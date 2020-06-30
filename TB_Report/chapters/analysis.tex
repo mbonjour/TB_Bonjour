@@ -63,11 +63,11 @@ Tout ce que j'ai vu pour le moment c'est que Tutanota utilise AES128-CBC ? Mais 
 %\subsection{Bitmessage}
 \section{Attaque existantes}
 \subsection{Défauts webmail}
-Selon un chercheur\cite{DBLP:journals/iacr/Kobeissi18a} l'infrastructure de Protonmail aurait des failles vis son webmail. Mais son papier est en fait plus général et parle des webmails en règle général.
+Selon un chercheur~\cite{DBLP:journals/iacr/Kobeissi18a} l'infrastructure de Protonmail aurait des failles vis son webmail. Mais son papier est en fait plus général et parle des webmails en règle général.
 Il part du principe que les serveurs de Protonmail ne sont pas des serveurs à faire confiance, pour ainsi prouver le zero-knowledge de Protonmail. Par contre, le fait qu'il ne peuvent pas être mis en confiance est un problème selon lui, car c'est ces serveurs qui vont délivrer le code d'OpenPGP afin de faire le chiffrement. 
 Cela indique que si Protonmail était corrompu le fait d'avoir le code délivré par Protonmail pourrait avoir des effets néfastes. Comme p.ex l'extraction de la clé privée PGP. La conclusion est dès le moment où vous avez utilisé une fois le webmail de protonmail la clé PGP est corrompue.
 \subsection{EFAIL}
-Malgré ces sécurités qui pourraient être mises en place à l’heure actuelle, une attaque nommée EFAIL\cite{DBLP:conf/uss/PoddebniakD0ISF18} a été faite en 2018 et est toujours possible aujourd’hui(à vérifier / tester). En effet cette attaque a seulement été mitigée en évitant d’afficher les contenus HTML et les images dans boites mails de base. Car le problème vient de là principalement, des problèmes sont liés aussi aux modes de chiffrement utilisé (typiquement CBC et CFB) grâce à des "gadgets".
+Malgré ces sécurités qui pourraient être mises en place à l’heure actuelle, une attaque nommée EFAIL~\cite{DBLP:conf/uss/PoddebniakD0ISF18} a été faite en 2018 et est toujours possible aujourd’hui(à vérifier / tester). En effet cette attaque a seulement été mitigée en évitant d’afficher les contenus HTML et les images dans boites mails de base. Car le problème vient de là principalement, des problèmes sont liés aussi aux modes de chiffrement utilisé (typiquement CBC et CFB) grâce à des "gadgets".
 Cette attaque permet en fait d'injecter une image dans l'HTML du message (typiquement dans les headers du mail), puis faire en sorte de récupérer le contenu du message déchiffrer dans un paramètre de l'URL.
 
 \section{Signal}
@@ -93,17 +93,17 @@ PGP est la solution prédominante pour s'envoyer des mails chiffrés cependant i
 
 \section{Primitives}
 \subsection{Primitives analysées}
-- Certificateless PKC\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}\\
+- Certificateless PKC~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}\\
 - HIBE - Hierarchised Based encryption\\
 - Identity based encryption
 %TODO à compléter
 \subsection{Primitive choisie}
-- Certificateless PKC\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}\\
+- Certificateless PKC~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}\\
 Tout d'abord le HIBE aurait été compliqué à mettre en place aussi à cause de sa forte forward secrecy, la hiérarchie doit de plus être commune sur tout les appareils, ce qui prendrait probablement du temps à un nouvel arrivage d'appareil pour un compte donné.
 J'ai choisi cette primitive au final car elle proposait des propriétés très intéressantes pour ma manière d'implémenter dans les mails cela. En effet, similaire à de l'identity based avec un ID pour désigner une clé publique. Le problème avec l'identity based encryption c'est le fait que le serveur central génère la clé publique et la clé secrète de l'utilisateur, cela amène ce qu'on appelle le \textit{key escrow} problème. C'est le fait qu'une entité connaisse à elle seule toutes les clés. Ce problème est résolu dans le certificateless en introduisant des \textit{Partial Private Keys} permettant d'avoir une clé secrète partiellement générée par le serveur et par l'utilisateur.
 \section{Recherches sur la primitive}
 \subsection{Schémas Certificateless de Chiffrement}
-Pour choisir parmi les nombreux schémas existants en certificateless pour le chiffrement j'ai établi un tableau comparatif des différentes manières de faire inspiré d'un livre\cite{bookIntroCertificateless}. En suivant ce tableau je me suis rendu compte que la construction de Dent-Libert-Paterson\cite{DBLP:conf/pkc/DentLP08} était probablement la plus adaptée en vue des propriétés qu'elle présentait. Le tableau se trouve en annexe \ref{ch:fichiers}.
+Pour choisir parmi les nombreux schémas existants en certificateless pour le chiffrement j'ai établi un tableau comparatif des différentes manières de faire inspiré d'un livre~\cite{bookIntroCertificateless}. En suivant ce tableau je me suis rendu compte que la construction de Dent-Libert-Paterson~\cite{DBLP:conf/pkc/DentLP08} était probablement la plus adaptée en vue des propriétés qu'elle présentait. Le tableau se trouve en annexe \ref{ch:fichiers}.
 
 \subsection{Schémas Certificateless de Signature}
-Pour choisir parmi les nombreux schémas certificateless pour la signature j'ai établi un tableau comparatif des différentes manières de faire inspiré du livre\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau il n'y en as pas une quantité énorme qui se dégage, en effet l'on peut voir que beaucoup de schémas de signature sont cassés, mon choix s'est porté au final sur la construction de Zhang et Zhang\cite{DBLP:conf/icc/ZhangZ08a} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) et en plus elle date de 2008 et n'a apparemment pas été cassée. Le tableau se trouve en annexe \ref{ch:fichiers}.
+Pour choisir parmi les nombreux schémas certificateless pour la signature j'ai établi un tableau comparatif des différentes manières de faire inspiré du livre~\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau il n'y en as pas une quantité énorme qui se dégage, en effet l'on peut voir que beaucoup de schémas de signature sont cassés, mon choix s'est porté au final sur la construction de Zhang et Zhang~\cite{DBLP:conf/icc/ZhangZ08a} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) et en plus elle date de 2008 et n'a apparemment pas été cassée. Le tableau se trouve en annexe \ref{ch:fichiers}.

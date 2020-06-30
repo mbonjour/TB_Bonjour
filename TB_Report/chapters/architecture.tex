@@ -1,9 +1,24 @@
 \chapter{Architecture / Design du protocole}
 \label{ch:arch}
 Dans ce chapitre je vais m'intéresser à expliquer le fonctionnement de la \textit{certificateless cryptography} et démontrer comment je l'ai utilisée afin de l'intégrer à un protocole de chiffrement de mail.
+\section{Architecture globale}
+Dans cette figure \ref{fig:globalProtocol} je présente uniquement l'architecture globale pour bien représenter les différents acteurs présents dans le protocole et ainsi avoir une vue d'ensemble pour faciliter la compréhension.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=14cm]{images/SchemaGlobal.png}
+	\caption{Schéma global du protocole}
+	\label{fig:globalProtocol}
+\end{figure}
+%TODO compléter ce chapitre et préciser les actions des acteurs plus en détails
+\section{Acteurs}
+Les parties impliquées sont les suivantes : 
+- Alice : L'envoyeur du message de mail en direction de Bob, ainsi elle doit discuter avec le KGC.\\
+- Bob : Le destinataire du message, communique uniquement avec le KGC en ayant reçu le message d'Alice.\\
+- KGC : Permet aux différents acteurs de pouvoir récupérer les Public Keys des clients, mais aussi recevoir les Partial Private Keys. \\
+Ces partis sont les principaux présents dans un exemple de Certificateless Cryptography.
 \section{Fonctionnement Certificateless PKC}
 Je vais ici découper les différents algorithmes présent dans le certificateless public key cryptography. En passant par le chiffrement et la signature.
-Ces algorithmes seront accompagnés d'explications sur leur utilité. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. L'on peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail\cite{DBLP:conf/pkc/DentLP08}.
+Ces algorithmes seront accompagnés d'explications sur leur utilité. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. L'on peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{DBLP:conf/pkc/DentLP08}.
 \subsection{Chiffrement}
 \begin{itemize}
 	\item Setup (seulement une fois par le KGC).
@@ -53,13 +68,4 @@ Mais dans la figure \ref{fig:aliceSends} l'on voit aussi comment la réception d
 	\item Avec s clé privée il va pouvoir déchiffrer c' et obtenir la clé AES pour la suite.
 	\item Une fois que l'on a la clé AES l'on peut simplement déchiffrer à l'aide de'AES\_GCM c pour obtenir le message initial.
 \end{itemize}
-
-\section{Architecture globale}
-Dans cette figure \ref{fig:globalProtocol} je présente uniquement l'architecture globale pour bien représenter les différents acteurs présents dans le protocole et ainsi avoir une vue d'ensemble pour faciliter la compréhension.
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=14cm]{images/SchemaGlobal.png}
-	\caption{Schéma très global du protocole}
-	\label{fig:globalProtocol}
-\end{figure}
 %TODO Schéma démontrant les parties impliqués

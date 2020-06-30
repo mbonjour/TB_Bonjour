@@ -1,5 +1,5 @@
 \relax 
-\@nameuse{bbl@beforestart}
+\bbl@beforestart
 \catcode `:\active 
 \catcode `;\active 
 \catcode `!\active 
@@ -51,22 +51,23 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3.7}Recherches sur la primitive}{15}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.7.1}Schémas Certificateless de Chiffrement}{15}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.7.2}Schémas Certificateless de Signature}{15}\protected@file@percent }
-\citation{DBLP:conf/pkc/DentLP08}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Architecture / Design du protocole}{16}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{ch:arch}{{4}{16}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Fonctionnement Certificateless PKC}{16}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Chiffrement}{16}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Signature}{17}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Design du protocole}{17}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma de la première connexion}}{17}\protected@file@percent }
-\newlabel{fig:firstConn}{{4.1}{17}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Alice envoi un message à Bob}}{18}\protected@file@percent }
-\newlabel{fig:aliceSends}{{4.2}{18}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Architecture globale}{19}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Schéma très global du protocole}}{19}\protected@file@percent }
-\newlabel{fig:globalProtocol}{{4.3}{19}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Architecture globale}{16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma global du protocole}}{16}\protected@file@percent }
+\newlabel{fig:globalProtocol}{{4.1}{16}}
+\citation{DBLP:conf/pkc/DentLP08}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Acteurs}{17}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Fonctionnement Certificateless PKC}{17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Chiffrement}{17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Signature}{17}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Design du protocole}{18}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Schéma de la première connexion}}{18}\protected@file@percent }
+\newlabel{fig:firstConn}{{4.2}{18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Alice envoi un message à Bob}}{19}\protected@file@percent }
+\newlabel{fig:aliceSends}{{4.3}{19}}
 \citation{relic-toolkit}
 \@writefile{toc}{\contentsline {chapter}{\numberline {5}Implémentation}{20}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -78,9 +79,11 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Courbe utilisée}{20}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.4}Dérivation de la clé AES}{21}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.5}Fonctions de hachage - signature}{21}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Implémentation certificateless}{21}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Schéma encapsulation des données}}{21}\protected@file@percent }
-\newlabel{fig:encapsulate}{{5.1}{21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.6}Sérialisation des données}{21}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.7}Enregistrement des clés publiques}{21}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Implémentation clés de chiffrement}{21}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Schéma encapsulation des données}}{22}\protected@file@percent }
+\newlabel{fig:encapsulate}{{5.1}{22}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Déroulement POC}{22}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion}{27}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -90,29 +93,32 @@
 \bibdata{chapters/biblio}
 \bibcite{DBLP:conf/asiacrypt/Al-RiyamiP03}{1}
 \bibcite{relic-toolkit}{2}
-\bibcite{DBLP:conf/pkc/DentLP08}{3}
-\bibcite{DBLP:journals/iacr/Kobeissi18a}{4}
-\bibcite{DBLP:conf/uss/PoddebniakD0ISF18}{5}
-\bibcite{bookIntroCertificateless}{6}
-\bibcite{DBLP:conf/icc/ZhangZ08a}{7}
-\citation{*}
+\bibcite{DBLP:journals/ijnsec/BalakrishnanR16}{3}
+\bibcite{DBLP:conf/pkc/DentLP08}{4}
+\bibcite{DBLP:conf/itcs2/ErYTG12}{5}
+\bibcite{DBLP:journals/iacr/Kobeissi18a}{6}
+\bibcite{DBLP:conf/uss/PoddebniakD0ISF18}{7}
+\bibcite{bookIntroCertificateless}{8}
+\bibcite{DBLP:conf/prdc/YehSDSSW18}{9}
 \@writefile{toc}{\contentsline {chapter}{Bibliographie}{28}\protected@file@percent }
+\bibcite{DBLP:conf/icc/ZhangZ08a}{10}
+\citation{*}
 \citation{relic-toolkit}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{30}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{31}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {A.1}RELIC Toolkit}{30}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A.2}Libsodium}{30}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.1}RELIC Toolkit}{31}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.2}Libsodium}{31}\protected@file@percent }
 \gdef\minted@oldcachelist{,
   default-pyg-prefix.pygstyle,
   default.pygstyle,
   0D4DC55E26B3A23334EF9FB8E1D613FC101747E3EBC79F58D453B8708F795FA9.pygtex}
-\@writefile{toc}{\contentsline {chapter}{\numberline {B}Fichiers}{31}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Fichiers}{32}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:fichiers}{{B}{31}}
-\@writefile{toc}{\contentsline {section}{\numberline {B.1}Code du POC}{31}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{31}\protected@file@percent }
-\newlabel{LastPage}{{}{31}}
-\xdef\lastpage@lastpage{31}
+\newlabel{ch:fichiers}{{B}{32}}
+\@writefile{toc}{\contentsline {section}{\numberline {B.1}Code du POC}{32}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{32}\protected@file@percent }
+\newlabel{LastPage}{{}{32}}
+\xdef\lastpage@lastpage{32}
 \gdef\lastpage@lastpageHy{}
