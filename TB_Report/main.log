@@ -1,0 +1,844 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.3.5)  19 JUN 2020 20:44
+entering extended mode
+**./main.tex
+(main.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-02-25>
+(C:\Users\micbo\Documents\Latex\tex/latex/base\report.cls
+Document Class: report 2019/12/20 v1.4l Standard LaTeX document class
+(C:\Users\micbo\Documents\Latex\tex/latex/base\size12.clo
+File: size12.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@chapter=\count168
+\c@section=\count169
+\c@subsection=\count170
+\c@subsubsection=\count171
+\c@paragraph=\count172
+\c@subparagraph=\count173
+\c@figure=\count174
+\c@table=\count175
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+(C:\Users\micbo\Documents\Latex\tex/generic/babel\babel.sty
+Package: babel 2020/02/28 3.41 The Babel package
+
+(C:\Users\micbo\Documents\Latex\tex/generic/babel\switch.def
+File: switch.def 2020/02/28 3.41 Babel switching mechanism
+)
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\micbo\Documents\Latex\tex/latex/arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\micbo\Documents\Latex\tex/generic/babel-french\french.ldf
+Language: french 2020/01/30 v3.5g French support from the babel system
+
+(C:\Users\micbo\Documents\Latex\tex/generic/babel\babel.def
+File: babel.def 2020/02/28 3.41 Babel common definitions
+\babel@savecnt=\count176
+\U@D=\dimen135
+
+(C:\Users\micbo\Documents\Latex\tex/generic/babel\txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count177
+)
+Package babel Info: \l@acadian = using hyphenrules for french
+(babel)             (\language22) on input line 91.
+Package babel Info: \l@canadien = using hyphenrules for french
+(babel)             (\language22) on input line 92.
+\FB@nonchar=\count178
+Package babel Info: Making : an active character on input line 419.
+Package babel Info: Making ; an active character on input line 420.
+Package babel Info: Making ! an active character on input line 421.
+Package babel Info: Making ? an active character on input line 422.
+\FBguill@level=\count179
+\FBold@everypar=\toks15
+\FB@Mht=\dimen136
+\mc@charclass=\count180
+\mc@charfam=\count181
+\mc@charslot=\count182
+\std@mcc=\count183
+\dec@mcc=\count184
+\c@FBcaption@count=\count185
+\listindentFB=\dimen137
+\descindentFB=\dimen138
+\labelindentFB=\dimen139
+\labelwidthFB=\dimen140
+\leftmarginFB=\dimen141
+\parindentFFN=\dimen142
+\FBfnindent=\dimen143
+))
+(C:\Users\micbo\Documents\Latex\tex/latex/carlisle\scalefnt.sty)
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics\keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/base\fontenc.sty
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/base\inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(C:\Users\micbo\Documents\Latex\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(C:\Users\micbo\Documents\Latex\tex/generic/iftex\iftex.sty
+Package: iftex 2019/11/07 v1.0c TeX engine tests
+))
+\Gm@cnth=\count186
+\Gm@cntv=\count187
+\c@Gm@tempcnt=\count188
+\Gm@bindingoffset=\dimen144
+\Gm@wd@mp=\dimen145
+\Gm@odd@mp=\dimen146
+\Gm@even@mp=\dimen147
+\Gm@layoutwidth=\dimen148
+\Gm@layoutheight=\dimen149
+\Gm@layouthoffset=\dimen150
+\Gm@layoutvoffset=\dimen151
+\Gm@dimlist=\toks19
+
+(C:\Users\micbo\Documents\Latex\tex/latex/geometry\geometry.cfg))
+(C:\Users\micbo\Documents\Latex\tex/latex/a4wide\a4wide.sty
+Package: a4wide 1994/08/30
+
+(C:\Users\micbo\Documents\Latex\tex/latex/ntgclass\a4.sty
+Package: a4 2020/02/18 v1.2g A4 based page layout
+))
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2020/01/20 v2.17e AMS math features
+\@mathmargin=\skip49
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks20
+\ex@=\dimen152
+))
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen153
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count189
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count190
+\leftroot@=\count191
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count192
+\DOTSCASE@=\count193
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box45
+\strutbox@=\box46
+\big@size=\dimen154
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count194
+\c@MaxMatrixCols=\count195
+\dotsspace@=\muskip16
+\c@parentequation=\count196
+\dspbrk@lvl=\count197
+\tag@help=\toks21
+\row@=\count198
+\column@=\count199
+\maxfields@=\count266
+\andhelp@=\toks22
+\eqnshift@=\dimen155
+\alignsep@=\dimen156
+\tagshift@=\dimen157
+\tagwidth@=\dimen158
+\totwidth@=\dimen159
+\lineht@=\dimen160
+\@envbody=\toks23
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks24
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics\graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics\graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics\trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics-cfg\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen161
+\Gin@req@width=\dimen162
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count267
+\float@exts=\toks25
+\float@box=\box47
+\@float@everytoks=\toks26
+\@floatcapt=\box48
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/fancyhdr\fancyhdr.sty
+Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
+s
+\f@nch@headwidth=\skip52
+\f@nch@O@elh=\skip53
+\f@nch@O@erh=\skip54
+\f@nch@O@olh=\skip55
+\f@nch@O@orh=\skip56
+\f@nch@O@elf=\skip57
+\f@nch@O@erf=\skip58
+\f@nch@O@olf=\skip59
+\f@nch@O@orf=\skip60
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/minted\minted.sty
+Package: minted 2017/07/19 v2.5 Yet another Pygments shim for LaTeX
+
+(C:\Users\micbo\Documents\Latex\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
+
+(C:\Users\micbo\Documents\Latex\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\micbo\Documents\Latex\tex/generic/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+))
+(C:\Users\micbo\Documents\Latex\tex/latex/fvextra\fvextra.sty
+Package: fvextra 2019/02/04 v1.4 fvextra - extensions and patches for fancyvrb
+
+(C:\Users\micbo\Documents\Latex\tex/latex/base\ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count268
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/fancyvrb\fancyvrb.sty
+Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count269
+\FV@InFile=\read3
+\FV@TabBox=\box49
+\c@FancyVerbLine=\count270
+\FV@StepNumber=\count271
+\FV@OutFile=\write3
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/upquote\upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+
+(C:\Users\micbo\Documents\Latex\tex/latex/base\textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+))
+(C:\Users\micbo\Documents\Latex\tex/latex/lineno\lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count272
+\output=\toks27
+\linenoprevgraf=\count273
+\linenumbersep=\dimen163
+\linenumberwidth=\dimen164
+\c@linenumber=\count274
+\c@pagewiselinenumber=\count275
+\c@LN@truepage=\count276
+\c@internallinenumber=\count277
+\c@internallinenumbers=\count278
+\quotelinenumbersep=\dimen165
+\bframerule=\dimen166
+\bframesep=\dimen167
+\bframebox=\box50
+LaTeX Info: Redefining \\ on input line 3056.
+)
+\c@FV@TrueTabGroupLevel=\count279
+\c@FV@TrueTabCounter=\count280
+\FV@TabBox@Group=\box51
+\FV@TmpLength=\skip61
+\c@FV@HighlightLinesStart=\count281
+\c@FV@HighlightLinesStop=\count282
+\FV@LoopCount=\count283
+\FV@NCharsBox=\box52
+\FV@BreakIndent=\dimen168
+\FV@BreakIndentNChars=\count284
+\FV@BreakSymbolSepLeft=\dimen169
+\FV@BreakSymbolSepLeftNChars=\count285
+\FV@BreakSymbolSepRight=\dimen170
+\FV@BreakSymbolSepRightNChars=\count286
+\FV@BreakSymbolIndentLeft=\dimen171
+\FV@BreakSymbolIndentLeftNChars=\count287
+\FV@BreakSymbolIndentRight=\dimen172
+\FV@BreakSymbolIndentRightNChars=\count288
+\c@FancyVerbLineBreakLast=\count289
+\FV@LineBox=\box53
+\FV@LineIndentBox=\box54
+\FV@LineWidth=\dimen173
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/tools\calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count290
+\calc@Bcount=\count291
+\calc@Adimen=\dimen174
+\calc@Bdimen=\dimen175
+\calc@Askip=\skip62
+\calc@Bskip=\skip63
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count292
+\calc@Cskip=\skip64
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/tools\shellesc.sty
+Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
+Package shellesc Info: Unrestricted shell escape enabled on input line 75.
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/ifplatform\ifplatform.sty
+Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
+
+(C:\Users\micbo\Documents\Latex\tex/latex/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\micbo\Documents\Latex\tex/generic/infwarerr\infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(C:\Users\micbo\Documents\Latex\tex/generic/catchfile\catchfile.sty
+Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
+
+(C:\Users\micbo\Documents\Latex\tex/generic/etexcmds\etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+))
+(C:\Users\micbo\Documents\Latex\tex/generic/iftex\ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+))
+(C:\Users\micbo\Documents\Latex\tex/latex/xstring\xstring.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/xstring\xstring.tex
+\integerpart=\count293
+\decimalpart=\count294
+)
+Package: xstring 2019/02/06 v1.83 String manipulations (CT)
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/framed\framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip65
+\fb@frw=\dimen176
+\fb@frh=\dimen177
+\FrameRule=\dimen178
+\FrameSep=\dimen179
+)
+\minted@appexistsfile=\read4
+\minted@bgbox=\box55
+\minted@code=\write4
+\c@minted@FancyVerbLineTemp=\count295
+\c@minted@pygmentizecounter=\count296
+\@float@every@listing=\toks28
+\c@listing=\count297
+)
+runsystem(if not exist _minted-main mkdir _minted-main)...executed.
+
+
+(C:\Users\micbo\Documents\Latex\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/enumitem\enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip66
+\enit@outerparindent=\dimen180
+\enit@toks=\toks29
+\enit@inbox=\box56
+\enit@count@id=\count298
+\enitdp@description=\count299
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/lastpage\lastpage.sty
+Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
+)
+(C:\Users\micbo\Documents\Latex\tex/latex/subfiles\subfiles.sty
+Package: subfiles 2020/02/14 v1.6 Multi-file projects (package)
+
+(C:\Users\micbo\Documents\Latex\tex/latex/import\import.sty
+Package: import 2020/01/22  v 6.0
+))
+(C:\Users\micbo\Documents\Latex\tex/latex/tocloft\tocloft.sty
+Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
+Package tocloft Info: The document has chapter divisions on input line 51.
+\cftparskip=\skip67
+\cftbeforetoctitleskip=\skip68
+\cftaftertoctitleskip=\skip69
+\cftbeforepartskip=\skip70
+\cftpartnumwidth=\skip71
+\cftpartindent=\skip72
+\cftbeforechapskip=\skip73
+\cftchapindent=\skip74
+\cftchapnumwidth=\skip75
+\cftbeforesecskip=\skip76
+\cftsecindent=\skip77
+\cftsecnumwidth=\skip78
+\cftbeforesubsecskip=\skip79
+\cftsubsecindent=\skip80
+\cftsubsecnumwidth=\skip81
+\cftbeforesubsubsecskip=\skip82
+\cftsubsubsecindent=\skip83
+\cftsubsubsecnumwidth=\skip84
+\cftbeforeparaskip=\skip85
+\cftparaindent=\skip86
+\cftparanumwidth=\skip87
+\cftbeforesubparaskip=\skip88
+\cftsubparaindent=\skip89
+\cftsubparanumwidth=\skip90
+\cftbeforeloftitleskip=\skip91
+\cftafterloftitleskip=\skip92
+\cftbeforefigskip=\skip93
+\cftfigindent=\skip94
+\cftfignumwidth=\skip95
+\c@lofdepth=\count300
+\c@lotdepth=\count301
+\cftbeforelottitleskip=\skip96
+\cftafterlottitleskip=\skip97
+\cftbeforetabskip=\skip98
+\cfttabindent=\skip99
+\cfttabnumwidth=\skip100
+)
+runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > ma
+in.aex <nul: /p x=^%~$PATH:i>> main.aex)...executed.
+
+runsystem(del main.aex)...executed.
+
+
+(C:\Users\micbo\Documents\Latex\tex/latex/l3backend\l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count302
+\l__pdf_internal_box=\box57
+)
+(main.aux)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Info: Redefining \degres on input line 43.
+LaTeX Info: Redefining \dots on input line 43.
+Package french.ldf Info: Setting StandardItemizeEnv=true for
+(french.ldf)             compatibility with enumitem package,
+(french.ldf)             reported on input line 43.
+Package french.ldf Info: Setting StandardEnumerateEnv=true for
+(french.ldf)             compatibility with enumitem package,
+(french.ldf)             reported on input line 43.
+LaTeX Info: Redefining \up on input line 43.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(42.67912pt, 512.14963pt, 42.67912pt)
+* v-part:(T,H,B)=(101.40665pt, 591.5302pt, 152.11pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=460.72124pt
+* \textheight=621.0pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=0.0pt
+* \headheight=49.0pt
+* \headsep=25.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=54.2025pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(C:\Users\micbo\Documents\Latex\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count303
+\scratchdimen=\dimen181
+\scratchbox=\box58
+\nofMPsegments=\count304
+\nofMParguments=\count305
+\everyMPshowfont=\toks30
+\MPscratchCnt=\count306
+\MPscratchDim=\dimen182
+\MPnumerator=\count307
+\makeMPintoPDFobject=\count308
+\everyMPtoPDFconversion=\toks31
+) (C:\Users\micbo\Documents\Latex\tex/latex/epstopdf-pkg\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+)
+Package lastpage Info: Please have a look at the pageslts package at
+(lastpage)             https://www.ctan.org/pkg/pageslts
+(lastpage)             ! on input line 43.
+<images/heig-logo.png, id=1, 135.342pt x 44.3475pt>
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 78.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+
+[1{C:/Users/micbo/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+ <./images/heig-logo.png>] (template/secondtitle.tex
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
+
+ []
+
+) (template/preambule.tex
+Overfull \hbox (34.19867pt too wide) in paragraph at lines 26--1
+[][]
+ []
+
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 1.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+[1]
+Underfull \hbox (badness 10000) in paragraph at lines 2--3
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
+
+ []
+
+) (template/authentification.tex
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 1.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [2])
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 89.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [3] (main.toc [4])
+\tf@toc=\write5
+\openout5 = `main.toc'.
+
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 93.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [5] (chapters/cdc.tex
+Chapitre 1.
+[6
+
+]) (chapters/introduction.tex
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 1.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [7]
+Chapitre 2.
+) (chapters/analysis.tex
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 1.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [8
+
+]
+Chapitre 3.
+<images/PGP_101.png, id=40, 501.875pt x 522.95375pt>
+File: images/PGP_101.png Graphic file (type png)
+<use images/PGP_101.png>
+Package pdftex.def Info: images/PGP_101.png  used on input line 14.
+(pdftex.def)             Requested size: 284.52756pt x 296.4908pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[9
+
+]
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 33.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [10 <./images/PGP_101.png>]
+<images/conceptualpEp.png, id=49, 541.0614pt x 412.4208pt>
+File: images/conceptualpEp.png Graphic file (type png)
+<use images/conceptualpEp.png>
+Package pdftex.def Info: images/conceptualpEp.png  used on input line 39.
+(pdftex.def)             Requested size: 426.79134pt x 325.33058pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 58.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+[11]
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 69.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [12 <./images/conceptualpEp.png>]
+<images/signalFonctionnement.png, id=58, 632.3625pt x 623.32875pt>
+File: images/signalFonctionnement.png Graphic file (type png)
+<use images/signalFonctionnement.png>
+Package pdftex.def Info: images/signalFonctionnement.png  used on input line 80
+.
+(pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 90.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+[13]
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 100.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [14 <./images/signalFonctionnement.png>]) (chapters/architecture.tex
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 1.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+
+[15]
+Chapitre 4.
+[16
+
+]
+<images/firstConnexion.png, id=72, 484.05844pt x 283.0575pt>
+File: images/firstConnexion.png Graphic file (type png)
+<use images/firstConnexion.png>
+Package pdftex.def Info: images/firstConnexion.png  used on input line 24.
+(pdftex.def)             Requested size: 398.33858pt x 232.94223pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--32
+
+ []
+
+<images/aliceSendsToBob.png, id=73, 842.39719pt x 483.30562pt>
+File: images/aliceSendsToBob.png Graphic file (type png)
+<use images/aliceSendsToBob.png>
+Package pdftex.def Info: images/aliceSendsToBob.png  used on input line 35.
+(pdftex.def)             Requested size: 398.33858pt x 228.5401pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 44.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+[17 <./images/firstConnexion.png>]
+<images/SchemaGlobal.png, id=78, 721.94719pt x 319.94531pt>
+File: images/SchemaGlobal.png Graphic file (type png)
+<use images/SchemaGlobal.png>
+Package pdftex.def Info: images/SchemaGlobal.png  used on input line 61.
+(pdftex.def)             Requested size: 398.33858pt x 176.53188pt.
+)
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 108.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [18 <./images/aliceSendsToBob.png>]
+(chapters/implementation.tex
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 1.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [19 <./images/SchemaGlobal.png>]
+Chapitre 5.
+[20
+
+]
+<images/schemaEncapsulation.png, id=91, 607.51968pt x 353.82187pt>
+File: images/schemaEncapsulation.png Graphic file (type png)
+<use images/schemaEncapsulation.png>
+Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 24.
+
+(pdftex.def)             Requested size: 341.43306pt x 198.85693pt.
+ (_minted-main/default-pyg-prefix.pygstyle) (_minted-main/default.pygstyle)
+(_minted-main/0D4DC55E26B3A23334EF9FB8E1D613FC101747E3EBC79F58D453B8708F795FA9.
+pygtex
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 1.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [21 <./images/schemaEncapsulation.png>]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
+.
+
+(C:\Users\micbo\Documents\Latex\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 7.
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 48.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [22]
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
+72.
+
+(C:\Users\micbo\Documents\Latex\tex/latex/base\ts1cmtt.fd
+File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 99.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [23]
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 148.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [24]
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 196.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [25]))
+(chapters/conclusion.tex
+File: images/heig-logo.png Graphic file (type png)
+<use images/heig-logo.png>
+Package pdftex.def Info: images/heig-logo.png  used on input line 1.
+(pdftex.def)             Requested size: 135.34166pt x 44.34738pt.
+ [26]
+Chapitre 6.
+) [27
+
+] (main.bbl
+! Undefined control sequence.
+l.15 \newblock \url
+                   {https://github.com/relic-toolkit/relic}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+) [28
+
+
+] (main.lof)
+\tf@lof=\write6
+\openout6 = `main.lof'.
+
+ [29] (chapters/outils.tex
+Annexe A.
+) (chapters/fichiers.tex [30
+
+]
+Annexe B.
+) 
+AED: lastpage setting LastPage
+[31
+
+] (main.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 9053 strings out of 481311
+ 148829 string characters out of 2916524
+ 463928 words of memory out of 3000000
+ 24306 multiletter control sequences out of 15000+200000
+ 547714 words of font info for 55 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 41i,15n,45p,1036b,647s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\
+ecrm1000.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/
+ec/dpi600\ecrm0800.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour
+/jknappen/ec/dpi600\tcit1000.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts
+/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\micbo\AppData\Local\MiKTeX
+\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecit1000.pk> <C:\Users\micbo\AppData\Lo
+cal\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\micbo\
+AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Us
+ers\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.
+pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600
+\ecti1200.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen
+/ec/dpi600\ecbx1200.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfou
+r/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\font
+s/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\micbo\AppData\Local\MiKTe
+X\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\micbo\AppData\L
+ocal\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk><C:/Users/micbo/
+Documents/Latex/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/micbo/Docume
+nts/Latex/fonts/type1/public/amsfonts/cm/cmsy6.pfb>
+Output written on main.pdf (32 pages, 567691 bytes).
+PDF statistics:
+ 728 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+

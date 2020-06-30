@@ -1,0 +1,48 @@
+\babel@toc {french}{}
+\contentsline {chapter}{\numberline {1}Cahier des charges}{6}%
+\contentsline {chapter}{\numberline {2}Introduction}{8}%
+\contentsline {chapter}{\numberline {3}Analyse - État de l'art}{9}%
+\contentsline {section}{\numberline {3.1}Protocoles existants}{9}%
+\contentsline {subsection}{\numberline {3.1.1}PGP}{9}%
+\contentsline {subsection}{\numberline {3.1.2}PEP}{11}%
+\contentsline {subsection}{\numberline {3.1.3}S/MIME}{11}%
+\contentsline {section}{\numberline {3.2}Implémentations existantes}{11}%
+\contentsline {subsection}{\numberline {3.2.1}Protonmail}{11}%
+\contentsline {subsection}{\numberline {3.2.2}Tutanota}{12}%
+\contentsline {section}{\numberline {3.3}Attaque existantes}{13}%
+\contentsline {subsection}{\numberline {3.3.1}Défauts webmail}{13}%
+\contentsline {subsection}{\numberline {3.3.2}EFAIL}{13}%
+\contentsline {section}{\numberline {3.4}Signal}{13}%
+\contentsline {subsection}{\numberline {3.4.1}Fonctionnement}{13}%
+\contentsline {subsection}{\numberline {3.4.2}Problèmes d'intégrations}{13}%
+\contentsline {section}{\numberline {3.5}Compromis}{14}%
+\contentsline {subsection}{\numberline {3.5.1}Résultats des recherches}{14}%
+\contentsline {section}{\numberline {3.6}Primitives}{15}%
+\contentsline {subsection}{\numberline {3.6.1}Primitives analysées}{15}%
+\contentsline {subsection}{\numberline {3.6.2}Primitive choisie}{15}%
+\contentsline {section}{\numberline {3.7}Recherches sur la primitive}{15}%
+\contentsline {subsection}{\numberline {3.7.1}Schémas Certificateless de Chiffrement}{15}%
+\contentsline {subsection}{\numberline {3.7.2}Schémas Certificateless de Signature}{15}%
+\contentsline {chapter}{\numberline {4}Architecture / Design du protocole}{16}%
+\contentsline {section}{\numberline {4.1}Fonctionnement Certificateless PKC}{16}%
+\contentsline {subsection}{\numberline {4.1.1}Chiffrement}{16}%
+\contentsline {subsection}{\numberline {4.1.2}Signature}{17}%
+\contentsline {section}{\numberline {4.2}Design du protocole}{17}%
+\contentsline {section}{\numberline {4.3}Architecture globale}{19}%
+\contentsline {chapter}{\numberline {5}Implémentation}{20}%
+\contentsline {section}{\numberline {5.1}Choix d'implémentations}{20}%
+\contentsline {subsection}{\numberline {5.1.1}Langage}{20}%
+\contentsline {subsection}{\numberline {5.1.2}Librairie}{20}%
+\contentsline {subsection}{\numberline {5.1.3}Courbe utilisée}{20}%
+\contentsline {subsection}{\numberline {5.1.4}Dérivation de la clé AES}{21}%
+\contentsline {subsection}{\numberline {5.1.5}Fonctions de hachage - signature}{21}%
+\contentsline {section}{\numberline {5.2}Implémentation certificateless}{21}%
+\contentsline {subsection}{\numberline {5.2.1}Déroulement POC}{22}%
+\contentsline {chapter}{\numberline {6}Conclusion}{27}%
+\contentsline {chapter}{Bibliographie}{28}%
+\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{30}%
+\contentsline {section}{\numberline {A.1}RELIC Toolkit}{30}%
+\contentsline {section}{\numberline {A.2}Libsodium}{30}%
+\contentsline {chapter}{\numberline {B}Fichiers}{31}%
+\contentsline {section}{\numberline {B.1}Code du POC}{31}%
+\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{31}%

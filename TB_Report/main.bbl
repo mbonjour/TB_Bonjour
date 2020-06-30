@@ -1,0 +1,52 @@
+\begin{thebibliography}{1}
+
+\bibitem{DBLP:conf/asiacrypt/Al-RiyamiP03}
+Sattam~S. Al{-}Riyami and Kenneth~G. Paterson.
+\newblock Certificateless public key cryptography.
+\newblock In Chi{-}Sung Laih, editor, {\em Advances in Cryptology - {ASIACRYPT}
+  2003, 9th International Conference on the Theory and Application of
+  Cryptology and Information Security, Taipei, Taiwan, November 30 - December
+  4, 2003, Proceedings}, volume 2894 of {\em Lecture Notes in Computer
+  Science}, pages 452--473. Springer, 2003.
+
+\bibitem{relic-toolkit}
+D.~F. Aranha, C.~P.~L. Gouvêa, T.~Markmann, R.~S. Wahby, and K.~Liao.
+\newblock {RELIC is an Efficient LIbrary for Cryptography}.
+\newblock \url{https://github.com/relic-toolkit/relic}.
+
+\bibitem{DBLP:conf/pkc/DentLP08}
+Alexander~W. Dent, Beno{\^{\i}}t Libert, and Kenneth~G. Paterson.
+\newblock Certificateless encryption schemes strongly secure in the standard
+  model.
+\newblock In Ronald Cramer, editor, {\em Public Key Cryptography - {PKC} 2008,
+  11th International Workshop on Practice and Theory in Public-Key
+  Cryptography, Barcelona, Spain, March 9-12, 2008. Proceedings}, volume 4939
+  of {\em Lecture Notes in Computer Science}, pages 344--359. Springer, 2008.
+
+\bibitem{DBLP:journals/iacr/Kobeissi18a}
+Nadim Kobeissi.
+\newblock An analysis of the protonmail cryptographic architecture.
+\newblock {\em {IACR} Cryptol. ePrint Arch.}, 2018:1121, 2018.
+
+\bibitem{DBLP:conf/uss/PoddebniakD0ISF18}
+Damian Poddebniak, Christian Dresen, Jens M{\"{u}}ller, Fabian Ising, Sebastian
+  Schinzel, Simon Friedberger, Juraj Somorovsky, and J{\"{o}}rg Schwenk.
+\newblock Efail: Breaking {S/MIME} and openpgp email encryption using
+  exfiltration channels.
+\newblock In William Enck and Adrienne~Porter Felt, editors, {\em 27th {USENIX}
+  Security Symposium, {USENIX} Security 2018, Baltimore, MD, USA, August 15-17,
+  2018}, pages 549--566. {USENIX} Association, 2018.
+
+\bibitem{bookIntroCertificateless}
+Hu~Xiong, Zhen Qin, and Athanasios~V. Vasilakos.
+\newblock {\em Introduction to Certificateless Cryptography}.
+\newblock CRC Press, Inc., USA, 2016.
+
+\bibitem{DBLP:conf/icc/ZhangZ08a}
+Lei Zhang and Futai Zhang.
+\newblock A new provably secure certificateless signature scheme.
+\newblock In {\em Proceedings of {IEEE} International Conference on
+  Communications, {ICC} 2008, Beijing, China, 19-23 May 2008}, pages
+  1685--1689. {IEEE}, 2008.
+
+\end{thebibliography}

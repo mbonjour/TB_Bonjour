@@ -1,0 +1,199 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}cipherPOC.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}signaturePOC.h\PYGZdq{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZdq{}sodium.h\PYGZdq{}}
+
+\PYG{c+c1}{// Utils function for encrypting / decrypting AES\PYGZus{}GCM}
+\PYG{k+kt}{char}\PYG{o}{*} \PYG{n+nf}{encrypt\PYGZus{}message}\PYG{p}{(}\PYG{k}{const} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{m}\PYG{p}{,} \PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{key}\PYG{p}{,} \PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{nonce}\PYG{p}{,} \PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{cipher}\PYG{p}{,} \PYG{k+kt}{unsigned} \PYG{k+kt}{long} \PYG{k+kt}{long}\PYG{o}{*} \PYG{n}{cipher\PYGZus{}len}\PYG{p}{,} \PYG{k}{const} \PYG{k+kt}{size\PYGZus{}t}\PYG{o}{*} \PYG{n}{m\PYGZus{}len}\PYG{p}{)\PYGZob{}}
+    \PYG{n}{randombytes\PYGZus{}buf}\PYG{p}{(}\PYG{n}{nonce}\PYG{p}{,} \PYG{k}{sizeof} \PYG{n}{nonce}\PYG{p}{);}
+    \PYG{n}{crypto\PYGZus{}aead\PYGZus{}aes256gcm\PYGZus{}encrypt}\PYG{p}{(}\PYG{n}{cipher}\PYG{p}{,} \PYG{n}{cipher\PYGZus{}len}\PYG{p}{,} \PYG{n}{m}\PYG{p}{,} \PYG{o}{*}\PYG{n}{m\PYGZus{}len}\PYG{p}{,}\PYG{n+nb}{NULL}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{nonce}\PYG{p}{,} \PYG{n}{key}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{decrypt\PYGZus{}message}\PYG{p}{(}\PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{decrypted}\PYG{p}{,} \PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{cipher}\PYG{p}{,} \PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{nonce}\PYG{p}{,} \PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{key}\PYG{p}{,} \PYG{k+kt}{unsigned} \PYG{k+kt}{long} \PYG{k+kt}{long} \PYG{n}{cipher\PYGZus{}len}\PYG{p}{)\PYGZob{}}
+    \PYG{k+kt}{unsigned} \PYG{k+kt}{long} \PYG{k+kt}{long} \PYG{n}{decrypted\PYGZus{}len}\PYG{p}{;}
+    \PYG{k}{if} \PYG{p}{(}\PYG{n}{cipher\PYGZus{}len} \PYG{o}{\PYGZlt{}} \PYG{n}{crypto\PYGZus{}aead\PYGZus{}aes256gcm\PYGZus{}ABYTES} \PYG{o}{||}
+        \PYG{n}{crypto\PYGZus{}aead\PYGZus{}aes256gcm\PYGZus{}decrypt}\PYG{p}{(}\PYG{n}{decrypted}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{decrypted\PYGZus{}len}\PYG{p}{,}
+                                      \PYG{n+nb}{NULL}\PYG{p}{,}
+                                      \PYG{n}{cipher}\PYG{p}{,} \PYG{n}{cipher\PYGZus{}len}\PYG{p}{,}
+                                      \PYG{n+nb}{NULL}\PYG{p}{,}
+                                      \PYG{l+m+mi}{0}\PYG{p}{,}
+                                      \PYG{n}{nonce}\PYG{p}{,} \PYG{n}{key}\PYG{p}{)} \PYG{o}{!=} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{c+cm}{/* message forged! */}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Message not correctly authenticated ! Aborting decryption...}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void} \PYG{n+nf}{get\PYGZus{}key}\PYG{p}{(}\PYG{k+kt}{char} \PYG{o}{*}\PYG{n}{aesk}\PYG{p}{,} \PYG{n}{gt\PYGZus{}t} \PYG{n}{originalM}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{int} \PYG{n}{sizeAESK} \PYG{o}{=} \PYG{n}{gt\PYGZus{}size\PYGZus{}bin}\PYG{p}{(}\PYG{n}{originalM}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{);}
+    \PYG{k+kt}{char} \PYG{n}{aeskBin} \PYG{p}{[}\PYG{n}{sizeAESK}\PYG{p}{];}
+    \PYG{n}{gt\PYGZus{}write\PYGZus{}bin}\PYG{p}{(}\PYG{n}{aeskBin}\PYG{p}{,} \PYG{n}{sizeAESK}\PYG{p}{,} \PYG{n}{originalM}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+    \PYG{n}{md\PYGZus{}map\PYGZus{}sh256}\PYG{p}{(}\PYG{n}{aesk}\PYG{p}{,} \PYG{n}{aeskBin}\PYG{p}{,} \PYG{n}{sizeAESK}\PYG{p}{);}
+    \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}AES Key : \PYGZdq{}}\PYG{p}{);}
+    \PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{32}\PYG{p}{;}\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}02X\PYGZdq{}}\PYG{p}{,(}\PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{p}{)}\PYG{n}{aesk}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]);}
+    \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{int} \PYG{n+nf}{main}\PYG{p}{()} \PYG{p}{\PYGZob{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{core\PYGZus{}init}\PYG{p}{()} \PYG{o}{==} \PYG{n}{RLC\PYGZus{}ERR}\PYG{p}{)\PYGZob{}}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}RELIC INIT ERROR !}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{sodium\PYGZus{}init}\PYG{p}{()} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}LIBSODIUM INIT ERROR !}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{k}{if}\PYG{p}{(}\PYG{n}{pc\PYGZus{}param\PYGZus{}set\PYGZus{}any}\PYG{p}{()} \PYG{o}{==} \PYG{n}{RLC\PYGZus{}OK}\PYG{p}{)\PYGZob{}}
+        \PYG{c+c1}{// Server doing this once}
+        \PYG{n}{pc\PYGZus{}param\PYGZus{}print}\PYG{p}{();}
+        \PYG{c+c1}{// Setup the encrypting and signing parameters for KGC}
+
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Security : \PYGZpc{}d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{pc\PYGZus{}param\PYGZus{}level}\PYG{p}{());}
+
+        \PYG{c+c1}{// MPK struct, Master Public Key structure to store}
+        \PYG{n}{mpkStruct} \PYG{n}{mpkSession}\PYG{p}{;}
+        \PYG{n}{mpkStructSig} \PYG{n}{mpkSignature}\PYG{p}{;}
+
+        \PYG{c+c1}{// Master secret key of KGC for encrypting}
+        \PYG{n}{g2\PYGZus{}t} \PYG{n}{msk}\PYG{p}{;}
+        \PYG{n}{g2\PYGZus{}null}\PYG{p}{(}\PYG{n}{msk}\PYG{p}{)}
+        \PYG{n}{g2\PYGZus{}new}\PYG{p}{(}\PYG{n}{msk}\PYG{p}{)}
+
+        \PYG{n}{setup}\PYG{p}{(}\PYG{l+m+mi}{256}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{mpkSession}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{msk}\PYG{p}{);}
+
+        \PYG{c+c1}{// Master key of KGC for signing}
+        \PYG{n}{bn\PYGZus{}t} \PYG{n}{masterSecret}\PYG{p}{;}
+        \PYG{n}{bn\PYGZus{}null}\PYG{p}{(}\PYG{n}{masterSecret}\PYG{p}{)}
+        \PYG{n}{bn\PYGZus{}new}\PYG{p}{(}\PYG{n}{masterSecret}\PYG{p}{)}
+
+        \PYG{n}{setupSig}\PYG{p}{(}\PYG{l+m+mi}{256}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{mpkSignature}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{masterSecret}\PYG{p}{);}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Setup successful !}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+        \PYG{c+c1}{// \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+        \PYG{c+c1}{// At this point, setup of KGC for encrypting and signing is successful}
+
+        \PYG{c+c1}{// Now we can go for user\PYGZsq{}s private keys (encrypting and signing)}
+        \PYG{n}{bn\PYGZus{}t} \PYG{n}{x}\PYG{p}{;}
+        \PYG{n}{setSec}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{x}\PYG{p}{);}
+
+        \PYG{n}{bn\PYGZus{}t} \PYG{n}{xSig}\PYG{p}{;}
+        \PYG{n}{setSecSig}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{xSig}\PYG{p}{);}
+        \PYG{c+c1}{// \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+        \PYG{c+c1}{// Private keys set}
+
+        \PYG{c+c1}{// Now we can go to set Public keys for both signing and encrypting}
+        \PYG{n}{PK} \PYG{n}{myPK}\PYG{p}{;}
+        \PYG{n}{setPub}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{mpkSession}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{myPK}\PYG{p}{);}
+
+        \PYG{n}{PKSig} \PYG{n}{myPKSig}\PYG{p}{;}
+        \PYG{n}{setPubSig}\PYG{p}{(}\PYG{n}{xSig}\PYG{p}{,} \PYG{n}{mpkSignature}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{myPKSig}\PYG{p}{);}
+        \PYG{c+c1}{// \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+        \PYG{c+c1}{// Public keys set}
+
+
+        \PYG{c+c1}{// The other user takes ID of the destination and PK to encrypt his message}
+        \PYG{c+c1}{// With the final version we will need to append a timestamp on the ID}
+        \PYG{k+kt}{char} \PYG{n}{ID}\PYG{p}{[]} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}mickael.bonjour@hotmail.fr\PYGZdq{}}\PYG{p}{;}
+
+        \PYG{n}{gt\PYGZus{}t} \PYG{n}{AESK}\PYG{p}{;}
+        \PYG{n}{gt\PYGZus{}null}\PYG{p}{(}\PYG{n}{AESK}\PYG{p}{);}
+        \PYG{n}{gt\PYGZus{}new}\PYG{p}{(}\PYG{n}{AESK}\PYG{p}{);}
+        \PYG{c+c1}{// For now we take m (AES Key) randomly from Gt}
+        \PYG{n}{gt\PYGZus{}rand}\PYG{p}{(}\PYG{n}{AESK}\PYG{p}{);}
+
+        \PYG{k+kt}{unsigned} \PYG{k+kt}{char} \PYG{n}{aesk} \PYG{p}{[}\PYG{n}{crypto\PYGZus{}secretbox\PYGZus{}KEYBYTES}\PYG{p}{];}
+        \PYG{n}{get\PYGZus{}key}\PYG{p}{(}\PYG{n}{aesk}\PYG{p}{,} \PYG{n}{AESK}\PYG{p}{);}
+
+        \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{m} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}This message will be encrypted\PYGZdq{}}\PYG{p}{;}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Message : \PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{m}\PYG{p}{);}
+        \PYG{k+kt}{unsigned} \PYG{k+kt}{char} \PYG{n}{nonceAES}\PYG{p}{[}\PYG{n}{crypto\PYGZus{}aead\PYGZus{}aes256gcm\PYGZus{}NPUBBYTES}\PYG{p}{];}
+        \PYG{k+kt}{size\PYGZus{}t} \PYG{n}{m\PYGZus{}len} \PYG{o}{=} \PYG{n}{strlen}\PYG{p}{(}\PYG{n}{m}\PYG{p}{);}
+        \PYG{k+kt}{unsigned} \PYG{k+kt}{long} \PYG{k+kt}{long} \PYG{n}{cipher\PYGZus{}len}\PYG{p}{;}
+        \PYG{k+kt}{unsigned} \PYG{k+kt}{char} \PYG{n}{ciphertextAES}\PYG{p}{[}\PYG{n}{m\PYGZus{}len} \PYG{o}{+} \PYG{n}{crypto\PYGZus{}aead\PYGZus{}aes256gcm\PYGZus{}ABYTES}\PYG{p}{];}
+        \PYG{n}{encrypt\PYGZus{}message}\PYG{p}{(}\PYG{n}{m}\PYG{p}{,} \PYG{n}{aesk}\PYG{p}{,} \PYG{n}{nonceAES}\PYG{p}{,} \PYG{n}{ciphertextAES}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{cipher\PYGZus{}len}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{m\PYGZus{}len}\PYG{p}{);}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Encrypted message : \PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{ciphertextAES}\PYG{p}{);}
+
+        \PYG{n}{cipher} \PYG{n}{c}\PYG{p}{;}
+        \PYG{n}{encrypt}\PYG{p}{(}\PYG{n}{AESK}\PYG{p}{,} \PYG{n}{myPK}\PYG{p}{,} \PYG{n}{ID}\PYG{p}{,} \PYG{n}{mpkSession}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{c}\PYG{p}{);}
+
+        \PYG{c+c1}{// For the signature we need our PPK}
+        \PYG{n}{PPKSig} \PYG{n}{myPartialKeysSig}\PYG{p}{;}
+
+        \PYG{c+c1}{//The sender needs to extract (via KGC) and setPriv to get his private key and sign the message}
+        \PYG{n}{extractSig}\PYG{p}{(}\PYG{n}{mpkSignature}\PYG{p}{,} \PYG{n}{masterSecret}\PYG{p}{,} \PYG{n}{ID} \PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{myPartialKeysSig}\PYG{p}{);}
+
+        \PYG{c+c1}{// Computes Secret User Keys for Signature}
+        \PYG{n}{SKSig} \PYG{n}{mySecretKeysSig}\PYG{p}{;}
+        \PYG{n}{setPrivSig}\PYG{p}{(}\PYG{n}{xSig}\PYG{p}{,} \PYG{n}{myPartialKeysSig}\PYG{p}{,} \PYG{n}{mpkSignature}\PYG{p}{,} \PYG{n}{ID}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{mySecretKeysSig}\PYG{p}{);}
+
+        \PYG{c+c1}{// Computes the message to sign, so the cipher struct}
+        \PYG{k+kt}{int} \PYG{n}{c0size} \PYG{o}{=} \PYG{n}{gt\PYGZus{}size\PYGZus{}bin}\PYG{p}{(}\PYG{n}{c}\PYG{p}{.}\PYG{n}{c0}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{);}
+        \PYG{k+kt}{int} \PYG{n}{c1Size} \PYG{o}{=} \PYG{n}{g1\PYGZus{}size\PYGZus{}bin}\PYG{p}{(}\PYG{n}{c}\PYG{p}{.}\PYG{n}{c1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+        \PYG{k+kt}{int} \PYG{n}{c2Size} \PYG{o}{=} \PYG{n}{g2\PYGZus{}size\PYGZus{}bin}\PYG{p}{(}\PYG{n}{c}\PYG{p}{.}\PYG{n}{c2}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+        \PYG{k+kt}{int} \PYG{n}{c3Size} \PYG{o}{=} \PYG{n}{g2\PYGZus{}size\PYGZus{}bin}\PYG{p}{(}\PYG{n}{c}\PYG{p}{.}\PYG{n}{c3}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+        \PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{mSig}\PYG{p}{[}\PYG{n}{c0size}\PYG{o}{+}\PYG{n}{c1Size}\PYG{o}{+}\PYG{n}{c2Size}\PYG{o}{+}\PYG{n}{c3Size}\PYG{p}{];}
+        \PYG{n}{gt\PYGZus{}write\PYGZus{}bin}\PYG{p}{(}\PYG{n}{mSig}\PYG{p}{,} \PYG{n}{c0size}\PYG{p}{,} \PYG{n}{c}\PYG{p}{.}\PYG{n}{c0}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+        \PYG{n}{g1\PYGZus{}write\PYGZus{}bin}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{mSig}\PYG{p}{[}\PYG{n}{c0size}\PYG{p}{],} \PYG{n}{c1Size}\PYG{p}{,} \PYG{n}{c}\PYG{p}{.}\PYG{n}{c1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+        \PYG{n}{g2\PYGZus{}write\PYGZus{}bin}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{mSig}\PYG{p}{[}\PYG{n}{c0size} \PYG{o}{+} \PYG{n}{c1Size}\PYG{p}{],} \PYG{n}{c2Size}\PYG{p}{,} \PYG{n}{c}\PYG{p}{.}\PYG{n}{c2}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+        \PYG{n}{g2\PYGZus{}write\PYGZus{}bin}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{mSig}\PYG{p}{[}\PYG{n}{c0size} \PYG{o}{+} \PYG{n}{c1Size} \PYG{o}{+} \PYG{n}{c2Size}\PYG{p}{],} \PYG{n}{c3Size}\PYG{p}{,} \PYG{n}{c}\PYG{p}{.}\PYG{n}{c3}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{);}
+
+        \PYG{c+c1}{// Structure of an signature}
+        \PYG{n}{signature} \PYG{n}{s}\PYG{p}{;}
+        \PYG{c+c1}{// We can sign using our private keys and public ones}
+        \PYG{n}{sign}\PYG{p}{(}\PYG{n}{mSig}\PYG{p}{,} \PYG{n}{mySecretKeysSig}\PYG{p}{,} \PYG{n}{myPKSig}\PYG{p}{,} \PYG{n}{ID}\PYG{p}{,} \PYG{n}{mpkSignature}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{s}\PYG{p}{);}
+        \PYG{c+c1}{// \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+        \PYG{c+c1}{// Now the message is encrypted and authentified with an AES Key and the key is encrypted and signed using CLPKC}
+        \PYG{c+c1}{// \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+
+
+        \PYG{c+c1}{// We can go for decrypting and verification}
+        \PYG{c+c1}{// For this we need our Partial Private Keys with the ID used to encrypt the message}
+
+        \PYG{c+c1}{// We can verify directly with the public keys of the sender}
+        \PYG{k+kt}{int} \PYG{n}{test} \PYG{o}{=} \PYG{n}{verify}\PYG{p}{(}\PYG{n}{s}\PYG{p}{,} \PYG{n}{myPKSig}\PYG{p}{,} \PYG{n}{mpkSignature}\PYG{p}{,} \PYG{n}{ID}\PYG{p}{,} \PYG{n}{mSig}\PYG{p}{);}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{Verification of the key (0 if correct 1 if not) : \PYGZpc{}d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{test}\PYG{p}{);}
+        \PYG{c+c1}{// if the verif is ok we can continue, otherwise we can stop here}
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{test} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{PPK} \PYG{n}{myPartialKeys}\PYG{p}{;}
+            \PYG{n}{g2\PYGZus{}null}\PYG{p}{(}\PYG{n}{myPartialKeys}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{d1}\PYG{p}{)}
+            \PYG{n}{g2\PYGZus{}new}\PYG{p}{(}\PYG{n}{myPartialKeys}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{d1}\PYG{p}{)}
+
+            \PYG{n}{g1\PYGZus{}null}\PYG{p}{(}\PYG{n}{myPartialKeys}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{d2}\PYG{p}{)}
+            \PYG{n}{g1\PYGZus{}new}\PYG{p}{(}\PYG{n}{myPartialKeys}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{d2}\PYG{p}{)}
+
+            \PYG{c+c1}{//The receiver needs to extract (via KGC) and setPriv to get his private key and decrypt the cipher}
+            \PYG{n}{extract}\PYG{p}{(}\PYG{n}{mpkSession}\PYG{p}{,} \PYG{n}{msk}\PYG{p}{,} \PYG{n}{ID}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{myPartialKeys}\PYG{p}{);}
+
+            \PYG{c+c1}{// Computes Secret User Keys}
+            \PYG{n}{SK} \PYG{n}{mySecretKeys}\PYG{p}{;}
+            \PYG{n}{g2\PYGZus{}null}\PYG{p}{(}\PYG{n}{mySecretKeys}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{s1}\PYG{p}{)}
+            \PYG{n}{g2\PYGZus{}new}\PYG{p}{(}\PYG{n}{mySecretKeys}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{s1}\PYG{p}{)}
+
+            \PYG{n}{g1\PYGZus{}null}\PYG{p}{(}\PYG{n}{mySecretKeys}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{s2}\PYG{p}{)}
+            \PYG{n}{g1\PYGZus{}new}\PYG{p}{(}\PYG{n}{mySecretKeys}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{s2}\PYG{p}{)}
+            \PYG{n}{setPriv}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{myPartialKeys}\PYG{p}{,} \PYG{n}{mpkSession}\PYG{p}{,} \PYG{n}{ID}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{mySecretKeys}\PYG{p}{);}
+
+            \PYG{c+c1}{// We can decrypt now}
+            \PYG{n}{gt\PYGZus{}t} \PYG{n}{decryptedMessage}\PYG{p}{;}
+            \PYG{n}{gt\PYGZus{}null}\PYG{p}{(}\PYG{n}{decryptedMessage}\PYG{p}{)}
+            \PYG{n}{gt\PYGZus{}new}\PYG{p}{(}\PYG{n}{decryptedMessage}\PYG{p}{)}
+            \PYG{n}{decrypt}\PYG{p}{(}\PYG{n}{c}\PYG{p}{,} \PYG{n}{mySecretKeys}\PYG{p}{,} \PYG{n}{myPK}\PYG{p}{,} \PYG{n}{mpkSession}\PYG{p}{,} \PYG{n}{ID}\PYG{p}{,} \PYG{o}{\PYGZam{}}\PYG{n}{decryptedMessage}\PYG{p}{);}
+
+            \PYG{k+kt}{char} \PYG{n}{aeskDecrypted}\PYG{p}{[}\PYG{n}{crypto\PYGZus{}secretbox\PYGZus{}KEYBYTES}\PYG{p}{];}
+            \PYG{n}{get\PYGZus{}key}\PYG{p}{(}\PYG{n}{aeskDecrypted}\PYG{p}{,} \PYG{n}{decryptedMessage}\PYG{p}{);}
+
+            \PYG{k+kt}{unsigned} \PYG{k+kt}{char} \PYG{n}{decrypted}\PYG{p}{[}\PYG{n}{m\PYGZus{}len}\PYG{p}{];}
+            \PYG{n}{decrypt\PYGZus{}message}\PYG{p}{(}\PYG{n}{decrypted}\PYG{p}{,} \PYG{n}{ciphertextAES}\PYG{p}{,} \PYG{n}{nonceAES}\PYG{p}{,} \PYG{n}{aeskDecrypted}\PYG{p}{,} \PYG{n}{cipher\PYGZus{}len}\PYG{p}{);}
+            \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Decrypted message : \PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{decrypted}\PYG{p}{);}
+        \PYG{p}{\PYGZcb{}}
+
+        \PYG{c+c1}{// For test purposes}
+        \PYG{c+c1}{// We change the message to see the signature not being correct again}
+        \PYG{k+kt}{unsigned} \PYG{k+kt}{char}\PYG{o}{*} \PYG{n}{mSigCorrupt} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}The message to be signed !!\PYGZdq{}}\PYG{p}{;}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Message changed to simulate corruption}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+
+        \PYG{c+c1}{// We can verify now with the public keys of the sender}
+        \PYG{n}{test} \PYG{o}{=} \PYG{n}{verify}\PYG{p}{(}\PYG{n}{s}\PYG{p}{,} \PYG{n}{myPKSig}\PYG{p}{,} \PYG{n}{mpkSignature}\PYG{p}{,} \PYG{n}{ID}\PYG{p}{,} \PYG{n}{mSigCorrupt}\PYG{p}{);}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Verification (0 if correct 1 if not) : \PYGZpc{}d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{test}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{core\PYGZus{}clean}\PYG{p}{();}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,141 @@
+\documentclass[a4paper,12pt]{report} % Type du document
+\usepackage[french]{babel} % Langue du document
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[left=15mm, right=15mm]{geometry} % Définition de la largeur des marges gauches et droites
+% pour définir toute les marges d'un coup : [margin=2cm] à la place de left et right
+\usepackage{a4wide} % Format de la feuille
+\usepackage{amsmath} % Pour inclure des équations
+\usepackage{graphicx} % Pour inclure des images / graphiques
+\usepackage{float} % Pour gérer le placement des images
+\usepackage{fancyhdr} % Pour les headers, paramètres ci-dessous
+%\usepackage{listings} % Pour afficher du code formaté
+% Pour le code formaté, minted est mieux mais on doit autoriser l'exécution de code arbitraire
+% à la compilation (--shell-escape) et installer pygmentize (python)
+%\lstset{ basicstyle=\footnotesize,breaklines=true,numbersep=4pt,}
+\usepackage{minted}
+\usepackage{xcolor} % Pour gérer les couleurs personnalisées
+\usepackage{enumitem} % Pour des listes à points personnalisable
+\usepackage{lastpage}
+\usepackage{subfiles}
+%\usepackage{hyperref}
+
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{49pt}
+\graphicspath{{images/}}
+% Paramètres fancyhdr
+\pagestyle{fancy}
+\fancyhf{}
+
+\lhead{\includegraphics{heig-logo}}
+\rhead{Mickael Bonjour} % header droit
+\rfoot{Page \thepage \hspace{1pt} sur \pageref{LastPage}}
+\fancypagestyle{firstpage}{%
+    \fancyhf{}
+    \lhead{\includegraphics[]{heig-logo}}
+    \rhead{{TIC\\[0.1cm]} {Télécommunication\\[0.1cm]} {Sécurité de l'information}}
+}
+
+\renewcommand*\contentsname{Table des matières}
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\hspace*{\fill}\Huge \bfseries}
+\renewcommand{\cftaftertoctitle}{\hspace*{\fill}}
+\begin{document}
+
+\begin{titlepage}
+    \thispagestyle{firstpage}
+    \begin{center}
+    
+     \vspace{1.5cm}
+    
+    {\huge \bfseries Travail de Bachelor \\[0.8cm] }
+    {\large Chiffrement / Signature d'emails \\[0.2cm] }
+    {\large \bfseries Non Confidentiel}
+    
+    %\vspace{1.0cm}
+    %\includegraphics[height=7.5cm]{sample.jpg} \\
+    %\vspace{1.2cm}
+    \vspace{9.7cm}
+    
+    \begin{tabular}{ll}
+    \textbf{Étudiant :} & \textbf{Bonjour Mickael} \\[0.1cm]
+    \textbf{Travail proposé par :} & Duc Alexandre \\[0.1cm]
+    & Nom de l’entreprise/institution \\
+    & Adresse \\
+    & NPA Ville \\
+    \textbf{Enseignant responsable :} & Duc Alexandre \\[0.1cm]
+    \textbf{Année académique} & 2019-2020 \\[0.1cm]
+    \end{tabular}
+    
+    \vspace{2.0cm}
+    
+    \begin{flushright}
+        Yverdon-les-Bains, le \today
+    \end{flushright}
+    
+    \end{center}
+    
+\end{titlepage}
+\pagebreak
+    
+
+%TODO: Mettre les pages de préambule, auth, etc
+\input{template/secondtitle}
+\pagebreak
+\input{template/preambule}
+\pagebreak
+\input{template/authentification}
+\pagebreak
+
+\tableofcontents
+\thispagestyle{fancy}
+\pagebreak
+
+\thispagestyle{fancy}
+\input{chapters/cdc}
+
+\thispagestyle{fancy}
+\input{chapters/introduction}
+
+\thispagestyle{fancy}
+\input{chapters/analysis}
+
+\thispagestyle{fancy}
+%\input{chapters/ch_exemple}
+
+\thispagestyle{fancy}
+\input{chapters/architecture}
+
+\thispagestyle{fancy}
+\input{chapters/implementation}
+
+\thispagestyle{fancy}
+\input{chapters/conclusion}
+\pagebreak
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliographie}
+\bibliographystyle{plain}
+\bibliography{chapters/biblio}
+\nocite{*} %ajoute tout ce qu'il y a dans le bibtex
+\pagebreak
+
+\listoffigures
+\pagebreak
+
+%\listoftables
+%\pagebreak
+
+% Annexes
+% +---------------------------------------------------------------+
+\appendix
+
+%TODO voir si code ou non
+%\input{chapters/code}
+
+\input{chapters/outils}
+
+\input{chapters/fichiers}
+
+%\input{chapters/journal-de-travail}
+\end{document}
