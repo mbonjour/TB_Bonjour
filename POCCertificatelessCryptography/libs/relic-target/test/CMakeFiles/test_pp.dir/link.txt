@@ -1,0 +1,1 @@
+/usr/bin/cc -pipe -std=c99 -m64 -Wall   -O2 -funroll-loops -fomit-frame-pointer  -L/home/mbonjour/RELIC/relic/src/low/gmp/  -rdynamic CMakeFiles/test_pp.dir/test_pp.c.o  -o ../bin/test_pp  ../lib/librelic_s.a -lgmp -lrt 

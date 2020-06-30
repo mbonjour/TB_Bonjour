@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/testAlgo.dir/test/fullTest.c.o CMakeFiles/testAlgo.dir/utils/aesUtils.c.o CMakeFiles/testAlgo.dir/cipherPOC.c.o CMakeFiles/testAlgo.dir/signaturePOC.c.o  -o testAlgo  -Wl,-rpath,/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/POCCertificatelessCryptography/libs/relic-target/lib ../libs/relic-target/lib/librelic.so -lsodium -lnsl -lpthread 
