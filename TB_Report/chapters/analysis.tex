@@ -119,10 +119,34 @@ Pour choisir parmi les nombreux schémas existants en certificateless pour le ch
 %TODO Expliquer les propriétés
 \subsection{Détails techniques}
 Les détails techniques sur le chiffrement avec la \textit{Certificateless Cryptography}.
-Le chiffrement se base sur le problème difficile \textit{The Decision 3-Party Diffie-Hellman Problem} (3-DDH). \\C'est de décider si $T =g^{abc} ayant (g^a, g^b, g^c, T) \in \mathbb{G}_4$.
+Le chiffrement se base sur le problème difficile \textit{The Decision 3-Party Diffie-Hellman Problem} (3-DDH). \\C'est de décider si $T =g^{abc} ayant (g^a, g^b, g^c, T) \in \mathbb{G}_4$.\\
+Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/pkc/DentLP08} et les expliquer :\\
+\textbf{Setup($1^k, n$) :} Avec $\mathbb{G}_1, \mathbb{G}_2, \mathbb{G}_T$ avec un ordre $p > 2^k$. $g$ est un générateur de $\mathbb{G}_1$. Ensuite  $g_1 = g^\gamma$ pour un $\gamma \leftarrow  \mathbb{Z}_p^*$ aléatoire. Puis $g_2 \leftarrow \mathbb{G}_2$. Deux vecteurs (U,V) seront tirés aléatoirement dans $\mathbb{G}_2^{n+1}$ en tant que fonctions de hash notés :
+\[F_u(ID) = \]
+L'on va aussi prendre une fonction de hash résistante aux collisions : $H : \{0,1\}^* \rightarrow \{0,1\}^n$. Au final notre $mpk$ (master public key) est :
+\[mpk \leftarrow (g, g_1, g_2, U, V)\]
+Et le $msk$ (master seret key) est $msk \leftarrow g_2^\gamma$.
+\\
+\textbf{Extract($mpk, \gamma, ID$) :} On prend $r \leftarrow \mathbb{Z}_p^*$ puis on retourne $d_{ID} \leftarrow (d_1, d_2) = (g_2^\gamma * F_u(ID)^r, g^r)$\\
+\textbf{SetSec($mpk$) :} Retourne un secret aléatoirement choisi $x_{ID} \leftarrow \mathbb{Z}_p^*$.\\
+\textbf{SetPub($x_{ID}, mpk$) :} Retourne $pk_{ID} \leftarrow (X,Y) = (g^{x_ID}, g_1^{x_ID})$.\\
+\textbf{SetPriv($x_{ID}, d_{ID}, mpk$) :} On choisit $r' \leftarrow \mathbb{Z}_p^*$ puis on reprends $(d_1, d_2) \leftarrow d_{ID}$ et l'on va prendre en secret key : 
+%TODO : Revoir si assez complet :
+\[sk_{ID} \leftarrow (s_1, s_2) = (d_1^{x_{ID}} * F_u(ID)^{r'}, d_2^{x_{ID}} * g^{r'})\]
+Avec $sk_{ID}$ étant la clé secréte de l'utilisateur, donnée par l'Extract (notre Partial Private Key) et la valeur secrète de SetSec.\\
+\textbf{Encrypt :}\\
+\textbf{Decrypt :}
 \subsection{Schémas Certificateless de Signature}
 %TODO : Expliquer Malicious KGC et mettre tableaux
 Pour choisir parmi les nombreux schémas certificateless pour la signature j'ai établi un tableau comparatif des différentes manières de faire inspiré de~\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau il y a peu de solutions se dégage, en effet l'on peut voir que beaucoup de schémas de signature sont cassés, mon choix s'est porté au final sur la construction de Zhang et Zhang~\cite{DBLP:conf/icc/ZhangZ08a} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) et en plus elle date de 2008 et n'a apparemment pas été cassée. Le tableau se trouve en annexe \ref{ch:fichiers}.
 \subsection{Détails techniques}
 Les détails techniques sur la signature avec la \textit{Certificateless Cryptography}.
-La signature se base sur le problème difficile \textit{The ComputationalDiffie-Hellman Problem} (CDH). \\Ayant $P, aP, bP$ où $a,b$ aléatoires $\in \mathbb{Z}_q^*$ il n'est pas possible de trouver $abP$.
+La signature se base sur le problème difficile \textit{The ComputationalDiffie-Hellman Problem} (CDH). \\Ayant $P, aP, bP$ où $a,b$ aléatoires $\in \mathbb{Z}_q^*$ il n'est pas possible de trouver $abP$.\\
+Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/icc/ZhangZ08a} et les expliquer :\\
+\textbf{Setup :}\\
+\textbf{Extract :}\\
+\textbf{SetSec :}\\
+\textbf{SetPub :}\\
+\textbf{SetPriv :}\\
+\textbf{Sign :}\\
+\textbf{Verify :}
