@@ -3,44 +3,46 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: plain.bst
 Database file #1: chapters/biblio.bib
-You've used 10 entries,
+Warning--empty institution in doubleratchet
+You've used 11 entries,
             2118 wiz_defined-function locations,
-            573 strings with 7120 characters,
-and the built_in function-call counts, 4628 in all, are:
-= -- 455
-> -- 239
+            576 strings with 7200 characters,
+and the built_in function-call counts, 4861 in all, are:
+= -- 478
+> -- 252
 < -- 9
-+ -- 93
-- -- 80
-* -- 330
-:= -- 724
-add.period$ -- 36
-call.type$ -- 10
-change.case$ -- 65
++ -- 98
+- -- 84
+* -- 343
+:= -- 769
+add.period$ -- 39
+call.type$ -- 11
+change.case$ -- 71
 chr.to.int$ -- 0
-cite$ -- 10
-duplicate$ -- 182
-empty$ -- 347
-format.name$ -- 80
-if$ -- 1009
+cite$ -- 12
+duplicate$ -- 190
+empty$ -- 362
+format.name$ -- 84
+if$ -- 1054
 int.to.chr$ -- 0
-int.to.str$ -- 10
+int.to.str$ -- 11
 missing$ -- 10
-newline$ -- 53
-num.names$ -- 28
-pop$ -- 78
+newline$ -- 58
+num.names$ -- 30
+pop$ -- 83
 preamble$ -- 1
-purify$ -- 56
+purify$ -- 60
 quote$ -- 0
-skip$ -- 145
+skip$ -- 151
 stack$ -- 0
-substring$ -- 279
+substring$ -- 284
 swap$ -- 76
 text.length$ -- 9
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 38
-warning$ -- 0
-while$ -- 45
-width$ -- 12
-write$ -- 119
+type$ -- 42
+warning$ -- 1
+while$ -- 47
+width$ -- 13
+write$ -- 129
+(There was 1 warning)

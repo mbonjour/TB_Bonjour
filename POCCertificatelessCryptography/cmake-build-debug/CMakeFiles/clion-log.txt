@@ -1,4 +1,11 @@
-/home/mbonjour/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.7846.88/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/POCCertificatelessCryptography
+/home/mbonjour/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.7846.88/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography
+-- The C compiler identification is GNU 10.1.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/POCCertificatelessCryptography
+-- Build files have been written to: /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography

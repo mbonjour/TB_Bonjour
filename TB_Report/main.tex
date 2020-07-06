@@ -1,11 +1,13 @@
 \documentclass[a4paper,12pt]{report} % Type du document
 \usepackage[french]{babel} % Langue du document
+\frenchbsetup{IndentFirst=false}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[left=15mm, right=15mm]{geometry} % Définition de la largeur des marges gauches et droites
 % pour définir toute les marges d'un coup : [margin=2cm] à la place de left et right
 \usepackage{a4wide} % Format de la feuille
 \usepackage{amsmath} % Pour inclure des équations
+\usepackage{amssymb}
 \usepackage{graphicx} % Pour inclure des images / graphiques
 \usepackage{float} % Pour gérer le placement des images
 \usepackage{fancyhdr} % Pour les headers, paramètres ci-dessous
@@ -19,7 +21,8 @@
 \usepackage{lastpage}
 \usepackage{subfiles}
 \usepackage{url}
-%\usepackage{hyperref}
+\usepackage{pgf-umlsd}
+\usepackage{hyperref}
 
 \renewcommand{\headrulewidth}{0pt}
 \setlength{\headheight}{49pt}
@@ -101,7 +104,7 @@
 \thispagestyle{fancy}
 \input{chapters/analysis}
 
-\thispagestyle{fancy}
+%\thispagestyle{fancy}
 %\input{chapters/ch_exemple}
 
 \thispagestyle{fancy}
@@ -121,6 +124,7 @@
 \nocite{*} %ajoute tout ce qu'il y a dans le bibtex
 \pagebreak
 
+\thispagestyle{fancy}
 \listoffigures
 \pagebreak
 
@@ -133,9 +137,10 @@
 
 %TODO voir si code ou non
 %\input{chapters/code}
-
+\thispagestyle{fancy}
 \input{chapters/outils}
 
+\thispagestyle{fancy}
 \input{chapters/fichiers}
 
 %\input{chapters/journal-de-travail}

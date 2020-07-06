@@ -44,6 +44,11 @@ Nadim Kobeissi.
 \newblock An analysis of the protonmail cryptographic architecture.
 \newblock {\em {IACR} Cryptol. ePrint Arch.}, 2018:1121, 2018.
 
+\bibitem{doubleratchet}
+Trevor Perrin and Moxie Marlinspike.
+\newblock {The Double Ratchet Algorithm}.
+\newblock Technical report, 2016.
+
 \bibitem{DBLP:conf/uss/PoddebniakD0ISF18}
 Damian Poddebniak, Christian Dresen, Jens M{\"{u}}ller, Fabian Ising, Sebastian
   Schinzel, Simon Friedberger, Juraj Somorovsky, and J{\"{o}}rg Schwenk.
