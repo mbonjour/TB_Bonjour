@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="POCCertificatelessCryptography" targetName="mainServer" />
       <config projectName="POCCertificatelessCryptography" targetName="mainClient" />
+      <config projectName="POCCertificatelessCryptography" targetName="mainServer" />
       <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
     </generated>
   </component>
@@ -14,6 +14,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/art/rlc_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/art/rlc_logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/bench/bench_pc.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/bench/bench_pc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/include/relic_alloc.h" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/include/relic_alloc.h" afterDir="false" />
@@ -110,6 +114,7 @@
       <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-455/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-455/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-638/relic_fpx_rdc_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-638/relic_fpx_rdc_low.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/tools/relic_gen_label.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/tools/relic_gen_label.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report/chapters/analysis.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report/chapters/analysis.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +126,10 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/libs/relic" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="vrrc0s21" />
   </component>
   <component name="ProjectId" id="1bXjlmXNqoUeRZHALooFDxNsdKQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -215,6 +223,7 @@
       <workItem from="1593266159927" duration="11680000" />
       <workItem from="1593419769181" duration="19217000" />
       <workItem from="1593506812461" duration="32000" />
+      <workItem from="1594110269856" duration="2640000" />
     </task>
     <servers />
   </component>
