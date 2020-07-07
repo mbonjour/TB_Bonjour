@@ -14,10 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/art/rlc_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/art/rlc_logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/bench/bench_pc.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/bench/bench_pc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/include/relic_alloc.h" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/include/relic_alloc.h" afterDir="false" />
@@ -223,7 +220,7 @@
       <workItem from="1593266159927" duration="11680000" />
       <workItem from="1593419769181" duration="19217000" />
       <workItem from="1593506812461" duration="32000" />
-      <workItem from="1594110269856" duration="2640000" />
+      <workItem from="1594110269856" duration="3860000" />
     </task>
     <servers />
   </component>

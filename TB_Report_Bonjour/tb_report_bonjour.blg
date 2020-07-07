@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Arch Linux)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: tb_report_bonjour.aux
+The style file: plain.bst
+Database file #1: chapters/biblio.bib
+Warning--empty institution in doubleratchet
+You've used 11 entries,
+            2118 wiz_defined-function locations,
+            576 strings with 7226 characters,
+and the built_in function-call counts, 4861 in all, are:
+= -- 478
+> -- 252
+< -- 9
++ -- 98
+- -- 84
+* -- 343
+:= -- 769
+add.period$ -- 39
+call.type$ -- 11
+change.case$ -- 71
+chr.to.int$ -- 0
+cite$ -- 12
+duplicate$ -- 190
+empty$ -- 362
+format.name$ -- 84
+if$ -- 1054
+int.to.chr$ -- 0
+int.to.str$ -- 11
+missing$ -- 10
+newline$ -- 58
+num.names$ -- 30
+pop$ -- 83
+preamble$ -- 1
+purify$ -- 60
+quote$ -- 0
+skip$ -- 151
+stack$ -- 0
+substring$ -- 284
+swap$ -- 76
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 42
+warning$ -- 1
+while$ -- 47
+width$ -- 13
+write$ -- 129
+(There was 1 warning)

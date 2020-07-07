@@ -1,0 +1,193 @@
+% +---------------------------------------------------------------+
+% | Author :    Sylvain Pasini, HEIG-VD
+% | Date :       April 22nd, 2020
+% +---------------------------------------------------------------+
+
+
+
+% +---------------------------------------------------------------+
+% | Page de garde
+% +---------------------------------------------------------------+
+
+\newcommand{\TBmaketitle}{
+	\thispagestyle{empty}
+
+	\begin{minipage}[t]{6cm}
+		\includegraphics[width=4.5cm]{template/logo_heig-vd.pdf}
+	\end{minipage}\hfill\begin{minipage}{10cm}%
+		\small%
+		\begin{flushright}%
+			\TBdpt\\
+			\TBfiliere\\
+			\TBorient
+		\end{flushright}
+	\end{minipage}
+
+	\vfill
+
+	\begin{center}        
+    {\large \bfseries Travail de Bachelor}
+    
+    \vspace{0.8cm}
+    
+    {\Huge \bfseries \TBtitle}
+
+	  \ifthenelse{\isempty{\TBsubtitle}}%
+ 			{empty}%empty
+	    {\Large \TBsubtitle}%not empty
+		
+		\ifisconfidential
+	    \vspace{0.8cm}    
+	    {\large \bfseries Confidentiel}
+	  \else
+		\fi      
+
+  \end{center}
+		
+	\vfill
+    
+    \normalsize
+    \begin{tabular}{l@{\hskip 10mm}l}
+    	\textbf{Étudiant} & \textbf{\TBauthor} \\[0.1cm]
+	    \textbf{Enseignant responsable} & \TBsupervisor \\[0.1cm]
+		  \ifthenelse{\isempty{\TBindustryName}}%
+    		{}%empty
+		    {\textbf{Entreprise mandante} & 
+		      \begin{minipage}[t]{8cm}%
+		    		\TBindustryContact\\
+						\TBindustryName\\
+						\TBindustryAddress\\
+					\end{minipage} \\[0.1cm]
+				}%not empty
+	    \textbf{Année académique} & 2019-2020 \\[0.1cm]
+    \end{tabular}
+    
+    \vspace{2.0cm}
+    
+	\begin{flushright}
+		Yverdon-les-Bains, le \today
+	\end{flushright}
+ 
+ 	\cleardoublepage   
+}
+
+
+
+% +---------------------------------------------------------------+
+% | Seconde page
+% +---------------------------------------------------------------+
+
+\newcommand{\TBsecondTitle}{
+
+  \begin{flushright}
+      \TBdpt\\
+      \TBfiliere\\
+      \TBorient\\
+      Étudiant : \TBauthor\\
+      Enseignant responsable : \TBsupervisor\\
+  \end{flushright}
+  
+  \vspace{0.6cm}
+  
+  \begin{center}
+      {\large Travail de Bachelor \TBacademicYears \\[0.2cm]}
+      {\TBtitle \\[0.5cm]}
+  \end{center}
+  
+  \hrule
+  \vspace{0.5cm}
+  
+  {Nom de l'entreprise/institution}
+
+  \TBindustryName
+
+  \vspace{0.5cm}
+  
+  {\bfseries Résumé publiable}
+  
+  {\TBresumePubliable}
+
+  \vspace{0.5cm}  
+  
+  
+  \begin{tabular}{lll}
+      Étudiant : & Date et lieu : & Signature :  \\[0.3cm]
+      {\TBauthor} & .......................................... &  .......................................... \\[0.8cm]
+      Enseignant responsable : & Date et lieu : & Signature :  \\[0.3cm]
+  
+      {\TBsupervisor} & .......................................... &  .......................................... \\[0.8cm]
+      Nom de l'entreprise/institution : & Date et lieu : & Signature :  \\[0.3cm]
+  
+      {\TBindustryContact} & .......................................... &  .......................................... \\
+      {\TBindustryName}
+  \end{tabular}
+  
+  \cleardoublepage
+}
+
+
+
+
+
+% +---------------------------------------------------------------+
+% | Preambule
+% +---------------------------------------------------------------+
+
+\newcommand{\TBpreambule}{
+
+  \chapter{Préambule}
+  
+  Ce travail de Bachelor (ci-après TB) est réalisé en fin de cursus d’études, en vue de l'obtention du titre de Bachelor of Science HES-SO en Ingénierie. \\
+  
+  En tant que travail académique, son contenu, sans préjuger de sa valeur, n'engage ni la responsabilité de l'auteur, ni celles du jury du travail de Bachelor et de l'Ecole. \\
+  
+  Toute utilisation, même partielle, de ce TB doit être faite dans le respect du droit d’auteur. \\
+  
+  
+  \begin{flushright}
+      \begin{minipage}{7cm}
+          \vspace{2cm}
+          HEIG-VD \\
+  
+          \vspace{2cm}
+  
+          Vincent Peiris\\
+          Chef de département TIC
+      \end{minipage}\hfill
+  \end{flushright}
+  
+  \vspace{3cm}
+  
+  Yverdon-les-Bains, le \today
+
+}
+
+
+
+
+
+
+
+% +---------------------------------------------------------------+
+% | Authentification
+% +---------------------------------------------------------------+
+
+\newcommand{\TBauthentification}{
+
+  \chapter{Authentification}
+  
+Le soussigné, \TBauthor, atteste par la présente avoir réalisé  ce travail et n’avoir utilisé aucune autre source que celles expressément mentionnées.
+
+\vspace{2cm}
+
+\noindent {Yverdon-les-bains}, le \today
+
+\vspace{3cm}
+
+\begin{flushright}
+    \begin{minipage}{7cm}
+        {\TBauthor}
+    \end{minipage}\hfill
+\end{flushright}
+
+}

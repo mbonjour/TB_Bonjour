@@ -1,0 +1,56 @@
+\BOOKMARK [0][-]{chapter*.1}{Pr\351ambule}{}% 1
+\BOOKMARK [0][-]{chapter*.2}{Authentification}{}% 2
+\BOOKMARK [0][-]{chapter*.3}{Cahier des charges}{}% 3
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 4
+\BOOKMARK [0][-]{chapter.2}{Analyse - \311tat de l'art}{}% 5
+\BOOKMARK [1][-]{section.2.1}{Protocoles existants}{chapter.2}% 6
+\BOOKMARK [2][-]{subsection.2.1.1}{PGP}{section.2.1}% 7
+\BOOKMARK [2][-]{subsection.2.1.2}{PEP}{section.2.1}% 8
+\BOOKMARK [2][-]{subsection.2.1.3}{S/MIME}{section.2.1}% 9
+\BOOKMARK [1][-]{section.2.2}{Impl\351mentations existantes}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.1}{Protonmail}{section.2.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.2}{Tutanota}{section.2.2}% 12
+\BOOKMARK [1][-]{section.2.3}{Attaque existantes}{chapter.2}% 13
+\BOOKMARK [2][-]{subsection.2.3.1}{D\351fauts webmail}{section.2.3}% 14
+\BOOKMARK [2][-]{subsection.2.3.2}{EFAIL}{section.2.3}% 15
+\BOOKMARK [1][-]{section.2.4}{Signal}{chapter.2}% 16
+\BOOKMARK [2][-]{subsection.2.4.1}{Fonctionnement}{section.2.4}% 17
+\BOOKMARK [2][-]{subsection.2.4.2}{Probl\350mes d'int\351grations}{section.2.4}% 18
+\BOOKMARK [1][-]{section.2.5}{Compromis}{chapter.2}% 19
+\BOOKMARK [2][-]{subsection.2.5.1}{R\351sultats des recherches}{section.2.5}% 20
+\BOOKMARK [1][-]{section.2.6}{Primitives}{chapter.2}% 21
+\BOOKMARK [2][-]{subsection.2.6.1}{Primitives analys\351es}{section.2.6}% 22
+\BOOKMARK [2][-]{subsection.2.6.2}{Primitive choisie}{section.2.6}% 23
+\BOOKMARK [1][-]{section.2.7}{Recherches sur la primitive}{chapter.2}% 24
+\BOOKMARK [2][-]{subsection.2.7.1}{Principes math\351matiques}{section.2.7}% 25
+\BOOKMARK [2][-]{subsection.2.7.2}{Sch\351mas Certificateless de Chiffrement}{section.2.7}% 26
+\BOOKMARK [2][-]{subsection.2.7.3}{D\351tails techniques}{section.2.7}% 27
+\BOOKMARK [2][-]{subsection.2.7.4}{Sch\351mas Certificateless de Signature}{section.2.7}% 28
+\BOOKMARK [2][-]{subsection.2.7.5}{D\351tails techniques}{section.2.7}% 29
+\BOOKMARK [1][-]{section.2.8}{\311tat de l'art}{chapter.2}% 30
+\BOOKMARK [0][-]{chapter.3}{Architecture / Design du protocole}{}% 31
+\BOOKMARK [1][-]{section.3.1}{Architecture globale}{chapter.3}% 32
+\BOOKMARK [1][-]{section.3.2}{Acteurs}{chapter.3}% 33
+\BOOKMARK [1][-]{section.3.3}{Fonctionnement Certificateless PKC}{chapter.3}% 34
+\BOOKMARK [2][-]{subsection.3.3.1}{Chiffrement}{section.3.3}% 35
+\BOOKMARK [2][-]{subsection.3.3.2}{Signature}{section.3.3}% 36
+\BOOKMARK [1][-]{section.3.4}{Design du protocole}{chapter.3}% 37
+\BOOKMARK [0][-]{chapter.4}{Impl\351mentation}{}% 38
+\BOOKMARK [1][-]{section.4.1}{Choix d'impl\351mentations}{chapter.4}% 39
+\BOOKMARK [2][-]{subsection.4.1.1}{Langage}{section.4.1}% 40
+\BOOKMARK [2][-]{subsection.4.1.2}{Librairie}{section.4.1}% 41
+\BOOKMARK [2][-]{subsection.4.1.3}{Courbe utilis\351e}{section.4.1}% 42
+\BOOKMARK [2][-]{subsection.4.1.4}{D\351rivation de la cl\351 AES}{section.4.1}% 43
+\BOOKMARK [2][-]{subsection.4.1.5}{Fonctions de hachage - signature}{section.4.1}% 44
+\BOOKMARK [2][-]{subsection.4.1.6}{S\351rialisation des donn\351es}{section.4.1}% 45
+\BOOKMARK [2][-]{subsection.4.1.7}{Enregistrement des cl\351s publiques}{section.4.1}% 46
+\BOOKMARK [1][-]{section.4.2}{Impl\351mentation cl\351s de chiffrement}{chapter.4}% 47
+\BOOKMARK [2][-]{subsection.4.2.1}{D\351roulement POC}{section.4.2}% 48
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 49
+\BOOKMARK [0][-]{chapter.5}{Bibliographie}{}% 50
+\BOOKMARK [0][-]{appendix.A}{Outils utilis\351s pour la compilation}{}% 51
+\BOOKMARK [1][-]{section.A.1}{RELIC Toolkit}{appendix.A}% 52
+\BOOKMARK [1][-]{section.A.2}{Libsodium}{appendix.A}% 53
+\BOOKMARK [0][-]{appendix.B}{Fichiers}{}% 54
+\BOOKMARK [1][-]{section.B.1}{Code du POC}{appendix.B}% 55
+\BOOKMARK [1][-]{section.B.2}{Tableaux comparatifs}{appendix.B}% 56

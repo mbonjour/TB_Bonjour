@@ -1,0 +1,254 @@
+% +---------------------------------------------------------------+
+% | Author :    Sylvain Pasini, HEIG-VD
+% | Date :       April 22nd, 2020
+% +---------------------------------------------------------------+
+
+
+% +---------------------------------------------------------------+
+% | SOLUTIONS BG
+% +---------------------------------------------------------------+
+
+%\usepackage[firstpage]{draftwatermark}
+%\SetWatermarkText{SOLUTIONS}
+%\SetWatermarkScale{2}
+%\SetWatermarkColor{red}
+%\SetWatermarkHorCenter{7cm}
+%\SetWatermarkVerCenter{7cm}
+
+\usepackage[contents={}]{background}
+
+\ifisdraft
+  %\backgroundsetup{
+  %	pages=all,
+  %  contents=\textbf{\textsc{Solutions}},
+  %  color=red,
+  %  opacity=1,
+  %  scale=3,
+  %  angle=0,	
+  %  position=current page.south,
+  %  %nodeanchor=bottom,
+  %  %anchor=right,
+  %  vshift=5mm,
+  %}
+  \backgroundsetup{
+  	pages=all,
+    contents=\textbf{\textsc{Solutions}},
+    color=red,
+    opacity=1,
+    scale=3,
+    angle=0,	
+    position=current page.north,
+    %nodeanchor=bottom,
+    %anchor=right,
+    vshift=-7mm,
+  }
+\else
+\fi
+
+
+% +---------------------------------------------------------------+
+% | COMMANDS
+% +---------------------------------------------------------------+
+% Format of unix command in text
+\let\com\texttt
+%\newcommand{\shellcmd}[1]{\texttt{#1}}
+
+\usepackage[most]{tcolorbox}
+\newtcolorbox{shellbox}{%
+  %title={Listing \thetcbcounter: #2},
+  %list entry={\numberline{\thetcbcounter}#2},
+  colframe=white!90!black,
+  colback=white!90!black,
+  %boxrule=0mm,
+  %enhanced,
+  %drop fuzzy shadow
+  %breakable
+  %#1
+  }
+  
+\newenvironment{shellcmd}
+{%
+ \VerbatimEnvironment%
+ \begin{shellbox}%
+ \begin{minted}[autogobble, breaklines=true]{console}% 
+}%
+{%
+ \end{minted}%
+ \end{shellbox}%
+}
+
+% Command in a box
+\newcommand{\boxcom}[1]{%
+	\begin{center}
+	\fbox{%
+  	\parbox{0.9\textwidth}{%
+    	\com{#1}
+  	}
+	}
+	\end{center}
+}
+
+% Path in a box (otherwise, simply use \path)
+\newcommand{\boxpath}[1]{%
+	\begin{center}
+	\fbox{%
+  	\parbox{0.9\textwidth}{%
+    	\path{#1}
+  	}
+	}
+	\end{center}
+}
+
+
+
+
+% +---------------------------------------------------------------+
+% | HINTS
+% +---------------------------------------------------------------+
+\newenvironment{hint}[1]{%
+~\\\noindent\textbf{Hint:} #1}{%
+}
+
+\newenvironment{reminder}[1]{%
+~\\\noindent\textbf{Reminder:} #1}{%
+}
+
+
+
+
+% +---------------------------------------------------------------+
+% | MATH
+% +---------------------------------------------------------------+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\card}[1]{|#1|}
+\newcommand{\st}{\;|\;}
+\newcommand{\xor}{\textnormal{XOR}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\V}{\mathrm{V}}
+\newcommand{\bigOne}{\mathbf{1}}
+\newcommand{\notequiv}{\not\equiv}
+\newcommand{\lcm}{\mathrm{lcm}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\binset}{\{0,1\}}
+
+
+
+
+% +---------------------------------------------------------------+
+% | CRYPTO
+% +---------------------------------------------------------------+
+\newcommand{\IV}{\mathrm{IV}}      %% use this to denote an initial vector
+\newcommand{\Oracle}{\mathcal{O}}
+
+%% Use this at the beginning of an algorithm
+\newcommand{\INPUT}{\item[\textbf{Input}:]}
+\newcommand{\OUTPUT}{\item[\textbf{Output}:]}
+\newcommand{\PROCESSING}{\item[\textbf{Processing}:]}
+
+%% Block cipher names
+\newcommand{\IDEA}{\mathsf{IDEA}}
+\newcommand{\DES}{\mathsf{DES}}
+\newcommand{\TDES}{\mathsf{3DES}}
+\newcommand{\DDES}{\mathsf{2DES}}
+\newcommand{\EDES}{\mathsf{EDES}}
+\newcommand{\EXDES}{\mathsf{ExtDES}}
+\newcommand{\SAFER}{\mathsf{SAFER}}
+\newcommand{\FOX}{\mathsf{FOX}}
+\newcommand{\AES}{\mathsf{AES}}
+\newcommand{\RCFIVE}{\mathsf{RC5}}
+\newcommand{\CSCIPHER}{\mathsf{CS}\text{-}\mathsf{CIPHER}}
+\newcommand{\ENC}{\mathsf{E}}   %% For denoting "any" block cipher E()
+\newcommand{\DEC}{\mathsf{D}}   %% For denoting the decryption "any" block cipher D()
+
+%% Hash Function/MAC Names
+%\newcommand{\SHAONE}{\mathsf{SHA}-1}
+\newcommand{\SHAONE}{\mathsf{SHA}\text{-1}}
+\newcommand{\SHATWOFIVESIX}{\mathsf{SHA}\text{-256}}
+\newcommand{\MDFIVE}{\mathsf{MD5}}
+\newcommand{\MDFOUR}{\mathsf{MD4}}
+
+%% stream cipher Names
+\newcommand{\RCFOUR}{\mathsf{RC4}}
+
+%% asmyetirc
+\newcommand{\RSA}{\mathrm{RSA}}
+
+
+
+
+% +---------------------------------------------------------------+
+% | CODE
+% +---------------------------------------------------------------+
+
+
+\usepackage[most]{tcolorbox}
+\usepackage[cache=false]{minted}
+
+\makeatletter
+\renewcommand*\l@tcolorbox{\@dottedtocline{1}{1.5em}{3em}}
+\makeatother
+
+\usepackage{wrapfig}
+
+
+% Listing
+% -----------
+\newtcolorbox[auto counter,number within=section, list inside=mypyg]{mintedbox}[2][]{%
+  title={Listing \thetcbcounter: #2},
+  list entry={\numberline{\thetcbcounter}#2},
+  colframe=white!50!black,
+  boxrule=0.4mm,
+  %enhanced,
+  %drop fuzzy shadow,
+  breakable,
+  #1}
+  
+  
+%% Mise en forme de commande SHELL
+%% 1er paramètre: le ype de shell, ici "console"
+%% 2ème paramètre: le nom donnée à la box
+\newenvironment{listingsbox}[3][]
+ {%
+   \VerbatimEnvironment%
+   \begin{mintedbox}[#1]{#3}%
+   \begin{minted}{#2}%
+}%
+ {%
+ \end{minted}%
+  \end{mintedbox}%
+}
+
+
+% Code source
+% -----------
+\newtcolorbox[auto counter,number within=section]{sourcecolorbox}[2][]{%
+  title={Code Source : #2},
+  colframe=white!50!black,
+  boxrule=0.4mm,
+  breakable,
+    %enhanced,
+  %drop fuzzy shadow,
+  #1}
+
+\newenvironment{sourcebox}[3][]
+ {%
+   \VerbatimEnvironment%   
+   \begin{sourcecolorbox}[#1]{#3}%
+   \begin{minted}[linenos, numbersep=4pt,tabsize=4,fontsize=\footnotesize, breaklines=true]{#2}%
+}%
+ {%
+ \end{minted}%
+  \end{sourcecolorbox}%
+}
+
+\newcommand{\inputsourcecode}[4][]
+% optional : [firstline=3,lastline=5]
+ {%
+   \begin{sourcecolorbox}{#4}%
+   \inputminted[linenos, numbersep=4pt,fontsize=\footnotesize, breaklines=true,#1]{#2}{#3}%
+   \end{sourcecolorbox}%
+}
+
+
+

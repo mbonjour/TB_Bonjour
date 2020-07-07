@@ -1,0 +1,128 @@
+\documentclass[a4paper,11pt,twoside,openright]{book} % Type du document
+
+% compiler avec : pdflatex, bibtex, pdflatex, pdflatex
+
+
+% +---------------------------------------------------------------+
+% | Language
+% +---------------------------------------------------------------+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{url}
+\usepackage{pgf-umlsd}
+
+\newif\ifisconfidential	\isconfidentialfalse
+
+\newif\ifisdraft\isdraftfalse
+
+
+
+% +---------------------------------------------------------------+
+% | Paramètres
+% +---------------------------------------------------------------+
+
+\newcommand{\TBtitle}{Chiffrement/Signature d'Emails}
+\newcommand{\TBsubtitle}{ }%laisser vide si pas de sous-titre
+\newcommand{\TByear}{2020}
+\newcommand{\TBacademicYears}{2019-2020}
+
+\newcommand{\TBdpt}{Département des Technologie de l'information et de la communication (TIC)}
+\newcommand{\TBfiliere}{Filière Télécommunications}
+\newcommand{\TBorient}{Orientation Sécurité de l'information}
+
+\newcommand{\TBauthor}{Mickael Bonjour}
+\newcommand{\TBsupervisor}{Prof. Alexandre Duc }
+\newcommand{\TBindustryContact}{Nom}
+\newcommand{\TBindustryName}{EntrepriseZ}
+\newcommand{\TBindustryAddress}{%
+  Rue XY\\
+  1400 Yverdon-les-Bains
+}
+
+% Confidentiel?
+% uncomment if confidential / comment if not confiential
+% \isconfidentialtrue
+
+\newcommand{\TBresumePubliable}{
+Dans ce travail de bachelor je vais analyser les solutions actuelles de messagerie sécurisée afin d'identifier les primitives cryptographiques dont j'ai besoin. Ensuite j'établirais un \textit{Proof Of Concept} amenant la technologie choisie dans un cadre de messagerie électronique sécurisée.
+}
+
+% +---------------------------------------------------------------+
+
+
+
+% +-[set path]-------------------------------------+
+\usepackage{template/TB-style}
+\usepackage{template/TB-macros}
+\usepackage{template/TB-template}
+%\graphicspath{images/}
+
+
+\begin{document}
+
+\frontmatter
+\pagestyle{empty}
+
+% TITLE and template
+% +---------------------------------------------------------------+
+
+\TBmaketitle
+
+\pagestyle{frontmatter}
+
+\TBsecondTitle
+
+\TBpreambule
+
+\TBauthentification
+
+
+% Cahier des charges
+% +---------------------------------------------------------------+
+\input{chapters/cdc}
+
+
+% TOC
+% +---------------------------------------------------------------+
+\tableofcontents
+\clearpage
+
+
+% Content
+% +---------------------------------------------------------------+
+
+\mainmatter
+\pagestyle{plain}
+
+\input{chapters/introduction}
+
+\input{chapters/analysis}
+
+\input{chapters/architecture}
+
+\input{chapters/implementation}
+
+\input{chapters/conclusion}
+\pagebreak
+
+% +---------------------------------------------------------------+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliographie}
+\bibliographystyle{plain}
+\bibliography{chapters/biblio}
+\nocite{*} %ajoute tout ce qu'il y a dans le bibtex
+
+\listoffigures
+\listoftables
+
+% Annexes
+% +---------------------------------------------------------------+
+\appendix
+
+\input{chapters/outils}
+
+\input{chapters/fichiers}
+
+
+\end{document}

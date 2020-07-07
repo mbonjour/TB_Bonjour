@@ -1,0 +1,179 @@
+% +---------------------------------------------------------------+
+% | Author :    Sylvain Pasini, HEIG-VD
+% | Date :       April 22nd, 2020
+% +---------------------------------------------------------------+
+
+
+% +---------------------------------------------------------------+
+% | A few useful packages
+% +---------------------------------------------------------------+
+
+% Maths & fonts
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% To hide text
+\usepackage{comment}
+
+% To add text for tests
+\usepackage{lipsum}
+
+% Images and colors
+\usepackage{graphicx,color}
+%\usepackage{xcolor} % Pour gérer les couleurs personnalisées
+
+% to print url
+\usepackage{url}
+
+% Allow number computations
+\usepackage{calc}
+
+% Smileys
+\usepackage{wasysym} % exemples : \smiley or \frownie
+
+% Algos
+\usepackage{verbatim}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% For setting PDF
+\usepackage{hyperref}
+
+% Layout
+\usepackage{fullpage}
+%\usepackage{subfigure}
+
+% remove parindent
+\setlength{\parindent}{0pt}
+% espace entre les paragraphes
+\setlength{\parskip}{6pt}
+
+% bullets in itemize
+\AtBeginDocument{\def\labelitemi{$\bullet$}}
+
+% multicolumn for choice on two columns... (exam questions)
+\usepackage{multicol}
+\setlength\multicolsep{0pt}
+
+% pour les commandes \menu
+\usepackage{menukeys}
+
+% pour utiliser ifempty
+\usepackage{ifthen}
+\usepackage{xifthen}
+
+% pour tourner les pages
+\usepackage{lscape}
+
+% utiliser de tables sur plusieurs pages
+\usepackage{longtable}
+
+%\usepackage{float} % Pour gérer le placement des images
+%\usepackage{fancyhdr} % Pour les headers, paramètres ci-dessous
+\usepackage{enumitem} % Pour des listes à points personnalisable
+\usepackage{lastpage}
+\usepackage{subfiles}
+
+
+
+% +---------------------------------------------------------------+
+% | Section, subsection, subsubsection, paragraph, ...
+% +---------------------------------------------------------------+
+% Permet de numéroter les paragraph et subparagraph
+\setcounter{secnumdepth}{5}
+
+
+% +---------------------------------------------------------------+
+% | Tables de matières
+% +---------------------------------------------------------------+
+% n'affiche que les tocdepth premiers niveaux
+\setcounter{tocdepth}{3} 
+%\mtcselectlanguage{french}
+
+
+% +---------------------------------------------------------------+
+% | Layout
+% +---------------------------------------------------------------+
+\def\spirale{6mm} 
+\def\demispirale{3mm}
+
+%1 Offset horizontal
+\setlength{\hoffset}{0pt}                            
+%2 Offset vertical
+%4 Top margin
+\setlength{\topmargin}{6mm}
+%5 head height
+\setlength{\headheight}{12pt}
+%6 head sep
+\setlength{\headsep}{15mm}
+%7 Text height
+\setlength{\textheight}{200mm}
+%8 Text width
+\setlength{\textwidth}{\paperwidth - 2in - \spirale}
+%9 Margin sep
+\setlength{\marginparsep}{5pt}
+%10 Margin notes width
+\setlength{\marginparwidth}{60pt}
+%11 Foot skip
+\setlength{\footskip}{15mm+12pt}
+
+\DeclareOption{reliure}%
+    {\setlength{\oddsidemargin}{\spirale}%
+     \setlength{\evensidemargin}{0mm}}
+\DeclareOption{centre}%
+     {\setlength{\oddsidemargin}{\demispirale}%
+      \setlength{\evensidemargin}{\demispirale}}
+% By default use the reliure
+\ExecuteOptions{reliure}
+% My options (process the specified options)
+\ProcessOptions
+
+% Package used to print layout data
+\usepackage{layout}
+
+
+
+% +---------------------------------------------------------------+
+% | Headers/footers
+% +---------------------------------------------------------------+
+% redefine the mark to access the simple text
+%\renewcommand{\chaptermark}[1]{\markleft{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+
+% plain style
+\makeatletter
+\def\ps@frontmatter{%
+  \renewcommand\@evenhead{\footnotesize \leftmark \ \hrulefill}%
+  \renewcommand\@oddhead{\footnotesize \hrulefill \ \TBauthor}%
+
+  \renewcommand\@evenfoot{\footnotesize \thepage \ \hrulefill}%
+  \renewcommand\@oddfoot{\footnotesize \hrulefill \ \thepage}%
+}
+\def\ps@plain{%
+  \renewcommand\@evenhead{\footnotesize \leftmark \ \hrulefill}%
+  \renewcommand\@oddhead{\footnotesize \hrulefill \ \TBauthor}%
+
+  \renewcommand\@evenfoot{\footnotesize \thepage \ \hrulefill}%
+  \renewcommand\@oddfoot{\footnotesize \hrulefill \ \thepage}%
+}
+\makeatother
+
+
+%\lhead{\includegraphics{heig-logo}}
+%\rhead{Condidentiel\\Edin Mujkanovic} % header droit
+%\rfoot{Page \thepage \hspace{1pt} sur \pageref{LastPage}}
+%\fancypagestyle{firstpage}{%
+%    \fancyhf{}
+%    \lhead{\includegraphics[]{heig-logo}}
+%    \rhead{{TIC\\[0.1cm]} {Télécommunication\\[0.1cm]} {Sécurité de l'information}}
+%}
+
+
+
+
+
+
+
+
+
