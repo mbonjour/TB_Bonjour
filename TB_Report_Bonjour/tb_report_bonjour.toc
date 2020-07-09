@@ -29,29 +29,34 @@
 \contentsline {subsection}{\numberline {2.7.4}Schémas Certificateless de Signature}{11}{subsection.2.7.4}% 
 \contentsline {subsection}{\numberline {2.7.5}Détails techniques}{12}{subsection.2.7.5}% 
 \contentsline {section}{\numberline {2.8}État de l'art}{12}{section.2.8}% 
-\contentsline {chapter}{\numberline {3}Architecture / Design du protocole}{13}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Architecture globale}{13}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Acteurs}{14}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Fonctionnement Certificateless PKC}{14}{section.3.3}% 
-\contentsline {subsection}{\numberline {3.3.1}Chiffrement}{14}{subsection.3.3.1}% 
-\contentsline {subsection}{\numberline {3.3.2}Signature}{14}{subsection.3.3.2}% 
-\contentsline {section}{\numberline {3.4}Design du protocole}{15}{section.3.4}% 
-\contentsline {chapter}{\numberline {4}Implémentation}{19}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Choix d'implémentations}{19}{section.4.1}% 
-\contentsline {subsection}{\numberline {4.1.1}Langage}{19}{subsection.4.1.1}% 
-\contentsline {subsection}{\numberline {4.1.2}Librairie}{19}{subsection.4.1.2}% 
-\contentsline {subsection}{\numberline {4.1.3}Courbe utilisée}{19}{subsection.4.1.3}% 
-\contentsline {subsection}{\numberline {4.1.4}Dérivation de la clé AES}{20}{subsection.4.1.4}% 
-\contentsline {subsection}{\numberline {4.1.5}Fonctions de hachage - signature}{20}{subsection.4.1.5}% 
-\contentsline {subsection}{\numberline {4.1.6}Sérialisation des données}{20}{subsection.4.1.6}% 
-\contentsline {subsection}{\numberline {4.1.7}Enregistrement des clés publiques}{20}{subsection.4.1.7}% 
-\contentsline {section}{\numberline {4.2}Implémentation clés de chiffrement}{20}{section.4.2}% 
-\contentsline {subsection}{\numberline {4.2.1}Déroulement POC}{21}{subsection.4.2.1}% 
-\contentsline {chapter}{\numberline {5}Conclusion}{27}{chapter.5}% 
-\contentsline {chapter}{Bibliographie}{29}{chapter.5}% 
-\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{35}{appendix.A}% 
-\contentsline {section}{\numberline {A.1}RELIC Toolkit}{35}{section.A.1}% 
-\contentsline {section}{\numberline {A.2}Libsodium}{35}{section.A.2}% 
-\contentsline {chapter}{\numberline {B}Fichiers}{37}{appendix.B}% 
-\contentsline {section}{\numberline {B.1}Code du POC}{37}{section.B.1}% 
-\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{37}{section.B.2}% 
+\contentsline {subsection}{\numberline {2.8.1}Email Encryption System Using Certificateless Public Key Encryption Scheme}{13}{subsection.2.8.1}% 
+\contentsline {subsection}{\numberline {2.8.2}An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{13}{subsection.2.8.2}% 
+\contentsline {subsection}{\numberline {2.8.3}Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}{13}{subsection.2.8.3}% 
+\contentsline {subsection}{\numberline {2.8.4}PriviPK : Certificate-less and secure email communication}{14}{subsection.2.8.4}% 
+\contentsline {subsection}{\numberline {2.8.5}A certificateless one-way group key agreement protocol for end-to-end email encryption}{14}{subsection.2.8.5}% 
+\contentsline {chapter}{\numberline {3}Architecture / Design du protocole}{15}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Architecture globale}{15}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Acteurs}{16}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}Fonctionnement Certificateless PKC}{16}{section.3.3}% 
+\contentsline {subsection}{\numberline {3.3.1}Chiffrement}{16}{subsection.3.3.1}% 
+\contentsline {subsection}{\numberline {3.3.2}Signature}{16}{subsection.3.3.2}% 
+\contentsline {section}{\numberline {3.4}Design du protocole}{17}{section.3.4}% 
+\contentsline {chapter}{\numberline {4}Implémentation}{21}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Choix d'implémentations}{21}{section.4.1}% 
+\contentsline {subsection}{\numberline {4.1.1}Langage}{21}{subsection.4.1.1}% 
+\contentsline {subsection}{\numberline {4.1.2}Librairie}{21}{subsection.4.1.2}% 
+\contentsline {subsection}{\numberline {4.1.3}Courbe utilisée}{21}{subsection.4.1.3}% 
+\contentsline {subsection}{\numberline {4.1.4}Dérivation de la clé AES}{22}{subsection.4.1.4}% 
+\contentsline {subsection}{\numberline {4.1.5}Fonctions de hachage - signature}{22}{subsection.4.1.5}% 
+\contentsline {subsection}{\numberline {4.1.6}Sérialisation des données}{22}{subsection.4.1.6}% 
+\contentsline {subsection}{\numberline {4.1.7}Enregistrement des clés publiques}{22}{subsection.4.1.7}% 
+\contentsline {section}{\numberline {4.2}Implémentation clés de chiffrement}{22}{section.4.2}% 
+\contentsline {subsection}{\numberline {4.2.1}Déroulement POC}{23}{subsection.4.2.1}% 
+\contentsline {chapter}{\numberline {5}Conclusion}{29}{chapter.5}% 
+\contentsline {chapter}{Bibliographie}{31}{chapter.5}% 
+\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{37}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}RELIC Toolkit}{37}{section.A.1}% 
+\contentsline {section}{\numberline {A.2}Libsodium}{37}{section.A.2}% 
+\contentsline {chapter}{\numberline {B}Fichiers}{39}{appendix.B}% 
+\contentsline {section}{\numberline {B.1}Code du POC}{39}{section.B.1}% 
+\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{39}{section.B.2}% 

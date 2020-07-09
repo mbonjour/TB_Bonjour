@@ -3,46 +3,58 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: tb_report_bonjour.aux
 The style file: plain.bst
 Database file #1: chapters/biblio.bib
+Repeated entry---line 203 of file chapters/biblio.bib
+ : @inproceedings{DBLP:conf/prdc/YehSDSSW18
+ :                                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 224 of file chapters/biblio.bib
+ : @article{DBLP:journals/ijnsec/BalakrishnanR16
+ :                                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 240 of file chapters/biblio.bib
+ : @inproceedings{DBLP:conf/itcs2/ErYTG12
+ :                                       ,
+I'm skipping whatever remains of this entry
 Warning--empty institution in doubleratchet
-You've used 11 entries,
+You've used 13 entries,
             2118 wiz_defined-function locations,
-            576 strings with 7226 characters,
-and the built_in function-call counts, 4861 in all, are:
-= -- 478
-> -- 252
-< -- 9
-+ -- 98
-- -- 84
-* -- 343
-:= -- 769
-add.period$ -- 39
-call.type$ -- 11
-change.case$ -- 71
+            593 strings with 7847 characters,
+and the built_in function-call counts, 5841 in all, are:
+= -- 569
+> -- 314
+< -- 11
++ -- 121
+- -- 105
+* -- 424
+:= -- 926
+add.period$ -- 45
+call.type$ -- 13
+change.case$ -- 86
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 190
-empty$ -- 362
-format.name$ -- 84
-if$ -- 1054
+cite$ -- 14
+duplicate$ -- 225
+empty$ -- 428
+format.name$ -- 105
+if$ -- 1258
 int.to.chr$ -- 0
-int.to.str$ -- 11
-missing$ -- 10
-newline$ -- 58
-num.names$ -- 30
-pop$ -- 83
+int.to.str$ -- 13
+missing$ -- 12
+newline$ -- 68
+num.names$ -- 36
+pop$ -- 98
 preamble$ -- 1
-purify$ -- 60
+purify$ -- 73
 quote$ -- 0
-skip$ -- 151
+skip$ -- 178
 stack$ -- 0
-substring$ -- 284
-swap$ -- 76
-text.length$ -- 9
+substring$ -- 342
+swap$ -- 90
+text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 42
+type$ -- 50
 warning$ -- 1
-while$ -- 47
-width$ -- 13
-write$ -- 129
-(There was 1 warning)
+while$ -- 57
+width$ -- 15
+write$ -- 152
+(There were 3 error messages)

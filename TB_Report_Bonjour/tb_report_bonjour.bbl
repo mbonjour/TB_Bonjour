@@ -9,6 +9,12 @@ Sattam~S. Al{-}Riyami and Kenneth~G. Paterson.
   4, 2003, Proceedings}, volume 2894 of {\em Lecture Notes in Computer
   Science}, pages 452--473. Springer, 2003.
 
+\bibitem{DBLP:journals/compsec/AlSabahTLSD17}
+Mashael AlSabah, Alin Tomescu, Ilia~A. Lebedev, Dimitrios~N. Serpanos, and
+  Srinivas Devadas.
+\newblock Privipk: Certificate-less and secure email communication.
+\newblock {\em Comput. Secur.}, 70:1--15, 2017.
+
 \bibitem{relic-toolkit}
 D.~F. Aranha, C.~P.~L. Gouvêa, T.~Markmann, R.~S. Wahby, and K.~Liao.
 \newblock {RELIC is an Efficient LIbrary for Cryptography}.
@@ -78,5 +84,14 @@ Lei Zhang and Futai Zhang.
 \newblock In {\em Proceedings of {IEEE} International Conference on
   Communications, {ICC} 2008, Beijing, China, 19-23 May 2008}, pages
   1685--1689. {IEEE}, 2008.
+
+\bibitem{DBLP:conf/acns/ZhangWXF06}
+Zhenfeng Zhang, Duncan~S. Wong, Jing Xu, and Dengguo Feng.
+\newblock Certificateless public-key signature: Security model and efficient
+  construction.
+\newblock In Jianying Zhou, Moti Yung, and Feng Bao, editors, {\em Applied
+  Cryptography and Network Security, 4th International Conference, {ACNS} 2006,
+  Singapore, June 6-9, 2006, Proceedings}, volume 3989 of {\em Lecture Notes in
+  Computer Science}, pages 293--308, 2006.
 
 \end{thebibliography}

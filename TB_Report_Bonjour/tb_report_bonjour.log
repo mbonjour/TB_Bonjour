@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.8)  7 JUL 2020 17:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.8)  9 JUL 2020 11:56
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1505,7 +1505,7 @@ Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
 (lastpage)             ! on input line 62.
 \c@lstlisting=\count428
-<template/logo_heig-vd.pdf, id=267, 236.885pt x 71.26625pt>
+<template/logo_heig-vd.pdf, id=287, 236.885pt x 71.26625pt>
 File: template/logo_heig-vd.pdf Graphic file (type pdf)
 <use template/logo_heig-vd.pdf>
 Package pdftex.def Info: template/logo_heig-vd.pdf  used on input line 70.
@@ -1594,7 +1594,7 @@ Chapitre 1.
 
 ]
 Chapitre 2.
-<images/PGP_101.png, id=429, 501.875pt x 522.95375pt>
+<images/PGP_101.png, id=458, 501.875pt x 522.95375pt>
 File: images/PGP_101.png Graphic file (type png)
 <use images/PGP_101.png>
 Package pdftex.def Info: images/PGP_101.png  used on input line 15.
@@ -1603,7 +1603,7 @@ Package pdftex.def Info: images/PGP_101.png  used on input line 15.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [3] [4 <./images/PGP_101.png>]
-<images/conceptualpEp.png, id=445, 541.0614pt x 412.4208pt>
+<images/conceptualpEp.png, id=474, 541.0614pt x 412.4208pt>
 File: images/conceptualpEp.png Graphic file (type png)
 <use images/conceptualpEp.png>
 Package pdftex.def Info: images/conceptualpEp.png  used on input line 40.
@@ -1613,7 +1613,7 @@ Package pdftex.def Info: images/conceptualpEp.png  used on input line 40.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [5] [6 <./images/conceptualpEp.png>] [7]
-<images/signalFonctionnement.png, id=476, 632.3625pt x 623.32875pt>
+<images/signalFonctionnement.png, id=506, 632.3625pt x 623.32875pt>
 File: images/signalFonctionnement.png Graphic file (type png)
 <use images/signalFonctionnement.png>
 Package pdftex.def Info: images/signalFonctionnement.png  used on input line 84
@@ -1636,16 +1636,41 @@ t/10.95 C$ \T1/cmr/m/n/10.95 et la clé pri-vée $\OT1/cmr/m/n/10.95 (\OML/cmm/m/
 it/10.95 s[]; s[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95  
  []
 
-[11]) (./chapters/architecture.tex [12]
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 170--171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--176
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
+
+ []
+
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 185--186
+
+ []
+
+) (./chapters/architecture.tex [14]
 Chapitre 3.
-<images/SchemaGlobal.png, id=529, 721.94719pt x 319.94531pt>
+<images/SchemaGlobal.png, id=589, 721.94719pt x 319.94531pt>
 File: images/SchemaGlobal.png Graphic file (type png)
 <use images/SchemaGlobal.png>
 Package pdftex.def Info: images/SchemaGlobal.png  used on input line 8.
 (pdftex.def)             Requested size: 398.33858pt x 176.53188pt.
-[13
+[15
 
- <./images/SchemaGlobal.png>] [14]
+ <./images/SchemaGlobal.png>] [16]
 \pgf@layerbox@umlsd@background=\box120
 \pgf@layerboxsaved@umlsd@background=\box121
 \pgf@layerbox@umlsd@threadlayer=\box122
@@ -1658,27 +1683,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 69--73
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[15]
+[17]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[16]) (./chapters/implementation.tex [17] [18
+[18]) (./chapters/implementation.tex [19] [20
 
 ]
 Chapitre 4.
-[19]
+[21]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 2
 2.
  (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-<images/schemaEncapsulation.png, id=574, 607.51968pt x 353.82187pt>
+<images/schemaEncapsulation.png, id=635, 607.51968pt x 353.82187pt>
 File: images/schemaEncapsulation.png Graphic file (type png)
 <use images/schemaEncapsulation.png>
 Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 29.
 
 (pdftex.def)             Requested size: 341.43306pt x 198.85693pt.
- [20]
+ [22]
 runsystem(pygmentize -S default -f latex -P commandprefix=PYG > tb_report_bonjo
 ur.out.pyg)...executed.
 
@@ -1699,37 +1724,37 @@ LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line
 72.
  (/usr/share/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)) [21 <./images/schemaEncapsulation.PNG>] [22] [23] [24])
-(./chapters/conclusion.tex [25] [26
+)) [23 <./images/schemaEncapsulation.PNG>] [24] [25] [26])
+(./chapters/conclusion.tex [27] [28
 
 ]
 Chapitre 5.
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [27]
-[28
+ [29]
+[30
 
-] (./tb_report_bonjour.bbl [29
+] (./tb_report_bonjour.bbl [31
 
-]) [30] (./tb_report_bonjour.lof)
+]) [32] (./tb_report_bonjour.lof)
 \tf@lof=\write11
 \openout11 = `tb_report_bonjour.lof'.
 
- [31
+ [33
 
 ]
-[32
+[34
 
 ] (./tb_report_bonjour.lot)
 \tf@lot=\write12
 \openout12 = `tb_report_bonjour.lot'.
 
- (./chapters/outils.tex [33] [34
+ (./chapters/outils.tex [35] [36
 
 ]
 Annexe A.
-) (./chapters/fichiers.tex [35] [36
+) (./chapters/fichiers.tex [37] [38
 
 ]
 Annexe B.
@@ -1742,7 +1767,7 @@ Overfull \hbox (13.2715pt too wide) in paragraph at lines 5--8
 
 ) 
 AED: lastpage setting LastPage
-[37]
+[39]
 
 Package catoptions Warning: Undeclared options found in \XExecuteOptions
 (catoptions)                (family,option,value): 
@@ -1754,21 +1779,35 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 128.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 128.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 128.
 Package rerunfilecheck Info: File `tb_report_bonjour.out' has not changed.
-(rerunfilecheck)             Checksum: EC602D8992AF0297FEC4B24DDDBF8671;3751.
+(rerunfilecheck)             Checksum: C9A6F6AD701E4748F065227370DE6957;4437.
 runsystem(rm tb_report_bonjour.out.pyg)...executed.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 128.
  ) 
 Here is how much of TeX's memory you used:
- 43937 strings out of 492167
- 858012 string characters out of 6131559
- 1160779 words of memory out of 5000000
- 47420 multiletter control sequences out of 15000+600000
+ 43976 strings out of 492167
+ 858822 string characters out of 6131559
+ 1161308 words of memory out of 5000000
+ 47431 multiletter control sequences out of 15000+600000
  555498 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  70i,11n,115p,1050b,1041s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/icc/Zhang
-Z08a} has been referenced but does not exist, replaced by a fixed one
+pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/prdc/YehS
+DSSW18} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:journals/compsec
+/AlSabahTLSD17} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:journals/ijnsec/
+BalakrishnanR16} has been referenced but does not exist, replaced by a fixed on
+e
+
+pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/itcs2/ErYTG
+12} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/acns/ZhangW
+XF06} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/pkc/DentLP0
 8} has been referenced but does not exist, replaced by a fixed one
@@ -1807,10 +1846,10 @@ public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super
 /usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texm
 f-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf-dist/fonts/ty
 pe1/public/cm-super/sftt1095.pfb>
-Output written on tb_report_bonjour.pdf (51 pages, 853437 bytes).
+Output written on tb_report_bonjour.pdf (53 pages, 861448 bytes).
 PDF statistics:
- 816 PDF objects out of 1000 (max. 8388607)
- 688 compressed objects within 7 object streams
- 161 named destinations out of 1000 (max. 500000)
- 635 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 885 PDF objects out of 1000 (max. 8388607)
+ 754 compressed objects within 8 object streams
+ 189 named destinations out of 1000 (max. 500000)
+ 675 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
+      <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
       <config projectName="POCCertificatelessCryptography" targetName="mainClient" />
       <config projectName="POCCertificatelessCryptography" targetName="mainServer" />
-      <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -111,7 +111,17 @@
       <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-455/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-455/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-638/relic_fpx_rdc_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-638/relic_fpx_rdc_low.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/tools/relic_gen_label.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/tools/relic_gen_label.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TB_Report/chapters/analysis.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report/chapters/analysis.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/analysis.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/analysis.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/biblio.bib" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/biblio.bib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.bbl" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.bbl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.blg" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.blg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.lof" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.lof" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.out" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +230,8 @@
       <workItem from="1593266159927" duration="11680000" />
       <workItem from="1593419769181" duration="19217000" />
       <workItem from="1593506812461" duration="32000" />
-      <workItem from="1594110269856" duration="3860000" />
+      <workItem from="1594110269856" duration="4487000" />
+      <workItem from="1594207002998" duration="1704000" />
     </task>
     <servers />
   </component>

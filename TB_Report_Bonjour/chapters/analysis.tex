@@ -142,11 +142,11 @@ Où $w \leftarrow H(C_0,C_1, C_2, ID, pk_{ID})$.\\
 Qui donnera $m$ le texte en clair si le chiffré était bien formaté ou un élément aléatoire dans $G_T$.
 \subsection{Schémas Certificateless de Signature}
 %TODO : Expliquer Malicious KGC et mettre tableaux
-Pour choisir parmi les nombreux schémas certificateless pour la signature j'ai établi un tableau comparatif des différentes manières de faire inspiré de~\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau il y a peu de solutions se dégage, en effet l'on peut voir que beaucoup de schémas de signature sont cassés, mon choix s'est porté au final sur la construction de Zhang et Zhang~\cite{DBLP:conf/icc/ZhangZ08a} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) datant de 2008 et n'a pas été cassée depuis. Le tableau se trouve en annexe \ref{ch:fichiers}.
+Pour choisir parmi les nombreux schémas certificateless pour la signature j'ai établi un tableau comparatif des différentes manières de faire inspiré de~\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau il y a peu de solutions se dégage, en effet l'on peut voir que beaucoup de schémas de signature sont cassés, mon choix s'est porté au final sur la construction de Zhang et Zhang~\cite{DBLP:conf/acns/ZhangWXF06} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) datant de 2006 et n'a pas été cassée depuis. Le tableau se trouve en annexe \ref{ch:fichiers}.
 \subsection{Détails techniques}
 Les détails techniques sur la signature avec la \textit{Certificateless Cryptography}.
 La signature se base sur le problème difficile \textit{The ComputationalDiffie-Hellman Problem} (CDH). \\Ayant $P, aP, bP$ où $a,b$ aléatoires $\in \mathbb{Z}_q^*$ il n'est pas possible de trouver $abP$.\\
-Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/icc/ZhangZ08a} et les expliquer. Cependant dans le papier original le groupe bilinéaire de couplage choisi est de forme $\mathbb{G}_1 \times \mathbb{G}_2 \rightarrow \mathbb{G}_T$ avec un \textit{pairing} $e(g,h)$ avec $g \in \mathbb{G}_1, h \in \mathbb{G}_2$ alors que le papier annonce une construction tel que $\mathbb{G} \times \mathbb{G} \rightarrow \mathbb{G}_T$.\\
+Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/acns/ZhangWXF06} et les expliquer. Cependant dans le papier original le groupe bilinéaire de couplage choisi est de forme $\mathbb{G}_1 \times \mathbb{G}_2 \rightarrow \mathbb{G}_T$ avec un \textit{pairing} $e(g,h)$ avec $g \in \mathbb{G}_1, h \in \mathbb{G}_2$ alors que le papier annonce une construction tel que $\mathbb{G} \times \mathbb{G} \rightarrow \mathbb{G}_T$.\\
 \textbf{Setup($1^k $) :} Tout d'abord l'on va prendre les groupes d'ordre $q$ énoncés auparavant. Puis on choisit un générateur $P \in \mathbb{G}_1$. La \textit{master secret key} va être choisie aléatoirement $s \in \mathbb{Z}_q^*$. Puis la clé publique calculée : $P_{pub} = sP$. Finalement, trois fonctions de hash distinctes $H_1, H_2, H_3$ vont être choisies, chacune d'elle \textit{mappant} de $\{0,1\}^*$ à $\mathbb{G}_2$. Pour cela j'ai choisi de faire du \textit{Hash Domain Separation} comme expliqué dans le Chapitre \ref{ch:impl}. L'on définit les $\mathbf{params} = (\mathbb{G}_1,\mathbb{G}_2,\mathbb{G}_T,e,q,P,P_{pub},H_1,H_2,H_3)$\\
 \textbf{Partial-Private-Key-Extract($params, s, ID_A$) :} Pour avoir la \textit{Partial Private Key} ($D_A$) de l'user $A$ avec l'identité $ID_A$. Calculer $Q_A = H_1(ID_A)$. Alors $D_A = sQ_A$.\\
 %TODO : Compléter
@@ -160,5 +160,32 @@ Ainsi ces composantes forment la signature $\sigma = (U,V )$.\\
 \textbf{CL-Verify($params, PK_A,  m, ID_A, \sigma$) :} Tout d'abord l'on va calculer $Q_A = H_1(ID_A)$ puis effectuer ce calcul afin de vérifier la signature :
 \[e(V,P) == e(P_{pub}, Q_A)*e(U, H_2(m, ID_A, PK_A,U))*e(PK_A, H_3(m, ID_A, PK_A)) \]
 \section{État de l'art}
-Dans cette section je vais analyser et comparer les différentes solutions trouvées utilisant le \textit{Certificateless Cryptography} dans une implémentation pour sécuriser des envois d'emails.
+Dans cette section je vais analyser et comparer les différentes solutions trouvées utilisant la \textit{Certificateless Cryptography} dans une implémentation concrète pour sécuriser des envois d'emails. J'ai trié les articles suivants par date de publication afin de voir comment les suivants ont repris les technologies etc.
+\subsection{Email Encryption System Using Certificateless Public Key Encryption Scheme}
+Analyse de l'article~\cite{DBLP:conf/itcs2/ErYTG12}.\\
+\paragraph*{Description.}
+\paragraph*{Détails techniques.}
+\paragraph*{Conclusion.}
+\subsection{An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}
+Analyse de l'article~.\\
+\paragraph*{Description.}
+\paragraph*{Détails techniques.}
+\paragraph*{Conclusion.}
+\subsection{Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}
+Analyse de l'article~\cite{DBLP:journals/ijnsec/BalakrishnanR16}.\\
+\paragraph*{Description.}
+\paragraph*{Détails techniques.}
+\paragraph*{Conclusion.}
+\subsection{PriviPK : Certificate-less and secure email communication}
+Analyse de l'article~\cite{DBLP:journals/compsec/AlSabahTLSD17}.\\
+\paragraph*{Description.}
+\paragraph*{Détails techniques.}
+\paragraph*{Conclusion.}
+\subsection{A certificateless one-way group key agreement protocol for end-to-end email encryption}
+Analyse de l'article~\cite{DBLP:conf/prdc/YehSDSSW18}.\\
+\paragraph*{Description.} Dans cet article les auteurs présentent un moyen d'avoir une clé partagée entre n-partis et avec un seul message, ce qui permet dans un systéme de mail d'avoir qu'à envoyer un mail avec les informations nécessaires pour recomposer la clé partagée. Cette clé partagée est utilisée afin de chiffrer le mail et de l'envoyer ensuite avec les informations nécessaires à la création de la clé partagée. De plus, le systéme est n-parti, cela veut dire que l'on peut envoyer le mail à n personnes et le chiffrer avec la même clé. On enverra juste pas les mêmes informations de créations de la clé partagée à tous.
+\paragraph*{Détails techniques.} Pour ce qui est des détails techniques on peut voir que le principe est de créer une clé partagée à l'aide des différents ID et clés publiques des destinataires. On aura une sous-clé $x_i$ pour chaque utilisateur $i$. L'on va construire un $y_i = x_0 \dots x_{i-1} + x_{i+1} \dots x_n$ pour un utilisateur où l'on additionnera tout les $x$ des utilisateurs sauf de l'utilisateur $i$. Ainsi à la réception du message l'utilisateur pourra recréer la clé partagée en faisant $y_i + x_i = x_0 + \dots + x_n = K$. Ce $K$ sera ensuite utilisé pour chiffrer le mail.
+\paragraph*{Conclusion.} Ce systéme est simple et efficace mais ne permets pas la signature des éléments nécessaires à la création de la clé partagée, l'on peut donc envisager des DOS afin qu'un utilisateur ne puisses plus lire ces messages. Cependant c'est une construction intéressante se basant sur un \textit{key-agreement} via le \textit{Certificateless Cryptography} et non pas sur ses possibilités de chiffrement/signature.
+
+
 
