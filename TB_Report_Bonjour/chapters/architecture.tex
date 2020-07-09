@@ -13,16 +13,16 @@ Dans cette Figure \ref{fig:globalProtocol}, je présente uniquement l'architectu
 \section{Acteurs}
 Les parties impliquées sont les suivantes comme vu à la figure \ref{fig:globalProtocol}.
 \begin{itemize}
-	\item Alice : L'envoyeur du message de mail en direction de Bob, ainsi elle doit discuter avec le KGC.
-	\item Bob : Le destinataire du message, communique uniquement avec le KGC en ayant reçu le message d'Alice.
-	\item KGC : Permet aux différents acteurs de pouvoir récupérer les Public Keys des clients, mais aussi recevoir les Partial Private Keys. 
+	\item Alice : L'envoyeur du mail en direction de Bob. Alice doit discuter avec le KGC pour construire sa clé privée (afin de signer) et récupérer la clé publique de Bob.
+	\item Bob : Le destinataire du message, communique uniquement avec le KGC en ayant reçu le message d'Alice afin de récupérer sa clé publique pour vérifier la signature et de construire sa clé privé pour déchiffrer le message.
+	\item KGC : Permet aux différents acteurs de pouvoir récupérer lesclés publiques des clients, mais aussi de  recevoir les \textit{Partial Private Keys} qui permettent aux acteurs de construire leur clé privée. 
 \end{itemize}
-Ces partis sont les principaux présents dans un exemple de Certificateless Cryptography.
+Ces partis sont les principaux présents dans un exemple de \textit{Certificateless Cryptography} dans mon systéme de mail.
 \section{Fonctionnement Certificateless PKC}
 Je vais ici découper les différents algorithmes présent dans le certificateless public key cryptography. En passant par le chiffrement et la signature.
 Ces algorithmes seront accompagnés d'explications sur leur utilité. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. L'on peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{DBLP:conf/pkc/DentLP08}.
 \subsection{Chiffrement}
-Liste des différents algorithmes de \textit{Certificateless Cryptography} et leur description.
+Liste des différents algorithmes de \textit{Certificateless Cryptography} et leur description, les détails techniques de leurs implémentations sont disponibles à la Section \ref{sec:primitiveSearch}.
 \begin{itemize}
 	\item \textit{Setup.} (seulement une fois par le KGC).
 	\item \textit{Partial-Private-Key-Extract.} Calcul d'une clé privée partielles lorsque qu'un client le demande pour identité donnée.
@@ -30,7 +30,7 @@ Liste des différents algorithmes de \textit{Certificateless Cryptography} et le
 	\item \textit{Set-Private-Key.} Le client combine ses clés partielles et sa clé secrète pour obtenir une clé privée afin de déchiffrer les message reçus, chiffrés avec une certaine identité.
 	\item \textit{Set-Public-Key.} Le client ne le fait qu'une fois, il calcule sa clé publique en fonction de sa valeur secrète.
 	\item \textit{Encrypt.} Chiffre un message avec la clé publique du destinataire et son identité.
-	\item \textit{Decrypt.} Déchiffres un message utilisant sa clé privée et l'identité utilisée pendant le chiffrement.
+	\item \textit{Decrypt.} Déchiffre un message utilisant sa clé privée et l'identité utilisée pendant le chiffrement.
 \end{itemize}
 \subsection{Signature}
 Pour la signature les algorithmes sont les mêmes avec une différence dans leur conception et évidemment le \textit{Encrypt} et \textit{Decrypt} sont remplacé par \textit{Sign} et \textit{Verify}.
@@ -43,22 +43,23 @@ Dans la littérature certificateless les schémas de signatures sont beaucoup pl
 %	\caption{Schéma de la première connexion}
 %	\label{fig:firstConn}
 %\end{figure}
+%TODO : ajouter setup
 \begin{figure}
 [h!]
 	\centering
 	\begin{sequencediagram}
 		\newthread{A}{Alice}{}
 		\newinst[8]{B}{KGC}{} 
-		\begin{call}{A}{Initialisation with alice@mail.ch}{B}{OK, ID not in use. Give PK}
+		\begin{call}{A}{Initialisation with alice@mail.ch}{B}{OK, $mpk_E, mpk_S$}
 		\end{call}
 	\postlevel
-		\begin{callself}{A}{SetSec $x = Z_p$}{}
+		\begin{callself}{A}{\shortstack{SetSec $x_E = Z_p^*$ \\ SetSecSig $x_S = Z_p^*$}}{}
 		\end{callself}
 	\postlevel
-		\begin{callself}{A}{SetPub $PK_{Alice} = (g^x, g_{1}^x)$}{}
+		\begin{callself}{A}{\shortstack{SetPub $PKE_{Alice} = (g^{x_E}, g_{1}^{x_E})$\\SetPubSig $PKS_{Alice} =x_SP$}}{}
 		\end{callself}
 	\postlevel
-		\begin{call}{A}{$PK_{Alice}$}{B}{}
+		\begin{call}{A}{$PKE_{Alice}, PKS_{Alice}$}{B}{}
 		\end{call}
 		
 	\end{sequencediagram}
@@ -66,8 +67,8 @@ Dans la littérature certificateless les schémas de signatures sont beaucoup pl
 	\label{fig:firstConn}
 \end{figure}
 
-Dans la Figure \ref{fig:firstConn} l'on voit la première connexion d'un utilisateur mais aussi le Setup du serveur, cette étape ne se fera qu'une fois dans la vie du KGC. Mais le Setup doit tout de même être fait pour la partie de signature et la partie de chiffrement.
-Ensuite Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoi les paramètres publiques (mpkS et mpkE) si aucun utilisateur n'a déjà cet email.
+Dans la Figure \ref{fig:firstConn} l'on voit la première connexion d'un utilisateur.
+Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoi les paramètres publiques (mpkS et mpkE) si aucun utilisateur n'a déjà cet email.
 L'utilisateur va alors crée sa valeur secrète tirée aléatoire modulo p puis générer sa clé publique.
 Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et puisses le donner aux personnes qui veulent envoyer un mail à Alice.\\
 
@@ -78,8 +79,7 @@ Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et
 	%\label{fig:aliceSends}
 %\end{figure}
 
-\begin{figure}
-[h!]
+\begin{figure}[h!]
 	\centering
 	\begin{sequencediagram}
 		\newthread{A}{Alice}{}
@@ -94,8 +94,7 @@ Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et
 		\begin{callself}{A}{$c'  = ENC_{PKE_{Bob}}(AES_K, bob@mail.ch + time)$}{}
 		\end{callself}
 		\postlevel
-		%TODO : mettre algo private keys signature
-		\begin{callself}{A}{SetPrivSig $SKS_{Alice}' = $}{}
+		\begin{callself}{A}{SetPrivSig $SKS_{Alice} = (PPKS_{Alice}, x)$}{}
 		\end{callself}
 		\postlevel
 		\begin{callself}{A}{$s' = Sign(c', SKS_{Alice})$}{}

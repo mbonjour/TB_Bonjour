@@ -45,6 +45,15 @@ Yee{-}Lee Er, Wei{-}Chuen Yau, Syh{-}Yuan Tan, and Bok{-}Min Goi.
   6-8, 2012}, volume 180 of {\em Lecture Notes in Electrical Engineering},
   pages 179--186. Springer, 2012.
 
+\bibitem{DBLP:conf/cans/HuangSMZ05}
+Xinyi Huang, Willy Susilo, Yi~Mu, and Futai Zhang.
+\newblock On the security of certificateless signature schemes from asiacrypt
+  2003.
+\newblock In Yvo Desmedt, Huaxiong Wang, Yi~Mu, and Yongqing Li, editors, {\em
+  Cryptology and Network Security, 4th International Conference, {CANS} 2005,
+  Xiamen, China, December 14-16, 2005, Proceedings}, volume 3810 of {\em
+  Lecture Notes in Computer Science}, pages 13--25. Springer, 2005.
+
 \bibitem{DBLP:journals/iacr/Kobeissi18a}
 Nadim Kobeissi.
 \newblock An analysis of the protonmail cryptographic architecture.
