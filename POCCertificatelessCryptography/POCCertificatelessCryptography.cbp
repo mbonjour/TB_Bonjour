@@ -213,6 +213,12 @@
 			<Option target="mainClient"/>
 			<Option target="testAlgo"/>
 		</Unit>
+		<Unit filename="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/utils/binn.c">
+			<Option target="mainClient"/>
+		</Unit>
+		<Unit filename="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/utils/binn.h">
+			<Option target="mainClient"/>
+		</Unit>
 		<Unit filename="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

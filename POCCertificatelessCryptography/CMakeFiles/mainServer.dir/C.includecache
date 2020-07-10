@@ -6,20 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c
-cipherPOC.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.h
-
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.h
-stdio.h
--
-relic.h
--
-string.h
--
-binn.h
--
-
 /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/server/mainServer.c
 stdio.h
 -
@@ -44,20 +30,6 @@ cipherPOC.h
 signaturePOC.h
 /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/server/signaturePOC.h
 
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c
-signaturePOC.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.h
-
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.h
-stdio.h
--
-relic.h
--
-string.h
--
-binn.h
--
-
 cipherPOC.h
 stdio.h
 -
@@ -65,8 +37,8 @@ relic.h
 -
 string.h
 -
-binn.h
--
+utils/binn.h
+utils/binn.h
 
 libs/relic-target/include/relic_conf.h
 relic_label.h
@@ -403,4 +375,6 @@ string.h
 -
 binn.h
 -
+
+utils/binn.h
 

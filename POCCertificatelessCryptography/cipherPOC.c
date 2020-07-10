@@ -52,6 +52,7 @@ void setup(int k, mpkStruct* mpkSetup, g2_t* msk){
     bn_free(uvGen)
 }
 
+// TODO: pass length of var
 void F(const char *var, g2_t* suite, g2_t *result) {
     uint8_t h[RLC_MD_LEN];
     // Strlen ok car effectué sur des IDs donc vrais chaines de chars
@@ -71,7 +72,7 @@ void F(const char *var, g2_t* suite, g2_t *result) {
         for (int j = 0; j < 8; ++j, somebyte >>= 1) {
             currentBit = somebyte & 0x1;
             bn_read_bin(transitionToBn, &currentBit, 1);
-            g2_mul(currentPoint, suite[(i*8) + j], transitionToBn);
+            g2_mul(currentPoint, suite[(i*8) + j + 1], transitionToBn);
             g2_add(*result, *result, currentPoint)
             //g2_null(currentPoint)
         }
@@ -357,7 +358,6 @@ void decrypt(cipher c, SK sk, PK pk, mpkStruct  mpk, char* ID, gt_t* m){
     gt_free(denominateur)
 }
 
-// TODO : Remplir ça
 void serialize_MPKE(binn* obj, mpkStruct mpke){
     binn *listU, *listV;
     listU = binn_list();
@@ -411,14 +411,12 @@ void deserialize_MPKE(binn* obj, mpkStruct* newMpk){
     countV = binn_count(listV);
     void* currentBin;
     int currentSize;
-    for(int i = 1; i < countU; ++i){
+    for(int i = 1; i <= countU; ++i){
         currentBin = binn_list_blob(listU, i, &currentSize);
         g2_read_bin(newMpk->u[i-1], currentBin, currentSize);
-    }
-    for(int j = 1; j < countV; ++j){
-        currentBin = binn_list_blob(listV, j, &currentSize);
         // TODO : Check why at j = 0x48 it crashes sometimes (because currentBin = NULL)
-        g2_read_bin(newMpk->v[j-1], currentBin, currentSize);
+        binn_list_get_blob(listV, i,&currentBin, &currentSize);
+        g2_read_bin(newMpk->v[i-1], currentBin, currentSize);
     }
     //binn_free(listU);
     //binn_free(listV);

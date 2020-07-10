@@ -58,10 +58,10 @@ void split(char** tokensDest, char* initialString, char* delim){
 void* socketThread(void *arg){
     int newSocket = *((int *)arg);
     // TODO change number of bytes to read ?
-    char client_message[256];
+    char client_message[1024];
     recv(newSocket , client_message , 1024 , 0);
     // TODO : change the size of fields to be able to put the data received
-    char** tokens = generate_fields(2, 64);
+    char** tokens = generate_fields(2, 512);
     pthread_mutex_lock(&lock);
     split(tokens, client_message, ":");
     pthread_mutex_unlock(&lock);
@@ -71,7 +71,6 @@ void* socketThread(void *arg){
     //Prepare structs for the possibilities
     PPKSig myPartialKeysSig;
     PPK myPartialKeys;
-    // TODO do the logic
     if(strcmp(tokens[0], "SE") == 0){
         printf("Code : SE\n");
         //The sender needs to extract (via KGC) and setPriv to get his private key and sign the message
@@ -216,6 +215,7 @@ void* socketThread(void *arg){
             // exit(1);
         }
         //TODO : fwrite struct of public key created
+
         printf("%s:%s\n", payloadTokens[0], payloadTokens[1]);
         fprintf(publicKeySignature,"%s:%s\n", payloadTokens[0], payloadTokens[1]);
         fclose(publicKeySignature);
@@ -279,7 +279,7 @@ int main() {
         // Address family = Internet 
         serverAddr.sin_family = AF_INET;
         //Set port number, using htons function to use proper byte order 
-        serverAddr.sin_port = htons(10005);
+        serverAddr.sin_port = htons(10001);
         //Set IP address to localhost 
         serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
         //Set all bits of the padding field to 0 

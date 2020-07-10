@@ -83,9 +83,22 @@ CMakeFiles/mainClient.dir/utils/aesUtils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mainClient.dir/utils/aesUtils.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/utils/aesUtils.c -o CMakeFiles/mainClient.dir/utils/aesUtils.c.s
 
+CMakeFiles/mainClient.dir/utils/binn.c.o: CMakeFiles/mainClient.dir/flags.make
+CMakeFiles/mainClient.dir/utils/binn.c.o: utils/binn.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/mainClient.dir/utils/binn.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainClient.dir/utils/binn.c.o   -c /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/utils/binn.c
+
+CMakeFiles/mainClient.dir/utils/binn.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mainClient.dir/utils/binn.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/utils/binn.c > CMakeFiles/mainClient.dir/utils/binn.c.i
+
+CMakeFiles/mainClient.dir/utils/binn.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mainClient.dir/utils/binn.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/utils/binn.c -o CMakeFiles/mainClient.dir/utils/binn.c.s
+
 CMakeFiles/mainClient.dir/cipherPOC.c.o: CMakeFiles/mainClient.dir/flags.make
 CMakeFiles/mainClient.dir/cipherPOC.c.o: cipherPOC.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/mainClient.dir/cipherPOC.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/mainClient.dir/cipherPOC.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainClient.dir/cipherPOC.c.o   -c /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c
 
 CMakeFiles/mainClient.dir/cipherPOC.c.i: cmake_force
@@ -98,7 +111,7 @@ CMakeFiles/mainClient.dir/cipherPOC.c.s: cmake_force
 
 CMakeFiles/mainClient.dir/signaturePOC.c.o: CMakeFiles/mainClient.dir/flags.make
 CMakeFiles/mainClient.dir/signaturePOC.c.o: signaturePOC.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/mainClient.dir/signaturePOC.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/mainClient.dir/signaturePOC.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainClient.dir/signaturePOC.c.o   -c /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c
 
 CMakeFiles/mainClient.dir/signaturePOC.c.i: cmake_force
@@ -113,6 +126,7 @@ CMakeFiles/mainClient.dir/signaturePOC.c.s: cmake_force
 mainClient_OBJECTS = \
 "CMakeFiles/mainClient.dir/client/mainClient.c.o" \
 "CMakeFiles/mainClient.dir/utils/aesUtils.c.o" \
+"CMakeFiles/mainClient.dir/utils/binn.c.o" \
 "CMakeFiles/mainClient.dir/cipherPOC.c.o" \
 "CMakeFiles/mainClient.dir/signaturePOC.c.o"
 
@@ -121,12 +135,13 @@ mainClient_EXTERNAL_OBJECTS =
 
 mainClient: CMakeFiles/mainClient.dir/client/mainClient.c.o
 mainClient: CMakeFiles/mainClient.dir/utils/aesUtils.c.o
+mainClient: CMakeFiles/mainClient.dir/utils/binn.c.o
 mainClient: CMakeFiles/mainClient.dir/cipherPOC.c.o
 mainClient: CMakeFiles/mainClient.dir/signaturePOC.c.o
 mainClient: CMakeFiles/mainClient.dir/build.make
 mainClient: libs/relic-target/lib/librelic.so
 mainClient: CMakeFiles/mainClient.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable mainClient"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable mainClient"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mainClient.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

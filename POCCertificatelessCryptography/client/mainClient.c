@@ -7,7 +7,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
-#define PORT 10005
+#define PORT 10001
 
 int main() {
     if(core_init() == RLC_ERR){
@@ -65,20 +65,38 @@ int main() {
         binn_free(list);
 
         // Now we can go for user's private keys (encrypting and signing)
-        bn_t x;
-        setSec(&x);
+        bn_t xAlice;
+        setSec(&xAlice);
 
-        bn_t xSig;
-        setSecSig(&xSig);
+        bn_t xSigAlice;
+        setSecSig(&xSigAlice);
         // -------------------------------------------------------------
-        // Private keys set
+        // Private keys set for Alice
 
         // Now we can go to set Public keys for both signing and encrypting
-        PK myPK;
-        setPub(x, mpkSession, &myPK);
+        PK PKAlice;
+        setPub(xAlice, mpkSession, &PKAlice);
 
-        PKSig myPKSig;
-        setPubSig(xSig, mpkSignature, &myPKSig);
+        PKSig PKSigAlice;
+        setPubSig(xSigAlice, mpkSignature, &PKSigAlice);
+        // --------------------------------------------------------------
+        // Alice done
+
+        // Now we can go for user's private keys (encrypting and signing)
+        bn_t xBob;
+        setSec(&xBob);
+
+        bn_t xSigBob;
+        setSecSig(&xSigBob);
+        // -------------------------------------------------------------
+        // Private keys set for Bob
+
+        // Now we can go to set Public keys for both signing and encrypting
+        PK PKBob;
+        setPub(xBob, mpkSession, &PKBob);
+
+        PKSig PKSigBob;
+        setPubSig(xSigBob, mpkSignature, &PKSigBob);
 
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
             printf("\n Socket creation error \n");
@@ -89,33 +107,64 @@ int main() {
             printf("\nConnection Failed \n");
             return -1;
         }
-        char bufferPK[1024] = {0};
+        char bufferPKAlice[1024] = {0};
         // TODO : construct our PK binn
-        binn* listPK;
-        listPK = binn_list();
+        binn* listPKAlice;
+        listPKAlice = binn_list();
         binn* PKE, *PKS;
         PKE = binn_object();
         PKS = binn_object();
-        serialize_PKE(PKE, myPK);
-        serialize_PKS(PKS, myPKSig);
-        binn_list_add_object(listPK, PKE);
-        binn_list_add_object(listPK, PKS);
+        serialize_PKE(PKE, PKAlice);
+        serialize_PKS(PKS, PKSigAlice);
+        binn_list_add_object(listPKAlice, PKE);
+        binn_list_add_object(listPKAlice, PKS);
         binn_free(PKE);
         binn_free(PKS);
 
-        char *PKanounce = "PK:mickael.bonjour@hotmail.fr,";
-        memcpy(bufferPK, PKanounce, strlen(PKanounce) + 1);
-        memcpy(&bufferPK[strlen(PKanounce) + 1], binn_ptr(listPK), binn_size(listPK));
+        char *PKanounceAlice = "PK:alice@mail.ch,";
+        memcpy(bufferPKAlice, PKanounceAlice, strlen(PKanounceAlice) + 1);
+        memcpy(&bufferPKAlice[strlen(PKanounceAlice) + 1], binn_ptr(listPKAlice), binn_size(listPKAlice));
 
-        send(sock, bufferPK, strlen(PKanounce) + binn_size(listPK), 0);
-        binn_free(listPK);
+        send(sock, bufferPKAlice, strlen(PKanounceAlice) + binn_size(listPKAlice), 0);
+        binn_free(listPKAlice);
         // -----------------------------------------------------------------
         // Public keys set
 
+        if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+            printf("\n Socket creation error \n");
+            return -1;
+        }
+        if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+        {
+            printf("\nConnection Failed \n");
+            return -1;
+        }
+        char bufferPKBob[1024] = {0};
+        // TODO : construct our PK binn
+        binn* listPKBob;
+        listPKBob = binn_list();
+        binn* PKEBob, *PKSBob;
+        PKEBob = binn_object();
+        PKSBob = binn_object();
+        serialize_PKE(PKEBob, PKBob);
+        serialize_PKS(PKSBob, PKSigBob);
+        binn_list_add_object(listPKBob, PKEBob);
+        binn_list_add_object(listPKBob, PKSBob);
+        binn_free(PKEBob);
+        binn_free(PKSBob);
+        char *PKanounceBob = "PK:bob@mail.ch,";
+        memcpy(bufferPKBob, PKanounceBob, strlen(PKanounceBob) + 1);
+        memcpy(&bufferPKBob[strlen(PKanounceBob) + 1], binn_ptr(listPKBob), binn_size(listPKBob));
+
+        send(sock, bufferPKBob, strlen(PKanounceBob) + binn_size(listPKBob), 0);
+        binn_free(listPKBob);
+        // -----------------------------------------------------------------
+        // Public keys set
 
         // The other user takes ID of the destination and PK to encrypt his message
         // With the final version we will need to append a timestamp on the ID
-        char ID[] = "mickael.bonjour@hotmail.fr";
+        char IDAlice[] = "alice@mail.ch";
+        char IDBob[] = "bob@mail.ch";
 
         gt_t AESK;
         gt_null(AESK);
@@ -126,7 +175,7 @@ int main() {
         unsigned char aesk [crypto_secretbox_KEYBYTES];
         get_key(aesk, AESK);
 
-        char* m = "This message will be encrypted";
+        char* m = "This message for Bob will be encrypted";
         printf("Message : %s\n", m);
         unsigned char nonceAES[crypto_aead_aes256gcm_NPUBBYTES];
         size_t m_len = strlen(m);
@@ -136,10 +185,10 @@ int main() {
         printf("Encrypted message : %s\n", ciphertextAES);
 
         cipher c;
-        encrypt(AESK, myPK, ID, mpkSession, &c);
+        encrypt(AESK, PKBob, IDBob, mpkSession, &c);
 
         // For the signature we need our PPK
-        PPKSig myPartialKeysSig;
+        PPKSig PartialKeysSigAlice;
         // TODO : Verify if ok the deserialize
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
             printf("\n Socket creation error \n");
@@ -151,14 +200,14 @@ int main() {
             return -1;
         }
         char bufferPPK[1024] = {0};
-        char *signExtract = "SE:mickael.bonjour@hotmail.fr";
+        char *signExtract = "SE:alice@mail.ch";
         send(sock, signExtract, strlen(signExtract), 0);
         read(sock, bufferPPK, 1024);
-        deserialize_PPKS(bufferPPK, &myPartialKeysSig);
+        deserialize_PPKS(bufferPPK, &PartialKeysSigAlice);
 
         // Computes Secret User Keys for Signature
-        SKSig mySecretKeysSig;
-        setPrivSig(xSig, myPartialKeysSig, mpkSignature, ID, &mySecretKeysSig);
+        SKSig SecretKeysSigAlice;
+        setPrivSig(xSigAlice, PartialKeysSigAlice, mpkSignature, IDAlice, &SecretKeysSigAlice);
 
         // Computes the message to sign, so the cipher struct
         int c0size = gt_size_bin(c.c0,1);
@@ -174,21 +223,19 @@ int main() {
         // Structure of an signature
         signature s;
         // We can sign using our private keys and public ones
-        sign(mSig, mySecretKeysSig, myPKSig, ID, mpkSignature, &s);
+        sign(mSig, SecretKeysSigAlice, PKSigAlice, IDAlice, mpkSignature, &s);
         // ----------------------------------------------------------------------
         // Now the message is encrypted and authentified with an AES Key and the key is encrypted and signed using CLPKC
         // ----------------------------------------------------------------------
 
-
         // We can go for decrypting and verification
-        // For this we need our Partial Private Keys with the ID used to encrypt the message
-
         // We can verify directly with the public keys of the sender
-        int test = verify(s, myPKSig, mpkSignature, ID, mSig);
+        int test = verify(s, PKSigAlice, mpkSignature, IDAlice, mSig);
         printf("\nVerification of the key (0 if correct 1 if not) : %d\n", test);
         // if the verif is ok we can continue, otherwise we can stop here
         if(test == 0) {
-            PPK myPartialKeys;
+            // For this we need our Partial Private Keys with the ID used to encrypt the message
+            PPK PartialKeysBob;
             // TODO : Verify if ok the deserialize
             if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
                 printf("\n Socket creation error \n");
@@ -200,25 +247,25 @@ int main() {
                 return -1;
             }
             char bufferPPKE[1024] = {0};
-            char *encExtract = "EE:mickael.bonjour@hotmail.fr";
+            char *encExtract = "EE:bob@mail.ch";
             send(sock, encExtract, strlen(encExtract), 0);
             read(sock, bufferPPKE, 1024);
-            deserialize_PPKE(bufferPPKE, &myPartialKeys);
+            deserialize_PPKE(bufferPPKE, &PartialKeysBob);
 
             // Computes Secret User Keys
-            SK mySecretKeys;
-            g2_null(mySecretKeys->s1)
-            g2_new(mySecretKeys->s1)
+            SK SecretKeysBob;
+            g2_null(SecretKeysBob->s1)
+            g2_new(SecretKeysBob->s1)
 
-            g1_null(mySecretKeys->s2)
-            g1_new(mySecretKeys->s2)
-            setPriv(x, myPartialKeys, mpkSession, ID, &mySecretKeys);
+            g1_null(SecretKeysBob->s2)
+            g1_new(SecretKeysBob->s2)
+            setPriv(xBob, PartialKeysBob, mpkSession, IDBob, &SecretKeysBob);
 
             // We can decrypt now
             gt_t decryptedMessage;
             gt_null(decryptedMessage)
             gt_new(decryptedMessage)
-            decrypt(c, mySecretKeys, myPK, mpkSession, ID, &decryptedMessage);
+            decrypt(c, SecretKeysBob, PKBob, mpkSession, IDBob, &decryptedMessage);
 
             char aeskDecrypted[crypto_secretbox_KEYBYTES];
             get_key(aeskDecrypted, decryptedMessage);
@@ -234,7 +281,7 @@ int main() {
         printf("Message changed to simulate corruption\n");
 
         // We can verify now with the public keys of the sender
-        test = verify(s, myPKSig, mpkSignature, ID, mSigCorrupt);
+        test = verify(s, PKSigAlice, mpkSignature, IDAlice, mSigCorrupt);
         printf("Verification (0 if correct 1 if not) : %d\n", test);
     }
     core_clean();

@@ -326,6 +326,33 @@ utils/aesUtils.c.s:
 	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/utils/aesUtils.c.s
 .PHONY : utils/aesUtils.c.s
 
+utils/binn.o: utils/binn.c.o
+
+.PHONY : utils/binn.o
+
+# target to build an object file
+utils/binn.c.o:
+	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/binn.c.o
+.PHONY : utils/binn.c.o
+
+utils/binn.i: utils/binn.c.i
+
+.PHONY : utils/binn.i
+
+# target to preprocess a source file
+utils/binn.c.i:
+	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/binn.c.i
+.PHONY : utils/binn.c.i
+
+utils/binn.s: utils/binn.c.s
+
+.PHONY : utils/binn.s
+
+# target to generate assembly for a file
+utils/binn.c.s:
+	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/binn.c.s
+.PHONY : utils/binn.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -355,6 +382,9 @@ help:
 	@echo "... utils/aesUtils.o"
 	@echo "... utils/aesUtils.i"
 	@echo "... utils/aesUtils.s"
+	@echo "... utils/binn.o"
+	@echo "... utils/binn.i"
+	@echo "... utils/binn.s"
 .PHONY : help
 
 
