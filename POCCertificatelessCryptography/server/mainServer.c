@@ -7,6 +7,7 @@
 #include <fcntl.h> // for open
 #include <unistd.h> // for close
 #include<pthread.h>
+#include <netinet/tcp.h>
 
 #include "cipherPOC.h"
 #include "signaturePOC.h"
@@ -61,13 +62,13 @@ void* socketThread(void *arg){
     char client_message[1024];
     recv(newSocket , client_message , 1024 , 0);
     // TODO : change the size of fields to be able to put the data received
-    char** tokens = generate_fields(2, 512);
+    char** tokens = generate_fields(2, 64);
     pthread_mutex_lock(&lock);
     split(tokens, client_message, ":");
     pthread_mutex_unlock(&lock);
     // Remove \r\n from the last token
     // TODO check if still necessary with client implemented
-    tokens[1][strcspn(tokens[1], "\r\n")] = 0;
+    //tokens[1][strcspn(tokens[1], "\r\n")] = 0;
     //Prepare structs for the possibilities
     PPKSig myPartialKeysSig;
     PPK myPartialKeys;
@@ -235,10 +236,20 @@ void* socketThread(void *arg){
         binn_list_add_object(list, obj);
         binn_free(obj);
         printf("Size of this packet = %d\n", binn_size(list));
-        send(newSocket, binn_ptr(list), binn_size(list),0);
+        FILE* publicKeysEncryptionFile = fopen("testMPK", "w");
+        if(publicKeysEncryptionFile == NULL) {
+            printf("Error creating/opening required files!");
+            // exit(1);
+        }
+        //TODO : fwrite struct of public key created
+        fwrite(binn_ptr(list), binn_size(list),1,publicKeysEncryptionFile);
+        fclose(publicKeysEncryptionFile);
+        size_t bytesSent = send(newSocket, binn_ptr(list), binn_size(list),0);
+        printf("Bytes sent : %zu\n", bytesSent);
     }
     free_fields(tokens, 2, 64);
     printf("Exit socketThread \n");
+    //fflush(newSocket);
     close(newSocket);
     pthread_exit(NULL);
 }
@@ -279,7 +290,7 @@ int main() {
         // Address family = Internet 
         serverAddr.sin_family = AF_INET;
         //Set port number, using htons function to use proper byte order 
-        serverAddr.sin_port = htons(10001);
+        serverAddr.sin_port = htons(10003);
         //Set IP address to localhost 
         serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
         //Set all bits of the padding field to 0 

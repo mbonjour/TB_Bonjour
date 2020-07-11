@@ -1,1 +1,1 @@
-bob@mail.ch:€
+bob@mail.ch:°

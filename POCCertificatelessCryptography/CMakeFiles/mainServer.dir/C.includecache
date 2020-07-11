@@ -25,6 +25,8 @@ unistd.h
 -
 pthread.h
 -
+netinet/tcp.h
+-
 cipherPOC.h
 /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/server/cipherPOC.h
 signaturePOC.h

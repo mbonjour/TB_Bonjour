@@ -2,9 +2,9 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
+      <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
       <config projectName="POCCertificatelessCryptography" targetName="mainClient" />
       <config projectName="POCCertificatelessCryptography" targetName="mainServer" />
-      <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -14,45 +14,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cipherPOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cipherPOC.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/client/mainClient.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/client/mainClient.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/C.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/cipherPOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/cipherPOC.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/server/mainServer.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/server/mainServer.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POCCertificatelessCryptography.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/POCCertificatelessCryptography.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cipherPOC.c" beforeDir="false" afterPath="$PROJECT_DIR$/cipherPOC.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cipherPOC.h" beforeDir="false" afterPath="$PROJECT_DIR$/cipherPOC.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/mainClient.c" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test25@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test2@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test3@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test4@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test5@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test6@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test7@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test@mail.ch&#10;" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/encryption/test@mail.ch2&#10;" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption/test2@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption/test@mail.ch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/encryption/test@mail.ch&#10;" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/peda-session-22258.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/peda-session-22300.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/peda-session-22331.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/peda-session-22385.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/peda-session-22460.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/peda-session-22559.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/peda-session-22613.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/peda-session-22637.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/art/rlc_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/art/rlc_logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/bench/bench_pc.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/bench/bench_pc.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/relic/include/relic_alloc.h" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/include/relic_alloc.h" afterDir="false" />
@@ -153,7 +130,8 @@
       <change beforePath="$PROJECT_DIR$/mainServer" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/peda-session-unknown.txt" beforeDir="false" afterPath="$PROJECT_DIR$/peda-session-unknown.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/mainServer.c" beforeDir="false" afterPath="$PROJECT_DIR$/server/mainServer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/signature/mickael.bonjour@hotmail.fr" beforeDir="false" afterPath="$PROJECT_DIR$/signature/mickael.bonjour@hotmail.fr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/signature/alice@mail.ch" beforeDir="false" afterPath="$PROJECT_DIR$/signature/alice@mail.ch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/signature/bob@mail.ch" beforeDir="false" afterPath="$PROJECT_DIR$/signature/bob@mail.ch" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +157,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../TB_Bonjour/POCCertificatelessCryptography" />
@@ -264,7 +243,8 @@
       <workItem from="1593506812461" duration="32000" />
       <workItem from="1594110269856" duration="4487000" />
       <workItem from="1594207002998" duration="1704000" />
-      <workItem from="1594368979965" duration="16439000" />
+      <workItem from="1594368979965" duration="20479000" />
+      <workItem from="1594477232601" duration="3514000" />
     </task>
     <servers />
   </component>
@@ -276,10 +256,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="411" y="21" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1593289109477" />
-    <state x="642" y="253" width="629" height="389" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594372385270">
+    <state x="640" y="209" width="629" height="389" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594387360484">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="642" y="253" width="629" height="389" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1594372385270" />
+    <state x="640" y="209" width="629" height="389" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1594387360484" />
     <state x="801" y="250" width="198" height="521" key="#xdebugger.XInspectDialog" timestamp="1593270128592">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -288,47 +268,47 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="717" y="240" key="#xdebugger.evaluate/0.0.1920.1080@0.0.1920.1080" timestamp="1593270149753" />
-    <state width="531" height="506" key="DebuggerActiveHint" timestamp="1594385947286">
+    <state width="531" height="506" key="DebuggerActiveHint" timestamp="1594387616204">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="531" height="506" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1594385947286" />
+    <state width="531" height="506" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1594387616204" />
     <state x="734" y="77" width="426" height="477" key="FileChooserDialogImpl" timestamp="1593506842056">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="404" y="197" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1170@0.0.1920.1050" timestamp="1592821540496" />
     <state x="734" y="77" width="426" height="477" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1593506842056" />
-    <state width="1874" height="273" key="GridCell.Tab.0.bottom" timestamp="1594386505598">
+    <state width="1874" height="273" key="GridCell.Tab.0.bottom" timestamp="1594481948936">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594386505598" />
-    <state width="1874" height="273" key="GridCell.Tab.0.center" timestamp="1594386505598">
+    <state width="1874" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594481948936" />
+    <state width="1874" height="273" key="GridCell.Tab.0.center" timestamp="1594481948936">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="273" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594386505598" />
-    <state width="1874" height="273" key="GridCell.Tab.0.left" timestamp="1594386505598">
+    <state width="1874" height="273" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594481948936" />
+    <state width="1874" height="273" key="GridCell.Tab.0.left" timestamp="1594481948935">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="273" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594386505598" />
-    <state width="1874" height="273" key="GridCell.Tab.0.right" timestamp="1594386505598">
+    <state width="1874" height="273" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594481948935" />
+    <state width="1874" height="273" key="GridCell.Tab.0.right" timestamp="1594481948936">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="273" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594386505598" />
-    <state width="1874" height="262" key="GridCell.Tab.1.bottom" timestamp="1594385970292">
+    <state width="1874" height="273" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594481948936" />
+    <state width="1874" height="262" key="GridCell.Tab.1.bottom" timestamp="1594479347949">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="262" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594385970292" />
-    <state width="1874" height="262" key="GridCell.Tab.1.center" timestamp="1594385970290">
+    <state width="1874" height="262" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594479347949" />
+    <state width="1874" height="262" key="GridCell.Tab.1.center" timestamp="1594479347948">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="262" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594385970290" />
-    <state width="1874" height="262" key="GridCell.Tab.1.left" timestamp="1594385970289">
+    <state width="1874" height="262" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594479347948" />
+    <state width="1874" height="262" key="GridCell.Tab.1.left" timestamp="1594479347948">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="262" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594385970289" />
-    <state width="1874" height="262" key="GridCell.Tab.1.right" timestamp="1594385970291">
+    <state width="1874" height="262" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594479347948" />
+    <state width="1874" height="262" key="GridCell.Tab.1.right" timestamp="1594479347949">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1874" height="262" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594385970291" />
+    <state width="1874" height="262" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594479347949" />
     <state x="452" y="64" key="SettingsEditor" timestamp="1593035535526">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -361,32 +341,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/server/mainServer.c</url>
-          <line>170</line>
+          <line>171</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/server/mainServer.c</url>
-          <line>194</line>
+          <line>195</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/server/mainServer.c</url>
-          <line>125</line>
+          <line>126</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/server/mainServer.c</url>
-          <line>110</line>
+          <line>111</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/server/mainServer.c</url>
-          <line>33</line>
+          <line>34</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/server/mainServer.c</url>
-          <line>207</line>
+          <line>208</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -419,6 +399,22 @@
           <url>file://$PROJECT_DIR$/cipherPOC.c</url>
           <line>79</line>
           <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <condition expression="i == 71" language="ObjectiveC" />
+          <url>file://$PROJECT_DIR$/cipherPOC.c</url>
+          <line>414</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/server/mainServer.c</url>
+          <line>237</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
+          <line>96</line>
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

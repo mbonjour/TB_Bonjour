@@ -6,11 +6,27 @@
 
 #IncludeRegexTransform: 
 
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c
+/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.c
 cipherPOC.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.h
+/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/cipherPOC.h
+signaturePOC.h
+/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/signaturePOC.h
+utils/aesUtils.h
+/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/utils/aesUtils.h
+sodium.h
+/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/sodium.h
+stdio.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+unistd.h
+-
+string.h
+-
 
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.h
+cipherPOC.h
 stdio.h
 -
 relic.h
@@ -18,9 +34,7 @@ relic.h
 string.h
 -
 utils/binn.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/utils/binn.h
-
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/utils/binn.h
+utils/binn.h
 
 libs/relic-target/include/relic_conf.h
 relic_label.h
@@ -347,4 +361,22 @@ relic_types.h
 libs/relic/include/relic_types.h
 relic_label.h
 libs/relic/include/relic_label.h
+
+signaturePOC.h
+stdio.h
+-
+relic.h
+-
+string.h
+-
+binn.h
+-
+
+utils/aesUtils.h
+sodium.h
+utils/sodium.h
+relic.h
+utils/relic.h
+
+utils/binn.h
 
