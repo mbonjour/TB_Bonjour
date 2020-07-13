@@ -101,7 +101,7 @@ relic_conf.h
 libs/relic/include/relic_conf.h
 malloc.h
 -
-malloc.h
+alloca.h
 -
 
 libs/relic/include/relic_arch.h

@@ -14,154 +14,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/utils/base64.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/build.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cipherPOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cipherPOC.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/client/mainClient.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/client/mainClient.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cmake_clean.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.internal" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/flags.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/utils/binn.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/signaturePOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/signaturePOC.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/utils/aesUtils.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/utils/aesUtils.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/build.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/cipherPOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/cipherPOC.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/flags.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/server/mainServer.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/server/mainServer.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/signaturePOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/signaturePOC.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/progress.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POCCertificatelessCryptography.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/POCCertificatelessCryptography.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cipherPOC.h" beforeDir="false" afterPath="$PROJECT_DIR$/cipherPOC.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/mainClient.c" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/art/rlc_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/art/rlc_logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/bench/bench_pc.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/bench/bench_pc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/include/relic_alloc.h" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/include/relic_alloc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/include/relic_types.h" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/include/relic_types.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/ardue-pbc-bn254.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/ardue-pbc-bn254.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/arm-pbc-bn254.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/arm-pbc-bn254.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/armdroid-pbc-bn254.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/armdroid-pbc-bn254.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/armduino-ecc-128k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/armduino-ecc-128k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/armega-pbc-bn254.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/armega-pbc-bn254.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/armios-pbc-bn254.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/armios-pbc-bn254.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/avr-ecc-80k-sim.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/avr-ecc-80k-sim.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/avr-ecc-80k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/avr-ecc-80k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/avr-pbc-80.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/avr-pbc-80.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/curve2251-clmul-gcc.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/curve2251-clmul-gcc.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/curve2251-clmul-icc.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/curve2251-clmul-icc.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/curve2251-ssse3-gcc.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/curve2251-ssse3-gcc.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/curve2251-ssse3-icc.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/curve2251-ssse3-icc.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/fiat-pbc-bls381.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/fiat-pbc-bls381.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/gmp-ecc-128.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/gmp-ecc-128.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/gmp-pbc-bls381.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/gmp-pbc-bls381.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/gmp-pbc-bn254.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/gmp-pbc-bn254.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/gmp-pbc-ss1536.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/gmp-pbc-ss1536.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/msp-ecc-128.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/msp-ecc-128.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/msp-ecc-128k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/msp-ecc-128k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/msp-ecc-80.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/msp-ecc-80.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/msp-ecc-80k.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/msp-ecc-80k.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/msp-pbc-bn158.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/msp-pbc-bn158.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/msp-pbc-bn254.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/msp-pbc-bn254.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/valgrind-debug.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/valgrind-debug.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls12-381.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls12-381.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls12-446.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls12-446.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls12-455.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls12-455.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls12-638.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls12-638.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls48-575.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bls48-575.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bn254.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bn254.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bn382.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/preset/x64-pbc-bn382.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/cp/relic_cp_ecdh.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/cp/relic_cp_ecdh.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/epx/relic_ep2_mul_fix.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/epx/relic_ep2_mul_fix.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_bn_add_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_bn_add_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_bn_shift_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_bn_shift_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_bn_shift_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_bn_shift_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_add_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_add_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_mul_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_mul_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_rdc_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_rdc_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_shift_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_shift_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_shift_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_shift_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_sqr_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-158/relic_fp_sqr_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_bn_add_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_bn_add_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_bn_shift_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_bn_shift_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_bn_shift_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_bn_shift_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_add_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_add_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_add_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_add_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_mul_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_mul_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_mul_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_mul_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_shift_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_shift_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_shift_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_shift_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_sqr_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_sqr_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_sqr_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/avr-asm-163/relic_fb_sqr_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/macros.h" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/macros.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_add_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_add_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_inv_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_inv_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_mul_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_mul_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_mul_low_cl.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_mul_low_cl.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_mul_low_ld.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_mul_low_ld.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_mul_low_sf.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_mul_low_sf.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_rdc_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_rdc_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_slv_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_slv_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_sqr_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_sqr_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_srt_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/curve2251-sse/relic_fb_srt_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/easy/relic_fpx_add_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/easy/relic_fpx_add_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/easy/relic_fpx_mul_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/easy/relic_fpx_mul_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/easy/relic_fpx_rdc_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/easy/relic_fpx_rdc_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/easy/relic_fpx_sqr_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/easy/relic_fpx_sqr_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/macro.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/macro.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_add_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_add_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_mul_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_mul_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_mul_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_mul_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_rdc_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_rdc_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_rdc_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_rdc_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_shift_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_shift_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_shift_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_shift_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_sqr_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_sqr_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_sqr_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fp_sqr_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_add_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_add_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_add_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_add_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_mul_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_mul_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_mul_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_mul_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_rdc_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_rdc_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_rdc_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_rdc_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_sqr_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_sqr_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_sqr_low.s" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-254/relic_fpx_sqr_low.s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-382/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-382/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-455/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-455/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-638/relic_fpx_rdc_low.c" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/src/low/x64-asm-638/relic_fpx_rdc_low.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/relic/tools/relic_gen_label.sh" beforeDir="false" afterPath="$PROJECT_DIR$/libs/relic/tools/relic_gen_label.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainClient" beforeDir="false" afterPath="$PROJECT_DIR$/mainClient" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainServer" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peda-session-77073.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/peda-session-77122.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/peda-session-77154.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/peda-session-77185.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/peda-session-77410.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/peda-session-unknown.txt" beforeDir="false" afterPath="$PROJECT_DIR$/peda-session-unknown.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/mainServer.c" beforeDir="false" afterPath="$PROJECT_DIR$/server/mainServer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/signature/alice@mail.ch" beforeDir="false" afterPath="$PROJECT_DIR$/signature/alice@mail.ch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/signature/bob@mail.ch" beforeDir="false" afterPath="$PROJECT_DIR$/signature/bob@mail.ch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testMPK" beforeDir="false" afterPath="$PROJECT_DIR$/testMPK" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testMPKClient" beforeDir="false" afterPath="$PROJECT_DIR$/testMPKClient" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/binn.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/binn.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +70,7 @@
       <recent name="$PROJECT_DIR$/libs" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.mainClient">
+  <component name="RunManager" selected="CMake Application.mainServer">
     <configuration name="mainClient" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="POCCertificatelessCryptography" TARGET_NAME="mainClient" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="POCCertificatelessCryptography" RUN_TARGET_NAME="mainClient">
       <envs>
         <env name="LD_LIBRARY_PATH" value="/usr/local/lib" />

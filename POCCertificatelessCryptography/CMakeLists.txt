@@ -11,7 +11,7 @@ include_directories(.)
 link_libraries(${CMAKE_SOURCE_DIR}/libs/relic-target/lib/librelic.so)
 link_libraries(${CMAKE_SOURCE_DIR}/libs/unqlite/libunqlite.a)
 link_libraries(sodium)
-link_libraries(nsl)
+#link_libraries(nsl)
 link_libraries(pthread)
 link_libraries(binn)
 

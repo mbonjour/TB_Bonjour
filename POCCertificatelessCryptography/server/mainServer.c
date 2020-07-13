@@ -217,7 +217,9 @@ void* socketThread(void *arg){
 }
 
 int main() {
-
+    unqlite_lib_config(UNQLITE_LIB_CONFIG_THREAD_LEVEL_MULTI);
+    unqlite_lib_init();
+    printf("UNQLITE_ENABLE_THREADS=%d", unqlite_lib_is_threadsafe());
     // Open our database;
     int rc = unqlite_open(&pDb,"test.db", UNQLITE_OPEN_CREATE);
     if( rc != UNQLITE_OK ){ return -1; }
