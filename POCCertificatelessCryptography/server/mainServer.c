@@ -8,7 +8,9 @@
 #include <unistd.h> // for close
 #include<pthread.h>
 #include <netinet/tcp.h>
+#include <unqlite.h>
 
+#include "utils/base64.h"
 #include "cipherPOC.h"
 #include "signaturePOC.h"
 //TODO: sauvegarder les master secret pour permettre au serveur de récréer son état en cas de redémarrage
@@ -23,6 +25,7 @@ g2_t msk;
 // MPK struct, Master Public Key structure to store
 mpkStruct mpkSession;
 mpkStructSig mpkSignature;
+unqlite *pDb;
 
 char** generate_fields(int numberOfFields, int sizeOfFields) {
     char** options = malloc(numberOfFields*sizeof(char *));
@@ -62,7 +65,7 @@ void* socketThread(void *arg){
     char client_message[1024];
     recv(newSocket , client_message , 1024 , 0);
     // TODO : change the size of fields to be able to put the data received
-    char** tokens = generate_fields(2, 64);
+    char** tokens = generate_fields(2, 512);
     pthread_mutex_lock(&lock);
     split(tokens, client_message, ":");
     pthread_mutex_unlock(&lock);
@@ -86,15 +89,6 @@ void* socketThread(void *arg){
         printf("Code : EE\n");
         //The receiver needs to extract (via KGC) and setPriv to get his private key and decrypt the cipher
         extract(mpkSession, msk, tokens[1], &myPartialKeys);
-        /*size_t sizePartialKeys = 0;
-        size_t sizePartialKeysD1 = g2_size_bin(myPartialKeys.d1, 1);
-        size_t sizePartialKeysD2 = g1_size_bin(myPartialKeys.d2, 1);
-        uint8_t partialKeyToSend[sizePartialKeysD1 + 1 + sizePartialKeysD2]; // +1 pour le séparateur
-        g2_write_bin(partialKeyToSend, sizePartialKeysD1, myPartialKeys.d1,1);
-        strcpy(&partialKeyToSend[sizePartialKeysD1], ".");
-
-        g1_write_bin(partialKeyToSend, sizePartialKeysD2, myPartialKeys.d2,1);
-        */
         binn *obj;
         obj = binn_object();
         serialize_PPKE(obj, myPartialKeys);
@@ -106,30 +100,21 @@ void* socketThread(void *arg){
         char path[strlen(tokens[1])+11];
         strcpy(path, "encryption/");
         strcat(path, tokens[1]);
-        // Open files to store the public keys of the users
         printf("Path : %s\n", path);
-        FILE* publicKeysEncryptionFile = fopen(path, "r");
-        if(publicKeysEncryptionFile == NULL) {
-            printf("Error creating/opening required files!");
-            // exit(1);
+        unqlite_int64 bufLen;
+        int result = unqlite_kv_fetch(pDb, path, -1, NULL, &bufLen);
+        if( result != UNQLITE_OK ){
+            printf("No record found\n");
         }
-        //TODO take binary data instead
-        char** fileTokens = generate_fields(3, 64);
-        char fileContent[64];
-        //fscanf(publicKeysEncryptionFile,"%s", &fileContent);
-        //TODO fread when struct get saved
-        while (fgets(fileContent, sizeof(fileContent), publicKeysEncryptionFile)) {
-            /* note that fgets don't strip the terminating \n, checking its
-               presence would allow to handle lines longer that sizeof(line) */
-            printf("%s", fileContent);
-        }
-        split(fileTokens, fileContent, ":");
-        printf("From File : %s:%s:%s\n", fileTokens[0], fileTokens[1], fileTokens[2]);
+        //Allocate a buffer big enough to hold the record content
+        void* zBuf = (char *)malloc(bufLen);
+        if( zBuf == NULL ){ printf("Can't allocate\n"); }
 
-        //send(newSocket,buffer,strlen(buffer),0);
-        fclose(publicKeysEncryptionFile);
-        free_fields(fileTokens,3,64);
-        publicKeysEncryptionFile = NULL;
+        //Copy record content in our buffer
+        unqlite_kv_fetch(pDb,path,-1,zBuf,&bufLen);
+        printf("PKE (Sent) : %s\n", zBuf);
+        send(newSocket, zBuf, bufLen, 0);
+        free(zBuf);
     }
     if(strcmp(tokens[0], "GPS") == 0){
         printf("Code : GPS\n");
@@ -137,91 +122,68 @@ void* socketThread(void *arg){
         strcpy(path, "signature/");
         strcat(path, tokens[1]);
         printf("Path : %s\n", path);
-        FILE* publicKeySignature = fopen(path, "r");
-        if(publicKeySignature == NULL) {
-            printf("Error creating/opening required files!");
-            // exit(1);
+        void* buffer = NULL;
+        unqlite_int64 bufLen;
+        int result = unqlite_kv_fetch(pDb, path, -1, NULL, &bufLen);
+        if( result != UNQLITE_OK ){
+            printf("No record found\n");
         }
-        //TODO take binary data instead
-        char* fileTokens[2];
-        fscanf(publicKeySignature,"%s:%s", fileTokens[0], fileTokens[1]);
-        printf("From file : %s:%s\n", fileTokens[0], fileTokens[1]);
+        //Allocate a buffer big enough to hold the record content
+        void* zBuf = (char *)malloc(bufLen);
+        if( zBuf == NULL ){ printf("Can't allocate\n"); }
 
-        //send(newSocket,buffer,strlen(buffer),0);
-        fclose(publicKeySignature);
-        publicKeySignature = NULL;
-    }
-    if(strcmp(tokens[0], "PKE") == 0){
-        printf("Code : PKE\n");
-        char* payload = tokens[1];
-
-        char** payloadTokens = generate_fields(3, 64);
-        split(payloadTokens, payload, ",");
-
-        char path[strlen(payloadTokens[0])+11];
-        strcpy(path, "encryption/");
-        strcat(path, payloadTokens[0]);
-        // Open files to store the public keys of the users
-        printf("Path : %s\n", path);
-        FILE* publicKeysEncryptionFile = fopen(path, "w");
-        if(publicKeysEncryptionFile == NULL) {
-            printf("Error creating/opening required files!");
-            // exit(1);
-        }
-
-        printf("%s:%s:%s\n", payloadTokens[0], payloadTokens[1], payloadTokens[2]);
-        //TODO : fwrite struct of public key created
-        fprintf(publicKeysEncryptionFile,"%s:%s:%s\n", payloadTokens[0], payloadTokens[1], payloadTokens[2]);
-        fclose(publicKeysEncryptionFile);
-        publicKeysEncryptionFile = NULL;
-        free_fields(payloadTokens, 3, 64);
-    }
-    if(strcmp(tokens[0], "PKS") == 0){
-        printf("Code : PKS\n");
-        char* payload = tokens[1];
-
-        char** payloadTokens = generate_fields(2,64);
-        split(payloadTokens, payload, ",");
-
-        char path[strlen(payloadTokens[0])+10];
-        strcpy(path, "signature/");
-        strcat(path, payloadTokens[0]);
-        printf("Path : %s\n", path);
-        FILE* publicKeySignature = fopen(path, "w");
-        if(publicKeySignature == NULL) {
-            printf("Error creating/opening required files!");
-            // exit(1);
-        }
-        //TODO : fwrite struct of public key created
-        printf("%s:%s\n", payloadTokens[0], payloadTokens[1]);
-        fprintf(publicKeySignature,"%s:%s\n", payloadTokens[0], payloadTokens[1]);
-        fclose(publicKeySignature);
-        publicKeySignature = NULL;
-        free_fields(payloadTokens, 2, 64);
+        //Copy record content in our buffer
+        unqlite_kv_fetch(pDb,path,-1,zBuf,&bufLen);
+        printf("PKE (Sent) : %s\n", zBuf);
+        send(newSocket, zBuf, bufLen, 0);
+        free(zBuf);
     }
     if(strcmp(tokens[0], "PK") == 0){
         printf("Code : PK\n");
         char* payload = tokens[1];
 
-        char** payloadTokens = generate_fields(2,64);
+        char** payloadTokens = generate_fields(2,512);
         split(payloadTokens, payload, ",");
 
         char path[strlen(payloadTokens[0])+10];
         strcpy(path, "signature/");
         strcat(path, payloadTokens[0]);
+        char pathPKE[strlen(payloadTokens[0])+11];
+        strcpy(pathPKE, "encryption/");
+        strcat(pathPKE, payloadTokens[0]);
         printf("Path : %s\n", path);
-        FILE* publicKeySignature = fopen(path, "w");
-        if(publicKeySignature == NULL) {
-            printf("Error creating/opening required files!");
-            // exit(1);
-        }
-        //TODO : fwrite struct of public key created
 
-        printf("%s:%s\n", payloadTokens[0], payloadTokens[1]);
-        fprintf(publicKeySignature,"%s:%s\n", payloadTokens[0], payloadTokens[1]);
-        fclose(publicKeySignature);
-        publicKeySignature = NULL;
-        free_fields(payloadTokens, 2, 64);
+        printf("%s\n", payloadTokens[1]);
+        size_t out_len;
+        unsigned char* decoded = base64_decode(payloadTokens[1], strlen(payloadTokens[1]), &out_len);
+        binn* list;
+        list = binn_open(decoded);
+        binn *PKE, *PKS;
+        PKE = binn_list_object(list, 1);
+        PKS = binn_list_object(list, 2);
+        size_t outLenPKE;
+        unsigned char* b64PKE = base64_encode(binn_ptr(PKE), binn_size(PKE), &outLenPKE);
+        size_t outLenPKS;
+        unsigned char* b64PKS = base64_encode(binn_ptr(PKS), binn_size(PKS), &outLenPKS);
+        printf("PKE : %s\n", b64PKE);
+        printf("PKS : %s\n", b64PKS);
+        int result;
+        result = unqlite_kv_store(pDb, path, -1, b64PKS, outLenPKS);
+        if( result != UNQLITE_OK ){
+            //Insertion fail, Handle error (See below)
+            printf("Store failed\n");
+        }
+        result = unqlite_kv_store(pDb, pathPKE, -1, b64PKE, outLenPKE);
+        if( result != UNQLITE_OK ){
+            //Insertion fail, Handle error (See below)
+            printf("Store failed\n");
+        }
+        //binn_free(PKE);
+        //binn_free(PKS);
+        binn_free(list);
+        free(b64PKS);
+        free(b64PKE);
+        free_fields(payloadTokens, 2, 512);
     }
     if(strcmp(tokens[0], "HELO")==0){
         printf("Code : HELO\n");
@@ -247,7 +209,7 @@ void* socketThread(void *arg){
         size_t bytesSent = send(newSocket, binn_ptr(list), binn_size(list),0);
         printf("Bytes sent : %zu\n", bytesSent);
     }
-    free_fields(tokens, 2, 64);
+    free_fields(tokens, 2, 512);
     printf("Exit socketThread \n");
     //fflush(newSocket);
     close(newSocket);
@@ -255,6 +217,10 @@ void* socketThread(void *arg){
 }
 
 int main() {
+
+    // Open our database;
+    int rc = unqlite_open(&pDb,"test.db", UNQLITE_OPEN_CREATE);
+    if( rc != UNQLITE_OK ){ return -1; }
     if(core_init() == RLC_ERR){
         printf("RELIC INIT ERROR !\n");
     }
@@ -290,7 +256,7 @@ int main() {
         // Address family = Internet 
         serverAddr.sin_family = AF_INET;
         //Set port number, using htons function to use proper byte order 
-        serverAddr.sin_port = htons(10003);
+        serverAddr.sin_port = htons(10008);
         //Set IP address to localhost 
         serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
         //Set all bits of the padding field to 0 

@@ -7,7 +7,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
-#define PORT 10003
+#include "utils/base64.h"
+#define PORT 10008
 
 int main() {
     if(core_init() == RLC_ERR){
@@ -52,56 +53,39 @@ int main() {
         //char buffer[52000] = {0};
         send(sock , initMessage , strlen(initMessage) , 0 );
         printf("Hello message sent\n");
-        //size_t bytesRead = recv(sock, buffer, 52000, 0);
-        //printf("Bytes received : %zu\n", bytesRead);
+
         //Wa to receive chunks of data, Taken from : https://stackoverflow.com/questions/10011098/how-to-receive-the-large-data-using-recv
         unsigned char buf[52000];  //10Kb fixed-size buffer
         unsigned char buffer[2048];  //temporary buffer
         unsigned char* temp_buf = buf;
         unsigned char* end_buf = buf + sizeof(buf);
         size_t iByteCount;
-        do
-        {
+        do {
             iByteCount = recv(sock, buffer,2048,0);
-
-            if ( iByteCount > 0 )
-            {
+            if ( iByteCount > 0 ) {
                 //make sure we're not about to go over the end of the buffer
                 if (!((temp_buf + iByteCount) <= end_buf))
                     break;
-
                 //fprintf(stderr, "Bytes received: %d\n",iByteCount);
                 memcpy(temp_buf, buffer, iByteCount);
                 temp_buf += iByteCount;
             }
-            else if ( iByteCount == 0 )
-            {
-                if(temp_buf != buf)
-                {
+            else if ( iByteCount == 0 ) {
+                if(temp_buf != buf) {
                     //do process with received data
                 }
-                else
-                {
+                else {
                     fprintf(stderr, "receive failed");
                     break;
                 }
             }
-            else
-            {
+            else {
                 fprintf(stderr, "recv failed: ");
                 break;
             }
         } while(iByteCount > 0 && temp_buf < end_buf);
         binn *list;
         list = binn_open(buf);
-        printf("Size of this packet = %d\n", binn_size(list));
-        FILE* publicKeysEncryptionFile = fopen("testMPKClient", "w");
-        if(publicKeysEncryptionFile == NULL) {
-            printf("Error creating/opening required files!");
-            // exit(1);
-        }
-        //TODO : fwrite struct of public key created
-        fwrite(binn_ptr(list), binn_size(list),1,publicKeysEncryptionFile);
         binn *mpks, *mpke;
         mpks = binn_list_object(list, 1);
         mpke = binn_list_object(list, 2);
@@ -154,6 +138,7 @@ int main() {
             printf("\nConnection Failed \n");
             return -1;
         }
+
         char bufferPKAlice[1024] = {0};
         // TODO : construct our PK binn
         binn* listPKAlice;
@@ -169,10 +154,14 @@ int main() {
         binn_free(PKS);
 
         char *PKanounceAlice = "PK:alice@mail.ch,";
-        memcpy(bufferPKAlice, PKanounceAlice, strlen(PKanounceAlice) + 1);
-        memcpy(&bufferPKAlice[strlen(PKanounceAlice) + 1], binn_ptr(listPKAlice), binn_size(listPKAlice));
+        memcpy(bufferPKAlice, PKanounceAlice, strlen(PKanounceAlice));
+        size_t outLen;
+        unsigned char* b64 = base64_encode(binn_ptr(listPKAlice), binn_size(listPKAlice), &outLen);
+        printf("%s\n", b64);
+        memcpy(&bufferPKAlice[strlen(PKanounceAlice)], b64, outLen);
 
-        send(sock, bufferPKAlice, strlen(PKanounceAlice) + binn_size(listPKAlice), 0);
+        int sizeSent = send(sock, bufferPKAlice, strlen(PKanounceAlice) + outLen, 0);
+        printf("Size of PK : %d\n", sizeSent);
         binn_free(listPKAlice);
         // -----------------------------------------------------------------
         // Public keys set
@@ -200,13 +189,40 @@ int main() {
         binn_free(PKEBob);
         binn_free(PKSBob);
         char *PKanounceBob = "PK:bob@mail.ch,";
-        memcpy(bufferPKBob, PKanounceBob, strlen(PKanounceBob) + 1);
-        memcpy(&bufferPKBob[strlen(PKanounceBob) + 1], binn_ptr(listPKBob), binn_size(listPKBob));
+        memcpy(bufferPKBob, PKanounceBob, strlen(PKanounceBob));
+        //memcpy(&bufferPKBob[strlen(PKanounceBob) + 1], binn_ptr(listPKBob), binn_size(listPKBob));
+        size_t outLenBob;
+        unsigned char* b64Bob = base64_encode(binn_ptr(listPKBob), binn_size(listPKBob), &outLenBob);
+        printf("%s\n", b64Bob);
+        memcpy(&bufferPKBob[strlen(PKanounceBob)], b64Bob, outLenBob);
 
-        send(sock, bufferPKBob, strlen(PKanounceBob) + binn_size(listPKBob), 0);
+        send(sock, bufferPKBob, strlen(PKanounceBob) + outLenBob, 0);
         binn_free(listPKBob);
         // -----------------------------------------------------------------
         // Public keys set
+
+
+
+        // Test recuperation PKs
+        if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+            printf("\n Socket creation error \n");
+        }
+        if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+        {
+            printf("\nConnection Failed \n");
+        }
+        char* testGPE = "GPE:bob@mail.ch";
+        send(sock, testGPE, strlen(testGPE), 0);
+        char bufferGPE[512] = {0};
+
+        int testSize = recv(sock, bufferGPE, 512, 0);
+        printf("%s\n", bufferGPE);
+        PK PKBob2;
+        size_t out_len_test;
+        unsigned char * decodedTest = base64_decode(bufferGPE, testSize, &out_len_test);
+        deserialize_PKE(decodedTest, &PKBob2);
+
+
 
         // The other user takes ID of the destination and PK to encrypt his message
         // With the final version we will need to append a timestamp on the ID

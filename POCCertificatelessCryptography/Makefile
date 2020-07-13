@@ -326,32 +326,38 @@ utils/aesUtils.c.s:
 	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/utils/aesUtils.c.s
 .PHONY : utils/aesUtils.c.s
 
-utils/binn.o: utils/binn.c.o
+utils/base64.o: utils/base64.c.o
 
-.PHONY : utils/binn.o
+.PHONY : utils/base64.o
 
 # target to build an object file
-utils/binn.c.o:
-	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/binn.c.o
-.PHONY : utils/binn.c.o
+utils/base64.c.o:
+	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/base64.c.o
+	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/utils/base64.c.o
+	$(MAKE) -f CMakeFiles/mainServer.dir/build.make CMakeFiles/mainServer.dir/utils/base64.c.o
+.PHONY : utils/base64.c.o
 
-utils/binn.i: utils/binn.c.i
+utils/base64.i: utils/base64.c.i
 
-.PHONY : utils/binn.i
+.PHONY : utils/base64.i
 
 # target to preprocess a source file
-utils/binn.c.i:
-	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/binn.c.i
-.PHONY : utils/binn.c.i
+utils/base64.c.i:
+	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/base64.c.i
+	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/utils/base64.c.i
+	$(MAKE) -f CMakeFiles/mainServer.dir/build.make CMakeFiles/mainServer.dir/utils/base64.c.i
+.PHONY : utils/base64.c.i
 
-utils/binn.s: utils/binn.c.s
+utils/base64.s: utils/base64.c.s
 
-.PHONY : utils/binn.s
+.PHONY : utils/base64.s
 
 # target to generate assembly for a file
-utils/binn.c.s:
-	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/binn.c.s
-.PHONY : utils/binn.c.s
+utils/base64.c.s:
+	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/base64.c.s
+	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/utils/base64.c.s
+	$(MAKE) -f CMakeFiles/mainServer.dir/build.make CMakeFiles/mainServer.dir/utils/base64.c.s
+.PHONY : utils/base64.c.s
 
 # Help Target
 help:
@@ -382,9 +388,9 @@ help:
 	@echo "... utils/aesUtils.o"
 	@echo "... utils/aesUtils.i"
 	@echo "... utils/aesUtils.s"
-	@echo "... utils/binn.o"
-	@echo "... utils/binn.i"
-	@echo "... utils/binn.s"
+	@echo "... utils/base64.o"
+	@echo "... utils/base64.i"
+	@echo "... utils/base64.s"
 .PHONY : help
 
 

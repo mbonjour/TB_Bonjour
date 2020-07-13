@@ -3,7 +3,6 @@
 
 CMakeFiles/mainClient.dir/cipherPOC.c.o: cipherPOC.c
 CMakeFiles/mainClient.dir/cipherPOC.c.o: cipherPOC.h
-CMakeFiles/mainClient.dir/cipherPOC.c.o: utils/binn.h
 CMakeFiles/mainClient.dir/cipherPOC.c.o: libs/relic-target/include/relic_conf.h
 CMakeFiles/mainClient.dir/cipherPOC.c.o: libs/relic/include/relic.h
 CMakeFiles/mainClient.dir/cipherPOC.c.o: libs/relic/include/relic_alloc.h
@@ -63,7 +62,7 @@ CMakeFiles/mainClient.dir/client/mainClient.c.o: libs/relic/include/relic_types.
 CMakeFiles/mainClient.dir/client/mainClient.c.o: libs/relic/include/relic_util.h
 CMakeFiles/mainClient.dir/client/mainClient.c.o: signaturePOC.h
 CMakeFiles/mainClient.dir/client/mainClient.c.o: utils/aesUtils.h
-CMakeFiles/mainClient.dir/client/mainClient.c.o: utils/binn.h
+CMakeFiles/mainClient.dir/client/mainClient.c.o: utils/base64.h
 
 CMakeFiles/mainClient.dir/signaturePOC.c.o: signaturePOC.c
 CMakeFiles/mainClient.dir/signaturePOC.c.o: signaturePOC.h
@@ -125,6 +124,6 @@ CMakeFiles/mainClient.dir/utils/aesUtils.c.o: libs/relic/include/relic_rand.h
 CMakeFiles/mainClient.dir/utils/aesUtils.c.o: libs/relic/include/relic_types.h
 CMakeFiles/mainClient.dir/utils/aesUtils.c.o: libs/relic/include/relic_util.h
 
-CMakeFiles/mainClient.dir/utils/binn.c.o: utils/binn.c
-CMakeFiles/mainClient.dir/utils/binn.c.o: utils/binn.h
+CMakeFiles/mainClient.dir/utils/base64.c.o: utils/base64.c
+CMakeFiles/mainClient.dir/utils/base64.c.o: utils/base64.h
 

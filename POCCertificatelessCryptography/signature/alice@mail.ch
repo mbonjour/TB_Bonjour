@@ -1,1 +1,1 @@
-alice@mail.ch:°
+alice@mail.ch:

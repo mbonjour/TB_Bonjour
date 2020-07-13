@@ -27,6 +27,10 @@ pthread.h
 -
 netinet/tcp.h
 -
+unqlite.h
+-
+utils/base64.h
+/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/server/utils/base64.h
 cipherPOC.h
 /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/server/cipherPOC.h
 signaturePOC.h
@@ -39,8 +43,8 @@ relic.h
 -
 string.h
 -
-utils/binn.h
-utils/binn.h
+binn.h
+-
 
 libs/relic-target/include/relic_conf.h
 relic_label.h
@@ -368,6 +372,10 @@ libs/relic/include/relic_types.h
 relic_label.h
 libs/relic/include/relic_label.h
 
+libs/unqlite/unqlite.h
+stdarg.h
+-
+
 signaturePOC.h
 stdio.h
 -
@@ -378,5 +386,13 @@ string.h
 binn.h
 -
 
-utils/binn.h
+utils/base64.h
+glob.h
+-
+unistd.h
+-
+stdlib.h
+-
+string.h
+-
 

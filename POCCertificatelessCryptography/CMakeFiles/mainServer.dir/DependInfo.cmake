@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c" "/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles/mainServer.dir/cipherPOC.c.o"
   "/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/server/mainServer.c" "/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles/mainServer.dir/server/mainServer.c.o"
   "/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c" "/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles/mainServer.dir/signaturePOC.c.o"
+  "/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/utils/base64.c" "/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles/mainServer.dir/utils/base64.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -15,6 +16,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "PUBLIC"
   "libs/relic-target/include"
   "libs/relic/include"
+  "libs/unqlite"
   "."
   )
 

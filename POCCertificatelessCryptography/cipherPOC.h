@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <relic.h>
 #include <string.h>
-#include "utils/binn.h"
+#include <binn.h>
 
 #define MESSAGE_SPACE 257
 
