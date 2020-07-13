@@ -2,7 +2,8 @@
  * @file signaturePOC.h
  * @author Mickael Bonjour mickael.bonjour@heig-vd.ch
  * @date 13 juillet 2020
- * @brief All the resources to sign with a CL-PKC scheme using the RELIC library
+ * @brief All the resources to sign/verify with a CL-PKC scheme using the RELIC library
+ *        Signature scheme used : https://link.springer.com/content/pdf/10.1007/11767480_20.pdf
  */
 
 #ifndef TEST_RELIC_SIGNATUREPOC_H
@@ -156,11 +157,31 @@ void serialize_MPKS(binn* obj, mpkStructSig mpks);
  * @param mpks The resulting Master Public Key structure
  */
 void deserialize_MPKS(binn* obj, mpkStructSig* newMpk);
-
+/**
+ * @brief Serilization of Partial Private Key struct
+ * @param obj THe binn object resulting
+ * @param ppks The partial private key struct to serialize
+ */
 void serialize_PPKS(binn* obj, PPKSig ppks);
+
+/**
+ * @brief Deserialization of a binn object containing partial private key.
+ * @param buffer The buffer of binn object
+ * @param newPpk The resulting Partial Private Key struct
+ */
 void deserialize_PPKS(void* buffer, PPKSig* newPpk);
 
+/**
+ * @brief Serialization of the Public Key structure
+ * @param obj The binn object resulting
+ * @param pks The Public Key to serialize
+ */
 void serialize_PKS(binn* obj, PKSig pks);
+/**
+ * @brief Deserialization of a binn object containing public key.
+ * @param buffer The buffer of binn object
+ * @param newPk The resulting Public Key struct
+ */
 void deserialize_PKS(void* buffer, PKSig* newPk);
 
 #endif //TEST_RELIC_SIGNATUREPOC_H
