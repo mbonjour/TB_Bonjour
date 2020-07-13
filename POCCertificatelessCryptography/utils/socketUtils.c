@@ -1,5 +1,6 @@
 #include "socketUtils.h"
 
+//Way to receive chunks of data, Taken from : https://stackoverflow.com/questions/10011098/how-to-receive-the-large-data-using-recv
 size_t recvAll(int sock, unsigned char* buf){
     unsigned char buffer[2048];  //temporary buffer
     unsigned char* temp_buf = buf;

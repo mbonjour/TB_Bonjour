@@ -15,8 +15,14 @@
   <component name="ChangeListManager">
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cipherPOC.c" beforeDir="false" afterPath="$PROJECT_DIR$/cipherPOC.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cipherPOC.h" beforeDir="false" afterPath="$PROJECT_DIR$/cipherPOC.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/mainClient.c" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/signaturePOC.c" beforeDir="false" afterPath="$PROJECT_DIR$/signaturePOC.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/signaturePOC.h" beforeDir="false" afterPath="$PROJECT_DIR$/signaturePOC.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/aesUtils.c" beforeDir="false" afterPath="$PROJECT_DIR$/utils/aesUtils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/base64.h" beforeDir="false" afterPath="$PROJECT_DIR$/utils/base64.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/socketUtils.c" beforeDir="false" afterPath="$PROJECT_DIR$/utils/socketUtils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +137,7 @@
       <workItem from="1594368979965" duration="20479000" />
       <workItem from="1594477232601" duration="5634000" />
       <workItem from="1594543248091" duration="11810000" />
-      <workItem from="1594649706862" duration="7401000" />
+      <workItem from="1594649706862" duration="8623000" />
     </task>
     <servers />
   </component>
@@ -231,17 +237,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>138</line>
+          <line>137</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>204</line>
+          <line>203</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>197</line>
+          <line>196</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>

@@ -57,7 +57,6 @@ int main() {
         send(sock , initMessage , strlen(initMessage) , 0 );
         printf("Hello message sent\n");
 
-        //Wa to receive chunks of data, Taken from : https://stackoverflow.com/questions/10011098/how-to-receive-the-large-data-using-recv
         unsigned char buf[52000];  //10Kb fixed-size buffer
         size_t sizeReceived = recvAll(sock, buf);
         binn *list;

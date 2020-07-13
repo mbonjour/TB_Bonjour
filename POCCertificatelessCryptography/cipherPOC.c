@@ -1,6 +1,10 @@
-//
-// Created by mbonjour on 14.05.20.
-//
+/**
+ * @file cipherPOC.h
+ * @author Mickael Bonjour mickael.bonjour@heig-vd.ch
+ * @date 14 mai 2020
+ * @brief All the resources to encrypt/decrypt with a CL-PKC scheme using the RELIC library
+ *        Encryption Scheme used : https://eprint.iacr.org/2007/121.pdf
+ */
 
 #include "cipherPOC.h"
 

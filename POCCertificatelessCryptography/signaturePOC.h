@@ -1,7 +1,7 @@
 /**
  * @file signaturePOC.h
  * @author Mickael Bonjour mickael.bonjour@heig-vd.ch
- * @date 13 juillet 2020
+ * @date 14 mai 2020
  * @brief All the resources to sign/verify with a CL-PKC scheme using the RELIC library
  *        Signature scheme used : https://link.springer.com/content/pdf/10.1007/11767480_20.pdf
  */

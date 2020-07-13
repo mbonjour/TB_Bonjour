@@ -1,10 +1,7 @@
-//
-// Created by mbonjour on 14.05.20.
-//
 /**
  * @file cipherPOC.h
  * @author Mickael Bonjour mickael.bonjour@heig-vd.ch
- * @date 13 juillet 2020
+ * @date 14 mai 2020
  * @brief All the resources to encrypt/decrypt with a CL-PKC scheme using the RELIC library
  *        Encryption Scheme used : https://eprint.iacr.org/2007/121.pdf
  */
@@ -150,13 +147,43 @@ void encrypt(gt_t m, PK pk, unsigned char* ID, mpkStruct mpk, cipher* c);
  */
 void decrypt(cipher c, SK sk, PK pk, mpkStruct  mpk, char* ID, gt_t* m);
 
+/**
+ * @brief Serialize Master public key (encryption)
+ * @param obj Binn object generated
+ * @param mpke Master public key to serialize
+ */
 void serialize_MPKE(binn* obj, mpkStruct mpke);
+
+/**
+ * @brief Deserialize Master Public Key
+ * @param obj Binn object to deserialize
+ * @param newMpk MPK struct generated
+ */
 void deserialize_MPKE(binn* obj, mpkStruct* newMpk);
 
+/**
+ * @brief Serialize Partial Private Key (encryption)
+ * @param obj Binn object generated
+ * @param ppke Partial private key to serialize
+ */
 void serialize_PPKE(binn* obj, PPK ppke);
+/**
+ * @brief Deserialize Partial Private Key
+ * @param obj Binn object to deserialize
+ * @param newPpk PPK struct generated
+ */
 void deserialize_PPKE(void* buffer, PPK* newPpk);
-
+/**
+ * @brief Serialize Public Key (encryption)
+ * @param obj Binn object generated
+ * @param pk Public key to serialize
+ */
 void serialize_PKE(binn* obj, PK pk);
+/**
+ * @brief Deserialize Public Key
+ * @param obj Binn object to deserialize
+ * @param newPk PK struct generated
+ */
 void deserialize_PKE(void* buffer, PK* newPk);
 
 #endif //TEST_RELIC_CIPHERPOC_H

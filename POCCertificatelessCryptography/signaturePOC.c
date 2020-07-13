@@ -1,11 +1,15 @@
-//
-// Created by mbonjour on 14.05.20.
-// 
-//
+/**
+ * @file cipherPOC.h
+ * @author Mickael Bonjour mickael.bonjour@heig-vd.ch
+ * @date 14 mai 2020
+ * @brief All the resources to encrypt/decrypt with a CL-PKC scheme using the RELIC library
+ *        Encryption Scheme used : https://eprint.iacr.org/2007/121.pdf
+ */
 #include "signaturePOC.h"
 
 void functionH2(g2_t* to_point, char* bytes_from, int len_bytes){
     uint8_t to_hash[len_bytes + 1];
+    // Hash domain separation adding 1 byte \x01 before the actual data to hash
     to_hash[0] = '\x01';
     memcpy(to_hash + 1, bytes_from, len_bytes);
     g2_map(*to_point, to_hash, len_bytes + 1);
@@ -13,6 +17,7 @@ void functionH2(g2_t* to_point, char* bytes_from, int len_bytes){
 
 void functionH3(g2_t* to_point, char* bytes_from, int len_bytes){
     uint8_t to_hash[len_bytes + 1];
+    // Hash domain separation adding 1 byte \x02 before the actual data to hash
     to_hash[0] = '\x02';
     memcpy(to_hash + 1, bytes_from, len_bytes);
     g2_map(*to_point, to_hash, len_bytes + 1);
