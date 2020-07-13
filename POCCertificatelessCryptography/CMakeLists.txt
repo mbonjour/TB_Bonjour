@@ -3,10 +3,7 @@ project(POCCertificatelessCryptography C)
 
 set(CMAKE_C_STANDARD 11)
 
-include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/libs/relic-target/include)
-include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/libs/relic/include)
-include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/libs/unqlite)
-include_directories(.)
+include_directories(. ${CMAKE_SOURCE_DIR}/libs/relic/include ${CMAKE_SOURCE_DIR}/libs/unqlite ${CMAKE_SOURCE_DIR}/libs/relic-target/include)
 
 link_libraries(${CMAKE_SOURCE_DIR}/libs/relic-target/lib/librelic.so)
 link_libraries(${CMAKE_SOURCE_DIR}/libs/unqlite/libunqlite.a)
@@ -15,10 +12,13 @@ link_libraries(sodium)
 link_libraries(pthread)
 link_libraries(binn)
 
-set(COMMON_SOURCES cipherPOC.c cipherPOC.h signaturePOC.c signaturePOC.h utils/base64.c utils/base64.h)
+set(COMMON_SOURCES cipherPOC.c cipherPOC.h signaturePOC.c signaturePOC.h utils/base64.c utils/base64.h utils/socketUtils.c utils/socketUtils.h)
 set(CLIENT_SOURCES client/mainClient.c utils/aesUtils.c utils/aesUtils.h)
 set(SERVER_SOURCES server/mainServer.c)
 set(TEST_SOURCES test/fullTest.c utils/aesUtils.c utils/aesUtils.h)
+
+add_definitions("-Wall -Wextra -Wpedantic ")
+# -Wformat=2 -Wno-unused-parameter -Wshadow -Wwrite-strings -Wstrict-prototypes -Wold-style-definition -Wredundant-decls -Wnested-externs -Wmissing-include-dirs
 
 add_executable(mainClient ${CLIENT_SOURCES} ${COMMON_SOURCES})
 add_executable(mainServer ${SERVER_SOURCES} ${COMMON_SOURCES})

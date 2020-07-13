@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/mainClient.dir/signaturePOC.c.o"
   "CMakeFiles/mainClient.dir/utils/aesUtils.c.o"
   "CMakeFiles/mainClient.dir/utils/base64.c.o"
+  "CMakeFiles/mainClient.dir/utils/socketUtils.c.o"
   "mainClient"
   "mainClient.pdb"
 )

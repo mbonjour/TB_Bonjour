@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/testAlgo.dir/test/fullTest.c.o"
   "CMakeFiles/testAlgo.dir/utils/aesUtils.c.o"
   "CMakeFiles/testAlgo.dir/utils/base64.c.o"
+  "CMakeFiles/testAlgo.dir/utils/socketUtils.c.o"
   "testAlgo"
   "testAlgo.pdb"
 )

@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/mainServer.dir/server/mainServer.c.o"
   "CMakeFiles/mainServer.dir/signaturePOC.c.o"
   "CMakeFiles/mainServer.dir/utils/base64.c.o"
+  "CMakeFiles/mainServer.dir/utils/socketUtils.c.o"
   "mainServer"
   "mainServer.pdb"
 )

@@ -1,13 +1,16 @@
-#include "cipherPOC.h"
-#include "signaturePOC.h"
-#include "utils/aesUtils.h"
-#include "sodium.h"
+#include <sodium.h>
 #include <stdio.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
+
 #include "utils/base64.h"
+#include "utils/socketUtils.h"
+#include "cipherPOC.h"
+#include "signaturePOC.h"
+#include "utils/aesUtils.h"
+
 #define PORT 10008
 
 int main() {
@@ -56,34 +59,7 @@ int main() {
 
         //Wa to receive chunks of data, Taken from : https://stackoverflow.com/questions/10011098/how-to-receive-the-large-data-using-recv
         unsigned char buf[52000];  //10Kb fixed-size buffer
-        unsigned char buffer[2048];  //temporary buffer
-        unsigned char* temp_buf = buf;
-        unsigned char* end_buf = buf + sizeof(buf);
-        size_t iByteCount;
-        do {
-            iByteCount = recv(sock, buffer,2048,0);
-            if ( iByteCount > 0 ) {
-                //make sure we're not about to go over the end of the buffer
-                if (!((temp_buf + iByteCount) <= end_buf))
-                    break;
-                //fprintf(stderr, "Bytes received: %d\n",iByteCount);
-                memcpy(temp_buf, buffer, iByteCount);
-                temp_buf += iByteCount;
-            }
-            else if ( iByteCount == 0 ) {
-                if(temp_buf != buf) {
-                    //do process with received data
-                }
-                else {
-                    fprintf(stderr, "receive failed");
-                    break;
-                }
-            }
-            else {
-                fprintf(stderr, "recv failed: ");
-                break;
-            }
-        } while(iByteCount > 0 && temp_buf < end_buf);
+        size_t sizeReceived = recvAll(sock, buf);
         binn *list;
         list = binn_open(buf);
         binn *mpks, *mpke;

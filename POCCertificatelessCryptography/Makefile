@@ -359,6 +359,39 @@ utils/base64.c.s:
 	$(MAKE) -f CMakeFiles/mainServer.dir/build.make CMakeFiles/mainServer.dir/utils/base64.c.s
 .PHONY : utils/base64.c.s
 
+utils/socketUtils.o: utils/socketUtils.c.o
+
+.PHONY : utils/socketUtils.o
+
+# target to build an object file
+utils/socketUtils.c.o:
+	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/socketUtils.c.o
+	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/utils/socketUtils.c.o
+	$(MAKE) -f CMakeFiles/mainServer.dir/build.make CMakeFiles/mainServer.dir/utils/socketUtils.c.o
+.PHONY : utils/socketUtils.c.o
+
+utils/socketUtils.i: utils/socketUtils.c.i
+
+.PHONY : utils/socketUtils.i
+
+# target to preprocess a source file
+utils/socketUtils.c.i:
+	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/socketUtils.c.i
+	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/utils/socketUtils.c.i
+	$(MAKE) -f CMakeFiles/mainServer.dir/build.make CMakeFiles/mainServer.dir/utils/socketUtils.c.i
+.PHONY : utils/socketUtils.c.i
+
+utils/socketUtils.s: utils/socketUtils.c.s
+
+.PHONY : utils/socketUtils.s
+
+# target to generate assembly for a file
+utils/socketUtils.c.s:
+	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/utils/socketUtils.c.s
+	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/utils/socketUtils.c.s
+	$(MAKE) -f CMakeFiles/mainServer.dir/build.make CMakeFiles/mainServer.dir/utils/socketUtils.c.s
+.PHONY : utils/socketUtils.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -391,6 +424,9 @@ help:
 	@echo "... utils/base64.o"
 	@echo "... utils/base64.i"
 	@echo "... utils/base64.s"
+	@echo "... utils/socketUtils.o"
+	@echo "... utils/socketUtils.i"
+	@echo "... utils/socketUtils.s"
 .PHONY : help
 
 

@@ -1,7 +1,7 @@
 // Utils function for encrypting / decrypting AES_GCM
 #include "aesUtils.h"
 
-char* encrypt_message(const char* m, unsigned char* key, unsigned char* nonce, unsigned char* cipher, unsigned long long* cipher_len, const size_t* m_len){
+void encrypt_message(const char* m, unsigned char* key, unsigned char* nonce, unsigned char* cipher, unsigned long long* cipher_len, const size_t* m_len){
     randombytes_buf(nonce, sizeof nonce);
     crypto_aead_aes256gcm_encrypt(cipher, cipher_len, m, *m_len,NULL,0,NULL, nonce, key);
 }
