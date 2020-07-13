@@ -16,13 +16,7 @@
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cipherPOC.c" beforeDir="false" afterPath="$PROJECT_DIR$/cipherPOC.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cipherPOC.h" beforeDir="false" afterPath="$PROJECT_DIR$/cipherPOC.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/mainClient.c" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/signaturePOC.c" beforeDir="false" afterPath="$PROJECT_DIR$/signaturePOC.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/signaturePOC.h" beforeDir="false" afterPath="$PROJECT_DIR$/signaturePOC.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/aesUtils.c" beforeDir="false" afterPath="$PROJECT_DIR$/utils/aesUtils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/base64.h" beforeDir="false" afterPath="$PROJECT_DIR$/utils/base64.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/socketUtils.c" beforeDir="false" afterPath="$PROJECT_DIR$/utils/socketUtils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +131,7 @@
       <workItem from="1594368979965" duration="20479000" />
       <workItem from="1594477232601" duration="5634000" />
       <workItem from="1594543248091" duration="11810000" />
-      <workItem from="1594649706862" duration="8623000" />
+      <workItem from="1594649706862" duration="11348000" />
     </task>
     <servers />
   </component>
@@ -223,10 +217,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="237" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1593266880229" />
-    <state x="623" y="216" width="672" height="678" key="search.everywhere.popup" timestamp="1594650051521">
+    <state x="623" y="216" width="672" height="678" key="search.everywhere.popup" timestamp="1594676583612">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="216" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1594650051521" />
+    <state x="623" y="216" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1594676583612" />
     <state x="683" y="387" width="542" height="165" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1593119098044">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

@@ -24,15 +24,19 @@ void setup(int k, mpkStruct* mpkSetup, g2_t* msk){
     g1_new(mpkSetup->g)
     g1_new(mpkSetup->g1)
     g2_new(mpkSetup->g2)
-
+    // g = generator of G1
     g1_get_gen(mpkSetup->g);
     g1_get_ord(p);
 
+    // gamma = random from Zp
     bn_rand_mod(gamma, p);
+    // g1 = gamma*g
     g1_mul(mpkSetup->g1, mpkSetup->g, gamma);
+    // g2 = generator of G2
     g2_get_gen(mpkSetup->g2);
 
     g2_get_ord(p);
+    // Generate 2 arrays with G2 elements for the U and  vectors
     for(int i =0; i < MESSAGE_SPACE; ++i){
         g2_null(mpkSetup->u[i])
         g2_null(mpkSetup->v[i])
@@ -45,6 +49,7 @@ void setup(int k, mpkStruct* mpkSetup, g2_t* msk){
         g2_mul(mpkSetup->v[i], mpkSetup->g2, uvGen);
     }
 
+    // The master secret key is msk = gamma*g2
     g2_mul(*msk, mpkSetup->g2, gamma);
 
     bn_zero(gamma);
@@ -62,6 +67,7 @@ void F(const char *var, g2_t* suite, g2_t *result) {
     // Strlen ok car effectué sur des IDs donc vrais chaines de chars
     md_map(h, (uint8_t*) var, strlen(var));
 
+    // Premier à ajouter
     g2_copy(*result, suite[0]);
     g2_t currentPoint;
     g2_null(currentPoint)
@@ -70,13 +76,17 @@ void F(const char *var, g2_t* suite, g2_t *result) {
     bn_t transitionToBn;
     bn_null(transitionToBn)
     bn_new(transitionToBn)
+    // On parcourt byte par byte le hash
     for(int i = 0; i < 32; ++i){
         uint8_t somebyte = h[i];
         uint8_t currentBit;
+        // On parcourt bit par bit le byte courrant
         for (int j = 0; j < 8; ++j, somebyte >>= 1) {
             currentBit = somebyte & 0x1;
+            // le bit est transformé en bn_t pour pouvoir faire la multiplication avec l'élément de G2
             bn_read_bin(transitionToBn, &currentBit, 1);
             g2_mul(currentPoint, suite[(i*8) + j + 1], transitionToBn);
+            // Ajout au total
             g2_add(*result, *result, currentPoint)
             //g2_null(currentPoint)
         }
@@ -102,9 +112,10 @@ void extract(mpkStruct mpk, g2_t msk, char* ID, PPK* partialKeys){
     g1_new(partialKeys->d2)
 
     g1_get_ord(p);
+    // r random from Zp
     bn_rand_mod(r,p);
 
-    // Computes d1
+    // Computes d1 = msk + r*Fu(ID)
     g2_t temp;
     g2_null(temp)
     g2_new(temp)
@@ -113,7 +124,7 @@ void extract(mpkStruct mpk, g2_t msk, char* ID, PPK* partialKeys){
     g2_mul(temp, temp, r);
     g2_add(partialKeys->d1, msk, temp);
 
-    // Computes d2
+    // Computes d2 = r*g
     g1_mul(partialKeys->d2, mpk.g, r);
 
     g2_set_infty(temp);
@@ -151,7 +162,7 @@ void setPriv(bn_t x,PPK d, mpkStruct mpk, char* ID, SK* secretKeys){
     g1_get_ord(p);
     bn_rand_mod(r, p);
 
-    // Computes s1
+    // Computes s1 = x*d1 + r*Fu(ID)
     g2_t pointTemp;
     g2_null(pointTemp)
     g2_new(pointTemp)
@@ -161,7 +172,7 @@ void setPriv(bn_t x,PPK d, mpkStruct mpk, char* ID, SK* secretKeys){
     g2_mul(pointTemp, pointTemp, r);
     g2_add(secretKeys->s1, secretKeys->s1, pointTemp);
 
-    // Computes s2
+    // Computes s2 = x*d2 + r*g
     g1_t temp;
     g1_null(temp)
     g1_new(temp)
@@ -204,7 +215,7 @@ void encrypt(gt_t m, PK pk, unsigned char* ID, mpkStruct mpk, cipher* c){
     g2_new(c->c2)
     g2_new(c->c3)
 
-    // Computes C0
+    // Computes C0 = e(Y,g2)^s*m
     gt_t temp;
     gt_null(temp)
     gt_new(temp)
@@ -213,10 +224,10 @@ void encrypt(gt_t m, PK pk, unsigned char* ID, mpkStruct mpk, cipher* c){
     gt_mul(c->c0, m, temp)
     gt_free(temp)
 
-    // Computes C1
+    // Computes C1 = s*g
     g1_mul(c->c1, mpk.g, s);
 
-    // Computes C2
+    // Computes C2 = s*Fu(ID)
     g2_t pointTemp;
     g2_null(pointTemp)
     g2_new(pointTemp)
@@ -224,7 +235,7 @@ void encrypt(gt_t m, PK pk, unsigned char* ID, mpkStruct mpk, cipher* c){
     g2_mul(c->c2, pointTemp, s);
     g2_free(pointTemp)
 
-    // Computes C3
+    // Computes C3 = s*Fv(w) où w = C0, C1, C2, ID, PK.x, PK.y
     g2_t pointTemp2;
     g2_null(pointTemp2)
     g2_new(pointTemp2)
@@ -286,7 +297,7 @@ void decrypt(cipher c, SK sk, PK pk, mpkStruct  mpk, char* ID, gt_t* m){
     g2_new(pointFv)
     g2_new(pointFu)
 
-    // Construction of the w bytes object to hash
+    // Construction of the w bytes object to hash (e(Ppub, Qa)*e(U, H2(m,ID,PK,U))*e(Ppub, H3(m,ID,PK)))
     int c0size = gt_size_bin(c.c0,1);
     int c1Size = g1_size_bin(c.c1, 1);
     int c2Size = g2_size_bin(c.c2, 1);
@@ -303,6 +314,7 @@ void decrypt(cipher c, SK sk, PK pk, mpkStruct  mpk, char* ID, gt_t* m){
     F(w, mpk.v, &pointFv);
     F(ID, mpk.u, &pointFu);
 
+    // m = numerateur * numerateur2 / denominateur
     gt_t numerateur, denominateur, numerateur2;
     g1_t alphaG, tempNumerateur;
     g2_t Fpoints;

@@ -31,14 +31,19 @@ void setupSig(int i, mpkStructSig *mpk, bn_t *s){
     bn_null(q)
     bn_new(q)
 
+    // q = Order of G1
     g1_get_ord(q);
 
+    // s = random Zq
     bn_rand_mod(*s, q);
+
     g1_null(mpk->P)
     g1_new(mpk->P)
     g1_null(mpk->Ppub)
     g1_new(mpk->Ppub)
+    // Choose a generator P
     g1_get_gen(mpk->P);
+    // Setup Ppub = s*P
     g1_mul(mpk->Ppub, mpk->P, *s);
 
     bn_zero(q);
@@ -53,10 +58,13 @@ void extractSig(mpkStructSig mpk, bn_t msk, char* ID, PPKSig * partialKeys) {
     g2_null(partialKeys->D)
     g2_new(partialKeys->D)
 
+    // Qa = H1(ID)
     g2_map(qa, ID, strlen(ID));
+    // D = msk*Qa
     g2_mul(partialKeys->D, qa, msk);
 
-    // Test correctnes
+    // TODO : Extract this
+    // Test correctnes (for user only so we need to put it in a different function)
     gt_t test1, test2;
     gt_null(test1)
     gt_null(tet2)
@@ -85,7 +93,9 @@ void setSecSig(bn_t* x){
     bn_new(q)
     bn_null(*x)
     bn_new(*x)
+    // q = Zq
     g1_get_ord(q);
+    // x = random from Zq
     bn_rand_mod(*x, q);
 
     bn_zero(q);
@@ -95,6 +105,7 @@ void setSecSig(bn_t* x){
 void setPubSig(bn_t x, mpkStructSig mpkSession, PKSig* PKtoGen){
     g1_null(PKtoGen->Ppub)
     g1_new(PKtoGen->Ppub)
+    // Public key : Ppub = x*P
     g1_mul(PKtoGen->Ppub, mpkSession.P, x);
 }
 
@@ -104,8 +115,9 @@ void setPrivSig(bn_t x, PPKSig d, mpkStructSig mpk, char* ID, SKSig * secretKeys
 
     bn_null(secretKeys->x)
     bn_new(secretKeys->x)
-
+    // The private key is composed with D, the partial private key
     g2_copy(secretKeys->D, d.D);
+    // And x the secret value
     bn_copy(secretKeys->x, x);
 }
 
@@ -116,13 +128,15 @@ void sign(unsigned char* m, SKSig sk, PKSig pk, unsigned char* ID, mpkStructSig 
     bn_null(q)
     bn_new(q)
     g1_get_ord(q);
+    // r = random from Zq
     bn_rand_mod(r, q);
 
-    //Computes U
+    //Computes U = r*P
     g1_null(s->U)
     g1_new(s->U)
     g1_mul(s->U, mpk.P, r);
 
+    // Computes V = D + r*H2(m,ID,PK,U) + x*H3(m,ID,PK)
     g2_null(s->V)
     g2_new(s->V)
     g2_copy(s->V, sk.D);
@@ -138,6 +152,7 @@ void sign(unsigned char* m, SKSig sk, PKSig pk, unsigned char* ID, mpkStructSig 
     int lenConcat1 = strlen(ID) + strlen(m) + PKsize + USize;
     int lenConcat2 = strlen(ID) + strlen(m) + PKsize;
 
+    // Construct H2(m,ID,PK,U) and H3(m,ID,PK)
     uint8_t concat1[lenConcat1], concat2[lenConcat2];
     strcpy(concat1, m);
     strcpy(concat2, m);
@@ -169,12 +184,16 @@ void sign(unsigned char* m, SKSig sk, PKSig pk, unsigned char* ID, mpkStructSig 
 }
 
 int verify(signature s, PKSig pk, mpkStructSig mpk, char* ID, unsigned char* m){
+    // By default the signature is not verified
     int result = 1;
+
     g2_t qa;
     g2_null(qa)
     g2_new(qa)
+    // Qa = H1(ID)
     g2_map(qa, ID, strlen(ID));
 
+    // Computes leftOperand = e(P,V), rightOperand e(Ppub, Qa), temp e(U, H2(m,ID,PK,U))
     gt_t leftOperand, rightOperand, temp;
     gt_null(leftOperand)
     gt_null(rightOperand)
@@ -182,7 +201,9 @@ int verify(signature s, PKSig pk, mpkStructSig mpk, char* ID, unsigned char* m){
     gt_new(leftOperand)
     gt_new(rightOperand)
     gt_new(temp)
+    // leftOPerand = e(P,V)
     pc_map(leftOperand, mpk.P, s.V);
+    // rightOperand = e(Ppub, Qa)
     pc_map(rightOperand, mpk.Ppub, qa);
 
 
@@ -210,13 +231,18 @@ int verify(signature s, PKSig pk, mpkStructSig mpk, char* ID, unsigned char* m){
     functionH2(&h2, concat1, lenConcat1);
     functionH3(&h3, concat2, lenConcat2);
 
+    // temp = e(U, H2(m,ID,PK,U))
     pc_map(temp, s.U, h2);
+    // rightOPerand = e(Ppub, Qa)*e(U, H2(m,ID,PK,U))
     gt_mul(rightOperand, rightOperand, temp);
     gt_null(temp)
     gt_new(temp)
+    // temp = e(Ppub, H3(m,ID,PK))
     pc_map(temp, pk.Ppub, h3);
+    // rightOperand = e(Ppub, Qa)*e(U, H2(m,ID,PK,U))*e(Ppub, H3(m,ID,PK))
     gt_mul(rightOperand, rightOperand, temp);
 
+    // The signature is correct if e(P,V) = e(Ppub, Qa)*e(U, H2(m,ID,PK,U))*e(Ppub, H3(m,ID,PK))
     if (gt_cmp(leftOperand, rightOperand) == RLC_EQ) {
         result = 0;
     }
