@@ -483,3 +483,39 @@ void deserialize_PKE(void* buffer, encryption_pk* newPk){
     g1_read_bin(newPk->Y, y, sizeY);
     binn_free(obj);
 }
+
+void serialize_Cipher(binn* obj, cipher c){
+    int sizeC0, sizeC1, sizeC2, sizeC3;
+    sizeC0 = gt_size_bin(c.c0, 1);
+    sizeC1 = g1_size_bin(c.c1, 1);
+    sizeC2 = g2_size_bin(c.c2, 1);
+    sizeC3 = g2_size_bin(c.c3, 1);
+    uint8_t c0Bin[sizeC0], c1Bin[sizeC1], c2Bin[sizeC2], c3Bin[sizeC3];
+    gt_write_bin(c0Bin, sizeC0, c.c0, 1);
+    g1_write_bin(c1Bin, sizeC1, c.c1, 1);
+    g2_write_bin(c2Bin, sizeC2, c.c2, 1);
+    g2_write_bin(c3Bin, sizeC3, c.c3, 1);
+    binn_object_set_blob(obj, "C0", c0Bin, sizeC0);
+    binn_object_set_blob(obj, "C1", c1Bin, sizeC1);
+    binn_object_set_blob(obj, "C2", c2Bin, sizeC2);
+    binn_object_set_blob(obj, "C3", c3Bin, sizeC3);
+}
+
+void deserialize_Cipher(void* buffer, cipher* c){
+    binn* obj;
+    obj = binn_open(buffer);
+    int sizeC0, sizeC1, sizeC2, sizeC3;
+    void *c0Bin, *c1Bin, *c2Bin, *c3Bin;
+
+    c0Bin = binn_object_blob(obj, "C0", &sizeC0);
+    c1Bin = binn_object_blob(obj, "C1", &sizeC1);
+    c2Bin = binn_object_blob(obj, "C2", &sizeC2);
+    c3Bin = binn_object_blob(obj, "C3", &sizeC3);
+
+    gt_read_bin(c->c0, c0Bin, sizeC0);
+    g1_read_bin(c->c1, c1Bin, sizeC1);
+    g2_read_bin(c->c2, c2Bin, sizeC2);
+    g2_read_bin(c->c3, c3Bin, sizeC3);
+
+    binn_free(obj);
+}

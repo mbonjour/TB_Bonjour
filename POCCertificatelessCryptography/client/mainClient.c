@@ -216,6 +216,7 @@ int main() {
             // Encryption of the AES Key with the Public key of the destination
             cipher c;
             encrypt(AESK, encryption_destinationPk, destinationID, mpkSession, &c);
+            // TODO print base64 of cipher for decrypt
 
             // For the signature we need our PPK
             signature_ppk signature_senderPpk;
@@ -231,6 +232,7 @@ int main() {
 
             read(sock, bufferPPK, 1024);
             deserialize_PPKS(bufferPPK, &signature_senderPpk);
+
 
             // Computes Secret User Keys for Signature
             signature_sk signature_senderSk;
@@ -251,9 +253,9 @@ int main() {
             signature s;
             // We can sign using our private keys and public ones
             sign(mSig, signature_senderSk, signaturePk, userID, mpkSignature, &s);
+            // TODO print base64 of signature for decrypt
 
             //TODO : Construct a structure of the email to be able to send easily
-
 
             // ----------------------------------------------------------------------
             // Now the message is encrypted and authentified with an AES Key and the key is encrypted and signed using CLPKC

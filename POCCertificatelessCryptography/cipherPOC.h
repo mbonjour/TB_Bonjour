@@ -186,4 +186,17 @@ void serialize_PKE(binn* obj, encryption_pk pk);
  */
 void deserialize_PKE(void* buffer, encryption_pk* newPk);
 
+/**
+ * @brief Serialize Cipher
+ * @param obj Binn object generated
+ * @param pk Cipher to serialize
+ */
+void serialize_Cipher(binn* obj, cipher c);
+/**
+ * @brief Deserialize Cipher
+ * @param obj Binn object to deserialize
+ * @param newPk Cipher struct generated
+ */
+void deserialize_Cipher(void* buffer, cipher* c);
+
 #endif //TEST_RELIC_CIPHERPOC_H
