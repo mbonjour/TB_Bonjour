@@ -184,4 +184,16 @@ void serialize_PKS(binn* obj, signature_pk pks);
  */
 void deserialize_PKS(void* buffer, signature_pk* newPk);
 
+/**
+ * @brief Serialization of the Signature structure
+ * @param obj The binn object resulting
+ * @param s The Signature to serialize
+ */
+void serialize_Signature(binn* obj, signature s);
+/**
+ * @brief Deserialization of a binn object containing Signature.
+ * @param buffer The buffer of binn object
+ * @param newPk The resulting Signature struct
+ */
+void deserialize_Signature(void* buffer, signature *s);
 #endif //TEST_RELIC_SIGNATUREPOC_H

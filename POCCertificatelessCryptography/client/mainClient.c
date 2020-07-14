@@ -190,7 +190,7 @@ int main() {
 
             char bufferGPE[512] = {0};
             int testSize = recv(sock, bufferGPE, 512, 0);
-            printf("%s\n", bufferGPE);
+            // printf("%s\n", bufferGPE);
             encryption_pk encryption_destinationPk;
             size_t out_len_test;
             unsigned char *decodedTest = base64_decode(bufferGPE, testSize, &out_len_test);
@@ -217,10 +217,13 @@ int main() {
             cipher c;
             encrypt(AESK, encryption_destinationPk, destinationID, mpkSession, &c);
             // TODO print base64 of cipher for decrypt
+            binn *cipherBinnObect;
+            cipherBinnObect = binn_object();
+            serialize_Cipher(cipherBinnObect, c);
+            printf("Cipher base64 : %s\n", base64_encode(binn_ptr(cipherBinnObect), binn_size(cipherBinnObect), NULL));
 
             // For the signature we need our PPK
             signature_ppk signature_senderPpk;
-            // TODO : Verify if ok the deserialize
             sock = connectToKGC();
             char bufferPPK[1024] = {0};
             binn *signatureExtractionSenderBinnObj;
@@ -254,6 +257,10 @@ int main() {
             // We can sign using our private keys and public ones
             sign(mSig, signature_senderSk, signaturePk, userID, mpkSignature, &s);
             // TODO print base64 of signature for decrypt
+            binn *signatureObjBinn;
+            signatureObjBinn = binn_object();
+            serialize_Signature(signatureObjBinn, s);
+            printf("Signature (base64) : %s\n", base64_encode(binn_ptr(signatureObjBinn), binn_size(signatureObjBinn), NULL));
 
             //TODO : Construct a structure of the email to be able to send easily
 
@@ -261,34 +268,80 @@ int main() {
             // Now the message is encrypted and authentified with an AES Key and the key is encrypted and signed using CLPKC
             // ----------------------------------------------------------------------
         }
+        /*
+         *  AES Key : 5E9248130025092FA2F3258020C3A5350D242183792AB33EB28581EC492470A2
+            Encrypted message : uxf5jCtPhQMJFbUut0syJqcLgM86fdgqRmUNtejvJXvPA2jMXXepLrWWdfqj
+
+            Cipher base64 : 4oAAApAEAkMwwIAAAYASlV0gx5Ws+R47R0ymyMPlVvfsUHbfBv3gQMabuoGoGiiXpgwWs9nS
+            dRZjMehSIlUSZ0oqN/OBe86QJpyKyNmKJ26y19Jx3x5vNM9oUhJufdkplQcPmfdySOivipJd
+            Zj8UfV9LTJz7fcRAnf+wJQkR1Gq5wKBqfdR97j03lE3kCMTX7H7WhH3q71jeInQtS10Q5Olr
+            Q7tRNBsT1UMCVQ3uhOvvmPXgAalfullP/BcIJDK5tPfinqC407K4TkGAmdMPniZFYS3Ve1mn
+            AcO6IykcfoNFjr4nPaGaz19vegg4xcs/1puvUk2fIqYcC9dpr/kNcmBHzWBE/nz4RLzAPGUE
+            52tCtswRcb8vdQvbY5cY14ACC2jKE5Z4/8EFpGGI4EkZyt7GgcUa6/6JbgkNsA0oVEeiJz01
+            se0D/Z9z83JksW6637ydxs/ZhiKcsGwo6wMXdBWJiNBLCO8C5eQUJtDU8A7mn0DLil1vxAKJ
+            zqbzYy5k5NP/uEv9/W8CR/845kMCQzHAMQMMpC19TbzAMJqyETILRYOdyxhxGgSbVAu7GCx+
+            PmdaKx0FUh747gJlDecc4kIGA1ICQzLAYQIATUujFb3UaZv/KMyS6biBxgXkWaYJI5CHM3i7
+            KsjepT8MmFAsaUduAEltKIZOkpICIBubQD2mt//VErrv1E4PyEjZwkT6o4Py5+CDaoUh9JVM
+            yehf6VYRpBy7/1wXt6oCQzPAYQISwGvMHXJTuqXawIQ1bZxiUn5ujn3nqSteYABlPzXifYYK
+            zVK/WZ2QNdHCa7/XlrAOKLqhpOfg30ThrlFsOGITdsh3j3rTivswmTaBAl1MtYRL8IHFPi0g
+            fAjpUapYlUI=
+
+            Signature (base64) : 4oAAAKACAVXAMQIGj8k8TBZOIH8fV+qSTY5Hw/QF4gLYTUCrie6pYWuMm6l/rZa8L7O4ZHHe
+            sWBo2/UBVsBhAgUu2BMVIv9e33X9fkNbVdBXjeRH8AbCUwTMVWcl/hdvR4h+qH7BFwS6qQiH
+            RlXgTwL60kg1eJTGDcAsZWWdvKC85fI08LP1BkGynpT63qNBM7am6PgihoQ2MvJqO0JjXQ==
+         */
         // If we want to decrypt an email
         else {
+            // TODO : Remove and replace by getting the email
+            printf("From ?\n");
+            char *sourceAddress = malloc(320);
+            fgets(sourceAddress, 320, stdin);
 
-            /*
+            printf("Base64 of signature ?\n");
+            char *b64Signature = malloc(300);
+            fgets(b64Signature, 300, stdin);
+
+            printf("Base64 of cipher ?\n");
+            char *b64Cipher = malloc(1000);
+            fgets(b64Cipher, 1000, stdin);
+
+            printf("Base64 of encrypted mesage ?\n");
+            char *b64Encrypted = malloc(300);
+            fgets(b64Encrypted, 300, stdin);
+
+            signature s;
+            deserialize_Signature(base64_decode(b64Signature, strlen(b64Signature), NULL), &s);
+            cipher c;
+            deserialize_Cipher(base64_decode(b64Cipher, strlen(b64Cipher), NULL), &c);
+
+            // Computes the message to sign, so the cipher struct
+            int c0size = gt_size_bin(c.c0, 1);
+            int c1Size = g1_size_bin(c.c1, 1);
+            int c2Size = g2_size_bin(c.c2, 1);
+            int c3Size = g2_size_bin(c.c3, 1);
+            uint8_t mSig[c0size + c1Size + c2Size + c3Size];
+            gt_write_bin(mSig, c0size, c.c0, 1);
+            g1_write_bin(&mSig[c0size], c1Size, c.c1, 1);
+            g2_write_bin(&mSig[c0size + c1Size], c2Size, c.c2, 1);
+            g2_write_bin(&mSig[c0size + c1Size + c2Size], c3Size, c.c3, 1);
+
+
             // We can go for decrypting and verification
             // We can verify directly with the public keys of the sender
-            int test = verify(s, signaturePk, mpkSignature, IDAlice, mSig);
+            int test = verify(s, signaturePk, mpkSignature, sourceAddress, mSig);
             printf("\nVerification of the key (0 if correct 1 if not) : %d\n", test);
             // if the verif is ok we can continue, otherwise we can stop here
             if(test == 0) {
                 // For this we need our Partial Private Keys with the ID used to encrypt the message
                 encryption_ppk PartialKeysBob;
-                // TODO : Verify if ok the deserialize
-                if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-                    printf("\n Socket creation error \n");
-                    return -1;
-                }
-                if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
-                {
-                    printf("\nConnection Failed \n");
-                    return -1;
-                }
+
+                int sock = connectToKGC();
+
                 char bufferPPKE[1024] = {0};
                 binn* bobPpk;
                 bobPpk = binn_object();
                 binn_object_set_str(bobPpk, "opCode", "EE");
-                binn_object_set_str(bobPpk, "ID", IDBob);
-                //char *encExtract = "EE:bob@mail.ch";
+                binn_object_set_str(bobPpk, "ID", userID);
                 send(sock, binn_ptr(bobPpk), binn_size(bobPpk), 0);
                 binn_free(bobPpk);
 
@@ -302,22 +355,26 @@ int main() {
 
                 g1_null(SecretKeysBob->s2)
                 g1_new(SecretKeysBob->s2)
-                setPriv(xBob, PartialKeysBob, mpkSession, IDBob, &SecretKeysBob);
+                setPriv(encryption_secret, PartialKeysBob, mpkSession, userID, &SecretKeysBob);
 
                 // We can decrypt now
                 gt_t decryptedMessage;
                 gt_null(decryptedMessage)
                 gt_new(decryptedMessage)
-                decrypt(c, SecretKeysBob, PKBob, mpkSession, IDBob, &decryptedMessage);
+                decrypt(c, SecretKeysBob, encryptionPk, mpkSession, userID, &decryptedMessage);
 
                 char aeskDecrypted[crypto_secretbox_KEYBYTES];
                 get_key(aeskDecrypted, decryptedMessage);
 
-                unsigned char decrypted[m_len];
-                decrypt_message(decrypted, ciphertextAES, nonceAES, aeskDecrypted, cipher_len);
+                size_t size_cipher;
+                unsigned char *ciphertext = base64_decode(b64Encrypted, strlen(b64Cipher), &size_cipher);
+                unsigned char decrypted[size_cipher];
+
+                // TODO récupérer d'ailleurs
+                unsigned char* nonceAES;
+                decrypt_message(decrypted, ciphertext, nonceAES, aeskDecrypted, size_cipher);
                 printf("Decrypted message : %s\n", decrypted);
             }
-             */
         }
     }
     core_clean();

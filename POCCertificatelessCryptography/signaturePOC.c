@@ -263,32 +263,7 @@ int verify(signature s, signature_pk pk, signature_mpk mpk, char* ID, unsigned c
 
     return result;
 }
-/*
-void* serialize_MPKS(mpkStructSig mpks, size_t* totalSize){
-    int sizeP = g1_size_bin(mpks.P, 1);
-    int sizePpub = g1_size_bin(mpks.Ppub, 1);
 
-    uint8_t* buffer = malloc(((sizeP + sizePpub) * sizeof(char))+(2*sizeof(int)));
-    memcpy(buffer, &sizeP, sizeof(int));
-    memcpy(buffer+sizeof(int), &sizePpub, sizeof(int));
-    g1_write_bin(buffer+(2*sizeof(int)), sizeP, mpks.P, 1);
-    //buffer[sizeP] = (uint8_t) ",";
-    g1_write_bin(&buffer[sizeP+(2*sizeof(int))], sizePpub, mpks.Ppub, 1);
-    *totalSize = sizeP+(2*sizeof(int))+sizePpub;
-    return buffer;
-}
-
-void deserialize_MPKS(uint8_t* buffer, mpkStructSig* newMpk) {
-    int sizeP,sizePpub;
-    memcpy(&sizeP, buffer, sizeof(int));
-    memcpy(&sizePpub, buffer+sizeof(int), sizeof(int));
-    g1_t P,Ppub;
-    g1_read_bin(P, buffer+2*sizeof(int), sizeP);
-    g1_read_bin(Ppub, buffer+sizeP+2*sizeof(int), sizePpub);
-    g1_copy(newMpk->P, P);
-    g1_copy(newMpk->Ppub, Ppub);
-}
-*/
 void serialize_MPKS(binn* obj, signature_mpk mpks) {
     int sizeP = g1_size_bin(mpks.P, 1);
     uint8_t P[sizeP];
@@ -352,5 +327,30 @@ void deserialize_PKS(void* buffer, signature_pk* newPk){
 
     g1_read_bin(newPk->Ppub, PpubBin, sizePpub);
 
+    binn_free(obj);
+}
+
+void serialize_Signature(binn* obj, signature s){
+    int sizeU, sizeV;
+    sizeU = g1_size_bin(s.U, 1);
+    sizeV = g2_size_bin(s.V, 1);
+    uint8_t UBin[sizeU], VBin[sizeV];
+    g1_write_bin(UBin, sizeU, s.U, 1);
+    g2_write_bin(VBin, sizeV, s.V, 1);
+    binn_object_set_blob(obj, "U", UBin, sizeU);
+    binn_object_set_blob(obj, "V", VBin, sizeV);
+}
+
+void deserialize_Signature(void* buffer, signature *s){
+    binn *obj;
+    obj = binn_open(buffer);
+
+    void *UBin, *VBin;
+    int sizeU, sizeV;
+    UBin = binn_object_blob(obj, "U", &sizeU);
+    VBin = binn_object_blob(obj, "V", &sizeV);
+
+    g1_read_bin(s->U, UBin, sizeU);
+    g2_read_bin(s->V, VBin, sizeV);
     binn_free(obj);
 }
