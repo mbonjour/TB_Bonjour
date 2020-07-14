@@ -19,5 +19,5 @@
  * @param buf  Te buffer where
  * @return size of the received data
  */
-size_t recvAll(int sock, unsigned char* buf);
+size_t recvAll(int sock, unsigned char* buf, size_t size_buf);
 #endif //POCCERTIFICATELESSCRYPTOGRAPHY_SOCKETUTILS_H

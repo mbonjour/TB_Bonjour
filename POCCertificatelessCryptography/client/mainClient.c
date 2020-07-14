@@ -11,7 +11,7 @@
 #include "signaturePOC.h"
 #include "utils/aesUtils.h"
 
-#define PORT 10008
+#define PORT 10000
 
 int main() {
     if(core_init() == RLC_ERR){
@@ -48,8 +48,8 @@ int main() {
         }
 
         // MPK struct, Master Public Key structure to store
-        mpkStruct mpkSession;
-        mpkStructSig mpkSignature;
+        encryption_mpk mpkSession;
+        signature_mpk mpkSignature;
 
         char* initMessage = "HELO:IDHere";
         // TODO malloc this and free it after received data
@@ -58,7 +58,7 @@ int main() {
         printf("Hello message sent\n");
 
         unsigned char buf[52000];  //10Kb fixed-size buffer
-        size_t sizeReceived = recvAll(sock, buf);
+        recvAll(sock, buf, 52000);
         binn *list;
         list = binn_open(buf);
         binn *mpks, *mpke;
@@ -80,10 +80,10 @@ int main() {
         // Private keys set for Alice
 
         // Now we can go to set Public keys for both signing and encrypting
-        PK PKAlice;
+        encryption_pk PKAlice;
         setPub(xAlice, mpkSession, &PKAlice);
 
-        PKSig PKSigAlice;
+        signature_pk PKSigAlice;
         setPubSig(xSigAlice, mpkSignature, &PKSigAlice);
         // --------------------------------------------------------------
         // Alice done
@@ -98,10 +98,10 @@ int main() {
         // Private keys set for Bob
 
         // Now we can go to set Public keys for both signing and encrypting
-        PK PKBob;
+        encryption_pk PKBob;
         setPub(xBob, mpkSession, &PKBob);
 
-        PKSig PKSigBob;
+        signature_pk PKSigBob;
         setPubSig(xSigBob, mpkSignature, &PKSigBob);
 
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -132,7 +132,7 @@ int main() {
         memcpy(bufferPKAlice, PKanounceAlice, strlen(PKanounceAlice));
         size_t outLen;
         unsigned char* b64 = base64_encode(binn_ptr(listPKAlice), binn_size(listPKAlice), &outLen);
-        printf("%s\n", b64);
+        printf("PK obj ALICE : %s\n", b64);
         memcpy(&bufferPKAlice[strlen(PKanounceAlice)], b64, outLen);
 
         int sizeSent = send(sock, bufferPKAlice, strlen(PKanounceAlice) + outLen, 0);
@@ -168,14 +168,14 @@ int main() {
         //memcpy(&bufferPKBob[strlen(PKanounceBob) + 1], binn_ptr(listPKBob), binn_size(listPKBob));
         size_t outLenBob;
         unsigned char* b64Bob = base64_encode(binn_ptr(listPKBob), binn_size(listPKBob), &outLenBob);
-        printf("%s\n", b64Bob);
+        printf("PK object of Bob : %s\n", b64Bob);
         memcpy(&bufferPKBob[strlen(PKanounceBob)], b64Bob, outLenBob);
 
         send(sock, bufferPKBob, strlen(PKanounceBob) + outLenBob, 0);
         binn_free(listPKBob);
         // -----------------------------------------------------------------
         // Public keys set
-
+        sleep(5);
 
 
         // Test recuperation PKs
@@ -192,7 +192,7 @@ int main() {
 
         int testSize = recv(sock, bufferGPE, 512, 0);
         printf("%s\n", bufferGPE);
-        PK PKBob2;
+        encryption_pk PKBob2;
         size_t out_len_test;
         unsigned char * decodedTest = base64_decode(bufferGPE, testSize, &out_len_test);
         deserialize_PKE(decodedTest, &PKBob2);
@@ -226,7 +226,7 @@ int main() {
         encrypt(AESK, PKBob, IDBob, mpkSession, &c);
 
         // For the signature we need our PPK
-        PPKSig PartialKeysSigAlice;
+        signature_ppk PartialKeysSigAlice;
         // TODO : Verify if ok the deserialize
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
             printf("\n Socket creation error \n");
@@ -244,7 +244,7 @@ int main() {
         deserialize_PPKS(bufferPPK, &PartialKeysSigAlice);
 
         // Computes Secret User Keys for Signature
-        SKSig SecretKeysSigAlice;
+        signature_sk SecretKeysSigAlice;
         setPrivSig(xSigAlice, PartialKeysSigAlice, mpkSignature, IDAlice, &SecretKeysSigAlice);
 
         // Computes the message to sign, so the cipher struct
@@ -273,7 +273,7 @@ int main() {
         // if the verif is ok we can continue, otherwise we can stop here
         if(test == 0) {
             // For this we need our Partial Private Keys with the ID used to encrypt the message
-            PPK PartialKeysBob;
+            encryption_ppk PartialKeysBob;
             // TODO : Verify if ok the deserialize
             if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
                 printf("\n Socket creation error \n");
@@ -291,7 +291,7 @@ int main() {
             deserialize_PPKE(bufferPPKE, &PartialKeysBob);
 
             // Computes Secret User Keys
-            SK SecretKeysBob;
+            encryption_sk SecretKeysBob;
             g2_null(SecretKeysBob->s1)
             g2_new(SecretKeysBob->s1)
 

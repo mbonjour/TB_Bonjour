@@ -8,7 +8,7 @@
 
 #include "cipherPOC.h"
 
-void setup(int k, mpkStruct* mpkSetup, g2_t* msk){
+void setup(int k, encryption_mpk* mpkSetup, g2_t* msk){
     //TODO nullify struct and init it (g1_new())
     bn_t p, gamma, uvGen;
     bn_null(p)
@@ -98,7 +98,7 @@ void F(const char *var, g2_t* suite, g2_t *result) {
     bn_free(transitionToBn)
 }
 
-void extract(mpkStruct mpk, g2_t msk, char* ID, PPK* partialKeys){
+void extract(encryption_mpk mpk, g2_t msk, char* ID, encryption_ppk* partialKeys){
     bn_t p, r;
     bn_null(p)
     bn_null(r)
@@ -147,12 +147,12 @@ void setSec(bn_t* x){
     bn_free(p)
 }
 
-void setPub(bn_t x, mpkStruct mpkSession, PK* PKtoGen){
+void setPub(bn_t x, encryption_mpk mpkSession, encryption_pk* PKtoGen){
     g2_mul(PKtoGen->X, mpkSession.g2, x);
     g1_mul(PKtoGen->Y, mpkSession.g1, x);
 }
 
-void setPriv(bn_t x,PPK d, mpkStruct mpk, char* ID, SK* secretKeys){
+void setPriv(bn_t x, encryption_ppk d, encryption_mpk mpk, char* ID, encryption_sk* secretKeys){
     bn_t p, r;
     bn_null(p)
     bn_new(p)
@@ -192,7 +192,7 @@ void setPriv(bn_t x,PPK d, mpkStruct mpk, char* ID, SK* secretKeys){
     g2_free(pointTemp)
 }
 
-void encrypt(gt_t m, PK pk, unsigned char* ID, mpkStruct mpk, cipher* c){
+void encrypt(gt_t m, encryption_pk pk, unsigned char* ID, encryption_mpk mpk, cipher* c){
     bn_t p, s;
     bn_null(p)
     bn_null(s)
@@ -269,7 +269,7 @@ void encrypt(gt_t m, PK pk, unsigned char* ID, mpkStruct mpk, cipher* c){
     gt_free(temp)
 }
 
-void decrypt(cipher c, SK sk, PK pk, mpkStruct  mpk, char* ID, gt_t* m){
+void decrypt(cipher c, encryption_sk sk, encryption_pk pk, encryption_mpk  mpk, char* ID, gt_t* m){
     /* Vesrion fonctionelle (sans vérifications)
      * gt_t numerateur;
     gt_t denominateur;
@@ -374,7 +374,7 @@ void decrypt(cipher c, SK sk, PK pk, mpkStruct  mpk, char* ID, gt_t* m){
     gt_free(denominateur)
 }
 
-void serialize_MPKE(binn* obj, mpkStruct mpke){
+void serialize_MPKE(binn* obj, encryption_mpk mpke){
     binn *listU, *listV;
     listU = binn_list();
     listV = binn_list();
@@ -408,7 +408,7 @@ void serialize_MPKE(binn* obj, mpkStruct mpke){
     binn_free(listU);
     binn_free(listV);
 }
-void deserialize_MPKE(binn* obj, mpkStruct* newMpk){
+void deserialize_MPKE(binn* obj, encryption_mpk* newMpk){
     binn *listU, *listV;
     void *g, *g1, *g2;
     int sizeG, sizeG1, sizeG2;
@@ -439,7 +439,7 @@ void deserialize_MPKE(binn* obj, mpkStruct* newMpk){
     //binn_free(obj);
 }
 
-void serialize_PPKE(binn* obj, PPK ppke){
+void serialize_PPKE(binn* obj, encryption_ppk ppke){
     int sizeD1, sizeD2;
     sizeD1 = g2_size_bin(ppke.d1, 1);
     sizeD2 = g1_size_bin(ppke.d2, 1);
@@ -449,7 +449,7 @@ void serialize_PPKE(binn* obj, PPK ppke){
     binn_object_set_blob(obj, "D1", d1Bin, sizeD1);
     binn_object_set_blob(obj, "D2", d2Bin, sizeD2);
 }
-void deserialize_PPKE(void* buffer, PPK* newPpk){
+void deserialize_PPKE(void* buffer, encryption_ppk* newPpk){
     binn* obj;
     obj = binn_open(buffer);
     int sizeD1, sizeD2;
@@ -461,7 +461,7 @@ void deserialize_PPKE(void* buffer, PPK* newPpk){
     binn_free(obj);
 }
 
-void serialize_PKE(binn* obj, PK pk){
+void serialize_PKE(binn* obj, encryption_pk pk){
     int sizeX, sizeY;
     sizeX = g2_size_bin(pk.X, 1);
     sizeY = g1_size_bin(pk.Y, 1);
@@ -472,7 +472,7 @@ void serialize_PKE(binn* obj, PK pk){
     binn_object_set_blob(obj, "Y", yBin, sizeY);
 }
 
-void deserialize_PKE(void* buffer, PK* newPk){
+void deserialize_PKE(void* buffer, encryption_pk* newPk){
     binn* obj;
     obj = binn_open(buffer);
     int sizeX, sizeY;

@@ -19,8 +19,8 @@
  * @struct mpkStructSig
  * @brief mpkStructSig is a struct to handle the Master Public Key for the signature, it has 2 g1 elements : P, Ppub
  */
-typedef struct mpkStructSig mpkStructSig;
-struct mpkStructSig {
+typedef struct signature_mpk signature_mpk;
+struct signature_mpk {
     g1_t P, Ppub;
 };
 
@@ -29,8 +29,8 @@ struct mpkStructSig {
  * @brief This is a structure to handle the Public Keys of the user using signature across the application.
  *        Public keys are just a G1 element Ppub.
  */
-typedef struct PKSig PKSig;
-struct PKSig {
+typedef struct signature_pk signature_pk;
+struct signature_pk {
     g1_t Ppub;
 };
 
@@ -39,8 +39,8 @@ struct PKSig {
  * @brief This is a structure to store the Secret keys of an user using signatures across the application.
  *        Secret keys are composed with a G2 element D (actually this is the Partial Private Key form the KGC) and a value randomly choosen x.
  */
-typedef struct SKSig SKSig;
-struct SKSig {
+typedef struct signature_sk signature_sk;
+struct signature_sk {
     g2_t D;
     bn_t x;
 };
@@ -50,8 +50,8 @@ struct SKSig {
  * @brief This is a structure to store the partial private key given by the KGC to the client.
  *        It's composed of a G2 element D.
  */
-typedef struct PPKSig PPKSig;
-struct PPKSig {
+typedef struct signature_ppk signature_ppk;
+struct signature_ppk {
     g2_t D;
 };
 
@@ -87,7 +87,7 @@ void functionH3(g2_t* to_point, char* bytes_from, int len_bytes);
  * @param pStruct Structure handling the Master Public Key generated
  * @param ptr bn_t storing the master secret key of the KGC (generated at setup)
  */
-void setupSig(int i, mpkStructSig *pStruct, bn_t *ptr);
+void setupSig(int i, signature_mpk *pStruct, bn_t *ptr);
 
 /**
  * @brief Extraction of the Partial Private Key, used by the KGC to provide the user.
@@ -96,7 +96,7 @@ void setupSig(int i, mpkStructSig *pStruct, bn_t *ptr);
  * @param ID The ID we need to extract for.
  * @param partialKeys The resulting Partial Private key for the given ID
  */
-void extractSig(mpkStructSig mpk, bn_t msk, char* ID, PPKSig * partialKeys);
+void extractSig(signature_mpk mpk, bn_t msk, char* ID, signature_ppk * partialKeys);
 
 /**
  * @brief Generate a secret value for the user
@@ -110,7 +110,7 @@ void setSecSig(bn_t* x);
  * @param mpkSession Master Publc Key of the KGC
  * @param PKtoGen The resulting Public Key for the user
  */
-void setPubSig(bn_t x, mpkStructSig mpkSession, PKSig* PKtoGen);
+void setPubSig(bn_t x, signature_mpk mpkSession, signature_pk* PKtoGen);
 
 /**
  * @brief Compute the secret key of an user given his secret value and the partial private key generated from the KGC.
@@ -120,7 +120,7 @@ void setPubSig(bn_t x, mpkStructSig mpkSession, PKSig* PKtoGen);
  * @param ID The ID used in the signature to verify correctly
  * @param secretKeys The Secret Key of the user generated
  */
-void setPrivSig(bn_t x,PPKSig d, mpkStructSig mpk, char* ID, SKSig * secretKeys);
+void setPrivSig(bn_t x, signature_ppk d, signature_mpk mpk, char* ID, signature_sk * secretKeys);
 
 /**
  * @brief The sign operation of a message
@@ -131,7 +131,7 @@ void setPrivSig(bn_t x,PPKSig d, mpkStructSig mpk, char* ID, SKSig * secretKeys)
  * @param mpk Master Publi Keys of the KGC
  * @param s Th resulting signature
  */
-void sign(unsigned char* m, SKSig sk, PKSig pk, unsigned char* ID, mpkStructSig mpk, signature* s);
+void sign(unsigned char* m, signature_sk sk, signature_pk pk, unsigned char* ID, signature_mpk mpk, signature* s);
 
 /**
  * @brief The verification of a given message.
@@ -142,46 +142,46 @@ void sign(unsigned char* m, SKSig sk, PKSig pk, unsigned char* ID, mpkStructSig 
  * @param m The message signed to verify
  * @return 0 if OK 1 if not
  */
-int verify(signature s, PKSig pk, mpkStructSig mpk, char* ID, unsigned char* m);
+int verify(signature s, signature_pk pk, signature_mpk mpk, char* ID, unsigned char* m);
 
 /**
  * @brief Serialization of the mpkStructSig with the binn library
  * @param obj The resulting binn Object
  * @param mpks Master Public Key structure to serialize
  */
-void serialize_MPKS(binn* obj, mpkStructSig mpks);
+void serialize_MPKS(binn* obj, signature_mpk mpks);
 
 /**
  * @brief Deserialization of the mpkStructSig with the binn library
  * @param obj The binn object containing the mpkStruc
  * @param mpks The resulting Master Public Key structure
  */
-void deserialize_MPKS(binn* obj, mpkStructSig* newMpk);
+void deserialize_MPKS(binn* obj, signature_mpk* newMpk);
 /**
  * @brief Serilization of Partial Private Key struct
  * @param obj THe binn object resulting
  * @param ppks The partial private key struct to serialize
  */
-void serialize_PPKS(binn* obj, PPKSig ppks);
+void serialize_PPKS(binn* obj, signature_ppk ppks);
 
 /**
  * @brief Deserialization of a binn object containing partial private key.
  * @param buffer The buffer of binn object
  * @param newPpk The resulting Partial Private Key struct
  */
-void deserialize_PPKS(void* buffer, PPKSig* newPpk);
+void deserialize_PPKS(void* buffer, signature_ppk* newPpk);
 
 /**
  * @brief Serialization of the Public Key structure
  * @param obj The binn object resulting
  * @param pks The Public Key to serialize
  */
-void serialize_PKS(binn* obj, PKSig pks);
+void serialize_PKS(binn* obj, signature_pk pks);
 /**
  * @brief Deserialization of a binn object containing public key.
  * @param buffer The buffer of binn object
  * @param newPk The resulting Public Key struct
  */
-void deserialize_PKS(void* buffer, PKSig* newPk);
+void deserialize_PKS(void* buffer, signature_pk* newPk);
 
 #endif //TEST_RELIC_SIGNATUREPOC_H

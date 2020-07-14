@@ -22,8 +22,8 @@
  *        g2 G2 element
  *        u, v Array of G2 eleemnts
  */
-typedef struct mpkStruct mpkStruct;
-struct mpkStruct {
+typedef struct encryption_mpk encryption_mpk;
+struct encryption_mpk {
     g1_t g, g1;
     g2_t g2;
     g2_t u[MESSAGE_SPACE];
@@ -36,8 +36,8 @@ struct mpkStruct {
  *        X G2 element
  *        Y G1 element
  */
-typedef struct PK PK;
-struct PK {
+typedef struct encryption_pk encryption_pk;
+struct encryption_pk {
     g2_t X;
     g1_t Y;
 };
@@ -48,8 +48,8 @@ struct PK {
  *        s1 G2 element
  *        s2 G1 element
  */
-typedef struct SK SK;
-struct SK {
+typedef struct encryption_sk encryption_sk;
+struct encryption_sk {
     g1_t s2;
     g2_t s1;
 };
@@ -60,8 +60,8 @@ struct SK {
  *        d1 G2 element
  *        d2 G1 element
  */
-typedef struct PPK PPK;
-struct PPK {
+typedef struct encryption_ppk encryption_ppk;
+struct encryption_ppk {
     g1_t d2;
     g2_t d1;
 };
@@ -83,7 +83,7 @@ struct Cipher {
  * @param pStruct The Master public key generated from the setup
  * @param ptr The Master secret key generated from the setup
  */
-void setup(int i, mpkStruct *pStruct, g2_t *ptr);
+void setup(int i, encryption_mpk *pStruct, g2_t *ptr);
 
 /**
  * @brief Hash function to sum up some G2 points (used in the u,v mpk context)
@@ -100,7 +100,7 @@ void F(const char *var, g2_t* suite, g2_t *result);
  * @param ID The ID given to extract the PPK for
  * @param partialKeys The resulting Partial Private Key struct
  */
-void extract(mpkStruct mpk, g2_t msk, char* ID, PPK* partialKeys);
+void extract(encryption_mpk mpk, g2_t msk, char* ID, encryption_ppk* partialKeys);
 
 /**
  * @brief Set secret value randomly from Zp
@@ -114,7 +114,7 @@ void setSec(bn_t* x);
  * @param mpkSession The Master Public Key of the KGC
  * @param PKtoGen The resulting Public key generated
  */
-void setPub(bn_t x, mpkStruct mpkSession, PK* PKtoGen);
+void setPub(bn_t x, encryption_mpk mpkSession, encryption_pk* PKtoGen);
 
 /**
  * @brief Setting Private key for a given ID
@@ -124,7 +124,7 @@ void setPub(bn_t x, mpkStruct mpkSession, PK* PKtoGen);
  * @param ID The ID used on the ecryption typically
  * @param secretKeys The generated Secret Key
  */
-void setPriv(bn_t x,PPK d, mpkStruct mpk, char* ID, SK* secretKeys);
+void setPriv(bn_t x, encryption_ppk d, encryption_mpk mpk, char* ID, encryption_sk* secretKeys);
 
 /**
  * @brief Encryption of a GT element for a given ID and Public Key
@@ -134,7 +134,7 @@ void setPriv(bn_t x,PPK d, mpkStruct mpk, char* ID, SK* secretKeys);
  * @param mpk The master public key of the KGC
  * @param c The cipher generated from the encryption of m
  */
-void encrypt(gt_t m, PK pk, unsigned char* ID, mpkStruct mpk, cipher* c);
+void encrypt(gt_t m, encryption_pk pk, unsigned char* ID, encryption_mpk mpk, cipher* c);
 
 /**
  * @brief Decryption of a given cipher struct
@@ -145,45 +145,45 @@ void encrypt(gt_t m, PK pk, unsigned char* ID, mpkStruct mpk, cipher* c);
  * @param ID The ID of the recipient
  * @param m The Gt element resulting the decryption (the original message)
  */
-void decrypt(cipher c, SK sk, PK pk, mpkStruct  mpk, char* ID, gt_t* m);
+void decrypt(cipher c, encryption_sk sk, encryption_pk pk, encryption_mpk  mpk, char* ID, gt_t* m);
 
 /**
  * @brief Serialize Master public key (encryption)
  * @param obj Binn object generated
  * @param mpke Master public key to serialize
  */
-void serialize_MPKE(binn* obj, mpkStruct mpke);
+void serialize_MPKE(binn* obj, encryption_mpk mpke);
 
 /**
  * @brief Deserialize Master Public Key
  * @param obj Binn object to deserialize
  * @param newMpk MPK struct generated
  */
-void deserialize_MPKE(binn* obj, mpkStruct* newMpk);
+void deserialize_MPKE(binn* obj, encryption_mpk* newMpk);
 
 /**
  * @brief Serialize Partial Private Key (encryption)
  * @param obj Binn object generated
  * @param ppke Partial private key to serialize
  */
-void serialize_PPKE(binn* obj, PPK ppke);
+void serialize_PPKE(binn* obj, encryption_ppk ppke);
 /**
  * @brief Deserialize Partial Private Key
  * @param obj Binn object to deserialize
  * @param newPpk PPK struct generated
  */
-void deserialize_PPKE(void* buffer, PPK* newPpk);
+void deserialize_PPKE(void* buffer, encryption_ppk* newPpk);
 /**
  * @brief Serialize Public Key (encryption)
  * @param obj Binn object generated
  * @param pk Public key to serialize
  */
-void serialize_PKE(binn* obj, PK pk);
+void serialize_PKE(binn* obj, encryption_pk pk);
 /**
  * @brief Deserialize Public Key
  * @param obj Binn object to deserialize
  * @param newPk PK struct generated
  */
-void deserialize_PKE(void* buffer, PK* newPk);
+void deserialize_PKE(void* buffer, encryption_pk* newPk);
 
 #endif //TEST_RELIC_CIPHERPOC_H

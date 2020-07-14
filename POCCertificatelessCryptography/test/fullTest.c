@@ -18,8 +18,8 @@ int main() {
         printf("Security : %d\n", pc_param_level());
 
         // MPK struct, Master Public Key structure to store
-        mpkStruct mpkSession;
-        mpkStructSig mpkSignature;
+        encryption_mpk mpkSession;
+        signature_mpk mpkSignature;
 
         // Master secret key of KGC for encrypting
         g2_t msk;
@@ -48,10 +48,10 @@ int main() {
         // Private keys set
 
         // Now we can go to set Public keys for both signing and encrypting
-        PK myPK;
+        encryption_pk myPK;
         setPub(x, mpkSession, &myPK);
 
-        PKSig myPKSig;
+        signature_pk myPKSig;
         setPubSig(xSig, mpkSignature, &myPKSig);
         // -----------------------------------------------------------------
         // Public keys set
@@ -83,13 +83,13 @@ int main() {
         encrypt(AESK, myPK, ID, mpkSession, &c);
 
         // For the signature we need our PPK
-        PPKSig myPartialKeysSig;
+        signature_ppk myPartialKeysSig;
 
         //The sender needs to extract (via KGC) and setPriv to get his private key and sign the message
         extractSig(mpkSignature, masterSecret, ID , &myPartialKeysSig);
 
         // Computes Secret User Keys for Signature
-        SKSig mySecretKeysSig;
+        signature_sk mySecretKeysSig;
         setPrivSig(xSig, myPartialKeysSig, mpkSignature, ID, &mySecretKeysSig);
 
         // Computes the message to sign, so the cipher struct
@@ -120,13 +120,13 @@ int main() {
         printf("\nVerification of the key (0 if correct 1 if not) : %d\n", test);
         // if the verif is ok we can continue, otherwise we can stop here
         if(test == 0) {
-            PPK myPartialKeys;
+            encryption_ppk myPartialKeys;
 
             //The receiver needs to extract (via KGC) and setPriv to get his private key and decrypt the cipher
             extract(mpkSession, msk, ID, &myPartialKeys);
 
             // Computes Secret User Keys
-            SK mySecretKeys;
+            encryption_sk mySecretKeys;
             g2_null(mySecretKeys->s1)
             g2_new(mySecretKeys->s1)
 

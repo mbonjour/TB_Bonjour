@@ -23,7 +23,7 @@ void functionH3(g2_t* to_point, char* bytes_from, int len_bytes){
     g2_map(*to_point, to_hash, len_bytes + 1);
 }
 
-void setupSig(int i, mpkStructSig *mpk, bn_t *s){
+void setupSig(int i, signature_mpk *mpk, bn_t *s){
     bn_t q;
     bn_null(*s)
     bn_new(*s)
@@ -50,7 +50,7 @@ void setupSig(int i, mpkStructSig *mpk, bn_t *s){
     bn_free(q)
 }
 
-void extractSig(mpkStructSig mpk, bn_t msk, char* ID, PPKSig * partialKeys) {
+void extractSig(signature_mpk mpk, bn_t msk, char* ID, signature_ppk * partialKeys) {
     g2_t qa;
     g2_null(qa)
     g2_new(qa)
@@ -102,14 +102,14 @@ void setSecSig(bn_t* x){
     bn_free(q)
 }
 
-void setPubSig(bn_t x, mpkStructSig mpkSession, PKSig* PKtoGen){
+void setPubSig(bn_t x, signature_mpk mpkSession, signature_pk* PKtoGen){
     g1_null(PKtoGen->Ppub)
     g1_new(PKtoGen->Ppub)
     // Public key : Ppub = x*P
     g1_mul(PKtoGen->Ppub, mpkSession.P, x);
 }
 
-void setPrivSig(bn_t x, PPKSig d, mpkStructSig mpk, char* ID, SKSig * secretKeys){
+void setPrivSig(bn_t x, signature_ppk d, signature_mpk mpk, char* ID, signature_sk * secretKeys){
     g2_null(secretKeys->D)
     g2_new(secretKeys->D)
 
@@ -121,7 +121,7 @@ void setPrivSig(bn_t x, PPKSig d, mpkStructSig mpk, char* ID, SKSig * secretKeys
     bn_copy(secretKeys->x, x);
 }
 
-void sign(unsigned char* m, SKSig sk, PKSig pk, unsigned char* ID, mpkStructSig mpk, signature* s){
+void sign(unsigned char* m, signature_sk sk, signature_pk pk, unsigned char* ID, signature_mpk mpk, signature* s){
     bn_t r, q;
     bn_null(r)
     bn_new(r)
@@ -183,7 +183,7 @@ void sign(unsigned char* m, SKSig sk, PKSig pk, unsigned char* ID, mpkStructSig 
     g2_free(h3)
 }
 
-int verify(signature s, PKSig pk, mpkStructSig mpk, char* ID, unsigned char* m){
+int verify(signature s, signature_pk pk, signature_mpk mpk, char* ID, unsigned char* m){
     // By default the signature is not verified
     int result = 1;
 
@@ -289,7 +289,7 @@ void deserialize_MPKS(uint8_t* buffer, mpkStructSig* newMpk) {
     g1_copy(newMpk->Ppub, Ppub);
 }
 */
-void serialize_MPKS(binn* obj,mpkStructSig mpks) {
+void serialize_MPKS(binn* obj, signature_mpk mpks) {
     int sizeP = g1_size_bin(mpks.P, 1);
     uint8_t P[sizeP];
     g1_write_bin(P, sizeP, mpks.P, 1);
@@ -301,7 +301,7 @@ void serialize_MPKS(binn* obj,mpkStructSig mpks) {
     binn_object_set_blob(obj, "Ppub", Ppub, sizePpub);
 }
 
-void deserialize_MPKS(binn* obj, mpkStructSig* newMpk){
+void deserialize_MPKS(binn* obj, signature_mpk* newMpk){
 
     void *PBin;
     void *PpubBin;
@@ -314,13 +314,13 @@ void deserialize_MPKS(binn* obj, mpkStructSig* newMpk){
 
     //binn_free(obj);
 }
-void serialize_PPKS(binn* obj, PPKSig ppks){
+void serialize_PPKS(binn* obj, signature_ppk ppks){
     int sizeD = g2_size_bin(ppks.D, 1);
     uint8_t P[sizeD];
     g2_write_bin(P, sizeD, ppks.D, 1);
     binn_object_set_blob(obj, "D", P, sizeD);
 }
-void deserialize_PPKS(void* buffer, PPKSig* newPpk){
+void deserialize_PPKS(void* buffer, signature_ppk* newPpk){
     binn *obj;
 
     obj = binn_open(buffer);
@@ -334,14 +334,14 @@ void deserialize_PPKS(void* buffer, PPKSig* newPpk){
     binn_free(obj);
 }
 
-void serialize_PKS(binn* obj, PKSig pks){
+void serialize_PKS(binn* obj, signature_pk pks){
     int sizePpub = g1_size_bin(pks.Ppub, 1);
     uint8_t Ppub[sizePpub];
     g1_write_bin(Ppub, sizePpub, pks.Ppub, 1);
     binn_object_set_blob(obj, "Ppub", Ppub, sizePpub);
 }
 
-void deserialize_PKS(void* buffer, PKSig* newPk){
+void deserialize_PKS(void* buffer, signature_pk* newPk){
     binn *obj;
 
     obj = binn_open(buffer);

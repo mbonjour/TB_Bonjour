@@ -14,8 +14,9 @@
 #include "cipherPOC.h"
 #include "signaturePOC.h"
 //TODO: sauvegarder les master secret pour permettre au serveur de récréer son état en cas de redémarrage
-/***
- * Main du KGC de l'infrastructure, doit permettre de recevoir des requêtes et de les traiter pour l'extraction des clés partielles, et pour délivrer des clés publiques demandées
+/**
+ * Main du KGC de l'infrastructure, doit permettre de recevoir des requêtes et de les traiter pour l'extraction des clés partielles,
+ * et pour délivrer les clés publiques demandées
 */
 
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
@@ -23,8 +24,8 @@ pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 bn_t masterSecret;
 g2_t msk;
 // MPK struct, Master Public Key structure to store
-mpkStruct mpkSession;
-mpkStructSig mpkSignature;
+encryption_mpk mpkSession;
+signature_mpk mpkSignature;
 unqlite *pDb;
 
 char** generate_fields(int numberOfFields, int sizeOfFields) {
@@ -73,8 +74,8 @@ void* socketThread(void *arg){
     // TODO check if still necessary with client implemented
     //tokens[1][strcspn(tokens[1], "\r\n")] = 0;
     //Prepare structs for the possibilities
-    PPKSig myPartialKeysSig;
-    PPK myPartialKeys;
+    signature_ppk myPartialKeysSig;
+    encryption_ppk myPartialKeys;
     if(strcmp(tokens[0], "SE") == 0){
         printf("Code : SE\n");
         //The sender needs to extract (via KGC) and setPriv to get his private key and sign the message
@@ -108,7 +109,7 @@ void* socketThread(void *arg){
         }
         //Allocate a buffer big enough to hold the record content
         void* zBuf = (char *)malloc(bufLen);
-        if( zBuf == NULL ){ printf("Can't allocate\n"); }
+        if( zBuf == NULL ){ printf("Can't allocate enough size\n"); }
 
         //Copy record content in our buffer
         unqlite_kv_fetch(pDb,path,-1,zBuf,&bufLen);
@@ -130,7 +131,7 @@ void* socketThread(void *arg){
         }
         //Allocate a buffer big enough to hold the record content
         void* zBuf = (char *)malloc(bufLen);
-        if( zBuf == NULL ){ printf("Can't allocate\n"); }
+        if( zBuf == NULL ){ printf("Can't allocate enough size\n"); }
 
         //Copy record content in our buffer
         unqlite_kv_fetch(pDb,path,-1,zBuf,&bufLen);
@@ -198,14 +199,6 @@ void* socketThread(void *arg){
         binn_list_add_object(list, obj);
         binn_free(obj);
         printf("Size of this packet = %d\n", binn_size(list));
-        FILE* publicKeysEncryptionFile = fopen("testMPK", "w");
-        if(publicKeysEncryptionFile == NULL) {
-            printf("Error creating/opening required files!");
-            // exit(1);
-        }
-        //TODO : fwrite struct of public key created
-        fwrite(binn_ptr(list), binn_size(list),1,publicKeysEncryptionFile);
-        fclose(publicKeysEncryptionFile);
         size_t bytesSent = send(newSocket, binn_ptr(list), binn_size(list),0);
         printf("Bytes sent : %zu\n", bytesSent);
     }
@@ -259,7 +252,7 @@ int main() {
         // Address family = Internet 
         serverAddr.sin_family = AF_INET;
         //Set port number, using htons function to use proper byte order 
-        serverAddr.sin_port = htons(10008);
+        serverAddr.sin_port = htons(10000);
         //Set IP address to localhost 
         serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
         //Set all bits of the padding field to 0 

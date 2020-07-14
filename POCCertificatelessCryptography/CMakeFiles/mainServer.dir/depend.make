@@ -97,3 +97,6 @@ CMakeFiles/mainServer.dir/signaturePOC.c.o: libs/relic/include/relic_util.h
 CMakeFiles/mainServer.dir/utils/base64.c.o: utils/base64.c
 CMakeFiles/mainServer.dir/utils/base64.c.o: utils/base64.h
 
+CMakeFiles/mainServer.dir/utils/socketUtils.c.o: utils/socketUtils.c
+CMakeFiles/mainServer.dir/utils/socketUtils.c.o: utils/socketUtils.h
+
