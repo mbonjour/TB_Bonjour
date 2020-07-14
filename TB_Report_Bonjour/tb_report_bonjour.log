@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.8)  9 JUL 2020 15:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.5.8)  14 JUL 2020 11:42
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1419,37 +1419,37 @@ runsystem(rm tb_report_bonjour.aex)...executed.
  (./tb_report_bonjour.aux)
 \openout1 = `tb_report_bonjour.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 62.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 63.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 6
-2.
+3.
 
 (/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Info: Redefining \degres on input line 62.
-LaTeX Info: Redefining \dots on input line 62.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Info: Redefining \degres on input line 63.
+LaTeX Info: Redefining \dots on input line 63.
 Package french.ldf Info: Setting StandardItemizeEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 62.
+(french.ldf)             reported on input line 63.
 Package french.ldf Info: Setting StandardEnumerateEnv=true for
 (french.ldf)             compatibility with enumitem package,
-(french.ldf)             reported on input line 62.
-LaTeX Info: Redefining \up on input line 62.
+(french.ldf)             reported on input line 63.
+LaTeX Info: Redefining \up on input line 63.
 
 ABD: EveryShipout initializing macros
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1483,7 +1483,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box119
-Package hyperref Info: Link coloring OFF on input line 62.
+Package hyperref Info: Link coloring OFF on input line 63.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -1493,9 +1493,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count427
 )
-LaTeX Info: Redefining \ref on input line 62.
-LaTeX Info: Redefining \pageref on input line 62.
-LaTeX Info: Redefining \nameref on input line 62.
+LaTeX Info: Redefining \ref on input line 63.
+LaTeX Info: Redefining \pageref on input line 63.
+LaTeX Info: Redefining \nameref on input line 63.
 
 (./tb_report_bonjour.out) (./tb_report_bonjour.out)
 \@outlinefile=\write9
@@ -1503,70 +1503,69 @@ LaTeX Info: Redefining \nameref on input line 62.
 
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 62.
+(lastpage)             ! on input line 63.
 \c@lstlisting=\count428
-<template/logo_heig-vd.pdf, id=291, 236.885pt x 71.26625pt>
-File: template/logo_heig-vd.pdf Graphic file (type pdf)
-<use template/logo_heig-vd.pdf>
-Package pdftex.def Info: template/logo_heig-vd.pdf  used on input line 70.
-(pdftex.def)             Requested size: 128.0374pt x 38.52016pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 70.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 71.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 70.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 71.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+wasy on input line 70
+LaTeX Font Info:    Trying to load font information for U+wasy on input line 71
 .
 
 (/usr/share/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-Overfull \hbox (19.34784pt too wide) in paragraph at lines 70--70
-[][] $[]$ 
+<template/logo_heig-vd.pdf, id=291, 236.885pt x 71.26625pt>
+File: template/logo_heig-vd.pdf Graphic file (type pdf)
+<use template/logo_heig-vd.pdf>
+Package pdftex.def Info: template/logo_heig-vd.pdf  used on input line 71.
+(pdftex.def)             Requested size: 128.0374pt x 38.52016pt.
+
+Overfull \hbox (24.19107pt too wide) has occurred while \output is active
+ $[]$ $[]$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--70
-
- []
-
-[1
+Overfull \vbox (18.18109pt too high) has occurred while \output is active []
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./template/logo_heig-vd.pd
-f>] [2
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+ <./template/logo_heig-vd.pdf>] [2
 
 ]
-Overfull \hbox (9.28046pt too wide) in paragraph at lines 74--74
+Overfull \hbox (9.28046pt too wide) in paragraph at lines 75--75
 [][] 
  []
 
 [3] [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 76--76
+Underfull \hbox (badness 10000) in paragraph at lines 77--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--76
+Underfull \hbox (badness 10000) in paragraph at lines 77--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--76
+Underfull \hbox (badness 10000) in paragraph at lines 77--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--76
+Underfull \hbox (badness 10000) in paragraph at lines 77--77
 
  []
 
@@ -1619,33 +1618,18 @@ File: images/signalFonctionnement.png Graphic file (type png)
 Package pdftex.def Info: images/signalFonctionnement.png  used on input line 84
 .
 (pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
-
-Underfull \vbox (badness 4859) has occurred while \output is active []
-
  [8 <./images/signalFonctionnement.png>] [9]
 Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
-
-Underfull \vbox (badness 2951) has occurred while \output is active []
-
- [10]
-Overfull \hbox (1.09999pt too wide) in paragraph at lines 143--146
-\T1/cmr/bx/n/10.95 Decrypt($\OML/cmm/m/it/10.95 C; sk[]; mpk$\T1/cmr/bx/n/10.95
- ) : \T1/cmr/m/n/10.95 L'on peut re-prendre $\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/
-10.95 C[]; C[]; C[]; C[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95   \OML/cmm/m/i
-t/10.95 C$ \T1/cmr/m/n/10.95 et la clé pri-vée $\OT1/cmr/m/n/10.95 (\OML/cmm/m/
-it/10.95 s[]; s[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95  
- []
-
-[11] [12]
+[10] [11] [12]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
 76.
  (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [13] [14] [15])
-(./chapters/architecture.tex [16]
+) [13] [14]
+[15]) (./chapters/architecture.tex [16]
 Chapitre 3.
 <images/SchemaGlobal.png, id=611, 721.94719pt x 319.94531pt>
 File: images/SchemaGlobal.png Graphic file (type png)
@@ -1678,94 +1662,61 @@ File: images/schemaEncapsulation.png Graphic file (type png)
 Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 30.
 
 (pdftex.def)             Requested size: 341.43306pt x 198.85693pt.
- [24]
-runsystem(pygmentize -S default -f latex -P commandprefix=PYG > tb_report_bonjo
-ur.out.pyg)...executed.
-
- (./tb_report_bonjour.out.pyg)
-runsystem(pygmentize -S default -f latex -P commandprefix=PYGdefault > tb_repor
-t_bonjour.out.pyg)...executed.
-
- (./tb_report_bonjour.out.pyg)
-runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o tb_rep
-ort_bonjour.out.pyg "source_code/main.c")...executed.
-
-
-(./tb_report_bonjour.out.pyg
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 7.
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-72.
- (/usr/share/texmf-dist/tex/latex/base/ts1cmtt.fd
-File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)) [25 <./images/schemaEncapsulation.PNG>] [26] [27] [28])
-(./chapters/conclusion.tex [29] [30
+ [24]) (./chapters/conclusion.tex [25 <./images/schemaEncapsulation.PNG>]
+[26
 
 ]
 Chapitre 5.
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
+) [27] [28
 
- [31]
-[32
+] (./tb_report_bonjour.bbl [29
 
-] (./tb_report_bonjour.bbl [33
-
-]) [34] (./tb_report_bonjour.lof)
+]) [30] (./tb_report_bonjour.lof)
 \tf@lof=\write11
 \openout11 = `tb_report_bonjour.lof'.
 
- [35
 
-]
-[36
+[31
+
+] [32
 
 ] (./tb_report_bonjour.lot)
 \tf@lot=\write12
 \openout12 = `tb_report_bonjour.lot'.
 
- (./chapters/outils.tex [37] [38
+ (./chapters/outils.tex [33] [34
 
 ]
 Annexe A.
-) (./chapters/fichiers.tex [39] [40
+) (./chapters/fichiers.tex [35] [36
 
 ]
 Annexe B.
-
-Overfull \hbox (13.2715pt too wide) in paragraph at lines 5--8
-[]\T1/cmr/m/n/10.95 Le code est en an-nexe du rap-port avec le nom \T1/cmr/m/it
-/10.95 POC-Cer-ti-fi-ca-te-less-Cryp-to-gra-phy\T1/cmr/m/n/10.95 . Le \T1/cmr/m
-/it/10.95 README.md
- []
-
 ) 
 AED: lastpage setting LastPage
-[41]
+[37]
 
 Package catoptions Warning: Undeclared options found in \XExecuteOptions
 (catoptions)                (family,option,value): 
 background.sty,all,; background.sty,center,.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 128.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 128.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 129.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 129.
 (./tb_report_bonjour.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 128.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 128.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 129.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 129.
 Package rerunfilecheck Info: File `tb_report_bonjour.out' has not changed.
 (rerunfilecheck)             Checksum: FFFAF367B273A6B4D531FB053951228B;4502.
-runsystem(rm tb_report_bonjour.out.pyg)...executed.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 128.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 129.
  ) 
 Here is how much of TeX's memory you used:
- 43990 strings out of 492167
- 859104 string characters out of 6131559
- 1161505 words of memory out of 5000000
- 47439 multiletter control sequences out of 15000+600000
- 555498 words of font info for 82 fonts, out of 8000000 for 9000
+ 43698 strings out of 492167
+ 854544 string characters out of 6131559
+ 1139868 words of memory out of 5000000
+ 47165 multiletter control sequences out of 15000+600000
+ 553806 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 70i,11n,115p,1050b,1041s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,11n,115p,1050b,968s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/prdc/YehS
 DSSW18} has been referenced but does not exist, replaced by a fixed one
 
@@ -1798,35 +1749,32 @@ iakD0ISF18} has been referenced but does not exist, replaced by a fixed one
 pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:journals/iacr/Ko
 beissi18a} has been referenced but does not exist, replaced by a fixed one
 
-{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/tex
-mf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/s
-hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1
-/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/c
-m-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx120
-0.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf-dist/f
-onts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/cm-super/sfcc1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfi
-t0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr
-/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-di
-st/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/
-public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super
-/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><
-/usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texm
-f-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/cm-super/sftt1095.pfb>
-Output written on tb_report_bonjour.pdf (55 pages, 871599 bytes).
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr
+/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/te
+xmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/
+type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm
+-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074
+.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/shar
+e/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/share/texmf-dist/fo
+nts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/publi
+c/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm
+1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/
+share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dis
+t/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/cm-super/sftt0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/
+sftt1095.pfb>
+Output written on tb_report_bonjour.pdf (51 pages, 801377 bytes).
 PDF statistics:
- 908 PDF objects out of 1000 (max. 8388607)
- 775 compressed objects within 8 object streams
- 195 named destinations out of 1000 (max. 500000)
+ 874 PDF objects out of 1000 (max. 8388607)
+ 748 compressed objects within 8 object streams
+ 190 named destinations out of 1000 (max. 500000)
  683 words of extra memory for PDF output out of 10000 (max. 10000000)
 

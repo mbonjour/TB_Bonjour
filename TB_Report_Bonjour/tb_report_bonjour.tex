@@ -11,6 +11,7 @@
 \usepackage[french]{babel}
 \usepackage{url}
 \usepackage{pgf-umlsd}
+\raggedbottom
 
 \newif\ifisconfidential	\isconfidentialfalse
 
@@ -27,14 +28,14 @@
 \newcommand{\TByear}{2020}
 \newcommand{\TBacademicYears}{2019-2020}
 
-\newcommand{\TBdpt}{Département des Technologie de l'information et de la communication (TIC)}
+\newcommand{\TBdpt}{Département TIC}
 \newcommand{\TBfiliere}{Filière Télécommunications}
 \newcommand{\TBorient}{Orientation Sécurité de l'information}
 
 \newcommand{\TBauthor}{Mickael Bonjour}
 \newcommand{\TBsupervisor}{Prof. Alexandre Duc }
-\newcommand{\TBindustryContact}{Nom}
-\newcommand{\TBindustryName}{EntrepriseZ}
+\newcommand{\TBindustryContact}{}
+\newcommand{\TBindustryName}{}
 \newcommand{\TBindustryAddress}{%
   Rue XY\\
   1400 Yverdon-les-Bains
@@ -49,8 +50,8 @@ Dans ce travail de bachelor je vais analyser les solutions actuelles de messager
 }
 
 % +---------------------------------------------------------------+
-
-
+\setlength{\emergencystretch}{100pt}
+% Not reccommended but avoid text overfull
 
 % +-[set path]-------------------------------------+
 \usepackage{template/TB-style}

@@ -141,8 +141,24 @@
 %\renewcommand{\chaptermark}[1]{\markleft{#1}{}}
 %\renewcommand{\sectionmark}[1]{\markright{#1}{}}
 
+
 % plain style
 \makeatletter
+\def\ps@title{%
+  \renewcommand\@oddhead{
+    \parbox{6cm}{
+      %\includegraphics[width=4.5cm]{template/logo_heig-vd.pdf}
+      \includegraphics[width=4.5cm]{template/logo_heig-vd.pdf}
+    }\hfill\parbox{10cm}{%
+      \small%
+      \begin{flushright}%
+        \TBdpt\\
+        \TBfiliere\\
+        \TBorient
+      \end{flushright}
+    }
+  }%
+}
 \def\ps@frontmatter{%
   \renewcommand\@evenhead{\footnotesize \leftmark \ \hrulefill}%
   \renewcommand\@oddhead{\footnotesize \hrulefill \ \TBauthor}%

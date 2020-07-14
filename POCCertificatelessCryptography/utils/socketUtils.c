@@ -2,12 +2,12 @@
 
 //Way to receive chunks of data, Taken from : https://stackoverflow.com/questions/10011098/how-to-receive-the-large-data-using-recv
 size_t recvAll(int sock, unsigned char* buf, size_t size_buf){
-    unsigned char buffer[2048];  //temporary buffer
+    unsigned char buffer[512];  //temporary buffer
     unsigned char* temp_buf = buf;
     unsigned char* end_buf = buf + size_buf;
     size_t iByteCount;
     do {
-        iByteCount = recv(sock, buffer,2048,0);
+        iByteCount = recv(sock, buffer,512,0);
         if ( iByteCount > 0 ) {
             //make sure we're not about to go over the end of the buffer
             if (!((temp_buf + iByteCount) <= end_buf))

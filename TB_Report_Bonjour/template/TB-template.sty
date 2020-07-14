@@ -10,21 +10,24 @@
 % +---------------------------------------------------------------+
 
 \newcommand{\TBmaketitle}{
-	\thispagestyle{empty}
+	\thispagestyle{title}
 
-	\begin{minipage}[t]{6cm}
-		\includegraphics[width=4.5cm]{template/logo_heig-vd.pdf}
-	\end{minipage}\hfill\begin{minipage}{10cm}%
-		\small%
-		\begin{flushright}%
-			\TBdpt\\
-			\TBfiliere\\
-			\TBorient
-		\end{flushright}
-	\end{minipage}
+	%\begin{minipage}[t]{6cm}
+	%	\includegraphics[width=4.5cm]{template/logo_heig-vd.pdf}
+	%\end{minipage}\hfill\begin{minipage}{10cm}%
+	%	\small%
+	%	\begin{flushright}%
+	%		\TBdpt\\
+	%		\TBfiliere\\
+	%		\TBorient
+	%	\end{flushright}
+	%\end{minipage}
 
-	\vfill
-
+  %\vfill
+  \begin{minipage}[t]{6cm}
+    
+  \end{minipage}
+  
 	\begin{center}        
     {\large \bfseries Travail de Bachelor}
     
@@ -50,7 +53,7 @@
     \begin{tabular}{l@{\hskip 10mm}l}
     	\textbf{Étudiant} & \textbf{\TBauthor} \\[0.1cm]
 	    \textbf{Enseignant responsable} & \TBsupervisor \\[0.1cm]
-		  \ifthenelse{\isempty{\TBindustryName}}%
+		  \ifthenelse{\equal{\TBindustryName}{}}%
     		{}%empty
 		    {\textbf{Entreprise mandante} & 
 		      \begin{minipage}[t]{8cm}%
@@ -83,8 +86,8 @@
       \TBdpt\\
       \TBfiliere\\
       \TBorient\\
-      Étudiant : \TBauthor\\
-      Enseignant responsable : \TBsupervisor\\
+      Étudiant \TBauthor\\
+      Enseignant responsable \TBsupervisor\\
   \end{flushright}
   
   \vspace{0.6cm}
@@ -96,8 +99,9 @@
   
   \hrule
   \vspace{0.5cm}
-  
-  {Nom de l'entreprise/institution}
+  \ifthenelse{\equal{\TBindustryName}{}}%
+    		{}%empty
+        {Nom de l'entreprise/institution}
 
   \TBindustryName
 
@@ -107,8 +111,8 @@
   
   {\TBresumePubliable}
 
-  \vspace{0.5cm}  
-  
+  %\vspace{0.5cm}  
+  \vfill
   
   \begin{tabular}{lll}
       Étudiant : & Date et lieu : & Signature :  \\[0.3cm]
@@ -117,9 +121,10 @@
   
       {\TBsupervisor} & .......................................... &  .......................................... \\[0.8cm]
       Nom de l'entreprise/institution : & Date et lieu : & Signature :  \\[0.3cm]
-  
-      {\TBindustryContact} & .......................................... &  .......................................... \\
-      {\TBindustryName}
+      \ifthenelse{\equal{\TBindustryName}{}}%
+    		{}%empty
+        {{\TBindustryContact} & .......................................... &  .......................................... \\
+        {\TBindustryName}}
   \end{tabular}
   
   \cleardoublepage
