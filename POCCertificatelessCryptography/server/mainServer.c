@@ -28,79 +28,51 @@ encryption_mpk mpkSession;
 signature_mpk mpkSignature;
 unqlite *pDb;
 
-char** generate_fields(int numberOfFields, int sizeOfFields) {
-    char** options = malloc(numberOfFields*sizeof(char *));
-    for(int i = 0; i < numberOfFields; i++)
-        options[i] = malloc(sizeOfFields);
-    return options;
-}
-
-void free_fields(char ** options, int numberOfFields, int sizeOfFields) {
-    for(int i = 0; i < numberOfFields; i++) {
-        memset(options[i], 0, sizeOfFields);
-        free(options[i]);
-    }
-    memset(options, 0, numberOfFields*sizeof(char*));
-    free(options);
-}
-
-void split(char** tokensDest, char* initialString, char* delim){
-    char* token = strtok(initialString, delim);
-
-    // Extract code tokens[0] et l'ID (ou payload) tokens[1]
-    // loop through the string to extract all other tokens
-    int i = 0;
-    while( token != NULL ) {
-        // TODO change when using bytes ? Or maybe base64 all along to have strings
-        strcpy(tokensDest[i], token);
-        token = strtok(NULL, delim);
-        ++i;
-    }
-}
-
 // Codes : Signature extraction (SE), Encryption Extraction (EE), Get Public kex Encryption (GPE), Get Public kex Signature (GPS),
 // Put Public key Encryption (PKE), Put Public key Signature (PKS)
 void* socketThread(void *arg){
     int newSocket = *((int *)arg);
     // TODO change number of bytes to read ?
     char client_message[1024];
+    // TODO recvall modifié ?
     recv(newSocket , client_message , 1024 , 0);
-    // TODO : change the size of fields to be able to put the data received
-    char** tokens = generate_fields(2, 512);
+
+    binn *srcObject;
     pthread_mutex_lock(&lock);
-    split(tokens, client_message, ":");
+    srcObject = binn_open(client_message);
     pthread_mutex_unlock(&lock);
-    // Remove \r\n from the last token
-    // TODO check if still necessary with client implemented
-    //tokens[1][strcspn(tokens[1], "\r\n")] = 0;
-    //Prepare structs for the possibilities
+    char* opCode = binn_object_str(srcObject, "opCode");
+
     signature_ppk myPartialKeysSig;
     encryption_ppk myPartialKeys;
-    if(strcmp(tokens[0], "SE") == 0){
+    if(strcmp(opCode, "SE") == 0){
+        char* currentID = binn_object_str(srcObject, "ID");
         printf("Code : SE\n");
         //The sender needs to extract (via KGC) and setPriv to get his private key and sign the message
-        extractSig(mpkSignature, masterSecret, tokens[1], &myPartialKeysSig);
+        extractSig(mpkSignature, masterSecret, currentID, &myPartialKeysSig);
         binn* obj;
         obj = binn_object();
         serialize_PPKS(obj, myPartialKeysSig);
         send(newSocket,binn_ptr(obj),binn_size(obj),0);
         binn_free(obj);
     }
-    if(strcmp(tokens[0], "EE") == 0){
+    if(strcmp(opCode, "EE") == 0){
+        char* currentID = binn_object_str(srcObject, "ID");
         printf("Code : EE\n");
         //The receiver needs to extract (via KGC) and setPriv to get his private key and decrypt the cipher
-        extract(mpkSession, msk, tokens[1], &myPartialKeys);
+        extract(mpkSession, msk, currentID, &myPartialKeys);
         binn *obj;
         obj = binn_object();
         serialize_PPKE(obj, myPartialKeys);
         send(newSocket,binn_ptr(obj),binn_size(obj),0);
         binn_free(obj);
     }
-    if(strcmp(tokens[0], "GPE") == 0){
+    if(strcmp(opCode, "GPE") == 0){
+        char* currentID = binn_object_str(srcObject, "ID");
         printf("Code : GPE\n");
-        char path[strlen(tokens[1])+11];
+        char path[strlen(currentID)+11];
         strcpy(path, "encryption/");
-        strcat(path, tokens[1]);
+        strcat(path, currentID);
         printf("Path : %s\n", path);
         unqlite_int64 bufLen;
         int result = unqlite_kv_fetch(pDb, path, -1, NULL, &bufLen);
@@ -117,12 +89,14 @@ void* socketThread(void *arg){
         send(newSocket, zBuf, bufLen, 0);
         free(zBuf);
     }
-    if(strcmp(tokens[0], "GPS") == 0){
+    if(strcmp(opCode, "GPS") == 0){
+        char* currentID = binn_object_str(srcObject, "ID");
         printf("Code : GPS\n");
-        char path[strlen(tokens[1])+10];
+        char path[strlen(currentID)+10];
         strcpy(path, "signature/");
-        strcat(path, tokens[1]);
+        strcat(path, currentID);
         printf("Path : %s\n", path);
+
         void* buffer = NULL;
         unqlite_int64 bufLen;
         int result = unqlite_kv_fetch(pDb, path, -1, NULL, &bufLen);
@@ -139,24 +113,21 @@ void* socketThread(void *arg){
         send(newSocket, zBuf, bufLen, 0);
         free(zBuf);
     }
-    if(strcmp(tokens[0], "PK") == 0){
-        printf("Code : PK\n");
-        char* payload = tokens[1];
+    if(strcmp(opCode, "PK") == 0){
+        char *currentID = binn_object_str(srcObject, "ID");
+        printf("Code : PK from ID : %s\n", currentID);
 
-        char** payloadTokens = generate_fields(2,512);
-        split(payloadTokens, payload, ",");
-
-        char path[strlen(payloadTokens[0])+10];
+        char path[strlen(currentID)+10];
         strcpy(path, "signature/");
-        strcat(path, payloadTokens[0]);
-        char pathPKE[strlen(payloadTokens[0])+11];
+        strcat(path, currentID);
+        char pathPKE[strlen(currentID)+11];
         strcpy(pathPKE, "encryption/");
-        strcat(pathPKE, payloadTokens[0]);
+        strcat(pathPKE, currentID);
         printf("Path : %s\n", path);
 
-        printf("%s\n", payloadTokens[1]);
+        char* b64EncodedPK = binn_object_str(srcObject, "PK");
         size_t out_len;
-        unsigned char* decoded = base64_decode(payloadTokens[1], strlen(payloadTokens[1]), &out_len);
+        unsigned char* decoded = base64_decode(b64EncodedPK, strlen(b64EncodedPK), &out_len);
         binn* list;
         list = binn_open(decoded);
         binn *PKE, *PKS;
@@ -179,15 +150,13 @@ void* socketThread(void *arg){
             //Insertion fail, Handle error (See below)
             printf("Store failed\n");
         }
-        //binn_free(PKE);
-        //binn_free(PKS);
         binn_free(list);
         free(b64PKS);
         free(b64PKE);
-        free_fields(payloadTokens, 2, 512);
     }
-    if(strcmp(tokens[0], "HELO")==0){
-        printf("Code : HELO\n");
+    if(strcmp(opCode, "HELO")==0){
+        char* currentID = binn_object_str(srcObject, "ID");
+        printf("Code : HELO from ID : %s\n", currentID);
         binn *obj, *list;
         obj = binn_object();
         list = binn_list();
@@ -202,9 +171,9 @@ void* socketThread(void *arg){
         size_t bytesSent = send(newSocket, binn_ptr(list), binn_size(list),0);
         printf("Bytes sent : %zu\n", bytesSent);
     }
-    free_fields(tokens, 2, 512);
+
     printf("Exit socketThread \n");
-    //fflush(newSocket);
+    binn_free(srcObject);
     close(newSocket);
     pthread_exit(NULL);
 }
@@ -252,7 +221,7 @@ int main() {
         // Address family = Internet 
         serverAddr.sin_family = AF_INET;
         //Set port number, using htons function to use proper byte order 
-        serverAddr.sin_port = htons(10000);
+        serverAddr.sin_port = htons(10002);
         //Set IP address to localhost 
         serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
         //Set all bits of the padding field to 0 

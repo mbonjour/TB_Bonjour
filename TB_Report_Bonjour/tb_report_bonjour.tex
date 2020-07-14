@@ -110,11 +110,17 @@ Dans ce travail de bachelor je vais analyser les solutions actuelles de messager
 % +---------------------------------------------------------------+
 \cleardoublepage
 \addcontentsline{toc}{chapter}{Bibliographie}
+\renewcommand{\thechapter}{}
+\renewcommand{\chaptername}{}
+\chaptermark{Bibliographie}
 \bibliographystyle{plain}
 \bibliography{chapters/biblio}
 \nocite{*} %ajoute tout ce qu'il y a dans le bibtex
-
+\cleardoublepage
+\chaptermark{Liste des Figures}
 \listoffigures
+\cleardoublepage
+\chaptermark{Liste des tableaux}
 \listoftables
 
 % Annexes

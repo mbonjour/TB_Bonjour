@@ -189,6 +189,9 @@
 		<Unit filename="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.c">
 			<Option target="mainClient"/>
 		</Unit>
+		<Unit filename="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.h">
+			<Option target="mainClient"/>
+		</Unit>
 		<Unit filename="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/server/mainServer.c">
 			<Option target="mainServer"/>
 		</Unit>

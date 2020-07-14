@@ -32,6 +32,7 @@ CMakeFiles/mainClient.dir/cipherPOC.c.o: libs/relic/include/relic_types.h
 CMakeFiles/mainClient.dir/cipherPOC.c.o: libs/relic/include/relic_util.h
 
 CMakeFiles/mainClient.dir/client/mainClient.c.o: client/mainClient.c
+CMakeFiles/mainClient.dir/client/mainClient.c.o: client/mainClient.h
 CMakeFiles/mainClient.dir/client/mainClient.c.o: cipherPOC.h
 CMakeFiles/mainClient.dir/client/mainClient.c.o: libs/relic-target/include/relic_conf.h
 CMakeFiles/mainClient.dir/client/mainClient.c.o: libs/relic/include/relic.h

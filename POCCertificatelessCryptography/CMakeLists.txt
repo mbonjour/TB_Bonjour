@@ -13,7 +13,7 @@ link_libraries(pthread)
 link_libraries(binn)
 
 set(COMMON_SOURCES cipherPOC.c cipherPOC.h signaturePOC.c signaturePOC.h utils/base64.c utils/base64.h utils/socketUtils.c utils/socketUtils.h)
-set(CLIENT_SOURCES client/mainClient.c utils/aesUtils.c utils/aesUtils.h)
+set(CLIENT_SOURCES client/mainClient.c utils/aesUtils.c utils/aesUtils.h client/mainClient.h)
 set(SERVER_SOURCES server/mainServer.c)
 set(TEST_SOURCES test/fullTest.c utils/aesUtils.c utils/aesUtils.h)
 

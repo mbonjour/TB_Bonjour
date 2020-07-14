@@ -7,6 +7,10 @@
 #IncludeRegexTransform: 
 
 /home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.c
+mainClient.h
+/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.h
+
+/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.h
 sodium.h
 -
 stdio.h
