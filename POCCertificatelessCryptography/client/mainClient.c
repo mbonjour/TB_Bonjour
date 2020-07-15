@@ -2,6 +2,18 @@
 
 #define PORT 10002
 
+/*
+ * In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data :
+Test
+We give the salt and need to store it for future use :
+sBZf3JdVAAAIoObbl1UAAA==
+
+We give the nonce and need to store it for future use :
+Em/FtrzAMg5vtnL2
+
+Encypted params saved
+ */
+
 int checkIfParamsExistAlready(char* userID){
     FILE *file;
     file = fopen(userID, "r");
@@ -17,8 +29,30 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
     FILE *savedParams;
     binn *paramsObjBinn;
     savedParams = fopen(userID, "rb");
-    unsigned char *decodedParams;
+    unsigned char *decryptedParams;
     if(savedParams) {
+        unsigned char aesk[crypto_secretbox_KEYBYTES];
+        printf("Pleas give us the password to decrypt your personal data : \n");
+        // Max size of an email address
+        char* userPassword = malloc(320);
+        fgets(userPassword, 320, stdin);
+        userPassword[strlen(userPassword)-1] = '\x00';
+
+        printf("Please give us the salt :\n");
+        char* saltEntered = malloc(50);
+        fgets(saltEntered, 50, stdin);
+        saltEntered[strlen(saltEntered)-1] = '\x00';
+        size_t saltSize;
+        unsigned char *salt = base64_decode(saltEntered, strlen(saltEntered), &saltSize);
+
+        if (crypto_pwhash
+                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
+                     crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
+                     crypto_pwhash_ALG_DEFAULT) != 0) {
+            printf("Not enough memory");
+            /* out of memory */
+        }
+        free(salt);
         fseek(savedParams, 0, SEEK_END);
         long fileSize = ftell(savedParams);
         fseek(savedParams, 0, SEEK_SET);
@@ -28,10 +62,23 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
         fclose(savedParams);
 
         size_t outLen;
-        decodedParams = base64_decode(paramsB64, fileSize, &outLen);
-        paramsObjBinn = binn_open(decodedParams);
-
+        unsigned char *decodedParams = base64_decode(paramsB64, fileSize, &outLen);
         free(paramsB64);
+
+        printf("Please give us the nonce :\n");
+        char* nonceEntered = malloc(50);
+        fgets(nonceEntered, 50, stdin);
+        nonceEntered[strlen(nonceEntered)-1] = '\x00';
+        size_t outLenNonce;
+        unsigned char *nonceDecoded = base64_decode(nonceEntered, strlen(nonceEntered), &outLenNonce);
+        free(nonceEntered);
+
+        decryptedParams = malloc(outLen);
+        decrypt_message(decryptedParams, decodedParams, nonceDecoded, aesk, outLen, NULL,0);
+        free(nonceDecoded);
+        free(decodedParams);
+
+        paramsObjBinn = binn_open(decryptedParams);
     } else {
         printf("Failed to open a file to save params\n");
         return;
@@ -61,7 +108,7 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
     char* userSaved = binn_list_str(paramsObjBinn, 7);
     strcpy(userID, userSaved);
     binn_free(paramsObjBinn);
-    free(decodedParams);
+    free(decryptedParams);
 }
 
 void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
@@ -112,15 +159,52 @@ void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *e
     savingParams = fopen(userID, "wb");
     if(savingParams){
         size_t outLen;
-        unsigned char *b64params = base64_encode(binn_ptr(list), binn_size(list), &outLen);
-        unsigned long strlenTest = strlen((char*) b64params);
-        size_t test = fwrite(b64params, strlenTest, 1, savingParams);
+        unsigned char *m = binn_ptr(list);
+        unsigned long m_len = binn_size(list);
+        unsigned char aesk[crypto_secretbox_KEYBYTES];
+        printf("In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data : \n");
+        // Max size of an email address
+        char* userPassword = malloc(320);
+        fgets(userPassword, 320, stdin);
+        userPassword[strlen(userPassword)-1] = '\x00';
+
+        //TODO : store this
+        unsigned char salt[crypto_pwhash_SALTBYTES];
+        printf("We give the salt and need to store it for future use :\n");
+        size_t sizeB64Salt;
+        unsigned char *b64Salt = base64_encode(salt, crypto_pwhash_SALTBYTES, &sizeB64Salt);
+        printf("%s\n", b64Salt);
+        free(b64Salt);
+
+        randombytes_buf(salt, sizeof salt);
+
+        if (crypto_pwhash
+                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
+                     crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
+                     crypto_pwhash_ALG_DEFAULT) != 0) {
+            printf("Not enough memory");
+            /* out of memory */
+        }
+        unsigned char nonceAES[crypto_aead_aes256gcm_NPUBBYTES];
+        unsigned long long cipher_len;
+        unsigned char ciphertextAES[m_len + crypto_aead_aes256gcm_ABYTES];
+        encrypt_message(m, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len, NULL, 0);
+        printf("We give the nonce and need to store it for future use :\n");
+        size_t outLenB64Nonce;
+        unsigned char *b64nonce = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, &outLenB64Nonce);
+        printf("%s\n", b64nonce);
+        free(b64nonce);
+
+        size_t b64EncryptedLen;
+        unsigned char *encryptedContent = base64_encode(ciphertextAES, cipher_len, &b64EncryptedLen);
+        size_t test = fwrite(encryptedContent, b64EncryptedLen, 1, savingParams);
         if(test > 0){
-            printf("Params saved\n");
+            printf("Encypted params saved\n");
         } else {
             printf("Failed to save Params\n");
         }
-        free(b64params);
+        free(userPassword);
+        free(encryptedContent);
         fclose(savingParams);
     } else {
         printf("Failed to open a file to save params\n");
@@ -338,7 +422,13 @@ int main() {
             size_t m_len = strlen(message);
             unsigned long long cipher_len;
             unsigned char ciphertextAES[m_len + crypto_aead_aes256gcm_ABYTES];
-            encrypt_message(message, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len);
+            size_t authenticatedDataSize = strlen(userID) + strlen(destinationID) + strlen(subject) + 1;
+            unsigned char *authenticatedData = malloc(authenticatedDataSize);
+            memset(authenticatedData, 0, authenticatedDataSize);
+            strcpy(authenticatedData, userID);
+            strcat(authenticatedData, destinationID);
+            strcat(authenticatedData, subject);
+            encrypt_message(message, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len, authenticatedData, authenticatedDataSize);
             unsigned char *ciphertextB64 = base64_encode(ciphertextAES, cipher_len, NULL);
             printf("Encrypted message : %s\n", ciphertextB64);
             free(ciphertextB64);
@@ -410,14 +500,14 @@ int main() {
             free(destinationID);
         }
         /*
-         *  AES Key : C802921E5655D5CEEE3F3D63598C0BC62EB9C3F2D95EFDD57C2FC13A434B3B0A
-Encrypted message : PyKk1+MMWnho0CDsHr8hTXeQB1Q=
+         *  AES Key : 53D0E0FB5808FB56C300DE6F6A87965C74534634833749875428CC1E014C84CE
+Encrypted message : uU5Nf1LWEa8xbfh+rlg9qc6MZfnJbuZ8zQnsbiv5SiEFH52shw==
 
-Nonce message : AJeTBLv5J7ricTJN
+Nonce message : QQonB6XIVsiaOp8q
 
-Cipher base64 : 4oAAApAEAkMwwIAAAYAIjVmbujpxSTv/3HegTeiBeAcbDi251zkB8iR/hbyasJ0Ry08o+U6ALDqduQngT+gFCeKaKC9vrTsJ8NYmebrNgxccbm71jlAPwf28M25LJo8T85Q8xuJI32vVzUqxIpECimvQ1IPeA/lujpwh8GbuDxOSP6nF6tQlNM6aR6qoKCzozVoHBtvV6a0q6JuWYvoIltNX4LuK/rTpL4T/oDawLSbbooCiZHPKGgCx5IlbxT9kRBCjJ+85MYzoPJufvY0Y0HdLB98+NgnZKHysqC8Y/sL/lAvXF8cibj2HDq99FUjwMkkd+ys6COZtpPm8teQMW9rZlzcFnYFHRfBueTmr+6O86xRR/+gFtPiIoZtTRQTRKwVqogJEUYyeI0Wj9BIV9OpETzRwkKgKLCaNoyIxdOwv9/0CsIYT9NXs4xA6iSayAzhqpXEvcHxX120G5MMPbMdhnSj1nUPO2GWt9TmYO407R30c7PYI9nHE0YYTHCnpfn3/dcpJ2lS33PkP3P0CQzHAMQMPdhVwC4Xy4maGVKpAFeK6iB1iMbJKVDyHnDbt2KVlylOIgjcuGp1Baw/ctPppaOYCQzLAYQIXhRAsNBK812DSdUk91v/fwHx6EPByIqWkv+JyKgvmbBUdGE3h8epm/RvylNIRjJcUkMyDs+wvJ6RM8QKrUxSskKGKNYj0WIGenUPedi/9qWbh4UUcf2pIzFlnb12v4mcCQzPAYQIASSxVzXrgDxOJl4uEGEwX4F7GHDUbccLRxxWj8BxzQN1mqAwBKtxCYEhN03B7RocEi/poHDsfb4QZkTpd58WCiX5r/fKODSXFe8e4Ea3NmQ2Dmzi1IfHvvxfV0sxehD8=
+Cipher base64 : 4oAAApAEAkMwwIAAAYAXTIQzeOyxdNfunB0o0PV+27FAyiLkRG+jX865VMNlxI6bfxnU/wQ6R0Y9AnSxcRoEWPw2jOxwgC56aScpeEWkfGJeI/Hu8qAhb9J/bZ95ACXSlLvEKXC/axuxIHMmnn8ZdADQp4k36XHsuhtvSCBSnHZAB2caHYs9RrKYGofe7rYxbcjqic91EjLLYt27aqMOeTE9eg4vp1R6jK2kbislmPd3Ky4A0/UvZLSEb8iE/C2j3U69gkVA8luyaiYwghEBPmHGUiYc0TwAC8njKoBTzrklLB6RaotP4cZsnjdeFaF36H3trvfmASPfhiAAiSwIScTs/U6O8cMEUK9T9beczSiH3lxEWtCAnxkySdF+twbLxaIO3Xz0M4mjbWPIYkEAOwRaZw6VQ35SMofhbqgh1Ancr9obQNqCAd0NC8CynUGjcOM63qogGrHKKGsfTLIJWzWUlVsh2OlwiBP5KfS57nmdXuhKa5EY6xsrKCyFdet214AGcPzX5VDibjZqueQCQzHAMQMXiKM849L8SiRqxMIiLKeUDD7goQ6pXxj/bC34pCjoao6C/1rPIujDgXW5WWUkWyMCQzLAYQIRoNmLXq1HecKhY0Fp+Dr7kf41s+Z88tCzma0Ih9IsoKSf4+SSEck095nNcuIbEfgSlkVD30b7BFSwW5zwwbrgNZaaSe8TW7dmGMV7GRBUjso+7gCbDJK3TPeOM0eF/y4CQzPAYQISY4neQLfIm4X3T4SDNhEYnK0nt7LoUVNVYCjzlmLFJfjw35TrltlTvTuiJiO2tg8S+vvH5T84oRQz1qTjN+WFPgaX9QX3g96ZjqLjNdNdaqRjK5Qz2ZcXqf7l7x2gX/c=
 
-Signature (base64) : 4oAAAKACAVXAMQIPajEvUDhZuqjwv5QVh0C9ttNmr6GllknFYqxE84qPPNatgLewRzY8oseSNtanpVMBVsBhAg42o6ZR8CnNNItVoFFoTkFdkBXIRRgek/7dUdTe36AUpR2oS35JVuboRTqxi1mY8QjMj3ZXpRSunHy8JS82py0elqi8z17yYu0vk4E5joUZ5YrVg4zhx4UgT+5g/RoE2g==
+Signature (base64) : 4oAAAKACAVXAMQMPdF6P/iIcQd4oSKCGjGKb0Z5zF5bdi0gKQaxGqVpgVxZyTjcH2gHdIAJXHfLY8nsBVsBhAhJoGtkB28umJVjZW3sM9D5n0JS0laCs2PSPRg5hQQ2C/dsj6JTem3wjG66s0S7ksRm8nTJzMr2MutShUKJaCcMKivjE9Fo1fzBu8u6MZ10vkgj/sIblvpWin9bXkio7Xw==
          */
         // If we want to decrypt an email
         else {
@@ -446,6 +536,11 @@ Signature (base64) : 4oAAAKACAVXAMQIPajEvUDhZuqjwv5QVh0C9ttNmr6GllknFYqxE84qPPNa
             char *b64Nonce = malloc(100);
             fgets(b64Nonce, 100, stdin);
             b64Nonce[strlen(b64Nonce)-1] = '\x00';
+
+            printf("Subject ?\n");
+            char *subject = malloc(100);
+            fgets(subject, 100, stdin);
+            subject[strlen(subject)-1] = '\x00';
 
             signature s;
             size_t outLen;
@@ -532,7 +627,14 @@ Signature (base64) : 4oAAAKACAVXAMQIPajEvUDhZuqjwv5QVh0C9ttNmr6GllknFYqxE84qPPNa
                 // TODO récupérer d'ailleurs
                 size_t nonceSize;
                 unsigned char* nonceAES = base64_decode(b64Nonce, strlen(b64Nonce), &nonceSize);
-                decrypt_message(decrypted, ciphertext, nonceAES, aeskDecrypted, size_cipher);
+
+                size_t authenticatedDataSize = strlen(sourceAddress) + strlen(userID) + strlen(subject) + 1;
+                unsigned char *authenticatedData = malloc(authenticatedDataSize);
+                memset(authenticatedData, 0, authenticatedDataSize);
+                strcpy(authenticatedData, sourceAddress);
+                strcat(authenticatedData, userID);
+                strcat(authenticatedData, subject);
+                decrypt_message(decrypted, ciphertext, nonceAES, aeskDecrypted, size_cipher, authenticatedData, authenticatedDataSize);
                 printf("Decrypted message : %s\n", decrypted);
                 free(ciphertext);
                 free(nonceAES);

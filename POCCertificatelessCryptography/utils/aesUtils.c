@@ -1,22 +1,22 @@
 // Utils function for encrypting / decrypting AES_GCM
 #include "aesUtils.h"
 
-void encrypt_message(const char* m, unsigned char* key, unsigned char* nonce, unsigned char* cipher, unsigned long long* cipher_len, const size_t* m_len){
+void encrypt_message(const unsigned char* m, unsigned char* key, unsigned char* nonce, unsigned char* cipher, unsigned long long* cipher_len, const size_t* m_len, unsigned char* ad_data, size_t ad_len){
     // Get a nonce randomly
     randombytes_buf(nonce, crypto_aead_aes256gcm_NPUBBYTES);
     // Encrypt with AES256_GCM
-    crypto_aead_aes256gcm_encrypt(cipher, cipher_len, m, *m_len,NULL,0,NULL, nonce, key);
+    crypto_aead_aes256gcm_encrypt(cipher, cipher_len, m, *m_len, ad_data, ad_len,NULL, nonce, key);
 }
 
-void decrypt_message(unsigned char* decrypted, unsigned char* cipher, unsigned char* nonce, unsigned char* key, unsigned long long cipher_len){
+void decrypt_message(unsigned char* decrypted, unsigned char* cipher, unsigned char* nonce, unsigned char* key, unsigned long long cipher_len, unsigned char* ad_data, size_t ad_len){
     unsigned long long decrypted_len;
     // Decrypt using the given key and AES256_GCM
     if (cipher_len < crypto_aead_aes256gcm_ABYTES ||
         crypto_aead_aes256gcm_decrypt(decrypted, &decrypted_len,
                                       NULL,
                                       cipher, cipher_len,
-                                      NULL,
-                                      0,
+                                      ad_data,
+                                      ad_len,
                                       nonce, key) != 0) {
         /* message forged! */
         printf("Message not correctly authenticated ! Aborting decryption...\n");
