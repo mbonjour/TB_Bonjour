@@ -1,8 +1,0 @@
-\chapter{Outils utilisés pour la compilation}
-
-\section{RELIC Toolkit}
-Pour pouvoir faire des calculs de \textit{Pairings} et sur des courbes elliptiques je me suis fier à RELIC Toolkit~\cite{relic-toolkit} qui est une librairie C permettant ce genre de calculs assez simplement.\\
-Cette librairie demande à être compilée avec une certaine courbe et certaines options (typiquement fonction de hachage et autres...). Des presets existent et c'est donc ce que j'ai utilisé pour ce POC. Cela demande donc de fournir la librairie précompilée avec les bonnes options pour l'utilisateur. L'inconvénient c'est donc que pour mettre à jour une courbe il va falloir recompiler toute la librairie et la fournir à l'utilisateur, néanmoins on n'aura pas à changer de code.
-
-\section{Libsodium}
-Pour faire du chiffrement authentifié j'ai utilisé libsodium\footnote{https://libsodium.gitbook.io/doc/}, en effet, m'étant un peu familiarisé avec la librairie il m'a semblé être le choix le plus évident en plus de fournir des méthodes de chiffrement simples à mettre en place. Nécessite d'avoir libsodium en librairie linkée.
