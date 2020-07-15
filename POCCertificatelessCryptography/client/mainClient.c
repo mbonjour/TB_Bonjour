@@ -17,6 +17,7 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
     FILE *savedParams;
     binn *paramsObjBinn;
     savedParams = fopen(userID, "rb");
+    unsigned char *decodedParams;
     if(savedParams) {
         fseek(savedParams, 0, SEEK_END);
         long fileSize = ftell(savedParams);
@@ -25,9 +26,12 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
         char *paramsB64 = malloc(fileSize);
         fread(paramsB64, fileSize, 1, savedParams);
         fclose(savedParams);
+
         size_t outLen;
-        unsigned char *decodedParams = base64_decode(paramsB64, fileSize, &outLen);
+        decodedParams = base64_decode(paramsB64, fileSize, &outLen);
         paramsObjBinn = binn_open(decodedParams);
+
+        free(paramsB64);
     } else {
         printf("Failed to open a file to save params\n");
         return;
@@ -40,8 +44,8 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
     obj = binn_list_object(paramsObjBinn, 2);
     deserialize_MPKS(obj, mpkSignature);
 
-    int size;
-    void *bnBin;
+    int size = 0;
+    void *bnBin = NULL;
     bnBin = binn_list_blob(paramsObjBinn,3, &size);
     bn_read_bin(*encryption_secret, bnBin, size);
 
@@ -57,6 +61,7 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
     char* userSaved = binn_list_str(paramsObjBinn, 7);
     strcpy(userID, userSaved);
     binn_free(paramsObjBinn);
+    free(decodedParams);
 }
 
 void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
@@ -115,10 +120,12 @@ void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *e
         } else {
             printf("Failed to save Params\n");
         }
+        free(b64params);
         fclose(savingParams);
     } else {
         printf("Failed to open a file to save params\n");
     }
+    binn_free(list);
 }
 
 void generateAndSendParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
@@ -182,6 +189,8 @@ void generateAndSendParams(encryption_mpk *mpkSession, signature_mpk *mpkSignatu
     unsigned char* b64Payload = base64_encode(binn_ptr(pkBinnObj), binn_size(pkBinnObj), &outLen);
     printf("PK obj : %s\n", b64Payload);
     binn_object_set_str(packetSendingPK, "PK", b64Payload);
+    // TODO : Vérifi si ok
+    free(b64Payload);
 
     int sizeSent = send(sock, binn_ptr(packetSendingPK), binn_size(packetSendingPK), 0);
     printf("Size of PK : %d\n", sizeSent);
@@ -229,7 +238,11 @@ int main() {
         encryption_mpk mpkSession;
         signature_mpk mpkSignature;
         bn_t encryption_secret;
+        bn_null(encryption_secret)
+        bn_new(encryption_secret)
         bn_t signature_secret;
+        bn_null(signature_secret)
+        bn_new(signature_secret)
         encryption_pk encryptionPk;
         signature_pk signaturePk;
 
@@ -291,6 +304,7 @@ int main() {
                 printf("Not implemented yet");
                 return -1;
             }
+            free(userChoice);
 
             //TODO : do this for all destination, or implement something on te KGC to send all the asked public keys
             int sock = connectToKGC();
@@ -308,6 +322,7 @@ int main() {
             size_t out_len_test;
             unsigned char *decodedTest = base64_decode(bufferGPE, testSize, &out_len_test);
             deserialize_PKE(decodedTest, &encryption_destinationPk);
+            free(decodedTest);
 
             // The other user takes ID of the destination and PK to encrypt his message
             // With the final version we will need to append a timestamp on the ID
@@ -324,8 +339,12 @@ int main() {
             unsigned long long cipher_len;
             unsigned char ciphertextAES[m_len + crypto_aead_aes256gcm_ABYTES];
             encrypt_message(message, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len);
-            printf("Encrypted message : %s\n", base64_encode(ciphertextAES, cipher_len, NULL));
-            printf("Nonce message : %s\n", base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, NULL));
+            unsigned char *ciphertextB64 = base64_encode(ciphertextAES, cipher_len, NULL);
+            printf("Encrypted message : %s\n", ciphertextB64);
+            free(ciphertextB64);
+            unsigned char *nonceAesB64 = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, NULL);
+            printf("Nonce message : %s\n", nonceAesB64);
+            free(nonceAesB64);
 
             // Encryption of the AES Key with the Public key of the destination
             cipher c;
@@ -334,7 +353,10 @@ int main() {
             binn *cipherBinnObect;
             cipherBinnObect = binn_object();
             serialize_Cipher(cipherBinnObect, c);
-            printf("Cipher base64 : %s\n", base64_encode(binn_ptr(cipherBinnObect), binn_size(cipherBinnObect), NULL));
+            unsigned char *cipherB64 = base64_encode(binn_ptr(cipherBinnObect), binn_size(cipherBinnObect), NULL);
+            printf("Cipher base64 : %s\n", cipherB64);
+            free(cipherB64);
+            binn_free(cipherBinnObect);
 
             // For the signature we need our PPK
             signature_ppk signature_senderPpk;
@@ -349,7 +371,6 @@ int main() {
 
             read(sock, bufferPPK, 1024);
             deserialize_PPKS(bufferPPK, &signature_senderPpk);
-
 
             // Computes Secret User Keys for Signature
             signature_sk signature_senderSk;
@@ -374,23 +395,29 @@ int main() {
             binn *signatureObjBinn;
             signatureObjBinn = binn_object();
             serialize_Signature(signatureObjBinn, s);
-            printf("Signature (base64) : %s\n", base64_encode(binn_ptr(signatureObjBinn), binn_size(signatureObjBinn), NULL));
+            unsigned char *b64signatureObjBinn = base64_encode(binn_ptr(signatureObjBinn), binn_size(signatureObjBinn), NULL);
+            printf("Signature (base64) : %s\n", b64signatureObjBinn);
+            free(b64signatureObjBinn);
+            binn_free(signatureObjBinn);
 
             //TODO : Construct a structure of the email to be able to send easily
 
             // ----------------------------------------------------------------------
             // Now the message is encrypted and authentified with an AES Key and the key is encrypted and signed using CLPKC
             // ----------------------------------------------------------------------
+            free(message);
+            free(subject);
+            free(destinationID);
         }
         /*
-         *  AES Key : B2B297914A1E63416928570D3F1BD69ECAF45059CA0720769D0E528A1BCAE62D
-Encrypted message : k0gMovoXdqFnZLvJSGVaq81svOOWUJk60k4n
+         *  AES Key : F1821D8CFF0B1BBDD9B083F32DE75B4A7340F75E36C28FE4E3AEEE8E5CB1E865
+Encrypted message : cVfiJ6cx9P4JEMKYkRPwGyea8YM=
 
-Nonce message : mvZ4NAJuPlwsUlz/
+Nonce message : AUt1ViLpgnN3JoD2
 
-Cipher base64 : 4oAAApAEAkMwwIAAAYATEi16ZUSmdYqTmpieFb7DpbUDIjLnIEoaUwzqp9cYF4lRlQvdnRxJkpU5Ib5dfKkFWoUAlSxmrVFUw2kHIvj66QcbR5d3TjR0FpVgzSncRFpu98lb75RiymKRUQAnJvUT5r9F+86o9VBYpwOc/ytfHKvPIM5nsKv+2zoWhTghtqowUjTB60x5H+rqkGq2gLwYt0k7FAtilONObOp6wiGpp5mLVou+R9F9cgerFlU/6iz6YrI4Z3LXNi6CG3qKvxcRqZ8N5d5PvFZNaQgiCCBOEXIxF5iI6q6a2U20rLM8eaTBiBbxCi20fPSPzmMZ/WsKXsRZn+/BwkciFUYJQOo6MpNdq+GD5UmzRxKJIoafSy6pg34z68urcBwanlEiA6URhPFX77JtLKXv5oUKdDTJQ06nRwUwz9zDsjdFPPhK7AhTDiI45qgoJ+AFUWkak6MCwSXFp1kZv65f3UAqKVycWfIaeNIwHnfIEKRqr5HYKoMdcIClT5oDS/Q8YjhNM8ACQzHAMQIYjcw0sfBI+dQff4SZPdKAaXw+zQQu+RecLkClwjXMEA539s8IB+5LX7sOzADkABYCQzLAYQMFSWpY8QOxUf31pvFtE3VDEyovCNhwKDV19zcPZT1K9Lql2oEwPt6eBdy259KRRsAUZTj9ZObpG52Yn4rIg+sEZLkqS2N3XboBE48A+v0uuvCk3JvPjq2Crt5PZUsjFC4CQzPAYQIC9fhR3tAyqWCb51LdZQx+4kS19Q0Oog9UD1AT1C/4GEpn2l/cYA8ruP1WGDQzaiASoHKbkqjO/4/8ma7V1Z17qtevPhyFny997gOE7uk5Rh8FZAOWNpDDdGi7Kl6jip8=
+Cipher base64 : 4oAAApAEAkMwwIAAAYAFhbmlejjqWrrQnJRZ0O3ttk3vfm3Qig/uhHi2gRzZvp/GPd49E/KTyQZ6GLwW73oZyRZr9dsnPAjWwnlnBUkQf0Xi3WWfZ80QFGrYrSqpiU90hz70Vog0Dye+bkFLAqUHHryDREitMz5XQjDw/8BesUxkU/olCkfUgWjXddXBJm+AeZ3tUIK2Be3ZG5dpkycLF1So6L2OjntjD+Z64gwvrmHHvBdhDW6QsWtLiJlI1VKRnBZ2ikrKrUoGP8L2evcEVLF8Q9vmG5v1hlRkaAItF0E+ej6Eom9YUZQsRgzyl5aN0sgm9o3bNuyEJKtvohcLqprKO6ii2qqgXE6Nc5gRvZaCASp5nJz7tt8guXi2pA1p1znnofOLdAv1G62/y+sRo2/Y1Kd1exQnDSjTOFjV4wJx8lA0KmzV2prafoeSCIe6kcOGWduFfFzxUQAO+bcLSBZhi6kaBx1v5gO8IostwAUbJ1s8LDx3zBCWpqL3FLQknyGyX6VWf57hiyxK3YMCQzHAMQINAF58CmO7ZNcnM6VBxhvhv1eIrox12JJtFgGe3dzeASYrilkJqNMYn+Q7sIODJQgCQzLAYQMGaOruZsK806verM8wEg3n0CH/1YzcIyvQGqlYHICVEHlPr04+HDQjR9tCFxUlZw4Zf1OIGFK3mCnn6y0gteAJf8p2B8vAN+4rsMDro/c8Z2O3te/icyT7BCSvyO/z+wICQzPAYQIRul2bfFT4Fu0ab5nNU5hS8oICIC6nfFx6U+bilO7mPg/fx9ZVMe+W746pr8ICPckEn0guYWSHqUVNvNmc4lZ356Ubzv49DAfF8XGjnp4FhGutUJl3KBJ9A4mocc/Y9Ws=
 
-Signature (base64) : 4oAAAKACAVXAMQICof2ZcSlOd8PFjRJbSaDFGFoXAKFFf5f8jgqM0jEb/8POL32q++nZdnGUgKgYwOEBVsBhAwTdV++TgmNU0Qck90uPmcM/8uLQs5hg/GwXhj9tqXQCKQ3seoAnxk3z+5ZByStVTQG9g369ZwHdTIWYL5BiUaCeN9sT3F73sjpJszL52vQdVOrvDrsmN79XQKfKyG5GNQ==
+Signature (base64) : 4oAAAKACAVXAMQMNHbEYCfNUF7t3ljZf5w/za2c4flQJVWtjrV0iAck/aAt3R+A8w8TyipYR65Gc5PABVsBhAhTeoju/hssBuuWc4pte/XKm0TkeTBV4WuFXK9ols08dMnK4eMg/1HRXdcTZjTJl4hieO0G1FTuNslax21Oexovi6+4SKlyugiEYFQO+JNwj5t0EcOD5gxb2FLldBzzo9g==
          */
         // If we want to decrypt an email
         else {
@@ -424,9 +451,11 @@ Signature (base64) : 4oAAAKACAVXAMQICof2ZcSlOd8PFjRJbSaDFGFoXAKFFf5f8jgqM0jEb/8P
             size_t outLen;
             unsigned char *signatureBinn = base64_decode(b64Signature, strlen(b64Signature), &outLen);
             deserialize_Signature(signatureBinn, &s);
+            free(signatureBinn);
             cipher c;
             unsigned char *cipherBinn = base64_decode(b64Cipher, strlen(b64Cipher),&outLen);
             deserialize_Cipher(cipherBinn, &c);
+            free(cipherBinn);
 
             // Computes the message to sign, so the cipher struct
             int c0size = gt_size_bin(c.c0, 1);
@@ -452,8 +481,8 @@ Signature (base64) : 4oAAAKACAVXAMQICof2ZcSlOd8PFjRJbSaDFGFoXAKFFf5f8jgqM0jEb/8P
             // printf("%s\n", bufferGPE);
             signature_pk signature_sourcePK;
             size_t out_len_test;
-            unsigned char *decodedTest = base64_decode(bufferGPS, testSize, &out_len_test);
-            deserialize_PKS(decodedTest, &signature_sourcePK);
+            unsigned char *signature_sourcePKBin = base64_decode(bufferGPS, testSize, &out_len_test);
+            deserialize_PKS(signature_sourcePKBin, &signature_sourcePK);
 
             // We can go for decrypting and verification
             // We can verify directly with the public keys of the sender
@@ -464,7 +493,7 @@ Signature (base64) : 4oAAAKACAVXAMQICof2ZcSlOd8PFjRJbSaDFGFoXAKFFf5f8jgqM0jEb/8P
                 // For this we need our Partial Private Keys with the ID used to encrypt the message
                 encryption_ppk PartialKeysBob;
 
-                int sock = connectToKGC();
+                sock = connectToKGC();
 
                 char bufferPPKE[1024] = {0};
                 binn* bobPpk;
@@ -498,14 +527,26 @@ Signature (base64) : 4oAAAKACAVXAMQICof2ZcSlOd8PFjRJbSaDFGFoXAKFFf5f8jgqM0jEb/8P
                 size_t size_cipher;
                 unsigned char *ciphertext = base64_decode(b64Encrypted, strlen(b64Encrypted), &size_cipher);
                 unsigned char decrypted[size_cipher];
+                memset(decrypted, 0, size_cipher);
 
                 // TODO récupérer d'ailleurs
                 size_t nonceSize;
                 unsigned char* nonceAES = base64_decode(b64Nonce, strlen(b64Nonce), &nonceSize);
                 decrypt_message(decrypted, ciphertext, nonceAES, aeskDecrypted, size_cipher);
                 printf("Decrypted message : %s\n", decrypted);
+                free(ciphertext);
+                free(nonceAES);
             }
+
+            free(signature_sourcePKBin);
+            free(b64Nonce);
+            free(b64Cipher);
+            free(b64Encrypted);
+            free(b64Signature);
+            free(sourceAddress);
         }
+        free(charUserChoice);
+        free(userID);
     }
     core_clean();
 }
