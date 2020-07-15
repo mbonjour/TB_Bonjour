@@ -3,18 +3,124 @@
 #define PORT 10002
 
 int checkIfParamsExistAlready(){
-    //TODO: Check if there is already params saved on the current dir, if there is return 1
+    FILE *file;
+    file = fopen("paramsBin", "r");
+    if (file){
+        fclose(file);
+        return 1;
+    }
     return 0;
 }
 
 void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
                bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID){
-    // TODO get all params from file
+    FILE *savedParams;
+    binn *paramsObjBinn;
+    savedParams = fopen("paramsBin", "rb");
+    if(savedParams) {
+        fseek(savedParams, 0, SEEK_END);
+        long fileSize = ftell(savedParams);
+        fseek(savedParams, 0, SEEK_SET);
+
+        char *paramsB64 = malloc(fileSize);
+        fread(paramsB64, fileSize, 1, savedParams);
+        fclose(savedParams);
+        size_t outLen;
+        unsigned char *decodedParams = base64_decode(paramsB64, fileSize, &outLen);
+        paramsObjBinn = binn_open(decodedParams);
+    } else {
+        printf("Failed to open a file to save params\n");
+        return;
+    }
+
+    binn *obj;
+    obj = binn_list_object(paramsObjBinn, 1);
+    deserialize_MPKE(obj, mpkSession);
+
+    obj = binn_list_object(paramsObjBinn, 2);
+    deserialize_MPKS(obj, mpkSignature);
+
+    int size;
+    void *bnBin;
+    bnBin = binn_list_blob(paramsObjBinn,3, &size);
+    bn_read_bin(*encryption_secret, bnBin, size);
+
+    bnBin = binn_list_blob(paramsObjBinn,4, &size);
+    bn_read_bin(*signature_secret, bnBin, size);
+
+    obj = binn_list_object(paramsObjBinn, 5);
+    deserialize_PKE(obj, encryptionPk);
+
+    obj = binn_list_object(paramsObjBinn, 6);
+    deserialize_PKS(obj, signaturePk);
+
+    char* userSaved = binn_list_str(paramsObjBinn, 7);
+    strcpy(userID, userSaved);
+    binn_free(paramsObjBinn);
 }
+
 void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
                 bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID){
+    binn* list;
+    list = binn_list();
+    binn *obj;
+    obj = binn_object();
+    serialize_MPKE(obj, *mpkSession);
+    binn_list_add_object(list, obj);
+    binn_free(obj);
 
+    obj = binn_object();
+    serialize_MPKS(obj, *mpkSignature);
+    binn_list_add_object(list, obj);
+    binn_free(obj);
+
+    obj = binn_object();
+    int size = bn_size_bin(*encryption_secret);
+    uint8_t *bin = malloc(size);
+    bn_write_bin(bin, size, *encryption_secret);
+    binn_list_add_blob(list, bin, size);
+    binn_free(obj);
+    free(bin);
+
+    obj = binn_object();
+    size = bn_size_bin(*signature_secret);
+    bin = malloc(size);
+    bn_write_bin(bin, size, *signature_secret);
+    binn_list_add_blob(list, bin, size);
+    binn_free(obj);
+    free(bin);
+
+    obj = binn_object();
+    serialize_PKE(obj, *encryptionPk);
+    binn_list_add_object(list, obj);
+    binn_free(obj);
+
+    // TODO : Verify if OK
+    obj = binn_object();
+    serialize_PKS(obj, *signaturePk);
+    binn_list_add_object(list, obj);
+    binn_free(obj);
+
+    binn_list_add_str(list, userID);
+
+    FILE *savingParams;
+    savingParams = fopen("paramsBin", "wb");
+    if(savingParams){
+        size_t outLen;
+        unsigned char *b64params = base64_encode(binn_ptr(list), binn_size(list), &outLen);
+        unsigned long strlenTest = strlen((char*) b64params);
+        size_t test = fwrite(b64params, strlenTest, 1, savingParams);
+        if(test > 0){
+            printf("Params saved\n");
+        } else {
+            printf("Failed to save Params\n");
+        }
+        fclose(savingParams);
+    } else {
+        printf("Failed to open a file to save params\n");
+    }
 }
+
 void generateAndSendParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
         bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID){
 
@@ -325,10 +431,25 @@ int main() {
             g2_write_bin(&mSig[c0size + c1Size], c2Size, c.c2, 1);
             g2_write_bin(&mSig[c0size + c1Size + c2Size], c3Size, c.c3, 1);
 
+            int sock = connectToKGC();
+            binn *getPKBinnObj;
+            getPKBinnObj = binn_object();
+            binn_object_set_str(getPKBinnObj, "opCode", "GPS");
+            binn_object_set_str(getPKBinnObj, "ID", sourceAddress);
+            send(sock, binn_ptr(getPKBinnObj), binn_size(getPKBinnObj), 0);
+            binn_free(getPKBinnObj);
+
+            char bufferGPS[512] = {0};
+            int testSize = recv(sock, bufferGPS, 512, 0);
+            // printf("%s\n", bufferGPE);
+            signature_pk signature_sourcePK;
+            size_t out_len_test;
+            unsigned char *decodedTest = base64_decode(bufferGPS, testSize, &out_len_test);
+            deserialize_PKS(decodedTest, &signature_sourcePK);
 
             // We can go for decrypting and verification
             // We can verify directly with the public keys of the sender
-            int test = verify(s, signaturePk, mpkSignature, sourceAddress, mSig);
+            int test = verify(s, signature_sourcePK, mpkSignature, sourceAddress, mSig);
             printf("\nVerification of the key (0 if correct 1 if not) : %d\n", test);
             // if the verif is ok we can continue, otherwise we can stop here
             if(test == 0) {
