@@ -79,8 +79,9 @@ void* socketThread(void *arg){
         if( result != UNQLITE_OK ){
             printf("No record found\n");
         }
-        //Allocate a buffer big enough to hold the record content
-        void* zBuf = (char *)malloc(bufLen);
+        //Allocate a buffer big enough to hold the record content and \0 (necessary to print, not mandatory)
+        void* zBuf = (char *)malloc(bufLen+1);
+        memset(zBuf, 0, bufLen+1);
         if( zBuf == NULL ){ printf("Can't allocate enough size\n"); }
 
         //Copy record content in our buffer
