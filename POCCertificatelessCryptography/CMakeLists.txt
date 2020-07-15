@@ -3,14 +3,15 @@ project(POCCertificatelessCryptography C)
 
 set(CMAKE_C_STANDARD 11)
 
-include_directories(. ${CMAKE_SOURCE_DIR}/libs/relic/include ${CMAKE_SOURCE_DIR}/libs/unqlite ${CMAKE_SOURCE_DIR}/libs/relic-target/include)
+include_directories(. ${CMAKE_SOURCE_DIR}/libs/relic/include ${CMAKE_SOURCE_DIR}/libs/unqlite ${CMAKE_SOURCE_DIR}/libs/relic-target/include ${CMAKE_SOURCE_DIR}/libs/binn)
 
 link_libraries(${CMAKE_SOURCE_DIR}/libs/relic-target/lib/librelic.so)
 link_libraries(${CMAKE_SOURCE_DIR}/libs/unqlite/libunqlite.a)
 link_libraries(sodium)
 #link_libraries(nsl)
 link_libraries(pthread)
-link_libraries(binn)
+link_libraries(${CMAKE_SOURCE_DIR}/libs/binn/libbinn.so.3.0)
+#link_libraries(binn)
 
 set(COMMON_SOURCES cipherPOC.c cipherPOC.h signaturePOC.c signaturePOC.h utils/base64.c utils/base64.h utils/socketUtils.c utils/socketUtils.h)
 set(CLIENT_SOURCES client/mainClient.c utils/aesUtils.c utils/aesUtils.h client/mainClient.h)

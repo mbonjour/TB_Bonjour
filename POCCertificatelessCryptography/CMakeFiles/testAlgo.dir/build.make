@@ -176,6 +176,7 @@ testAlgo: CMakeFiles/testAlgo.dir/utils/socketUtils.c.o
 testAlgo: CMakeFiles/testAlgo.dir/build.make
 testAlgo: libs/relic-target/lib/librelic.so
 testAlgo: libs/unqlite/libunqlite.a
+testAlgo: libs/binn/libbinn.so.3.0
 testAlgo: CMakeFiles/testAlgo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable testAlgo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/testAlgo.dir/link.txt --verbose=$(VERBOSE)

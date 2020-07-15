@@ -3,6 +3,7 @@
 
 CMakeFiles/testAlgo.dir/cipherPOC.c.o: cipherPOC.c
 CMakeFiles/testAlgo.dir/cipherPOC.c.o: cipherPOC.h
+CMakeFiles/testAlgo.dir/cipherPOC.c.o: libs/binn/binn.h
 CMakeFiles/testAlgo.dir/cipherPOC.c.o: libs/relic-target/include/relic_conf.h
 CMakeFiles/testAlgo.dir/cipherPOC.c.o: libs/relic/include/relic.h
 CMakeFiles/testAlgo.dir/cipherPOC.c.o: libs/relic/include/relic_alloc.h
@@ -33,6 +34,7 @@ CMakeFiles/testAlgo.dir/cipherPOC.c.o: libs/relic/include/relic_util.h
 
 CMakeFiles/testAlgo.dir/signaturePOC.c.o: signaturePOC.c
 CMakeFiles/testAlgo.dir/signaturePOC.c.o: signaturePOC.h
+CMakeFiles/testAlgo.dir/signaturePOC.c.o: libs/binn/binn.h
 CMakeFiles/testAlgo.dir/signaturePOC.c.o: libs/relic-target/include/relic_conf.h
 CMakeFiles/testAlgo.dir/signaturePOC.c.o: libs/relic/include/relic.h
 CMakeFiles/testAlgo.dir/signaturePOC.c.o: libs/relic/include/relic_alloc.h
@@ -63,6 +65,7 @@ CMakeFiles/testAlgo.dir/signaturePOC.c.o: libs/relic/include/relic_util.h
 
 CMakeFiles/testAlgo.dir/test/fullTest.c.o: test/fullTest.c
 CMakeFiles/testAlgo.dir/test/fullTest.c.o: cipherPOC.h
+CMakeFiles/testAlgo.dir/test/fullTest.c.o: libs/binn/binn.h
 CMakeFiles/testAlgo.dir/test/fullTest.c.o: libs/relic-target/include/relic_conf.h
 CMakeFiles/testAlgo.dir/test/fullTest.c.o: libs/relic/include/relic.h
 CMakeFiles/testAlgo.dir/test/fullTest.c.o: libs/relic/include/relic_alloc.h

@@ -109,7 +109,7 @@ void* socketThread(void *arg){
 
         //Copy record content in our buffer
         unqlite_kv_fetch(pDb,path,-1,zBuf,&bufLen);
-        printf("PKE (Sent) : %s\n", zBuf);
+        printf("PKS (Sent) : %s\n", zBuf);
         send(newSocket, zBuf, bufLen, 0);
         free(zBuf);
     }

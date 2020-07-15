@@ -48,6 +48,7 @@
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
@@ -71,6 +72,7 @@
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
@@ -94,6 +96,7 @@
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
@@ -117,6 +120,7 @@
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
@@ -140,6 +144,7 @@
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>
@@ -163,6 +168,7 @@
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
 					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.1.0/include-fixed"/>

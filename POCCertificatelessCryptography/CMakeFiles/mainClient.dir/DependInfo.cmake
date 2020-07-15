@@ -19,6 +19,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "libs/relic/include"
   "libs/unqlite"
   "libs/relic-target/include"
+  "libs/binn"
   )
 
 # Targets to which this target links.

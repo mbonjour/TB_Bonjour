@@ -176,6 +176,7 @@ mainClient: CMakeFiles/mainClient.dir/utils/socketUtils.c.o
 mainClient: CMakeFiles/mainClient.dir/build.make
 mainClient: libs/relic-target/lib/librelic.so
 mainClient: libs/unqlite/libunqlite.a
+mainClient: libs/binn/libbinn.so.3.0
 mainClient: CMakeFiles/mainClient.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable mainClient"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mainClient.dir/link.txt --verbose=$(VERBOSE)

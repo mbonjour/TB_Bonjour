@@ -102,6 +102,8 @@ string.h
 binn.h
 -
 
+libs/binn/binn.h
+
 libs/relic-target/include/relic_conf.h
 relic_label.h
 libs/relic-target/include/relic_label.h

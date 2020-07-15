@@ -2,9 +2,9 @@
 
 #define PORT 10002
 
-int checkIfParamsExistAlready(){
+int checkIfParamsExistAlready(char* userID){
     FILE *file;
-    file = fopen("paramsBin", "r");
+    file = fopen(userID, "r");
     if (file){
         fclose(file);
         return 1;
@@ -16,7 +16,7 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
                bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID){
     FILE *savedParams;
     binn *paramsObjBinn;
-    savedParams = fopen("paramsBin", "rb");
+    savedParams = fopen(userID, "rb");
     if(savedParams) {
         fseek(savedParams, 0, SEEK_END);
         long fileSize = ftell(savedParams);
@@ -104,7 +104,7 @@ void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *e
     binn_list_add_str(list, userID);
 
     FILE *savingParams;
-    savingParams = fopen("paramsBin", "wb");
+    savingParams = fopen(userID, "wb");
     if(savingParams){
         size_t outLen;
         unsigned char *b64params = base64_encode(binn_ptr(list), binn_size(list), &outLen);
@@ -232,10 +232,14 @@ int main() {
         bn_t signature_secret;
         encryption_pk encryptionPk;
         signature_pk signaturePk;
+
         // Max size of an email address
         char* userID = malloc(320);
+        printf("What's your email ?\n");
+        fgets(userID, 320, stdin);
+        userID[strlen(userID)-1] = '\x00';
 
-        int existingParams = checkIfParamsExistAlready();
+        int existingParams = checkIfParamsExistAlready(userID);
         if(existingParams == 1){
             //TODO Recup params
             printf("Params found on disk, retrieving these\n");
@@ -243,10 +247,7 @@ int main() {
                       &signature_secret, &encryptionPk, &signaturePk, userID);
         }
         // If there are no params saved we can go for a full generation
-
         else {
-            printf("What's your email ?\n");
-            fgets(userID, 320, stdin);
             generateAndSendParams(&mpkSession, &mpkSignature, &encryption_secret, &signature_secret, &encryptionPk, &signaturePk, userID);
             saveParams(&mpkSession, &mpkSignature, &encryption_secret, &signature_secret, &encryptionPk, &signaturePk, userID);
         }
@@ -254,6 +255,8 @@ int main() {
         int sendOrDecryptUser;
         char* charUserChoice = malloc(4);
         fgets(charUserChoice, 4, stdin);
+        charUserChoice[strlen(charUserChoice)-1] = '\x00';
+
         sendOrDecryptUser = strtol(charUserChoice, NULL, 10);
         // If we want to send an email
         if(sendOrDecryptUser == 0) {
@@ -262,16 +265,19 @@ int main() {
             printf("Now params are loaded, please enter the destination address of the email :\n");
             char *destinationID = malloc(320);
             fgets(destinationID, 320, stdin);
+            destinationID[strlen(destinationID)-1] = '\x00';
 
             // Max size seems to be like more than 130 chars but some email clients truncate to 130
             printf("What's the subject :\n");
             char *subject = malloc(130);
             fgets(subject, 130, stdin);
+            subject[strlen(subject)-1] = '\x00';
 
             printf("Message :\n");
             //arbitrary size
             char *message = malloc(10000);
             fgets(message, 10000, stdin);
+            message[strlen(message)-1] = '\x00';
             printf("\n\nHere is a summary of the mail that will be sent, are you ok (yes/no) ?\n");
             printf("From : %s\n", userID);
             printf("To : %s\n", destinationID);
@@ -280,6 +286,7 @@ int main() {
 
             char *userChoice = malloc(4);
             fgets(userChoice, 4, stdin);
+            userChoice[strlen(userChoice)-1] = '\x00';
             if (strcmp(userChoice, "no") == 0) {
                 printf("Not implemented yet");
                 return -1;
@@ -318,6 +325,7 @@ int main() {
             unsigned char ciphertextAES[m_len + crypto_aead_aes256gcm_ABYTES];
             encrypt_message(message, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len);
             printf("Encrypted message : %s\n", base64_encode(ciphertextAES, cipher_len, NULL));
+            printf("Nonce message : %s\n", base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, NULL));
 
             // Encryption of the AES Key with the Public key of the destination
             cipher c;
@@ -375,26 +383,14 @@ int main() {
             // ----------------------------------------------------------------------
         }
         /*
-         *  AES Key : 5E9248130025092FA2F3258020C3A5350D242183792AB33EB28581EC492470A2
-            Encrypted message : uxf5jCtPhQMJFbUut0syJqcLgM86fdgqRmUNtejvJXvPA2jMXXepLrWWdfqj
+         *  AES Key : B2B297914A1E63416928570D3F1BD69ECAF45059CA0720769D0E528A1BCAE62D
+Encrypted message : k0gMovoXdqFnZLvJSGVaq81svOOWUJk60k4n
 
-            Cipher base64 : 4oAAApAEAkMwwIAAAYASlV0gx5Ws+R47R0ymyMPlVvfsUHbfBv3gQMabuoGoGiiXpgwWs9nS
-            dRZjMehSIlUSZ0oqN/OBe86QJpyKyNmKJ26y19Jx3x5vNM9oUhJufdkplQcPmfdySOivipJd
-            Zj8UfV9LTJz7fcRAnf+wJQkR1Gq5wKBqfdR97j03lE3kCMTX7H7WhH3q71jeInQtS10Q5Olr
-            Q7tRNBsT1UMCVQ3uhOvvmPXgAalfullP/BcIJDK5tPfinqC407K4TkGAmdMPniZFYS3Ve1mn
-            AcO6IykcfoNFjr4nPaGaz19vegg4xcs/1puvUk2fIqYcC9dpr/kNcmBHzWBE/nz4RLzAPGUE
-            52tCtswRcb8vdQvbY5cY14ACC2jKE5Z4/8EFpGGI4EkZyt7GgcUa6/6JbgkNsA0oVEeiJz01
-            se0D/Z9z83JksW6637ydxs/ZhiKcsGwo6wMXdBWJiNBLCO8C5eQUJtDU8A7mn0DLil1vxAKJ
-            zqbzYy5k5NP/uEv9/W8CR/845kMCQzHAMQMMpC19TbzAMJqyETILRYOdyxhxGgSbVAu7GCx+
-            PmdaKx0FUh747gJlDecc4kIGA1ICQzLAYQIATUujFb3UaZv/KMyS6biBxgXkWaYJI5CHM3i7
-            KsjepT8MmFAsaUduAEltKIZOkpICIBubQD2mt//VErrv1E4PyEjZwkT6o4Py5+CDaoUh9JVM
-            yehf6VYRpBy7/1wXt6oCQzPAYQISwGvMHXJTuqXawIQ1bZxiUn5ujn3nqSteYABlPzXifYYK
-            zVK/WZ2QNdHCa7/XlrAOKLqhpOfg30ThrlFsOGITdsh3j3rTivswmTaBAl1MtYRL8IHFPi0g
-            fAjpUapYlUI=
+Nonce message : mvZ4NAJuPlwsUlz/
 
-            Signature (base64) : 4oAAAKACAVXAMQIGj8k8TBZOIH8fV+qSTY5Hw/QF4gLYTUCrie6pYWuMm6l/rZa8L7O4ZHHe
-            sWBo2/UBVsBhAgUu2BMVIv9e33X9fkNbVdBXjeRH8AbCUwTMVWcl/hdvR4h+qH7BFwS6qQiH
-            RlXgTwL60kg1eJTGDcAsZWWdvKC85fI08LP1BkGynpT63qNBM7am6PgihoQ2MvJqO0JjXQ==
+Cipher base64 : 4oAAApAEAkMwwIAAAYATEi16ZUSmdYqTmpieFb7DpbUDIjLnIEoaUwzqp9cYF4lRlQvdnRxJkpU5Ib5dfKkFWoUAlSxmrVFUw2kHIvj66QcbR5d3TjR0FpVgzSncRFpu98lb75RiymKRUQAnJvUT5r9F+86o9VBYpwOc/ytfHKvPIM5nsKv+2zoWhTghtqowUjTB60x5H+rqkGq2gLwYt0k7FAtilONObOp6wiGpp5mLVou+R9F9cgerFlU/6iz6YrI4Z3LXNi6CG3qKvxcRqZ8N5d5PvFZNaQgiCCBOEXIxF5iI6q6a2U20rLM8eaTBiBbxCi20fPSPzmMZ/WsKXsRZn+/BwkciFUYJQOo6MpNdq+GD5UmzRxKJIoafSy6pg34z68urcBwanlEiA6URhPFX77JtLKXv5oUKdDTJQ06nRwUwz9zDsjdFPPhK7AhTDiI45qgoJ+AFUWkak6MCwSXFp1kZv65f3UAqKVycWfIaeNIwHnfIEKRqr5HYKoMdcIClT5oDS/Q8YjhNM8ACQzHAMQIYjcw0sfBI+dQff4SZPdKAaXw+zQQu+RecLkClwjXMEA539s8IB+5LX7sOzADkABYCQzLAYQMFSWpY8QOxUf31pvFtE3VDEyovCNhwKDV19zcPZT1K9Lql2oEwPt6eBdy259KRRsAUZTj9ZObpG52Yn4rIg+sEZLkqS2N3XboBE48A+v0uuvCk3JvPjq2Crt5PZUsjFC4CQzPAYQIC9fhR3tAyqWCb51LdZQx+4kS19Q0Oog9UD1AT1C/4GEpn2l/cYA8ruP1WGDQzaiASoHKbkqjO/4/8ma7V1Z17qtevPhyFny997gOE7uk5Rh8FZAOWNpDDdGi7Kl6jip8=
+
+Signature (base64) : 4oAAAKACAVXAMQICof2ZcSlOd8PFjRJbSaDFGFoXAKFFf5f8jgqM0jEb/8POL32q++nZdnGUgKgYwOEBVsBhAwTdV++TgmNU0Qck90uPmcM/8uLQs5hg/GwXhj9tqXQCKQ3seoAnxk3z+5ZByStVTQG9g369ZwHdTIWYL5BiUaCeN9sT3F73sjpJszL52vQdVOrvDrsmN79XQKfKyG5GNQ==
          */
         // If we want to decrypt an email
         else {
@@ -402,23 +398,35 @@ int main() {
             printf("From ?\n");
             char *sourceAddress = malloc(320);
             fgets(sourceAddress, 320, stdin);
+            sourceAddress[strlen(sourceAddress)-1] = '\x00';
 
             printf("Base64 of signature ?\n");
             char *b64Signature = malloc(300);
             fgets(b64Signature, 300, stdin);
+            b64Signature[strlen(b64Signature)-1] = '\x00';
 
             printf("Base64 of cipher ?\n");
             char *b64Cipher = malloc(1000);
             fgets(b64Cipher, 1000, stdin);
+            b64Cipher[strlen(b64Cipher)-1] = '\x00';
 
             printf("Base64 of encrypted mesage ?\n");
             char *b64Encrypted = malloc(300);
             fgets(b64Encrypted, 300, stdin);
+            b64Encrypted[strlen(b64Encrypted)-1] = '\x00';
+
+            printf("Base64 of nonce ?\n");
+            char *b64Nonce = malloc(100);
+            fgets(b64Nonce, 100, stdin);
+            b64Nonce[strlen(b64Nonce)-1] = '\x00';
 
             signature s;
-            deserialize_Signature(base64_decode(b64Signature, strlen(b64Signature), NULL), &s);
+            size_t outLen;
+            unsigned char *signatureBinn = base64_decode(b64Signature, strlen(b64Signature), &outLen);
+            deserialize_Signature(signatureBinn, &s);
             cipher c;
-            deserialize_Cipher(base64_decode(b64Cipher, strlen(b64Cipher), NULL), &c);
+            unsigned char *cipherBinn = base64_decode(b64Cipher, strlen(b64Cipher),&outLen);
+            deserialize_Cipher(cipherBinn, &c);
 
             // Computes the message to sign, so the cipher struct
             int c0size = gt_size_bin(c.c0, 1);
@@ -488,11 +496,12 @@ int main() {
                 get_key(aeskDecrypted, decryptedMessage);
 
                 size_t size_cipher;
-                unsigned char *ciphertext = base64_decode(b64Encrypted, strlen(b64Cipher), &size_cipher);
+                unsigned char *ciphertext = base64_decode(b64Encrypted, strlen(b64Encrypted), &size_cipher);
                 unsigned char decrypted[size_cipher];
 
                 // TODO récupérer d'ailleurs
-                unsigned char* nonceAES;
+                size_t nonceSize;
+                unsigned char* nonceAES = base64_decode(b64Nonce, strlen(b64Nonce), &nonceSize);
                 decrypt_message(decrypted, ciphertext, nonceAES, aeskDecrypted, size_cipher);
                 printf("Decrypted message : %s\n", decrypted);
             }

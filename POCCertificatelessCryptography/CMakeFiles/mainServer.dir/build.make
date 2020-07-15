@@ -161,6 +161,7 @@ mainServer: CMakeFiles/mainServer.dir/utils/socketUtils.c.o
 mainServer: CMakeFiles/mainServer.dir/build.make
 mainServer: libs/relic-target/lib/librelic.so
 mainServer: libs/unqlite/libunqlite.a
+mainServer: libs/binn/libbinn.so.3.0
 mainServer: CMakeFiles/mainServer.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable mainServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mainServer.dir/link.txt --verbose=$(VERBOSE)

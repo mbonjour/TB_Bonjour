@@ -3,6 +3,7 @@
 
 CMakeFiles/mainServer.dir/cipherPOC.c.o: cipherPOC.c
 CMakeFiles/mainServer.dir/cipherPOC.c.o: cipherPOC.h
+CMakeFiles/mainServer.dir/cipherPOC.c.o: libs/binn/binn.h
 CMakeFiles/mainServer.dir/cipherPOC.c.o: libs/relic-target/include/relic_conf.h
 CMakeFiles/mainServer.dir/cipherPOC.c.o: libs/relic/include/relic.h
 CMakeFiles/mainServer.dir/cipherPOC.c.o: libs/relic/include/relic_alloc.h
@@ -33,6 +34,7 @@ CMakeFiles/mainServer.dir/cipherPOC.c.o: libs/relic/include/relic_util.h
 
 CMakeFiles/mainServer.dir/server/mainServer.c.o: server/mainServer.c
 CMakeFiles/mainServer.dir/server/mainServer.c.o: cipherPOC.h
+CMakeFiles/mainServer.dir/server/mainServer.c.o: libs/binn/binn.h
 CMakeFiles/mainServer.dir/server/mainServer.c.o: libs/relic-target/include/relic_conf.h
 CMakeFiles/mainServer.dir/server/mainServer.c.o: libs/relic/include/relic.h
 CMakeFiles/mainServer.dir/server/mainServer.c.o: libs/relic/include/relic_alloc.h
@@ -66,6 +68,7 @@ CMakeFiles/mainServer.dir/server/mainServer.c.o: utils/base64.h
 
 CMakeFiles/mainServer.dir/signaturePOC.c.o: signaturePOC.c
 CMakeFiles/mainServer.dir/signaturePOC.c.o: signaturePOC.h
+CMakeFiles/mainServer.dir/signaturePOC.c.o: libs/binn/binn.h
 CMakeFiles/mainServer.dir/signaturePOC.c.o: libs/relic-target/include/relic_conf.h
 CMakeFiles/mainServer.dir/signaturePOC.c.o: libs/relic/include/relic.h
 CMakeFiles/mainServer.dir/signaturePOC.c.o: libs/relic/include/relic_alloc.h

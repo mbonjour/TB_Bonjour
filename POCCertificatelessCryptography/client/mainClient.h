@@ -17,7 +17,7 @@
 #include "signaturePOC.h"
 #include "utils/aesUtils.h"
 
-int checkIfParamsExistAlready();
+int checkIfParamsExistAlready(char *userID);
 void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
                bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID);
 void generateAndSendParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
