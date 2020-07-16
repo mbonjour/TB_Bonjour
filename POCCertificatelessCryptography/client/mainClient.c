@@ -6,10 +6,10 @@
  * In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data :
 Test
 We give the salt and need to store it for future use :
-sBZf3JdVAAAIoObbl1UAAA==
+I37gSGcKgd0/3u/JzyIQKg==
 
 We give the nonce and need to store it for future use :
-Em/FtrzAMg5vtnL2
+rpY4WUqKowDgdqNU
 
 Encypted params saved
  */
@@ -147,7 +147,6 @@ void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *e
     binn_list_add_object(list, obj);
     binn_free(obj);
 
-    // TODO : Verify if OK
     obj = binn_object();
     serialize_PKS(obj, *signaturePk);
     binn_list_add_object(list, obj);
@@ -171,12 +170,11 @@ void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *e
         //TODO : store this
         unsigned char salt[crypto_pwhash_SALTBYTES];
         printf("We give the salt and need to store it for future use :\n");
+        randombytes_buf(salt, sizeof salt);
         size_t sizeB64Salt;
         unsigned char *b64Salt = base64_encode(salt, crypto_pwhash_SALTBYTES, &sizeB64Salt);
         printf("%s\n", b64Salt);
         free(b64Salt);
-
-        randombytes_buf(salt, sizeof salt);
 
         if (crypto_pwhash
                     (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
