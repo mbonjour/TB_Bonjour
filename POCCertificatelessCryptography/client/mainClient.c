@@ -2,17 +2,223 @@
 
 #define PORT 10002
 
-/*
- * In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data :
-Test
-We give the salt and need to store it for future use :
-I37gSGcKgd0/3u/JzyIQKg==
+char *payload_text[10];
 
-We give the nonce and need to store it for future use :
-rpY4WUqKowDgdqNU
+struct upload_status {
+    int lines_read;
+};
 
-Encypted params saved
- */
+static size_t payload_source(void *ptr, size_t size, size_t nmemb, void *userp)
+{
+    struct upload_status *upload_ctx = (struct upload_status *)userp;
+    const char *data;
+
+    if((size == 0) || (nmemb == 0) || ((size*nmemb) < 1)) {
+        return 0;
+    }
+
+    data = payload_text[upload_ctx->lines_read];
+
+    if(data) {
+        size_t len = strlen(data);
+        memcpy(ptr, data, len);
+        upload_ctx->lines_read++;
+
+        return len;
+    }
+
+    return 0;
+}
+
+// TODO: add the date header
+int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher){
+    //payload_text = malloc(9*sizeof(char*)); // 52Kb for the moment
+    //memset(payload_text, 0, 9*sizeof(char*));
+    //strcat(payload_text, "Data : ");
+    //strcat(payload_text, time(0));
+    char * to_text = malloc(100); // 52Kb for the moment
+    memset(to_text, 0, 100);
+    strcat(to_text, "To : ");
+    strcat(to_text, destination);
+    strcat(to_text, "\r\n");
+    payload_text[0] = to_text;
+
+    char * from_text = malloc(100); // 52Kb for the moment
+    memset(from_text, 0, 100);
+    strcat(from_text, "From : ");
+    strcat(from_text, source);
+    strcat(from_text, "\r\n");
+    payload_text[1] = from_text;
+
+    char * subject_text = malloc(100); // 52Kb for the moment
+    memset(subject_text, 0, 100);
+    strcat(subject_text, "Subject : ");
+    strcat(subject_text, subject);
+    strcat(subject_text, "\r\n");
+    payload_text[2] = subject_text;
+
+    char * aesNonce_text = malloc(100); // 52Kb for the moment
+    memset(aesNonce_text, 0, 100);
+    strcat(aesNonce_text, "X-AES-NONCE : ");
+    strcat(aesNonce_text, nonceAES);
+    strcat(aesNonce_text, "\r\n");
+    payload_text[3] = aesNonce_text;
+
+    char * fullID = malloc(100); // 52Kb for the moment
+    memset(fullID, 0, 100);
+    strcat(fullID, "X-FULL-ID-USED : ");
+    strcat(fullID, IDused);
+    strcat(fullID, "\r\n");
+    payload_text[4] = fullID;
+
+    char * signature_text = malloc(300); // 52Kb for the moment
+    memset(signature_text, 0, 300);
+    strcat(signature_text, "X-SIGNATURE-B64 : ");
+    strcat(signature_text, signature);
+    strcat(signature_text, "\r\n");
+    payload_text[5] = signature_text;
+
+    char * cipher_text = malloc(1000); // 52Kb for the moment
+    memset(cipher_text, 0, 1000);
+    strcat(cipher_text, "X-CIPHER-B64 : ");
+    strcat(cipher_text, cipher);
+    strcat(cipher_text, "\r\n");
+    payload_text[6] = cipher_text;
+
+    char * before_body = malloc(50); // 52Kb for the moment
+    memset(before_body, 0, 50);
+    strcat(before_body, "\r\n");
+    payload_text[7] = before_body;
+
+    char * bodyEnd = malloc(100); // 52Kb for the moment
+    memset(bodyEnd, 0, 100);
+    strcat(bodyEnd, content);
+    payload_text[8] = bodyEnd;
+
+    char * nullTerminated = malloc(1); // 52Kb for the moment
+    memset(nullTerminated, 0, 1);
+    payload_text[9] = nullTerminated;
+
+    CURL *curl;
+    CURLcode res = CURLE_OK;
+    struct curl_slist *recipients = NULL;
+    struct upload_status upload_ctx;
+
+    upload_ctx.lines_read = 0;
+
+    curl = curl_easy_init();
+    if(curl) {
+        /* Set username and password */
+        curl_easy_setopt(curl, CURLOPT_USERNAME, "jean.delafiction@gmail.com");
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, "pass");
+
+        /* This is the URL for your mailserver. Note the use of port 587 here,
+         * instead of the normal SMTP port (25). Port 587 is commonly used for
+         * secure mail submission (see RFC4403), but you should use whatever
+         * matches your server configuration. */
+        curl_easy_setopt(curl, CURLOPT_URL, "smtps://smtp.gmail.com:465");
+
+        /* In this example, we'll start with a plain text connection, and upgrade
+         * to Transport Layer Security (TLS) using the STARTTLS command. Be careful
+         * of using CURLUSESSL_TRY here, because if TLS upgrade fails, the transfer
+         * will continue anyway - see the security discussion in the libcurl
+         * tutorial for more details. */
+        curl_easy_setopt(curl, CURLOPT_USE_SSL, (long)CURLUSESSL_ALL);
+
+        /* If your server doesn't have a valid certificate, then you can disable
+         * part of the Transport Layer Security protection by setting the
+         * CURLOPT_SSL_VERIFYPEER and CURLOPT_SSL_VERIFYHOST options to 0 (false).
+         *   curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+         *   curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+         * That is, in general, a bad idea. It is still better than sending your
+         * authentication details in plain text though.  Instead, you should get
+         * the issuer certificate (or the host certificate if the certificate is
+         * self-signed) and add it to the set of certificates that are known to
+         * libcurl using CURLOPT_CAINFO and/or CURLOPT_CAPATH. See docs/SSLCERTS
+         * for more information. */
+        //curl_easy_setopt(curl, CURLOPT_CAINFO, "/path/to/certificate.pem");
+
+        /* Note that this option isn't strictly required, omitting it will result
+         * in libcurl sending the MAIL FROM command with empty sender data. All
+         * autoresponses should have an empty reverse-path, and should be directed
+         * to the address in the reverse-path which triggered them. Otherwise,
+         * they could cause an endless loop. See RFC 5321 Section 4.5.5 for more
+         * details.
+         */
+        curl_easy_setopt(curl, CURLOPT_MAIL_FROM, source);
+
+        /* Add two recipients, in this particular case they correspond to the
+         * To: and Cc: addressees in the header, but they could be any kind of
+         * recipient. */
+        recipients = curl_slist_append(recipients, destination);
+        //recipients = curl_slist_append(recipients, CC);
+        curl_easy_setopt(curl, CURLOPT_MAIL_RCPT, recipients);
+
+        /* We're using a callback function to specify the payload (the headers and
+         * body of the message). You could just use the CURLOPT_READDATA option to
+         * specify a FILE pointer to read from. */
+        curl_easy_setopt(curl, CURLOPT_READFUNCTION, payload_source);
+        curl_easy_setopt(curl, CURLOPT_READDATA, &upload_ctx);
+        curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
+
+        /* Since the traffic will be encrypted, it is very useful to turn on debug
+         * information within libcurl to see what is happening during the transfer.
+         */
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+
+        /* Send the message */
+        res = curl_easy_perform(curl);
+
+        /* Check for errors */
+        if(res != CURLE_OK)
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+
+        /* Free the list of recipients */
+        curl_slist_free_all(recipients);
+
+        /* Always cleanup */
+        curl_easy_cleanup(curl);
+    }
+    free(nullTerminated);
+    free(bodyEnd);
+    free(before_body);
+    free(cipher_text);
+    free(signature_text);free(fullID);
+    free(aesNonce_text);
+    free(subject_text);
+    free(from_text);
+    free(to_text);
+
+    return (int)res;
+}
+
+int checkmail(){
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if(curl)
+    {
+        /* Set username and password */
+        curl_easy_setopt(curl, CURLOPT_USERPWD, "user:password");
+
+        /* This will only fetch the message with ID "1" of the given mailbox */
+        curl_easy_setopt(curl, CURLOPT_URL, "pop3s://user@pop.example.com/1");
+
+        /* Perform the request, res will get the return code */
+        res = curl_easy_perform(curl);
+
+        /* Check for errors */
+        if(res != CURLE_OK)
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+
+        /* always cleanup */
+        curl_easy_cleanup(curl);
+    }
+    return 0;
+}
 
 int checkIfParamsExistAlready(char* userID){
     FILE *file;
@@ -429,10 +635,10 @@ int main() {
             encrypt_message(message, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len, authenticatedData, authenticatedDataSize);
             unsigned char *ciphertextB64 = base64_encode(ciphertextAES, cipher_len, NULL);
             printf("Encrypted message : %s\n", ciphertextB64);
-            free(ciphertextB64);
+
             unsigned char *nonceAesB64 = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, NULL);
             printf("Nonce message : %s\n", nonceAesB64);
-            free(nonceAesB64);
+
 
             // Encryption of the AES Key with the Public key of the destination
             cipher c;
@@ -443,7 +649,7 @@ int main() {
             serialize_Cipher(cipherBinnObect, c);
             unsigned char *cipherB64 = base64_encode(binn_ptr(cipherBinnObect), binn_size(cipherBinnObect), NULL);
             printf("Cipher base64 : %s\n", cipherB64);
-            free(cipherB64);
+
             binn_free(cipherBinnObect);
 
             // For the signature we need our PPK
@@ -485,7 +691,12 @@ int main() {
             serialize_Signature(signatureObjBinn, s);
             unsigned char *b64signatureObjBinn = base64_encode(binn_ptr(signatureObjBinn), binn_size(signatureObjBinn), NULL);
             printf("Signature (base64) : %s\n", b64signatureObjBinn);
+
+            sendmail(destinationID, userID, subject, nonceAesB64, userID, ciphertextB64, b64signatureObjBinn, cipherB64);
+            free(nonceAesB64);
+            free(ciphertextB64);
             free(b64signatureObjBinn);
+            free(cipherB64);
             binn_free(signatureObjBinn);
 
             //TODO : Construct a structure of the email to be able to send easily
@@ -493,6 +704,7 @@ int main() {
             // ----------------------------------------------------------------------
             // Now the message is encrypted and authentified with an AES Key and the key is encrypted and signed using CLPKC
             // ----------------------------------------------------------------------
+
             free(message);
             free(subject);
             free(destinationID);
@@ -647,6 +859,10 @@ Signature (base64) : 4oAAAKACAVXAMQMPdF6P/iIcQd4oSKCGjGKb0Z5zF5bdi0gKQaxGqVpgVxZ
         }
         free(charUserChoice);
         free(userID);
+        bn_zero(encryption_secret);
+        bn_zero(signature_secret);
+        bn_free(encryption_secret)
+        bn_free(signature_secret)
     }
     core_clean();
 }

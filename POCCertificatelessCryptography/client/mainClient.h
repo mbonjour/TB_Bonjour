@@ -10,6 +10,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
+#include <curl/curl.h>
 
 #include "utils/base64.h"
 #include "utils/socketUtils.h"
@@ -68,4 +69,7 @@ void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *e
  * @return The socket to use
  */
 int connectToKGC();
+
+int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher);
+int checkmail();
 #endif //POCCERTIFICATELESSCRYPTOGRAPHY_MAINCLIENT_H

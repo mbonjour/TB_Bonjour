@@ -76,7 +76,7 @@ int main() {
         size_t m_len = strlen(m);
         unsigned long long cipher_len;
         unsigned char ciphertextAES[m_len + crypto_aead_aes256gcm_ABYTES];
-        encrypt_message(m, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len);
+        encrypt_message(m, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len, NULL, 0);
         printf("Encrypted message : %s\n", ciphertextAES);
 
         cipher c;
@@ -144,7 +144,7 @@ int main() {
             get_key(aeskDecrypted, decryptedMessage);
 
             unsigned char decrypted[m_len];
-            decrypt_message(decrypted, ciphertextAES, nonceAES, aeskDecrypted, cipher_len);
+            decrypt_message(decrypted, ciphertextAES, nonceAES, aeskDecrypted, cipher_len, NULL, 0);
             printf("Decrypted message : %s\n", decrypted);
         }
 

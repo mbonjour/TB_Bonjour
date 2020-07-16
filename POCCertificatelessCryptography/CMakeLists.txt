@@ -10,6 +10,7 @@ link_libraries(${CMAKE_SOURCE_DIR}/libs/unqlite/libunqlite.a)
 link_libraries(sodium)
 #link_libraries(nsl)
 link_libraries(pthread)
+link_libraries(curl)
 link_libraries(${CMAKE_SOURCE_DIR}/libs/binn/libbinn.so.3.0)
 #link_libraries(binn)
 
