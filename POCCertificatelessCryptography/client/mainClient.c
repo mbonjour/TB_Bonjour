@@ -3,7 +3,15 @@
 #define PORT 10002
 
 char *payload_text[10];
-
+/*
+ * In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data :
+Testing118
+We give the salt and need to store it for future use :
+jV8LTEVgkbi/Tvlhl27S8A==
+We give the nonce and need to store it for future use :
+Qi2M5oDV6V3nERt2
+Encypted params saved
+ */
 struct upload_status {
     int lines_read;
 };
@@ -110,7 +118,7 @@ int sendmail(char* destination, char* source, char* subject, char* nonceAES, cha
     if(curl) {
         /* Set username and password */
         curl_easy_setopt(curl, CURLOPT_USERNAME, "jean.delafiction@gmail.com");
-        curl_easy_setopt(curl, CURLOPT_PASSWORD, "pass");
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, "Testing118");
 
         /* This is the URL for your mailserver. Note the use of port 587 here,
          * instead of the normal SMTP port (25). Port 587 is commonly used for
@@ -710,15 +718,12 @@ int main() {
             free(destinationID);
         }
         /*
-         *  AES Key : 53D0E0FB5808FB56C300DE6F6A87965C74534634833749875428CC1E014C84CE
-Encrypted message : uU5Nf1LWEa8xbfh+rlg9qc6MZfnJbuZ8zQnsbiv5SiEFH52shw==
-
-Nonce message : QQonB6XIVsiaOp8q
-
-Cipher base64 : 4oAAApAEAkMwwIAAAYAXTIQzeOyxdNfunB0o0PV+27FAyiLkRG+jX865VMNlxI6bfxnU/wQ6R0Y9AnSxcRoEWPw2jOxwgC56aScpeEWkfGJeI/Hu8qAhb9J/bZ95ACXSlLvEKXC/axuxIHMmnn8ZdADQp4k36XHsuhtvSCBSnHZAB2caHYs9RrKYGofe7rYxbcjqic91EjLLYt27aqMOeTE9eg4vp1R6jK2kbislmPd3Ky4A0/UvZLSEb8iE/C2j3U69gkVA8luyaiYwghEBPmHGUiYc0TwAC8njKoBTzrklLB6RaotP4cZsnjdeFaF36H3trvfmASPfhiAAiSwIScTs/U6O8cMEUK9T9beczSiH3lxEWtCAnxkySdF+twbLxaIO3Xz0M4mjbWPIYkEAOwRaZw6VQ35SMofhbqgh1Ancr9obQNqCAd0NC8CynUGjcOM63qogGrHKKGsfTLIJWzWUlVsh2OlwiBP5KfS57nmdXuhKa5EY6xsrKCyFdet214AGcPzX5VDibjZqueQCQzHAMQMXiKM849L8SiRqxMIiLKeUDD7goQ6pXxj/bC34pCjoao6C/1rPIujDgXW5WWUkWyMCQzLAYQIRoNmLXq1HecKhY0Fp+Dr7kf41s+Z88tCzma0Ih9IsoKSf4+SSEck095nNcuIbEfgSlkVD30b7BFSwW5zwwbrgNZaaSe8TW7dmGMV7GRBUjso+7gCbDJK3TPeOM0eF/y4CQzPAYQISY4neQLfIm4X3T4SDNhEYnK0nt7LoUVNVYCjzlmLFJfjw35TrltlTvTuiJiO2tg8S+vvH5T84oRQz1qTjN+WFPgaX9QX3g96ZjqLjNdNdaqRjK5Qz2ZcXqf7l7x2gX/c=
-
-Signature (base64) : 4oAAAKACAVXAMQMPdF6P/iIcQd4oSKCGjGKb0Z5zF5bdi0gKQaxGqVpgVxZyTjcH2gHdIAJXHfLY8nsBVsBhAhJoGtkB28umJVjZW3sM9D5n0JS0laCs2PSPRg5hQQ2C/dsj6JTem3wjG66s0S7ksRm8nTJzMr2MutShUKJaCcMKivjE9Fo1fzBu8u6MZ10vkgj/sIblvpWin9bXkio7Xw==
-         */
+         *  AAES Key : 6175013504CCBFF00EB8513A12D9E8FC6C7BA22ADB9F672128871788A1892BDA
+Encrypted message : 6tRjuqpOKiyFO4vks0zN5tuHnb6DTEWMSulNgEkEgLTT830=
+Nonce message : eOuPEEgTwveWvK3Q
+Cipher base64 : 4oAAApAEAkMwwIAAAYACT8MCvM71jhrEsyZc9xS3kYji68RY/XjGFkumXeuZTy3NeZlNxjw83J/7KNmQoYgEmnzftZ68+w0qL8xjNoFEOBA1nmb0W3/nldktSbNpK8GBNeLXePMcTx3lAO5xWC0EdQQ9EUj0ddn00g3aQo5nkeSU3Qk2eHKk+vcpCpZnEMqyH5DleuAoQgRku+YGJhkNWF2mR84grj1evyhDM6idvOwCITuBPlz8/750bMj4s4/CEflEGyauZp27wuSZ3LQPgv8AtRCFtH9KVmNnkbGtBnbDqxC8hA4lbzVOcgzVUul/Sk8Ery+BLZShHHWAOhcU4ULrkPjYoE9UhXGiKQRpISBF3jOys/PnG0Uoqn/HEIwQg5Ln8ljaM6vL6CMVIIEQf4v66SDc0W56iRa+dZVulQL0OeRsHHMKd3qslCXaJ4I/la76rk46Mat1mJO3LdcRaJkHdKWZ9QCuL3JCr5TBTZbGWXnOze4vKBGN9vUmCmWOJTSzvfjeJ+M2/e4/QFcCQzHAMQMUtavI0llLhTsmjpvLUS2KFe2EbJRcGDu3qRTG4+mn8k3vP4NGaQwgjK9FcTfVrqECQzLAYQMAsu7EDnA8G2oMfvvBkWufAySTuy/+cKRTT8WKfHxcqJnVFnokdadQjeaR/AuhbbYHNrv9IjXwgh9s4gsesCmp1DmGyiNBVZa68aC49S61jehOkMXYwHJQLyfAvShPqiwCQzPAYQMFqAt6hKwwStCglIB7ItjdwU3O22xNbepnFShAueg/SslBJyUmfzHW7ETjaqqyQ+MIQr2uIUwqxPyKLct6rmeGdE3wR/ZRkn7//jYBEpxUY/bolRSwbMBguCTNN4EdPTg=
+Signature (base64) : 4oAAAKACAVXAMQMZsn0RsRlzqx6jSRllsQR1ybm0yybXNCehLL1+9kduUApQVF3oKKZvGRuesZisWuMBVsBhAheDBj8Rzppy1hFGomLw7vI+srn6OaudSKUAj24/wRlhWrwwytjhSXLZoCXnzZC5nwIrBm0Bo/vskltkMhmLpHFxJ1PjRIrxNVGio794wv3oT7OFc/f+j9sqLcodp93Zug==
+*/
         // If we want to decrypt an email
         else {
             // TODO : Remove and replace by getting the email
