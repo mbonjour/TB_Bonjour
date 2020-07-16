@@ -118,7 +118,7 @@ int sendmail(char* destination, char* source, char* subject, char* nonceAES, cha
     if(curl) {
         /* Set username and password */
         curl_easy_setopt(curl, CURLOPT_USERNAME, "jean.delafiction@gmail.com");
-        curl_easy_setopt(curl, CURLOPT_PASSWORD, "Testing118");
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, "PASS");
 
         /* This is the URL for your mailserver. Note the use of port 587 here,
          * instead of the normal SMTP port (25). Port 587 is commonly used for
