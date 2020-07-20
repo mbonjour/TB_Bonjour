@@ -56,6 +56,9 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
 void generateAndSendParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
                            bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID);
 
+
+void generateAndSendPKs(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
+                           bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID);
 /**
  * When they are generated the params are saved on a file. This function ask the user for a password and encrypt his params.
  * @param mpkSession The mpke_e to store
@@ -66,8 +69,15 @@ void generateAndSendParams(encryption_mpk *mpkSession, signature_mpk *mpkSignatu
  * @param signaturePk The pk_s to store
  * @param userID The userID of the stored params
  */
-void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
-                bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID);
+
+void getGlobalParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature);
+
+binn* getSecretsValue(char *userID);
+
+void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID);
+
+void  saveSecretsValue(binn *secrets, char *userID);
+
 
 /**
  * @brief A small function to initiate a new connection to the KGC in order to ask something to it.

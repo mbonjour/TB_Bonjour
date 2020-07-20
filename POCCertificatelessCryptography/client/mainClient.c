@@ -604,6 +604,112 @@ int checkIfParamsExistAlready(char* userID){
     return 0;
 }
 
+void getGlobalParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature){
+    FILE *file;
+    file = fopen("globalMPK", "r");
+    if (file){
+        int r;
+        struct stat stat_info;
+        r = stat(file, &stat_info);
+        if (r != 0) {
+            fclose(file);
+            exit(EXIT_FAILURE);
+        }
+
+        char * data = malloc(stat_info.st_size);
+        fread(data, 1, stat_info.st_size, file);
+        fclose(file);
+        binn *savedMPK;
+        savedMPK = binn_open(data);
+
+        binn *obj;
+        obj = binn_list_object(savedMPK, 1);
+        deserialize_MPKE(obj, mpkSession);
+
+        obj = binn_list_object(savedMPK, 2);
+        deserialize_MPKS(obj, mpkSignature);
+        fclose(file);
+        free(data);
+        binn_free(savedMPK);
+    }
+    file = fopen("globalMPK", "w");
+    int sock = connectToKGC();
+
+    binn *objToSend;
+    objToSend = binn_object();
+    binn_object_set_str(objToSend, "opCode", "HELO");
+    binn_object_set_str(objToSend, "ID", "Get-MPK");
+    send(sock , binn_ptr(objToSend) , binn_size(objToSend) , 0 );
+    binn_free(objToSend);
+    printf("Retrieving all public params from KGC\n");
+
+    unsigned char buf[52000];  //52Kb fixed-size buffer
+    recvAll(sock, buf, 52000);
+
+    binn *listReceived;
+    listReceived = binn_open(buf);
+    binn *mpks, *mpke;
+    mpks = binn_list_object(listReceived, 1);
+    mpke = binn_list_object(listReceived, 2);
+    deserialize_MPKS(mpks, mpkSignature);
+    deserialize_MPKE(mpke, mpkSession);
+    binn_free(listReceived);
+
+    binn* list;
+    list = binn_list();
+    binn *obj;
+    obj = binn_object();
+    serialize_MPKE(obj, *mpkSession);
+    binn_list_add_object(list, obj);
+    binn_free(obj);
+
+    obj = binn_object();
+    serialize_MPKS(obj, *mpkSignature);
+    binn_list_add_object(list, obj);
+    binn_free(obj);
+    fwrite(binn_ptr(list), binn_size(list), file);
+    fclose(file);
+}
+
+// TODO : just get or create secrets values
+binn* getSecretsValue(char *userID) {
+    FILE *file;
+    file = fopen(userID, "r");
+    if (file){
+        // TODO : get the encrypted secret values
+        fclose(file);
+        return 1;
+    }
+    //TODO : generate secret values and encrypts it and public keys ans send the lasts
+    return 0;
+}
+
+// TODO at the end of a transaction save the state of the params (maybe a timestamp was added
+void  saveSecretsValue(binn *secrets, char *userID) {
+    FILE *file;
+    file = fopen(userID, "r");
+    if (file){
+        // TODO : get the encrypted secret values
+        fclose(file);
+        return 1;
+    }
+    //TODO : generate secret values and encrypts it and public keys ans send the lasts
+    return 0;
+}
+
+// TODO : get a public key of a particular user locally if we sent to it recently or get them via KGC and saves them for further use
+void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID){
+    FILE *file;
+    file = fopen(userID, "r");
+    if (file){
+        // TODO : retrieve Public keys of an user which we already sent to
+        fclose(file);
+        return 1;
+    }
+    // TODO : Get public keys of userID and save them to a file userID_PK
+    return 0;
+}
+
 void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
                bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID){
     FILE *savedParams;
@@ -923,6 +1029,10 @@ int main() {
         // MPK struct, Master Public Key structure to store
         encryption_mpk mpkSession;
         signature_mpk mpkSignature;
+        getGlobalParams(&mpkSession, &mpkSignature);
+
+
+
         bn_t encryption_secret;
         bn_null(encryption_secret)
         bn_new(encryption_secret)
@@ -943,6 +1053,10 @@ int main() {
         printf("What's your password (Gmail) ?\n");
         fgets(password, 320, stdin);
         password[strlen(password)-1] = '\x00';
+
+        // TODO : Generate our public keys in getSecrets if not present
+        binn *secrets = getSecretsValue(userID);
+        getPk(&encryptionPk, &signaturePk, userID);
 
         int existingParams = checkIfParamsExistAlready(userID);
         if(existingParams == 1){

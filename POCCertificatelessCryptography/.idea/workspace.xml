@@ -33,45 +33,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/client/mainClient.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/client/mainClient.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/mainClient.c" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/1.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/10.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/11.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/12.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/13.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/14.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/15.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/16.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/17.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/18.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/19.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/2.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/20.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/21.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/22.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/23.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/24.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/25.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/26.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/27.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/28.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/29.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/3.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/30.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/31.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/32.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/33.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/34.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/35.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/36.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/4.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/5.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/6.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/7.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/8.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/download/9.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainClient" beforeDir="false" afterPath="$PROJECT_DIR$/mainClient" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/mainClient.h" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.blg" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.blg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fdb_latexmk" afterDir="false" />
@@ -227,7 +190,7 @@
       <workItem from="1595092420310" duration="2616000" />
       <workItem from="1595104165043" duration="7225000" />
       <workItem from="1595171814628" duration="15599000" />
-      <workItem from="1595234366808" duration="15863000" />
+      <workItem from="1595234366808" duration="19215000" />
     </task>
     <servers />
   </component>
@@ -284,46 +247,46 @@
     <state x="404" y="197" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1170@0.0.1920.1050" timestamp="1592821540496" />
     <state x="734" y="77" width="426" height="477" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1593506842056" />
     <state x="778" y="102" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1595251853229" />
-    <state width="1802" height="328" key="GridCell.Tab.0.bottom" timestamp="1595256773611">
+    <state width="1802" height="328" key="GridCell.Tab.0.bottom" timestamp="1595260149288">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224173" />
-    <state width="1802" height="328" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595256773611" />
-    <state width="1802" height="328" key="GridCell.Tab.0.center" timestamp="1595256773611">
+    <state width="1802" height="328" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595260149288" />
+    <state width="1802" height="328" key="GridCell.Tab.0.center" timestamp="1595260149287">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224172" />
-    <state width="1802" height="328" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595256773611" />
-    <state width="1802" height="328" key="GridCell.Tab.0.left" timestamp="1595256773610">
+    <state width="1802" height="328" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595260149287" />
+    <state width="1802" height="328" key="GridCell.Tab.0.left" timestamp="1595260149287">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224171" />
-    <state width="1802" height="328" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595256773610" />
-    <state width="1802" height="328" key="GridCell.Tab.0.right" timestamp="1595256773611">
+    <state width="1802" height="328" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595260149287" />
+    <state width="1802" height="328" key="GridCell.Tab.0.right" timestamp="1595260149288">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224172" />
-    <state width="1802" height="328" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595256773611" />
-    <state width="1802" height="328" key="GridCell.Tab.1.bottom" timestamp="1595256743233">
+    <state width="1802" height="328" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595260149288" />
+    <state width="1802" height="328" key="GridCell.Tab.1.bottom" timestamp="1595260149290">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225137" />
-    <state width="1802" height="328" key="GridCell.Tab.1.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595256743233" />
-    <state width="1802" height="328" key="GridCell.Tab.1.center" timestamp="1595256743233">
+    <state width="1802" height="328" key="GridCell.Tab.1.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595260149290" />
+    <state width="1802" height="328" key="GridCell.Tab.1.center" timestamp="1595260149290">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225136" />
-    <state width="1802" height="328" key="GridCell.Tab.1.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595256743232" />
-    <state width="1802" height="328" key="GridCell.Tab.1.left" timestamp="1595256743232">
+    <state width="1802" height="328" key="GridCell.Tab.1.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595260149290" />
+    <state width="1802" height="328" key="GridCell.Tab.1.left" timestamp="1595260149290">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225136" />
-    <state width="1802" height="328" key="GridCell.Tab.1.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595256743232" />
-    <state width="1802" height="328" key="GridCell.Tab.1.right" timestamp="1595256743233">
+    <state width="1802" height="328" key="GridCell.Tab.1.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595260149290" />
+    <state width="1802" height="328" key="GridCell.Tab.1.right" timestamp="1595260149290">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225136" />
-    <state width="1802" height="328" key="GridCell.Tab.1.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595256743233" />
+    <state width="1802" height="328" key="GridCell.Tab.1.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595260149290" />
     <state x="506" y="68" width="1186" height="737" key="SettingsEditor" timestamp="1595251855886">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
@@ -372,17 +335,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1195</line>
+          <line>1309</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>756</line>
+          <line>862</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1059</line>
+          <line>1173</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
