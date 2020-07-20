@@ -184,6 +184,7 @@ binn* parseEmail(char* filename){
     binn_object_set_str(mailReturn, "Body", mime->mm_data.mm_message.mm_msg_mime->mm_body->dt_data.dt_filename);
     mailmime_free(mime);
     free(data);
+    free(test);
     return mailReturn;
 }
 
@@ -245,7 +246,7 @@ int sendmail(char* destination, char* source, char* subject, char* nonceAES, cha
 
     char * fullID = malloc(100); // 52Kb for the moment
     memset(fullID, 0, 100);
-    strcat(fullID, "X-FULL-ID-USED : ");
+    strcat(fullID, "X-TIMESTAMP-USED : ");
     strcat(fullID, IDused);
     strcat(fullID, "\r\n");
     payload_text[4] = fullID;
@@ -269,8 +270,8 @@ int sendmail(char* destination, char* source, char* subject, char* nonceAES, cha
     strcat(before_body, "\r\n");
     payload_text[7] = before_body;
 
-    char * bodyEnd = malloc(100); // 52Kb for the moment
-    memset(bodyEnd, 0, 100);
+    char * bodyEnd = malloc(10000); // 52Kb for the moment
+    memset(bodyEnd, 0, 10000);
     strcat(bodyEnd, content);
     payload_text[8] = bodyEnd;
 
@@ -483,6 +484,8 @@ static void fetch_msg(struct mailimap * imap, uint32_t uid)
     printf("%u has been fetched\n", (unsigned int) uid);
 
     mailimap_fetch_list_free(fetch_result);
+    mailimap_fetch_type_free(fetch_type);
+    mailimap_set_free(set);
 }
 
 static uint32_t get_uid(struct mailimap_msg_att * msg_att)
@@ -559,6 +562,8 @@ static void fetch_messages(struct mailimap * imap)
     }
 
     mailimap_fetch_list_free(fetch_result);
+    mailimap_set_free(set);
+    mailimap_fetch_type_free(fetch_type);
 }
 int checkmail(char* email, char *password){
     struct mailimap * imap;
@@ -658,9 +663,12 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
         decrypt_message(decryptedParams, decodedParams, nonceDecoded, aesk, outLen, NULL,0);
         free(nonceDecoded);
         free(decodedParams);
+        free(userPassword);
         free(salt);
 
         paramsObjBinn = binn_open(decryptedParams);
+        binn_free(objParams);
+        free(paramsB64);
     } else {
         printf("Failed to open a file to save params\n");
         return;
@@ -942,6 +950,7 @@ int main() {
             generateAndSendParams(&mpkSession, &mpkSignature, &encryption_secret, &signature_secret, &encryptionPk, &signaturePk, userID);
             saveParams(&mpkSession, &mpkSignature, &encryption_secret, &signature_secret, &encryptionPk, &signaturePk, userID);
         }
+
         printf("Do you want to send an email (0) or decrypt one (1) ?\n");
         int sendOrDecryptUser;
         char* charUserChoice = malloc(4);
@@ -1033,7 +1042,18 @@ int main() {
             // Encryption of the AES Key with the Public key of the destination
             cipher c;
             //TODO : add timestamp
-            encrypt(AESK, encryption_destinationPk, destinationID, mpkSession, &c);
+            char *destinationTimestamp = malloc(330);
+            memset(destinationTimestamp, 0, 330);
+            strcpy(destinationTimestamp, destinationID);
+            strcat(destinationTimestamp, "+");
+            time_t timestampNow = time(NULL);
+            timestampNow -= timestampNow % 604800;
+            char *timestampStr = malloc(20);
+            memset(timestampStr, 0, 20);
+            sprintf(timestampStr, "%d", timestampNow);
+            strcat(destinationTimestamp, timestampStr);
+
+            encrypt(AESK, encryption_destinationPk, destinationTimestamp, mpkSession, &c);
             // TODO print base64 of cipher for decrypt
             binn *cipherBinnObect;
             cipherBinnObect = binn_object();
@@ -1084,7 +1104,7 @@ int main() {
             printf("Signature (base64) : %s\n", b64signatureObjBinn);
 
             // TODO add timestamp sendmail
-            sendmail(destinationID, userID, subject, nonceAesB64, userID, ciphertextB64, b64signatureObjBinn, cipherB64, userID, password);
+            sendmail(destinationID, userID, subject, nonceAesB64, timestampStr, ciphertextB64, b64signatureObjBinn, cipherB64, userID, password);
             free(nonceAesB64);
             free(ciphertextB64);
             free(b64signatureObjBinn);
@@ -1100,6 +1120,10 @@ int main() {
             free(message);
             free(subject);
             free(destinationID);
+
+            free(destinationTimestamp);
+            free(timestampStr);
+            free(authenticatedData);
         }
         // If we want to decrypt an email
         else {
@@ -1143,6 +1167,7 @@ int main() {
             */
             printf("filename  : %s", fileChoice);
             binn* emailObj = parseEmail(fileChoice);
+            free(fileChoice);
 
             char *sourceAddress = binn_object_str(emailObj, "From");
             char *b64Signature = binn_object_str(emailObj, "X-SIGNATURE-B64");
@@ -1151,11 +1176,16 @@ int main() {
             char *b64Nonce = binn_object_str(emailObj, "X-AES-NONCE");
             char *subject = binn_object_str(emailObj, "Subject");
             // TODO : timestamp
-            char *fullID = binn_object_str(emailObj, "X-TIMESTAMP-USED");
+            char *timestamp = binn_object_str(emailObj, "X-TIMESTAMP-USED");
             if(b64Signature == NULL || b64Cipher == NULL || b64Encrypted == NULL || b64Nonce == NULL){
                 printf("I cannot parse the email, it's not an email written by my POC\n");
                 exit(EXIT_FAILURE);
             }
+            char *IDUsed = malloc(330);
+            memset(IDUsed, 0, 330);
+            strcpy(IDUsed, userID);
+            strcat(IDUsed, "+");
+            strcat(IDUsed, timestamp);
 
             signature s;
             size_t outLen;
@@ -1210,7 +1240,7 @@ int main() {
                 binn* bobPpk;
                 bobPpk = binn_object();
                 binn_object_set_str(bobPpk, "opCode", "EE");
-                binn_object_set_str(bobPpk, "ID", userID);
+                binn_object_set_str(bobPpk, "ID", IDUsed);
                 send(sock, binn_ptr(bobPpk), binn_size(bobPpk), 0);
                 binn_free(bobPpk);
 
@@ -1224,13 +1254,13 @@ int main() {
 
                 g1_null(SecretKeysBob->s2)
                 g1_new(SecretKeysBob->s2)
-                setPriv(encryption_secret, PartialKeysBob, mpkSession, userID, &SecretKeysBob);
+                setPriv(encryption_secret, PartialKeysBob, mpkSession, IDUsed, &SecretKeysBob);
 
                 // We can decrypt now
                 gt_t decryptedMessage;
                 gt_null(decryptedMessage)
                 gt_new(decryptedMessage)
-                decrypt(c, SecretKeysBob, encryptionPk, mpkSession, userID, &decryptedMessage);
+                decrypt(c, SecretKeysBob, encryptionPk, mpkSession, IDUsed, &decryptedMessage);
 
                 char aeskDecrypted[crypto_secretbox_KEYBYTES];
                 get_key(aeskDecrypted, decryptedMessage);
@@ -1253,9 +1283,10 @@ int main() {
                 decrypt_message(decrypted, ciphertext, nonceAES, aeskDecrypted, size_cipher, authenticatedData, authenticatedDataSize);
                 printf("Decrypted message : %s\n", decrypted);
                 free(ciphertext);
+                free(authenticatedData);
                 free(nonceAES);
             }
-
+            free(IDUsed);
             free(signature_sourcePKBin);
             /*free(b64Nonce);
             free(b64Cipher);
@@ -1267,6 +1298,7 @@ int main() {
         }
         free(charUserChoice);
         free(userID);
+        free(password);
         bn_zero(encryption_secret);
         bn_zero(signature_secret);
         bn_free(encryption_secret)
@@ -1274,3 +1306,9 @@ int main() {
     }
     core_clean();
 }
+/*AES Key : B01905631A7451808565EBCDB311CA07FA1556548B7EBD33011B4CD3D4A64F9B
+Encrypted message : 3ClEbRCjrL7TnqMx4wDXZRtZDRU=
+Nonce message : EN8cLEdzhVNEPdzH
+Cipher base64 : 4oAAApAEAkMwwIAAAYAVYN5PILuji4+lIJKfOpbRWxkgYV5bUXj68rMQd0JvXECYYTmjbHJoYYaUxStnthYEumausaQfwEAYLqFfosz14gaKgUksvyALA/Inr+fkJZeinzaA1wNwDWZy5cfhEr0MW4uX9Sn3+zYwzI+DKfJCO1PkI2TCsQWVVeKGEeOr1i9SP3tl+8rlJSzx/bw8kaMKPk/pA9+sy5roqnnXgVc04UZ3+xHLZ1t6G/qJ2EDzNwnxBh7yApqqnwrriPjj224BRPUBtnVMVQtmuJCFEZ1DhAUcmAeKGtuazizX8XdVjJH6Vcfr/3I0HIZqrpq1KVkTYuoLGrLUUXoTGqRLUOfIH1Wmr6aGUo/P+1POhWV5nBSL2D94/QZpF1Lscl5ICFcFipUKLqUFUa7R0qUMtWA4LruxXU9fu2izkKVlRIeEl8F7i1H3L7+XaYcjCLW1yLUHs47raJgvQPs0hieImHOEaawoLth+1orajCPVcwfpxtqyBJiXRaHxkW+o531CNHACQzHAMQIRrj2dd/NPEcLZmVicdUFSykraJIqxzt5QbzNp45Cz87ZRmTEMxbfsP6hV2/hF6goCQzLAYQIP0eZo0cBdtPf9c7Ic5XxiE3iIHL0/XO29c9RfqP9gV5hlJpYLNuXadZSWygP/z7oISMCC5gqVuQGWtc7qUPOy4cHWUj8wBaaa3we7l8xNJIeoQJuIVBRCFM7qEmYfJwYCQzPAYQINxR+yXekWedsFn2DuUFneebIbJotfs0X18flpYRH4WBBDCNxN1HIwJ84i5eABhAAME1sawFexl3XFqBN8Xa9jYZSwQjNXhIJRiR7Ha2M3oD9kWMbXqjelgh6F7gPa/Zc=
+Signature (base64) : 4oAAAKACAVXAMQMB8SqXobSsN4lftNCUAUCeySiPx75a/dDxQUmQ8FDT5VdEi4c+gc9nw878wXg375UBVsBhAhDFseXKWZ0DCWGih1RWA4tAayWG/80DpNRrz9orhLCfz8dAfEd+bVKVZdQxAykzPRO47JAXygV9rBet/y9C1GWm4Dd0J3rus+uY+ZJon1v4oDLTHcE2Kwff0fyiV+q3Gw==
+*/
