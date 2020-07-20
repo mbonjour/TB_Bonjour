@@ -58,13 +58,19 @@
       <change beforePath="$PROJECT_DIR$/download/28.eml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/download/29.eml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/download/3.eml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download/30.eml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download/31.eml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download/32.eml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download/33.eml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download/34.eml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download/35.eml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download/36.eml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/download/4.eml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/download/5.eml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/download/6.eml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/download/7.eml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/download/8.eml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/download/9.eml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jean.delafiction@gmail.com" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mainClient" beforeDir="false" afterPath="$PROJECT_DIR$/mainClient" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.blg" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.blg" afterDir="false" />
@@ -221,7 +227,7 @@
       <workItem from="1595092420310" duration="2616000" />
       <workItem from="1595104165043" duration="7225000" />
       <workItem from="1595171814628" duration="15599000" />
-      <workItem from="1595234366808" duration="14599000" />
+      <workItem from="1595234366808" duration="15863000" />
     </task>
     <servers />
   </component>
@@ -263,11 +269,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="717" y="240" key="#xdebugger.evaluate/0.0.1920.1080@0.0.1920.1080" timestamp="1593270149753" />
-    <state width="761" height="494" key="DebuggerActiveHint" timestamp="1595186933234">
+    <state width="761" height="494" key="DebuggerActiveHint" timestamp="1595256756187">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="531" height="506" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1594885599986" />
-    <state width="761" height="494" key="DebuggerActiveHint/72.27.1848.1053@72.27.1848.1053" timestamp="1595186933234" />
+    <state width="761" height="494" key="DebuggerActiveHint/72.27.1848.1053@72.27.1848.1053" timestamp="1595256756187" />
     <state x="967" y="-9" width="941" height="1053" key="DiffContextDialog" timestamp="1594815177699">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -278,46 +284,46 @@
     <state x="404" y="197" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1170@0.0.1920.1050" timestamp="1592821540496" />
     <state x="734" y="77" width="426" height="477" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1593506842056" />
     <state x="778" y="102" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1595251853229" />
-    <state width="858" height="408" key="GridCell.Tab.0.bottom" timestamp="1595253186399">
+    <state width="1802" height="328" key="GridCell.Tab.0.bottom" timestamp="1595256773611">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224173" />
-    <state width="858" height="408" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595253186399" />
-    <state width="858" height="408" key="GridCell.Tab.0.center" timestamp="1595253186398">
+    <state width="1802" height="328" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595256773611" />
+    <state width="1802" height="328" key="GridCell.Tab.0.center" timestamp="1595256773611">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224172" />
-    <state width="858" height="408" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595253186398" />
-    <state width="858" height="408" key="GridCell.Tab.0.left" timestamp="1595253186397">
+    <state width="1802" height="328" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595256773611" />
+    <state width="1802" height="328" key="GridCell.Tab.0.left" timestamp="1595256773610">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224171" />
-    <state width="858" height="408" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595253186397" />
-    <state width="858" height="408" key="GridCell.Tab.0.right" timestamp="1595253186399">
+    <state width="1802" height="328" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595256773610" />
+    <state width="1802" height="328" key="GridCell.Tab.0.right" timestamp="1595256773611">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224172" />
-    <state width="858" height="408" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595253186399" />
-    <state width="1802" height="436" key="GridCell.Tab.1.bottom" timestamp="1595253186380">
+    <state width="1802" height="328" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595256773611" />
+    <state width="1802" height="328" key="GridCell.Tab.1.bottom" timestamp="1595256743233">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225137" />
-    <state width="1802" height="436" key="GridCell.Tab.1.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595253186380" />
-    <state width="1802" height="436" key="GridCell.Tab.1.center" timestamp="1595253186378">
+    <state width="1802" height="328" key="GridCell.Tab.1.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595256743233" />
+    <state width="1802" height="328" key="GridCell.Tab.1.center" timestamp="1595256743233">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225136" />
-    <state width="1802" height="436" key="GridCell.Tab.1.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595253186378" />
-    <state width="1802" height="436" key="GridCell.Tab.1.left" timestamp="1595253186377">
+    <state width="1802" height="328" key="GridCell.Tab.1.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595256743232" />
+    <state width="1802" height="328" key="GridCell.Tab.1.left" timestamp="1595256743232">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225136" />
-    <state width="1802" height="436" key="GridCell.Tab.1.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595253186377" />
-    <state width="1802" height="436" key="GridCell.Tab.1.right" timestamp="1595253186379">
+    <state width="1802" height="328" key="GridCell.Tab.1.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595256743232" />
+    <state width="1802" height="328" key="GridCell.Tab.1.right" timestamp="1595256743233">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225136" />
-    <state width="1802" height="436" key="GridCell.Tab.1.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595253186379" />
+    <state width="1802" height="328" key="GridCell.Tab.1.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595256743233" />
     <state x="506" y="68" width="1186" height="737" key="SettingsEditor" timestamp="1595251855886">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
@@ -366,23 +372,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1188</line>
+          <line>1195</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>750</line>
+          <line>756</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1052</line>
+          <line>1059</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
           <line>277</line>
           <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
+          <line>545</line>
+          <option name="timeStamp" value="107" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -523,28 +523,34 @@ static void fetch_messages(struct mailimap * imap)
     /* as improvement UIDVALIDITY should be read and the message cache should be cleaned
        if the UIDVALIDITY is not the same */
 
-    set = mailimap_set_new_interval(1, 0); /* fetch in interval 1:* */
-    /*
-    char *test = malloc(100);
+    //set = mailimap_set_new_interval(1, 0); /* fetch in interval 1:* */
+
+    /*char *test = malloc(100);
     memset(test, 0, 100);
     strcat(test, "SEARCH SINCE \"");
+     */
     time_t rawtime = time(NULL);
     rawtime -= 86400;
+    /*
     char* timeFormat = malloc(50);
     memset(timeFormat, 0, 50);
+     */
     struct tm *ptm = localtime(&rawtime);
-    strftime(timeFormat, 50, "%d-%b-%Y", ptm);
+    /*strftime(timeFormat, 50, "%d-%b-%Y", ptm);
     strcat(test, timeFormat);
-    strcat(test, "\"\r\n");
-    r = mailimap_custom_command(imap, "SEARCH NEW\r\n");
+    strcat(test, "\"\r\n");*/
+    struct mailimap_date *dateSince = mailimap_date_new(ptm->tm_mday, ptm->tm_mon, ptm->tm_year + 1900);
+    struct mailimap_search_key *keySince = mailimap_search_key_new_since(dateSince);
+    clist* testResult = clist_new();
+    r = mailimap_search(imap, NULL, keySince, &testResult);
     check_error(r, "Could not compute last emails");
     printf("Response to search : %s", imap->imap_response);
-     */
 
     fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
     fetch_att = mailimap_fetch_att_new_uid();
     mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
 
+    set = mailimap_set_new(testResult);
     r = mailimap_fetch(imap, set, fetch_type, &fetch_result);
     check_error(r, "could not fetch");
 
