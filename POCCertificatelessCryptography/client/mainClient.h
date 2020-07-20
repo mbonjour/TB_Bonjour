@@ -72,11 +72,11 @@ void generateAndSendPKs(encryption_mpk *mpkSession, signature_mpk *mpkSignature,
 
 void getGlobalParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature);
 
-binn* getSecretsValue(char *userID);
+binn* getSecretsValue(char *userID, char *userPassword);
 
 void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID);
 
-void  saveSecretsValue(binn *secrets, char *userID);
+void saveSecretsValue(binn *secrets, char *userID, char *userPassword);
 
 
 /**

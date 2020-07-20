@@ -672,42 +672,233 @@ void getGlobalParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature){
 }
 
 // TODO : just get or create secrets values
-binn* getSecretsValue(char *userID) {
+binn* getSecretsValue(char *userID, char *userPassword) {
     FILE *file;
-    file = fopen(userID, "r");
+    char *secretFile = malloc(330);
+    memset(secretFile, 0, 330);
+    strcpy(secretFile, userID);
+    strcat(secretFile, "_SK");
+
+    file = fopen(secretFile, "r");
     if (file){
-        // TODO : get the encrypted secret values
+        printf("Pleas give us the password to decrypt your personal data : \n");
+        // Max size of an email address
+        userPassword = malloc(320);
+        fgets(userPassword, 320, stdin);
+        userPassword[strlen(userPassword)-1] = '\x00';
+        unsigned char aesk[crypto_secretbox_KEYBYTES];
+        int r;
+        struct stat stat_info;
+        r = stat(secretFile, &stat_info);
+        if (r != 0) {
+            fclose(file);
+            exit(EXIT_FAILURE);
+        }
+
+        char * data = malloc(stat_info.st_size);
+        fread(data, 1, stat_info.st_size, file);
         fclose(file);
-        return 1;
+
+        size_t saltSize;
+        binn *objParams;
+        objParams = binn_open(data);
+        char *saltSaved = binn_object_str(objParams, "salt");
+        unsigned char *salt = base64_decode(saltSaved, strlen(saltSaved), &saltSize);
+
+        size_t outLen;
+        char *encryptedParams = binn_object_str(objParams, "b64Encrypted");
+        unsigned char *decodedParams = base64_decode(encryptedParams, strlen(encryptedParams), &outLen);
+
+        size_t outLenNonce;
+        char *nonceB64 = binn_object_str(objParams, "nonce");
+        unsigned char *nonceDecoded = base64_decode(nonceB64, strlen(nonceB64), &outLenNonce);
+
+        if (crypto_pwhash
+                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
+                     crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
+                     crypto_pwhash_ALG_DEFAULT) != 0) {
+            printf("Not enough memory");
+            /* out of memory */
+        }
+
+        char *decryptedParams = malloc(outLen);
+        decrypt_message(decryptedParams, decodedParams, nonceDecoded, aesk, outLen, NULL,0);
+        free(nonceDecoded);
+        free(decodedParams);
+        //free(userPassword);
+        free(salt);
+        binn_free(objParams);
+        free(data);
+
+        binn *savedSecrets;
+        savedSecrets = binn_open(decryptedParams);
+        fclose(file);
+        return savedSecrets;
     }
+
     //TODO : generate secret values and encrypts it and public keys ans send the lasts
-    return 0;
+    printf("Generating and saving secret values and public keys\n");
+    // Now we can go for user's private keys (encrypting and signing)
+    bn_t encryption_secret;
+    bn_t signature_secret;
+
+    setSec(&encryption_secret);
+    setSecSig(&signature_secret);
+
+    binn *obj;
+    obj = binn_object();
+    int size = bn_size_bin(encryption_secret);
+    uint8_t *bin = malloc(size);
+    bn_write_bin(bin, size, encryption_secret);
+    binn_object_set_blob(obj, "encryption_secret", bin, size);
+    //binn_free(obj);
+    free(bin);
+
+    //obj = binn_object();
+    size = bn_size_bin(signature_secret);
+    bin = malloc(size);
+    bn_write_bin(bin, size, signature_secret);
+    binn_object_set_blob(obj,"signature_secret", bin, size);
+    //binn_free(obj);
+    free(bin);
+
+    // Now we can go to set Public keys for both signing and encrypting
+
+    encryption_mpk mpkSession;
+    signature_mpk mpkSignature;
+    getGlobalParams(&mpkSession, &mpkSignature);
+
+    encryption_pk encryptionPk;
+    signature_pk signaturePk;
+
+    setPub(encryption_secret, mpkSession, &encryptionPk);
+    setPubSig(signature_secret, mpkSignature, &signaturePk);
+
+    int sock = connectToKGC();
+
+    binn* pkBinnObj;
+    pkBinnObj = binn_list();
+    binn* encryption_PkBinnObj, *signature_PkBinnObj;
+    encryption_PkBinnObj = binn_object();
+    signature_PkBinnObj = binn_object();
+    serialize_PKE(encryption_PkBinnObj, encryptionPk);
+    serialize_PKS(signature_PkBinnObj, signaturePk);
+    binn_list_add_object(pkBinnObj, encryption_PkBinnObj);
+    binn_list_add_object(pkBinnObj, signature_PkBinnObj);
+    binn_free(encryption_PkBinnObj);
+    binn_free(signature_PkBinnObj);
+
+    binn* packetSendingPK;
+    packetSendingPK = binn_object();
+    binn_object_set_str(packetSendingPK, "opCode", "PK");
+    binn_object_set_str(packetSendingPK, "ID", userID);
+
+    size_t outLen;
+    unsigned char* b64Payload = base64_encode(binn_ptr(pkBinnObj), binn_size(pkBinnObj), &outLen);
+    FILE *pkFile;
+    char *pkFilename = malloc(330);
+    memset(pkFilename, 0, 330);
+    strcpy(pkFilename, userID);
+    strcat(pkFilename, "_PK");
+
+    pkFile = fopen(pkFilename, "w");
+    fwrite(binn_ptr(pkBinnObj), binn_size(pkBinnObj), 1, pkFile);
+    fclose(pkFile);
+
+    printf("PK obj : %s\n", b64Payload);
+    binn_object_set_str(packetSendingPK, "PK", b64Payload);
+    // TODO : Vérifi si ok
+    free(b64Payload);
+
+    int sizeSent = send(sock, binn_ptr(packetSendingPK), binn_size(packetSendingPK), 0);
+    printf("Size of PK : %d\n", sizeSent);
+    binn_free(pkBinnObj);
+    binn_free(packetSendingPK);
+    printf("In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data : \n");
+    // Max size of an email address
+    userPassword = malloc(320);
+    fgets(userPassword, 320, stdin);
+    userPassword[strlen(userPassword)-1] = '\x00';
+    return obj;
 }
 
 // TODO at the end of a transaction save the state of the params (maybe a timestamp was added
-void  saveSecretsValue(binn *secrets, char *userID) {
-    FILE *file;
-    file = fopen(userID, "r");
-    if (file){
-        // TODO : get the encrypted secret values
-        fclose(file);
-        return 1;
+void saveSecretsValue(binn *secrets, char *userID, char *userPassword) {
+    FILE *savingParams;
+    char *secretFile = malloc(330);
+    memset(secretFile, 0, 330);
+    strcpy(secretFile, userID);
+    strcat(secretFile, "_SK");
+    savingParams = fopen(secretFile, "w");
+    if(savingParams){
+        size_t outLen;
+        unsigned char *m = binn_ptr(secrets);
+        unsigned long m_len = binn_size(secrets);
+        unsigned char aesk[crypto_secretbox_KEYBYTES];
+
+        //TODO : store this
+        unsigned char salt[crypto_pwhash_SALTBYTES];
+        printf("We give the salt and need to store it for future use :\n");
+        randombytes_buf(salt, sizeof salt);
+        size_t sizeB64Salt;
+        unsigned char *b64Salt = base64_encode(salt, crypto_pwhash_SALTBYTES, &sizeB64Salt);
+        printf("%s\n", b64Salt);
+
+
+        if (crypto_pwhash
+                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
+                     crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
+                     crypto_pwhash_ALG_DEFAULT) != 0) {
+            printf("Not enough memory");
+            /* out of memory */
+        }
+        unsigned char nonceAES[crypto_aead_aes256gcm_NPUBBYTES];
+        unsigned long long cipher_len;
+        unsigned char ciphertextAES[m_len + crypto_aead_aes256gcm_ABYTES];
+        encrypt_message(m, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len, NULL, 0);
+        printf("We give the nonce and need to store it for future use :\n");
+        size_t outLenB64Nonce;
+        unsigned char *b64nonce = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, &outLenB64Nonce);
+        printf("%s\n", b64nonce);
+
+
+        size_t b64EncryptedLen;
+        unsigned char *encryptedContent = base64_encode(ciphertextAES, cipher_len, &b64EncryptedLen);
+        binn *savedParamsBinn;
+        savedParamsBinn = binn_object();
+        binn_object_set_str(savedParamsBinn, "b64Encrypted", encryptedContent);
+        binn_object_set_str(savedParamsBinn, "nonce", b64nonce);
+        binn_object_set_str(savedParamsBinn, "salt", b64Salt);
+        size_t test = fwrite(binn_ptr(savedParamsBinn), binn_size(savedParamsBinn), 1, savingParams);
+        if(test > 0){
+            printf("Encypted params saved\n");
+        } else {
+            printf("Failed to save Params\n");
+        }
+        free(b64nonce);
+        free(b64Salt);
+        //free(userPassword);
+        free(encryptedContent);
+        fclose(savingParams);
+        binn_free(savedParamsBinn);
+    } else {
+        printf("Failed to open a file to save params\n");
     }
-    //TODO : generate secret values and encrypts it and public keys ans send the lasts
-    return 0;
 }
 
 // TODO : get a public key of a particular user locally if we sent to it recently or get them via KGC and saves them for further use
 void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID){
     FILE *file;
+    char *pkFile = malloc(330);
+    memset(pkFile, 0, 330);
+    strcpy(pkFile, userID);
+    strcat(pkFile, "_PK");
     file = fopen(userID, "r");
     if (file){
         // TODO : retrieve Public keys of an user which we already sent to
         fclose(file);
-        return 1;
     }
     // TODO : Get public keys of userID and save them to a file userID_PK
-    return 0;
 }
 
 void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
@@ -1030,8 +1221,6 @@ int main() {
         encryption_mpk mpkSession;
         signature_mpk mpkSignature;
         getGlobalParams(&mpkSession, &mpkSignature);
-
-
 
         bn_t encryption_secret;
         bn_null(encryption_secret)
