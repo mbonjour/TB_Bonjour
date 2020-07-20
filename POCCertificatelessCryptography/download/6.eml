@@ -1,0 +1,359 @@
+Delivered-To: jean.delafiction@gmail.com
+Received: by 2002:a67:7f01:0:0:0:0:0 with SMTP id a1csp697115vsd;
+        Wed, 10 Jun 2020 14:45:33 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJx2p/bgkD4nLpxFM9Rg3fFCJAOi5GV+Z5HWJMug4TOYCdDsgTuspXvJVy8ArppuJClHCDJ/
+X-Received: by 2002:ac8:750a:: with SMTP id u10mr5488312qtq.103.1591825533450;
+        Wed, 10 Jun 2020 14:45:33 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1591825533; cv=none;
+        d=google.com; s=arc-20160816;
+        b=rfqo65ooLqJRkA2t3rUwwIbzddD36rVhCdUNqbpqYYYQs48HP/z93nQJfix6xZmbJ4
+         kdt6C53EbsP4b0TdBF2g3glPyUtwxBWOL1age99VJTUtOq3G6y5ETcZOwOeC21g/E0RZ
+         yS1DeTURA61H5YlzudbhywuUyzcUayBEbAxRPK5MDmwWoFo3OFZnQyRh3cAvnC5Yh1iB
+         3+pPtzjm2N49UBeZwZBpXGsZCuJQGJuk3/JzSv02PC3xxrsFik8R+lsqtJr+cBFf4azK
+         +zoGDSGXfnBGO95ssnfhrau7Lgtnu380MRbixdTOsQQ4Od4ecEH3CMYUT8lfC6SLkyGL
+         bVbQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=feedback-id:date:to:mime-version:subject:message-id:from
+         :dkim-signature:dkim-signature;
+        bh=bceXININ2NZGyYoOFyV/OvlhV/XUXQzAaQ2jGjo6tKk=;
+        b=dLAPOhPoGOhE31TGX1VHXSCbsLK1naRqYAnVrVruoRRa6VWQD7AnDQe8SiARyYL4A9
+         50jkDc1lcDneYbhX/8j4+46wliczQk0pGdfNgFrwzaFfaUGBGNKICjWNgXBq6cM8ajD8
+         QDDGBMA7AN16P025VqSXvkh3cVykffn4jCMtbLoEm7gqgl8Yn0k8/5Jm0pMpCUw8D9qw
+         yAXUGFtjCLALZebkSy/z7FeYdDwFfcxJobybiPbxe7O8vpFoBFlDFOkdBJwSWaxn2m8r
+         CO5VjVnUWS68aH6syHmN7yF2qZXRqHtgBZLAkg6QA22lj40Yqg5LPUfh1wb5NZ3IP/II
+         X5Fw==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@linkedin.com header.s=d2048-201806-01 header.b="KomkX/X2";
+       dkim=pass header.i=@maila.linkedin.com header.s=proddkim1024 header.b=ZOcg0r9c;
+       spf=pass (google.com: domain of s-4vz1d3m78ta1u90lwi6k3xyqec460e3t8kpyofznj96bba9pg6wh2kpy@bounce.linkedin.com designates 108.174.3.139 as permitted sender) smtp.mailfrom=s-4vz1d3m78ta1u90lwi6k3xyqec460e3t8kpyofznj96bba9pg6wh2kpy@bounce.linkedin.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=linkedin.com
+Return-Path: <s-4vz1d3m78ta1u90lwi6k3xyqec460e3t8kpyofznj96bba9pg6wh2kpy@bounce.linkedin.com>
+Received: from maila-bc.linkedin.com (maila-bc.linkedin.com. [108.174.3.139])
+        by mx.google.com with ESMTPS id a14si526250qtp.62.2020.06.10.14.45.33
+        for <jean.delafiction@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 10 Jun 2020 14:45:33 -0700 (PDT)
+Received-SPF: pass (google.com: domain of s-4vz1d3m78ta1u90lwi6k3xyqec460e3t8kpyofznj96bba9pg6wh2kpy@bounce.linkedin.com designates 108.174.3.139 as permitted sender) client-ip=108.174.3.139;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@linkedin.com header.s=d2048-201806-01 header.b="KomkX/X2";
+       dkim=pass header.i=@maila.linkedin.com header.s=proddkim1024 header.b=ZOcg0r9c;
+       spf=pass (google.com: domain of s-4vz1d3m78ta1u90lwi6k3xyqec460e3t8kpyofznj96bba9pg6wh2kpy@bounce.linkedin.com designates 108.174.3.139 as permitted sender) smtp.mailfrom=s-4vz1d3m78ta1u90lwi6k3xyqec460e3t8kpyofznj96bba9pg6wh2kpy@bounce.linkedin.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=linkedin.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linkedin.com;
+	s=d2048-201806-01; t=1591825533;
+	bh=bceXININ2NZGyYoOFyV/OvlhV/XUXQzAaQ2jGjo6tKk=;
+	h=From:Subject:MIME-Version:Content-Type:To:Date:X-LinkedIn-Class:
+	 X-LinkedIn-Template:X-LinkedIn-fbl;
+	b=KomkX/X2NTY2ffcAGfBNINQW8RXWNpXWbt702sJ6nCnuI79VZ8MwNnXFTklPw3FnT
+	 CCjWILdUREqqIqmFmm7j1mtHfPj3JjmKfLFpogoAywraypjyZ3p2wH6aIdq8rbVmku
+	 xxE2swDt9MR2/Y71WJbISoODXGEyRs0pUDTUuJnBGrMdZpaGlkYsuBmcj35kVo8l85
+	 mdx1epiURCvFip7EO3bFuHXk3/rx4DCV4O1rPhWqr6xR60jStsiYp8Nf1FYPMxxHpl
+	 5NPB+bGzudMFc+hArVwO40aHBxmy7uM7X8sxwDYQla+hM+nnxwyvJABh3cIbRQIhWM
+	 rQjaTeJuE/DPg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=maila.linkedin.com;
+	s=proddkim1024; t=1591825533;
+	bh=bceXININ2NZGyYoOFyV/OvlhV/XUXQzAaQ2jGjo6tKk=;
+	h=From:Subject:MIME-Version:Content-Type:To:Date:X-LinkedIn-Class:
+	 X-LinkedIn-Template:X-LinkedIn-fbl;
+	b=ZOcg0r9ciOXkyn1BH+eoQCYzqqJJn+QdV8e7hhYZBJwYjC3SJ8f2SpQDkjKYOFzHd
+	 9XmYmOz9aenRBEqkqk3Oj1kjfqCYohyrsjsTzRGaw79puTeYhfPYPxQMcXmXWBwwwG
+	 SdZUwD5w++cKE3ABVeHILMc538o6WZKbs+EPaflg=
+From: Messages LinkedIn <security-noreply@linkedin.com>
+Message-ID: <89974217.6315792.1591825533238.JavaMail.app@lva1-app47505.prod.linkedin.com>
+Subject: Jean, votre code est 414940. Veuillez confirmer votre adresse
+ e-mail
+MIME-Version: 1.0
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_6315790_437704866.1591825533235"
+To: Jean De La Fiction <jean.delafiction@gmail.com>
+Date: Wed, 10 Jun 2020 21:45:33 +0000 (UTC)
+X-LinkedIn-Class: ACCT-ADMIN
+X-LinkedIn-Template: email_confirm_your_email_with_pin_single_01
+X-LinkedIn-fbl: m2-aszvm4qaa50f5tc39zsjtyddrdjoz6vtfl1778sm1j2t0jcd5dho93n3hiwxwp4mabn63j0tf2sdzxg4n93k5wn774p9zvskrcbhaf
+X-LinkedIn-Id: dn5t62-kb9vtm7z-eb
+Feedback-ID: email_confirm_your_email_with_pin_single_01:linkedin
+
+------=_Part_6315790_437704866.1591825533235
+Content-Type: text/plain;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-ID: text-body
+
+.....................................
+
+LinkedIn
+
+Merci de votre inscription.
+Veuillez confirmer votre adresse e-mail pour un acc=C3=A8s complet =C3=A0 L=
+inkedIn.
+
+Pour v=C3=A9rifier votre adresse e-mail, veuillez saisir le code de v=C3=A9=
+rification suivant=C2=A0:
+
+414940
+
+Prot=C3=A9gez votre confidentialit=C3=A9
+
+Nous pouvons vous envoyer des nouvelles des membres, des messages de recrut=
+eurs, des recommandations de poste, des invitations, des rappels et des mes=
+sages promotionnels =C3=A9mis par nous ou nos partenaires. Vous pouvez modi=
+fier vos pr=C3=A9f=C3=A9rences d=E2=80=99e-mail =C3=A0 tout moment.
+
+Ou vous pouvez accepter et v=C3=A9rifier votre e-mail en acc=C3=A9dant =C3=
+=A0 l=E2=80=99URL suivante=C2=A0:
+
+https://www.linkedin.com/comm/psettings/email/confirm?sig=3D2VlgxVbRJVQFg1&=
+crua=3Dneptune%2Fonboarding%2Estart&id=3D8737398813&ct=3D1591825533118&midT=
+oken=3DAQELTIcSR8AOIQ&trk=3Deml-email_confirm_your_email_with_pin_single_01=
+-hero-5-confirm%7Eemail&trkEmail=3Deml-email_confirm_your_email_with_pin_si=
+ngle_01-hero-5-confirm%7Eemail-null-dn5t62%7Ekb9vtm7z%7Eeb-null-psettings%7=
+Eemail%7Econfirmation&lipi=3Durn%3Ali%3Apage%3Aemail_email_confirm_your_ema=
+il_with_pin_single_01%3BLcAOaM59Ro2gpq5rbbg4%2Fw%3D%3D
+
+https://www.linkedin.com/e/v2?e=3Ddn5t62-kb9vtm7z-eb&lipi=3Durn%3Ali%3Apage=
+%3Aemail_email_confirm_your_email_with_pin_single_01%3BLcAOaM59Ro2gpq5rbbg4=
+%2Fw%3D%3D&a=3Dpsettings-email-controls&midToken=3DAQELTIcSR8AOIQ&ek=3Demai=
+l_confirm_your_email_with_pin_single_01&li=3D8&m=3Dhero&ts=3Dchange-email-u=
+rl_change_email_preferences
+
+Merci d=E2=80=99utiliser LinkedIn=C2=A0!
+L=E2=80=99=C3=A9quipe LinkedIn
+
+.....................................
+
+Vous recevez cet e-mail parce que vous, ou quelqu=E2=80=99un utilisant cet =
+e-mail, avez cr=C3=A9=C3=A9 un compte sur LinkedIn avec cette adresse.
+
+Vous ne vous =C3=AAtes pas inscrit(e) sur LinkedIn=C2=A0? Fermez le compte=
+=C2=A0: https://www.linkedin.com/e/v2?e=3Ddn5t62-kb9vtm7z-eb&lipi=3Durn%3Al=
+i%3Apage%3Aemail_email_confirm_your_email_with_pin_single_01%3BLcAOaM59Ro2g=
+pq5rbbg4%2Fw%3D%3D&a=3Daccount-close&midToken=3DAQELTIcSR8AOIQ&ek=3Demail_c=
+onfirm_your_email_with_pin_single_01&li=3D6&m=3Dfooter&ts=3Dnot-me&id=3DAFU=
+AADEr7eoBGVvR-3T2ZL04lq35W3R3wEvwBzg&email=3DMM8EcfW-k_fqXvhwyy_EvyrWJ4QXvg=
+hQ3MmGYZBG
+
+Cet e-mail est destin=C3=A9 =C3=A0 Jean De La Fiction
+D=C3=A9couvrez pourquoi nous pr=C3=A9cisons ceci=C2=A0: https://www.linkedi=
+n.com/e/v2?e=3Ddn5t62-kb9vtm7z-eb&lipi=3Durn%3Ali%3Apage%3Aemail_email_conf=
+irm_your_email_with_pin_single_01%3BLcAOaM59Ro2gpq5rbbg4%2Fw%3D%3D&a=3Dcust=
+omerServiceUrl&midToken=3DAQELTIcSR8AOIQ&ek=3Demail_confirm_your_email_with=
+_pin_single_01&articleId=3D4788
+
+=C2=A9 2020 LinkedIn Ireland Unlimited Company, Wilton Plaza, Wilton Place,=
+ Dublin 2. LinkedIn est le nom commercial d=C3=A9pos=C3=A9 de LinkedIn Irel=
+and Unlimited Company. LinkedIn et le logo de LinkedIn sont des marques d=
+=C3=A9pos=C3=A9es de LinkedIn.
+------=_Part_6315790_437704866.1591825533235
+Content-Type: text/html;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-ID: html-body
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> <html xmlns=3D"http://www.w3=
+.org/1999/xhtml" lang=3D"fr" xml:lang=3D"fr"> <head> <meta http-equiv=3D"Co=
+ntent-Type" content=3D"text/html;charset=3Dutf-8"> <meta name=3D"HandheldFr=
+iendly" content=3D"true"> <meta name=3D"viewport" content=3D"width=3Ddevice=
+-width; initial-scale=3D0.666667; maximum-scale=3D0.666667; user-scalable=
+=3D0"> <meta name=3D"viewport" content=3D"width=3Ddevice-width"> <title></t=
+itle> <!--[if mso]><style type=3D"text/css">body {font-family: 'Helvetica N=
+eue', Helvetica, Arial, sans-serif;}.phoenix-email-container {width: 512px =
+!important;}</style><![endif]--> <!--[if IE]><style type=3D"text/css">.phoe=
+nix-email-container {width: 512px !important;}</style><![endif]--> <style t=
+ype=3D"text/css">@media only screen and (max-width:32em) { .phoenix-email-c=
+ontainer { width:100% !important; } } @media only screen and (max-width:20e=
+m) {} @media only screen and (max-device-width:30em) {} @media screen and (=
+device-width:30em) and (device-height:22.5em), screen and (device-width:22.=
+5em) and (device-height:30em), screen and (device-width:20em) and (device-h=
+eight:15em) {} @media screen and (-webkit-min-device-pixel-ratio:0) {} @med=
+ia screen and (max-device-width:25.88em) and (max-device-height:48.5em) {} =
+</style> </head> <body style=3D"padding:0;margin:0 auto;-webkit-text-size-a=
+djust:100%;width:100% !important;-ms-text-size-adjust:100%;font-family:'Hel=
+vetica Neue',Helvetica,Arial,sans-serif;"> <div style=3D"overflow:hidden;co=
+lor:transparent;visibility:hidden;mso-hide:all;width:0;font-size:0;opacity:=
+0;height:0;"></div> <table align=3D"center" border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" width=3D"100%" bgcolor=3D"#EDF0F3" style=3D"background-co=
+lor:#EDF0F3;table-layout:fixed;-webkit-text-size-adjust:100%;mso-table-rspa=
+ce:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"> <tbody> <tr> <td a=
+lign=3D"center" style=3D"-webkit-text-size-adjust:100%;mso-table-rspace:0pt=
+;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"> <center style=3D"width:1=
+00%;"> <table border=3D"0" class=3D"phoenix-email-container" cellspacing=3D=
+"0" cellpadding=3D"0" width=3D"512" bgcolor=3D"#FFFFFF" style=3D"background=
+-color:#FFFFFF;margin:0 auto;max-width:512px;-webkit-text-size-adjust:100%;=
+mso-table-rspace:0pt;width:inherit;mso-table-lspace:0pt;-ms-text-size-adjus=
+t:100%;"> <tbody> <tr> <td bgcolor=3D"#F6F8FA" style=3D"background-color:#F=
+6F8FA;padding:28px 0 20px 0;-webkit-text-size-adjust:100%;mso-table-rspace:=
+0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"> <table border=3D"0" c=
+ellspacing=3D"0" cellpadding=3D"0" width=3D"100%" style=3D"-webkit-text-siz=
+e-adjust:100%;mso-table-rspace:0pt;width:100% !important;mso-table-lspace:0=
+pt;-ms-text-size-adjust:100%;min-width:100% !important;"> <tbody> <tr> <td =
+align=3D"center" width=3D"100%" style=3D"-webkit-text-size-adjust:100%;mso-=
+table-rspace:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"><a href=
+=3D"https://www.linkedin.com/comm/feed/?midToken=3DAQELTIcSR8AOIQ&amp;trk=
+=3Deml-email_confirm_your_email_with_pin_single_01-header-0-home&amp;trkEma=
+il=3Deml-email_confirm_your_email_with_pin_single_01-header-0-home-null-dn5=
+t62%7Ekb9vtm7z%7Eeb-null-neptune%2Ffeed&amp;lipi=3Durn%3Ali%3Apage%3Aemail_=
+email_confirm_your_email_with_pin_single_01%3BLcAOaM59Ro2gpq5rbbg4%2Fw%3D%3=
+D" style=3D"cursor:pointer;color:#008CC9;-webkit-text-size-adjust:100%;disp=
+lay:inline-block;text-decoration:none;-ms-text-size-adjust:100%;"> <img alt=
+=3D"LinkedIn" border=3D"0" src=3D"https://static.licdn.com/sc/p/com.linkedi=
+n.email-assets-frontend%3Aemail-assets-frontend-static-content%2B__latest__=
+/f/%2Femail-assets-frontend%2Fimages%2Femail%2Fphoenix%2Flogos%2Flogo_linke=
+din_tm_242x59_v1.png" height=3D"21" width=3D"88" style=3D"outline:none;-ms-=
+interpolation-mode:bicubic;color:#FFFFFF;text-decoration:none;"></a></td> <=
+/tr> <tr> <td align=3D"center" width=3D"100%" style=3D"padding:16px 24px 0 =
+24px;-webkit-text-size-adjust:100%;mso-table-rspace:0pt;mso-table-lspace:0p=
+t;-ms-text-size-adjust:100%;"> <h2 style=3D"margin:0;color:#262626;font-wei=
+ght:200;font-size:20px;padding-bottom:5px;line-height:1.2;">Merci de votre =
+inscription.</h2> <p style=3D"margin:0;color:#4C4C4C;font-weight:400;font-s=
+ize:16px;line-height:1.5;">Veuillez confirmer votre adresse e-mail pour un =
+acc=C3=A8s complet =C3=A0 LinkedIn.</p></td> </tr> </tbody> </table></td> <=
+/tr> <tr> <td style=3D"-webkit-text-size-adjust:100%;mso-table-rspace:0pt;m=
+so-table-lspace:0pt;-ms-text-size-adjust:100%;"> <table border=3D"0" cellsp=
+acing=3D"0" cellpadding=3D"0" width=3D"100%" style=3D"max-width:492px;-webk=
+it-text-size-adjust:100%;mso-table-rspace:0pt;mso-table-lspace:0pt;-ms-text=
+-size-adjust:100%;"> <tbody> <tr> <td align=3D"center" style=3D"padding:25p=
+x 10px;-webkit-text-size-adjust:100%;mso-table-rspace:0pt;mso-table-lspace:=
+0pt;-ms-text-size-adjust:100%;text-align:center;"> <h2 style=3D"margin:0;co=
+lor:#262626;font-weight:200;font-size:24px;padding-bottom:15px;line-height:=
+1.167;">414940</h2> <p style=3D"margin:0;color:#4C4C4C;font-weight:400;font=
+-size:14px;padding-bottom:25px;line-height:1.429;">Saisissez ce code ou cli=
+quez sur le bouton ci-dessous.</p> <table border=3D"0" cellspacing=3D"0" ce=
+llpadding=3D"0" width=3D"100%" style=3D"margin:0 auto 25px auto;max-width:4=
+20px;-webkit-text-size-adjust:100%;mso-table-rspace:0pt;mso-table-lspace:0p=
+t;-ms-text-size-adjust:100%;"> <tbody> <tr> <td align=3D"left" style=3D"bor=
+der-radius:2px;padding:12px 16px;-webkit-text-size-adjust:100%;mso-table-rs=
+pace:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;border-color:#e2e2e=
+2;border-width:1px;border-style:solid;"> <table border=3D"0" cellspacing=3D=
+"0" cellpadding=3D"0" width=3D"100%" style=3D"-webkit-text-size-adjust:100%=
+;mso-table-rspace:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"> <tb=
+ody> <tr> <td width=3D"20" valign=3D"top" style=3D"padding-top:3px;-webkit-=
+text-size-adjust:100%;mso-table-rspace:0pt;mso-table-lspace:0pt;width:20px;=
+vertical-align:top;-ms-text-size-adjust:100%;"><img src=3D"https://static.l=
+icdn.com/sc/p/com.linkedin.email-assets-frontend%3Aemail-assets-frontend-st=
+atic-content%2B__latest__/f/%2Femail-assets-frontend%2Fimages%2Femail%2Fart=
+deco%2Ficons%2F16%2Fshield-icon.png" width=3D"16" height=3D"16" alt=3D"shie=
+ld icon" style=3D"outline:none;-ms-interpolation-mode:bicubic;color:#FFFFFF=
+;text-decoration:none;"></td> <td style=3D"-webkit-text-size-adjust:100%;ms=
+o-table-rspace:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"> <h2 st=
+yle=3D"margin:0;color:#262626;font-weight:700;font-size:16px;line-height:1.=
+5;">Prot=C3=A9gez votre confidentialit=C3=A9</h2></td> </tr> <tr> <td style=
+=3D"-webkit-text-size-adjust:100%;mso-table-rspace:0pt;mso-table-lspace:0pt=
+;-ms-text-size-adjust:100%;"></td> <td style=3D"-webkit-text-size-adjust:10=
+0%;mso-table-rspace:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"> <=
+p style=3D"margin:0;color:#737373;font-weight:400;font-size:14px;line-heigh=
+t:1.429;">Nous pouvons vous envoyer des nouvelles des membres, des messages=
+ de recruteurs, des recommandations de poste, des invitations, des rappels =
+et des messages promotionnels =C3=A9mis par nous ou nos partenaires. Vous p=
+ouvez <a href=3D"https://www.linkedin.com/e/v2?e=3Ddn5t62-kb9vtm7z-eb&amp;l=
+ipi=3Durn%3Ali%3Apage%3Aemail_email_confirm_your_email_with_pin_single_01%3=
+BLcAOaM59Ro2gpq5rbbg4%2Fw%3D%3D&amp;a=3Dpsettings-email-controls&amp;midTok=
+en=3DAQELTIcSR8AOIQ&amp;ek=3Demail_confirm_your_email_with_pin_single_01&am=
+p;li=3D8&amp;m=3Dhero&amp;ts=3Dchange-email-url_change_email_preferences" s=
+tyle=3D"cursor:pointer;color:#0077B5;-webkit-text-size-adjust:100%;font-wei=
+ght:bold;display:inline;text-decoration:none;-ms-text-size-adjust:100%;">mo=
+difier vos pr=C3=A9f=C3=A9rences</a> =C3=A0 tout moment.</p></td> </tr> </t=
+body> </table></td> </tr> </tbody> </table> <table border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" style=3D"-webkit-text-size-adjust:100%;mso-table-r=
+space:0pt;display:inline-block;mso-table-lspace:0pt;-ms-text-size-adjust:10=
+0%;"> <tbody> <tr> <td align=3D"center" valign=3D"middle" style=3D"-webkit-=
+text-size-adjust:100%;mso-table-rspace:0pt;mso-table-lspace:0pt;-ms-text-si=
+ze-adjust:100%;"><a href=3D"https://www.linkedin.com/comm/psettings/email/c=
+onfirm?sig=3D2VlgxVbRJVQFg1&amp;crua=3Dneptune%2Fonboarding%2Estart&amp;id=
+=3D8737398813&amp;ct=3D1591825533118&amp;midToken=3DAQELTIcSR8AOIQ&amp;trk=
+=3Deml-email_confirm_your_email_with_pin_single_01-hero-5-confirm%7Eemail&a=
+mp;trkEmail=3Deml-email_confirm_your_email_with_pin_single_01-hero-5-confir=
+m%7Eemail-null-dn5t62%7Ekb9vtm7z%7Eeb-null-psettings%7Eemail%7Econfirmation=
+&amp;lipi=3Durn%3Ali%3Apage%3Aemail_email_confirm_your_email_with_pin_singl=
+e_01%3BLcAOaM59Ro2gpq5rbbg4%2Fw%3D%3D" target=3D"_blank" style=3D"cursor:po=
+inter;word-wrap:normal;color:#008CC9;word-break:normal;white-space:nowrap;-=
+webkit-text-size-adjust:100%;display:block;text-decoration:none;-ms-text-si=
+ze-adjust:100%;overflow-wrap:normal;"> <table border=3D"0" cellspacing=3D"0=
+" cellpadding=3D"0" width=3D"auto" style=3D"-webkit-text-size-adjust:100%;m=
+so-table-rspace:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"> <tbod=
+y> <tr> <td bgcolor=3D"#008CC9" align=3D"center" style=3D"padding:6px 16px;=
+word-wrap:break-word;color:#FFFFFF;-webkit-text-size-adjust:100%;white-spac=
+e:normal !important;font-weight:500;-ms-word-break:break-all;font-size:16px=
+;-ms-text-size-adjust:100%;border-color:#008CC9;overflow-wrap:break-word;ba=
+ckground-color:#008CC9;border-radius:2px;word-break:break-word;mso-table-rs=
+pace:0pt;mso-table-lspace:0pt;border-width:1px;border-style:solid;text-alig=
+n:center;"><a href=3D"https://www.linkedin.com/comm/psettings/email/confirm=
+?sig=3D2VlgxVbRJVQFg1&amp;crua=3Dneptune%2Fonboarding%2Estart&amp;id=3D8737=
+398813&amp;ct=3D1591825533118&amp;midToken=3DAQELTIcSR8AOIQ&amp;trk=3Deml-e=
+mail_confirm_your_email_with_pin_single_01-hero-5-confirm%7Eemail&amp;trkEm=
+ail=3Deml-email_confirm_your_email_with_pin_single_01-hero-5-confirm%7Eemai=
+l-null-dn5t62%7Ekb9vtm7z%7Eeb-null-psettings%7Eemail%7Econfirmation&amp;lip=
+i=3Durn%3Ali%3Apage%3Aemail_email_confirm_your_email_with_pin_single_01%3BL=
+cAOaM59Ro2gpq5rbbg4%2Fw%3D%3D" target=3D"_blank" style=3D"cursor:pointer;co=
+lor:#FFFFFF;-webkit-text-size-adjust:100%;display:inline-block;text-decorat=
+ion:none;-ms-text-size-adjust:100%;">Accepter et confirmer votre e-mail</a>=
+</td> </tr> </tbody> </table></a></td> </tr> </tbody> </table></td> </tr> <=
+/tbody> </table></td> </tr> <tr> <td style=3D"-webkit-text-size-adjust:100%=
+;mso-table-rspace:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"> <ta=
+ble border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" bgcolor=
+=3D"#EDF0F3" align=3D"center" style=3D"background-color:#EDF0F3;padding:0 2=
+4px;color:#6A6C6D;-webkit-text-size-adjust:100%;mso-table-rspace:0pt;mso-ta=
+ble-lspace:0pt;-ms-text-size-adjust:100%;text-align:center;"> <tbody> <tr> =
+<td align=3D"center" style=3D"padding:16px 0 0 0;-webkit-text-size-adjust:1=
+00%;mso-table-rspace:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;tex=
+t-align:center;"></td> </tr> <tr> <td style=3D"-webkit-text-size-adjust:100=
+%;mso-table-rspace:0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;"> <t=
+able border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" style=
+=3D"-webkit-text-size-adjust:100%;mso-table-rspace:0pt;mso-table-lspace:0pt=
+;-ms-text-size-adjust:100%;"> <tbody> <tr> <td align=3D"center" style=3D"pa=
+dding:0 0 12px 0;-webkit-text-size-adjust:100%;mso-table-rspace:0pt;mso-tab=
+le-lspace:0pt;-ms-text-size-adjust:100%;text-align:center;"> <p style=3D"ma=
+rgin:0;color:#6A6C6D;font-weight:400;font-size:12px;padding-bottom:10px;lin=
+e-height:1.333;">Vous recevez un e-mail parce que vous, ou quelqu=E2=80=99u=
+n utilisant cet e-mail, avez cr=C3=A9=C3=A9 un compte sur LinkedIn avec cet=
+te adresse e-mail.</p> <p style=3D"margin:0;color:#6A6C6D;font-weight:400;f=
+ont-size:12px;line-height:1.333;">Vous ne vous =C3=AAtes pas inscrit(e) sur=
+ LinkedIn&nbsp;? <a href=3D"https://www.linkedin.com/e/v2?e=3Ddn5t62-kb9vtm=
+7z-eb&amp;lipi=3Durn%3Ali%3Apage%3Aemail_email_confirm_your_email_with_pin_=
+single_01%3BLcAOaM59Ro2gpq5rbbg4%2Fw%3D%3D&amp;a=3Daccount-close&amp;midTok=
+en=3DAQELTIcSR8AOIQ&amp;ek=3Demail_confirm_your_email_with_pin_single_01&am=
+p;li=3D6&amp;m=3Dfooter&amp;ts=3Dnot-me&amp;id=3DAFUAADEr7eoBGVvR-3T2ZL04lq=
+35W3R3wEvwBzg&amp;email=3DMM8EcfW-k_fqXvhwyy_EvyrWJ4QXvghQ3MmGYZBG" style=
+=3D"cursor:pointer;color:#6A6C6D;-webkit-text-size-adjust:100%;text-decorat=
+ion:underline;display:inline-block;-ms-text-size-adjust:100%;">Fermer le co=
+mpte</a></p></td> </tr> <tr> <td align=3D"center" style=3D"padding:0 0 12px=
+ 0;-webkit-text-size-adjust:100%;mso-table-rspace:0pt;mso-table-lspace:0pt;=
+-ms-text-size-adjust:100%;text-align:center;"> <p style=3D"margin:0;word-wr=
+ap:break-word;color:#6A6C6D;word-break:break-word;font-weight:400;-ms-word-=
+break:break-all;font-size:12px;line-height:1.333;overflow-wrap:break-word;"=
+>Cet e-mail est destin=C3=A9 =C3=A0 Jean De La Fiction <a href=3D"https://w=
+ww.linkedin.com/e/v2?e=3Ddn5t62-kb9vtm7z-eb&amp;lipi=3Durn%3Ali%3Apage%3Aem=
+ail_email_confirm_your_email_with_pin_single_01%3BLcAOaM59Ro2gpq5rbbg4%2Fw%=
+3D%3D&amp;a=3DcustomerServiceUrl&amp;midToken=3DAQELTIcSR8AOIQ&amp;ek=3Dema=
+il_confirm_your_email_with_pin_single_01&amp;articleId=3D4788" style=3D"cur=
+sor:pointer;color:#6A6C6D;-webkit-text-size-adjust:100%;text-decoration:und=
+erline;display:inline-block;-ms-text-size-adjust:100%;">D=C3=A9couvrez pour=
+quoi nous pr=C3=A9cisons ceci.</a></p></td> </tr> <tr> <td align=3D"center"=
+ style=3D"padding:0 0 8px 0;-webkit-text-size-adjust:100%;mso-table-rspace:=
+0pt;mso-table-lspace:0pt;-ms-text-size-adjust:100%;text-align:center;"><a h=
+ref=3D"https://www.linkedin.com/comm/feed/?midToken=3DAQELTIcSR8AOIQ&amp;tr=
+k=3Deml-email_confirm_your_email_with_pin_single_01-footer-2-home&amp;trkEm=
+ail=3Deml-email_confirm_your_email_with_pin_single_01-footer-2-home-null-dn=
+5t62%7Ekb9vtm7z%7Eeb-null-neptune%2Ffeed&amp;lipi=3Durn%3Ali%3Apage%3Aemail=
+_email_confirm_your_email_with_pin_single_01%3BLcAOaM59Ro2gpq5rbbg4%2Fw%3D%=
+3D" style=3D"cursor:pointer;color:#6A6C6D;-webkit-text-size-adjust:100%;tex=
+t-decoration:underline;display:inline-block;-ms-text-size-adjust:100%;"><im=
+g alt=3D"LinkedIn" border=3D"0" height=3D"14" src=3D"https://static.licdn.c=
+om/sc/p/com.linkedin.email-assets-frontend%3Aemail-assets-frontend-static-c=
+ontent%2B__latest__/f/%2Femail-assets-frontend%2Fimages%2Femail%2Fphoenix%2=
+Flogos%2Flogo_phoenix_footer_darkgray_197x48_v1.png" width=3D"58" style=3D"=
+outline:none;-ms-interpolation-mode:bicubic;color:#FFFFFF;display:block;tex=
+t-decoration:none;"></a></td> </tr> <tr> <td align=3D"center" style=3D"padd=
+ing:0 0 12px 0;-webkit-text-size-adjust:100%;mso-table-rspace:0pt;mso-table=
+-lspace:0pt;-ms-text-size-adjust:100%;text-align:center;"> <p style=3D"marg=
+in:0;color:#6A6C6D;font-weight:400;font-size:12px;line-height:1.333;">=C2=
+=A9 2020 LinkedIn Ireland Unlimited Company, Wilton Plaza, Wilton Place, Du=
+blin 2. LinkedIn est le nom commercial d=C3=A9pos=C3=A9 de LinkedIn Ireland=
+ Unlimited Company. LinkedIn et le logo de LinkedIn sont des marques d=C3=
+=A9pos=C3=A9es de LinkedIn.</p></td> </tr> </tbody> </table></td> </tr> </t=
+body> </table></td> </tr> </tbody> </table> </center></td> </tr> </tbody> <=
+/table> <img alt=3D"" role=3D"presentation" src=3D"https://www.linkedin.com=
+/emimp/ip_Wkc0MWREWXlMV3RpT1haMGJUZDZMV1ZpOlpXMWhhV3hmWTI5dVptbHliVjk1YjNWe=
+VgyVnRZV2xzWDNkcGRHaGZjR2x1WDNOcGJtZHNaVjh3TVE9PTo=3D.gif" style=3D"outline=
+:none;-ms-interpolation-mode:bicubic;color:#FFFFFF;text-decoration:none;wid=
+th:1px;height:1px;"> </body> </html>
+------=_Part_6315790_437704866.1591825533235--
+

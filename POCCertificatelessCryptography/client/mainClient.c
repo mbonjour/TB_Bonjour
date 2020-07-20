@@ -1,20 +1,191 @@
+#include <sys/stat.h>
 #include "mainClient.h"
 
 #define PORT 10002
 
 char *payload_text[10];
-/*
- * In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data :
-Testing118
-We give the salt and need to store it for future use :
-jV8LTEVgkbi/Tvlhl27S8A==
-We give the nonce and need to store it for future use :
-Qi2M5oDV6V3nERt2
-Encypted params saved
- */
 struct upload_status {
     int lines_read;
 };
+static void display_mailbox_list(struct mailimf_mailbox_list * mb_list, char *dest)
+{
+    clistiter * cur;
+
+    for(cur = clist_begin(mb_list->mb_list) ; cur != NULL ;
+        cur = clist_next(cur)) {
+        struct mailimf_mailbox * mb;
+
+        mb = clist_content(cur);
+
+        //display_mailbox(mb);
+        if (mb->mb_display_name != NULL) {
+            strcat(dest, mb->mb_display_name);
+            strcat(dest, " ");
+        }
+        //printf("<%s>", mb->mb_addr_spec);
+        strcat(dest, mb->mb_addr_spec);
+        if (clist_next(cur) != NULL) {
+            strcat(dest, ", ");
+        }
+    }
+}
+static void display_address_list(struct mailimf_address_list * addr_list, char *dest)
+{
+    clistiter * cur;
+
+    for(cur = clist_begin(addr_list->ad_list) ; cur != NULL ;
+        cur = clist_next(cur)) {
+        struct mailimf_address * addr;
+
+        addr = clist_content(cur);
+
+        switch (addr->ad_type) {
+            case MAILIMF_ADDRESS_GROUP:
+                strcat(dest, addr->ad_data.ad_group->grp_display_name);
+                strcat(dest, ": ");
+                clistiter * current;
+                for(current = clist_begin(addr->ad_data.ad_group->grp_mb_list->mb_list) ; current != NULL ; current = clist_next(current)) {
+                    struct mailimf_mailbox * mb;
+
+                    mb = clist_content(current);
+                    if (mb->mb_display_name != NULL) {
+                        strcat(dest, mb->mb_display_name);
+                        strcat(dest, " ");
+                    }
+                    //printf("<%s>", mb->mb_addr_spec);
+                    strcat(dest, mb->mb_addr_spec);
+                }
+                strcat(dest, "; ");
+                break;
+
+            case MAILIMF_ADDRESS_MAILBOX:
+                if (addr->ad_data.ad_mailbox->mb_display_name != NULL) {
+                    strcat(dest, addr->ad_data.ad_mailbox->mb_display_name);
+                    strcat(dest, " ");
+                }
+                //printf("<%s>", addr->ad_data.ad_mailbox->mb_addr_spec);
+                strcat(dest, addr->ad_data.ad_mailbox->mb_addr_spec);
+                break;
+        }
+
+        if (clist_next(cur) != NULL) {
+            strcat(dest, ", ");
+        }
+    }
+}
+
+binn* parseEmail(char* filename){
+    FILE *file;
+    binn *mailReturn;
+    mailReturn = binn_object();
+
+    char* test = malloc(50);
+    memset(test, 0, 50);
+    strcat(test, "download/");
+    strcat(test, filename);
+    int r;
+    struct mailmime * mime;
+    struct stat stat_info;
+    char * data;
+    size_t current_index;
+
+    file = fopen(test, "r");
+    if (file == NULL) {
+        exit(EXIT_FAILURE);
+    }
+
+    r = stat(test, &stat_info);
+    if (r != 0) {
+        fclose(file);
+        exit(EXIT_FAILURE);
+    }
+
+    data = malloc(stat_info.st_size);
+    fread(data, 1, stat_info.st_size, file);
+    fclose(file);
+
+    current_index = 0;
+    r = mailmime_parse(data, stat_info.st_size,
+                       &current_index, &mime);
+    if (r != MAILIMF_NO_ERROR) {
+        free(data);
+        exit(EXIT_FAILURE);
+        return EXIT_FAILURE;
+    }
+
+    // display_mime(mime);
+    if (mime->mm_data.mm_message.mm_fields) {
+        if (clist_begin(mime->mm_data.mm_message.mm_fields->fld_list) != NULL) {
+            clistiter * cur;
+
+            for(cur = clist_begin(mime->mm_data.mm_message.mm_fields->fld_list) ; cur != NULL ;
+                cur = clist_next(cur)) {
+                struct mailimf_field * f;
+
+                f = clist_content(cur);
+                switch (f->fld_type) {
+                    case MAILIMF_FIELD_ORIG_DATE:
+                        printf("\n");
+                        char *dateFormat = malloc(50);
+                        struct mailimf_date_time * d = f->fld_data.fld_orig_date->dt_date_time;
+                        snprintf(dateFormat, 50, "%02i/%02i/%i %02i:%02i:%02i %+04i",
+                               d->dt_day, d->dt_month, d->dt_year,
+                               d->dt_hour, d->dt_min, d->dt_sec, d->dt_zone);
+                        binn_object_set_str(mailReturn, "Date", dateFormat);
+                        free(dateFormat);
+                        break;
+                    case MAILIMF_FIELD_FROM:
+                        printf("\n");
+                        char *fromList = malloc(256);
+                        memset(fromList,0,256);
+                        display_mailbox_list(f->fld_data.fld_from->frm_mb_list, fromList);
+                        //printf("\n");
+                        binn_object_set_str(mailReturn, "From", fromList);
+                        free(fromList);
+                        break;
+                    case MAILIMF_FIELD_TO:
+                        printf("\n");
+                        char *toList = malloc(256);
+                        memset(toList,0,256);
+                        //display_to(f->fld_data.fld_to);
+                        display_address_list(f->fld_data.fld_to->to_addr_list, toList);
+                        //printf("\n");
+                        binn_object_set_str(mailReturn, "To", toList);
+                        free(toList);
+                        break;
+                    case MAILIMF_FIELD_CC:
+                        printf("\n");
+                        char *ccList = malloc(256);
+                        memset(ccList,0,256);
+                        //display_cc(f->fld_data.fld_cc);
+                        display_address_list(f->fld_data.fld_cc->cc_addr_list, ccList);
+                        //printf("\n");
+                        binn_object_set_str(mailReturn, "CC", ccList);
+                        free(ccList);
+                        break;
+                    case MAILIMF_FIELD_SUBJECT:
+                        printf("\n");
+                        //display_subject(f->fld_data.fld_subject);
+                        binn_object_set_str(mailReturn, "Subject",f->fld_data.fld_subject->sbj_value);
+                        //printf("\n");
+                        break;
+                    case MAILIMF_FIELD_MESSAGE_ID:
+                        //printf("Message-ID: %s\n", f->fld_data.fld_message_id->mid_value);
+                        binn_object_set_str(mailReturn, "Message-id", f->fld_data.fld_message_id->mid_value);
+                        break;
+                    case MAILIMF_FIELD_OPTIONAL_FIELD:
+                        //printf("%s : %s\n",f->fld_data.fld_optional_field->fld_name, f->fld_data.fld_optional_field->fld_value);
+                        binn_object_set_str(mailReturn, f->fld_data.fld_optional_field->fld_name, f->fld_data.fld_optional_field->fld_value);
+                }
+            }
+        }
+    }
+    //printf("Body : %s", mime->mm_data.mm_message.mm_msg_mime->mm_body->dt_data.dt_filename);
+    binn_object_set_str(mailReturn, "Body", mime->mm_data.mm_message.mm_msg_mime->mm_body->dt_data.dt_filename);
+    mailmime_free(mime);
+    free(data);
+    return mailReturn;
+}
 
 static size_t payload_source(void *ptr, size_t size, size_t nmemb, void *userp)
 {
@@ -38,8 +209,8 @@ static size_t payload_source(void *ptr, size_t size, size_t nmemb, void *userp)
     return 0;
 }
 
-// TODO: add the date header
-int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher){
+// TODO: add the date header and maybe a name before each header
+int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher, char *email, char *password){
     //payload_text = malloc(9*sizeof(char*)); // 52Kb for the moment
     //memset(payload_text, 0, 9*sizeof(char*));
     //strcat(payload_text, "Data : ");
@@ -117,8 +288,8 @@ int sendmail(char* destination, char* source, char* subject, char* nonceAES, cha
     curl = curl_easy_init();
     if(curl) {
         /* Set username and password */
-        curl_easy_setopt(curl, CURLOPT_USERNAME, "jean.delafiction@gmail.com");
-        curl_easy_setopt(curl, CURLOPT_PASSWORD, "PASS");
+        curl_easy_setopt(curl, CURLOPT_USERNAME, email);
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, password);
 
         /* This is the URL for your mailserver. Note the use of port 587 here,
          * instead of the normal SMTP port (25). Port 587 is commonly used for
@@ -172,7 +343,7 @@ int sendmail(char* destination, char* source, char* subject, char* nonceAES, cha
         /* Since the traffic will be encrypted, it is very useful to turn on debug
          * information within libcurl to see what is happening during the transfer.
          */
-        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 0L);
 
         /* Send the message */
         res = curl_easy_perform(curl);
@@ -200,32 +371,216 @@ int sendmail(char* destination, char* source, char* subject, char* nonceAES, cha
 
     return (int)res;
 }
+static void check_error(int r, char * msg)
+{
+    if (r == MAILIMAP_NO_ERROR)
+        return;
+    if (r == MAILIMAP_NO_ERROR_AUTHENTICATED)
+        return;
+    if (r == MAILIMAP_NO_ERROR_NON_AUTHENTICATED)
+        return;
 
-int checkmail(){
-    CURL *curl;
-    CURLcode res;
+    fprintf(stderr, "%s\n", msg);
+    exit(EXIT_FAILURE);
+}
 
-    curl = curl_easy_init();
-    if(curl)
-    {
-        /* Set username and password */
-        curl_easy_setopt(curl, CURLOPT_USERPWD, "user:password");
+static char * get_msg_att_msg_content(struct mailimap_msg_att * msg_att, size_t * p_msg_size)
+{
+    clistiter * cur;
 
-        /* This will only fetch the message with ID "1" of the given mailbox */
-        curl_easy_setopt(curl, CURLOPT_URL, "pop3s://user@pop.example.com/1");
+    /* iterate on each result of one given message */
+    for(cur = clist_begin(msg_att->att_list) ; cur != NULL ; cur = clist_next(cur)) {
+        struct mailimap_msg_att_item * item;
 
-        /* Perform the request, res will get the return code */
-        res = curl_easy_perform(curl);
+        item = clist_content(cur);
+        if (item->att_type != MAILIMAP_MSG_ATT_ITEM_STATIC) {
+            continue;
+        }
 
-        /* Check for errors */
-        if(res != CURLE_OK)
-            fprintf(stderr, "curl_easy_perform() failed: %s\n",
-                    curl_easy_strerror(res));
+        if (item->att_data.att_static->att_type != MAILIMAP_MSG_ATT_BODY_SECTION) {
+            continue;
+        }
 
-        /* always cleanup */
-        curl_easy_cleanup(curl);
+        * p_msg_size = item->att_data.att_static->att_data.att_body_section->sec_length;
+        return item->att_data.att_static->att_data.att_body_section->sec_body_part;
     }
+
+    return NULL;
+}
+
+static char * get_msg_content(clist * fetch_result, size_t * p_msg_size)
+{
+    clistiter * cur;
+
+    /* for each message (there will probably be only one message) */
+    for(cur = clist_begin(fetch_result) ; cur != NULL ; cur = clist_next(cur)) {
+        struct mailimap_msg_att * msg_att;
+        size_t msg_size;
+        char * msg_content;
+
+        msg_att = clist_content(cur);
+        msg_content = get_msg_att_msg_content(msg_att, &msg_size);
+        if (msg_content == NULL) {
+            continue;
+        }
+
+        * p_msg_size = msg_size;
+        return msg_content;
+    }
+
+    return NULL;
+}
+
+static void fetch_msg(struct mailimap * imap, uint32_t uid)
+{
+    struct mailimap_set * set;
+    struct mailimap_section * section;
+    char filename[512];
+    size_t msg_len;
+    char * msg_content;
+    FILE * f;
+    struct mailimap_fetch_type * fetch_type;
+    struct mailimap_fetch_att * fetch_att;
+    int r;
+    clist * fetch_result;
+    struct stat stat_info;
+
+    snprintf(filename, sizeof(filename), "download/%u.eml", (unsigned int) uid);
+    r = stat(filename, &stat_info);
+    if (r == 0) {
+        // already cached
+        printf("%u is already fetched\n", (unsigned int) uid);
+        return;
+    }
+
+    set = mailimap_set_new_single(uid);
+    fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
+    section = mailimap_section_new(NULL);
+    fetch_att = mailimap_fetch_att_new_body_peek_section(section);
+    mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
+
+    r = mailimap_uid_fetch(imap, set, fetch_type, &fetch_result);
+    check_error(r, "could not fetch");
+    printf("fetch %u\n", (unsigned int) uid);
+
+    msg_content = get_msg_content(fetch_result, &msg_len);
+    if (msg_content == NULL) {
+        fprintf(stderr, "no content\n");
+        mailimap_fetch_list_free(fetch_result);
+        return;
+    }
+
+    f = fopen(filename, "w");
+    if (f == NULL) {
+        fprintf(stderr, "could not write\n");
+        mailimap_fetch_list_free(fetch_result);
+        return;
+    }
+
+    fwrite(msg_content, 1, msg_len, f);
+    fclose(f);
+
+    printf("%u has been fetched\n", (unsigned int) uid);
+
+    mailimap_fetch_list_free(fetch_result);
+}
+
+static uint32_t get_uid(struct mailimap_msg_att * msg_att)
+{
+    clistiter * cur;
+
+    /* iterate on each result of one given message */
+    for(cur = clist_begin(msg_att->att_list) ; cur != NULL ; cur = clist_next(cur)) {
+        struct mailimap_msg_att_item * item;
+
+        item = clist_content(cur);
+        if (item->att_type != MAILIMAP_MSG_ATT_ITEM_STATIC) {
+            continue;
+        }
+
+        if (item->att_data.att_static->att_type != MAILIMAP_MSG_ATT_UID) {
+            continue;
+        }
+
+        return item->att_data.att_static->att_data.att_uid;
+    }
+
     return 0;
+}
+
+static void fetch_messages(struct mailimap * imap)
+{
+    struct mailimap_set * set;
+    struct mailimap_fetch_type * fetch_type;
+    struct mailimap_fetch_att * fetch_att;
+    clist * fetch_result;
+    clistiter * cur;
+    int r;
+
+    /* as improvement UIDVALIDITY should be read and the message cache should be cleaned
+       if the UIDVALIDITY is not the same */
+
+    set = mailimap_set_new_interval(1, 0); /* fetch in interval 1:* */
+    /*
+    char *test = malloc(100);
+    memset(test, 0, 100);
+    strcat(test, "SEARCH SINCE \"");
+    time_t rawtime = time(NULL);
+    rawtime -= 86400;
+    char* timeFormat = malloc(50);
+    memset(timeFormat, 0, 50);
+    struct tm *ptm = localtime(&rawtime);
+    strftime(timeFormat, 50, "%d-%b-%Y", ptm);
+    strcat(test, timeFormat);
+    strcat(test, "\"\r\n");
+    r = mailimap_custom_command(imap, "SEARCH NEW\r\n");
+    check_error(r, "Could not compute last emails");
+    printf("Response to search : %s", imap->imap_response);
+     */
+
+    fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
+    fetch_att = mailimap_fetch_att_new_uid();
+    mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
+
+    r = mailimap_fetch(imap, set, fetch_type, &fetch_result);
+    check_error(r, "could not fetch");
+
+    /* for each message */
+    for(cur = clist_begin(fetch_result) ; cur != NULL ; cur = clist_next(cur)) {
+        struct mailimap_msg_att * msg_att;
+        uint32_t uid;
+
+        msg_att = clist_content(cur);
+        uid = get_uid(msg_att);
+        if (uid == 0)
+            continue;
+
+        fetch_msg(imap, uid);
+    }
+
+    mailimap_fetch_list_free(fetch_result);
+}
+int checkmail(char* email, char *password){
+    struct mailimap * imap;
+    int r;
+
+    mkdir("download", 0700);
+
+    imap = mailimap_new(0, NULL);
+    r = mailimap_ssl_connect(imap, "imap.gmail.com", 993);
+    fprintf(stderr, "connect: %i\n", r);
+    check_error(r, "could not connect to server");
+
+    r = mailimap_login(imap, email, password);
+    check_error(r, "could not login");
+
+    r = mailimap_select(imap, "INBOX");
+    check_error(r, "could not select INBOX");
+
+    fetch_messages(imap);
+
+    mailimap_logout(imap);
+    mailimap_free(imap);
 }
 
 int checkIfParamsExistAlready(char* userID){
@@ -241,7 +596,7 @@ int checkIfParamsExistAlready(char* userID){
 void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
                bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID){
     FILE *savedParams;
-    binn *paramsObjBinn;
+    binn* paramsObjBinn;
     savedParams = fopen(userID, "rb");
     unsigned char *decryptedParams;
     if(savedParams) {
@@ -251,22 +606,13 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
         char* userPassword = malloc(320);
         fgets(userPassword, 320, stdin);
         userPassword[strlen(userPassword)-1] = '\x00';
-
+        /*
         printf("Please give us the salt :\n");
         char* saltEntered = malloc(50);
         fgets(saltEntered, 50, stdin);
         saltEntered[strlen(saltEntered)-1] = '\x00';
-        size_t saltSize;
-        unsigned char *salt = base64_decode(saltEntered, strlen(saltEntered), &saltSize);
 
-        if (crypto_pwhash
-                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
-                     crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
-                     crypto_pwhash_ALG_DEFAULT) != 0) {
-            printf("Not enough memory");
-            /* out of memory */
-        }
-        free(salt);
+         */
         fseek(savedParams, 0, SEEK_END);
         long fileSize = ftell(savedParams);
         fseek(savedParams, 0, SEEK_SET);
@@ -275,22 +621,44 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
         fread(paramsB64, fileSize, 1, savedParams);
         fclose(savedParams);
 
-        size_t outLen;
-        unsigned char *decodedParams = base64_decode(paramsB64, fileSize, &outLen);
-        free(paramsB64);
+        size_t saltSize;
+        binn *objParams;
+        objParams = binn_open(paramsB64);
+        char *saltSaved = binn_object_str(objParams, "salt");
+        unsigned char *salt = base64_decode(saltSaved, strlen(saltSaved), &saltSize);
 
+        size_t outLen;
+        char *encryptedParams = binn_object_str(objParams, "b64Encrypted");
+        unsigned char *decodedParams = base64_decode(encryptedParams, strlen(encryptedParams), &outLen);
+
+        size_t outLenNonce;
+        char *nonceB64 = binn_object_str(objParams, "nonce");
+        unsigned char *nonceDecoded = base64_decode(nonceB64, strlen(nonceB64), &outLenNonce);
+
+        if (crypto_pwhash
+                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
+                     crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
+                     crypto_pwhash_ALG_DEFAULT) != 0) {
+            printf("Not enough memory");
+            /* out of memory */
+        }
+
+
+        /*
         printf("Please give us the nonce :\n");
         char* nonceEntered = malloc(50);
         fgets(nonceEntered, 50, stdin);
         nonceEntered[strlen(nonceEntered)-1] = '\x00';
-        size_t outLenNonce;
-        unsigned char *nonceDecoded = base64_decode(nonceEntered, strlen(nonceEntered), &outLenNonce);
-        free(nonceEntered);
+         */
+
+
+        //free(nonceEntered);
 
         decryptedParams = malloc(outLen);
         decrypt_message(decryptedParams, decodedParams, nonceDecoded, aesk, outLen, NULL,0);
         free(nonceDecoded);
         free(decodedParams);
+        free(salt);
 
         paramsObjBinn = binn_open(decryptedParams);
     } else {
@@ -388,7 +756,7 @@ void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *e
         size_t sizeB64Salt;
         unsigned char *b64Salt = base64_encode(salt, crypto_pwhash_SALTBYTES, &sizeB64Salt);
         printf("%s\n", b64Salt);
-        free(b64Salt);
+
 
         if (crypto_pwhash
                     (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
@@ -405,19 +773,27 @@ void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *e
         size_t outLenB64Nonce;
         unsigned char *b64nonce = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, &outLenB64Nonce);
         printf("%s\n", b64nonce);
-        free(b64nonce);
+
 
         size_t b64EncryptedLen;
         unsigned char *encryptedContent = base64_encode(ciphertextAES, cipher_len, &b64EncryptedLen);
-        size_t test = fwrite(encryptedContent, b64EncryptedLen, 1, savingParams);
+        binn *savedParamsBinn;
+        savedParamsBinn = binn_object();
+        binn_object_set_str(savedParamsBinn, "b64Encrypted", encryptedContent);
+        binn_object_set_str(savedParamsBinn, "nonce", b64nonce);
+        binn_object_set_str(savedParamsBinn, "salt", b64Salt);
+        size_t test = fwrite(binn_ptr(savedParamsBinn), binn_size(savedParamsBinn), 1, savingParams);
         if(test > 0){
             printf("Encypted params saved\n");
         } else {
             printf("Failed to save Params\n");
         }
+        free(b64nonce);
+        free(b64Salt);
         free(userPassword);
         free(encryptedContent);
         fclose(savingParams);
+        binn_free(savedParamsBinn);
     } else {
         printf("Failed to open a file to save params\n");
     }
@@ -544,9 +920,15 @@ int main() {
 
         // Max size of an email address
         char* userID = malloc(320);
-        printf("What's your email ?\n");
+        printf("What's your email (Gmail) ?\n");
         fgets(userID, 320, stdin);
         userID[strlen(userID)-1] = '\x00';
+
+        // Max size of an email address
+        char* password = malloc(320);
+        printf("What's your password (Gmail) ?\n");
+        fgets(password, 320, stdin);
+        password[strlen(password)-1] = '\x00';
 
         int existingParams = checkIfParamsExistAlready(userID);
         if(existingParams == 1){
@@ -650,6 +1032,7 @@ int main() {
 
             // Encryption of the AES Key with the Public key of the destination
             cipher c;
+            //TODO : add timestamp
             encrypt(AESK, encryption_destinationPk, destinationID, mpkSession, &c);
             // TODO print base64 of cipher for decrypt
             binn *cipherBinnObect;
@@ -700,7 +1083,8 @@ int main() {
             unsigned char *b64signatureObjBinn = base64_encode(binn_ptr(signatureObjBinn), binn_size(signatureObjBinn), NULL);
             printf("Signature (base64) : %s\n", b64signatureObjBinn);
 
-            sendmail(destinationID, userID, subject, nonceAesB64, userID, ciphertextB64, b64signatureObjBinn, cipherB64);
+            // TODO add timestamp sendmail
+            sendmail(destinationID, userID, subject, nonceAesB64, userID, ciphertextB64, b64signatureObjBinn, cipherB64, userID, password);
             free(nonceAesB64);
             free(ciphertextB64);
             free(b64signatureObjBinn);
@@ -717,45 +1101,61 @@ int main() {
             free(subject);
             free(destinationID);
         }
-        /*
-         *  AAES Key : 6175013504CCBFF00EB8513A12D9E8FC6C7BA22ADB9F672128871788A1892BDA
-Encrypted message : 6tRjuqpOKiyFO4vks0zN5tuHnb6DTEWMSulNgEkEgLTT830=
-Nonce message : eOuPEEgTwveWvK3Q
-Cipher base64 : 4oAAApAEAkMwwIAAAYACT8MCvM71jhrEsyZc9xS3kYji68RY/XjGFkumXeuZTy3NeZlNxjw83J/7KNmQoYgEmnzftZ68+w0qL8xjNoFEOBA1nmb0W3/nldktSbNpK8GBNeLXePMcTx3lAO5xWC0EdQQ9EUj0ddn00g3aQo5nkeSU3Qk2eHKk+vcpCpZnEMqyH5DleuAoQgRku+YGJhkNWF2mR84grj1evyhDM6idvOwCITuBPlz8/750bMj4s4/CEflEGyauZp27wuSZ3LQPgv8AtRCFtH9KVmNnkbGtBnbDqxC8hA4lbzVOcgzVUul/Sk8Ery+BLZShHHWAOhcU4ULrkPjYoE9UhXGiKQRpISBF3jOys/PnG0Uoqn/HEIwQg5Ln8ljaM6vL6CMVIIEQf4v66SDc0W56iRa+dZVulQL0OeRsHHMKd3qslCXaJ4I/la76rk46Mat1mJO3LdcRaJkHdKWZ9QCuL3JCr5TBTZbGWXnOze4vKBGN9vUmCmWOJTSzvfjeJ+M2/e4/QFcCQzHAMQMUtavI0llLhTsmjpvLUS2KFe2EbJRcGDu3qRTG4+mn8k3vP4NGaQwgjK9FcTfVrqECQzLAYQMAsu7EDnA8G2oMfvvBkWufAySTuy/+cKRTT8WKfHxcqJnVFnokdadQjeaR/AuhbbYHNrv9IjXwgh9s4gsesCmp1DmGyiNBVZa68aC49S61jehOkMXYwHJQLyfAvShPqiwCQzPAYQMFqAt6hKwwStCglIB7ItjdwU3O22xNbepnFShAueg/SslBJyUmfzHW7ETjaqqyQ+MIQr2uIUwqxPyKLct6rmeGdE3wR/ZRkn7//jYBEpxUY/bolRSwbMBguCTNN4EdPTg=
-Signature (base64) : 4oAAAKACAVXAMQMZsn0RsRlzqx6jSRllsQR1ybm0yybXNCehLL1+9kduUApQVF3oKKZvGRuesZisWuMBVsBhAheDBj8Rzppy1hFGomLw7vI+srn6OaudSKUAj24/wRlhWrwwytjhSXLZoCXnzZC5nwIrBm0Bo/vskltkMhmLpHFxJ1PjRIrxNVGio794wv3oT7OFc/f+j9sqLcodp93Zug==
-*/
         // If we want to decrypt an email
         else {
-            // TODO : Remove and replace by getting the email
-            printf("From ?\n");
-            char *sourceAddress = malloc(320);
-            fgets(sourceAddress, 320, stdin);
-            sourceAddress[strlen(sourceAddress)-1] = '\x00';
+            checkmail(userID, password);
 
-            printf("Base64 of signature ?\n");
-            char *b64Signature = malloc(300);
-            fgets(b64Signature, 300, stdin);
-            b64Signature[strlen(b64Signature)-1] = '\x00';
+            DIR *dir;
+            struct dirent *ent;
+            if ((dir = opendir ("download")) != NULL) {
+                /* print all the files and directories within directory */
+                while ((ent = readdir (dir)) != NULL) {
+                    printf ("%s\n", ent->d_name);
+                }
+                closedir (dir);
+            } else {
+                /* could not open directory */
+                perror ("");
+                return EXIT_FAILURE;
+            }
+            printf("Choose a file to parse (filename): \n");
+            char *fileChoice = malloc(256);
+            memset(fileChoice, 0, 256);
+            fgets(fileChoice, 256, stdin);
+            fileChoice[strlen(fileChoice)-1] = '\x00';
+            /*
+            int testNumber = strtol(fileChoice, NULL, 10);
+            char *filename = malloc(256);
+            memset(filename, 0, 256);
+            if ((dir = opendir ("download")) != NULL) {
+                for(int j = 0; j < testNumber;++j) {
+                    ent = readdir (dir);
+                    printf ("%s\n", ent->d_name);
 
-            printf("Base64 of cipher ?\n");
-            char *b64Cipher = malloc(1000);
-            fgets(b64Cipher, 1000, stdin);
-            b64Cipher[strlen(b64Cipher)-1] = '\x00';
+                }
+                strcpy(filename, ent->d_name);
+                closedir (dir);
+            } else {
 
-            printf("Base64 of encrypted mesage ?\n");
-            char *b64Encrypted = malloc(300);
-            fgets(b64Encrypted, 300, stdin);
-            b64Encrypted[strlen(b64Encrypted)-1] = '\x00';
+                perror ("");
+                return EXIT_FAILURE;
+            }
+            */
+            printf("filename  : %s", fileChoice);
+            binn* emailObj = parseEmail(fileChoice);
 
-            printf("Base64 of nonce ?\n");
-            char *b64Nonce = malloc(100);
-            fgets(b64Nonce, 100, stdin);
-            b64Nonce[strlen(b64Nonce)-1] = '\x00';
-
-            printf("Subject ?\n");
-            char *subject = malloc(100);
-            fgets(subject, 100, stdin);
-            subject[strlen(subject)-1] = '\x00';
+            char *sourceAddress = binn_object_str(emailObj, "From");
+            char *b64Signature = binn_object_str(emailObj, "X-SIGNATURE-B64");
+            char *b64Cipher = binn_object_str(emailObj, "X-CIPHER-B64");
+            char *b64Encrypted = binn_object_str(emailObj, "Body");
+            char *b64Nonce = binn_object_str(emailObj, "X-AES-NONCE");
+            char *subject = binn_object_str(emailObj, "Subject");
+            // TODO : timestamp
+            char *fullID = binn_object_str(emailObj, "X-TIMESTAMP-USED");
+            if(b64Signature == NULL || b64Cipher == NULL || b64Encrypted == NULL || b64Nonce == NULL){
+                printf("I cannot parse the email, it's not an email written by my POC\n");
+                exit(EXIT_FAILURE);
+            }
 
             signature s;
             size_t outLen;
@@ -805,6 +1205,7 @@ Signature (base64) : 4oAAAKACAVXAMQMZsn0RsRlzqx6jSRllsQR1ybm0yybXNCehLL1+9kduUAp
 
                 sock = connectToKGC();
 
+                // TODO add timestamp to extraction
                 char bufferPPKE[1024] = {0};
                 binn* bobPpk;
                 bobPpk = binn_object();
@@ -856,11 +1257,13 @@ Signature (base64) : 4oAAAKACAVXAMQMZsn0RsRlzqx6jSRllsQR1ybm0yybXNCehLL1+9kduUAp
             }
 
             free(signature_sourcePKBin);
-            free(b64Nonce);
+            /*free(b64Nonce);
             free(b64Cipher);
             free(b64Encrypted);
             free(b64Signature);
             free(sourceAddress);
+             */
+            binn_free(emailObj);
         }
         free(charUserChoice);
         free(userID);

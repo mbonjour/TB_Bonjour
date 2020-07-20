@@ -1,0 +1,922 @@
+Delivered-To: jean.delafiction@gmail.com
+Received: by 2002:a67:7f01:0:0:0:0:0 with SMTP id a1csp692900vsd;
+        Wed, 10 Jun 2020 14:36:51 -0700 (PDT)
+X-Received: by 2002:ac8:3806:: with SMTP id q6mr5669093qtb.144.1591825011774;
+        Wed, 10 Jun 2020 14:36:51 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1591825011; cv=none;
+        d=google.com; s=arc-20160816;
+        b=DGQP1aTy9tT3zVlZZQq0E0nNQTODthdNiTMT2jo7La2gaXo3eDcUmF4OW42hMFiiWE
+         VMyEcK9FAcKKC4YwHMZ5qLGusz6fUjhFV7qDHIUO5PhAAvB7UEPRFxNfBFB5tImwBbJz
+         VwPo4xtzQedRxJ8OMMOlShsO+g1X4CZPO8BM4qhvBw/PJK8FhRQrqS6SBHR4hqCzcz/6
+         cgiK2JBtjw1CI6LT2rjjNNPUFdokXKpfkttyDfQ76qiYCIANNzU00HRH3wEi7Tvng6ny
+         PPohKF0+VwLwbpC7nCU2YFpEksUhB6y6g/oErUOd8PfmWZSHqZtYy+FpYwCbs5Pzng9U
+         tUFg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:from:subject:message-id:feedback-id:reply-to:date:mime-version
+         :dkim-signature;
+        bh=urfSp5EC2gLkIS2iSVhmjCABmkAJ79AdKMb19R3zS7E=;
+        b=Oyuhm9Ncrm2BIJAfnQuFAjyHxuJ9KC65GA3PAGyJEkQvgVtCvLHLMe8iNd5GhA6JrN
+         fR2j7/xS9uER9thqhPXMg2EyI+xa5IPOvEFqj4KbS5nXYAQDTkqe1w1nA0Nt1OJLjQiU
+         Zc1WN72ywMXV04S/4a9Li6OjL0N2D5U2Yb76b+gWOAGSP+CiCe9J41YWa8Qq40xIzKIm
+         S3pyt9ReeVVsGyWRMLAHr8gqn8V+LMz9GEF5a2zL5RDYp6oKiyQX1WM1aqmeg9q1uoFC
+         IUfVU8Y4TTemWHNz3jLZ26RDGEIT/SuuEmgj0RlDCh+N3LOjTIPfFnMSx2tSHgN5ZuJk
+         9pVg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@google.com header.s=20161025 header.b=j4PV2uDh;
+       spf=pass (google.com: domain of 3a1lhxhskaji2aa270ya88g94fkf0w8-9ad0b7k2aa270.ya8@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3a1LhXhsKAJI2AA270yA88G94FKF0w8-9AD0B7K2AA270.yA8@scoutcamp.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+Return-Path: <3a1LhXhsKAJI2AA270yA88G94FKF0w8-9AD0B7K2AA270.yA8@scoutcamp.bounces.google.com>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+        by mx.google.com with SMTPS id 198sor926276qkf.52.2020.06.10.14.36.43
+        for <jean.delafiction@gmail.com>
+        (Google Transport Security);
+        Wed, 10 Jun 2020 14:36:51 -0700 (PDT)
+Received-SPF: pass (google.com: domain of 3a1lhxhskaji2aa270ya88g94fkf0w8-9ad0b7k2aa270.ya8@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@google.com header.s=20161025 header.b=j4PV2uDh;
+       spf=pass (google.com: domain of 3a1lhxhskaji2aa270ya88g94fkf0w8-9ad0b7k2aa270.ya8@scoutcamp.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3a1LhXhsKAJI2AA270yA88G94FKF0w8-9AD0B7K2AA270.yA8@scoutcamp.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:date:reply-to:feedback-id:message-id:subject:from:to;
+        bh=urfSp5EC2gLkIS2iSVhmjCABmkAJ79AdKMb19R3zS7E=;
+        b=j4PV2uDhzwJdK9F9kvAmoyTcFr8zDPMqHWHrV3b5XO9wzq3X2BxtCT81dCYNVtpMlw
+         sST9ZAu0GDIYi1eV9EDJHcGcE9CirdQZ2DDmBqEv01sCvlMYrs56rptm4twtsslgvfUG
+         5eXrhLGWs58VExASJmW0Oo/UGQ9zZO78C0u8PefqKGmq1jfj2ePmJd6hGAAaxYGjq7Jy
+         IsyUGzSJ87WFVCyg5CPXJkCRzrrAmpnJ1lLAAMaq6M9nJ4e0TeSGd2OeE5gNXMFJipQQ
+         CwMxYKHgKrW/E+yH6lBh7r1HtpoTO9fvf8fcQV/ALOT+cjnivFgYzJXqXmlUDoM2fad7
+         QWkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:date:reply-to:feedback-id
+         :message-id:subject:from:to;
+        bh=urfSp5EC2gLkIS2iSVhmjCABmkAJ79AdKMb19R3zS7E=;
+        b=NsmEvOlTI62fDSHoiELOiFpnIedjCqRcPs1Vp+cHStAqJR8Gfe2wrQrOWbxkK88pci
+         QM1hWgJcMMl60RY1L9wghhKHoR6Du1mavgA8hbZNw420YVsGy71XB0R1QT/TccsLMex7
+         as3f7pTrzFzXeZqJVusNM6vo7U+tBkWRyECu0l3fEtNnTEHHIGQtLDSX8vRQTJEOxoLo
+         jGKjAo+whhTygkc6qwpjbOpZGRUzu2510iEEy8OsklLI+wHCX8ST5u3Pd53TOxFDWacu
+         0cDruTTmh7C8s98en1t3OHmyqx4rfyHjO8TLrx3wIqYwbRF9zYFQPFDPAgV/oueogNaT
+         W8/Q==
+X-Gm-Message-State: AOAM531u89r5hsxBeZY9MFKQ22a3XntxvGqT8DKircN4fa2N8Egg+heR
+	ZFIckWLnQnV6ZKU=
+X-Google-Smtp-Source: ABdhPJzZ5OVs3efUksc2Z06sFrKFDiFOXNPQC77/PxzFRrRCwiCOe4vr8wIs8pRzDYs2rhx36+ggk7c=
+MIME-Version: 1.0
+X-Received: by 2002:a37:73c2:: with SMTP id o185mr5146726qkc.356.1591825003839;
+ Wed, 10 Jun 2020 14:36:43 -0700 (PDT)
+Date: Wed, 10 Jun 2020 14:36:43 -0700
+Reply-To: =?UTF-8?Q?L=27=C3=A9quipe_Google_Community?= <googlecommunityteam-noreply@google.com>
+X-Google-Id: 248176						
+Feedback-ID: P-232-0:C20113407:M110292378-fr:gamma
+X-Notifications: GAMMA:<b79c4944570959ab3958a51e86b5ee66f1793ac6-20113407-110708208@google.com>
+Message-ID: <b79c4944570959ab3958a51e86b5ee66f1793ac6-20113407-110708208@google.com>
+Subject: Finalisez la configuration de votre nouveau compte Google
+From: =?UTF-8?Q?L=27=C3=A9quipe_Google_Community?= <googlecommunityteam-noreply@google.com>
+To: jean.delafiction@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000e600d805a7c1a317"
+
+--000000000000e600d805a7c1a317
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+Content-Transfer-Encoding: base64
+
+R29vZ2xlICANCjxodHRwczovL3d3dy5nb29nbGUuY29tL2FwcHNlcnZlL21rdC9wL0FELUZuRXlJ
+aHpOaFFITnpKcVBKRGVYdU93WnI4aTdrVndtZmJCOWdxNDI5RFdMWGRiU09jMnl6ZWh6WElUXzRL
+S0o2cGV4TGNtMDRhWnNhTHc3YzZIdmo4YWktV01RYTlPeUxaRl8zRlNKTWM5OGx2aWpHUDBRa2Mz
+eC1JWVUzWmFaR21xX2RNUy01X184dVpEUXFXMnRZbHIwal9CRXRCWWJYQXFGbUNxcy10dz4NCg0K
+YmFubmnDqHJlDQoNCkJvbmpvdXIgSmVhbiwNCg0KQmllbnZlbnVlIHN1ciBHb29nbGUuIFZvdHJl
+IG5vdXZlYXUgY29tcHRlIHZvdXMgZG9ubmUgYWNjw6hzIGF1eCBwcm9kdWl0cywgIA0KYXBwbGlj
+YXRpb25zIGV0IHNlcnZpY2VzIEdvb2dsZS4NCg0KVm9pY2kgcXVlbHF1ZXMgY29uc2VpbHMgcG91
+ciB2b3VzIGxhbmNlci4NCg0KR1NBDQoNClJlc3RleiBpbmZvcm3DqSBhdmVjIGwnYXBwbGkgR29v
+Z2xlDQoNClRyb3V2ZXogcmFwaWRlbWVudCBkZXMgcsOpcG9uc2VzIMOgIHZvcyBxdWVzdGlvbnMs
+IGV4cGxvcmV6IHZvcyBzdWpldHMgIA0KZmF2b3JpcyBldCB0ZW5lei12b3VzIGluZm9ybcOpLg0K
+DQpFc3NheWVyICANCjxodHRwczovL3d3dy5nb29nbGUuY29tL2FwcHNlcnZlL21rdC9wL0FELUZu
+RXdOY3YzX09FdGZPaU1OODZSMUJHcjRvV3pyYUlKbmFlUnQ5ZjNuRC1vXzROLV9JcEFzc2dLc1dT
+TGRnczBpNGZSTkhrbWppWU9KSENIWjdHWVpWckp6Rml1MmNrX3VzSDN0X2VleXNkYl9IVm9YRzR6
+SGt5cGZ1VUJyUC1KRlJXd29aakpxek14TTFYYUdhNVFoWHRaaHEyMjRhZkxqQlFzc2toRkNhVlZq
+QWNxSG51TE9sd1lMVUxCTDlWeUthOVdPVlVNSjI5YW5JUE8zelVqSUpLZlhvQmI5X18tYVAtaEx4
+aG5ib0pscDhyaVl2ckFiVHhHY3dzVFplQmc5UndBcT4NCg0KYXBwbGljYXRpb25zDQoNClBsdXMg
+ZGUgc2VydmljZXMgZXQgcHJvZHVpdHMgR29vZ2xlDQoNCkTDqWNvdXZyZXogbGVzIGRlcm5pw6hy
+ZXMgYXBwbGlzIGRlIEdvb2dsZS4NCg0KUG91ciBBbmRyb2lkICANCjxodHRwczovL3d3dy5nb29n
+bGUuY29tL2FwcHNlcnZlL21rdC9wL0FELUZuRXpCZzhoRlFOMHJjb1BtUnJtdU00UzJHOXU3bTNN
+dDNZc0VzQ2o5aGxnM2hOOUk1M1hIOENxVHFtNE9rUDFtVTdwY2JrWEtTS0N0VVE0QTJtazVERDkw
+RFpNai1jTVNMN3BPVmE1NktBaDYtY0NxMTVDMlAtR0ZzQ3FkVjBzQm1VaVQ0dmY1ci11Q1c3UGtj
+N1dlUmZOd0lkZmdPdnNMbDdsRENsY2hBbEVTc3pYeXhxdG9EWmNhLWlmdm9pVUJWdm5OY1k1UXFD
+d3ZxaEd5aFdmbGtaalVSNmppWlFwTmQxS2prV3c3dmpTSXNoTnhRY2hhSF9WY0xzWEItdG8yUDRI
+enFMbXFTM1dybzJuRm1FWnJBOWRLenpfaW01RzJ6YXZKcWNPZXZsMUtvRDg4MHg4am1rYzRvTUZZ
+R2J5S3NESS1nTmdHRDdHQVl4S01MZmNlcWFkelM4eHVYblZUbTYxeDR2eVlsdHY1YjN1NUxkbTB2
+N1FZdjYwZTVma1hLYmVCYml2RDlQb1dpVmQ1b2x4cXRRS0xMcm96QkY0ZFljbU9VTXhKZENjXzBr
+LWZyNUZESGpnVzJia05PYXQ0LVd6X0ZpWkFQUmhtSDNKVHY4emVTbGtHNXQ2ZW5BOGxWR05scHQ2
+WlNzcDRuaV9NQzdva09VVmVMcGNEZGwtTmpBNWw5TEpyTHB6YUN4MVA1MVVZek03UVJRRFNYRWVD
+OWpRY1NRPg0KDQpQb3VyIGlPUyAgDQo8aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hcHBzZXJ2ZS9t
+a3QvcC9BRC1GbkV3bW1wcVhDSTY3eklJeno2WUszSGtGVHBtMWhSWS1lS2tJMVVlejc4dGJTRUdK
+YkV4UXhaNGVwdTltVWgzSE85RU5OR1A0TVd0WE91LVJEMFVRZ0V2TnFSenM4d29KWEJFalN1bDRi
+d3NZYVowMEIway14N2tJZlI0OEpDczhIYkxaZVkxemROREw2ZEhLLTJreWpzODVUNEJzc2R5Q25v
+elFYS2RJdUJ1Y0k3WTdtRFdGTmFtRzlzaVFBWWViM2t2WjVVQ1lfQlJLZnRNdUtma21hVVZLU3di
+Y1hTLUpRUU51c0lyRGZiX0RHOXRWQXRIU1hfVzV3c0tLMGlRdENtTVZ2bEVyNTg1eVgwNGV4ckxC
+aVc4aj4NCg0KU8OpY3VyaXTDqQ0KDQpDb250csO0bGV6IHZvdHJlIGNvbXB0ZQ0KDQpDaG9pc2lz
+c2V6IGxlcyBvcHRpb25zIGxlcyBwbHVzIGFkYXB0w6llcyDDoCB2b3MgYmVzb2lucy4gVm91cyBw
+b3V2ZXogIA0KdsOpcmlmaWVyIGV0IG1vZGlmaWVyIHZvcyBwYXJhbcOodHJlcyBkZSBjb25maWRl
+bnRpYWxpdMOpIGV0IGRlIHPDqWN1cml0w6kgw6AgIA0KdG91dCBtb21lbnQuDQoNCk1vbiBjb21w
+dGUgIA0KPGh0dHBzOi8vd3d3Lmdvb2dsZS5jb20vYXBwc2VydmUvbWt0L3AvQUQtRm5FeHhYd2NE
+Ym5FM1ZMWUdaM2ZmdTlnRmFqdURYSzBqU1Vrd01sdGdfSkJNUmJtc1hqQ1I0bHlTRmtRM2hPaG5y
+TmtoVWZQdTRwQVJNRmpQUm5QZlZmdWdxb3o4bFM0amFwdUVNTnU1c3RjQXE5VWRYMFc1QTFMM21v
+ZW5JaGpaVW5WcndVWnV3Z0ZERDB4c3BzSTdQUWNpcHBBTmwzYlowdmZQNmNUamktT3pMdWM4Rmdw
+a1Zyc01fUlRpNnU1VnFqVHlUcHhXOEVSaGRqbTFNUnJkQlhaRW80TDlfazg+DQoNCkxvY2FsaXNl
+ciBtb24gYXBwYXJlaWwNCg0KTG9jYWxpc2V6IHZvdHJlIHTDqWzDqXBob25lDQoNCkxvY2FsaXNl
+eiB2b3RyZSB0w6lsw6lwaG9uZSAgDQo8aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hcHBzZXJ2ZS9t
+a3QvcC9BRC1GbkV3VlE3WF9DVXlNdlJiVURPQ0NqY21yRXE0U2ttdW5Yejk3RjZzR2NkME9iXzdu
+V3gwcVo4dFBMZkIybUxEUUxVeXZCRkRxT0FmdVJacjZiZk1tRXZtdk5FNk1jZXQ3UEdKV29uNWZR
+bnMwSFhJcG11VUIyajdpaW5fRGdtNWY4SzJCbGZmd0J0QS04QjA5R01pRm1HZnZyQlVBSS1yWks3
+UWliOElDcldtUmIyLTltd2lfWnRVd082SEJhRHZabHRNY1JEUnhCX3JLPiAgDQpldCBzw6ljdXJp
+c2V6LWxlIGF2ZWMgTG9jYWxpc2VyIG1vbiBhcHBhcmVpbC4NCg0KVHJvdXZlciBsZXMgcsOpcG9u
+c2VzIMOgIHZvcyBxdWVzdGlvbnMNCg0KVHJvdXZleiBsZXMgcsOpcG9uc2VzIMOgIHZvcyBxdWVz
+dGlvbnMNCg0KQ29uc3VsdGV6IGxlIENlbnRyZSBkJ2FpZGUgIA0KPGh0dHBzOi8vd3d3Lmdvb2ds
+ZS5jb20vYXBwc2VydmUvbWt0L3AvQUQtRm5FejIyaDRSaU5pRDB0T3otajV5NXFWQ3ZxZlAtREJW
+Q2M5cGxPc3p4eHg2VXQ4cTBaZnVLUi03aE9mWHRFanZsOEEwTGVabm1heGg5SUNJVVNsNF9UUTEw
+Vl9TU0F2UjlTNVZ4YlE0V1NwRzUxUDlNQVBHRDdJOUtWRW5BTHhrc3FkTUpMY3Ffekp0OFQwUmo3
+LUtYZUdxMWlUSi0xWEp5YndlYzVVSjkyRjdqX0NTc29oUkNiVXlXa0R0cTYzRW4zeC1fTFF1OGc+
+ICANCnBvdXIgZW4gc2F2b2lyIHBsdXMgc3VyIHZvdHJlIG5vdXZlYXUgY29tcHRlIEdvb2dsZS4N
+Cg0KTG9nbyBHb29nbGUNCg0KTGVzIHLDqXBvbnNlcyDDoCBjZXQgZS1tYWlsIG5lIHNlcm9udCBw
+YXMgdHJhaXTDqWVzLiBTaSB2b3VzIGF2ZXogdW5lIHF1ZXN0aW9uICANCsOgIHByb3BvcyBkZSB2
+b3RyZSBub3V2ZWF1IGNvbXB0ZSwgdm91cyB0cm91dmVyZXogY2VydGFpbmVtZW50IGxhIHLDqXBv
+bnNlICANCmRhbnMgbGUgY2VudHJlIGQnYWlkZS4NCg0KDQoNCkdvb2dsZSBJcmVsYW5kIEx0ZCwg
+R29yZG9uIEhvdXNlLCBCYXJyb3cgU3RyZWV0LCBEdWJsaW4gNCwgSXJlbGFuZC4NClZvdXMgYXZl
+eiByZcOndSBjZXQgZS1tYWlsLCBjYXIgdm91cyBhdmV6IGNyw6nDqSB1biBjb21wdGUgR29vZ2xl
+Lg0KDQo=
+--000000000000e600d805a7c1a317
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!doctype html public "- / /w3c / /dtd xhtml 1.0 transitional / /en" "http:=
+ / /www.w3.org /tr /xhtml1 /dtd /xhtml1-transitional.dtd">
+
+  <html xmlns=3Dhttp://www.w3.org/1999/xhtml xmlns:v=3Durn:schemas-microsof=
+t-com:vml xmlns:o=3Durn:schemas-microsoft-com:office:office>
+    <head>
+      <meta name=3Dformat-detection content=3Daddress=3Dno>
+      <meta name=3Dformat-detection content=3Dtelephone=3Dno>
+      <meta name=3Dx-apple-disable-message-reformatting>
+      <meta http-equiv=3DContent-Type content=3D"text/html; charset=3Dutf-8=
+">
+      <meta name=3Dviewport content=3D"width=3Ddevice-width, initial-scale=
+=3D1, maximum-scale=3D1">
+      <link href=3D//fonts.googleapis.com/css?family=3DGoogle+Sans rel=3Dst=
+ylesheet type=3Dtext/css>
+      <style type=3Dtext/css>
+      body{text-decoration:none;}
+      </style>
+      <style type=3Dtext/css>
+           @media only screen and (max-width: 767px){
+             .body_wrapper{min-width:540px !important;}
+             .body_size{width: 100% !important;}
+             .subheadline{font-size:22px!important;line-height: 35px !impor=
+tant;}
+             .device_txt{font-size:26px!important;}
+             .greeting_name{font-size:32px!important;}
+             .google_mobile{width:135px !important; height:43px !important;=
+}
+             .bulb_mobile{width:22px !important; height:31px !important;pad=
+ding-top:20px !important;}
+             .module_mobile{width:110px !important; height:110px !important=
+;}
+             .shield_mobile{width:24px !important; height:31px !important;}
+             .fmd_mobile{width:30px !important; height:24px !important;}
+             .fa_mobile{width:30px !important; height:30px !important;}
+             .arm4_img_height{height: 60px !important; width: 190px !import=
+ant;}
+
+             .btn_mod2_mobile1{padding:9px 24px 11px 24px !important; borde=
+r-radius: 4px !important;}
+             .btn_mod2_mobile2{padding:9px 24px 11px 24px !important; borde=
+r-radius: 4px !important;}
+
+             .btn_mod3_mobile{padding:9px 24px 11px 24px !important; border=
+-radius: 4px !important;}
+             .btn_mod4_mobile{padding:9px 24px 11px 24px !important; border=
+-radius: 4px !important;}
+
+             .space1{height:19px !important;}
+             .space2{padding:3px 35px 0 35px !important;}
+             .space3{padding-top: 22px !important;}
+             .space4{padding: 6px 0 0 0 !important;}
+             .space5{padding-top: 17px !important;}
+             .space6{padding:0 35px 0 35px !important;}
+             .space7{padding-right: 0px !important;}
+           }
+
+           @media screen and (min-resolution: 288dpi) {
+             .device_txt{font-size:26px!important;}
+           }
+       </style>
+     =20
+     =20
+       <style>
+        @font-face {
+          font-family: Noto Naskh Arabic;
+          font-style: normal;
+          font-weight: 400;
+          src: url(https://fonts.gstatic.com/ea/notonaskharabic/v4/NotoNask=
+hArabic-Regular.eot);
+          src: url(https://fonts.gstatic.com/ea/notonaskharabic/v4/NotoNask=
+hArabic-Regular.eot?#iefix) format('embedded-opentype'),
+               url(https://fonts.gstatic.com/ea/notonaskharabic/v4/NotoNask=
+hArabic-Regular.woff2) format('woff2'),
+               url(https://fonts.gstatic.com/ea/notonaskharabic/v4/NotoNask=
+hArabic-Regular.woff) format('woff'),
+               url(https://fonts.gstatic.com/ea/notonaskharabic/v4/NotoNask=
+hArabic-Regular.ttf) format('truetype');
+        }
+		</style>
+     =20
+    <!--[if gte mso 9]>
+<xml>
+    <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+<!--[if mso]>
+ <style>a{color:4285f4 !important; text-decoration:none !important;}</style=
+>
+<![endif]-->
+    </head>
+       =20
+      =20
+     =20
+   =20
+   =20
+
+
+ =20
+<body bgcolor=3D#ffffff class=3Dbody_wrapper>
+      <style>
+          @media screen{@font-face{font-family:'Open Sans';font-style:norma=
+l;font-weight:normal;src:local('Open Sans Light'),local('OpenSans-Light'),u=
+rl(http://fonts.gstatic.com/s/opensans/v9/DXI1ORHCpsQm3Vp6mXoaTRampu5_7CjHW=
+5spxoeN3Vs.woff2) format('woff2'),url(http://fonts.gstatic.com/s/opensans/v=
+9/DXI1ORHCpsQm3Vp6mXoaTaRDOzjiPcYnFooOUGCOsRk.woff) format('woff')}}
+          /*body{padding:0;margin:0}@media only screen and (max-width:520px=
+){-webkit-text-size-adjust:100%}*/
+          body{text-decoration:none;}
+      </style>
+  <div style=3D"font-size: 0px; line-height:0px; color: #ffffff; display: n=
+one;">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+=C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0=C2=A0 =C2=A0 </div>
+      <center>
+        <table class=3Dbody_size border=3D0 cellspacing=3D0 cellpadding=3D0=
+ align=3Dcenter width=3D520 bgcolor=3D#ffffff style=3D"background: #ffffff;=
+ min-width: 520px; -webkit-font-smoothing: antialiased; -webkit-text-size-a=
+djust: none; -ms-text-size-adjust: 100%;">
+          <tr><td align=3Dcenter style=3D"padding-top: 20px;"><a href=3Dhtt=
+ps://www.google.com/appserve/mkt/p/AD-FnEzOl_ErwNUvxD3P94sPLqsHcGlPeeHeGUe-=
+xaN34JitanjySPh9b3BVj9iC9Vz2bv5spthDyflxH5Mjjy4loojz4BCdXN7oc6kFK_MfcQk5i9x=
+llAT_V4GeppCuuCJS-__R-GtB7YPTdYRhJs6SriXx-cTDKi2oXrzy04sZDlSo target=3D_bla=
+nk><img class=3Dgoogle_mobile width=3D82 height=3D26 border=3D0 src=3Dhttps=
+://services.google.com/fh/files/emails/google_logo_orig.png alt=3DGoogle st=
+yle=3D"width: 82px; height:26px; text-align: center; border: none;"></a></t=
+d></tr>
+          <tr><td class=3Dspace1 height=3D15></td></tr>
+          <tr>
+            <td width=3D480 style=3D"-webkit-font-smoothing: antialiased; -=
+webkit-text-size-adjust: none; -ms-text-size-adjust: 100%; border: 2px soli=
+d #E8EAED; border-radius: 16px;">
+              <table border=3D0 cellspacing=3D0 cellpadding=3D0 width=3D100=
+%>
+                <tr>
+                  <td align=3Dcenter>  	<a href=3D# style=3D"pointer-events=
+: none; cursor: default" ;>
+      		<img class=3Dtop_img width=3D516 border=3D0 src=3Dhttps://services.=
+google.com/fh/files/emails/topdesign.png alt=3D"banni=C3=A8re" style=3D"wid=
+th: 100%; text-align: center; border: none;">
+    </a>
+</td>
+                </tr>
+                <tr>
+                  <td>
+  				    <table border=3D0 cellspacing=3D0 cellpadding=3D0 align=3Dcenter =
+width=3D100%>
+                      <tr>
+                        <!--[if mso]>
+                        <td align=3D"center" class=3D"greeting_name space6"=
+ style=3D'color:#202124; font-family:Google Sans, "Roboto", Arial; font-siz=
+e:22px; font-weight:normal; line-height:45px; margin:0; padding:0 80px 20px=
+ 80px; text-align:center;word-break:normal;direction:ltr;' dir=3D"ltr">
+             Bonjour Jean,
+</td>
+                        <![endif]-->
+                        <!--[if !mso]><!-->
+                        <td align=3Dcenter class=3D"greeting_name space6" s=
+tyle=3D"color:#202124; font-family:Google Sans, &quot;Roboto&quot;, Arial; =
+font-size:22px; font-weight:normal; line-height:45px; margin:0; padding:0 8=
+0px 0 80px; text-align:center; word-break:normal;direction:ltr;" dir=3Dltr>
+             Bonjour Jean,
+         </td>
+                        <!--<![endif]-->
+                      </tr>
+                      <!--[if !mso]><!-->
+                      <tr>
+                        <td height=3D15 style=3D"line-height: 4px; font-siz=
+e: 4px;"></td>
+                      </tr>
+                      <!--<![endif]-->
+                      <tr>
+                        <td class=3D"subheadline space2" align=3Dcenter sty=
+le=3D"color:#3C4043; font-family:&quot;Roboto&quot;, OpenSans, &quot;Open S=
+ans&quot;, Arial, sans-serif; font-size:16px; font-weight:normal; line-heig=
+ht:24px; margin:0; padding:0 70px 0 70px; text-align:center; word-break:nor=
+mal;direction:ltr;" dir=3Dltr> Bienvenue sur Google. Votre nouveau compte v=
+ous donne acc=C3=A8s aux produits, applications et services Google.</td>
+                      </tr>
+                      <tr>
+                        <td class=3D"subheadline space6" align=3Dcenter sty=
+le=3D"color:#3C4043; font-family:&quot;Roboto&quot;, OpenSans, &quot;Open S=
+ans&quot;, Arial, sans-serif; font-size:16px; font-weight:normal; line-heig=
+ht:24px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:nor=
+mal;direction:ltr;" dir=3Dltr> Voici quelques conseils pour vous lancer.</t=
+d>
+                      </tr>
+                      <tr><td height=3D45></td></tr>
+                    </table>
+				  </td>
+                </tr>
+              <tr>
+                  <td>
+                    <table border=3D0 cellspacing=3D0 cellpadding=3D0 align=
+=3Dcenter width=3D100%>
+                      <tr><td height=3D50></td></tr>
+                      <tr>
+                        <td align=3Dcenter>    <img class=3Dmodule_mobile w=
+idth=3D64 height=3D64 border=3D0 src=3Dhttps://services.google.com/fh/files=
+/emails/g_logo2.png alt=3DGSA style=3D"width: 64px; height:64px; text-align=
+: center; border: none; font-size:9px;">
+</td>
+                      </tr>
+                 =20
+                      <tr><td height=3D15></td></tr>
+                      <tr>
+                       =20
+                        <!--[if mso]>
+                        <td align=3D"center" class=3D"device_txt space6" st=
+yle=3D'color:#202124; font-family:Google Sans, "Roboto", Arial; font-size:1=
+8px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 20px 80=
+px; text-align:center; word-break:normal;direction:ltr;' dir=3D"ltr">Restez=
+ inform=C3=A9 avec l'appli Google</td>
+                        <![endif]-->
+                        <!--[if !mso]><!-->
+                        <td align=3Dcenter class=3D"device_txt space6" styl=
+e=3D"color:#202124; font-family:Google Sans, &quot;Roboto&quot;, Arial; fon=
+t-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px=
+ 0 80px; text-align:center; word-break:normal;direction:ltr;" dir=3Dltr>Res=
+tez inform=C3=A9 avec l&#39;appli Google</td>
+                        <!--<![endif]-->
+                       =20
+                      </tr>
+                      <!--[if !mso]><!-->
+                      <tr>
+                        <td height=3D15 style=3D"line-height: 4px; font-siz=
+e: 4px;"></td>
+                      </tr>
+                      <!--<![endif]-->
+                      <tr>
+                        =20
+                          <td class=3D"subheadline space6" align=3Dcenter s=
+tyle=3D"color:#5F6368; font-family:&quot;Roboto&quot;, OpenSans, &quot;Open=
+ Sans&quot;, Arial, sans-serif; font-size:16px; font-weight:normal; line-he=
+ight:24px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:n=
+ormal;direction:ltr;" dir=3Dltr>Trouvez rapidement des r=C3=A9ponses =C3=A0=
+ vos questions, explorez vos sujets favoris et tenez-vous inform=C3=A9.</td=
+>
+                         =20
+                      </tr>
+                      <tr><td height=3D30></td></tr>
+                      <tr>
+                          <td class=3Dspace4 style=3D"text-align: center; p=
+adding: 0;">
+                             <div>
+                				<!--[if mso]>
+                                	<v:roundrect xmlns:v=3D"urn:schemas-micros=
+oft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word" href=3D"http=
+s://www.google.com/appserve/mkt/p/AD-FnEzSTrSXaFCgV_5Lfr_C67EGWF3EcBVGAppKE=
+O7y0lSEoMbWliOU0isR8Bvp9qcqYULXHDs5YMeTM8yDz0XSKu0mhhcQBs-Xo2z3gnLaAmNsqKxz=
+rEk88CZnAR8yMdtJGEhLMqc7oj4jeNdZMC98xljrW_WTGlAvbPkb3ICYtg7m0mM6JtUkl33sWcd=
+-dhZRX2HWwXOk9hQxrLLCCWU17onTl83Ie9vgJVLsYBmFfenQd9XZytYEuQAbMz1dn4Fnl3IBQr=
+4" style=3D"height:35px; v-text-anchor:middle; width:210;" arcsize=3D"10%" =
+strokecolor=3D"#1A73E8" fillcolor=3D"#1A73E8;">
+									<w:anchorlock/>
+                                    <center style=3D"color:#ffffff;font-fam=
+ily:Google Sans, Roboto, Arial; font-size:16px; font-weight:normal; word-br=
+eak:normal;direction:ltr;" dir=3D"ltr">Essayer</center>
+                                    </v:roundrect>
+                                <![endif]-->
+                                <a href=3Dhttps://www.google.com/appserve/m=
+kt/p/AD-FnEzSTrSXaFCgV_5Lfr_C67EGWF3EcBVGAppKEO7y0lSEoMbWliOU0isR8Bvp9qcqYU=
+LXHDs5YMeTM8yDz0XSKu0mhhcQBs-Xo2z3gnLaAmNsqKxzrEk88CZnAR8yMdtJGEhLMqc7oj4je=
+NdZMC98xljrW_WTGlAvbPkb3ICYtg7m0mM6JtUkl33sWcd-dhZRX2HWwXOk9hQxrLLCCWU17onT=
+l83Ie9vgJVLsYBmFfenQd9XZytYEuQAbMz1dn4Fnl3IBQr4 class=3D"subheadline btn_mo=
+d2_mobile2" target=3D_blank style=3D"background-color:#1A73E8;; border:1px =
+solid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font=
+-family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-=
+decoration:none; padding:7px 24px 7px 24px; -webkit-text-size-adjust:none; =
+mso-hide:all; font-weight:500; text-align: center; word-break:normal;direct=
+ion:ltr;" dir=3Dltr>Essayer</a>
+                             </div>
+                          </td>
+                      </tr>
+
+                      <tr><td height=3D50></td></tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+		        </td>
+          </tr>
+
+          <!-- New module starts from here -->
+          <tr><td height=3D24></td></tr>
+          <tr>
+                  <td width=3D480 style=3D"-webkit-font-smoothing: antialia=
+sed; -webkit-text-size-adjust: none; -ms-text-size-adjust: 100%; border: 2p=
+x solid #E8EAED; border-radius: 16px;">
+                    <table border=3D0 cellspacing=3D0 cellpadding=3D0 align=
+=3Dcenter width=3D100%>
+                      <tr>
+                  <td align=3Dcenter>  	<a href=3D# style=3D"pointer-events=
+: none; cursor: default" ;><img class=3Dtop_img width=3D514 border=3D0 src=
+=3Dhttps://services.google.com/fh/files/emails/hero_new_2019.png alt=3Dappl=
+ications style=3D"width: 100%; text-align: center; border: none; border-top=
+-left-radius: 16px; border-top-right-radius: 16px;"></a>
+
+				</td>
+                </tr>
+
+                      <tr><td height=3D15></td></tr>
+                      <tr>
+
+                        <!--[if mso]>
+                        <td align=3D"center" class=3D"device_txt space6" st=
+yle=3D'color:#202124; font-family:Google Sans, "Roboto", Arial; font-size:1=
+8px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 20px 80=
+px; text-align:center; word-break:normal;direction:ltr;' dir=3D"ltr">Plus d=
+e services et produits Google</td>
+                        <![endif]-->
+                        <!--[if !mso]><!-->
+                        <td align=3Dcenter class=3D"device_txt space6" styl=
+e=3D"color:#202124; font-family:Google Sans, &quot;Roboto&quot;, Arial; fon=
+t-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px=
+ 0 80px; text-align:center; word-break:normal;direction:ltr;" dir=3Dltr>Plu=
+s de services et produits Google</td>
+                        <!--<![endif]-->
+                      </tr>
+                      <!--[if !mso]><!-->
+                      <tr>
+                        <td height=3D15 style=3D"line-height: 4px; font-siz=
+e: 4px;"></td>
+                      </tr>
+                      <!--<![endif]-->
+                      <tr>
+                          <td class=3D"subheadline space6" align=3Dcenter s=
+tyle=3D"color:#5F6368; font-family:&quot;Roboto&quot;, OpenSans, &quot;Open=
+ Sans&quot;, Arial, sans-serif; font-size:16px; font-weight:normal; line-he=
+ight:24px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:n=
+ormal;direction:ltr;" dir=3Dltr>D=C3=A9couvrez les derni=C3=A8res applis de=
+ Google.</td>
+                      </tr>
+                      <tr><td height=3D30></td></tr>
+                      <tr>
+                          <td align=3Dcenter valign=3Dtop>
+                              <table>
+                                  <tr>
+                                      <td style=3D"text-align: center; padd=
+ing: 0;">
+                                          <div>
+                                            <!--[if mso]>
+                                              <v:roundrect xmlns:v=3D"urn:s=
+chemas-microsoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word"=
+ href=3D"https://www.google.com/appserve/mkt/p/AD-FnEw0NuxefnwDROQMwHPXnKus=
+pjcTToXakgBO4j2E1bjGtv4CuA9dM0OQ8CfTwKHCcrByG4WDHCWyeCpTdmVkHzfTP6uWr9MOl0Z=
+S-c0wJNTxJqNYvpv4gjeFbJqpmPzKAWhlOrl6u8J2oowFwysdBgCQFlcjzLSaWQ2pTSttr-njnw=
+K4nsnQV7qx6TWV8DfGUY3PaAWOiqq5i54cCBBU0MNDinda_RFvnTM0dMS0w27KTjlUrHM4WTSWz=
+k7bESepnZqu4suW3w32568lFRRndAf1I_QlIVSx60Qub0gDJjRjq7sQqHsDyTWVhgGMz-4wkBtN=
+-xO3mKqO3wV6h7VYcsdKhCmN-f8N4IZboDyKkVnu8tJxb7nqiP6QH4m6f5fHcgqJBgQ1YvrgtYU=
+t8miIkz-3zZwZDQp2Fc7envYkAdlayCPKW2Xtg9tP2X4WLZ449d8QBdNGzrxvbgwaAfQoU2OrSq=
+qNeSVPh-c70CEZJ05KxUPzZTVLEOYpmTo7Tfn1YEg2NGznaTniLkEd7NT4IZBLR7wXlGEtKCfpQ=
+-PY" style=3D"height:35px; v-text-anchor:middle; width:160;" arcsize=3D"10%=
+" strokecolor=3D"#1A73E8" fillcolor=3D"#1A73E8;">
+                                              <w:anchorlock/>
+                                              <center style=3D"color:#fffff=
+f;font-family:Google Sans, Roboto, Arial; font-size:16px; font-weight:norma=
+l; word-break:normal;direction:ltr;" dir=3D"ltr">Pour Android</center>
+                                              </v:roundrect>
+                                            <![endif]-->
+                                            <a href=3Dhttps://www.google.co=
+m/appserve/mkt/p/AD-FnEw0NuxefnwDROQMwHPXnKuspjcTToXakgBO4j2E1bjGtv4CuA9dM0=
+OQ8CfTwKHCcrByG4WDHCWyeCpTdmVkHzfTP6uWr9MOl0ZS-c0wJNTxJqNYvpv4gjeFbJqpmPzKA=
+WhlOrl6u8J2oowFwysdBgCQFlcjzLSaWQ2pTSttr-njnwK4nsnQV7qx6TWV8DfGUY3PaAWOiqq5=
+i54cCBBU0MNDinda_RFvnTM0dMS0w27KTjlUrHM4WTSWzk7bESepnZqu4suW3w32568lFRRndAf=
+1I_QlIVSx60Qub0gDJjRjq7sQqHsDyTWVhgGMz-4wkBtN-xO3mKqO3wV6h7VYcsdKhCmN-f8N4I=
+ZboDyKkVnu8tJxb7nqiP6QH4m6f5fHcgqJBgQ1YvrgtYUt8miIkz-3zZwZDQp2Fc7envYkAdlay=
+CPKW2Xtg9tP2X4WLZ449d8QBdNGzrxvbgwaAfQoU2OrSqqNeSVPh-c70CEZJ05KxUPzZTVLEOYp=
+mTo7Tfn1YEg2NGznaTniLkEd7NT4IZBLR7wXlGEtKCfpQ-PY class=3D"subheadline btn_m=
+od3_mobile" target=3D_blank style=3D"background-color:#1A73E8; border:1px s=
+olid #1A73E8; border-radius:4px; color:#ffffff; display:inline-block; font-=
+family:Google Sans, Roboto, Arial; font-size:16px; line-height:25px; text-d=
+ecoration:none; padding:7px 24px 7px 24px; -webkit-text-size-adjust:none; m=
+so-hide:all; font-weight:500; text-align: center; word-break:normal;directi=
+on:ltr;" dir=3Dltr>Pour Android</a>
+
+                        <span width=3D40 style=3Dwidth:40px;>=C2=A0</span>
+                                            <!--[if mso]>
+                                              <v:roundrect xmlns:v=3D"urn:s=
+chemas-microsoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word"=
+ href=3D"https://www.google.com/appserve/mkt/p/AD-FnEykJMT0TG4DDQaiXdAxlWol=
+xwY3o2uJ4EMOZ0xG-YNVNyksEKrEEDn79Op1IBCd59M_xsvK3N51-NnKfuM8g6EK065n5hX61TH=
+QfkCH7pw3JmApeagVkFoL51p0H7V2YSaxh6K_DGJykRkOsHDYWMbNpPMgjJHJl8VJ-D__6o81a_=
+dwBhGPI3RHKs-nsPJxQkkDTxudvOYIepjdv3vgTT8shsb3UqcVR1chkrjSxktAXMYylGM00nqHl=
+P_R-mJdCT-3a2FIaXI80OEypUwCQhkXnrk" style=3D"height:35px; v-text-anchor:mid=
+dle; width:130;" arcsize=3D"10%" strokecolor=3D"#1A73E8" fillcolor=3D"#1A73=
+E8;">
+                                              <w:anchorlock/>
+                                              <center style=3D"color:#fffff=
+f;font-family:Google Sans, Roboto, Arial; font-size:16px; font-weight:norma=
+l; word-break:normal;direction:ltr;" dir=3D"ltr">Pour iOS</center>
+                                              </v:roundrect>
+                                            <![endif]-->
+                                            <a href=3Dhttps://www.google.co=
+m/appserve/mkt/p/AD-FnEykJMT0TG4DDQaiXdAxlWolxwY3o2uJ4EMOZ0xG-YNVNyksEKrEED=
+n79Op1IBCd59M_xsvK3N51-NnKfuM8g6EK065n5hX61THQfkCH7pw3JmApeagVkFoL51p0H7V2Y=
+Saxh6K_DGJykRkOsHDYWMbNpPMgjJHJl8VJ-D__6o81a_dwBhGPI3RHKs-nsPJxQkkDTxudvOYI=
+epjdv3vgTT8shsb3UqcVR1chkrjSxktAXMYylGM00nqHlP_R-mJdCT-3a2FIaXI80OEypUwCQhk=
+Xnrk class=3D"subheadline btn_mod3_mobile" target=3D_blank style=3D"backgro=
+und-color:#1A73E8;; border:1px solid #1A73E8; border-radius:4px; color:#fff=
+fff; display:inline-block; font-family:Google Sans, Roboto, Arial; font-siz=
+e:16px; line-height:25px; text-decoration:none; padding:7px 24px 7px 24px; =
+-webkit-text-size-adjust:none; mso-hide:all; font-weight:500; text-align: c=
+enter; word-break:normal;direction:ltr;" dir=3Dltr>Pour iOS</a>
+                                          </div>
+                                      </td>
+                                  </tr>
+                              </table>
+                          </td>
+                      </tr>
+                      <tr><td height=3D50></td></tr>
+                    </table>
+                  </td>
+                </tr>
+			<!-- New module Ends here -->
+
+          <!-- Arm 2 module starts from here -->
+          <!-- Arm 2 module ends here -->
+
+          <!-- arm3 module starts from here -->
+			<!-- arm3 module Ends here -->
+
+           <!-- arm4 module starts from here -->
+			<!-- arm4 module Ends here -->
+
+          <!-- Arm 5 module starts from here -->
+          <!-- Arm 5 module ends here -->
+
+          <!-- Arm 6 module starts from here -->
+          <!-- Arm 6 module ends here -->
+
+              <tr><td height=3D24></td></tr>
+                <tr>
+                  <td width=3D480 style=3D"-webkit-font-smoothing: antialia=
+sed; -webkit-text-size-adjust: none; -ms-text-size-adjust: 100%; border: 2p=
+x solid #E8EAED; border-radius: 16px;">
+                    <table border=3D0 cellspacing=3D0 cellpadding=3D0 align=
+=3Dcenter width=3D100%>
+                      <tr><td height=3D40></td></tr>
+                      <tr>
+                        <td align=3Dcenter>    <img class=3Dmodule_mobile w=
+idth=3D64 height=3D64 border=3D0 src=3Dhttps://services.google.com/fh/files=
+/emails/security_logo.png alt=3D"S=C3=A9curit=C3=A9" style=3D"width: 64px; =
+height:64px; text-align: center; border: none;">
+</td>
+                      </tr>
+                      <tr><td height=3D15></td></tr>
+                      <tr>
+                        <!--[if mso]>
+                        <td align=3D"center" class=3D"device_txt space6" st=
+yle=3D'color:#202124; font-family:Google Sans, "Roboto", Arial; font-size:1=
+8px; font-weight:normal; line-height:33px; margin:0; padding:0 80px 20px 80=
+px; text-align:center; word-break:normal;direction:ltr;' dir=3D"ltr">Contr=
+=C3=B4lez votre compte</td>
+                        <![endif]-->
+                        <!--[if !mso]><!-->
+                        <td align=3Dcenter class=3D"device_txt space6" styl=
+e=3D"color:#202124; font-family:Google Sans, &quot;Roboto&quot;, Arial; fon=
+t-size:18px; font-weight:normal; line-height:33px; margin:0; padding:0 80px=
+ 0 80px; text-align:center; word-break:normal;direction:ltr;" dir=3Dltr>Con=
+tr=C3=B4lez votre compte</td>
+                        <!--<![endif]-->
+                      </tr>
+                      <!--[if !mso]><!-->
+                      <tr>
+                        <td height=3D15 style=3D"line-height: 4px; font-siz=
+e: 4px;"></td>
+                      </tr>
+                      <!--<![endif]-->
+                      <tr>
+                        <td class=3D"subheadline space6" align=3Dcenter sty=
+le=3D"color:#5F6368; font-family:&quot;Roboto&quot;, OpenSans, &quot;Open S=
+ans&quot;, Arial, sans-serif; font-size:16px; font-weight:normal; line-heig=
+ht:24px; margin:0; padding:0 80px 0 80px; text-align:center; word-break:nor=
+mal;direction:ltr;" dir=3Dltr>Choisissez les options les plus adapt=C3=A9es=
+ =C3=A0 vos besoins. Vous pouvez v=C3=A9rifier et modifier vos param=C3=A8t=
+res de confidentialit=C3=A9 et de s=C3=A9curit=C3=A9 =C3=A0 tout moment.</t=
+d>
+                      </tr>
+                      <tr><td height=3D30></td></tr>
+                      <tr>
+                          <td align=3Dcenter valign=3Dtop>
+                              <table>
+                                  <tr>
+                                      <td style=3D"text-align: center; padd=
+ing: 0;">
+                                          <div>
+                                              <!--[if mso]>
+                                                <v:roundrect xmlns:v=3D"urn=
+:schemas-microsoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:wor=
+d" href=3D"https://www.google.com/appserve/mkt/p/AD-FnEwJUsalOjlCBSoxMaGXKI=
+o_018dLKWrhjBU69jwCTd410cTfxIdBBTisc9ff-gWLXKBgKFDUDAYJlDqVFfQi546FrXroOLD_=
+CY_QqAdevhwLfcA_NjdVY7gJwKVxqAo1SrtSqWME06jHnkuWuwGaOo-cHt8ggls_wrIWSQYcwaH=
+zV9-Tz7Sijrbspi35cwgsQ9p7_OteWJsD7ovyvkgRKD-OPwGfJsJMw" style=3D"height:35p=
+x; v-text-anchor:middle; width:136" arcsize=3D"10%" strokecolor=3D"#1A73E8"=
+ fillcolor=3D"#1A73E8;">
+                                                <w:anchorlock/>
+                                                <center style=3D"color:#fff=
+fff;font-family:Google Sans, Roboto, Arial; font-size:16px; font-weight:nor=
+mal; word-break:normal;direction:ltr;" dir=3D"ltr">Mon compte</center>
+                                                </v:roundrect>
+                                              <![endif]-->
+                                              <a href=3Dhttps://www.google.=
+com/appserve/mkt/p/AD-FnEwJUsalOjlCBSoxMaGXKIo_018dLKWrhjBU69jwCTd410cTfxId=
+BBTisc9ff-gWLXKBgKFDUDAYJlDqVFfQi546FrXroOLD_CY_QqAdevhwLfcA_NjdVY7gJwKVxqA=
+o1SrtSqWME06jHnkuWuwGaOo-cHt8ggls_wrIWSQYcwaHzV9-Tz7Sijrbspi35cwgsQ9p7_OteW=
+JsD7ovyvkgRKD-OPwGfJsJMw class=3D"subheadline btn_mod4_mobile" target=3D_bl=
+ank style=3D"background-color:#1A73E8;; border:1px solid #1A73E8; border-ra=
+dius:4px; color:#ffffff; display:inline-block; font-family:Google Sans, Rob=
+oto, Arial; font-size:16px; line-height:25px; text-decoration:none; padding=
+:7px 24px 7px 24px; -webkit-text-size-adjust:none; mso-hide:all; font-weigh=
+t:500; text-align: center; word-break:normal;direction:ltr;" dir=3Dltr>Mon =
+compte</a>
+                                            </div>
+                                      </td>
+                                  </tr>
+                              </table>
+                          </td>
+                      </tr>
+                      <tr><td height=3D50></td></tr>
+                    </table>
+                  </td>
+                </tr>
+
+
+          <tr><td height=3D24></td></tr>
+          <tr>
+              <td width=3D480 style=3D"-webkit-font-smoothing: antialiased;=
+ -webkit-text-size-adjust: none; -ms-text-size-adjust: 100%; border: 2px so=
+lid #E8EAED; border-radius: 16px;">
+                    <table border=3D0 cellspacing=3D0 cellpadding=3D0 width=
+=3D100%>
+                            <tr>
+                                <td style=3D"font-size:0pt; line-height:0pt=
+; padding:0; margin:0;" width=3D24></td>
+                                <!--[if mso]>
+                                <td style=3D"margin-top:9px; padding: 40px =
+25px 29px 20px;" valign=3D"top">    <img class=3D"fmd_mobile" width=3D"24" =
+height=3D"18" border=3D"0" src=3D"https://services.google.com/fh/files/emai=
+ls/vibration_outline.png" alt=3D"Localiser mon appareil" style=3D"width: 24=
+px; height:18px; text-align: center; border: none; font-size:3px;">
+</td>
+                                <![endif]-->
+                                <!--[if !mso]><!-->
+                                <td style=3D"padding: 55px 10px 40px 20px;"=
+ valign=3Dtop>    <img class=3Dfmd_mobile width=3D24 height=3D18 border=3D0=
+ src=3Dhttps://services.google.com/fh/files/emails/vibration_outline.png al=
+t=3D"Localiser mon appareil" style=3D"width: 24px; height:18px; text-align:=
+ center; border: none; font-size:3px;">
+</td>
+                                <!--<![endif]-->
+
+                                <td valign=3Dtop>
+                                  <!--[if mso]>
+                                  <div class=3D"device_txt" style=3D"margin=
+-bottom:15px; padding-left: 20px; color:#202124; font-family:Google Sans, R=
+oboto, Arial; font-size:18px; line-height:28px; text-align:left; padding-to=
+p:30px; padding-bottom:12px; word-break:normal;direction:ltr;" dir=3D"ltr" =
+valign=3D"top">Localisez votre t=C3=A9l=C3=A9phone</div>
+                                  <![endif]-->
+                                  <!--[if !mso]><!-->
+                                  <div class=3Ddevice_txt style=3D"padding-=
+left: 20px; color:#202124; font-family:Google Sans, Roboto, Arial; font-siz=
+e:18px; line-height:28px; text-align:left; padding-top:45px; padding-bottom=
+:12px; word-break:normal;direction:ltr;" dir=3Dltr valign=3Dtop>Localisez v=
+otre t=C3=A9l=C3=A9phone</div>
+                                  <!--<![endif]-->
+
+                                  <!--[if mso]>
+                                  <div class=3D"subheadline space7" style=
+=3D"padding-left: 20px; padding-right: 20px; color:#5F6368; font-family:Rob=
+oto, OpenSans, Open Sans, Arial, sans-serif; font-weight: normal; font-size=
+:16px; line-height:24px; text-align:left; padding-bottom:24px; word-break:n=
+ormal;direction:ltr;" dir=3D"ltr" valign=3D"top"><a class=3D"tstt" href=3D"=
+https://www.google.com/appserve/mkt/p/AD-FnExxY05nqqZwo4Drng1SU7K_V37rbADMB=
+IOuCuFW83WujmCqzuhbOQi_pJRAUJZ880IDTRWBWD8ETOVqrkrc0V5MD9SLZPLo8pRB-SIqSRMP=
+MUuo-h2FrwrWfHq9-NkWMXB2a1uqo4-3Vjr0-L5a3bQSjDHpG3PhU6VQ1l4Foq94QxJVyMlVDYM=
+4_yv7R2mah5lGWU7AWwYJHJ8" target=3D"_blank" style=3D"color:#1A73E8; text-de=
+coration:none; font-weight:normal; border:0; ; white-space: normal;"> Local=
+isez votre t=C3=A9l=C3=A9phone</a> et s=C3=A9curisez-le avec Localiser mon =
+appareil.</div>
+                                  <![endif]-->
+                                  <!--[if !mso]><!-->
+                                  <div class=3D"subheadline space7 tst1" st=
+yle=3D"padding-left: 20px; padding-right: 20px; color:#5F6368; font-family:=
+Roboto, OpenSans, Open Sans, Arial, sans-serif; font-weight: normal; font-s=
+ize:16px; line-height:24px; text-align:left; padding-bottom:35px; word-brea=
+k:normal;direction:ltr;" dir=3Dltr valign=3Dtop><a class=3Dtstt href=3Dhttp=
+s://www.google.com/appserve/mkt/p/AD-FnExxY05nqqZwo4Drng1SU7K_V37rbADMBIOuC=
+uFW83WujmCqzuhbOQi_pJRAUJZ880IDTRWBWD8ETOVqrkrc0V5MD9SLZPLo8pRB-SIqSRMPMUuo=
+-h2FrwrWfHq9-NkWMXB2a1uqo4-3Vjr0-L5a3bQSjDHpG3PhU6VQ1l4Foq94QxJVyMlVDYM4_yv=
+7R2mah5lGWU7AWwYJHJ8 target=3D_blank style=3D"color:#1A73E8; text-decoratio=
+n:none; font-weight:normal; border:0; ; white-space: normal;"> Localisez vo=
+tre t=C3=A9l=C3=A9phone</a> et s=C3=A9curisez-le avec Localiser mon apparei=
+l.</div>
+                                  <!--<![endif]-->
+                                </td>
+                                <td style=3D"font-size:0pt; line-height:0pt=
+; padding:0; margin:0;" width=3D24></td>
+                            </tr>
+
+                            <tr>
+                                <td style=3D"font-size:0pt; line-height:0pt=
+; padding:0; margin:0; width:24px;" width=3D24></td>
+                                <!--[if mso]>
+                                <td colspan=3D"2" width=3D"468" align=3D"to=
+p" style=3D"width:468px;"><hr width=3D"468" style=3D"background-color: #E8E=
+AED;color: #E8EAED; height: 2px; border: none;font-size:0pt; line-height:0p=
+t; padding:0; margin:0; width:468px;"></td>
+                                <![endif]-->
+                                  <!--[if !mso]><!-->
+                                  <td colspan=3D2 align=3Dtop><hr style=3D"=
+background-color: #E8EAED;color: #E8EAED; min-width:360px; max-width:96%; h=
+eight: 2px; border: none;font-size:0pt; line-height:0pt; padding:0; margin:=
+0;"></td>
+                                  <!--<![endif]-->
+                                <td style=3D"font-size:0pt; line-height:0pt=
+; padding:0; margin:0; width:24px;" width=3D24></td>
+                            </tr>
+                            <tr>
+                                <td style=3D"font-size:0pt; line-height:0pt=
+; padding:0; margin:0;" width=3D24></td>
+                                <!--[if mso]>
+                                <td style=3D"margin-bottom:67px; padding: 2=
+1px 10px 35px 20px;">    <img class=3D"fa_mobile" width=3D"24" height=3D"24=
+" border=3D"0" src=3D"https://services.google.com/fh/files/emails/help_outl=
+ine.png" alt=3D"Trouver les r=C3=A9ponses =C3=A0 vos questions" style=3D"wi=
+dth: 24px; height:24px; text-align: center; border: none; font-size:3px;">
+</td>
+                                <![endif]-->
+                                <!--[if !mso]><!-->
+                                <td style=3D"padding: 43px 10px 40px 20px;"=
+ valign=3Dtop>    <img class=3Dfa_mobile width=3D24 height=3D24 border=3D0 =
+src=3Dhttps://services.google.com/fh/files/emails/help_outline.png alt=3D"T=
+rouver les r=C3=A9ponses =C3=A0 vos questions" style=3D"width: 24px; height=
+:24px; text-align: center; border: none; font-size:3px;">
+</td>
+                                <!--<![endif]-->
+
+                                <td valign=3Dtop>
+                                    <!--[if mso]>
+                                    <div class=3D"device_txt" style=3D"marg=
+in-bottom:15px; padding-left: 20px; color:#202124; font-family:Google Sans,=
+ Roboto, Arial; font-size:18px; line-height:28px; text-align:left; padding-=
+top:18px; padding-bottom:12px; word-break:normal;direction:ltr;" dir=3D"ltr=
+" valign=3D"top">Trouvez les r=C3=A9ponses =C3=A0 vos questions</div>
+                                    <![endif]-->
+                                    <!--[if !mso]><!-->
+                                    <div class=3Ddevice_txt style=3D"paddin=
+g-left: 20px; color:#202124; font-family:Google Sans, Roboto, Arial; font-s=
+ize:18px; line-height:28px; text-align:left; padding-top:35px; padding-bott=
+om:12px; word-break:normal;direction:ltr;" dir=3Dltr valign=3Dtop>Trouvez l=
+es r=C3=A9ponses =C3=A0 vos questions</div>
+                                    <!--<![endif]-->
+
+                                    <!--[if mso]>
+                                    <div class=3D"subheadline space7" style=
+=3D"margin-bottom:20px; padding-left: 20px; padding-right: 20px; color:#5F6=
+368; font-family:Roboto, OpenSans, Open Sans, Arial, sans-serif; font-weigh=
+t: normal; font-size:16px; line-height:24px; text-align:left; padding-botto=
+m:45px; word-break:normal;direction:ltr;" dir=3D"ltr" valign=3D"top">Consul=
+tez le <a class=3D"tstt" href=3D"https://www.google.com/appserve/mkt/p/AD-F=
+nExCC-WDB49Q9cNW07NP8jmlxQg3oBqGNJ_wX3FU-8tQfkiCOBSNA3426-Gg76gJKoMI_Uepokz=
+t_hgZO3spdaGisw4v0RKHEJoT59irGOcYExjAptRFxCpa4yF_wsKz_9Sm33SEpu93fA2ZhleCze=
+N2_pu1AsUb6Tddw_2XvbZypt0CJ2HZXeFV-4X-KS6sl9TXWVa1p932" target=3D"_blank" s=
+tyle=3D"color:#1A73E8; text-decoration:none; font-weight:normal; border:0; =
+; white-space: normal;"> Centre d'aide</a> pour en savoir plus sur votre no=
+uveau compte Google.</div>
+                                    <![endif]-->
+                                    <!--[if !mso]><!-->
+                                    <div class=3D"subheadline space7 tst4" =
+style=3D"padding-left: 20px; padding-right: 20px; color:#5F6368; font-famil=
+y:Roboto, OpenSans, Open Sans, Arial, sans-serif; font-weight: normal; font=
+-size:16px; line-height:24px; text-align:left; padding-bottom:50px; word-br=
+eak:normal;direction:ltr;" dir=3Dltr valign=3Dtop>Consultez le <a class=3Dt=
+stt href=3Dhttps://www.google.com/appserve/mkt/p/AD-FnExCC-WDB49Q9cNW07NP8j=
+mlxQg3oBqGNJ_wX3FU-8tQfkiCOBSNA3426-Gg76gJKoMI_Uepokzt_hgZO3spdaGisw4v0RKHE=
+JoT59irGOcYExjAptRFxCpa4yF_wsKz_9Sm33SEpu93fA2ZhleCzeN2_pu1AsUb6Tddw_2XvbZy=
+pt0CJ2HZXeFV-4X-KS6sl9TXWVa1p932 target=3D_blank style=3D"color:#1A73E8; te=
+xt-decoration:none; font-weight:normal; border:0; ; white-space: normal;"> =
+Centre d&#39;aide</a> pour en savoir plus sur votre nouveau compte Google.<=
+/div>
+                                    <!--<![endif]-->
+                                </td>
+                                <td style=3D"font-size:0pt; line-height:0pt=
+; padding:0; margin:0;" width=3D24></td>
+                            </tr>
+                    </table>
+              </td>
+          </tr>
+                  <tr>
+                      <td style=3D"-webkit-font-smoothing: antialiased; -we=
+bkit-text-size-adjust: none; -ms-text-size-adjust: 100%;">
+                        <table border=3D0 cellspacing=3D0 cellpadding=3D0 a=
+lign=3Dcenter width=3D100%>
+                          <tr><td height=3D30></td></tr>
+                          <tr>
+                            <td width=3D134 height=3D46 align=3Dcenter styl=
+e=3D"font-size:8px; word-break:normal;direction:ltr;" dir=3Dltr>    <img cl=
+ass=3Dgoogle_mobile width=3D82 height=3D26 border=3D0 src=3Dhttps://service=
+s.google.com/fh/files/emails/google_logo2.png alt=3D"Logo Google" style=3D"=
+width: 82px; height:26px; text-align: center; border: none;">
+</td>
+                          </tr>
+                          <tr><td height=3D19></td></tr>
+                          <tr>
+                            <td class=3Dspace6 align=3Dcenter style=3D"colo=
+r:#5F6368; font-family:&quot;Roboto&quot;, OpenSans, &quot;Open Sans&quot;,=
+ Arial, sans-serif; font-size:12px; line-height:17px; margin:0; padding:0 8=
+0px 0 80px; text-align:center; word-break:normal;direction:ltr;" dir=3Dltr>=
+Les r=C3=A9ponses =C3=A0 cet e-mail ne seront pas trait=C3=A9es. Si vous av=
+ez une question =C3=A0 propos de votre nouveau compte, vous trouverez certa=
+inement la r=C3=A9ponse dans le centre d&#39;aide.</td>
+                          </tr>
+                          <tr><td height=3D19></td></tr>
+                          <tr>
+                            <td class=3Dspace6 valign=3Dmiddle style=3D"col=
+or:#777; font-family:&quot;Roboto&quot;, OpenSans, &quot;Open Sans&quot;, A=
+rial, sans-serif; font-size:10px; line-height:14px; margin:0; padding:0 30p=
+x 0 30px; text-align:center" align=3Dcenter>
+=20
+
+      <span style=3D"font-size:inherit; color:inherit; font-weight:inherit;=
+ line-height:inherit; font-family:inherit;">Google Ireland Ltd,<br>Gordon H=
+ouse, Barrow Street,<br>Dublin 4, Ireland.</span>
+  =20
+  =20
+<br><br><span style=3Dword-break:normal;direction:ltr; dir=3Dltr>Vous avez =
+re=C3=A7u cet e-mail, car vous avez cr=C3=A9=C3=A9 un compte Google.</span>=
+</td>
+                          </tr>
+                        </table>
+                      </td>
+                  </tr>
+                  <tr><td height=3D18></td></tr>
+        </table>
+        <div style=3D"display:none; white-space:nowrap; font:15px courier; =
+line-height:0;">
+        =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0
+        =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0
+        </div>
+      </center>
+    <img height=3D1 width=3D3 src=3Dhttps://www.google.com/appserve/mkt/img=
+/AD-FnEzbItL_eRF1UHJgQ7FXHJPEePFEPV059iqUdXeWYmQPLuJw.gif></body>
+  </html>
+
+
+
+--000000000000e600d805a7c1a317--

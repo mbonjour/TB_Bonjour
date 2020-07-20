@@ -11,12 +11,17 @@
 #include <unistd.h>
 #include <string.h>
 #include <curl/curl.h>
+#include <time.h>
+#include <libetpan/libetpan.h>
+#include <dirent.h>
 
 #include "utils/base64.h"
 #include "utils/socketUtils.h"
 #include "cipherPOC.h"
 #include "signaturePOC.h"
 #include "utils/aesUtils.h"
+
+binn* parseEmail(char* filename);
 
 /**
  * @brief This is a checker to know if there is already params stored on the disk, so we don't have to regenerate it.
@@ -70,6 +75,6 @@ void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *e
  */
 int connectToKGC();
 
-int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher);
-int checkmail();
+int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher, char *email, char *password);
+int checkmail(char *email, char *password);
 #endif //POCCERTIFICATELESSCRYPTOGRAPHY_MAINCLIENT_H

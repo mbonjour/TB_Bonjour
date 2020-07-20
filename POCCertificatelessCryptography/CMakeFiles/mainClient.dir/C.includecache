@@ -6,11 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.c
+/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.c
+sys/stat.h
+-
 mainClient.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.h
+/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.h
 
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.h
+/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.h
 sodium.h
 -
 stdio.h
@@ -25,16 +27,22 @@ string.h
 -
 curl/curl.h
 -
+time.h
+-
+libetpan/libetpan.h
+-
+dirent.h
+-
 utils/base64.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/utils/base64.h
+/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/utils/base64.h
 utils/socketUtils.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/utils/socketUtils.h
+/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/utils/socketUtils.h
 cipherPOC.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/cipherPOC.h
+/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/cipherPOC.h
 signaturePOC.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/signaturePOC.h
+/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/signaturePOC.h
 utils/aesUtils.h
-/home/mbonjour/HEIG-VD/annee3/semestre_2/TB/TB_Bonjour/POCCertificatelessCryptography/client/utils/aesUtils.h
+/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/utils/aesUtils.h
 
 cipherPOC.h
 stdio.h

@@ -1,0 +1,152 @@
+Delivered-To: jean.delafiction@gmail.com
+Received: by 2002:a67:7f01:0:0:0:0:0 with SMTP id a1csp695517vsd;
+        Wed, 10 Jun 2020 14:42:12 -0700 (PDT)
+X-Received: by 2002:ad4:57ac:: with SMTP id g12mr5015697qvx.226.1591825332728;
+        Wed, 10 Jun 2020 14:42:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1591825332; cv=none;
+        d=google.com; s=arc-20160816;
+        b=qeicCKVwD2Mp4HR6o1ccpvrqG3vzLZ6EBwnwQLW1UM9q6m0xcUwyOi5SK+peoqLNWy
+         a9cP6Ycq1xz+e7Rpow1zOrft/Ejpz51RzCCzfARs5gJrBGM5QYDpUcCt6Ml8j5GZtCzA
+         57kV9B+DFiktnTKxuiIH86DSoDe4RZtPs9LKIF10+Jz7zgQwUG4KIDPRB2mV147JIQKQ
+         huzxRdKFmONNSpO05g+ieKGRHqmOqIofPnWSiWNHL0XkhZb5vVu5POLNoEsz+TihD+6/
+         fDqYQbJ1jRiIe35eOlKUdTQ26gsLrFipA/45eRlSt8RbQ0b+nxmFmYo8/clp/zIIGijZ
+         e7PA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:from:subject:message-id:feedback-id:date:mime-version
+         :dkim-signature;
+        bh=9UkqnzFCioYY6OXqeHbFBPXTqwOyrpyUiBCjMXMMmAA=;
+        b=0/2nKpDCBjj8R7+4I40J5Qo+MQCp6ylISaSBRatqQz3FmtQQtD+gWwMLaAFbPpzZGq
+         KBLZwn6pXlQ4OfaImm0c1mhFJz6QfQrVjSwOnnlDb4fPChAbV2Mfn3H47xs8/GmXXArg
+         5FC+RHOjfTy8Acf+ug0R9b0unXODgK0EUTNlgOcLtS9JOprmYmvkpexHBWmVeNjqjNL5
+         ssbeHBplme+BmeYPrp7YCFWthnQBUvH5RLjs/nWAARSlqa5T/xTd+daoUwX//IwDNVXv
+         Yx5BABl8ZhJjLOs2o5ttl+ymVSK9KuH1DeJos+W87+zkGgkqmW/ISYydsdBJrh8+RYnp
+         8vWQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@accounts.google.com header.s=20161025 header.b=o3ufsGdX;
+       spf=pass (google.com: domain of 3tfphxggtan0mn-qdokx9bbntmsr.fnnfkd.bnl@gaia.bounces.google.com designates 209.85.220.73 as permitted sender) smtp.mailfrom=3tFPhXggTAN0MN-QDOKX9BBNTMSR.FNNFKD.BNL@gaia.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=accounts.google.com
+Return-Path: <3tFPhXggTAN0MN-QDOKX9BBNTMSR.FNNFKD.BNL@gaia.bounces.google.com>
+Received: from mail-sor-f73.google.com (mail-sor-f73.google.com. [209.85.220.73])
+        by mx.google.com with SMTPS id k4sor1695327qta.38.2020.06.10.14.42.12
+        for <jean.delafiction@gmail.com>
+        (Google Transport Security);
+        Wed, 10 Jun 2020 14:42:12 -0700 (PDT)
+Received-SPF: pass (google.com: domain of 3tfphxggtan0mn-qdokx9bbntmsr.fnnfkd.bnl@gaia.bounces.google.com designates 209.85.220.73 as permitted sender) client-ip=209.85.220.73;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@accounts.google.com header.s=20161025 header.b=o3ufsGdX;
+       spf=pass (google.com: domain of 3tfphxggtan0mn-qdokx9bbntmsr.fnnfkd.bnl@gaia.bounces.google.com designates 209.85.220.73 as permitted sender) smtp.mailfrom=3tFPhXggTAN0MN-QDOKX9BBNTMSR.FNNFKD.BNL@gaia.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=accounts.google.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=accounts.google.com; s=20161025;
+        h=mime-version:date:feedback-id:message-id:subject:from:to;
+        bh=9UkqnzFCioYY6OXqeHbFBPXTqwOyrpyUiBCjMXMMmAA=;
+        b=o3ufsGdXahYM6ARhEE//U/6gVrTsf6LXkrzoBOvjLkuIwhXQ0NMGr2zDag1bPSDbWm
+         9LMEs4d1y6no/VuLu95YlKvk8H89QVIB0yeBOR6zDZ8368VVQ8kso6dBeEzMfsMsPsg8
+         hxQhxaRhqZquept/iMZtV29aWW4wu+k8fA7tKZtL/sn0N3DY3bJ/o6ZcJO+NpgLLrLGQ
+         YhDJRqZVGAy5W4jiR6d354Qn74mjrY7lyeDCSENX449jijv41PQeJsdYXhvuF/wtYa0v
+         jfudwqvTPkatlowbGWt0JqPiZ5j+Wd1vgHcDTqhWl6t0lNqMaSoHtO1EIrVb7jud7Sl6
+         0S8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:date:feedback-id:message-id:subject
+         :from:to;
+        bh=9UkqnzFCioYY6OXqeHbFBPXTqwOyrpyUiBCjMXMMmAA=;
+        b=O0ENeEF1L6WcEezv/W4MuTVZl6dJ1JVVz9coh1Rn399lTFkxDwo5TsEzR2lMlGjCc2
+         7+6vqT3R4XJuqDR30hsGiyNYMWVpLuM+8EkzKRwgUYsBPnpbns1vSn8fXbOmCTrj3LGI
+         rI4oWF8z9X1kmiS2LnHAb4wlYO1GSWuvrQLKq3qOVvNcIV0Drx0jZsbSUo0/SdkfnXKR
+         YVp8pk85i5tOU0IEgN0a0zkwop3U96Kt/rKKV9mpiFGPPnHwcMVtyqO3fpI6ZUR6Ai/G
+         kwmoI1G71rM9TB1FBRY7xZbPbNf+yU86Q1VOYpzy0AFzWSRHWLO0kN2EpjXRRZeDPAea
+         AXqA==
+X-Gm-Message-State: AOAM532j1VYllFZkBw9Vqwd5NGuuxXiOgW/PnB63+4Ivw2jL+qHq9umm
+	9uafy761CFZ8XUWcp6xZEZ9qFCW/+jA6
+X-Google-Smtp-Source: ABdhPJwyvST4A288Bw3lTern5xs2JdAbU5FQqVvXstmExNeW1bimBj+bzvwJweGnfvAhF35rsoj24IzKGLRJY3O5KLzf1g==
+MIME-Version: 1.0
+X-Received: by 2002:aed:2237:: with SMTP id n52mr5211259qtc.83.1591825332537;
+ Wed, 10 Jun 2020 14:42:12 -0700 (PDT)
+Date: Wed, 10 Jun 2020 21:42:02 GMT
+X-Account-Notification-Type: 1
+Feedback-ID: 1:account-notifier
+X-Notifications: e32a89a212400000
+Message-ID: <QlB5OdqNh5SjAgik7W-Q5A.0@notifications.google.com>
+Subject: =?UTF-8?B?QWxlcnRlIGRlIHPDqWN1cml0w6k=?=
+From: Google <no-reply@accounts.google.com>
+To: jean.delafiction@gmail.com
+Content-Type: multipart/alternative; boundary="0000000000007d898205a7c1b706"
+
+--0000000000007d898205a7c1b706
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+Content-Transfer-Encoding: base64
+
+W2ltYWdlOiBHb29nbGVdDQpWb3RyZSBtb3QgZGUgcGFzc2UgYSDDqXTDqSBtb2RpZmnDqQ0KDQoN
+CmplYW4uZGVsYWZpY3Rpb25AZ21haWwuY29tDQpMZSBtb3QgZGUgcGFzc2UgZGUgdm90cmUgY29t
+cHRlIEdvb2dsZSBqZWFuLmRlbGFmaWN0aW9uQGdtYWlsLmNvbSBhIMOpdMOpDQptb2RpZmnDqS4g
+U2kgdm91cyBuJ8OqdGVzIHBhcyDDoCBsJ29yaWdpbmUgZGUgY2V0dGUgbW9kaWZpY2F0aW9uLCBu
+b3VzIHZvdXMNCmNvbnNlaWxsb25zIGRlIHLDqWN1cMOpcmVyIHZvdHJlIGNvbXB0ZQ0KPGh0dHBz
+Oi8vYWNjb3VudHMuZ29vZ2xlLmNvbS9SZWNvdmVyQWNjb3VudD9mcE9ubHk9MSZzb3VyY2U9YW5j
+cCZFbWFpbD1qZWFuLmRlbGFmaWN0aW9uQGdtYWlsLmNvbSZldD0wPg0KLg0KQ2V0IGUtbWFpbCB2
+b3VzIGEgw6l0w6kgZW52b3nDqSBwb3VyIHZvdXMgaW5mb3JtZXIgZGUgbW9kaWZpY2F0aW9ucw0K
+aW1wb3J0YW50ZXMgYXBwb3J0w6llcyDDoCB2b3RyZSBjb21wdGUgZXQgYXV4IHNlcnZpY2VzIEdv
+b2dsZSBxdWUgdm91cw0KdXRpbGlzZXouDQrCqSAyMDIwIEdvb2dsZSBMTEMsIDE2MDAgQW1waGl0
+aGVhdHJlIFBhcmt3YXksIE1vdW50YWluIFZpZXcsIENBIDk0MDQzLCBVU0ENCg==
+--0000000000007d898205a7c1b706
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html><html lang=3D"en"><head><meta name=3D"format-detection" cont=
+ent=3D"email=3Dno"/><meta name=3D"format-detection" content=3D"date=3Dno"/>=
+<style nonce=3D"0LYk1WvKNLjpHm4BMfZgww">.awl a {color: #FFFFFF; text-decora=
+tion: none;} .abml a {color: #000000; font-family: Roboto-Medium,Helvetica,=
+Arial,sans-serif; font-weight: bold; text-decoration: none;} .adgl a {color=
+: rgba(0, 0, 0, 0.87); text-decoration: none;} .afal a {color: #b0b0b0; tex=
+t-decoration: none;} @media screen and (min-width: 600px) {.v2sp {padding: =
+6px 30px 0px;} .v2rsp {padding: 0px 10px;}} @media screen and (min-width: 6=
+00px) {.mdv2rw {padding: 40px 40px;}} </style><link href=3D"//fonts.googlea=
+pis.com/css?family=3DGoogle+Sans" rel=3D"stylesheet" type=3D"text/css"/></h=
+ead><body style=3D"margin: 0; padding: 0;" bgcolor=3D"#FFFFFF"><table width=
+=3D"100%" height=3D"100%" style=3D"min-width: 348px;" border=3D"0" cellspac=
+ing=3D"0" cellpadding=3D"0" lang=3D"en"><tr height=3D"32" style=3D"height: =
+32px;"><td></td></tr><tr align=3D"center"><td><div itemscope itemtype=3D"//=
+schema.org/EmailMessage"><div itemprop=3D"action" itemscope itemtype=3D"//s=
+chema.org/ViewAction"><link itemprop=3D"url" href=3D"https://accounts.googl=
+e.com/RecoverAccount?fpOnly=3D1&amp;source=3Dancp&amp;Email=3Djean.delafict=
+ion@gmail.com&amp;et=3D0"/><meta itemprop=3D"name" content=3D"Consulter l&#=
+39;activit=C3=A9 du compte"/></div></div><table border=3D"0" cellspacing=3D=
+"0" cellpadding=3D"0" style=3D"padding-bottom: 20px; max-width: 516px; min-=
+width: 220px;"><tr><td width=3D"8" style=3D"width: 8px;"></td><td><div styl=
+e=3D"border-style: solid; border-width: thin; border-color:#dadce0; border-=
+radius: 8px; padding: 40px 20px;" align=3D"center" class=3D"mdv2rw"><img sr=
+c=3D"https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo_color=
+_74x24dp.png" width=3D"74" height=3D"24" aria-hidden=3D"true" style=3D"marg=
+in-bottom: 16px;" alt=3D"Google"><div style=3D"font-family: &#39;Google San=
+s&#39;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;border-bottom: thin so=
+lid #dadce0; color: rgba(0,0,0,0.87); line-height: 32px; padding-bottom: 24=
+px;text-align: center; word-break: break-word;"><div style=3D"font-size: 24=
+px;">Votre mot de passe a =C3=A9t=C3=A9 modifi=C3=A9</div><table align=3D"c=
+enter" style=3D"margin-top:8px;"><tr style=3D"line-height: normal;"><td ali=
+gn=3D"right" style=3D"padding-right:8px;"><img width=3D"20" height=3D"20" s=
+tyle=3D"width: 20px; height: 20px; vertical-align: sub; border-radius: 50%;=
+;" src=3D"https://www.gstatic.com/accountalerts/email/anonymous_profile_pho=
+to.png" alt=3D""></td><td><a style=3D"font-family: &#39;Google Sans&#39;,Ro=
+boto,RobotoDraft,Helvetica,Arial,sans-serif;color: rgba(0,0,0,0.87); font-s=
+ize: 14px; line-height: 20px;">jean.delafiction@gmail.com</a></td></tr></ta=
+ble></div><div style=3D"font-family: Roboto-Regular,Helvetica,Arial,sans-se=
+rif; font-size: 14px; color: rgba(0,0,0,0.87); line-height: 20px;padding-to=
+p: 20px; text-align: left;">Le mot de passe de votre compte Google jean.del=
+afiction@gmail.com a =C3=A9t=C3=A9 modifi=C3=A9. Si vous n'=C3=AAtes pas =
+=C3=A0 l'origine de cette modification, nous vous conseillons de <a href=3D=
+"https://accounts.google.com/RecoverAccount?fpOnly=3D1&amp;source=3Dancp&am=
+p;Email=3Djean.delafiction@gmail.com&amp;et=3D0" data-meta-key=3D"recover-a=
+ccount" style=3D"text-decoration: none; color: #4285F4;" target=3D"_blank">=
+r=C3=A9cup=C3=A9rer votre compte</a>.</div></div><div style=3D"text-align: =
+left;"><div style=3D"font-family: Roboto-Regular,Helvetica,Arial,sans-serif=
+;color: rgba(0,0,0,0.54); font-size: 11px; line-height: 18px; padding-top: =
+12px; text-align: center;"><div>Cet e-mail vous a =C3=A9t=C3=A9 envoy=C3=A9=
+ pour vous informer de modifications importantes apport=C3=A9es =C3=A0 votr=
+e compte et aux services Google que vous utilisez.</div><div style=3D"direc=
+tion: ltr;">&copy; 2020 Google LLC, <a class=3D"afal" style=3D"font-family:=
+ Roboto-Regular,Helvetica,Arial,sans-serif;color: rgba(0,0,0,0.54); font-si=
+ze: 11px; line-height: 18px; padding-top: 12px; text-align: center;">1600 A=
+mphitheatre Parkway, Mountain View, CA 94043, USA</a></div></div></div></td=
+><td width=3D"8" style=3D"width: 8px;"></td></tr></table></td></tr><tr heig=
+ht=3D"32" style=3D"height: 32px;"><td></td></tr></table></body></html>
+--0000000000007d898205a7c1b706--

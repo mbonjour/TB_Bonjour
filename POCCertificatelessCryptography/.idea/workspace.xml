@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
-      <config projectName="POCCertificatelessCryptography" targetName="mainClient" />
       <config projectName="POCCertificatelessCryptography" targetName="mainServer" />
+      <config projectName="POCCertificatelessCryptography" targetName="mainClient" />
+      <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -14,7 +32,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.16.5/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.16.5/CMakeCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.16.5/CMakeSystem.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.16.5/CMakeSystem.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.16.5/CompilerIdC/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.16.5/CompilerIdC/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/C.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cipherPOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/cipherPOC.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/client/mainClient.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/client/mainClient.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/signaturePOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/signaturePOC.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/utils/aesUtils.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/utils/aesUtils.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/utils/base64.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/utils/base64.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/utils/socketUtils.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/utils/socketUtils.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/C.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/cipherPOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/cipherPOC.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/server/mainServer.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/server/mainServer.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/signaturePOC.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/signaturePOC.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/utils/base64.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/utils/base64.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/utils/socketUtils.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainServer.dir/utils/socketUtils.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/testAlgo.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POCCertificatelessCryptography.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/POCCertificatelessCryptography.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alice@mail.ch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/mainClient.c" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/mainClient.h" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainClient" beforeDir="false" afterPath="$PROJECT_DIR$/mainClient" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainServer" beforeDir="false" afterPath="$PROJECT_DIR$/mainServer" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.db_unqlite_journal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testAlgo" beforeDir="false" afterPath="$PROJECT_DIR$/testAlgo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.blg" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.blg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fdb_latexmk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fls" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.lof" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.lof" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +117,19 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="OCFindUsagesOptions.isSearchForTextOccurrences" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TB_Bonjour/POCCertificatelessCryptography" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
@@ -145,25 +231,49 @@
       <workItem from="1594906711824" duration="1155000" />
       <workItem from="1594909995588" duration="842000" />
       <workItem from="1594911819160" duration="826000" />
+      <workItem from="1594997327943" duration="309000" />
+      <workItem from="1594998825604" duration="346000" />
+      <workItem from="1595017081859" duration="6479000" />
+      <workItem from="1595086291415" duration="2098000" />
+      <workItem from="1595088420343" duration="1320000" />
+      <workItem from="1595089766634" duration="2625000" />
+      <workItem from="1595092420310" duration="2616000" />
+      <workItem from="1595104165043" duration="7225000" />
+      <workItem from="1595171814628" duration="15599000" />
+      <workItem from="1595234366808" duration="6413000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="410" y="-1" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594906730889">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="410" y="-1" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1594906730889" />
-    <state x="638" y="165" width="629" height="389" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594807375444">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="686" y="188" width="722" height="380" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595236200473">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="638" y="165" width="629" height="389" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1594807375444" />
-    <state x="690" y="200" width="526" height="495" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1594892116445">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="686" y="188" width="722" height="380" key="#com.intellij.fileTypes.FileTypeChooser/72.27.1848.1053@72.27.1848.1053" timestamp="1595236200473" />
+    <state x="736" y="222" width="526" height="495" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1595105214263">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="690" y="200" width="526" height="495" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1594892116445" />
+    <state x="736" y="222" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1595105214263" />
     <state x="801" y="250" width="198" height="521" key="#xdebugger.XInspectDialog" timestamp="1593270128592">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -172,10 +282,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="717" y="240" key="#xdebugger.evaluate/0.0.1920.1080@0.0.1920.1080" timestamp="1593270149753" />
-    <state width="531" height="506" key="DebuggerActiveHint" timestamp="1594885599986">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="761" height="494" key="DebuggerActiveHint" timestamp="1595186933234">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="531" height="506" key="DebuggerActiveHint/0.0.1920.1080@0.0.1920.1080" timestamp="1594885599986" />
+    <state width="761" height="494" key="DebuggerActiveHint/72.27.1848.1053@72.27.1848.1053" timestamp="1595186933234" />
     <state x="967" y="-9" width="941" height="1053" key="DiffContextDialog" timestamp="1594815177699">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -185,47 +296,56 @@
     </state>
     <state x="404" y="197" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1170@0.0.1920.1050" timestamp="1592821540496" />
     <state x="734" y="77" width="426" height="477" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1593506842056" />
-    <state width="1874" height="442" key="GridCell.Tab.0.bottom" timestamp="1594912224173">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1802" height="355" key="GridCell.Tab.0.bottom" timestamp="1595237156977">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224173" />
-    <state width="1874" height="442" key="GridCell.Tab.0.center" timestamp="1594912224172">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1802" height="355" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595237156977" />
+    <state width="1802" height="355" key="GridCell.Tab.0.center" timestamp="1595237156976">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224172" />
-    <state width="1874" height="442" key="GridCell.Tab.0.left" timestamp="1594912224171">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1802" height="355" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595237156976" />
+    <state width="1802" height="355" key="GridCell.Tab.0.left" timestamp="1595237156976">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224171" />
-    <state width="1874" height="442" key="GridCell.Tab.0.right" timestamp="1594912224172">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1802" height="355" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595237156976" />
+    <state width="1802" height="355" key="GridCell.Tab.0.right" timestamp="1595237156976">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224172" />
-    <state width="1874" height="442" key="GridCell.Tab.1.bottom" timestamp="1594912225137">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1802" height="355" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595237156976" />
+    <state width="1802" height="328" key="GridCell.Tab.1.bottom" timestamp="1595198025529">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225137" />
-    <state width="1874" height="442" key="GridCell.Tab.1.center" timestamp="1594912225136">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1802" height="328" key="GridCell.Tab.1.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595198025529" />
+    <state width="1802" height="328" key="GridCell.Tab.1.center" timestamp="1595198025528">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225136" />
-    <state width="1874" height="442" key="GridCell.Tab.1.left" timestamp="1594912225136">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1802" height="328" key="GridCell.Tab.1.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595198025528" />
+    <state width="1802" height="328" key="GridCell.Tab.1.left" timestamp="1595198025527">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225136" />
-    <state width="1874" height="442" key="GridCell.Tab.1.right" timestamp="1594912225136">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="1802" height="328" key="GridCell.Tab.1.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595198025527" />
+    <state width="1802" height="328" key="GridCell.Tab.1.right" timestamp="1595198025529">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.1.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594912225136" />
+    <state width="1802" height="328" key="GridCell.Tab.1.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595198025529" />
     <state x="451" y="42" key="SettingsEditor" timestamp="1594814277840">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="453" y="84" key="SettingsEditor/0.0.1920.1050/1920.0.1920.1170@0.0.1920.1050" timestamp="1592822147637" />
     <state x="451" y="42" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1594814277840" />
-    <state width="961" height="539" key="XDebugger.FullValuePopup" timestamp="1594886170173">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state width="925" height="526" key="XDebugger.FullValuePopup" timestamp="1595174890541">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state width="961" height="539" key="XDebugger.FullValuePopup/0.0.1920.1080@0.0.1920.1080" timestamp="1594886170173" />
+    <state width="925" height="526" key="XDebugger.FullValuePopup/72.27.1848.1053@72.27.1848.1053" timestamp="1595174890540" />
     <state x="752" y="410" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1594547552617">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -238,10 +358,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="623" y="237" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1593266880229" />
-    <state x="623" y="216" width="672" height="678" key="search.everywhere.popup" timestamp="1594730429259">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="672" y="238" width="672" height="662" key="search.everywhere.popup" timestamp="1595176333580">
+      <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="623" y="216" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1594730429259" />
+    <state x="672" y="238" width="672" height="662" key="search.everywhere.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1595176333580" />
     <state x="683" y="387" width="542" height="165" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1593119098044">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -257,38 +378,48 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>570</line>
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>594</line>
+          <line>976</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>751</line>
-          <option name="timeStamp" value="75" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>636</line>
+          <line>1018</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>250</line>
-          <option name="timeStamp" value="79" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>167</line>
+          <line>338</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>46</line>
+          <line>217</line>
           <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
+          <line>134</line>
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
+          <line>1159</line>
+          <option name="timeStamp" value="99" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
+          <line>627</line>
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
+          <line>742</line>
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/client/mainClient.c</url>
+          <line>696</line>
+          <option name="timeStamp" value="102" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

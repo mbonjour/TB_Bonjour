@@ -1,0 +1,304 @@
+Delivered-To: jean.delafiction@gmail.com
+Received: by 2002:a67:7f01:0:0:0:0:0 with SMTP id a1csp695721vsd;
+        Wed, 10 Jun 2020 14:42:36 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzcQAjRqTZMhPOTK9jN+AQ37clbRuoFX7NqBdyxYMsaf5ucQ7azhaCXLM3rxtBH75QcLKl7
+X-Received: by 2002:a17:906:1dce:: with SMTP id v14mr5341143ejh.46.1591825356031;
+        Wed, 10 Jun 2020 14:42:36 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1591825356; cv=none;
+        d=google.com; s=arc-20160816;
+        b=smRLiZ6LUqlFu1LNZiuiUUpvbf6quvdi6AjhUIAeUe1sAIhf7NinBs8xlIC8AQXlZu
+         F2WOFYFGiy/WSSJrGq+wNZ/qIByMDXJnHtKy2nA7fC+pwg2KbitIwUaeSm2jF1X0TnyI
+         6M9H4My6rUDvM3GBRp1jEpKOCegFrnnOovm37qEhn4/04852i14oyeqGKxRBN3tNaGIO
+         iEfvjXFLMP5107jlAEH41ZN2ScKAtqys6Udg4LCcC8uX5IES35YC3z9iIRxonhgTLZMi
+         WEuThXWdiNc4Ns36ZLDs6fPalLasWGiYiy7WIkxSI2NmAkyHLOe03Xv875SAV6rq6Y7F
+         V5cw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=mime-version:message-id:feedback-id:errors-to:reply-to:from:subject
+         :to:date:dkim-signature;
+        bh=x482qSinY6eoDLAwB5C107GWkyQAEnx2YVSi3D9EGrQ=;
+        b=ChHkovkZL7Jw44RmQQhoK/wVhdawLGdXm1gRIc2f0TmlTwLiBpTyCn3GGPPL6Iz2xc
+         kgORspZlxBgdxnO5w76anzwJfnOqUBkHlReMyKJmqmfFObRRBUZ26Bm8ZJ3DlpjcCRL3
+         U1fAYVWaAX5Oc5PEvRlPH9gjItjSkYsSXwGmGQ3s/UzIigas6KMxhX1tRlcb+EOSGKys
+         c4LxMUJsrGjaFzudqZUA0tY/k9cnKz7saazDYsoiLRi4J4ZsPKKlNUvJRT1hILFEI1uU
+         6Wc++pjCCqqBuEHYjw3MscAxQWyqlkbEOkaIw+BidUw/Ql3a4QFcyBXs+15lmZH98SLS
+         kbQg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@facebookmail.com header.s=s1024-2013-q3 header.b=jayusKL0;
+       spf=pass (google.com: domain of registration@facebookmail.com designates 66.220.155.143 as permitted sender) smtp.mailfrom=registration@facebookmail.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=facebookmail.com
+Return-Path: <registration@facebookmail.com>
+Received: from 66-220-155-143.mail-mail.facebook.com (66-220-155-143.mail-mail.facebook.com. [66.220.155.143])
+        by mx.google.com with ESMTPS id b10si494446edw.184.2020.06.10.14.42.35
+        for <jean.delafiction@gmail.com>
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 10 Jun 2020 14:42:36 -0700 (PDT)
+Received-SPF: pass (google.com: domain of registration@facebookmail.com designates 66.220.155.143 as permitted sender) client-ip=66.220.155.143;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@facebookmail.com header.s=s1024-2013-q3 header.b=jayusKL0;
+       spf=pass (google.com: domain of registration@facebookmail.com designates 66.220.155.143 as permitted sender) smtp.mailfrom=registration@facebookmail.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=facebookmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=facebookmail.com;
+	s=s1024-2013-q3; t=1591825349;
+	bh=x482qSinY6eoDLAwB5C107GWkyQAEnx2YVSi3D9EGrQ=;
+	h=Date:To:Subject:From:MIME-Version:Content-Type;
+	b=jayusKL03v6TJr/P7BgQNG0kz2yPhX7GDMI/PsLQfKYQYU5lDxxiWiXD4/i2eHkJj
+	 b/Nsv8mbmQ7s7HLsvpJEV6SBeJAkYkECl2MelHeWd6HLgQpvLoUxjwtlOrzYhSOoMg
+	 u5YfdgsnHcLR7U54a74LqTZmPm/0LM7EJHTaIqK4=
+X-Facebook: from 2401:db00:3120:91e4:face:0:2ca:0 ([MTI3LjAuMC4x]) 
+	by www.facebook.com with HTTPS (ZuckMail);
+Date: Wed, 10 Jun 2020 14:42:28 -0700
+To: Jean De La Fiction <jean.delafiction@gmail.com>
+Subject: 52748 est votre code de confirmation Facebook
+X-Priority: 3
+X-Mailer: ZuckMail [version 1.00]
+Return-Path: registration@facebookmail.com
+From: "Facebook" <registration@facebookmail.com>
+Reply-to: noreply <noreply@facebookmail.com>
+Errors-To: registration@facebookmail.com
+X-Facebook-Notify: registration:first_send; mailid=5a7c16edaf858G5aff347d0642G5a7c1b870fb2aG3c2
+Feedback-ID: 0:registration:Facebook
+X-FACEBOOK-PRIORITY: 1
+X-Auto-Response-Suppress: All
+Message-ID: <704fd393ada7966281b6d9fc2b4ea7cd@3e723b591bdb95ce8f5c9b7032dc572ca97351d0da5efc73459c1fbaf438e43b>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="b1_704fd393ada7966281b6d9fc2b4ea7cd"
+
+
+--b1_704fd393ada7966281b6d9fc2b4ea7cd
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Confirmer votre compte
+https://www.facebook.com/n/?confirmemail.php&e=3Djean.delafiction%40gmail.=
+com&c=3D52748&cuid=3DAYii4cPY4qCcLlNhZ9LEj4J3WajvKDkJtyoP-IOAbSTuR151u8d_D=
+hlxUdCAh1EBYzwe7vSa1jAE-NmTQ5vgrSExMsFI2PQcXGN4V5ul1vUlt7Qz1dkkpWYI9E0CwhO=
+l1dE&aref=3D1591825348492074&medium=3Demail&mid=3D5a7c16edaf858G5aff347d06=
+42G5a7c1b870fb2aG3c2&bcode=3D2.1591825348.Abx5B9o5s05TgKo9jC4&n_m=3Djean.d=
+elafiction%40gmail.com
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Bonjour Jean,
+
+Bonjour Jean,
+
+Vous avez r=C3=A9cemment cr=C3=A9=C3=A9 un compte sur Facebook. Pour =
+terminer votre inscription, veuillez confirmer votre compte.
+
+Merci,
+L=E2=80=99=C3=A9quipe Facebook
+
+Il pourra vous =C3=AAtre demand=C3=A9 de saisir ce code de =
+confirmation=C2=A0:
+
+52748
+
+Facebook vous permet de rester en contact avec tous vos amis. Une fois =
+inscrit(e) sur Facebook, vous pouvez partager des photos, organiser des =
+=C3=A9v=C3=A8nements et bien plus encore.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Ce message a =C3=A9t=C3=A9 envoy=C3=A9 =C3=A0 jean.delafiction@gmail.com =
+sur votre demande.
+Facebook, Inc., Attention: Community Support, 1 Facebook Way, Menlo Park, =
+CA 94025
+Pour contribuer =C3=A0 la protection de votre compte, veuillez ne pas =
+transf=C3=A9rer cet e-mail. Suivez le lien ci-dessous pour en savoir plus.
+https://www.facebook.com/email_forward_notice/?mid=3D5a7c16edaf858G5aff347=
+d0642G5a7c1b870fb2aG3c2
+
+
+--b1_704fd393ada7966281b6d9fc2b4ea7cd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional =
+//EN"><html><head><title>Facebook</title><meta http-equiv=3D"Content-Type" =
+content=3D"text/html; charset=3Dutf-8" /><style>@media all and (max-width: =
+480px){*[class].ib_t{min-width:100% =
+!important}*[class].ib_row{display:block =
+!important}*[class].ib_ext{display:block !important;padding:10px 0 5px =
+0;vertical-align:top !important;width:100% =
+!important}*[class].ib_img,*[class].ib_mid{vertical-align:top =
+!important}*[class].mb_blk{display:block =
+!important;padding-bottom:10px;width:100% =
+!important}*[class].mb_hide{display:none =
+!important}*[class].mb_inl{display:inline =
+!important}*[class].d_mb_flex{display:block !important}}.d_mb_show{display=
+:none}.d_mb_show_center{display:table;margin:auto}.d_mb_flex{display:flex}=
+@media only screen and (max-device-width: 480px){.d_mb_hide{display:none =
+!important}.d_mb_show{display:block !important}.d_mb_flex{display:block =
+!important}}.mb_text h1,.mb_text h2,.mb_text h3,.mb_text h4,.mb_text =
+h5,.mb_text h6{line-height:normal}.mb_work_text =
+h1{font-size:18px;line-height:normal;margin-top:4px}.mb_work_text =
+h2,.mb_work_text =
+h3{font-size:16px;line-height:normal;margin-top:4px}.mb_work_text =
+h4,.mb_work_text h5,.mb_work_text =
+h6{font-size:14px;line-height:normal}.mb_work_text =
+a{color:#1270e9}.mb_work_text p{margin-top:4px}</style></head><body =
+style=3D"margin:0;padding:0;" dir=3D"ltr" bgcolor=3D"#ffffff"><table =
+border=3D"0" cellspacing=3D"0" cellpadding=3D"0" align=3D"center" =
+id=3D"email_table" style=3D"border-collapse:collapse;"><tr><td =
+id=3D"email_content" style=3D"font-family:Helvetica Neue,Helvetica,Lucida =
+Grande,tahoma,verdana,arial,sans-serif;background:#ffffff;"><table =
+border=3D"0" width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" =
+style=3D"border-collapse:collapse;"><tr style=3D""><td height=3D"20" =
+style=3D"line-height:20px;" colspan=3D"3">&nbsp;</td></tr><tr><td =
+height=3D"1" colspan=3D"3" style=3D"line-height:1px;"><span =
+style=3D"color:#FFFFFF;font-size:1px;">=C2=A0 Bonjour Jean, =C2=A0 Vous =
+avez r=C3=A9cemment cr=C3=A9=C3=A9 un compte sur Facebook. Pour terminer =
+votre inscription, veuillez confirmer votre compte. =
+=C2=A0</span></td></tr><tr><td width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td><td =
+style=3D""><table border=3D"0" width=3D"100%" cellspacing=3D"0" =
+cellpadding=3D"0" style=3D"border-collapse:collapse;"><tr style=3D""><td =
+height=3D"15" style=3D"line-height:15px;" =
+colspan=3D"3">&nbsp;</td></tr><tr><td width=3D"32" align=3D"left" =
+valign=3D"middle" style=3D"height:32;line-height:0px;"><a =
+href=3D"https://www.facebook.com/n/?confirmemail.php&amp;e=3Djean.delafict=
+ion%40gmail.com&amp;c=3D52748&amp;cuid=3DAYheFMdZl_XhO3sS_GuEOHh-ebv46Y-40=
+YExOX-CmbO4TYtM8T1Fw0XcDBTWzThzpy7U2gOkVfwQiUtVxBQ1pvnCQ1GVy_7NFi0jKCv3ItQ=
+NixZDGwv2wIqhqzeBiWLMIpM&amp;aref=3D1591825348492074&amp;medium=3Demail&am=
+p;mid=3D5a7c16edaf858G5aff347d0642G5a7c1b870fb2aG3c2&amp;bcode=3D2.1591825=
+348.Abx5B9o5s05TgKo9jC4&amp;n_m=3Djean.delafiction%40gmail.com" =
+style=3D"color:#3b5998;text-decoration:none;"><img =
+src=3D"https://static.xx.fbcdn.net/rsrc.php/v3/yP/r/nblMrq1jYuK.png" =
+width=3D"32" height=3D"32" style=3D"border:0;" /></a></td><td width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td><td =
+width=3D"100%" style=3D""><a href=3D"https://www.facebook.com/n/?confirmem=
+ail.php&amp;e=3Djean.delafiction%40gmail.com&amp;c=3D52748&amp;cuid=3DAYhe=
+FMdZl_XhO3sS_GuEOHh-ebv46Y-40YExOX-CmbO4TYtM8T1Fw0XcDBTWzThzpy7U2gOkVfwQiU=
+tVxBQ1pvnCQ1GVy_7NFi0jKCv3ItQNixZDGwv2wIqhqzeBiWLMIpM&amp;aref=3D159182534=
+8492074&amp;medium=3Demail&amp;mid=3D5a7c16edaf858G5aff347d0642G5a7c1b870f=
+b2aG3c2&amp;bcode=3D2.1591825348.Abx5B9o5s05TgKo9jC4&amp;n_m=3Djean.delafi=
+ction%40gmail.com" =
+style=3D"color:#3b5998;text-decoration:none;font-family:Helvetica =
+Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;font-size:19p=
+x;line-height:32px;">Action requise=C2=A0: confirmez votre compte =
+Facebook</a></td></tr><tr style=3D"border-bottom:solid 1px #e5e5e5;"><td =
+height=3D"15" style=3D"line-height:15px;" =
+colspan=3D"3">&nbsp;</td></tr></table></td><td width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td></tr><tr><td =
+width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td><td =
+style=3D""><table border=3D"0" width=3D"100%" cellspacing=3D"0" =
+cellpadding=3D"0" style=3D"border-collapse:collapse;"><tr style=3D""><td =
+height=3D"28" style=3D"line-height:28px;">&nbsp;</td></tr><tr><td =
+style=3D""><span class=3D"mb_text" style=3D"font-family:Helvetica =
+Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;font-size:16p=
+x;line-height:21px;color:#141823;">Bonjour Jean,</span></td></tr><tr =
+style=3D""><td height=3D"28" =
+style=3D"line-height:28px;">&nbsp;</td></tr><tr><td style=3D""><span =
+class=3D"mb_text" style=3D"font-family:Helvetica Neue,Helvetica,Lucida =
+Grande,tahoma,verdana,arial,sans-serif;font-size:16px;line-height:21px;col=
+or:#141823;">Vous avez r=C3=A9cemment cr=C3=A9=C3=A9 un compte sur =
+Facebook. Pour terminer votre inscription, veuillez confirmer votre =
+compte.</span></td></tr><tr style=3D""><td height=3D"28" =
+style=3D"line-height:28px;">&nbsp;</td></tr></table></td><td width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td></tr><tr><td =
+width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td><td =
+style=3D""><table border=3D"0" width=3D"100%" cellspacing=3D"0" =
+cellpadding=3D"0" style=3D"border-collapse:collapse;"><tr style=3D""><td =
+height=3D"2" style=3D"line-height:2px;" =
+colspan=3D"3">&nbsp;</td></tr><tr><td class=3D"mb_blk" style=3D""><a =
+href=3D"https://www.facebook.com/n/?confirmemail.php&amp;e=3Djean.delafict=
+ion%40gmail.com&amp;c=3D52748&amp;cuid=3DAYg37KBSmeoxTZfKDlbI8NIRAqaIWJvQR=
+dB_M3B2bE3uson_GQiEFV9w5Oy0wYtlzlGX_HpO4bTgDBnOqQOaBqxl4t9vxWQpZ7vO9zJl-NQ=
+X_1b3z1dCiVJrOyhXowdkjuI&amp;aref=3D1591825348492074&amp;medium=3Demail&am=
+p;mid=3D5a7c16edaf858G5aff347d0642G5a7c1b870fb2aG3c2&amp;bcode=3D2.1591825=
+348.Abx5B9o5s05TgKo9jC4&amp;n_m=3Djean.delafiction%40gmail.com" =
+style=3D"color:#3b5998;text-decoration:none;"><table border=3D"0" =
+width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" =
+style=3D"border-collapse:collapse;"><tr><td style=3D"border-collapse:colla=
+pse;border-radius:2px;text-align:center;display:block;border:solid 1px =
+#344c80;box-shadow:inset 0 1px 1px rgba(255, 255, 255, 0.1),0 1px 0 =
+rgba(0, 0, 0, 0.1);background:#4c649b;padding:7px 16px 11px 16px;"><a =
+href=3D"https://www.facebook.com/n/?confirmemail.php&amp;e=3Djean.delafict=
+ion%40gmail.com&amp;c=3D52748&amp;cuid=3DAYg37KBSmeoxTZfKDlbI8NIRAqaIWJvQR=
+dB_M3B2bE3uson_GQiEFV9w5Oy0wYtlzlGX_HpO4bTgDBnOqQOaBqxl4t9vxWQpZ7vO9zJl-NQ=
+X_1b3z1dCiVJrOyhXowdkjuI&amp;aref=3D1591825348492074&amp;medium=3Demail&am=
+p;mid=3D5a7c16edaf858G5aff347d0642G5a7c1b870fb2aG3c2&amp;bcode=3D2.1591825=
+348.Abx5B9o5s05TgKo9jC4&amp;n_m=3Djean.delafiction%40gmail.com" =
+style=3D"color:#3b5998;text-decoration:none;display:block;"><center><font =
+size=3D"3"><span style=3D"font-family:Helvetica Neue,Helvetica,Lucida =
+Grande,tahoma,verdana,arial,sans-serif;white-space:nowrap;font-weight:bold=
+;vertical-align:middle;color:#ffffff;text-shadow:0 -1px 0 =
+#415686;font-size:14px;line-height:14px;">Confirmer&nbsp;votre&nbsp;compte=
+</span></font></center></a></td></tr></table></a></td><td width=3D"100%" =
+class=3D"mb_hide" style=3D""></td></tr><tr style=3D""><td height=3D"32" =
+style=3D"line-height:32px;" colspan=3D"3">&nbsp;</td></tr></table></td><td =
+width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td></tr><tr><td =
+width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td><td =
+style=3D""><table border=3D"0" width=3D"100%" cellspacing=3D"0" =
+cellpadding=3D"0" style=3D"border-collapse:collapse;"><tr><td =
+style=3D""><span class=3D"mb_text" style=3D"font-family:Helvetica =
+Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;font-size:16p=
+x;line-height:21px;color:#141823;">Il pourra vous =C3=AAtre demand=C3=A9 =
+de saisir ce code de confirmation=C2=A0:</span></td></tr><tr =
+style=3D""><td height=3D"14" =
+style=3D"line-height:14px;">&nbsp;</td></tr><tr><td style=3D""><span =
+class=3D"mb_text" style=3D"font-family:Helvetica Neue,Helvetica,Lucida =
+Grande,tahoma,verdana,arial,sans-serif;font-size:16px;line-height:21px;col=
+or:#141823;"><center><table border=3D"0" cellspacing=3D"0" =
+cellpadding=3D"0" style=3D"border-collapse:collapse;"><tr><td =
+style=3D"font-size:11px;font-family:LucidaGrande,tahoma,verdana,arial,sans=
+-serif;padding:10px;background-color:#f2f2f2;border-left:1px solid =
+#ccc;border-right:1px solid #ccc;border-top:1px solid =
+#ccc;border-bottom:1px solid =
+#ccc;">52748</td></tr></table></center></span></td></tr><tr style=3D""><td =
+height=3D"14" style=3D"line-height:14px;">&nbsp;</td></tr><tr><td =
+style=3D""><span class=3D"mb_text" style=3D"font-family:Helvetica =
+Neue,Helvetica,Lucida Grande,tahoma,verdana,arial,sans-serif;font-size:14p=
+x;line-height:19px;color:#898f9c;">Facebook vous permet de rester en =
+contact avec tous vos amis. Une fois inscrit(e) sur Facebook, vous pouvez =
+partager des photos, organiser des =C3=A9v=C3=A8nements et bien plus =
+encore.</span></td></tr><tr style=3D""><td height=3D"14" =
+style=3D"line-height:14px;">&nbsp;</td></tr></table></td><td width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td></tr><tr><td =
+width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td><td =
+style=3D""><table border=3D"0" width=3D"100%" cellspacing=3D"0" =
+cellpadding=3D"0" align=3D"left" style=3D"border-collapse:collapse;"><tr =
+style=3D"border-top:solid 1px #e5e5e5;"><td height=3D"19" =
+style=3D"line-height:19px;">&nbsp;</td></tr><tr><td =
+style=3D"font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana=
+,arial,sans-serif;font-size:11px;color:#aaaaaa;line-height:16px;">Ce =
+message a =C3=A9t=C3=A9 envoy=C3=A9 =C3=A0 <a =
+href=3D"mailto:jean.delafiction&#064;gmail.com" style=3D"color:#3b5998;tex=
+t-decoration:none;">jean.delafiction&#064;gmail.com</a> sur votre =
+demande.<br />Facebook, Inc., Attention: Community Support, 1 Facebook =
+Way, Menlo Park, CA 94025</td></tr></table></td><td width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td></tr><tr><td =
+width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td><td =
+style=3D""><table border=3D"0" width=3D"100%" cellspacing=3D"0" =
+cellpadding=3D"0" style=3D"border-collapse:collapse;"><tr><td =
+style=3D"font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana=
+,arial,sans-serif;font-size:11px;color:#aaaaaa;line-height:16px;"><span =
+style=3D"font-family:Helvetica Neue,Helvetica,Lucida Grande,tahoma,verdana=
+,arial,sans-serif;font-size:11px;color:#aaaaaa;line-height:16px;">Pour =
+contribuer =C3=A0 la protection de votre compte, veuillez ne pas =
+transf=C3=A9rer cet e-mail. <a href=3D"https://www.facebook.com/email_forw=
+ard_notice/?mid=3D5a7c16edaf858G5aff347d0642G5a7c1b870fb2aG3c2" =
+style=3D"color:#3b5998;text-decoration:none;">En savoir =
+plus</a></span></td></tr></table></td><td width=3D"15" =
+style=3D"display:block;width:15px;">&nbsp;&nbsp;&nbsp;</td></tr><tr =
+style=3D""><td height=3D"20" style=3D"line-height:20px;" =
+colspan=3D"3">&nbsp;</td></tr></table><span style=3D""><img =
+src=3D"https://www.facebook.com/email_open_log_pic.php?cn=3DHgEZHyTeB3&amp=
+;mid=3D5a7c16edaf858G5aff347d0642G5a7c1b870fb2aG3c2" =
+style=3D"border:0;width:1px;height:1px;" =
+/></span></td></tr></table></body></html>
+
+
+
+--b1_704fd393ada7966281b6d9fc2b4ea7cd--
+
