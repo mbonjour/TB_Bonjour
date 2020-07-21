@@ -1,6 +1,12 @@
-//
-// Created by mbonjour on 14.07.20.
-//
+/**
+ * @file mainClient.h
+ * @author Mickael Bonjour mickael.bonjour@heig-vd.ch
+ * @date 14 juillet 2020
+ * @brief This is the main file for the client side application of my project POC.
+ *        It's able to communicate with the KGC and the gmail servers to send encrypted mails and receive them.
+ *        This file will ask for infos about the user along the way and store some infos, the most sensitive encrypted.
+ *        It's really the core of the POC but needs to be initialized with a KGC running.
+ */
 
 #ifndef POCCERTIFICATELESSCRYPTOGRAPHY_MAINCLIENT_H
 #define POCCERTIFICATELESSCRYPTOGRAPHY_MAINCLIENT_H
@@ -21,14 +27,7 @@
 #include "signaturePOC.h"
 #include "utils/aesUtils.h"
 
-binn* parseEmail(char* filename);
 
-/**
- * @brief This is a checker to know if there is already params stored on the disk, so we don't have to regenerate it.
- * @param userID The user email that needs his params back.
- * @return 0 if no params stored, 1 if stored
- */
-int checkIfParamsExistAlready(char *userID);
 
 /**
  * @brief Get the Encrypted params in a file, asking the user for his password to decrypt it.
@@ -40,8 +39,6 @@ int checkIfParamsExistAlready(char *userID);
  * @param signaturePk The structure to store the pk_s
  * @param userID The userID of the searched params
  */
-void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
-               bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID);
 
 /**
  * @brief If no params are stored on the disk, we can generate them and send them to the KGC, the function does just that.
@@ -53,12 +50,7 @@ void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *en
  * @param signaturePk The structure to store the pk_s
  * @param userID The userID of the searched params
  */
-void generateAndSendParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
-                           bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID);
 
-
-void generateAndSendPKs(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
-                           bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID);
 /**
  * When they are generated the params are saved on a file. This function ask the user for a password and encrypt his params.
  * @param mpkSession The mpke_e to store
@@ -88,4 +80,5 @@ int connectToKGC();
 
 int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher, char *email, char *password);
 int checkmail(char *email, char *password);
+binn* parseEmail(char* filename);
 #endif //POCCERTIFICATELESSCRYPTOGRAPHY_MAINCLIENT_H

@@ -2,18 +2,6 @@
 #include "mainClient.h"
 
 #define PORT 10002
-/*
- AES Key : A7DEDEBC9AB65BE0E94311C33F5C03D5CCEDDE6031A460F77BB6B23BF992EAF3
-Encrypted message : Tr7SK9ZS8PGHdzmLFi/GxmzZI5uOrepWwJpCMVadyECu7IMjdAvXHP26+A==
-Nonce message : lLzls2ucULkcl5iD
-Cipher base64 : 4oAAApAEAkMwwIAAAYAJMM6oX3uUSIog4EuhatTnG0v8RiBzzdLQ2fF6bCTrs+iuhUs7+K2PcA/faWxCbfUDoZ2R3Z+5OAZu4K7zqb9zCKUV8miCv1ifhFAZe1zBN4n9l6QDy8JyQB6HQolQOsQA0NwcKF6caaHnCqWR9FWEaTLp0Nb87zBammxFhpysl/0jliJenPwu1v7NLnmLKt0Lb+6JhrvO0iSJZWmtnGKJeNYK2kAfaXvR3gTfhEgFOw0gQKoZjXdUwuOaM8Ohqv0GXz6slUZxXKhfve+3XnIfE9ksafdRLK54NMNAm+WPPulVGdw8Z6IGfMOuafK5q14B8BKMOrpx8lHdnH9YNNOQDaLpULXPCvmcwRXP1KIKm82npDlq4leRLe/qywzjWXAHRCgf3KDOgRvWuA31bLPaWwuxAoDpK56kP6u4NK/J9d/ePh8I5i1CaFZn5ORkAvcTUX8xY7XXeiqxLVUCQJn6ujXVMvLjgjzyedUBRXM4j6qIVB5P9jsD1VEW3jmcODoCQzHAMQMDynzjkVpXDkkhVoEuzHL4bwMvrTGqyEMR+hXFtE8fp2azVVkPIO/u3n3CDDYin+sCQzLAYQIQIKpR6uiScNvKm19MZj3NpmMYeUTQJB0EHEIm3UpfDTfCtXFZmgAFAcS56UemDqgJTUYS8dlQYureiTghiNfy/qdZ5GTRiYvL7YSP45zFUHpY6R79Yl45dNh2CnUfxS4CQzPAYQMHgVRxB9ckYvYGqO1A6BWbrjFICxPnvWUfrTmL5j7BieSBF8Qc7hLBf4wMm+Bc60UUvIMhw7ypW2C4BSyzHDPJE1F/ueGXW0cIjwl/db8gyAT58Kg0Mrf9r+Dv/sdVVqg=
-Signature (base64) : 4oAAAKACAVXAMQIVEcZ+XuPCn1t4A/+jbzL6bk+KxPsBDg8EixYCi1Ujr2bVZomUDFl7Ta3c+QHNzEsBVsBhAgb9VUp84gFjGyD6AVWkjOUWEnsVgDMynYoMaFaKJnlTsRzXcC9oRYxF85Pmma+5wBRH9j4/Kc9LvI7PwSXiwKXsGfQBnO9rRygqgubfd1YOpvsLH5agPg4PEpYEIQZPtQ==
-We give the salt and need to store it for future use :
-valQhiGAzadD1Hz0GXaZIQ==
-We give the nonce and need to store it for future use :
-Jqez4sezbhxAOuwF
-Encypted params saved
- * */
 char *payload_text[10];
 struct upload_status {
     int lines_read;
@@ -223,10 +211,7 @@ static size_t payload_source(void *ptr, size_t size, size_t nmemb, void *userp)
 
 // TODO: add the date header and maybe a name before each header
 int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher, char *email, char *password){
-    //payload_text = malloc(9*sizeof(char*)); // 52Kb for the moment
-    //memset(payload_text, 0, 9*sizeof(char*));
-    //strcat(payload_text, "Data : ");
-    //strcat(payload_text, time(0));
+
     char * to_text = malloc(100); // 52Kb for the moment
     memset(to_text, 0, 100);
     strcat(to_text, "To : ");
@@ -530,32 +515,14 @@ static void fetch_messages(struct mailimap * imap)
     clist * fetch_result;
     clistiter * cur;
     int r;
-
-    /* as improvement UIDVALIDITY should be read and the message cache should be cleaned
-       if the UIDVALIDITY is not the same */
-
-    //set = mailimap_set_new_interval(1, 0); /* fetch in interval 1:* */
-
-    /*char *test = malloc(100);
-    memset(test, 0, 100);
-    strcat(test, "SEARCH SINCE \"");
-     */
     time_t rawtime = time(NULL);
     rawtime -= 86400;
-    /*
-    char* timeFormat = malloc(50);
-    memset(timeFormat, 0, 50);
-     */
     struct tm *ptm = localtime(&rawtime);
-    /*strftime(timeFormat, 50, "%d-%b-%Y", ptm);
-    strcat(test, timeFormat);
-    strcat(test, "\"\r\n");*/
-    struct mailimap_date *dateSince = mailimap_date_new(ptm->tm_mday, ptm->tm_mon, ptm->tm_year + 1900);
+    struct mailimap_date *dateSince = mailimap_date_new(ptm->tm_mday, ptm->tm_mon + 1, ptm->tm_year + 1900);
     struct mailimap_search_key *keySince = mailimap_search_key_new_since(dateSince);
     clist* testResult = clist_new();
     r = mailimap_search(imap, NULL, keySince, &testResult);
     check_error(r, "Could not compute last emails");
-    printf("Response to search : %s", imap->imap_response);
     mailimap_search_key_free(keySince);
 
     fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
@@ -563,6 +530,7 @@ static void fetch_messages(struct mailimap * imap)
     mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
 
     set = mailimap_set_new(testResult);
+
     r = mailimap_fetch(imap, set, fetch_type, &fetch_result);
     check_error(r, "could not fetch");
 
@@ -578,8 +546,8 @@ static void fetch_messages(struct mailimap * imap)
 
         fetch_msg(imap, uid);
     }
-    //mailimap_set_free(set);
-    clist_free(testResult);
+    //clist_free(testResult);
+    mailimap_set_free(set);
     mailimap_fetch_list_free(fetch_result);
     mailimap_fetch_type_free(fetch_type);
 }
@@ -753,24 +721,27 @@ binn* getSecretsValue(char *userID, char *userPassword, unsigned char **salt, un
         binn value;
         savedSecCopy = binn_object();
         binn_object_foreach(savedSecrets, key, value){
+            void *copySec;
             if(strcmp(key, "encryption_secret") == 0){
-                void *copySec = malloc(value.size);
+                copySec = malloc(value.size);
                 memcpy(copySec, value.ptr, value.size);
                 binn_object_set_blob(savedSecCopy, key, copySec, value.size);
             }
             else if(strcmp(key, "signature_secret") == 0){
-                void *copySec = malloc(value.size);
+                copySec = malloc(value.size);
                 memcpy(copySec, value.ptr, value.size);
                 binn_object_set_blob(savedSecCopy, key, copySec, value.size);
 
             } else {
-                void *temp;
-                temp = malloc(value.size);
-                memcpy(temp, value.ptr, value.size);
-                binn_object_set_object(savedSecCopy, key, temp);
+                copySec = malloc(value.size);
+                memcpy(copySec, value.ptr, value.size);
+                binn_object_set_object(savedSecCopy, key, copySec);
             }
+            free(copySec);
         }
-        //free(decryptedParams);
+        free(decryptedParams);
+        binn_free(savedSecrets);
+
         return savedSecCopy;
     }
 
@@ -1017,286 +988,6 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
     free(pkFile);
 }
 
-void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
-               bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID){
-    FILE *savedParams;
-    binn* paramsObjBinn;
-    savedParams = fopen(userID, "rb");
-    unsigned char *decryptedParams;
-    if(savedParams) {
-        unsigned char aesk[crypto_secretbox_KEYBYTES];
-        printf("Pleas give us the password to decrypt your personal data : \n");
-        // Max size of an email address
-        char* userPassword = malloc(320);
-        fgets(userPassword, 320, stdin);
-        userPassword[strlen(userPassword)-1] = '\x00';
-        /*
-        printf("Please give us the salt :\n");
-        char* saltEntered = malloc(50);
-        fgets(saltEntered, 50, stdin);
-        saltEntered[strlen(saltEntered)-1] = '\x00';
-
-         */
-        fseek(savedParams, 0, SEEK_END);
-        long fileSize = ftell(savedParams);
-        fseek(savedParams, 0, SEEK_SET);
-
-        char *paramsB64 = malloc(fileSize);
-        fread(paramsB64, fileSize, 1, savedParams);
-        fclose(savedParams);
-
-        size_t saltSize;
-        binn *objParams;
-        objParams = binn_open(paramsB64);
-        char *saltSaved = binn_object_str(objParams, "salt");
-        unsigned char *salt = base64_decode(saltSaved, strlen(saltSaved), &saltSize);
-
-        size_t outLen;
-        char *encryptedParams = binn_object_str(objParams, "b64Encrypted");
-        unsigned char *decodedParams = base64_decode(encryptedParams, strlen(encryptedParams), &outLen);
-
-        size_t outLenNonce;
-        char *nonceB64 = binn_object_str(objParams, "nonce");
-        unsigned char *nonceDecoded = base64_decode(nonceB64, strlen(nonceB64), &outLenNonce);
-
-        if (crypto_pwhash
-                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
-                     crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
-                     crypto_pwhash_ALG_DEFAULT) != 0) {
-            printf("Not enough memory");
-            /* out of memory */
-        }
-
-
-        /*
-        printf("Please give us the nonce :\n");
-        char* nonceEntered = malloc(50);
-        fgets(nonceEntered, 50, stdin);
-        nonceEntered[strlen(nonceEntered)-1] = '\x00';
-         */
-
-
-        //free(nonceEntered);
-
-        decryptedParams = malloc(outLen);
-        decrypt_message(decryptedParams, decodedParams, nonceDecoded, aesk, outLen, NULL,0);
-        free(nonceDecoded);
-        free(decodedParams);
-        free(userPassword);
-        free(salt);
-
-        paramsObjBinn = binn_open(decryptedParams);
-        binn_free(objParams);
-        free(paramsB64);
-    } else {
-        printf("Failed to open a file to save params\n");
-        return;
-    }
-
-    binn *obj;
-    obj = binn_list_object(paramsObjBinn, 1);
-    deserialize_MPKE(obj, mpkSession);
-
-    obj = binn_list_object(paramsObjBinn, 2);
-    deserialize_MPKS(obj, mpkSignature);
-
-    int size = 0;
-    void *bnBin = NULL;
-    bnBin = binn_list_blob(paramsObjBinn,3, &size);
-    bn_read_bin(*encryption_secret, bnBin, size);
-
-    bnBin = binn_list_blob(paramsObjBinn,4, &size);
-    bn_read_bin(*signature_secret, bnBin, size);
-
-    obj = binn_list_object(paramsObjBinn, 5);
-    deserialize_PKE(obj, encryptionPk);
-
-    obj = binn_list_object(paramsObjBinn, 6);
-    deserialize_PKS(obj, signaturePk);
-
-    char* userSaved = binn_list_str(paramsObjBinn, 7);
-    strcpy(userID, userSaved);
-    binn_free(paramsObjBinn);
-    free(decryptedParams);
-}
-
-void saveParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
-                bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID){
-    binn* list;
-    list = binn_list();
-    binn *obj;
-    obj = binn_object();
-    serialize_MPKE(obj, *mpkSession);
-    binn_list_add_object(list, obj);
-    binn_free(obj);
-
-    obj = binn_object();
-    serialize_MPKS(obj, *mpkSignature);
-    binn_list_add_object(list, obj);
-    binn_free(obj);
-
-    obj = binn_object();
-    int size = bn_size_bin(*encryption_secret);
-    uint8_t *bin = malloc(size);
-    bn_write_bin(bin, size, *encryption_secret);
-    binn_list_add_blob(list, bin, size);
-    binn_free(obj);
-    free(bin);
-
-    obj = binn_object();
-    size = bn_size_bin(*signature_secret);
-    bin = malloc(size);
-    bn_write_bin(bin, size, *signature_secret);
-    binn_list_add_blob(list, bin, size);
-    binn_free(obj);
-    free(bin);
-
-    obj = binn_object();
-    serialize_PKE(obj, *encryptionPk);
-    binn_list_add_object(list, obj);
-    binn_free(obj);
-
-    obj = binn_object();
-    serialize_PKS(obj, *signaturePk);
-    binn_list_add_object(list, obj);
-    binn_free(obj);
-
-    binn_list_add_str(list, userID);
-
-    FILE *savingParams;
-    savingParams = fopen(userID, "wb");
-    if(savingParams){
-        size_t outLen;
-        unsigned char *m = binn_ptr(list);
-        unsigned long m_len = binn_size(list);
-        unsigned char aesk[crypto_secretbox_KEYBYTES];
-        printf("In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data : \n");
-        // Max size of an email address
-        char* userPassword = malloc(320);
-        fgets(userPassword, 320, stdin);
-        userPassword[strlen(userPassword)-1] = '\x00';
-
-        //TODO : store this
-        unsigned char salt[crypto_pwhash_SALTBYTES];
-        printf("We give the salt and need to store it for future use :\n");
-        randombytes_buf(salt, sizeof salt);
-        size_t sizeB64Salt;
-        unsigned char *b64Salt = base64_encode(salt, crypto_pwhash_SALTBYTES, &sizeB64Salt);
-        printf("%s\n", b64Salt);
-
-
-        if (crypto_pwhash
-                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
-                     crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
-                     crypto_pwhash_ALG_DEFAULT) != 0) {
-            printf("Not enough memory");
-            /* out of memory */
-        }
-        unsigned char nonceAES[crypto_aead_aes256gcm_NPUBBYTES];
-        unsigned long long cipher_len;
-        unsigned char ciphertextAES[m_len + crypto_aead_aes256gcm_ABYTES];
-        encrypt_message(m, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len, NULL, 0);
-        printf("We give the nonce and need to store it for future use :\n");
-        size_t outLenB64Nonce;
-        unsigned char *b64nonce = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, &outLenB64Nonce);
-        printf("%s\n", b64nonce);
-
-
-        size_t b64EncryptedLen;
-        unsigned char *encryptedContent = base64_encode(ciphertextAES, cipher_len, &b64EncryptedLen);
-        binn *savedParamsBinn;
-        savedParamsBinn = binn_object();
-        binn_object_set_str(savedParamsBinn, "b64Encrypted", encryptedContent);
-        binn_object_set_str(savedParamsBinn, "nonce", b64nonce);
-        binn_object_set_str(savedParamsBinn, "salt", b64Salt);
-        size_t test = fwrite(binn_ptr(savedParamsBinn), binn_size(savedParamsBinn), 1, savingParams);
-        if(test > 0){
-            printf("Encypted params saved\n");
-        } else {
-            printf("Failed to save Params\n");
-        }
-        free(b64nonce);
-        free(b64Salt);
-        free(userPassword);
-        free(encryptedContent);
-        fclose(savingParams);
-        binn_free(savedParamsBinn);
-    } else {
-        printf("Failed to open a file to save params\n");
-    }
-    binn_free(list);
-}
-
-void generateAndSendParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
-        bn_t *signature_secret, encryption_pk *encryptionPk, signature_pk *signaturePk, char* userID){
-
-    int sock = connectToKGC();
-
-    binn *objToSend;
-    objToSend = binn_object();
-    binn_object_set_str(objToSend, "opCode", "HELO");
-    binn_object_set_str(objToSend, "ID", userID);
-    send(sock , binn_ptr(objToSend) , binn_size(objToSend) , 0 );
-    binn_free(objToSend);
-    printf("Retrieving all public params from KGC\n");
-
-    unsigned char buf[52000];  //52Kb fixed-size buffer
-    recvAll(sock, buf, 52000);
-
-    binn *list;
-    list = binn_open(buf);
-    binn *mpks, *mpke;
-    mpks = binn_list_object(list, 1);
-    mpke = binn_list_object(list, 2);
-    deserialize_MPKS(mpks, mpkSignature);
-    deserialize_MPKE(mpke, mpkSession);
-    binn_free(list);
-
-    printf("Generating and saving secret values and public keys\n");
-    // Now we can go for user's private keys (encrypting and signing)
-
-    setSec(encryption_secret);
-    setSecSig(signature_secret);
-    // -------------------------------------------------------------
-    // Private keys set for Alice
-
-    // Now we can go to set Public keys for both signing and encrypting
-
-    setPub(*encryption_secret, *mpkSession, encryptionPk);
-    setPubSig(*signature_secret, *mpkSignature, signaturePk);
-
-    sock = connectToKGC();
-
-    binn* pkBinnObj;
-    pkBinnObj = binn_list();
-    binn* encryption_PkBinnObj, *signature_PkBinnObj;
-    encryption_PkBinnObj = binn_object();
-    signature_PkBinnObj = binn_object();
-    serialize_PKE(encryption_PkBinnObj, *encryptionPk);
-    serialize_PKS(signature_PkBinnObj, *signaturePk);
-    binn_list_add_object(pkBinnObj, encryption_PkBinnObj);
-    binn_list_add_object(pkBinnObj, signature_PkBinnObj);
-    binn_free(encryption_PkBinnObj);
-    binn_free(signature_PkBinnObj);
-
-    binn* packetSendingPK;
-    packetSendingPK = binn_object();
-    binn_object_set_str(packetSendingPK, "opCode", "PK");
-    binn_object_set_str(packetSendingPK, "ID", userID);
-
-    size_t outLen;
-    unsigned char* b64Payload = base64_encode(binn_ptr(pkBinnObj), binn_size(pkBinnObj), &outLen);
-    printf("PK obj : %s\n", b64Payload);
-    binn_object_set_str(packetSendingPK, "PK", b64Payload);
-    // TODO : Vérifi si ok
-    free(b64Payload);
-
-    int sizeSent = send(sock, binn_ptr(packetSendingPK), binn_size(packetSendingPK), 0);
-    printf("Size of PK : %d\n", sizeSent);
-    binn_free(pkBinnObj);
-    binn_free(packetSendingPK);
-}
-
 
 int connectToKGC(){
     int sock = 0;
@@ -1456,8 +1147,8 @@ int main() {
 
         // TODO : Generate our public keys in getSecrets if not present
         char *userPassword = malloc(320);
-        unsigned char *salt;
-        unsigned char *nonce;
+        unsigned char *salt = NULL;
+        unsigned char *nonce = NULL;
         binn *secrets = getSecretsValue(userID, userPassword, &salt, &nonce);
         getPk(&encryptionPk, &signaturePk, userID);
 

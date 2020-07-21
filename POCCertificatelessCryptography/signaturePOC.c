@@ -348,6 +348,8 @@ void deserialize_SKS(binn* obj, signature_sk *sk){
     XBin = binn_object_blob(obj, "x", &sizeX);
 
     g2_read_bin(sk->D, DBin, sizeD);
+    bn_new(sk->x)
+    bn_null(sk->x)
     bn_read_bin(sk->x, XBin, sizeX);
     //binn_free(obj);
 }
