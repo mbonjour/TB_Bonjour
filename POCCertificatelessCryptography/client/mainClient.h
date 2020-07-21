@@ -72,12 +72,13 @@ void generateAndSendPKs(encryption_mpk *mpkSession, signature_mpk *mpkSignature,
 
 void getGlobalParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature);
 
-binn* getSecretsValue(char *userID, char *userPassword);
+binn* getSecretsValue(char *userID, char *userPassword, unsigned char **salt, unsigned char **nonce);
 
 void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID);
 
-void saveSecretsValue(binn *secrets, char *userID, char *userPassword);
+void saveSecretsValue(binn *secrets, char *userID, char *userPassword, unsigned char **salt, unsigned char **nonce);
 
+void getSecretKey(binn *secrets, char *timestamp, encryption_mpk mpkSession, signature_mpk mpkSignature, encryption_sk *encryptionSk, signature_sk *signatureSk, char *userID);
 
 /**
  * @brief A small function to initiate a new connection to the KGC in order to ask something to it.

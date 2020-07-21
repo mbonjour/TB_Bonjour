@@ -2,7 +2,18 @@
 #include "mainClient.h"
 
 #define PORT 10002
-
+/*
+ AES Key : A7DEDEBC9AB65BE0E94311C33F5C03D5CCEDDE6031A460F77BB6B23BF992EAF3
+Encrypted message : Tr7SK9ZS8PGHdzmLFi/GxmzZI5uOrepWwJpCMVadyECu7IMjdAvXHP26+A==
+Nonce message : lLzls2ucULkcl5iD
+Cipher base64 : 4oAAApAEAkMwwIAAAYAJMM6oX3uUSIog4EuhatTnG0v8RiBzzdLQ2fF6bCTrs+iuhUs7+K2PcA/faWxCbfUDoZ2R3Z+5OAZu4K7zqb9zCKUV8miCv1ifhFAZe1zBN4n9l6QDy8JyQB6HQolQOsQA0NwcKF6caaHnCqWR9FWEaTLp0Nb87zBammxFhpysl/0jliJenPwu1v7NLnmLKt0Lb+6JhrvO0iSJZWmtnGKJeNYK2kAfaXvR3gTfhEgFOw0gQKoZjXdUwuOaM8Ohqv0GXz6slUZxXKhfve+3XnIfE9ksafdRLK54NMNAm+WPPulVGdw8Z6IGfMOuafK5q14B8BKMOrpx8lHdnH9YNNOQDaLpULXPCvmcwRXP1KIKm82npDlq4leRLe/qywzjWXAHRCgf3KDOgRvWuA31bLPaWwuxAoDpK56kP6u4NK/J9d/ePh8I5i1CaFZn5ORkAvcTUX8xY7XXeiqxLVUCQJn6ujXVMvLjgjzyedUBRXM4j6qIVB5P9jsD1VEW3jmcODoCQzHAMQMDynzjkVpXDkkhVoEuzHL4bwMvrTGqyEMR+hXFtE8fp2azVVkPIO/u3n3CDDYin+sCQzLAYQIQIKpR6uiScNvKm19MZj3NpmMYeUTQJB0EHEIm3UpfDTfCtXFZmgAFAcS56UemDqgJTUYS8dlQYureiTghiNfy/qdZ5GTRiYvL7YSP45zFUHpY6R79Yl45dNh2CnUfxS4CQzPAYQMHgVRxB9ckYvYGqO1A6BWbrjFICxPnvWUfrTmL5j7BieSBF8Qc7hLBf4wMm+Bc60UUvIMhw7ypW2C4BSyzHDPJE1F/ueGXW0cIjwl/db8gyAT58Kg0Mrf9r+Dv/sdVVqg=
+Signature (base64) : 4oAAAKACAVXAMQIVEcZ+XuPCn1t4A/+jbzL6bk+KxPsBDg8EixYCi1Ujr2bVZomUDFl7Ta3c+QHNzEsBVsBhAgb9VUp84gFjGyD6AVWkjOUWEnsVgDMynYoMaFaKJnlTsRzXcC9oRYxF85Pmma+5wBRH9j4/Kc9LvI7PwSXiwKXsGfQBnO9rRygqgubfd1YOpvsLH5agPg4PEpYEIQZPtQ==
+We give the salt and need to store it for future use :
+valQhiGAzadD1Hz0GXaZIQ==
+We give the nonce and need to store it for future use :
+Jqez4sezbhxAOuwF
+Encypted params saved
+ * */
 char *payload_text[10];
 struct upload_status {
     int lines_read;
@@ -545,6 +556,7 @@ static void fetch_messages(struct mailimap * imap)
     r = mailimap_search(imap, NULL, keySince, &testResult);
     check_error(r, "Could not compute last emails");
     printf("Response to search : %s", imap->imap_response);
+    mailimap_search_key_free(keySince);
 
     fetch_type = mailimap_fetch_type_new_fetch_att_list_empty();
     fetch_att = mailimap_fetch_att_new_uid();
@@ -566,9 +578,9 @@ static void fetch_messages(struct mailimap * imap)
 
         fetch_msg(imap, uid);
     }
-
+    //mailimap_set_free(set);
+    clist_free(testResult);
     mailimap_fetch_list_free(fetch_result);
-    mailimap_set_free(set);
     mailimap_fetch_type_free(fetch_type);
 }
 int checkmail(char* email, char *password){
@@ -669,11 +681,11 @@ void getGlobalParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature){
     binn_free(obj);
     fwrite(binn_ptr(list), binn_size(list), 1, file);
     fclose(file);
-    return;
+    binn_free(list);
 }
 
 // TODO : just get or create secrets values
-binn* getSecretsValue(char *userID, char *userPassword) {
+binn* getSecretsValue(char *userID, char *userPassword, unsigned char **salt, unsigned char **nonce) {
     FILE *file;
     char *secretFile = malloc(330);
     memset(secretFile, 0, 330);
@@ -682,7 +694,7 @@ binn* getSecretsValue(char *userID, char *userPassword) {
 
     file = fopen(secretFile, "r");
     if (file){
-        printf("Pleas give us the password to decrypt your personal data : \n");
+        printf("Please give us the password to decrypt your personal data : \n");
         // Max size of an email address
         //userPassword = malloc(320);
         fgets(userPassword, 320, stdin);
@@ -704,7 +716,7 @@ binn* getSecretsValue(char *userID, char *userPassword) {
         binn *objParams;
         objParams = binn_open(data);
         char *saltSaved = binn_object_str(objParams, "salt");
-        unsigned char *salt = base64_decode(saltSaved, strlen(saltSaved), &saltSize);
+        *salt = base64_decode(saltSaved, strlen(saltSaved), &saltSize);
 
         size_t outLen;
         char *encryptedParams = binn_object_str(objParams, "b64Encrypted");
@@ -712,10 +724,10 @@ binn* getSecretsValue(char *userID, char *userPassword) {
 
         size_t outLenNonce;
         char *nonceB64 = binn_object_str(objParams, "nonce");
-        unsigned char *nonceDecoded = base64_decode(nonceB64, strlen(nonceB64), &outLenNonce);
+        *nonce = base64_decode(nonceB64, strlen(nonceB64), &outLenNonce);
 
         if (crypto_pwhash
-                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
+                    (aesk, sizeof aesk, userPassword, strlen(userPassword), *salt,
                      crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
                      crypto_pwhash_ALG_DEFAULT) != 0) {
             printf("Not enough memory");
@@ -723,17 +735,43 @@ binn* getSecretsValue(char *userID, char *userPassword) {
         }
 
         char *decryptedParams = malloc(outLen);
-        decrypt_message(decryptedParams, decodedParams, nonceDecoded, aesk, outLen, NULL,0);
-        free(nonceDecoded);
+        decrypt_message(decryptedParams, decodedParams, *nonce, aesk, outLen, NULL,0);
+        //free(nonceDecoded);
         free(decodedParams);
         //free(userPassword);
-        free(salt);
+        //free(salt);
         binn_free(objParams);
         free(data);
 
         binn *savedSecrets;
         savedSecrets = binn_open(decryptedParams);
-        return savedSecrets;
+        free(secretFile);
+
+        binn_iter iter;
+        binn *savedSecCopy;
+        char key[256];
+        binn value;
+        savedSecCopy = binn_object();
+        binn_object_foreach(savedSecrets, key, value){
+            if(strcmp(key, "encryption_secret") == 0){
+                void *copySec = malloc(value.size);
+                memcpy(copySec, value.ptr, value.size);
+                binn_object_set_blob(savedSecCopy, key, copySec, value.size);
+            }
+            else if(strcmp(key, "signature_secret") == 0){
+                void *copySec = malloc(value.size);
+                memcpy(copySec, value.ptr, value.size);
+                binn_object_set_blob(savedSecCopy, key, copySec, value.size);
+
+            } else {
+                void *temp;
+                temp = malloc(value.size);
+                memcpy(temp, value.ptr, value.size);
+                binn_object_set_object(savedSecCopy, key, temp);
+            }
+        }
+        //free(decryptedParams);
+        return savedSecCopy;
     }
 
     //TODO : generate secret values and encrypts it and public keys ans send the lasts
@@ -804,10 +842,11 @@ binn* getSecretsValue(char *userID, char *userPassword) {
     pkFile = fopen(pkFilename, "w");
     fwrite(binn_ptr(pkBinnObj), binn_size(pkBinnObj), 1, pkFile);
     fclose(pkFile);
+    free(pkFilename);
 
     printf("PK obj : %s\n", b64Payload);
     binn_object_set_str(packetSendingPK, "PK", b64Payload);
-    // TODO : Vérifi si ok
+    // TODO : Vérifier si ok
     free(b64Payload);
 
     int sizeSent = send(sock, binn_ptr(packetSendingPK), binn_size(packetSendingPK), 0);
@@ -816,51 +855,54 @@ binn* getSecretsValue(char *userID, char *userPassword) {
     binn_free(packetSendingPK);
     printf("In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data : \n");
     // Max size of an email address
-    //userPassword = malloc(320);
+    // userPassword = malloc(320);
     fgets(userPassword, 320, stdin);
     userPassword[strlen(userPassword)-1] = '\x00';
+    free(secretFile);
     return obj;
 }
 
 // TODO at the end of a transaction save the state of the params (maybe a timestamp was added
-void saveSecretsValue(binn *secrets, char *userID, char *userPassword) {
+void saveSecretsValue(binn *secrets, char *userID, char *userPassword, unsigned char **salt, unsigned char **nonce) {
     FILE *savingParams;
     char *secretFile = malloc(330);
     memset(secretFile, 0, 330);
     strcpy(secretFile, userID);
     strcat(secretFile, "_SK");
-    savingParams = fopen(secretFile, "w");
-    if(savingParams){
+    savingParams = fopen(secretFile, "wb");
+    if (*salt == NULL || *nonce == NULL){
+        // TODO :
+        *salt = malloc(crypto_pwhash_SALTBYTES);
+        printf("We give the salt and need to store it for future use :\n");
+        randombytes_buf(*salt, crypto_pwhash_SALTBYTES);
+        *nonce = malloc(crypto_aead_aes256gcm_NPUBBYTES);
+        randombytes_buf(*nonce, crypto_aead_aes256gcm_NPUBBYTES);
+    }
+    if(savingParams) {
         size_t outLen;
         unsigned char *m = binn_ptr(secrets);
         unsigned long m_len = binn_size(secrets);
         unsigned char aesk[crypto_secretbox_KEYBYTES];
 
-        //TODO : store this
-        unsigned char salt[crypto_pwhash_SALTBYTES];
-        printf("We give the salt and need to store it for future use :\n");
-        randombytes_buf(salt, sizeof salt);
         size_t sizeB64Salt;
-        unsigned char *b64Salt = base64_encode(salt, crypto_pwhash_SALTBYTES, &sizeB64Salt);
+        unsigned char *b64Salt = base64_encode(*salt, crypto_pwhash_SALTBYTES, &sizeB64Salt);
         printf("%s\n", b64Salt);
 
-
         if (crypto_pwhash
-                    (aesk, sizeof aesk, userPassword, strlen(userPassword), salt,
+                    (aesk, sizeof aesk, userPassword, strlen(userPassword), *salt,
                      crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
                      crypto_pwhash_ALG_DEFAULT) != 0) {
             printf("Not enough memory");
             /* out of memory */
         }
-        unsigned char nonceAES[crypto_aead_aes256gcm_NPUBBYTES];
+
         unsigned long long cipher_len;
         unsigned char ciphertextAES[m_len + crypto_aead_aes256gcm_ABYTES];
-        encrypt_message(m, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len, NULL, 0);
+        encrypt_message(m, aesk, *nonce, ciphertextAES, &cipher_len, &m_len, NULL, 0);
         printf("We give the nonce and need to store it for future use :\n");
         size_t outLenB64Nonce;
-        unsigned char *b64nonce = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, &outLenB64Nonce);
+        unsigned char *b64nonce = base64_encode(*nonce, crypto_aead_aes256gcm_NPUBBYTES, &outLenB64Nonce);
         printf("%s\n", b64nonce);
-
 
         size_t b64EncryptedLen;
         unsigned char *encryptedContent = base64_encode(ciphertextAES, cipher_len, &b64EncryptedLen);
@@ -884,6 +926,7 @@ void saveSecretsValue(binn *secrets, char *userID, char *userPassword) {
     } else {
         printf("Failed to open a file to save params\n");
     }
+    free(secretFile);
 }
 
 // TODO : get a public key of a particular user locally if we sent to it recently or get them via KGC and saves them for further use
@@ -893,7 +936,7 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
     memset(pkFile, 0, 330);
     strcpy(pkFile, userID);
     strcat(pkFile, "_PK");
-    file = fopen(pkFile, "r");
+    file = fopen(pkFile, "rb");
     if (file){
         // TODO : retrieve Public keys of an user which we already sent to
         int r;
@@ -916,10 +959,12 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
         deserialize_PKE(binEncryptionPk, encryptionPk);
         deserialize_PKS(binSignaturePk, signaturePk);
         binn_free(testObj);
+        free(data);
+        free(pkFile);
         return;
     }
     binn *objSavedPk;
-    objSavedPk = binn_object();
+    objSavedPk = binn_list();
 
     int sock = connectToKGC();
     binn *getPKBinnObj;
@@ -934,7 +979,7 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
     // printf("%s\n", bufferGPE);
     size_t out_len_test;
     unsigned char *decodedTest = base64_decode(bufferGPE, testSize, &out_len_test);
-    binn_object_set_blob(objSavedPk, "encryption_pk", decodedTest, out_len_test);
+    //binn_object_set_blob(objSavedPk, "encryption_pk", decodedTest, out_len_test);
 
     deserialize_PKE(decodedTest, encryptionPk);
     free(decodedTest);
@@ -953,12 +998,23 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
     // printf("%s\n", bufferGPE);
     size_t out_len_test_gps;
     unsigned char *signature_sourcePKBin = base64_decode(bufferGPS, testSizeGPS, &out_len_test_gps);
-    binn_object_set_blob(objSavedPk, "signature_pk", signature_sourcePKBin, out_len_test_gps);
+    //binn_object_set_blob(objSavedPk, "signature_pk", signature_sourcePKBin, out_len_test_gps);
     deserialize_PKS(signature_sourcePKBin, signaturePk);
     free(signature_sourcePKBin);
     file = fopen(pkFile, "wb");
+    binn* encryption_PkBinnObj, *signature_PkBinnObj;
+    encryption_PkBinnObj = binn_object();
+    signature_PkBinnObj = binn_object();
+    serialize_PKE(encryption_PkBinnObj, *encryptionPk);
+    serialize_PKS(signature_PkBinnObj, *signaturePk);
+    binn_list_add_object(objSavedPk, encryption_PkBinnObj);
+    binn_list_add_object(objSavedPk, signature_PkBinnObj);
+    binn_free(encryption_PkBinnObj);
+    binn_free(signature_PkBinnObj);
     fwrite(binn_ptr(objSavedPk), binn_size(objSavedPk), 1, file);
     fclose(file);
+    binn_free(objSavedPk);
+    free(pkFile);
 }
 
 void getParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature, bn_t *encryption_secret,
@@ -1265,6 +1321,99 @@ int connectToKGC(){
     return sock;
 }
 
+void getSecretKey(binn *secrets, char *timestamp, encryption_mpk mpkSession, signature_mpk mpkSignature,encryption_sk *encryptionSk, signature_sk *signatureSk, char *userID){
+    char *fullID = malloc(330);
+    memset(fullID, 0, 330);
+    strcpy(fullID, userID);
+    if(strcmp(timestamp, "default") != 0) {
+        // TODO : concatenate timestamp
+        strcat(fullID, "+");
+        strcat(fullID, timestamp);
+    }
+    binn *currentSK;
+    currentSK = binn_object_object(secrets, timestamp);
+    if (currentSK == NULL) {
+
+        bn_t encryption_secret;
+        bn_null(encryption_secret)
+        bn_new(encryption_secret)
+
+        bn_t signature_secret;
+        bn_null(signature_secret)
+        bn_new(signature_secret)
+
+        void *binEncryptionVal, *binSignatureVal;
+        int binEncryptionValLen, binSignatureValLen;
+        binEncryptionVal = binn_object_blob(secrets, "encryption_secret", &binEncryptionValLen);
+        binSignatureVal = binn_object_blob(secrets, "signature_secret", &binSignatureValLen);
+        bn_read_bin(encryption_secret, binEncryptionVal, binEncryptionValLen);
+        bn_read_bin(signature_secret, binSignatureVal, binSignatureValLen);
+
+        signature_ppk signature_senderPpk;
+        int sock = connectToKGC();
+        char bufferPPK[1024] = {0};
+        binn *signatureExtractionSenderBinnObj;
+        signatureExtractionSenderBinnObj = binn_object();
+        binn_object_set_str(signatureExtractionSenderBinnObj, "opCode", "SE");
+        binn_object_set_str(signatureExtractionSenderBinnObj, "ID", fullID);
+        send(sock, binn_ptr(signatureExtractionSenderBinnObj), binn_size(signatureExtractionSenderBinnObj), 0);
+        binn_free(signatureExtractionSenderBinnObj);
+
+        read(sock, bufferPPK, 1024);
+        deserialize_PPKS(bufferPPK, &signature_senderPpk);
+        setPrivSig(signature_secret, signature_senderPpk, mpkSignature, fullID, signatureSk);
+
+        encryption_ppk PartialKeysBob;
+
+        sock = connectToKGC();
+
+        // TODO add timestamp to extraction
+        char bufferPPKE[1024] = {0};
+        binn* bobPpk;
+        bobPpk = binn_object();
+        binn_object_set_str(bobPpk, "opCode", "EE");
+        binn_object_set_str(bobPpk, "ID", fullID);
+        send(sock, binn_ptr(bobPpk), binn_size(bobPpk), 0);
+        binn_free(bobPpk);
+
+        read(sock, bufferPPKE, 1024);
+        deserialize_PPKE(bufferPPKE, &PartialKeysBob);
+
+        // Computes Secret User Keys
+        g2_null(encryptionSk->s1)
+        g2_new(encryptionSk->s1)
+
+        g1_null(encryptionSk->s2)
+        g1_new(encryptionSk->s2)
+        setPriv(encryption_secret, PartialKeysBob, mpkSession, fullID, encryptionSk);
+
+        //TODO : serialize sk and put them on secrets
+        binn *addSK;
+        addSK = binn_object();
+        binn *addSKE;
+        addSKE = binn_object();
+        binn *addSKS;
+        addSKS = binn_object();
+
+        serialize_SKE(addSKE, *encryptionSk);
+        binn_object_set_object(addSK, "encryption_sk", addSKE);
+        serialize_SKS(addSKS, *signatureSk);
+        binn_object_set_object(addSK, "signature_sk", addSKS);
+
+        binn_object_set_object(secrets, timestamp, addSK);
+        binn_free(addSK);
+        binn_free(addSKE);
+        binn_free(addSKS);
+    } else {
+        binn *objSKE;
+        binn *objSKS;
+        objSKE = binn_object_object(currentSK, "encryption_sk");
+        objSKS = binn_object_object(currentSK, "signature_sk");
+        deserialize_SKE(objSKE, encryptionSk);
+        deserialize_SKS(objSKS, signatureSk);
+    }
+    free(fullID);
+}
 
 int main() {
     if(core_init() == RLC_ERR){
@@ -1306,8 +1455,10 @@ int main() {
         password[strlen(password)-1] = '\x00';
 
         // TODO : Generate our public keys in getSecrets if not present
-        char *userPassword = malloc(320);;
-        binn *secrets = getSecretsValue(userID, userPassword);
+        char *userPassword = malloc(320);
+        unsigned char *salt;
+        unsigned char *nonce;
+        binn *secrets = getSecretsValue(userID, userPassword, &salt, &nonce);
         getPk(&encryptionPk, &signaturePk, userID);
 
         void *binEncryptionVal, *binSignatureVal;
@@ -1451,7 +1602,7 @@ int main() {
             binn_free(cipherBinnObect);
 
             // For the signature we need our PPK
-            signature_ppk signature_senderPpk;
+            /*signature_ppk signature_senderPpk;
             int sock = connectToKGC();
             char bufferPPK[1024] = {0};
             binn *signatureExtractionSenderBinnObj;
@@ -1463,10 +1614,13 @@ int main() {
 
             read(sock, bufferPPK, 1024);
             deserialize_PPKS(bufferPPK, &signature_senderPpk);
+            setPrivSig(signature_secret, signature_senderPpk, mpkSignature, userID, &signature_senderSk);
+             */
 
             // Computes Secret User Keys for Signature
             signature_sk signature_senderSk;
-            setPrivSig(signature_secret, signature_senderPpk, mpkSignature, userID, &signature_senderSk);
+            encryption_sk encryption_senderSk;
+            getSecretKey(secrets, "default", mpkSession, mpkSignature, &encryption_senderSk, &signature_senderSk, userID);
 
             // Computes the message to sign, so the cipher struct
             int c0size = gt_size_bin(c.c0, 1);
@@ -1624,7 +1778,7 @@ int main() {
             // if the verif is ok we can continue, otherwise we can stop here
             if(test == 0) {
                 // For this we need our Partial Private Keys with the ID used to encrypt the message
-                encryption_ppk PartialKeysBob;
+                /*encryption_ppk PartialKeysBob;
 
                 int sock = connectToKGC();
 
@@ -1648,6 +1802,10 @@ int main() {
                 g1_null(SecretKeysBob->s2)
                 g1_new(SecretKeysBob->s2)
                 setPriv(encryption_secret, PartialKeysBob, mpkSession, IDUsed, &SecretKeysBob);
+                 */
+                encryption_sk SecretKeysBob;
+                signature_sk SecretKeysBobSig;
+                getSecretKey(secrets, timestamp, mpkSession, mpkSignature, &SecretKeysBob, &SecretKeysBobSig, userID);
 
                 // We can decrypt now
                 gt_t decryptedMessage;
@@ -1689,7 +1847,10 @@ int main() {
              */
             binn_free(emailObj);
         }
-        saveSecretsValue(secrets, userID, userPassword);
+        saveSecretsValue(secrets, userID, userPassword, &salt, &nonce);
+        binn_free(secrets);
+        free(salt);
+        free(nonce);
         free(charUserChoice);
         free(userID);
         free(password);
@@ -1698,13 +1859,6 @@ int main() {
         bn_zero(signature_secret);
         bn_free(encryption_secret)
         bn_free(signature_secret)
-
     }
     core_clean();
 }
-/*AES Key : B01905631A7451808565EBCDB311CA07FA1556548B7EBD33011B4CD3D4A64F9B
-Encrypted message : 3ClEbRCjrL7TnqMx4wDXZRtZDRU=
-Nonce message : EN8cLEdzhVNEPdzH
-Cipher base64 : 4oAAApAEAkMwwIAAAYAVYN5PILuji4+lIJKfOpbRWxkgYV5bUXj68rMQd0JvXECYYTmjbHJoYYaUxStnthYEumausaQfwEAYLqFfosz14gaKgUksvyALA/Inr+fkJZeinzaA1wNwDWZy5cfhEr0MW4uX9Sn3+zYwzI+DKfJCO1PkI2TCsQWVVeKGEeOr1i9SP3tl+8rlJSzx/bw8kaMKPk/pA9+sy5roqnnXgVc04UZ3+xHLZ1t6G/qJ2EDzNwnxBh7yApqqnwrriPjj224BRPUBtnVMVQtmuJCFEZ1DhAUcmAeKGtuazizX8XdVjJH6Vcfr/3I0HIZqrpq1KVkTYuoLGrLUUXoTGqRLUOfIH1Wmr6aGUo/P+1POhWV5nBSL2D94/QZpF1Lscl5ICFcFipUKLqUFUa7R0qUMtWA4LruxXU9fu2izkKVlRIeEl8F7i1H3L7+XaYcjCLW1yLUHs47raJgvQPs0hieImHOEaawoLth+1orajCPVcwfpxtqyBJiXRaHxkW+o531CNHACQzHAMQIRrj2dd/NPEcLZmVicdUFSykraJIqxzt5QbzNp45Cz87ZRmTEMxbfsP6hV2/hF6goCQzLAYQIP0eZo0cBdtPf9c7Ic5XxiE3iIHL0/XO29c9RfqP9gV5hlJpYLNuXadZSWygP/z7oISMCC5gqVuQGWtc7qUPOy4cHWUj8wBaaa3we7l8xNJIeoQJuIVBRCFM7qEmYfJwYCQzPAYQINxR+yXekWedsFn2DuUFneebIbJotfs0X18flpYRH4WBBDCNxN1HIwJ84i5eABhAAME1sawFexl3XFqBN8Xa9jYZSwQjNXhIJRiR7Ha2M3oD9kWMbXqjelgh6F7gPa/Zc=
-Signature (base64) : 4oAAAKACAVXAMQMB8SqXobSsN4lftNCUAUCeySiPx75a/dDxQUmQ8FDT5VdEi4c+gc9nw878wXg375UBVsBhAhDFseXKWZ0DCWGih1RWA4tAayWG/80DpNRrz9orhLCfz8dAfEd+bVKVZdQxAykzPRO47JAXygV9rBet/y9C1GWm4Dd0J3rus+uY+ZJon1v4oDLTHcE2Kwff0fyiV+q3Gw==
-*/

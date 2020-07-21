@@ -484,6 +484,28 @@ void deserialize_PKE(void* buffer, encryption_pk* newPk){
     binn_free(obj);
 }
 
+void serialize_SKE(binn* obj, encryption_sk sk){
+    int sizeS1, sizeS2;
+    sizeS1 = g2_size_bin(sk.s1, 1);
+    sizeS2 = g1_size_bin(sk.s2, 1);
+    uint8_t  s1Bin[sizeS1], s2Bin[sizeS2];
+    g2_write_bin(s1Bin, sizeS1, sk.s1, 1);
+    g1_write_bin(s2Bin,sizeS2, sk.s2, 1);
+    binn_object_set_blob(obj, "s1", s1Bin, sizeS1);
+    binn_object_set_blob(obj, "s2", s2Bin, sizeS2);
+}
+
+void deserialize_SKE(binn* obj, encryption_sk *sk){
+    int sizeS1, sizeS2;
+    void *s1, *s2;
+    s1 = binn_object_blob(obj, "s1", &sizeS1);
+    s2 = binn_object_blob(obj, "s2", &sizeS2);
+    g2_read_bin(sk->s1, s1, sizeS1);
+    g1_read_bin(sk->s2, s2, sizeS2);
+    //binn_free(obj);
+}
+
+
 void serialize_Cipher(binn* obj, cipher c){
     int sizeC0, sizeC1, sizeC2, sizeC3;
     sizeC0 = gt_size_bin(c.c0, 1);

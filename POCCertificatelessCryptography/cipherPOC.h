@@ -187,15 +187,28 @@ void serialize_PKE(binn* obj, encryption_pk pk);
 void deserialize_PKE(void* buffer, encryption_pk* newPk);
 
 /**
+ * @brief Serialize Secret Key
+ * @param obj Binn object generated
+ * @param sk SK to serialize
+ */
+void serialize_SKE(binn* obj, encryption_sk sk);
+/**
+ * @brief Deserialize Secret key
+ * @param obj Binn object to deserialize
+ * @param sk Secret key struct generated
+ */
+void deserialize_SKE(binn* obj, encryption_sk *sk);
+
+/**
  * @brief Serialize Cipher
  * @param obj Binn object generated
- * @param pk Cipher to serialize
+ * @param c Cipher to serialize
  */
 void serialize_Cipher(binn* obj, cipher c);
 /**
  * @brief Deserialize Cipher
  * @param obj Binn object to deserialize
- * @param newPk Cipher struct generated
+ * @param c Cipher struct generated
  */
 void deserialize_Cipher(void* buffer, cipher* c);
 

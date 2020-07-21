@@ -185,6 +185,19 @@ void serialize_PKS(binn* obj, signature_pk pks);
 void deserialize_PKS(void* buffer, signature_pk* newPk);
 
 /**
+ * @brief Serialization of the Secret key
+ * @param obj The binn object resulting
+ * @param sk The secret key to serialize
+ */
+void serialize_SKS(binn* obj, signature_sk sk);
+/**
+ * @brief Deserialization of a binn object containing Secret key.
+ * @param buffer The binn object
+ * @param sk The resulting secret key struct
+ */
+void deserialize_SKS(binn* obj, signature_sk *sk);
+
+/**
  * @brief Serialization of the Signature structure
  * @param obj The binn object resulting
  * @param s The Signature to serialize

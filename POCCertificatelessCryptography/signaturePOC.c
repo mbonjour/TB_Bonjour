@@ -330,6 +330,28 @@ void deserialize_PKS(void* buffer, signature_pk* newPk){
     binn_free(obj);
 }
 
+void serialize_SKS(binn* obj, signature_sk sk){
+    int sizeD, sizeX;
+    sizeD = g2_size_bin(sk.D, 1);
+    sizeX = bn_size_bin(sk.x);
+    uint8_t DBin[sizeD], XBin[sizeX];
+    g2_write_bin(DBin, sizeD, sk.D, 1);
+    bn_write_bin(XBin, sizeX, sk.x);
+    binn_object_set_blob(obj, "D", DBin, sizeD);
+    binn_object_set_blob(obj, "X", XBin, sizeX);
+}
+
+void deserialize_SKS(binn* obj, signature_sk *sk){
+    void *DBin, *XBin;
+    int sizeD, sizeX;
+    DBin = binn_object_blob(obj, "D", &sizeD);
+    XBin = binn_object_blob(obj, "x", &sizeX);
+
+    g2_read_bin(sk->D, DBin, sizeD);
+    bn_read_bin(sk->x, XBin, sizeX);
+    //binn_free(obj);
+}
+
 void serialize_Signature(binn* obj, signature s){
     int sizeU, sizeV;
     sizeU = g1_size_bin(s.U, 1);
