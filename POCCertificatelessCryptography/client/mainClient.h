@@ -28,44 +28,29 @@
 #include "utils/aesUtils.h"
 
 
-
 /**
- * @brief Get the Encrypted params in a file, asking the user for his password to decrypt it.
- * @param mpkSession The structure to store the mpk_e
- * @param mpkSignature The structure to store the mpk_s
- * @param encryption_secret The bn to store the secret_e
- * @param signature_secret The bn to store the secret_s
- * @param encryptionPk The structure to store the pk_e
- * @param signaturePk The structure to store the pk_s
- * @param userID The userID of the searched params
+ * @brief Function to get the global public parameters (MPKE & MPKS of KGC), it checks if present in disk or if we need to retrieve it.
+ * @param mpkSession The resulting MPKE
+ * @param mpkSignature The resulting MPKS
  */
-
-/**
- * @brief If no params are stored on the disk, we can generate them and send them to the KGC, the function does just that.
- * @param mpkSession The structure to store the mpk_e
- * @param mpkSignature The structure to store the mpk_s
- * @param encryption_secret The bn to store the secret_e
- * @param signature_secret The bn to store the secret_s
- * @param encryptionPk The structure to store the pk_e
- * @param signaturePk The structure to store the pk_s
- * @param userID The userID of the searched params
- */
-
-/**
- * When they are generated the params are saved on a file. This function ask the user for a password and encrypt his params.
- * @param mpkSession The mpke_e to store
- * @param mpkSignature The mpk_s to store
- * @param encryption_secret The secret_e to store
- * @param signature_secret The secret_s to store
- * @param encryptionPk The pk_e to store
- * @param signaturePk The pk_s to store
- * @param userID The userID of the stored params
- */
-
 void getGlobalParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature);
 
+/**
+ * @brief Function to get encrypted secrets value of an user.
+ * @param userID The user to retrieve the params for
+ * @param userPassword The user password to decrypt the data
+ * @param salt The salt used at encryption (needed for save at the end of the program)
+ * @param nonce The nonce used at encryption (needed for save at the end of the program)
+ * @return A pointer to a binn object containing the secret values of a user and secret keys already generated.
+ */
 binn* getSecretsValue(char *userID, char *userPassword, unsigned char **salt, unsigned char **nonce);
 
+/**
+ * @brief Fuction to get public key of a certain user
+ * @param encryptionPk The resulting Public key for encryption.
+ * @param signaturePk The resulting public key for signature.
+ * @param userID The desired userID to get for the PK.
+ */
 void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID);
 
 void saveSecretsValue(binn *secrets, char *userID, char *userPassword, unsigned char **salt, unsigned char **nonce);

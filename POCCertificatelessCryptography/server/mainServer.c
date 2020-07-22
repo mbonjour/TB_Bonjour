@@ -118,10 +118,10 @@ void* socketThread(void *arg){
         char *currentID = binn_object_str(srcObject, "ID");
         printf("Code : PK from ID : %s\n", currentID);
 
-        char path[strlen(currentID)+10];
+        char path[strlen(currentID)+11];
         strcpy(path, "signature/");
         strcat(path, currentID);
-        char pathPKE[strlen(currentID)+11];
+        char pathPKE[strlen(currentID)+12];
         strcpy(pathPKE, "encryption/");
         strcat(pathPKE, currentID);
         printf("Path : %s\n", path);

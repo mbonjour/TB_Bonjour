@@ -574,15 +574,6 @@ int checkmail(char* email, char *password){
     mailimap_free(imap);
 }
 
-int checkIfParamsExistAlready(char* userID){
-    FILE *file;
-    file = fopen(userID, "r");
-    if (file){
-        fclose(file);
-        return 1;
-    }
-    return 0;
-}
 
 void getGlobalParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature){
     FILE *file;
@@ -1007,7 +998,7 @@ int connectToKGC(){
     if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
     {
         printf("\nConnection Failed \n");
-        return -1;
+        exit(EXIT_FAILURE);
     }
     return sock;
 }
@@ -1158,21 +1149,6 @@ int main() {
         binSignatureVal = binn_object_blob(secrets, "signature_secret", &binSignatureValLen);
         bn_read_bin(encryption_secret, binEncryptionVal, binEncryptionValLen);
         bn_read_bin(signature_secret, binSignatureVal, binSignatureValLen);
-        /*
-
-        int existingParams = checkIfParamsExistAlready(userID);
-        if(existingParams == 1){
-            //TODO Recup params
-            printf("Params found on disk, retrieving these\n");
-            getParams(&mpkSession, &mpkSignature, &encryption_secret,
-                      &signature_secret, &encryptionPk, &signaturePk, userID);
-        }
-        // If there are no params saved we can go for a full generation
-        else {
-            generateAndSendParams(&mpkSession, &mpkSignature, &encryption_secret, &signature_secret, &encryptionPk, &signaturePk, userID);
-            saveParams(&mpkSession, &mpkSignature, &encryption_secret, &signature_secret, &encryptionPk, &signaturePk, userID);
-        }
-        */
 
         printf("Do you want to send an email (0) or decrypt one (1) ?\n");
         int sendOrDecryptUser;
@@ -1220,23 +1196,6 @@ int main() {
             signature_pk destPKS;
             getPk(&destPKE, &destPKS, destinationID);
             //TODO : do this for all destination, or implement something on te KGC to send all the asked public keys
-            /*int sock = connectToKGC();
-            binn *getPKBinnObj;
-            getPKBinnObj = binn_object();
-            binn_object_set_str(getPKBinnObj, "opCode", "GPE");
-            binn_object_set_str(getPKBinnObj, "ID", destinationID);
-            send(sock, binn_ptr(getPKBinnObj), binn_size(getPKBinnObj), 0);
-            binn_free(getPKBinnObj);
-
-            char bufferGPE[512] = {0};
-            int testSize = recv(sock, bufferGPE, 512, 0);
-            // printf("%s\n", bufferGPE);
-            encryption_pk encryption_destinationPk;
-            size_t out_len_test;
-            unsigned char *decodedTest = base64_decode(bufferGPE, testSize, &out_len_test);
-            deserialize_PKE(decodedTest, &encryption_destinationPk);
-            free(decodedTest);
-             */
 
             // The other user takes ID of the destination and PK to encrypt his message
             // With the final version we will need to append a timestamp on the ID
@@ -1281,7 +1240,6 @@ int main() {
 
             strcat(destinationTimestamp, timestampStr);
 
-
             encrypt(AESK, destPKE, destinationTimestamp, mpkSession, &c);
             // TODO print base64 of cipher for decrypt
             binn *cipherBinnObect;
@@ -1293,20 +1251,6 @@ int main() {
             binn_free(cipherBinnObect);
 
             // For the signature we need our PPK
-            /*signature_ppk signature_senderPpk;
-            int sock = connectToKGC();
-            char bufferPPK[1024] = {0};
-            binn *signatureExtractionSenderBinnObj;
-            signatureExtractionSenderBinnObj = binn_object();
-            binn_object_set_str(signatureExtractionSenderBinnObj, "opCode", "SE");
-            binn_object_set_str(signatureExtractionSenderBinnObj, "ID", userID);
-            send(sock, binn_ptr(signatureExtractionSenderBinnObj), binn_size(signatureExtractionSenderBinnObj), 0);
-            binn_free(signatureExtractionSenderBinnObj);
-
-            read(sock, bufferPPK, 1024);
-            deserialize_PPKS(bufferPPK, &signature_senderPpk);
-            setPrivSig(signature_secret, signature_senderPpk, mpkSignature, userID, &signature_senderSk);
-             */
 
             // Computes Secret User Keys for Signature
             signature_sk signature_senderSk;
@@ -1444,23 +1388,7 @@ int main() {
             encryption_pk encryption_sourcePK;
             signature_pk signature_sourcePK;
             getPk(&encryption_sourcePK, &signature_sourcePK, sourceAddress);
-            /*
-            int sock = connectToKGC();
-            binn *getPKBinnObj;
-            getPKBinnObj = binn_object();
-            binn_object_set_str(getPKBinnObj, "opCode", "GPS");
-            binn_object_set_str(getPKBinnObj, "ID", sourceAddress);
-            send(sock, binn_ptr(getPKBinnObj), binn_size(getPKBinnObj), 0);
-            binn_free(getPKBinnObj);
 
-            char bufferGPS[512] = {0};
-            int testSize = recv(sock, bufferGPS, 512, 0);
-            // printf("%s\n", bufferGPE);
-            signature_pk signature_sourcePK;
-            size_t out_len_test;
-            unsigned char *signature_sourcePKBin = base64_decode(bufferGPS, testSize, &out_len_test);
-            deserialize_PKS(signature_sourcePKBin, &signature_sourcePK);
-             */
 
             // We can go for decrypting and verification
             // We can verify directly with the public keys of the sender
@@ -1469,31 +1397,6 @@ int main() {
             // if the verif is ok we can continue, otherwise we can stop here
             if(test == 0) {
                 // For this we need our Partial Private Keys with the ID used to encrypt the message
-                /*encryption_ppk PartialKeysBob;
-
-                int sock = connectToKGC();
-
-                // TODO add timestamp to extraction
-                char bufferPPKE[1024] = {0};
-                binn* bobPpk;
-                bobPpk = binn_object();
-                binn_object_set_str(bobPpk, "opCode", "EE");
-                binn_object_set_str(bobPpk, "ID", IDUsed);
-                send(sock, binn_ptr(bobPpk), binn_size(bobPpk), 0);
-                binn_free(bobPpk);
-
-                read(sock, bufferPPKE, 1024);
-                deserialize_PPKE(bufferPPKE, &PartialKeysBob);
-
-                // Computes Secret User Keys
-                encryption_sk SecretKeysBob;
-                g2_null(SecretKeysBob->s1)
-                g2_new(SecretKeysBob->s1)
-
-                g1_null(SecretKeysBob->s2)
-                g1_new(SecretKeysBob->s2)
-                setPriv(encryption_secret, PartialKeysBob, mpkSession, IDUsed, &SecretKeysBob);
-                 */
                 encryption_sk SecretKeysBob;
                 signature_sk SecretKeysBobSig;
                 getSecretKey(secrets, timestamp, mpkSession, mpkSignature, &SecretKeysBob, &SecretKeysBobSig, userID);
@@ -1529,13 +1432,6 @@ int main() {
                 free(nonceAES);
             }
             free(IDUsed);
-            //free(signature_sourcePKBin);
-            /*free(b64Nonce);
-            free(b64Cipher);
-            free(b64Encrypted);
-            free(b64Signature);
-            free(sourceAddress);
-             */
             binn_free(emailObj);
         }
         saveSecretsValue(secrets, userID, userPassword, &salt, &nonce);

@@ -4,7 +4,8 @@ project(POCCertificatelessCryptography C)
 set(CMAKE_C_STANDARD 11)
 
 include_directories(. ${CMAKE_SOURCE_DIR}/libs/relic/include ${CMAKE_SOURCE_DIR}/libs/unqlite ${CMAKE_SOURCE_DIR}/libs/relic-target/include ${CMAKE_SOURCE_DIR}/libs/binn)
-
+# TODO : Remove when finish sanitize
+link_libraries(asan)
 link_libraries(${CMAKE_SOURCE_DIR}/libs/relic-target/lib/librelic.so)
 link_libraries(${CMAKE_SOURCE_DIR}/libs/unqlite/libunqlite.a)
 link_libraries(sodium)
@@ -12,6 +13,7 @@ link_libraries(sodium)
 link_libraries(pthread)
 link_libraries(curl)
 link_libraries(etpan)
+
 link_libraries(${CMAKE_SOURCE_DIR}/libs/binn/libbinn.so.3.0)
 #link_libraries(binn)
 
@@ -20,7 +22,7 @@ set(CLIENT_SOURCES client/mainClient.c utils/aesUtils.c utils/aesUtils.h client/
 set(SERVER_SOURCES server/mainServer.c)
 set(TEST_SOURCES test/fullTest.c utils/aesUtils.c utils/aesUtils.h)
 
-add_definitions("-Wall -Wextra -Wpedantic ")
+add_definitions("-fsanitize=address -fno-omit-frame-pointer -Wall -Wextra -Wpedantic  ")
 # -Wformat=2 -Wno-unused-parameter -Wshadow -Wwrite-strings -Wstrict-prototypes -Wold-style-definition -Wredundant-decls -Wnested-externs -Wmissing-include-dirs
 
 add_executable(mainClient ${CLIENT_SOURCES} ${COMMON_SOURCES})
