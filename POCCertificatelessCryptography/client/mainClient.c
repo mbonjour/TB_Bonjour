@@ -131,20 +131,21 @@ void displaySubject(char* filename){
     mailmime_free(mime);
     free(data);
     free(test);
+    binn_free(mailReturn);
 }
-binn* parseEmail(char* filename){
+binn* parseEmail(char* filename) {
     FILE *file;
     binn *mailReturn;
     mailReturn = binn_object();
 
-    char* test = malloc(50);
+    char *test = malloc(50);
     memset(test, 0, 50);
     strcat(test, "download/");
     strcat(test, filename);
     int r;
-    struct mailmime * mime;
+    struct mailmime *mime;
     struct stat stat_info;
-    char * data;
+    char *data;
     size_t current_index;
 
     file = fopen(test, "r");
@@ -174,28 +175,28 @@ binn* parseEmail(char* filename){
     // display_mime(mime);
     if (mime->mm_data.mm_message.mm_fields) {
         if (clist_begin(mime->mm_data.mm_message.mm_fields->fld_list) != NULL) {
-            clistiter * cur;
+            clistiter *cur;
 
-            for(cur = clist_begin(mime->mm_data.mm_message.mm_fields->fld_list) ; cur != NULL ;
-                cur = clist_next(cur)) {
-                struct mailimf_field * f;
+            for (cur = clist_begin(mime->mm_data.mm_message.mm_fields->fld_list); cur != NULL;
+                 cur = clist_next(cur)) {
+                struct mailimf_field *f;
 
                 f = clist_content(cur);
                 switch (f->fld_type) {
                     case MAILIMF_FIELD_ORIG_DATE:
                         printf("\n");
                         char *dateFormat = malloc(50);
-                        struct mailimf_date_time * d = f->fld_data.fld_orig_date->dt_date_time;
+                        struct mailimf_date_time *d = f->fld_data.fld_orig_date->dt_date_time;
                         snprintf(dateFormat, 50, "%02i/%02i/%i %02i:%02i:%02i %+04i",
-                               d->dt_day, d->dt_month, d->dt_year,
-                               d->dt_hour, d->dt_min, d->dt_sec, d->dt_zone);
+                                 d->dt_day, d->dt_month, d->dt_year,
+                                 d->dt_hour, d->dt_min, d->dt_sec, d->dt_zone);
                         binn_object_set_str(mailReturn, "Date", dateFormat);
                         free(dateFormat);
                         break;
                     case MAILIMF_FIELD_FROM:
                         printf("\n");
                         char *fromList = malloc(256);
-                        memset(fromList,0,256);
+                        memset(fromList, 0, 256);
                         display_mailbox_list(f->fld_data.fld_from->frm_mb_list, fromList);
                         //printf("\n");
                         binn_object_set_str(mailReturn, "From", fromList);
@@ -204,7 +205,7 @@ binn* parseEmail(char* filename){
                     case MAILIMF_FIELD_TO:
                         printf("\n");
                         char *toList = malloc(256);
-                        memset(toList,0,256);
+                        memset(toList, 0, 256);
                         //display_to(f->fld_data.fld_to);
                         display_address_list(f->fld_data.fld_to->to_addr_list, toList);
                         //printf("\n");
@@ -214,7 +215,7 @@ binn* parseEmail(char* filename){
                     case MAILIMF_FIELD_CC:
                         printf("\n");
                         char *ccList = malloc(256);
-                        memset(ccList,0,256);
+                        memset(ccList, 0, 256);
                         //display_cc(f->fld_data.fld_cc);
                         display_address_list(f->fld_data.fld_cc->cc_addr_list, ccList);
                         //printf("\n");
@@ -224,7 +225,7 @@ binn* parseEmail(char* filename){
                     case MAILIMF_FIELD_SUBJECT:
                         printf("\n");
                         //display_subject(f->fld_data.fld_subject);
-                        binn_object_set_str(mailReturn, "Subject",f->fld_data.fld_subject->sbj_value);
+                        binn_object_set_str(mailReturn, "Subject", f->fld_data.fld_subject->sbj_value);
                         //printf("\n");
                         break;
                     case MAILIMF_FIELD_MESSAGE_ID:
@@ -233,16 +234,22 @@ binn* parseEmail(char* filename){
                         break;
                     case MAILIMF_FIELD_OPTIONAL_FIELD:
                         //printf("%s : %s\n",f->fld_data.fld_optional_field->fld_name, f->fld_data.fld_optional_field->fld_value);
-                        binn_object_set_str(mailReturn, f->fld_data.fld_optional_field->fld_name, f->fld_data.fld_optional_field->fld_value);
+                        binn_object_set_str(mailReturn, f->fld_data.fld_optional_field->fld_name,
+                                            f->fld_data.fld_optional_field->fld_value);
                 }
             }
         }
     }
     //printf("Body : %s", mime->mm_data.mm_message.mm_msg_mime->mm_body->dt_data.dt_filename);
-    binn_object_set_str(mailReturn, "Body", mime->mm_data.mm_message.mm_msg_mime->mm_body->dt_data.dt_filename);
+    char *testCopy = malloc(mime->mm_data.mm_message.mm_msg_mime->mm_body->dt_data.dt_text.dt_length + 1);
+    memcpy(testCopy, mime->mm_data.mm_message.mm_msg_mime->mm_body->dt_data.dt_text.dt_data,
+           mime->mm_data.mm_message.mm_msg_mime->mm_body->dt_data.dt_text.dt_length);
+    testCopy[mime->mm_data.mm_message.mm_msg_mime->mm_body->dt_data.dt_text.dt_length] = 0;
+    binn_object_set_str(mailReturn, "Body", testCopy);
     mailmime_free(mime);
     free(data);
     free(test);
+    free(testCopy);
     return mailReturn;
 }
 
@@ -579,7 +586,7 @@ static void fetch_messages(struct mailimap * imap)
     struct tm *ptm = localtime(&rawtime);
     struct mailimap_date *dateSince = mailimap_date_new(ptm->tm_mday, ptm->tm_mon + 1, ptm->tm_year + 1900);
     struct mailimap_search_key *keySince = mailimap_search_key_new_since(dateSince);
-    clist* testResult = clist_new();
+    clist* testResult;
     r = mailimap_search(imap, NULL, keySince, &testResult);
     check_error(r, "Could not compute last emails");
     mailimap_search_key_free(keySince);
@@ -589,6 +596,7 @@ static void fetch_messages(struct mailimap * imap)
     mailimap_fetch_type_new_fetch_att_list_add(fetch_type, fetch_att);
 
     set = mailimap_set_new(testResult);
+    //mailimap_fetch_list_free(testResult);
 
     r = mailimap_fetch(imap, set, fetch_type, &fetch_result);
     check_error(r, "could not fetch");
@@ -605,9 +613,10 @@ static void fetch_messages(struct mailimap * imap)
 
         fetch_msg(imap, uid);
     }
-    //clist_free(testResult);
     mailimap_set_free(set);
+
     mailimap_fetch_list_free(fetch_result);
+
     mailimap_fetch_type_free(fetch_type);
 }
 int checkmail(char* email, char *password){
@@ -1366,7 +1375,9 @@ int main() {
             if ((dir = opendir ("download")) != NULL) {
                 /* print all the files and directories within directory */
                 while ((ent = readdir (dir)) != NULL) {
-                    printf ("%s : Subject - > ", ent->d_name);
+                    if(strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
+                        continue;
+                    printf("%s : Subject - > ", ent->d_name);
                     displaySubject(ent->d_name);
                     printf("\n");
                 }
