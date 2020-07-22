@@ -1279,15 +1279,12 @@ int main() {
             unsigned char *b64signatureObjBinn = base64_encode(binn_ptr(signatureObjBinn), binn_size(signatureObjBinn), NULL);
             printf("Signature (base64) : %s\n", b64signatureObjBinn);
 
-            // TODO add timestamp sendmail
             sendmail(destinationID, userID, subject, nonceAesB64, timestampStr, ciphertextB64, b64signatureObjBinn, cipherB64, userID, password);
             free(nonceAesB64);
             free(ciphertextB64);
             free(b64signatureObjBinn);
             free(cipherB64);
             binn_free(signatureObjBinn);
-
-            //TODO : Construct a structure of the email to be able to send easily
 
             // ----------------------------------------------------------------------
             // Now the message is encrypted and authentified with an AES Key and the key is encrypted and signed using CLPKC
@@ -1323,24 +1320,6 @@ int main() {
             memset(fileChoice, 0, 256);
             fgets(fileChoice, 256, stdin);
             fileChoice[strlen(fileChoice)-1] = '\x00';
-            /*
-            int testNumber = strtol(fileChoice, NULL, 10);
-            char *filename = malloc(256);
-            memset(filename, 0, 256);
-            if ((dir = opendir ("download")) != NULL) {
-                for(int j = 0; j < testNumber;++j) {
-                    ent = readdir (dir);
-                    printf ("%s\n", ent->d_name);
-
-                }
-                strcpy(filename, ent->d_name);
-                closedir (dir);
-            } else {
-
-                perror ("");
-                return EXIT_FAILURE;
-            }
-            */
             printf("filename  : %s", fileChoice);
             binn* emailObj = parseEmail(fileChoice);
             free(fileChoice);
