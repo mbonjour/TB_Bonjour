@@ -73,6 +73,65 @@ static void display_address_list(struct mailimf_address_list * addr_list, char *
     }
 }
 
+void displaySubject(char* filename){
+    FILE *file;
+    binn *mailReturn;
+    mailReturn = binn_object();
+
+    char* test = malloc(50);
+    memset(test, 0, 50);
+    strcat(test, "download/");
+    strcat(test, filename);
+    int r;
+    struct mailmime * mime;
+    struct stat stat_info;
+    char * data;
+    size_t current_index;
+
+    file = fopen(test, "r");
+    if (file == NULL) {
+        exit(EXIT_FAILURE);
+    }
+
+    r = stat(test, &stat_info);
+    if (r != 0) {
+        fclose(file);
+        exit(EXIT_FAILURE);
+    }
+
+    data = malloc(stat_info.st_size);
+    fread(data, 1, stat_info.st_size, file);
+    fclose(file);
+
+    current_index = 0;
+    r = mailmime_parse(data, stat_info.st_size,
+                       &current_index, &mime);
+    if (r != MAILIMF_NO_ERROR) {
+        free(data);
+        printf("Failed to pars\n");
+        exit(EXIT_FAILURE);
+    }
+    // display_mime(mime);
+    if (mime->mm_data.mm_message.mm_fields) {
+        if (clist_begin(mime->mm_data.mm_message.mm_fields->fld_list) != NULL) {
+            clistiter *cur;
+
+            for (cur = clist_begin(mime->mm_data.mm_message.mm_fields->fld_list); cur != NULL;
+                 cur = clist_next(cur)) {
+                struct mailimf_field *f;
+
+                f = clist_content(cur);
+                if (f->fld_type == MAILIMF_FIELD_SUBJECT) {
+                    printf("%s", f->fld_data.fld_subject->sbj_value);
+                    break;
+                }
+            }
+        }
+    }
+    mailmime_free(mime);
+    free(data);
+    free(test);
+}
 binn* parseEmail(char* filename){
     FILE *file;
     binn *mailReturn;
@@ -446,7 +505,7 @@ static void fetch_msg(struct mailimap * imap, uint32_t uid)
     r = stat(filename, &stat_info);
     if (r == 0) {
         // already cached
-        printf("%u is already fetched\n", (unsigned int) uid);
+        //printf("%u is already fetched\n", (unsigned int) uid);
         return;
     }
 
@@ -477,7 +536,7 @@ static void fetch_msg(struct mailimap * imap, uint32_t uid)
     fwrite(msg_content, 1, msg_len, f);
     fclose(f);
 
-    printf("%u has been fetched\n", (unsigned int) uid);
+    //printf("%u has been fetched\n", (unsigned int) uid);
 
     mailimap_fetch_list_free(fetch_result);
     mailimap_fetch_type_free(fetch_type);
@@ -1307,7 +1366,9 @@ int main() {
             if ((dir = opendir ("download")) != NULL) {
                 /* print all the files and directories within directory */
                 while ((ent = readdir (dir)) != NULL) {
-                    printf ("%s\n", ent->d_name);
+                    printf ("%s : Subject - > ", ent->d_name);
+                    displaySubject(ent->d_name);
+                    printf("\n");
                 }
                 closedir (dir);
             } else {
@@ -1330,7 +1391,6 @@ int main() {
             char *b64Encrypted = binn_object_str(emailObj, "Body");
             char *b64Nonce = binn_object_str(emailObj, "X-AES-NONCE");
             char *subject = binn_object_str(emailObj, "Subject");
-            // TODO : timestamp
             char *timestamp = binn_object_str(emailObj, "X-TIMESTAMP-USED");
             if(b64Signature == NULL || b64Cipher == NULL || b64Encrypted == NULL || b64Nonce == NULL){
                 printf("I cannot parse the email, it's not an email written by my POC\n");

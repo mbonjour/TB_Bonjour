@@ -66,4 +66,5 @@ int connectToKGC();
 int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher, char *email, char *password);
 int checkmail(char *email, char *password);
 binn* parseEmail(char* filename);
+void displaySubject(char* filename);
 #endif //POCCERTIFICATELESSCRYPTOGRAPHY_MAINCLIENT_H
