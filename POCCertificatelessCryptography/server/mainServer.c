@@ -70,49 +70,63 @@ void* socketThread(void *arg){
     if(strcmp(opCode, "GPE") == 0){
         char* currentID = binn_object_str(srcObject, "ID");
         printf("Code : GPE\n");
-        char path[strlen(currentID)+11];
+        char path[strlen(currentID)+12];
         strcpy(path, "encryption/");
         strcat(path, currentID);
         printf("Path : %s\n", path);
+
+        binn *response;
+        response = binn_object();
         unqlite_int64 bufLen;
         int result = unqlite_kv_fetch(pDb, path, -1, NULL, &bufLen);
         if( result != UNQLITE_OK ){
-            printf("No record found\n");
+            binn_object_set_str(response, "Error", "Error retrieving the PK, are you sure this user have already do the setup ?");
         }
         //Allocate a buffer big enough to hold the record content and \0 (necessary to print, not mandatory)
         void* zBuf = (char *)malloc(bufLen+1);
         memset(zBuf, 0, bufLen+1);
-        if( zBuf == NULL ){ printf("Can't allocate enough size\n"); }
+        if( zBuf == NULL ){
+            printf("Can't allocate enough size\n");
+            binn_object_set_str(response, "Error", "Error in the server side, contact admin");
+        }
 
         //Copy record content in our buffer
         unqlite_kv_fetch(pDb,path,-1,zBuf,&bufLen);
         printf("PKE (Sent) : %s\n", zBuf);
+        binn_object_set_blob(response, "PKE", zBuf, bufLen);
         send(newSocket, zBuf, bufLen, 0);
         free(zBuf);
+        binn_free(response);
     }
     if(strcmp(opCode, "GPS") == 0){
         char* currentID = binn_object_str(srcObject, "ID");
         printf("Code : GPS\n");
-        char path[strlen(currentID)+10];
+        char path[strlen(currentID)+11];
         strcpy(path, "signature/");
         strcat(path, currentID);
         printf("Path : %s\n", path);
 
-        void* buffer = NULL;
+        binn *response;
+        response = binn_object();
         unqlite_int64 bufLen;
         int result = unqlite_kv_fetch(pDb, path, -1, NULL, &bufLen);
         if( result != UNQLITE_OK ){
-            printf("No record found\n");
+            binn_object_set_str(response, "Error", "Error retrieving the PK, are you sure this user have already do the setup ?");
         }
         //Allocate a buffer big enough to hold the record content
         void* zBuf = (char *)malloc(bufLen);
-        if( zBuf == NULL ){ printf("Can't allocate enough size\n"); }
+        if( zBuf == NULL ){
+            printf("Can't allocate enough size\n");
+            binn_object_set_str(response, "Error", "Error in the server side, contact admin");
+        }
 
         //Copy record content in our buffer
-        unqlite_kv_fetch(pDb,path,-1,zBuf,&bufLen);
+        unqlite_kv_fetch(pDb,path,-1, zBuf, &bufLen);
         printf("PKS (Sent) : %s\n", zBuf);
-        send(newSocket, zBuf, bufLen, 0);
+        binn_object_set_blob(response, "PKS", zBuf, bufLen);
+        send(newSocket, binn_ptr(response), binn_size(response), 0);
         free(zBuf);
+        binn_free(response);
     }
     if(strcmp(opCode, "PK") == 0){
         char *currentID = binn_object_str(srcObject, "ID");

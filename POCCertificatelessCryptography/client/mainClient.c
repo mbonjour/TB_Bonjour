@@ -1007,8 +1007,18 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
     char bufferGPE[512] = {0};
     int testSize = recv(sock, bufferGPE, 512, 0);
     // printf("%s\n", bufferGPE);
+    binn *retrivedPKE;
+    retrivedPKE = binn_open(bufferGPE);
+    char *error = binn_object_str(retrivedPKE, "Error");
+    if(error == NULL) {
+        printf("Error server : %s", error);
+        exit(EXIT_FAILURE);
+    }
+    int size_PKE;
+    void *bufferGPE2 = binn_object_blob(retrivedPKE, "PKE", &size_PKE);
+
     size_t out_len_test;
-    unsigned char *decodedTest = base64_decode(bufferGPE, testSize, &out_len_test);
+    unsigned char *decodedTest = base64_decode(bufferGPE2, testSize, &out_len_test);
     //binn_object_set_blob(objSavedPk, "encryption_pk", decodedTest, out_len_test);
 
     deserialize_PKE(decodedTest, encryptionPk);
@@ -1025,9 +1035,18 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
 
     char bufferGPS[512] = {0};
     int testSizeGPS = recv(sock, bufferGPS, 512, 0);
+    binn *retrivedPK;
+    retrivedPK = binn_open(bufferGPS);
+    char *errorPKS = binn_object_str(retrivedPK, "Error");
+    if(error == NULL) {
+        printf("Error server : %s", errorPKS);
+        exit(EXIT_FAILURE);
+    }
+    int size_PKS;
+    void *bufferGPS2 = binn_object_blob(retrivedPK, "PKS", &size_PKS);
     // printf("%s\n", bufferGPE);
     size_t out_len_test_gps;
-    unsigned char *signature_sourcePKBin = base64_decode(bufferGPS, testSizeGPS, &out_len_test_gps);
+    unsigned char *signature_sourcePKBin = base64_decode(bufferGPS2, testSizeGPS, &out_len_test_gps);
     //binn_object_set_blob(objSavedPk, "signature_pk", signature_sourcePKBin, out_len_test_gps);
     deserialize_PKS(signature_sourcePKBin, signaturePk);
     free(signature_sourcePKBin);
