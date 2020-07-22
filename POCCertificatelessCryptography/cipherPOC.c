@@ -62,7 +62,7 @@ void setup(int k, encryption_mpk* mpkSetup, g2_t* msk){
 }
 
 // TODO: pass length of var
-void F(const char *var, g2_t* suite, g2_t *result) {
+void F(const char *var, g2_t* suite, g2_t *result, int size) {
     uint8_t h[RLC_MD_LEN];
     // Strlen ok car effectué sur des IDs donc vrais chaines de chars
     md_map(h, (uint8_t*) var, strlen(var));
@@ -120,7 +120,7 @@ void extract(encryption_mpk mpk, g2_t msk, char* ID, encryption_ppk* partialKeys
     g2_null(temp)
     g2_new(temp)
 
-    F(ID, mpk.u, &temp);
+    F(ID, mpk.u, &temp, strlen(ID));
     g2_mul(temp, temp, r);
     g2_add(partialKeys->d1, msk, temp);
 
@@ -168,7 +168,7 @@ void setPriv(bn_t x, encryption_ppk d, encryption_mpk mpk, char* ID, encryption_
     g2_new(pointTemp)
 
     g2_mul(secretKeys->s1,d.d1, x);
-    F(ID, mpk.u, &pointTemp);
+    F(ID, mpk.u, &pointTemp, strlen(ID));
     g2_mul(pointTemp, pointTemp, r);
     g2_add(secretKeys->s1, secretKeys->s1, pointTemp);
 
@@ -231,7 +231,7 @@ void encrypt(gt_t m, encryption_pk pk, unsigned char* ID, encryption_mpk mpk, ci
     g2_t pointTemp;
     g2_null(pointTemp)
     g2_new(pointTemp)
-    F(ID, mpk.u, &pointTemp);
+    F(ID, mpk.u, &pointTemp, strlen(ID));
     g2_mul(c->c2, pointTemp, s);
     g2_free(pointTemp)
 
@@ -254,7 +254,7 @@ void encrypt(gt_t m, encryption_pk pk, unsigned char* ID, encryption_mpk mpk, ci
     g2_write_bin(&w[c0size + c1Size + c2Size + strlen(ID)], pkXSize, pk.X, 1);
     g1_write_bin(&w[c0size + c1Size + c2Size + strlen(ID) + pkXSize], pkYSize, pk.Y, 1);
 
-    F(w, mpk.v, &pointTemp2);
+    F(w, mpk.v, &pointTemp2, c0size + c1Size + c2Size + strlen(ID) + pkXSize + pkYSize);
     g2_mul(c->c3, pointTemp2, s);
 
     bn_zero(p);
@@ -311,8 +311,8 @@ void decrypt(cipher c, encryption_sk sk, encryption_pk pk, encryption_mpk  mpk, 
     g2_write_bin(&w[c0size + c1Size + c2Size + strlen(ID)], pkXSize, pk.X, 1);
     g1_write_bin(&w[c0size + c1Size + c2Size + strlen(ID) + pkXSize], pkYSize, pk.Y, 1);
     // Constructs our point
-    F(w, mpk.v, &pointFv);
-    F(ID, mpk.u, &pointFu);
+    F(w, mpk.v, &pointFv, c0size + c1Size + c2Size + strlen(ID) + pkXSize + pkYSize);
+    F(ID, mpk.u, &pointFu, strlen(ID));
 
     // m = numerateur * numerateur2 / denominateur
     gt_t numerateur, denominateur, numerateur2;

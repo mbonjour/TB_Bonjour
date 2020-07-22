@@ -91,7 +91,7 @@ void setup(int i, encryption_mpk *pStruct, g2_t *ptr);
  * @param suite The suite to use, need to be a G2 element array
  * @param result The resulting point on G2
  */
-void F(const char *var, g2_t* suite, g2_t *result);
+void F(const char *var, g2_t* suite, g2_t *result, int size);
 
 /**
  * @brief Extraction of the partial private key for a given ID
