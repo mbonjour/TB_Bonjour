@@ -1010,7 +1010,7 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
     binn *retrivedPKE;
     retrivedPKE = binn_open(bufferGPE);
     char *error = binn_object_str(retrivedPKE, "Error");
-    if(error == NULL) {
+    if(error != NULL) {
         printf("Error server : %s", error);
         exit(EXIT_FAILURE);
     }

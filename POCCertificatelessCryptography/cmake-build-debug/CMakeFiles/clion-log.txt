@@ -1,4 +1,4 @@
-/snap/clion/114/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
+/home/mbonjour/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.8743.17/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography

@@ -81,6 +81,12 @@ void* socketThread(void *arg){
         int result = unqlite_kv_fetch(pDb, path, -1, NULL, &bufLen);
         if( result != UNQLITE_OK ){
             binn_object_set_str(response, "Error", "Error retrieving the PK, are you sure this user have already do the setup ?");
+            send(newSocket, binn_ptr(response), binn_size(response), 0);
+            binn_free(response);
+            printf("Exit socketThread \n");
+            binn_free(srcObject);
+            close(newSocket);
+            pthread_exit(NULL);
         }
         //Allocate a buffer big enough to hold the record content and \0 (necessary to print, not mandatory)
         void* zBuf = (char *)malloc(bufLen+1);
@@ -88,6 +94,12 @@ void* socketThread(void *arg){
         if( zBuf == NULL ){
             printf("Can't allocate enough size\n");
             binn_object_set_str(response, "Error", "Error in the server side, contact admin");
+            send(newSocket, binn_ptr(response), binn_size(response), 0);
+            binn_free(response);
+            printf("Exit socketThread \n");
+            binn_free(srcObject);
+            close(newSocket);
+            pthread_exit(NULL);
         }
 
         //Copy record content in our buffer
@@ -111,13 +123,25 @@ void* socketThread(void *arg){
         unqlite_int64 bufLen;
         int result = unqlite_kv_fetch(pDb, path, -1, NULL, &bufLen);
         if( result != UNQLITE_OK ){
-            binn_object_set_str(response, "Error", "Error retrieving the PK, are you sure this user have already do the setup ?");
+            binn_object_set_str(response, "Error", "Error retrieving the PK, are you sure this user have already done the setup ?");
+            send(newSocket, binn_ptr(response), binn_size(response), 0);
+            binn_free(response);
+            printf("Exit socketThread \n");
+            binn_free(srcObject);
+            close(newSocket);
+            pthread_exit(NULL);
         }
         //Allocate a buffer big enough to hold the record content
         void* zBuf = (char *)malloc(bufLen);
         if( zBuf == NULL ){
             printf("Can't allocate enough size\n");
             binn_object_set_str(response, "Error", "Error in the server side, contact admin");
+            send(newSocket, binn_ptr(response), binn_size(response), 0);
+            binn_free(response);
+            printf("Exit socketThread \n");
+            binn_free(srcObject);
+            close(newSocket);
+            pthread_exit(NULL);
         }
 
         //Copy record content in our buffer
