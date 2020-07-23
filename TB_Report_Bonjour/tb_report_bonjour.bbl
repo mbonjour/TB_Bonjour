@@ -82,6 +82,14 @@ Damian Poddebniak, Christian Dresen, Jens M{\"{u}}ller, Fabian Ising, Sebastian
   Security Symposium, {USENIX} Security 2018, Baltimore, MD, USA, August 15-17,
   2018}, pages 549--566. {USENIX} Association, 2018.
 
+\bibitem{DBLP:conf/crypto/Shamir84}
+Adi Shamir.
+\newblock Identity-based cryptosystems and signature schemes.
+\newblock In G.~R. Blakley and David Chaum, editors, {\em Advances in
+  Cryptology, Proceedings of {CRYPTO} '84, Santa Barbara, California, USA,
+  August 19-22, 1984, Proceedings}, volume 196 of {\em Lecture Notes in
+  Computer Science}, pages 47--53. Springer, 1984.
+
 \bibitem{bookIntroCertificateless}
 Hu~Xiong, Zhen Qin, and Athanasios~V. Vasilakos.
 \newblock {\em Introduction to Certificateless Cryptography}.

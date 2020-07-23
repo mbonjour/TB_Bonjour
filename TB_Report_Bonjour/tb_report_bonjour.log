@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  23 JUL 2020 16:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  23 JUL 2020 22:02
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1375,7 +1375,7 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 
 ]
 Chapitre 3.
-<images/SchemaGlobal.png, id=480, 721.94719pt x 319.94531pt>
+<images/SchemaGlobal.png, id=482, 721.94719pt x 319.94531pt>
 File: images/SchemaGlobal.png Graphic file (type png)
 <use images/SchemaGlobal.png>
 Package pdftex.def Info: images/SchemaGlobal.png  used on input line 8.
@@ -1401,7 +1401,7 @@ LaTeX Warning: Citation `bibid' on page 25 undefined on input line 29.
 [25
 
 ] [26]
-<images/schemaEncapsulation.png, id=545, 607.51968pt x 353.82187pt>
+<images/schemaEncapsulation.png, id=547, 607.51968pt x 353.82187pt>
 File: images/schemaEncapsulation.png Graphic file (type png)
 <use images/schemaEncapsulation.png>
 Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 47.
@@ -1411,12 +1411,15 @@ Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 47.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[27] [28 <./images/schemaEncapsulation.PNG>]) (./chapters/conclusion.tex
-[29] [30
+[27] [28 <./images/schemaEncapsulation.PNG>])
 
-]
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+(./chapters/conclusion.tex [29] [30]
 Chapitre 5.
-) [31] [32
+) [31
+
+] [32
 
 ] (./tb_report_bonjour.bbl
 Underfull \hbox (badness 1264) in paragraph at lines 49--56
@@ -1478,13 +1481,13 @@ LaTeX Warning: There were undefined references.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 138.
  ) 
 Here is how much of TeX's memory you used:
- 33737 strings out of 481239
- 669042 string characters out of 5920377
- 1152815 words of memory out of 5000000
- 48052 multiletter control sequences out of 15000+600000
+ 33746 strings out of 481239
+ 669252 string characters out of 5920377
+ 1153091 words of memory out of 5000000
+ 48055 multiletter control sequences out of 15000+600000
  553832 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 70i,11n,115p,1052b,980s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,11n,115p,1068b,980s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/prdc/YehS
 DSSW18} has been referenced but does not exist, replaced by a fixed one
 
@@ -1507,6 +1510,9 @@ XF06} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/pkc/DentLP0
 8} has been referenced but does not exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/crypto/Sham
+ir84} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/asiacrypt/A
 l-RiyamiP03} has been referenced but does not exist, replaced by a fixed one
@@ -1539,10 +1545,10 @@ blic/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm12
 00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/t
 exmf/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf/fonts/type1/pub
 lic/cm-super/sftt1095.pfb>
-Output written on tb_report_bonjour.pdf (53 pages, 812855 bytes).
+Output written on tb_report_bonjour.pdf (53 pages, 815404 bytes).
 PDF statistics:
- 785 PDF objects out of 1000 (max. 8388607)
- 658 compressed objects within 7 object streams
- 206 named destinations out of 1000 (max. 500000)
+ 797 PDF objects out of 1000 (max. 8388607)
+ 670 compressed objects within 7 object streams
+ 212 named destinations out of 1000 (max. 500000)
  443 words of extra memory for PDF output out of 10000 (max. 10000000)
 

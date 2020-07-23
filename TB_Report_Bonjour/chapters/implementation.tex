@@ -54,15 +54,15 @@ Ici je présente le fonctionnement global de mon implémentation du KGC pour mon
 \subsection{Fonctionnement}
 \subsection{Problèmes connus}
 \subsection{Améliorations}
-%\inputsourcecode{c}{"source_code/main.c"}{main.c}
-%\inputminted[linenos, numbersep=4pt,fontsize=\footnotesize, breaklines=true]{C}{source_code/main.c}
 \section{Fonctionnement global POC (Client)}
 Ici je présente le fonctionnement global de l'implémentation du client mail pour mon POC, des améliorations possibles et des problèmes connus.
 \subsection{Fonctionnement}
+\paragraph*{Sécurité connexion mail.}
+%TODO : présenter des captures de paquets chiffrées de connexion IMAP et SMTP
 \subsection{Problèmes connus}
 \subsection{Améliorations}
 \paragraph*{Multiples destinataires.}
-\section{Comparaisons}
+\section{Comparaisons avec état de l'art}
 Dans cette section je vais présenter les différents protocoles et implémentations existantes présentées au chapitre \ref{ch:analysis} et les comparer à mon implémentation. Tout d'abord en présentant les différentes propriétés cryptographiques puis les temps d'exécution.
 
 % TODO à analyser et remplir correctement
@@ -84,3 +84,39 @@ Dans cette section je vais présenter les différents protocoles et implémentat
 	\label{table:comparisonProperties}
 \end{table}
 % TODO si le temps le permet faire des calculs sur les temps de chiffrement / déchiffrement
+\subsection{Temps des différentes implémentations}
+Comparasion du temps mis pour chiffrer et signer / déchiffrer et vérifier un mail entres les différentes implémentations existantes.
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}| }
+		\hline
+		\multicolumn{3}{|c|}{Comparaisons des temps d'exécution entres différentes implémentations proposées} \\
+		\hline
+		Implémentations & E2EE & Forward Secrecy\\
+		\hline
+		CLPKC-POC   & Oui & Oui\\
+		PGP & Oui & Non\\
+		S/MIME & Oui & Non\\
+		\hline
+	\end{tabular}
+	\caption{Table de comparaison des temps d'exécution entres les implémentations de mails chiffrés}
+	\label{table:comparisonTime}
+\end{table}
+\subsection{Overhead induit}
+Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systémes de mails proposés.
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}| }
+		\hline
+		\multicolumn{3}{|c|}{Comparaisons de l'overhead induit dans un mail} \\
+		\hline
+		Implémentations & E2EE & Forward Secrecy\\
+		\hline
+		CLPKC-POC   & Oui & Oui\\
+		PGP & Oui & Non\\
+		S/MIME & Oui & Non\\
+		\hline
+	\end{tabular}
+	\caption{Table de comparaison des différents overhead en rapport avec les solutions existantes }
+	\label{table:comparisonOverhead}
+\end{table}

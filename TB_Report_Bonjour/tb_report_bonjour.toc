@@ -62,6 +62,8 @@
 \contentsline {subsection}{\numberline {4.4.3}Améliorations}{28}{subsection.4.4.3}%
 \contentsline {section}{\numberline {4.5}Comparaisons}{29}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{29}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{29}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Overhead induit}{29}{subsection.4.5.3}%
 \contentsline {chapter}{\numberline {5}Conclusion}{31}{chapter.5}%
 \contentsline {chapter}{Bibliographie}{33}{chapter.5}%
 \contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{39}{appendix.A}%
