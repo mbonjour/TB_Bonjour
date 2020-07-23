@@ -45,6 +45,15 @@ Yee{-}Lee Er, Wei{-}Chuen Yau, Syh{-}Yuan Tan, and Bok{-}Min Goi.
   6-8, 2012}, volume 180 of {\em Lecture Notes in Electrical Engineering},
   pages 179--186. Springer, 2012.
 
+\bibitem{irtf-cfrg-hash-to-curve}
+Armando Faz-Hernandez, Sam Scott, Nick Sullivan, Riad Wahby, and Christopher
+  Wood.
+\newblock Hashing to elliptic curves.
+\newblock Internet-Draft draft-irtf-cfrg-hash-to-curve-09, IETF Secretariat,
+  June 2020.
+\newblock
+  \url{http://www.ietf.org/internet-drafts/draft-irtf-cfrg-hash-to-curve-09.txt}.
+
 \bibitem{DBLP:conf/cans/HuangSMZ05}
 Xinyi Huang, Willy Susilo, Yi~Mu, and Futai Zhang.
 \newblock On the security of certificateless signature schemes from asiacrypt

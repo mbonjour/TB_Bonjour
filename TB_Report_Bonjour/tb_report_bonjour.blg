@@ -16,45 +16,45 @@ Repeated entry---line 240 of file chapters/biblio.bib
  :                                       ,
 I'm skipping whatever remains of this entry
 Warning--empty institution in doubleratchet
-You've used 14 entries,
+You've used 15 entries,
             2118 wiz_defined-function locations,
-            602 strings with 8216 characters,
-and the built_in function-call counts, 6416 in all, are:
-= -- 622
-> -- 351
-< -- 13
-+ -- 134
-- -- 117
-* -- 473
-:= -- 1016
-add.period$ -- 49
-call.type$ -- 14
-change.case$ -- 93
+            611 strings with 8511 characters,
+and the built_in function-call counts, 6758 in all, are:
+= -- 654
+> -- 379
+< -- 14
++ -- 145
+- -- 127
+* -- 501
+:= -- 1082
+add.period$ -- 53
+call.type$ -- 15
+change.case$ -- 101
 chr.to.int$ -- 0
-cite$ -- 15
-duplicate$ -- 247
-empty$ -- 468
-format.name$ -- 117
-if$ -- 1383
+cite$ -- 16
+duplicate$ -- 256
+empty$ -- 483
+format.name$ -- 127
+if$ -- 1447
 int.to.chr$ -- 0
-int.to.str$ -- 14
+int.to.str$ -- 15
 missing$ -- 13
-newline$ -- 73
-num.names$ -- 40
-pop$ -- 106
+newline$ -- 79
+num.names$ -- 42
+pop$ -- 112
 preamble$ -- 1
-purify$ -- 79
+purify$ -- 86
 quote$ -- 0
-skip$ -- 194
+skip$ -- 199
 stack$ -- 0
-substring$ -- 371
-swap$ -- 101
-text.length$ -- 13
+substring$ -- 376
+swap$ -- 102
+text.length$ -- 14
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 54
+type$ -- 58
 warning$ -- 1
-while$ -- 63
-width$ -- 16
-write$ -- 165
+while$ -- 65
+width$ -- 17
+write$ -- 178
 (There were 3 error messages)

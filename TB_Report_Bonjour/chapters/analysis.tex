@@ -100,13 +100,12 @@ En faisant quelques essais PGP de mon côté je me suis heurté à beaucoup de d
 \subsection{Primitives analysées}
 %TODO : Expliquer les différentes primitives
 - Certificateless PKC~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}\\
-- HIBE - Hierarchised Based encryption\\
+- HIBE - Hierarchised Identity Based encryption\\
 - Identity based encryption
 %TODO à compléter
 \subsection{Primitive choisie}
 - Certificateless PKC~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}\\
-Tout d'abord le HIBE aurait été compliqué à mettre en place aussi à cause de sa forte forward secrecy, la hiérarchie doit de plus être commune sur tout les appareils, ce qui prendrait probablement du temps à un nouvel arrivage d'appareil pour un compte donné.
-J'ai choisi cette primitive au final car elle proposait des propriétés très intéressantes pour ma manière d'implémenter dans les mails cela. En effet, similaire à de l'identity based avec un ID pour désigner une clé publique. Le problème avec l'identity based encryption c'est le fait que le serveur central génère la clé publique et la clé secrète de l'utilisateur, cela amène ce qu'on appelle le \textit{key escrow} problème. C'est le fait qu'une entité connaisse à elle seule toutes les clés. Ce problème est résolu dans le certificateless en introduisant des \textit{Partial Private Keys} permettant d'avoir une clé secrète partiellement générée par le serveur et par l'utilisateur.
+ Cette primitive a été choisiec car elle est similaire à de l'identity based avec un ID pour désigner une clé publique. Le problème avec l'identity based encryption c'est le fait que le serveur central génère la clé publique et la clé secrète de l'utilisateur, cela amène ce qu'on appelle le \textit{key escrow} problème. C'est le fait qu'une entité connaisse à elle seule toutes les clés de tout les utilisateurs. Ce problème est résolu dans le certificateless en introduisant des \textit{Partial Private Keys} permettant d'avoir une clé secrète partiellement générée par le serveur (KGC - Key Generation Center) et par l'utilisateur puis assemblée pour former la clé privée seulement connue de l'utilisateur. De plus, cette primitive a l'avantage de ne pas introduire de certificats et ainsi évites la complexité d'une infrastructure de PKI (Public Key Infrastructure).
 \section{Recherches sur la primitive}
 \label{sec:primitiveSearch}
 Dans cette section je vais introduire les détails techniques et les principes mathématiques utilisés. De plus, le choix de schéma parmi tous ceux analysés est détaillé ici.
@@ -115,12 +114,13 @@ Les variantes de \textit{Certificateless Cryptography} choisies utilisent un con
 Des groupes tels que $\mathbb{G}_1, \mathbb{G}_2, \mathbb{G}_T$ d'un ordre premier \textit{p} pour lesquels il existe un mapping $e : \mathbb{G}_1 \times \mathbb{G}_2 \rightarrow \mathbb{G}_T$ avec les propriétés suivantes :\\
 1. Bilinéarité : $e(g^a, h^b) = e(g, h)^{ab}$ pour tout $(g,h) \in \mathbb{G}_1 \times \mathbb{G}_2$ et $a,b \in \mathbb{Z}$;\\
 2. Pas de dégénérescence : $e(g,h) \neq 1_{\mathbb{G}_T} $ tant que $g,h \neq 1_{\mathbb{G}_{1,2}}$;
-%TODO : Détails mathématiques
+\subsection{À savoir}
+Avant d'analyser les différents schémas je vais présenter les différenets facteurs présentés dans les tableaux et ainsi établir une légende de ceux-ci expliquée.\\
+Types : Les types présentés peuvent être soit concret soit générique. Les types concrets sont des schémas qui présentent leurs algorithmes en utilisant des calculs bien établis et présentent l'entierté du fonctionnement de leur schéma, tandis que les schémas présenté génériques peuvent s'appuyer sur d'autres problèmes et se baser sur des algorithmes déjà existants.\\
+Modèles de sécurité : Ces modèles définissent sur quoi le schéma va se reposer pour établir sa sécurité et comment il va l'évaluer face à un adversaire. À nouveau il existe deux modèles présents dans les schémas analysés, le \textit{Random Oracle Model} et le \textit{Standard Model}. Le \textit{Random Oracle Model} se base sur des oracles aléatoires mais est un peu controversé, en effet l'aléatoire cryptographiquement sûr est difficile à atteindre, ainsi habituellement le \textit{Random Oracle Model} implémente ces oracles via des fonctions de hachage. Le modèle standard se base lui sur des problèmes mathématiquement difficiles tel que DDH (Decisional Diffie Hellman). \\
+Différentes sécurité : Pour évaluer les schémas de certificateless public key cryptography il y a différents niveaux de sécurité établis pour 2 types d'adversaires différents. Ces adversaires ont été décrits dans le papier d'Al-Riyami-Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03} pour la première fois. Ces deux adversaires sont de Type I (\textit{outsider adversaries}) et de Type II (\textit{honest but curious KGC}). L'adversaire de Type I est appelé \textit{outsiders} et est permis de remplacer des clés publiques, obtenir des clés partiels privées, et des clés privées puis faire des requêtes de déchiffrements. L'adversaire de Type II est en fait un KGC connaissant la Master Secret Key et qui peut donc générer des PPK, obtenir des clés privées et faire des requêtes de déchiffrement tout en faisant confiance à ce KGC pour pas qu'il ne remplace de clés publiques. POur chacun il existe différents niveaux de sécurité : \\
 \subsection{Schémas Certificateless de Chiffrement}
 Pour choisir parmi les nombreux schémas existants en certificateless pour le chiffrement j'ai établi un tableau comparatif des différentes manières de faire, inspiré de~\cite{bookIntroCertificateless}. En suivant ce tableau je me suis rendu compte que la construction de Dent-Libert-Paterson~\cite{DBLP:conf/pkc/DentLP08} était probablement la plus adaptée en vue des propriétés qu'elle présentait. Le tableau se trouve en annexe \ref{ch:fichiers}.
-%TODO Expliquer les propriétés et les modèle générique et concret ici
-\subsection{À savoir}
-Il y a plusieurs choses à savoir avant l'analyse de ces schémas, je vais donc faire une intro en présentant ce qu'il faut savoir sur les propriétés dont je parle ensuite et les différents \textit{Modèles} présents dans la littérature.\\
 
 \subsection{Détails techniques}
 Les détails techniques sur le chiffrement avec la \textit{Certificateless Cryptography}.

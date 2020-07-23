@@ -23,6 +23,7 @@ void decrypt_message(unsigned char* decrypted, unsigned char* cipher, unsigned c
     }
 }
 
+// TODO : Change to libsodium hash/KDF
 void get_key(char *aesk, gt_t originalM) {
     // Get the binary data of the Gt element
     int sizeAESK = gt_size_bin(originalM,1);

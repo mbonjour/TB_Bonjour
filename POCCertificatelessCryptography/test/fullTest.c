@@ -26,8 +26,12 @@ int main() {
         g2_null(msk)
         g2_new(msk)
 
+        clock_t t;
+        t = clock();
         setup(256, &mpkSession, &msk);
-
+        t = clock() - t;
+        double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+        printf("Setup took %f seconds to execute \n", time_taken);
         // Master key of KGC for signing
         bn_t masterSecret;
         bn_null(masterSecret)
@@ -80,7 +84,11 @@ int main() {
         printf("Encrypted message : %s\n", ciphertextAES);
 
         cipher c;
+        t = clock();
         encrypt(AESK, myPK, ID, mpkSession, &c);
+        t = clock() - t;
+        time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+        printf("Encryption took %f seconds to execute \n", time_taken);
 
         // For the signature we need our PPK
         signature_ppk myPartialKeysSig;
@@ -138,8 +146,11 @@ int main() {
             gt_t decryptedMessage;
             gt_null(decryptedMessage)
             gt_new(decryptedMessage)
+            t = clock();
             decrypt(c, mySecretKeys, myPK, mpkSession, ID, &decryptedMessage);
-
+            t = clock() - t;
+            time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+            printf("Decryption took %f seconds to execute \n", time_taken);
             char aeskDecrypted[crypto_secretbox_KEYBYTES];
             get_key(aeskDecrypted, decryptedMessage);
 
