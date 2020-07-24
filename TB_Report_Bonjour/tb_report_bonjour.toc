@@ -60,7 +60,7 @@
 \contentsline {subsection}{\numberline {4.4.1}Fonctionnement}{28}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Problèmes connus}{28}{subsection.4.4.2}%
 \contentsline {subsection}{\numberline {4.4.3}Améliorations}{28}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}Comparaisons}{29}{section.4.5}%
+\contentsline {section}{\numberline {4.5}Comparaisons avec état de l'art}{29}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{29}{subsection.4.5.1}%
 \contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{29}{subsection.4.5.2}%
 \contentsline {subsection}{\numberline {4.5.3}Overhead induit}{29}{subsection.4.5.3}%

@@ -92,29 +92,29 @@ Comparasion du temps mis pour chiffrer et signer / déchiffrer et vérifier un m
 		\hline
 		\multicolumn{3}{|c|}{Comparaisons des temps d'exécution entres différentes implémentations proposées} \\
 		\hline
-		Implémentations & E2EE & Forward Secrecy\\
+		Implémentations & Chiffrement & Déchiffrement\\
 		\hline
-		CLPKC-POC   & Oui & Oui\\
-		PGP & Oui & Non\\
-		S/MIME & Oui & Non\\
+		CLPKC-POC   & 0.0061584s & 0.00951s\\
+		PGP & 0 & 0\\
+		S/MIME & 0 & 0\\
 		\hline
 	\end{tabular}
 	\caption{Table de comparaison des temps d'exécution entres les implémentations de mails chiffrés}
 	\label{table:comparisonTime}
 \end{table}
 \subsection{Overhead induit}
-Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systémes de mails proposés.
+Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systèmes de mails proposés.
 \begin{table}[h!]
 	\centering
-	\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}| }
+	\begin{tabular}{ |p{3cm}||p{5cm}|p{6cm}| }
 		\hline
 		\multicolumn{3}{|c|}{Comparaisons de l'overhead induit dans un mail} \\
 		\hline
-		Implémentations & E2EE & Forward Secrecy\\
+		Implémentations & Taille overhead & Contenu\\
 		\hline
-		CLPKC-POC   & Oui & Oui\\
-		PGP & Oui & Non\\
-		S/MIME & Oui & Non\\
+		CLPKC-POC   & Environ 1200 bytes & Signature, timestamp, nonce, Encrypted Session Key\\
+		PGP & Environ 300 bytes & Encrypted Session key\\
+		S/MIME & 0 & jE SAIS PAS\\
 		\hline
 	\end{tabular}
 	\caption{Table de comparaison des différents overhead en rapport avec les solutions existantes }
