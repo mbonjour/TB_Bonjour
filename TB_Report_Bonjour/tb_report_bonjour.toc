@@ -21,19 +21,19 @@
 \contentsline {subsection}{\numberline {2.5.1}Résultats des recherches}{9}{subsection.2.5.1}%
 \contentsline {section}{\numberline {2.6}Primitives}{9}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}Primitives analysées}{9}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}Primitive choisie}{9}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.2}Primitive choisie}{10}{subsection.2.6.2}%
 \contentsline {section}{\numberline {2.7}Recherches sur la primitive}{10}{section.2.7}%
 \contentsline {subsection}{\numberline {2.7.1}Principes mathématiques}{10}{subsection.2.7.1}%
 \contentsline {subsection}{\numberline {2.7.2}À savoir}{10}{subsection.2.7.2}%
 \contentsline {subsection}{\numberline {2.7.3}Schémas Certificateless de Chiffrement}{11}{subsection.2.7.3}%
 \contentsline {subsection}{\numberline {2.7.4}Détails techniques}{11}{subsection.2.7.4}%
 \contentsline {subsection}{\numberline {2.7.5}Schémas Certificateless de Signature}{12}{subsection.2.7.5}%
-\contentsline {subsection}{\numberline {2.7.6}Détails techniques}{12}{subsection.2.7.6}%
+\contentsline {subsection}{\numberline {2.7.6}Détails techniques}{13}{subsection.2.7.6}%
 \contentsline {section}{\numberline {2.8}État de l'art}{13}{section.2.8}%
-\contentsline {subsection}{\numberline {2.8.1}Email Encryption System Using Certificateless Public Key Encryption Scheme}{13}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.1}Email Encryption System Using Certificateless Public Key Encryption Scheme}{14}{subsection.2.8.1}%
 \contentsline {subsection}{\numberline {2.8.2}An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{14}{subsection.2.8.2}%
 \contentsline {subsection}{\numberline {2.8.3}Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}{15}{subsection.2.8.3}%
-\contentsline {subsection}{\numberline {2.8.4}PriviPK : Certificate-less and secure email communication}{15}{subsection.2.8.4}%
+\contentsline {subsection}{\numberline {2.8.4}PriviPK : Certificate-less and secure email communication}{16}{subsection.2.8.4}%
 \contentsline {subsection}{\numberline {2.8.5}A certificateless one-way group key agreement protocol for end-to-end email encryption}{16}{subsection.2.8.5}%
 \contentsline {chapter}{\numberline {3}Architecture / Design du protocole}{19}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Architecture globale}{19}{section.3.1}%
@@ -45,30 +45,30 @@
 \contentsline {chapter}{\numberline {4}Implémentation}{25}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Choix d'implémentations}{25}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Langage}{25}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Librairie cryptographique}{25}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.2}Librairie cryptographique}{26}{subsection.4.1.2}%
 \contentsline {subsection}{\numberline {4.1.3}Courbe utilisée}{26}{subsection.4.1.3}%
 \contentsline {subsection}{\numberline {4.1.4}Dérivation de la clé AES}{26}{subsection.4.1.4}%
 \contentsline {subsection}{\numberline {4.1.5}Fonctions de hachage - signature}{26}{subsection.4.1.5}%
-\contentsline {subsection}{\numberline {4.1.6}Sérialisation des données}{26}{subsection.4.1.6}%
+\contentsline {subsection}{\numberline {4.1.6}Sérialisation des données}{27}{subsection.4.1.6}%
 \contentsline {subsection}{\numberline {4.1.7}Enregistrement des clés publiques (serveur)}{27}{subsection.4.1.7}%
 \contentsline {section}{\numberline {4.2}Implémentation clés de chiffrement}{27}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Fonctionnement global POC (KGC)}{27}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Fonctionnement}{28}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Problèmes connus}{28}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Améliorations}{28}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Fonctionnement global POC (Client)}{28}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Fonctionnement}{28}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Problèmes connus}{28}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Améliorations}{28}{subsection.4.4.3}%
-\contentsline {section}{\numberline {4.5}Comparaisons avec état de l'art}{29}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{29}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{29}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Overhead induit}{29}{subsection.4.5.3}%
-\contentsline {chapter}{\numberline {5}Conclusion}{31}{chapter.5}%
-\contentsline {chapter}{Bibliographie}{33}{chapter.5}%
-\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{39}{appendix.A}%
-\contentsline {section}{\numberline {A.1}RELIC Toolkit}{39}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Libsodium}{39}{section.A.2}%
-\contentsline {chapter}{\numberline {B}Fichiers}{41}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Code du POC}{41}{section.B.1}%
-\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{41}{section.B.2}%
+\contentsline {subsection}{\numberline {4.3.1}Fonctionnement}{27}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Problèmes connus}{29}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Améliorations}{29}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Fonctionnement global POC (Client)}{29}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Fonctionnement}{30}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Problèmes connus}{30}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Améliorations}{31}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Comparaisons avec état de l'art}{31}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{31}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{31}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Overhead induit}{32}{subsection.4.5.3}%
+\contentsline {chapter}{\numberline {5}Conclusion}{33}{chapter.5}%
+\contentsline {chapter}{Bibliographie}{35}{chapter.5}%
+\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{43}{appendix.A}%
+\contentsline {section}{\numberline {A.1}RELIC Toolkit}{43}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Libsodium}{43}{section.A.2}%
+\contentsline {chapter}{\numberline {B}Fichiers}{45}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Code du POC}{45}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{45}{section.B.2}%

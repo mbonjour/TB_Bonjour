@@ -15,47 +15,46 @@ Repeated entry---line 240 of file chapters/biblio.bib
  : @inproceedings{DBLP:conf/itcs2/ErYTG12
  :                                       ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "bibid"
 Warning--empty institution in doubleratchet
-You've used 16 entries,
+You've used 18 entries,
             2118 wiz_defined-function locations,
-            621 strings with 8784 characters,
-and the built_in function-call counts, 7209 in all, are:
-= -- 700
-> -- 394
-< -- 16
-+ -- 150
-- -- 131
-* -- 532
-:= -- 1148
-add.period$ -- 57
-call.type$ -- 16
-change.case$ -- 105
+            638 strings with 9461 characters,
+and the built_in function-call counts, 8036 in all, are:
+= -- 785
+> -- 429
+< -- 18
++ -- 163
+- -- 142
+* -- 588
+:= -- 1276
+add.period$ -- 65
+call.type$ -- 18
+change.case$ -- 116
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 278
-empty$ -- 523
-format.name$ -- 131
-if$ -- 1551
+cite$ -- 19
+duplicate$ -- 316
+empty$ -- 592
+format.name$ -- 142
+if$ -- 1737
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 14
-newline$ -- 84
-num.names$ -- 46
-pop$ -- 117
+int.to.str$ -- 18
+missing$ -- 16
+newline$ -- 94
+num.names$ -- 52
+pop$ -- 130
 preamble$ -- 1
-purify$ -- 89
+purify$ -- 98
 quote$ -- 0
-skip$ -- 216
+skip$ -- 242
 stack$ -- 0
-substring$ -- 405
-swap$ -- 113
-text.length$ -- 16
+substring$ -- 447
+swap$ -- 127
+text.length$ -- 18
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
+type$ -- 70
 warning$ -- 1
-while$ -- 71
-width$ -- 18
-write$ -- 191
+while$ -- 79
+width$ -- 20
+write$ -- 217
 (There were 3 error messages)

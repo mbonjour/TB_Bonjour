@@ -1,0 +1,161 @@
+Delivered-To: jean.delafiction@gmail.com
+Received: by 2002:ab0:2746:0:0:0:0:0 with SMTP id c6csp1770955uap;
+        Thu, 23 Jul 2020 13:05:30 -0700 (PDT)
+X-Received: by 2002:a05:620a:209b:: with SMTP id e27mr6862213qka.431.1595534730240;
+        Thu, 23 Jul 2020 13:05:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1595534730; cv=none;
+        d=google.com; s=arc-20160816;
+        b=wSGvpS7sYjBUrgn6RRyo63pUs8T4hk8HSCgRm9u6v/p2x9B0EhK+ZPf6NM5XN7F7Vh
+         NSEnCKuei1rCusG1DBIMf0hKq9+NfPBsx5M2IX7wNDjLKt52isB2Ov3usV5ICkxrgqNU
+         COlTX2tCUH+HH1FA8BBaU/93PSMbC2t1ZHtrQbJHwpTtfMbDXG1NFVFCRZKFhO+61oFC
+         q6s5ww5GUu1yFTcYt3eFannrwD/KAamtA4j3vzBaHo+0nZ9jiFnlrMOxphvgppMV/z6J
+         LOiyL/H7tPdZuXYocYZif47VedcRS4BCKrqKr3ZjVijDKpmuqxGdpuh05xysyiPJtACB
+         z3RQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:from:subject:message-id:feedback-id:date:mime-version
+         :dkim-signature;
+        bh=3jnL3xDf41wo2b2O3Vpil2PlXP6PV6VKbbKtqpHAZ1o=;
+        b=XgnBSYN6M/z8ufkd1pEJw8YS0srkH6IrSXfPo2dovL8URfcDqvR2FAumOHWEr86c9T
+         2DHYL5CavdaRGzN+jlkOKne/QEW6mR+a19jOAyAEy7yzkLteXnY3/LkfgmQMdSwDXBGR
+         pkAn67DZMvZAecmExPMXdLRAM8KE9ly8YXiVdDrw8Jvmw0bc/pgp7soPR16ZA/OKYy4N
+         P30TdF9S95T0Oa4bV2RSFkvfA97QMHS142WlsJo/59tmSFp8+hn4KFUz6vLrtj7cyv+V
+         VBpdfUyqkKUxekofirATtTp/HBnX08RWFYIfQjc0v939L+2bl333vJYiFgzwq/fQLljM
+         AOqQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@accounts.google.com header.s=20161025 header.b="s8We/F2z";
+       spf=pass (google.com: domain of 3ie0zxwgtamo34-7u51eqss4a398.w44w1u.s42@gaia.bounces.google.com designates 209.85.220.73 as permitted sender) smtp.mailfrom=3ie0ZXwgTAMo34-7u51Eqss4A398.w44w1u.s42@gaia.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=accounts.google.com
+Return-Path: <3ie0ZXwgTAMo34-7u51Eqss4A398.w44w1u.s42@gaia.bounces.google.com>
+Received: from mail-sor-f73.google.com (mail-sor-f73.google.com. [209.85.220.73])
+        by mx.google.com with SMTPS id dg16sor4849457qvb.51.2020.07.23.13.05.30
+        for <jean.delafiction@gmail.com>
+        (Google Transport Security);
+        Thu, 23 Jul 2020 13:05:30 -0700 (PDT)
+Received-SPF: pass (google.com: domain of 3ie0zxwgtamo34-7u51eqss4a398.w44w1u.s42@gaia.bounces.google.com designates 209.85.220.73 as permitted sender) client-ip=209.85.220.73;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@accounts.google.com header.s=20161025 header.b="s8We/F2z";
+       spf=pass (google.com: domain of 3ie0zxwgtamo34-7u51eqss4a398.w44w1u.s42@gaia.bounces.google.com designates 209.85.220.73 as permitted sender) smtp.mailfrom=3ie0ZXwgTAMo34-7u51Eqss4A398.w44w1u.s42@gaia.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=accounts.google.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=accounts.google.com; s=20161025;
+        h=mime-version:date:feedback-id:message-id:subject:from:to;
+        bh=3jnL3xDf41wo2b2O3Vpil2PlXP6PV6VKbbKtqpHAZ1o=;
+        b=s8We/F2zEwkAFgBNxhB6fOHaueM2ofwLE1u2ynDQ0Ymt7PkYumjmvoefW1xyawygjE
+         159gJIFGB7vpt7Ud3Qd2W+PNoxjR5ACg7GcvsUpkM4PIvqmC7sVfztQc1TbgAqMID2UV
+         dFbbxnF1cVAQ41pU/34Tofbu9KIXz+ZQ3/x4QyvGtfI5YROCHHwY1kCv+XCG2l3R5tHN
+         9WkX7s/YrmAT/7E2AaBH3bLoyX0SVWEpe/QNnPOIysShb9DFJsbGfyrWAvUomM0LsTeo
+         Nt3iXZbDM1tM+xWlSPXrlMG8jKVDo8nQ//VAc2zGUB5m77K0OuLMcKtLID4Fhn0318fn
+         W5gQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:date:feedback-id:message-id:subject
+         :from:to;
+        bh=3jnL3xDf41wo2b2O3Vpil2PlXP6PV6VKbbKtqpHAZ1o=;
+        b=Ahsfch32Szbk1ZVBFAlCEzaHn2rs2wG9zoSCe4EhzcnGfm4jmLsZZ8N5OoRwKTLiN+
+         W2yRwuKWJKxdFs6uL4mPDtH4dqwu7aMzepo3ykZxJjuCTKHxSZhMFgFEVJdMnEWijzMQ
+         4OK4NrXKsPyQwINbXvWLrftHsbAJJ89EImzQEtTLQNGL+SglcljoIHO3JMPHLcNyMmGY
+         SbZjlnEetR0PP3rAg+O5gt8GlAF6yBNvph3K94WMAmFlAdCo39Uove1X+BjzrsEl9b39
+         KsH0pCOsHcvrx0gwMW2ro5yXgB4wZQDRCWW/DMvW4T3Dt3RCRdDl1JGD/uU77lML5jSg
+         lxSw==
+X-Gm-Message-State: AOAM532tCBabVN96OM+jdGi1szSRwmGcsYe4zJ1U0wRlqeJvdit+7S2p
+	NwdJo+w9FmWBI2ay5ERHGULSGSCc3s9e
+X-Google-Smtp-Source: ABdhPJyR+XurQ2VU8sVN/Wvi1+pRFBb3jTbtVqYPDF+OIAHsViOVOZ1E6EVNxj4iOKTYVJL7L7XWW/c6hiCM8Td04dKLMw==
+MIME-Version: 1.0
+X-Received: by 2002:ac8:7191:: with SMTP id w17mr6175077qto.360.1595534729918;
+ Thu, 23 Jul 2020 13:05:29 -0700 (PDT)
+Date: Thu, 23 Jul 2020 20:05:29 GMT
+X-Account-Notification-Type: 127
+Feedback-ID: 127:account-notifier
+X-Notifications: 093b33f3e6400000
+Message-ID: <P9PJXrTYeu_vwz_LUdONZQ.0@notifications.google.com>
+Subject: =?UTF-8?B?QWxlcnRlIGRlIHPDqWN1cml0w6k=?=
+From: Google <no-reply@accounts.google.com>
+To: jean.delafiction@gmail.com
+Content-Type: multipart/alternative; boundary="000000000000cdb85605ab2160ca"
+
+--000000000000cdb85605ab2160ca
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+Content-Transfer-Encoding: base64
+
+W2ltYWdlOiBHb29nbGVdDQpNb3ppbGxhIFRodW5kZXJiaXJkIEVtYWlsIGEgZMOpc29ybWFpcyBh
+Y2PDqHMgw6Agdm90cmUgY29tcHRlIEdvb2dsZQ0KDQoNCmplYW4uZGVsYWZpY3Rpb25AZ21haWwu
+Y29tDQoNClNpIHZvdXMgbifDqnRlcyBwYXMgw6AgbCdvcmlnaW5lIGRlIGNldHRlIGF1dG9yaXNh
+dGlvbiwgbm91cyB2b3VzIGNvbnNlaWxsb25zDQpkZSB2w6lyaWZpZXIgY2V0dGUgYWN0aXZpdMOp
+IGV0IGRlIHPDqWN1cmlzZXIgdm90cmUgY29tcHRlLg0KQ29uc3VsdGVyIGwnYWN0aXZpdMOpDQo8
+aHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tL0FjY291bnRDaG9vc2VyP0VtYWlsPWplYW4uZGVs
+YWZpY3Rpb25AZ21haWwuY29tJmNvbnRpbnVlPWh0dHBzOi8vbXlhY2NvdW50Lmdvb2dsZS5jb20v
+YWxlcnQvbnQvMTU5NTUzNDcyOTAwMD9yZm4lM0QxMjclMjZyZm5jJTNEMSUyNmVpZCUzRDc3OTUw
+MDcyNzg2NDM3OTMyOTElMjZldCUzRDA+DQpDZXQgZS1tYWlsIHZvdXMgYSDDqXTDqSBlbnZvecOp
+IHBvdXIgdm91cyBpbmZvcm1lciBkZSBtb2RpZmljYXRpb25zDQppbXBvcnRhbnRlcyBhcHBvcnTD
+qWVzIMOgIHZvdHJlIGNvbXB0ZSBldCBhdXggc2VydmljZXMgR29vZ2xlIHF1ZSB2b3VzDQp1dGls
+aXNlei4NCsKpIDIwMjAgR29vZ2xlIExMQywgMTYwMCBBbXBoaXRoZWF0cmUgUGFya3dheSwgTW91
+bnRhaW4gVmlldywgQ0EgOTQwNDMsIFVTQQ0K
+--000000000000cdb85605ab2160ca
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html><html lang=3D"en"><head><meta name=3D"format-detection" cont=
+ent=3D"email=3Dno"/><meta name=3D"format-detection" content=3D"date=3Dno"/>=
+<style nonce=3D"vCjIa/Y3AQqd++SDoLFZNw">.awl a {color: #FFFFFF; text-decora=
+tion: none;} .abml a {color: #000000; font-family: Roboto-Medium,Helvetica,=
+Arial,sans-serif; font-weight: bold; text-decoration: none;} .adgl a {color=
+: rgba(0, 0, 0, 0.87); text-decoration: none;} .afal a {color: #b0b0b0; tex=
+t-decoration: none;} @media screen and (min-width: 600px) {.v2sp {padding: =
+6px 30px 0px;} .v2rsp {padding: 0px 10px;}} @media screen and (min-width: 6=
+00px) {.mdv2rw {padding: 40px 40px;}} </style><link href=3D"//fonts.googlea=
+pis.com/css?family=3DGoogle+Sans" rel=3D"stylesheet" type=3D"text/css"/></h=
+ead><body style=3D"margin: 0; padding: 0;" bgcolor=3D"#FFFFFF"><table width=
+=3D"100%" height=3D"100%" style=3D"min-width: 348px;" border=3D"0" cellspac=
+ing=3D"0" cellpadding=3D"0" lang=3D"en"><tr height=3D"32" style=3D"height: =
+32px;"><td></td></tr><tr align=3D"center"><td><div itemscope itemtype=3D"//=
+schema.org/EmailMessage"><div itemprop=3D"action" itemscope itemtype=3D"//s=
+chema.org/ViewAction"><link itemprop=3D"url" href=3D"https://accounts.googl=
+e.com/AccountChooser?Email=3Djean.delafiction@gmail.com&amp;continue=3Dhttp=
+s://myaccount.google.com/alert/nt/1595534729000?rfn%3D127%26rfnc%3D1%26eid%=
+3D7795007278643793291%26et%3D0"/><meta itemprop=3D"name" content=3D"Consult=
+er l&#39;activit=C3=A9 du compte"/></div></div><table border=3D"0" cellspac=
+ing=3D"0" cellpadding=3D"0" style=3D"padding-bottom: 20px; max-width: 516px=
+; min-width: 220px;"><tr><td width=3D"8" style=3D"width: 8px;"></td><td><di=
+v style=3D"border-style: solid; border-width: thin; border-color:#dadce0; b=
+order-radius: 8px; padding: 40px 20px;" align=3D"center" class=3D"mdv2rw"><=
+img src=3D"https://www.gstatic.com/images/branding/googlelogo/2x/googlelogo=
+_color_74x24dp.png" width=3D"74" height=3D"24" aria-hidden=3D"true" style=
+=3D"margin-bottom: 16px;" alt=3D"Google"><div style=3D"font-family: &#39;Go=
+ogle Sans&#39;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;border-bottom:=
+ thin solid #dadce0; color: rgba(0,0,0,0.87); line-height: 32px; padding-bo=
+ttom: 24px;text-align: center; word-break: break-word;"><div style=3D"font-=
+size: 24px;"><a>Mozilla Thunderbird Email</a> a d=C3=A9sormais acc=C3=A8s =
+=C3=A0 votre compte=C2=A0Google</div><table align=3D"center" style=3D"margi=
+n-top:8px;"><tr style=3D"line-height: normal;"><td align=3D"right" style=3D=
+"padding-right:8px;"><img width=3D"20" height=3D"20" style=3D"width: 20px; =
+height: 20px; vertical-align: sub; border-radius: 50%;;" src=3D"https://www=
+.gstatic.com/accountalerts/email/anonymous_profile_photo.png" alt=3D""></td=
+><td><a style=3D"font-family: &#39;Google Sans&#39;,Roboto,RobotoDraft,Helv=
+etica,Arial,sans-serif;color: rgba(0,0,0,0.87); font-size: 14px; line-heigh=
+t: 20px;">jean.delafiction@gmail.com</a></td></tr></table></div><div style=
+=3D"font-family: Roboto-Regular,Helvetica,Arial,sans-serif; font-size: 14px=
+; color: rgba(0,0,0,0.87); line-height: 20px;padding-top: 20px; text-align:=
+ left;"><br>Si vous n'=C3=AAtes pas =C3=A0 l'origine de cette autorisation,=
+ nous vous conseillons de v=C3=A9rifier cette activit=C3=A9 et de s=C3=A9cu=
+riser votre compte.<div style=3D"padding-top: 32px; text-align: center;"><a=
+ href=3D"https://accounts.google.com/AccountChooser?Email=3Djean.delafictio=
+n@gmail.com&amp;continue=3Dhttps://myaccount.google.com/alert/nt/1595534729=
+000?rfn%3D127%26rfnc%3D1%26eid%3D7795007278643793291%26et%3D0" target=3D"_b=
+lank" link-id=3D"main-button-link" style=3D"font-family: &#39;Google Sans&#=
+39;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif; line-height: 16px; color=
+: #ffffff; font-weight: 400; text-decoration: none;font-size: 14px;display:=
+inline-block;padding: 10px 24px;background-color: #4184F3; border-radius: 5=
+px; min-width: 90px;">Consulter l&#39;activit=C3=A9</a></div></div></div><d=
+iv style=3D"text-align: left;"><div style=3D"font-family: Roboto-Regular,He=
+lvetica,Arial,sans-serif;color: rgba(0,0,0,0.54); font-size: 11px; line-hei=
+ght: 18px; padding-top: 12px; text-align: center;"><div>Cet e-mail vous a =
+=C3=A9t=C3=A9 envoy=C3=A9 pour vous informer de modifications importantes a=
+pport=C3=A9es =C3=A0 votre compte et aux services Google que vous utilisez.=
+</div><div style=3D"direction: ltr;">&copy; 2020 Google LLC, <a class=3D"af=
+al" style=3D"font-family: Roboto-Regular,Helvetica,Arial,sans-serif;color: =
+rgba(0,0,0,0.54); font-size: 11px; line-height: 18px; padding-top: 12px; te=
+xt-align: center;">1600 Amphitheatre Parkway, Mountain View, CA 94043, USA<=
+/a></div></div></div></td><td width=3D"8" style=3D"width: 8px;"></td></tr><=
+/table></td></tr><tr height=3D"32" style=3D"height: 32px;"><td></td></tr></=
+table></body></html>
+--000000000000cdb85605ab2160ca--

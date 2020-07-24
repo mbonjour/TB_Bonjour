@@ -54,6 +54,15 @@ Armando Faz-Hernandez, Sam Scott, Nick Sullivan, Riad Wahby, and Christopher
 \newblock
   \url{http://www.ietf.org/internet-drafts/draft-irtf-cfrg-hash-to-curve-09.txt}.
 
+\bibitem{DBLP:conf/eurocrypt/HorwitzL02}
+Jeremy Horwitz and Ben Lynn.
+\newblock Toward hierarchical identity-based encryption.
+\newblock In Lars~R. Knudsen, editor, {\em Advances in Cryptology - {EUROCRYPT}
+  2002, International Conference on the Theory and Applications of
+  Cryptographic Techniques, Amsterdam, The Netherlands, April 28 - May 2, 2002,
+  Proceedings}, volume 2332 of {\em Lecture Notes in Computer Science}, pages
+  466--481. Springer, 2002.
+
 \bibitem{DBLP:conf/cans/HuangSMZ05}
 Xinyi Huang, Willy Susilo, Yi~Mu, and Futai Zhang.
 \newblock On the security of certificateless signature schemes from asiacrypt
@@ -81,6 +90,14 @@ Damian Poddebniak, Christian Dresen, Jens M{\"{u}}ller, Fabian Ising, Sebastian
 \newblock In William Enck and Adrienne~Porter Felt, editors, {\em 27th {USENIX}
   Security Symposium, {USENIX} Security 2018, Baltimore, MD, USA, August 15-17,
   2018}, pages 549--566. {USENIX} Association, 2018.
+
+\bibitem{performanceRELIC}
+Lucian Popa, Bogdan Groza, and Pal-Stefan Murvay.
+\newblock Performance evaluation of elliptic curve libraries on
+  automotive-grade microcontrollers.
+\newblock In {\em Proceedings of the 14th International Conference on
+  Availability, Reliability and Security}, ARES ’19, New York, NY, USA, 2019.
+  Association for Computing Machinery.
 
 \bibitem{DBLP:conf/crypto/Shamir84}
 Adi Shamir.
