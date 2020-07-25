@@ -1,14 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  24 JUL 2020 16:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.3.5)  25 JUL 2020 23:23
 entering extended mode
- \write18 enabled.
- %&-line parsing enabled.
-**tb_report_bonjour.tex
-(./tb_report_bonjour.tex
-LaTeX2e <2020-02-02> patch level 2
-L3 programming layer <2020-02-14>
-(/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
+**./tb_report_bonjour.tex
+(tb_report_bonjour.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-02-25>
+(C:\Users\micbo\Documents\Latex\tex/latex/base\book.cls
 Document Class: book 2019/12/20 v1.4l Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/bk11.clo
+(C:\Users\micbo\Documents\Latex\tex/latex/base\bk11.clo
 File: bk11.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
 \c@part=\count167
@@ -24,43 +22,50 @@ File: bk11.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 \belowcaptionskip=\skip48
 \bibindent=\dimen134
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/base\fontenc.sty
 Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/base\inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks14
-\inpenc@posthook=\toks15
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 )
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2020/02/14 3.40 The Babel package
+(C:\Users\micbo\Documents\Latex\tex/generic/babel\babel.sty
+Package: babel 2020/02/28 3.41 The Babel package
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
-File: switch.def 2020/02/14 3.40 Babel switching mechanism
+(C:\Users\micbo\Documents\Latex\tex/generic/babel\switch.def
+File: switch.def 2020/02/28 3.41 Babel switching mechanism
 )
-(/usr/share/texlive/texmf-dist/tex/generic/babel-french/french.ldf
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\micbo\Documents\Latex\tex/latex/arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\micbo\Documents\Latex\tex/generic/babel-french\french.ldf
 Language: french 2020/01/30 v3.5g French support from the babel system
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/02/14 3.40 Babel common definitions
+(C:\Users\micbo\Documents\Latex\tex/generic/babel\babel.def
+File: babel.def 2020/02/28 3.41 Babel common definitions
 \babel@savecnt=\count176
 \U@D=\dimen135
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+(C:\Users\micbo\Documents\Latex\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
 \bbl@dirlevel=\count177
 )
 Package babel Info: \l@acadian = using hyphenrules for french
-(babel)             (\language43) on input line 91.
+(babel)             (\language22) on input line 91.
 Package babel Info: \l@canadien = using hyphenrules for french
-(babel)             (\language43) on input line 92.
+(babel)             (\language22) on input line 92.
 \FB@nonchar=\count178
 Package babel Info: Making : an active character on input line 419.
 Package babel Info: Making ; an active character on input line 420.
 Package babel Info: Making ! an active character on input line 421.
 Package babel Info: Making ? an active character on input line 422.
 \FBguill@level=\count179
-\FBold@everypar=\toks16
+\FBold@everypar=\toks17
 \FB@Mht=\dimen136
 \mc@charclass=\count180
 \mc@charfam=\count181
@@ -76,71 +81,73 @@ Package babel Info: Making ? an active character on input line 422.
 \parindentFFN=\dimen142
 \FBfnindent=\dimen143
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/carlisle/scalefnt.sty)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/carlisle\scalefnt.sty)
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks17
+\KV@toks@=\toks18
 )
-(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/url\url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pgf-umlsd/pgf-umlsd.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf-umlsd\pgf-umlsd.sty
 Package: pgf-umlsd 2011/07/27 v0.6 Some LaTeX macros for UML Sequence Diagrams.
 
 
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks18
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf/frontendlayer\tikz.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf/basiclayer\pgf.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf/utilities\pgfrcs.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/utilities\pgfutil-common.tex
+\pgfutil@everybye=\toks19
 \pgfutil@tempdima=\dimen144
 \pgfutil@tempdimb=\dimen145
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.t
-ex)) (/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/utilities\pgfutil-common-lists.
+tex))
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/utilities\pgfutil-latex.def
 \pgfutil@abb=\box45
-(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+
+(C:\Users\micbo\Documents\Latex\tex/latex/ms\everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 ))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/utilities\pgfrcs.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf\pgf.revision.tex)
 Package: pgfrcs 2020/01/08 v3.1.5b (3.1.5b)
 ))
 Package: pgf 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf/basiclayer\pgfcore.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics\graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics\graphics.sty
 Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics\trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics-cfg\graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics-def\pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen146
 \Gin@req@width=\dimen147
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf/systemlayer\pgfsys.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/systemlayer\pgfsys.code.tex
 Package: pgfsys 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks19
-\pgfkeys@temptoks=\toks20
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/utilities\pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks20
+\pgfkeys@temptoks=\toks21
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.t
-ex
-\pgfkeys@tmptoks=\toks21
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/utilities\pgfkeysfiltered.code.
+tex
+\pgfkeys@tmptoks=\toks22
 ))
 \pgf@x=\dimen148
 \pgf@y=\dimen149
@@ -158,35 +165,35 @@ ex
 \c@pgf@countb=\count187
 \c@pgf@countc=\count188
 \c@pgf@countd=\count189
-\t@pgf@toka=\toks22
-\t@pgf@tokb=\toks23
-\t@pgf@tokc=\toks24
+\t@pgf@toka=\toks23
+\t@pgf@tokb=\toks24
+\t@pgf@tokc=\toks25
 \pgf@sys@id@count=\count190
- (/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+ (C:\Users\micbo\Documents\Latex\tex/generic/pgf/systemlayer\pgf.cfg
 File: pgf.cfg 2020/01/08 v3.1.5b (3.1.5b)
 )
 Driver file for pgf: pgfsys-pdftex.def
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/systemlayer\pgfsys-pdftex.def
 File: pgfsys-pdftex.def 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.de
-f
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/systemlayer\pgfsys-common-pdf.d
+ef
 File: pgfsys-common-pdf.def 2020/01/08 v3.1.5b (3.1.5b)
 )))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.
-tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/systemlayer\pgfsyssoftpath.code
+.tex
 File: pgfsyssoftpath.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfsyssoftpath@smallbuffer@items=\count191
 \pgfsyssoftpath@bigbuffer@items=\count192
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.
-tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/systemlayer\pgfsysprotocol.code
+.tex
 File: pgfsysprotocol.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+)) (C:\Users\micbo\Documents\Latex\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -200,43 +207,43 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcore.code.tex
 Package: pgfcore 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmath.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathcalc.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathutil.code.tex)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathparser.code.tex
 \pgfmath@dimen=\dimen158
 \pgfmath@count=\count193
 \pgfmath@box=\box46
-\pgfmath@toks=\toks25
-\pgfmath@stack@operand=\toks26
-\pgfmath@stack@operation=\toks27
+\pgfmath@toks=\toks26
+\pgfmath@stack@operand=\toks27
+\pgfmath@stack@operation=\toks28
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code
-.tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonomet
-ric.code.tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.cod
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfunctions.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfunctions.basic.cod
 e.tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison
-.code.tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.
-tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfunctions.trigonome
+tric.code.tex)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfunctions.random.co
+de.tex)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfunctions.compariso
+n.code.tex)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfunctions.base.code
 .tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.
-tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerari
-thmetics.code.tex)))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfunctions.round.cod
+e.tex)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfunctions.misc.code
+.tex)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfunctions.integerar
+ithmetics.code.tex)))
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmathfloat.code.tex
 \c@pgfmathroundto@lastzeros=\count194
 ))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.te
-x
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfint.code.tex)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorepoints.code.t
+ex
 File: pgfcorepoints.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@picminx=\dimen159
 \pgf@picmaxx=\dimen160
@@ -253,117 +260,123 @@ File: pgfcorepoints.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@zx=\dimen171
 \pgf@zy=\dimen172
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.
-code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorepathconstruct
+.code.tex
 File: pgfcorepathconstruct.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@path@lastx=\dimen173
 \pgf@path@lasty=\dimen174
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code
-.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorepathusage.cod
+e.tex
 File: pgfcorepathusage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@shorten@end@additional=\dimen175
 \pgf@shorten@start@additional=\dimen176
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.te
-x
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorescopes.code.t
+ex
 File: pgfcorescopes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfpic=\box47
 \pgf@hbox=\box48
 \pgf@layerbox@main=\box49
 \pgf@picture@serial@count=\count195
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.c
-ode.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcoregraphicstate.
+code.tex
 File: pgfcoregraphicstate.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgflinewidth=\dimen177
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformation
-s.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcoretransformatio
+ns.code.tex
 File: pgfcoretransformations.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@pt@x=\dimen178
 \pgf@pt@y=\dimen179
 \pgf@pt@temp=\dimen180
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorequick.code.te
+x
 File: pgfcorequick.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.t
-ex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcoreobjects.code.
+tex
 File: pgfcoreobjects.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing
-.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorepathprocessin
+g.code.tex
 File: pgfcorepathprocessing.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.te
-x
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorearrows.code.t
+ex
 File: pgfcorearrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfarrowsep=\dimen181
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcoreshade.code.te
+x
 File: pgfcoreshade.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@max=\dimen182
 \pgf@sys@shading@range@num=\count196
 \pgf@shadingcount=\count197
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcoreimage.code.te
+x
 File: pgfcoreimage.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.
-tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcoreexternal.code
+.tex
 File: pgfcoreexternal.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfexternal@startupbox=\box50
 ))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.te
-x
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorelayers.code.t
+ex
 File: pgfcorelayers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.c
-ode.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcoretransparency.
+code.tex
 File: pgfcoretransparency.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.
-tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorepatterns.code
+.tex
 File: pgfcorepatterns.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex
 File: pgfcorerdf.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/modules\pgfmoduleshapes.code.te
+x
 File: pgfmoduleshapes.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfnodeparttextbox=\box51
-) (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/modules\pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65
-.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf/compatibility\pgfcomp-version-0-6
+5.sty
 Package: pgfcomp-version-0-65 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@nodesepstart=\dimen183
 \pgf@nodesepend=\dimen184
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18
-.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf/compatibility\pgfcomp-version-1-1
+8.sty
 Package: pgfcomp-version-1-18 2020/01/08 v3.1.5b (3.1.5b)
-)) (/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
-(/usr/share/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+)) (C:\Users\micbo\Documents\Latex\tex/latex/pgf/utilities\pgffor.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf/utilities\pgfkeys.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/utilities\pgfkeys.code.tex))
+(C:\Users\micbo\Documents\Latex\tex/latex/pgf/math\pgfmath.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmath.code.tex))
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/utilities\pgffor.code.tex
 Package: pgffor 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/math\pgfmath.code.tex)
 \pgffor@iter=\dimen185
 \pgffor@skip=\dimen186
-\pgffor@stack=\toks28
-\pgffor@toks=\toks29
+\pgffor@stack=\toks29
+\pgffor@toks=\toks30
 ))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/frontendlayer/tikz\tikz.code.te
+x
 Package: tikz 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers
-.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/libraries\pgflibraryplothandler
+s.code.tex
 File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgf@plot@mark@count=\count198
 \pgfplotmarksize=\dimen187
@@ -385,7 +398,8 @@ File: pgflibraryplothandlers.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \tikznumberofcurrentchild=\count267
 \tikz@fig@count=\count268
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/modules\pgfmodulematrix.code.te
+x
 File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \pgfmatrixcurrentrow=\count269
 \pgfmatrixcurrentcolumn=\count270
@@ -393,31 +407,31 @@ File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
 \tikz@expandcount=\count272
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
-zlibrarytopaths.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/frontendlayer/tikz/libraries\ti
+kzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
-zlibraryarrows.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/frontendlayer/tikz/libraries\ti
+kzlibraryarrows.code.tex
 File: tikzlibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.
-tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/libraries\pgflibraryarrows.code
+.tex
 File: pgflibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \arrowsize=\dimen196
 ))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
-zlibraryshadows.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/frontendlayer/tikz/libraries\ti
+kzlibraryshadows.code.tex
 File: tikzlibraryshadows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
-zlibraryfadings.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/frontendlayer/tikz/libraries\ti
+kzlibraryfadings.code.tex
 File: tikzlibraryfadings.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code
-.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/libraries\pgflibraryfadings.cod
+e.tex
 File: pgflibraryfadings.code.tex 2020/01/08 v3.1.5b (3.1.5b)
-))) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+))) (C:\Users\micbo\Documents\Latex\tex/latex/base\ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \c@preinst=\count273
@@ -428,25 +442,25 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 \c@callselflevel=\count278
 \c@blocklevel=\count279
 )
-(./template/TB-style.sty
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+(template/TB-style.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2020/01/20 v2.17e AMS math features
 \@mathmargin=\skip49
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks30
+\@emptytoks=\toks31
 \ex@=\dimen197
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen198
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count280
@@ -469,25 +483,25 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
 \dotsspace@=\muskip17
 \c@parentequation=\count287
 \dspbrk@lvl=\count288
-\tag@help=\toks31
+\tag@help=\toks32
 \row@=\count289
 \column@=\count290
 \maxfields@=\count291
-\andhelp@=\toks32
+\andhelp@=\toks33
 \eqnshift@=\dimen256
 \alignsep@=\dimen257
 \tagshift@=\dimen258
 \tagwidth@=\dimen259
 \totwidth@=\dimen260
 \lineht@=\dimen261
-\@envbody=\toks33
+\@envbody=\toks34
 \multlinegap=\skip50
 \multlinetaggap=\skip51
-\mathdisplay@stack=\toks34
+\mathdisplay@stack=\toks35
 LaTeX Info: Redefining \[ on input line 2859.
 LaTeX Info: Redefining \] on input line 2860.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
@@ -495,24 +509,24 @@ LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
-(/usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/comment\comment.sty
 \CommentStream=\write4
 
 Excluding comment 'comment')
-(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
-(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-02-14 L3 programming layer (loader) 
+(C:\Users\micbo\Documents\Latex\tex/latex/lipsum\lipsum.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/l3kernel\expl3.sty
+Package: expl3 2020-02-25 L3 programming layer (loader) 
 
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+(C:\Users\micbo\Documents\Latex\tex/latex/l3backend\l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count292
 \l__pdf_internal_box=\box58
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2020-02-14 L3 Experimental document command parser
+(C:\Users\micbo\Documents\Latex\tex/latex/l3packages/xparse\xparse.sty
+Package: xparse 2020-02-25 L3 Experimental document command parser
 \l__xparse_current_arg_int=\count293
 \g__xparse_grabber_int=\count294
 \l__xparse_m_args_int=\count295
@@ -520,10 +534,10 @@ Package: xparse 2020-02-14 L3 Experimental document command parser
 )
 Package: lipsum 2019/01/02 v2.2 150 paragraphs of Lorem Ipsum dummy text
 
-(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex
+(C:\Users\micbo\Documents\Latex\tex/latex/lipsum\lipsum.ltd.tex
 File: lipsum.ltd.tex 2019/01/02 v2.2 The Lorem ipsum dummy text
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/tools\calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count297
 \calc@Bcount=\count298
@@ -536,34 +550,34 @@ LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count299
 \calc@Cskip=\skip54
 )
-(/usr/share/texlive/texmf-dist/tex/latex/wasysym/wasysym.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/wasysym\wasysym.sty
 Package: wasysym 2020/01/19 v2.4 Wasy-2 symbol support package
 \symwasy=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `wasy' in version `bold'
 (Font)                  U/wasy/m/n --> U/wasy/b/n on input line 93.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/tools\verbatim.sty
 Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks35
-\verbatim@line=\toks36
+\every@verbatim=\toks36
+\verbatim@line=\toks37
 \verbatim@in@stream=\read4
 )
-(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/algorithms\algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
 
-(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count300
-\float@exts=\toks37
+\float@exts=\toks38
 \float@box=\box59
-\@float@everytoks=\toks38
+\@float@everytoks=\toks39
 \@floatcapt=\box60
 )
-\@float@every@algorithm=\toks39
+\@float@every@algorithm=\toks40
 \c@algorithm=\count301
 )
-(/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithmic.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/algorithms\algorithmic.sty
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 \c@ALC@unique=\count302
 \c@ALC@line=\count303
@@ -572,64 +586,63 @@ Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 \ALC@tlm=\skip55
 \algorithmicindent=\skip56
 )
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
 
-(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/iftex\iftex.sty
 Package: iftex 2019/11/07 v1.0c TeX engine tests
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/pdftexcmds\pdftexcmds.sty
 Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
 )
 
-(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/infwarerr\infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/kvsetkeys\kvsetkeys.sty
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/kvdefinekeys\kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/pdfescape\pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/letltxmacro\letltxmacro.sty
 Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/auxhook\auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
 )
 \@linkdim=\dimen264
 \Hy@linkcounter=\count306
 \Hy@pagecounter=\count307
 
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+(C:\Users\micbo\Documents\Latex\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/etexcmds\etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count308
-\pdfmajorversion=\count309
 Package hyperref Info: Hyper figures OFF on input line 4547.
 Package hyperref Info: Link nesting OFF on input line 4552.
 Package hyperref Info: Hyper index ON on input line 4555.
@@ -637,18 +650,18 @@ Package hyperref Info: Plain pages OFF on input line 4562.
 Package hyperref Info: Backreferencing OFF on input line 4567.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4800.
-\c@Hy@tempcnt=\count310
+\c@Hy@tempcnt=\count309
 LaTeX Info: Redefining \url on input line 5159.
 \XeTeXLinkMargin=\dimen265
 
-(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/bigintcalc\bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count311
+\Fld@menulength=\count310
 \Field@Width=\dimen266
 \Fld@charsize=\dimen267
 Package hyperref Info: Hyper figures OFF on input line 6430.
@@ -661,29 +674,29 @@ Package hyperref Info: PDF/A mode OFF on input line 6460.
 LaTeX Info: Redefining \ref on input line 6500.
 LaTeX Info: Redefining \pageref on input line 6504.
 
-(/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/atbegshi\atbegshi.sty
 Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
 )
-\Hy@abspage=\count312
-\c@Item=\count313
-\c@Hfootnote=\count314
+\Hy@abspage=\count311
+\c@Item=\count312
+\c@Hfootnote=\count313
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+(C:\Users\micbo\Documents\Latex\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
 
-(/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/atveryend\atveryend.sty
 Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
 Package atveryend Info: \enddocument detected (standard20110627).
 )
-\Fld@listcount=\count315
-\c@bookmark@seq@number=\count316
+\Fld@listcount=\count314
+\c@bookmark@seq@number=\count315
 
-(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/rerunfilecheck\rerunfilecheck.sty
 Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/uniquecounter\uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
@@ -691,20 +704,20 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip57
 )
-(/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/preprint\fullpage.sty
 Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip58
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/tools\multicol.sty
 Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
-\c@tracingmulticols=\count317
+\c@tracingmulticols=\count316
 \mult@box=\box61
 \multicol@leftmargin=\dimen268
-\c@unbalance=\count318
-\c@collectmore=\count319
-\doublecol@number=\count320
-\multicoltolerance=\count321
-\multicolpretolerance=\count322
+\c@unbalance=\count317
+\c@collectmore=\count318
+\doublecol@number=\count319
+\multicoltolerance=\count320
+\multicolpretolerance=\count321
 \full@width=\dimen269
 \page@free=\dimen270
 \premulticols=\dimen271
@@ -755,65 +768,65 @@ Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
 \@tempa=\box102
 \@tempa=\box103
 \@tempa=\box104
-\c@minrows=\count323
-\c@columnbadness=\count324
-\c@finalcolumnbadness=\count325
+\c@minrows=\count322
+\c@columnbadness=\count323
+\c@finalcolumnbadness=\count324
 \last@try=\dimen274
 \multicolovershoot=\dimen275
 \multicolundershoot=\dimen276
 \mult@nat@firstbox=\box105
 \colbreak@box=\box106
-\mc@col@check@num=\count326
+\mc@col@check@num=\count325
 )
-(/usr/share/texlive/texmf-dist/tex/latex/menukeys/menukeys.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/menukeys\menukeys.sty
 Package: menukeys 2016/08/08 v1.5 -- A package to format menus, paths and short
 cuts
 
-(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.sty
-(/usr/share/texlive/texmf-dist/tex/generic/xstring/xstring.tex
-\integerpart=\count327
-\decimalpart=\count328
+(C:\Users\micbo\Documents\Latex\tex/latex/xstring\xstring.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/xstring\xstring.tex
+\integerpart=\count326
+\decimalpart=\count327
 )
 Package: xstring 2019/02/06 v1.83 String manipulations (CT)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count329
+\etb@tempcnta=\count328
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
-zlibrarycalc.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/frontendlayer/tikz/libraries\ti
+kzlibrarycalc.code.tex
 File: tikzlibrarycalc.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
-zlibraryshapes.symbols.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/frontendlayer/tikz/libraries\ti
+kzlibraryshapes.symbols.code.tex
 File: tikzlibraryshapes.symbols.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshape
-s.symbols.code.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/pgf/libraries/shapes\pgflibraryshap
+es.symbols.code.tex
 File: pgflibraryshapes.symbols.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/adjustbox\adjustbox.sty
 Package: adjustbox 2019/01/04 v1.2 Adjusting TeX boxes (trim, clip, ...)
 
-(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/xkeyval\xkeyval.sty
 Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
-(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks40
-\XKV@tempa@toks=\toks41
+(C:\Users\micbo\Documents\Latex\tex/generic/xkeyval\xkeyval.tex
+(C:\Users\micbo\Documents\Latex\tex/generic/xkeyval\xkvutils.tex
+\XKV@toks=\toks41
+\XKV@tempa@toks=\toks42
 )
-\XKV@depth=\count330
+\XKV@depth=\count329
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/adjustbox\adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
 -ends (calc, etex, pgfmath)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/adjustbox\trimclip.sty
 Package: trimclip 2018/04/08 v1.1 Trim and clip general TeX material
 
-(/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/collectbox\collectbox.sty
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
 \collectedbox=\box107
 )
@@ -823,7 +836,7 @@ Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
 \tc@ury=\dimen280
 Package trimclip Info: Using driver 'tc-pdftex.def'.
 
-(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+(C:\Users\micbo\Documents\Latex\tex/latex/adjustbox\tc-pdftex.def
 File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
 ))
 \adjbox@Width=\dimen281
@@ -835,142 +848,142 @@ File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
 \adjbox@pdepth=\dimen287
 \adjbox@ptotalheight=\dimen288
 
-(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/ifoddpage\ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count331
+\c@checkoddpage=\count330
 )
-(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/varwidth\varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box108
-\sift@deathcycles=\count332
+\sift@deathcycles=\count331
 \@vwid@loff=\dimen289
 \@vwid@roff=\dimen290
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/relsize\relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-(/usr/share/texlive/texmf-dist/tex/latex/catoptions/catoptions.sty
-\m@one=\count333
+(C:\Users\micbo\Documents\Latex\tex/latex/catoptions\catoptions.sty
+\m@one=\count332
 \z@pt=\dimen291
 Package: catoptions 2014/08/29 v0.2.7h Securing catcodes and parsing options (A
 M)
-\cpt@csvdepth=\count334
-\cpt@optdepth=\count335
-\cpt@cnta=\count336
-\indrisdepth=\count337
-\cpt@foreachdepth=\count338
-\cpt@exprcnt=\count339
+\cpt@csvdepth=\count333
+\cpt@optdepth=\count334
+\cpt@cnta=\count335
+\indrisdepth=\count336
+\cpt@foreachdepth=\count337
+\cpt@exprcnt=\count338
 )
-\c@tw@hyphen@char@num=\count340
+\c@tw@hyphen@char@num=\count339
 )
-(/usr/share/texlive/texmf-dist/tex/latex/xifthen/xifthen.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/xifthen\xifthen.sty
 Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
 
-(/usr/share/texlive/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/ifmtarg\ifmtarg.sty
 Package: ifmtarg 2018/04/16 v1.2b check for an empty argument
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/graphics\lscape.sty
 Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/tools\longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
 \LTleft=\skip61
 \LTright=\skip62
 \LTpre=\skip63
 \LTpost=\skip64
-\LTchunksize=\count341
+\LTchunksize=\count340
 \LTcapwidth=\dimen292
 \LT@head=\box109
 \LT@firsthead=\box110
 \LT@foot=\box111
 \LT@lastfoot=\box112
-\LT@cols=\count342
-\LT@rows=\count343
-\c@LT@tables=\count344
-\c@LT@chunks=\count345
-\LT@p@ftn=\toks42
+\LT@cols=\count341
+\LT@rows=\count342
+\c@LT@tables=\count343
+\c@LT@chunks=\count344
+\LT@p@ftn=\toks43
 )
-(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
 \labelindent=\skip65
 \enit@outerparindent=\dimen293
-\enit@toks=\toks43
+\enit@toks=\toks44
 \enit@inbox=\box113
-\enit@count@id=\count346
-\enitdp@description=\count347
+\enit@count@id=\count345
+\enitdp@description=\count346
 )
-(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/lastpage\lastpage.sty
 Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/subfiles/subfiles.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/subfiles\subfiles.sty
 Package: subfiles 2020/02/14 v1.6 Multi-file projects (package)
 
-(/usr/share/texlive/texmf-dist/tex/latex/import/import.sty
-Package: import 2009/03/23  v 5.1
+(C:\Users\micbo\Documents\Latex\tex/latex/import\import.sty
+Package: import 2020/01/22  v 6.0
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/tools/layout.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/tools\layout.sty
 Package: layout 2014/10/28 v1.2c Show layout parameters
-\oneinch=\count348
-\cnt@paperwidth=\count349
-\cnt@paperheight=\count350
-\cnt@hoffset=\count351
-\cnt@voffset=\count352
-\cnt@textheight=\count353
-\cnt@textwidth=\count354
-\cnt@topmargin=\count355
-\cnt@oddsidemargin=\count356
-\cnt@evensidemargin=\count357
-\cnt@headheight=\count358
-\cnt@headsep=\count359
-\cnt@marginparsep=\count360
-\cnt@marginparwidth=\count361
-\cnt@marginparpush=\count362
-\cnt@footskip=\count363
-\fheight=\count364
-\ref@top=\count365
-\ref@hoffset=\count366
-\ref@voffset=\count367
-\ref@head=\count368
-\ref@body=\count369
-\ref@foot=\count370
-\ref@margin=\count371
-\ref@marginwidth=\count372
-\ref@marginpar=\count373
-\Interval=\count374
-\ExtraYPos=\count375
-\PositionX=\count376
-\PositionY=\count377
-\ArrowLength=\count378
+\oneinch=\count347
+\cnt@paperwidth=\count348
+\cnt@paperheight=\count349
+\cnt@hoffset=\count350
+\cnt@voffset=\count351
+\cnt@textheight=\count352
+\cnt@textwidth=\count353
+\cnt@topmargin=\count354
+\cnt@oddsidemargin=\count355
+\cnt@evensidemargin=\count356
+\cnt@headheight=\count357
+\cnt@headsep=\count358
+\cnt@marginparsep=\count359
+\cnt@marginparwidth=\count360
+\cnt@marginparpush=\count361
+\cnt@footskip=\count362
+\fheight=\count363
+\ref@top=\count364
+\ref@hoffset=\count365
+\ref@voffset=\count366
+\ref@head=\count367
+\ref@body=\count368
+\ref@foot=\count369
+\ref@margin=\count370
+\ref@marginwidth=\count371
+\ref@marginpar=\count372
+\Interval=\count373
+\ExtraYPos=\count374
+\PositionX=\count375
+\PositionY=\count376
+\ArrowLength=\count377
 ))
-(./template/TB-macros.sty
-(/usr/share/texlive/texmf-dist/tex/latex/background/background.sty
+(template/TB-macros.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/background\background.sty
 Package: background 2014/03/04 v2.1 background material
 
-(/usr/share/texlive/texmf-dist/tex/latex/everypage/everypage.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/everypage\everypage.sty
 Package: everypage 2007/06/20 1.1 Hooks to run on every page
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/afterpage.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/tools\afterpage.sty
 Package: afterpage 2014/10/28 v1.08 After-Page Package (DPC)
-\AP@output=\toks44
+\AP@output=\toks45
 \AP@partial=\box114
 \AP@footins=\box115
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcolorbox.sty
 Package: tcolorbox 2019/11/15 version 4.22 text color boxes
 
-(/usr/share/texlive/texmf-dist/tex/latex/environ/environ.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/environ\environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
 
-(/usr/share/texlive/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/trimspaces\trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
 \tcb@titlebox=\box116
 \tcb@upperbox=\box117
 \tcb@lowerbox=\box118
 \tcb@phantombox=\box119
-\c@tcbbreakpart=\count379
-\c@tcblayer=\count380
-\tcolorbox@number=\count381
+\c@tcbbreakpart=\count378
+\c@tcblayer=\count379
+\tcolorbox@number=\count380
 \tcb@temp=\box120
 \tcb@temp=\box121
 \tcb@temp=\box122
@@ -978,167 +991,160 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \tcb@out=\write5
 \tcb@record@out=\write6
 
-(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbraster.code.tex
+(C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbraster.code.tex
 Library (tcolorbox): 'tcbraster.code.tex' version '4.22'
-\c@tcbrastercolumn=\count382
-\c@tcbrasterrow=\count383
-\c@tcbraster=\count384
-) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbskins.code.tex
+\c@tcbrastercolumn=\count381
+\c@tcbrasterrow=\count382
+\c@tcbraster=\count383
+) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbskins.code.tex
 Library (tcolorbox): 'tcbskins.code.tex' version '4.22'
 \tcb@waterbox=\box124
-(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbskinsjigsaw.code.tex
+(C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbskinsjigsaw.code.tex
 Library (tcolorbox): 'tcbskinsjigsaw.code.tex' version '4.22'
-)) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbbreakable.code.tex
+)) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbbreakable.code.tex
 Library (tcolorbox): 'tcbbreakable.code.tex' version '4.22'
 \tcb@testbox=\box125
 \tcb@totalupperbox=\box126
 \tcb@totallowerbox=\box127
-) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbhooks.code.tex
+) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbhooks.code.tex
 Library (tcolorbox): 'tcbhooks.code.tex' version '4.22'
-) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbtheorems.code.tex
+) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbtheorems.code.tex
 Library (tcolorbox): 'tcbtheorems.code.tex' version '4.22'
-) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbfitting.code.tex
+) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbfitting.code.tex
 Library (tcolorbox): 'tcbfitting.code.tex' version '4.22'
 \tcbfitdim=\dimen294
 \tcb@lowerfitdim=\dimen295
 \tcb@upperfitdim=\dimen296
-\tcb@cur@hbadness=\count385
-) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbxparse.code.tex
+\tcb@cur@hbadness=\count384
+) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbxparse.code.tex
 Library (tcolorbox): 'tcbxparse.code.tex' version '4.22'
-) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcblistingsutf8.code.tex
+) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcblistingsutf8.code.tex
 Library (tcolorbox): 'tcblistingsutf8.code.tex' version '4.22'
-(/usr/share/texlive/texmf-dist/tex/latex/listingsutf8/listingsutf8.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/listingsutf8\listingsutf8.sty
 Package: listingsutf8 2019-12-10 v1.5 Allow UTF-8 in listings input (HO)
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count386
+(C:\Users\micbo\Documents\Latex\tex/latex/listings\listings.sty
+\lst@mode=\count385
 \lst@gtempboxa=\box128
-\lst@token=\toks45
-\lst@length=\count387
+\lst@token=\toks46
+\lst@length=\count386
 \lst@currlwidth=\dimen297
-\lst@column=\count388
-\lst@pos=\count389
+\lst@column=\count387
+\lst@pos=\count388
 \lst@lostspace=\dimen298
 \lst@width=\dimen299
-\lst@newlines=\count390
-\lst@lineno=\count391
+\lst@newlines=\count389
+\lst@lineno=\count390
 \lst@maxwidth=\dimen300
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-\c@lstnumber=\count392
-\lst@skipnumbers=\count393
+\c@lstnumber=\count391
+\lst@skipnumbers=\count392
 \lst@framebox=\box129
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+(C:\Users\micbo\Documents\Latex\tex/latex/listings\listings.cfg
 File: listings.cfg 2019/09/10 1.8c listings configuration
 ))
 Package: listings 2019/09/10 1.8c (Carsten Heinz)
 
-(/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/stringenc\stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcblistings.code.tex
+(C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcblistings.code.tex
 Library (tcolorbox): 'tcblistings.code.tex' version '4.22'
-(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcblistingscore.code.tex
+(C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcblistingscore.code.tex
 Library (tcolorbox): 'tcblistingscore.code.tex' version '4.22'
-(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbprocessing.code.tex
+(C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbprocessing.code.tex
 Library (tcolorbox): 'tcbprocessing.code.tex' version '4.22'
-(/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/tools\shellesc.sty
 Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
 Package shellesc Info: Unrestricted shell escape enabled on input line 75.
 ))
-\c@tcblisting=\count394
+\c@tcblisting=\count393
 )))
-(/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbexternal.code.tex
+(C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbexternal.code.tex
 Library (tcolorbox): 'tcbexternal.code.tex' version '4.22'
-) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbmagazine.code.tex
+) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbmagazine.code.tex
 Library (tcolorbox): 'tcbmagazine.code.tex' version '4.22'
-) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbvignette.code.tex
+) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbvignette.code.tex
 Library (tcolorbox): 'tcbvignette.code.tex' version '4.22'
-) (/usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbposter.code.tex
+) (C:\Users\micbo\Documents\Latex\tex/latex/tcolorbox\tcbposter.code.tex
 Library (tcolorbox): 'tcbposter.code.tex' version '4.22'
-)) (/usr/share/texlive/texmf-dist/tex/latex/minted/minted.sty
+)) (C:\Users\micbo\Documents\Latex\tex/latex/minted\minted.sty
 Package: minted 2017/07/19 v2.5 Yet another Pygments shim for LaTeX
 
-(/usr/share/texlive/texmf-dist/tex/latex/fvextra/fvextra.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/fvextra\fvextra.sty
 Package: fvextra 2019/02/04 v1.4 fvextra - extensions and patches for fancyvrb
 
-(/usr/share/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2020/01/13 v3.5 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count395
+(C:\Users\micbo\Documents\Latex\tex/latex/fancyvrb\fancyvrb.sty
+Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count394
 \FV@InFile=\read5
 \FV@TabBox=\box130
-\c@FancyVerbLine=\count396
-\FV@StepNumber=\count397
+\c@FancyVerbLine=\count395
+\FV@StepNumber=\count396
 \FV@OutFile=\write7
 )
-(/usr/share/texlive/texmf-dist/tex/latex/upquote/upquote.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/upquote\upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/base\textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/lineno\lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count398
-\output=\toks46
-\linenoprevgraf=\count399
+\linenopenalty=\count397
+\output=\toks47
+\linenoprevgraf=\count398
 \linenumbersep=\dimen301
 \linenumberwidth=\dimen302
-\c@linenumber=\count400
-\c@pagewiselinenumber=\count401
-\c@LN@truepage=\count402
-\c@internallinenumber=\count403
-\c@internallinenumbers=\count404
+\c@linenumber=\count399
+\c@pagewiselinenumber=\count400
+\c@LN@truepage=\count401
+\c@internallinenumber=\count402
+\c@internallinenumbers=\count403
 \quotelinenumbersep=\dimen303
 \bframerule=\dimen304
 \bframesep=\dimen305
 \bframebox=\box131
 LaTeX Info: Redefining \\ on input line 3056.
 )
-\c@FV@TrueTabGroupLevel=\count405
-\c@FV@TrueTabCounter=\count406
+\c@FV@TrueTabGroupLevel=\count404
+\c@FV@TrueTabCounter=\count405
 \FV@TabBox@Group=\box132
 \FV@TmpLength=\skip66
-\c@FV@HighlightLinesStart=\count407
-\c@FV@HighlightLinesStop=\count408
-\FV@LoopCount=\count409
+\c@FV@HighlightLinesStart=\count406
+\c@FV@HighlightLinesStop=\count407
+\FV@LoopCount=\count408
 \FV@NCharsBox=\box133
 \FV@BreakIndent=\dimen306
-\FV@BreakIndentNChars=\count410
+\FV@BreakIndentNChars=\count409
 \FV@BreakSymbolSepLeft=\dimen307
-\FV@BreakSymbolSepLeftNChars=\count411
+\FV@BreakSymbolSepLeftNChars=\count410
 \FV@BreakSymbolSepRight=\dimen308
-\FV@BreakSymbolSepRightNChars=\count412
+\FV@BreakSymbolSepRightNChars=\count411
 \FV@BreakSymbolIndentLeft=\dimen309
-\FV@BreakSymbolIndentLeftNChars=\count413
+\FV@BreakSymbolIndentLeftNChars=\count412
 \FV@BreakSymbolIndentRight=\dimen310
-\FV@BreakSymbolIndentRightNChars=\count414
-\c@FancyVerbLineBreakLast=\count415
+\FV@BreakSymbolIndentRightNChars=\count413
+\c@FancyVerbLineBreakLast=\count414
 \FV@LineBox=\box134
 \FV@LineIndentBox=\box135
 \FV@LineWidth=\dimen311
 )
-(/usr/share/texlive/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/ifplatform\ifplatform.sty
 Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
 
-(/usr/share/texlive/texmf-dist/tex/generic/catchfile/catchfile.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/catchfile\catchfile.sty
 Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifluatex.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/iftex\ifluatex.sty
 Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
-)
-runsystem(uname -s > "tb_report_bonjour.w18")...executed.
-
-
-(./tb_report_bonjour.w18)
-runsystem(rm -- "tb_report_bonjour.w18")...executed.
-
-)
-(/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty
+))
+(C:\Users\micbo\Documents\Latex\tex/latex/framed\framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip67
 \fb@frw=\dimen312
@@ -1149,28 +1155,29 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \minted@appexistsfile=\read6
 \minted@bgbox=\box136
 \minted@code=\write8
-\c@minted@FancyVerbLineTemp=\count416
-\c@minted@pygmentizecounter=\count417
-\@float@every@listing=\toks47
-\c@listing=\count418
+\c@minted@FancyVerbLineTemp=\count415
+\c@minted@pygmentizecounter=\count416
+\@float@every@listing=\toks48
+\c@listing=\count417
 )
-(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/wrapfig\wrapfig.sty
 \wrapoverhang=\dimen316
 \WF@size=\dimen317
-\c@WF@wrappedlines=\count419
+\c@WF@wrappedlines=\count418
 \WF@box=\box137
-\WF@everypar=\toks48
+\WF@everypar=\toks49
 Package: wrapfig 2003/01/31  v 3.6
 )
-\c@tcb@cnt@mintedbox=\count420
-\c@tcb@cnt@sourcecolorbox=\count421
+\c@tcb@cnt@mintedbox=\count419
+\c@tcb@cnt@sourcecolorbox=\count420
 )
-(./template/TB-template.sty)
-runsystem(which pygmentize && touch tb_report_bonjour.aex)...executed.
+(template/TB-template.sty)
+runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > tb
+_report_bonjour.aex <nul: /p x=^%~$PATH:i>> tb_report_bonjour.aex)...executed.
 
-runsystem(rm tb_report_bonjour.aex)...executed.
+runsystem(del tb_report_bonjour.aex)...executed.
 
- (./tb_report_bonjour.aux)
+ (tb_report_bonjour.aux)
 \openout1 = `tb_report_bonjour.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
@@ -1200,73 +1207,68 @@ Package french.ldf Info: Setting StandardEnumerateEnv=true for
 LaTeX Info: Redefining \up on input line 66.
 
 ABD: EveryShipout initializing macros
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(C:\Users\micbo\Documents\Latex\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count422
+\scratchcounter=\count421
 \scratchdimen=\dimen318
 \scratchbox=\box138
-\nofMPsegments=\count423
-\nofMParguments=\count424
-\everyMPshowfont=\toks49
-\MPscratchCnt=\count425
+\nofMPsegments=\count422
+\nofMParguments=\count423
+\everyMPshowfont=\toks50
+\MPscratchCnt=\count424
 \MPscratchDim=\dimen319
-\MPnumerator=\count426
-\makeMPintoPDFobject=\count427
-\everyMPtoPDFconversion=\toks50
-) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+\MPnumerator=\count425
+\makeMPintoPDFobject=\count426
+\everyMPtoPDFconversion=\toks51
+) (C:\Users\micbo\Documents\Latex\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
+)
 \AtBeginShipoutBox=\box139
 Package hyperref Info: Link coloring OFF on input line 66.
 
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/hyperref\nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
-(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+(C:\Users\micbo\Documents\Latex\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(C:\Users\micbo\Documents\Latex\tex/generic/gettitlestring\gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count428
+\c@section@level=\count427
 )
 LaTeX Info: Redefining \ref on input line 66.
 LaTeX Info: Redefining \pageref on input line 66.
 LaTeX Info: Redefining \nameref on input line 66.
-
-(./tb_report_bonjour.out) (./tb_report_bonjour.out)
+(tb_report_bonjour.out) (tb_report_bonjour.out)
 \@outlinefile=\write9
 \openout9 = `tb_report_bonjour.out'.
 
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
 (lastpage)             ! on input line 66.
-\c@lstlisting=\count429
+\c@lstlisting=\count428
 LaTeX Font Info:    Trying to load font information for U+msa on input line 74.
 
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+(C:\Users\micbo\Documents\Latex\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 74.
 
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+(C:\Users\micbo\Documents\Latex\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+wasy on input line 74
 .
 
-(/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
+(C:\Users\micbo\Documents\Latex\tex/latex/wasysym\uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
-<template/logo_heig-vd.pdf, id=170, 236.885pt x 71.26625pt>
+<template/logo_heig-vd.pdf, id=173, 236.885pt x 71.26625pt>
 File: template/logo_heig-vd.pdf Graphic file (type pdf)
 <use template/logo_heig-vd.pdf>
 Package pdftex.def Info: template/logo_heig-vd.pdf  used on input line 74.
@@ -1280,7 +1282,7 @@ Overfull \hbox (24.19107pt too wide) has occurred while \output is active
 Overfull \vbox (18.18109pt too high) has occurred while \output is active []
 
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+[1{C:/Users/micbo/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
  <./template/logo_heig-vd.pdf>] [2
@@ -1316,18 +1318,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 80--80
 
 ] [6
 
-] (./chapters/cdc.tex [7] [8
+] (chapters/cdc.tex [7] [8
 
-] [9]) [10] (./tb_report_bonjour.toc [11
+] [9]) [10] (tb_report_bonjour.toc [11
 
 ])
 \tf@toc=\write10
 \openout10 = `tb_report_bonjour.toc'.
 
 
-[12] (./chapters/introduction.tex
+[12] (chapters/introduction.tex
 Chapitre 1.
-) (./chapters/analysis.tex [1
+) (chapters/analysis.tex [1
 
 
 
@@ -1335,50 +1337,66 @@ Chapitre 1.
 
 ]
 Chapitre 2.
-<images/PGP_101.png, id=299, 501.875pt x 522.95375pt>
+<images/PGP_101.png, id=302, 501.875pt x 522.95375pt>
 File: images/PGP_101.png Graphic file (type png)
 <use images/PGP_101.png>
-Package pdftex.def Info: images/PGP_101.png  used on input line 13.
+Package pdftex.def Info: images/PGP_101.png  used on input line 15.
 (pdftex.def)             Requested size: 284.52756pt x 296.4908pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [3] [4 <./images/PGP_101.png>]
-<images/conceptualpEp.png, id=318, 541.0614pt x 412.4208pt>
+<images/conceptualpEp.png, id=320, 541.0614pt x 412.4208pt>
 File: images/conceptualpEp.png Graphic file (type png)
 <use images/conceptualpEp.png>
-Package pdftex.def Info: images/conceptualpEp.png  used on input line 38.
+Package pdftex.def Info: images/conceptualpEp.png  used on input line 40.
 (pdftex.def)             Requested size: 426.79134pt x 325.33058pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [5] [6 <./images/conceptualpEp.png>] [7]
-<images/signalFonctionnement.png, id=354, 632.3625pt x 623.32875pt>
+<images/signalFonctionnement.png, id=356, 632.3625pt x 623.32875pt>
 File: images/signalFonctionnement.png Graphic file (type png)
 <use images/signalFonctionnement.png>
-Package pdftex.def Info: images/signalFonctionnement.png  used on input line 82
+Package pdftex.def Info: images/signalFonctionnement.png  used on input line 84
 .
 (pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
  [8 <./images/signalFonctionnement.png>] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 117--121
+Underfull \hbox (badness 10000) in paragraph at lines 125--126
 
  []
 
-[10] [11] [12] [13]
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
+
+ []
+
+
+Underfull \hbox (badness 5064) in paragraph at lines 128--133
+ []\T1/cmr/bx/n/10.95 Modèle d'ad-ver-saires. \T1/cmr/m/n/10.95 Pour éva-luer l
+es sché-mas de cer-ti-fi-ca-te-less pu-blic key
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--133
+
+ []
+
+[11] [12] [13]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-75.
- (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+86.
+ (C:\Users\micbo\Documents\Latex\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-[14] [15] [16]) (./chapters/architecture.tex [17] [18
+[14] [15] [16]) (chapters/architecture.tex [17] [18
 
 ]
 Chapitre 3.
-<images/SchemaGlobal.png, id=484, 721.94719pt x 319.94531pt>
+<images/SchemaGlobal.png, id=490, 721.94719pt x 319.94531pt>
 File: images/SchemaGlobal.png Graphic file (type png)
 <use images/SchemaGlobal.png>
-Package pdftex.def Info: images/SchemaGlobal.png  used on input line 8.
+Package pdftex.def Info: images/SchemaGlobal.png  used on input line 9.
 (pdftex.def)             Requested size: 398.33858pt x 176.53188pt.
 [19 <./images/SchemaGlobal.png>] [20]
 \pgf@layerbox@umlsd@background=\box140
@@ -1386,22 +1404,22 @@ Package pdftex.def Info: images/SchemaGlobal.png  used on input line 8.
 \pgf@layerbox@umlsd@threadlayer=\box142
 \pgf@layerboxsaved@umlsd@threadlayer=\box143
 
-Underfull \hbox (badness 10000) in paragraph at lines 70--74
+Underfull \hbox (badness 10000) in paragraph at lines 65--69
 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[21] [22] [23]) (./chapters/implementation.tex [24]
+[21] [22] [23]) (chapters/implementation.tex [24]
 Chapitre 4.
 [25
 
 ] [26]
-<images/schemaEncapsulation.png, id=551, 607.51968pt x 353.82187pt>
+<images/schemaEncapsulation.png, id=557, 607.51968pt x 353.82187pt>
 File: images/schemaEncapsulation.png Graphic file (type png)
 <use images/schemaEncapsulation.png>
-Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 47.
+Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 48.
 
 (pdftex.def)             Requested size: 341.43306pt x 198.85693pt.
 
@@ -1409,15 +1427,15 @@ Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 47.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--57
+Underfull \hbox (badness 10000) in paragraph at lines 56--58
 
  []
 
-[27] [28 <./images/schemaEncapsulation.PNG>] [29]
-<images/packetProofEncrypted.png, id=579, 1036.87375pt x 701.62125pt>
+[27] [28 <./images/schemaEncapsulation.png>] [29]
+<images/packetProofEncrypted.png, id=584, 1036.87375pt x 701.62125pt>
 File: images/packetProofEncrypted.png Graphic file (type png)
 <use images/packetProofEncrypted.png>
-Package pdftex.def Info: images/packetProofEncrypted.png  used on input line 87
+Package pdftex.def Info: images/packetProofEncrypted.png  used on input line 88
 .
 (pdftex.def)             Requested size: 398.33858pt x 269.54153pt.
  [30 <./images/packetProofEncrypted.png>]
@@ -1427,13 +1445,13 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [31] (./chapters/conclusion.tex [32]
+) [31] (chapters/conclusion.tex [32]
 Chapitre 5.
 ) [33
 
 ] [34
 
-] (./tb_report_bonjour.bbl
+] (tb_report_bonjour.bbl
 Underfull \hbox (badness 1264) in paragraph at lines 49--56
 []\T1/cmr/m/n/10.95 Armando Faz-Hernandez, Sam Scott, Nick Sul-li-van, Riad Wah
 by, and Chris-to-
@@ -1449,7 +1467,7 @@ aft-irtf-cfrg-hash-to-
 
 ] [36]) [37] [38
 
-] (./tb_report_bonjour.lof)
+] (tb_report_bonjour.lof)
 \tf@lof=\write11
 \openout11 = `tb_report_bonjour.lof'.
 
@@ -1457,18 +1475,18 @@ aft-irtf-cfrg-hash-to-
 
 ] [40
 
-]
-(./tb_report_bonjour.lot)
+] (tb_report_bonjour.lot)
 \tf@lot=\write12
 \openout12 = `tb_report_bonjour.lot'.
 
- (./chapters/outils.tex [41
+
+(chapters/outils.tex [41
 
 ] [42
 
 ]
 Annexe A.
-) (./chapters/fichiers.tex [43] [44
+) (chapters/fichiers.tex [43] [44
 
 ]
 Annexe B.
@@ -1482,21 +1500,21 @@ background.sty,all,; background.sty,center,.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 138.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 138.
-(./tb_report_bonjour.aux)
+(tb_report_bonjour.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 138.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 138.
 Package rerunfilecheck Info: File `tb_report_bonjour.out' has not changed.
-(rerunfilecheck)             Checksum: E8BE655EA4DA0B1C4BF0A4D9CCC3091E;2024.
+(rerunfilecheck)             Checksum: 8BAC39D6F9C256D2C27B2215137DBD2B;2108.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 138.
  ) 
 Here is how much of TeX's memory you used:
- 33779 strings out of 481239
- 669938 string characters out of 5920377
- 1153437 words of memory out of 5000000
- 48071 multiletter control sequences out of 15000+600000
- 553832 words of font info for 78 fonts, out of 8000000 for 9000
+ 33808 strings out of 481311
+ 672031 string characters out of 2916524
+ 1155259 words of memory out of 3000000
+ 48319 multiletter control sequences out of 15000+200000
+ 553832 words of font info for 78 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 70i,11n,115p,1068b,980s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,11n,115p,1052b,949s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/prdc/YehS
 DSSW18} has been referenced but does not exist, replaced by a fixed one
 
@@ -1535,32 +1553,36 @@ iakD0ISF18} has been referenced but does not exist, replaced by a fixed one
 pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:journals/iacr/Ko
 beissi18a} has been referenced but does not exist, replaced by a fixed one
 
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/shar
-e/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/
-public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx
-1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share
-/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/p
-ublic/cm-super/sfcc1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0
-800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/
-texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/pu
-blic/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm12
-00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/t
-exmf/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf/fonts/type1/pub
-lic/cm-super/sftt1095.pfb>
-Output written on tb_report_bonjour.pdf (57 pages, 1030283 bytes).
+ <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ec
+tt1095.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec
+/dpi600\ectt0900.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/j
+knappen/ec/dpi600\ecrm0800.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/p
+k/ljfour/jknappen/ec/dpi600\eccc1095.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2
+.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk> <C:\Users\micbo\AppData\Loca
+l\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\micbo\Ap
+pData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095.pk> <C:\User
+s\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk
+> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\e
+crm0900.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/e
+c/dpi600\ecrm1095.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/
+jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\micbo\AppData\Local\MiKTeX\2.9\fonts/
+pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\micbo\AppData\Local\MiKTeX\
+2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\micbo\AppData\Loc
+al\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk><C:/Users/micbo/Do
+cuments/Latex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/micbo/Documen
+ts/Latex/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/micbo/Documents/La
+tex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/micbo/Documents/Latex/f
+onts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/micbo/Documents/Latex/fonts/t
+ype1/public/amsfonts/cm/cmmi8.pfb><C:/Users/micbo/Documents/Latex/fonts/type1/p
+ublic/amsfonts/cm/cmr10.pfb><C:/Users/micbo/Documents/Latex/fonts/type1/public/
+amsfonts/cm/cmr6.pfb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfont
+s/cm/cmr8.pfb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfonts/symbols/msbm10.p
+fb>
+Output written on tb_report_bonjour.pdf (57 pages, 1020918 bytes).
 PDF statistics:
- 843 PDF objects out of 1000 (max. 8388607)
- 709 compressed objects within 8 object streams
- 228 named destinations out of 1000 (max. 500000)
- 448 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1425 PDF objects out of 1440 (max. 8388607)
+ 232 named destinations out of 1000 (max. 500000)
+ 456 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,4 +1,5 @@
 \chapter{Architecture / Design du protocole}
+% TODO Spécifications en texte via chapitre ou autre plus précise et ajouter un chapitre sur les notations
 \label{ch:arch}
 Dans ce chapitre, je vais m'intéresser à expliquer le fonctionnement de la \textit{certificateless cryptography} et démontrer comment je l'ai utilisée afin de l'intégrer à un protocole de chiffrement de mail.
 \section{Architecture globale}
@@ -15,9 +16,9 @@ Les parties impliquées sont les suivantes comme vu à la figure \ref{fig:global
 \begin{itemize}
 	\item Alice : L'envoyeur du mail en direction de Bob. Alice doit discuter avec le KGC pour construire sa clé privée (afin de signer) et récupérer la clé publique de Bob.
 	\item Bob : Le destinataire du message, communique uniquement avec le KGC en ayant reçu le message d'Alice afin de récupérer sa clé publique pour vérifier la signature et de construire sa clé privé pour déchiffrer le message.
-	\item KGC : Permet aux différents acteurs de pouvoir récupérer lesclés publiques des clients, mais aussi de  recevoir les \textit{Partial Private Keys} qui permettent aux acteurs de construire leur clé privée. 
+	\item KGC : Permet aux différents acteurs de pouvoir récupérer les clés publiques des clients, mais aussi de  recevoir les \textit{Partial Private Keys} qui permettent aux acteurs de construire leur clé privée. 
 \end{itemize}
-Ces partis sont les principaux présents dans un exemple de \textit{Certificateless Cryptography} dans mon systéme de mail.
+Ces partis sont les principaux présents dans un exemple de \textit{Certificateless Cryptography} dans mon système de mail.
 \section{Fonctionnement Certificateless PKC}
 Je vais ici découper les différents algorithmes présent dans le certificateless public key cryptography. En passant par le chiffrement et la signature.
 Ces algorithmes seront accompagnés d'explications sur leur utilité. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. L'on peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{DBLP:conf/pkc/DentLP08}.
@@ -37,12 +38,6 @@ Pour la signature les algorithmes sont les mêmes avec une différence dans leur
 %TODO compléter voir tableau
 Dans la littérature certificateless les schémas de signatures sont beaucoup plus cassés que ceux de chiffrement apparemment (voir tableau ). Il faut donc faire attention à suivre les schémas afin de vérifier que le schéma choisi ne soit pas mis à mal.
 \section{Design du protocole}
-%\begin{figure}[h!]
-%	\centering
-%	\includegraphics[width=14cm]{images/firstConnexion.png}
-%	\caption{Schéma de la première connexion}
-%	\label{fig:firstConn}
-%\end{figure}
 %TODO : ajouter setup
 \begin{figure}
 [h!]
@@ -106,7 +101,7 @@ Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et
 		\begin{call}{A}{time, c', c, t, s', IV}{C}{}
 		\end{call}
 	\end{sequencediagram}
-	\caption{Alice envoit un message à Bob}
+	\caption{Alice envoi un message à Bob}
 	\label{fig:aliceSends}
 \end{figure}
 

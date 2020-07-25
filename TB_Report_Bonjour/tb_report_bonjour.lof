@@ -10,7 +10,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{19}{figure.3.1}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{21}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoit un message à Bob}}{22}{figure.3.3}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoi un message à Bob}}{22}{figure.3.3}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{23}{figure.3.4}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{28}{figure.4.1}%

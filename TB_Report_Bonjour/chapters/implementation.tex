@@ -1,6 +1,7 @@
 \chapter{Implémentation}
 \label{ch:impl}
 
+%TODO ajouter problèmes rencontrés ou intégrer ailleurs et parler de la sérialisation et du problème de connexion socket que j'ai eu, voir si autres problèmes
 \section{Choix d'implémentations}
 \subsection{Langage}
 Au départ le choix du langage s'est porté sur sagemath (framework python) afin de mieux comprendre les différents calculs et faire un premier POC du chiffrement/déchiffrement.
@@ -34,12 +35,12 @@ La courbe utilisée pour le POC est la BLS12-P381, en effet cette courbe est ass
 Le but de mon schéma certificateless est de chiffrer puis signer une clé AES qui permettra à mon message d'avoir un chiffrement authentifié. Pour cela il me faut dériver un élément de $\mathbb{G}_t$ en clé AES, en effet le chiffrement dans le schéma certificateless se fait sur un élément de $\mathbb{G}_t$.\\
 Pour cela j'ai utilisé une fonction permettant d'écrire sous forme compressée cet élément en bytes (fourni par la librairie RELIC utilisé et la fonction gt\_write\_bin()). Puis j'ai effectué un hachage avec SHA256 dessus, ainsi le résultat du hachage est une clé de 256 bits utilisable par AES-256-GCM. La fonction de hachage doit être par conséquent cryptographiquement sûre.
 \subsection{Fonctions de hachage - signature}
-Pour le schéma de signature il nous faut plusieurs fonctions de hachage différentes, en effet ce shéme est basé sur le \textit{Random Oracle Model} comme définit dans le chapitre \ref{ch:analysis}. Pour appliquer cela j'ai utilisé la même méthode de mapping disponible ans RELIC pour mapper une char array (tableau de byte) à un point sur G2 à savoir g2\_map.
+Pour le schéma de signature il nous faut plusieurs fonctions de hachage différentes, en effet ce schéma est basé sur le \textit{Random Oracle Model} comme définit dans le chapitre \ref{ch:analysis}. Pour appliquer cela j'ai utilisé la même méthode de mapping disponible ans RELIC pour mapper une char array (tableau de byte) à un point sur G2 à savoir g2\_map.
 Pour H1, la première fonction de hachage j'ai simplement utilisé cette fonction directement, mais pour H2 et H3 j'ai ajouté un byte devant les données à mapper respectivement les bytes '01' et '02'. Ceci afin de séparer les domaines des résultats des hashs, cela s'appelle du \textit{Hash Domain Separation}. En effet l'on peut voir dans ce draft~\cite{irtf-cfrg-hash-to-curve} définit comme une simulation pour prendre en compte plusieurs \textit{Random Oracle}.
 \subsection{Sérialisation des données}
-Pour la sérialisation des données, typiquement les clés publiques et les clés privées partielles envoyées en réseau ou les clés publiques enregistrées dans les fichiers par exemple, j'ai utilisé la librairie binn\footnote{\url{https://github.com/liteserver/binn}}. Cela permet de packer facilement des données binaires, pour cela RELIC met à disposition des méthodes g1\_write\_bin g1\_read\_bin qui a permis de faire ces enregistrements binaires. Ainsi les transferts de données sont simplifiés. Cependant il faut faire attention à certaines choses, on ne peut lire et écrire simultanément à l'aide de bin, si l'on crée un objet via un buffer on ne pourra modifier cet objet. Cela m'a posé des problèmes pour l'enregistrement des données secrétes, j'ai donc du copier l'objet lu pour pouvoir le modifier et sauver les nouveau paramétres.
+Pour la sérialisation des données, typiquement les clés publiques et les clés privées partielles envoyées en réseau ou les clés publiques enregistrées dans les fichiers par exemple, j'ai utilisé la librairie binn\footnote{\url{https://github.com/liteserver/binn}}. Cela permet de packer facilement des données binaires, pour cela RELIC met à disposition des méthodes g1\_write\_bin g1\_read\_bin qui a permis de faire ces enregistrements binaires. Ainsi les transferts de données sont simplifiés. Cependant il faut faire attention à certaines choses, on ne peut lire et écrire simultanément à l'aide de binn, si l'on crée un objet via un buffer on ne pourra modifier cet objet. Cela m'a posé des problèmes pour l'enregistrement des données secrètes, j'ai donc du copier l'objet lu pour pouvoir le modifier et sauver les nouveau paramètres.
 \subsection{Enregistrement des clés publiques (serveur)}
-Pour l'enregistrement j'ai utilisé une petite base de données NoSQL stockant les clés publiques des utilisateurs sur le KGC. Cela permet de facilement récupérer une clé publique pour un utilisateur si besoin. Pour implémenter cela j'ai utilisé la librairie UnQlite\footnote{\url{https://unqlite.org/}}. J'ai stocké les clés publiques pour le schéma de signature et de chiffrement séparemment, en effet, l'entrée pour la signature porte le nom "signature/ID" et le chiffrement "encryption/ID".
+Pour l'enregistrement j'ai utilisé une petite base de données NoSQL stockant les clés publiques des utilisateurs sur le KGC. Cela permet de facilement récupérer une clé publique pour un utilisateur si besoin. Pour implémenter cela j'ai utilisé la librairie UnQlite\footnote{\url{https://unqlite.org/}}. J'ai stocké les clés publiques pour le schéma de signature et de chiffrement séparément, en effet, l'entrée pour la signature porte le nom "signature/ID" et le chiffrement "encryption/ID".
 \section{Implémentation clés  de chiffrement}
 Pour pouvoir implémenter ce schéma de chiffrement et signature certificateless dans un système hybride il a fallu penser à une manière d'encapsuler la clé et les données. Pour cela j'ai essayé de faire un système comparable à la figure \ref{fig:encapsulate}. 
 \begin{figure}[h!]
@@ -61,7 +62,7 @@ Ainsi un paquet typique sera : \\
 \paragraph*{Codes d'opérations.}
 Les différents codes d'opérations sont :
 \begin{itemize}
-	\item HELO : Permet de s'annoncer au KGC pour la première fois, le KGC respondra systématiquement avec les paramétres globaux du système. Cela implique la Master Public Key de chiffrement du KGC ainsi que celle du schéma de signature. 
+	\item HELO : Permet de s'annoncer au KGC pour la première fois, le KGC répondra systématiquement avec les paramètres globaux du système. Cela implique la Master Public Key de chiffrement du KGC ainsi que celle du schéma de signature. 
 	\item PK : Permet d'annoncer les clés publiques de l'utilisateur avec un certain ID. Le paquet est composé de \{ID : alice@wonderland.com, opCode : PK, PKE : base64 de la PKE, PKS : base64 de la PKS\}. La PKE est encodée en base64 par le client est envoyée au serveur. Elle est aussi représentée à l'aide d'un objet binn mais le serveur n'a pas besoin d'en prendre connaissance, il l'a stocke donc tel quel dans la base de donnée NoSQL. La même chose est faite pour la PKS, la clé publique pour la signature.
 	\item GPE : Permet de récupérer la clé publique de chiffrement (utile pour chiffrer un message) d'un utilisateur ayant l'ID mentionné. Ainsi le serveur va simplement regarder dans la base de donnée pour "encryption/ID" et récupérer la clé encodée en base64 et la renvoyer à l'utilisateur. Si le serveur ne trouve pas cette clé il va renvoyer une erreur dans l'objet et ainsi à la réception on va d'abord regarder cette erreur.
 	\item GPS : Fonctionne de la même manière que "GPE" mais pour les clés publiques de Signature (utile pour vérifier une signature).
@@ -79,7 +80,7 @@ On a vu dans les modèles d'adversaires définit par Al-Riyami et Paterson~\cite
 \section{Fonctionnement global POC (Client)}
 Ici je présente le fonctionnement global de l'implémentation du client mail sécurisé pour mon POC, des améliorations possibles et des problèmes connus.
 \subsection{Fonctionnement}
-Je vais dépeindre le fonctionnement de mon POC ici et les différentes fonctionalités que j'ai implémentée au client de mon POC.
+Je vais dépeindre le fonctionnement de mon POC ici et les différentes fonctionnalités que j'ai implémentée au client de mon POC.
 \paragraph*{Sécurité connexion mail.}
 Pour la connexion au serveur SMTP / IMAP j'ai fait attention à la connexion sécurisée pour éviter de \textit{leak} des mots de passe des utilisateurs du POC. En effet, cela permet de chiffrer les communications avec les serveurs de Gmail.
 \begin{figure}[h!]
@@ -96,9 +97,9 @@ ors du développement j'ai fait attention au maximum d'avoir le moins possible d
 \subsection{Améliorations}
 Les améliorations à amener dans le client :
 \paragraph*{Multiples destinataires.}
-Pour le moment l'implémentation ne prends pas en compte une situation où un mail doit être envoyé à des destinataires multiples, c'est une fonctionnalité importante à mettre en oeuvre dans une implémentation de client mail. Pour ce faire il faudra spécifier dans les headers l'utilisateur ciblé par tel cipher et signature. Ainsi lors de la réception le client prendra les options X-ID-CIPHER-B64 p.ex. Ou alors trouver un moyen d'envoyer un mail différent à chaque utilisateur, sans perdre la possibilité qu'un destinataire puisses choisir de répondre à tous.
+Pour le moment l'implémentation ne prends pas en compte une situation où un mail doit être envoyé à des destinataires multiples, c'est une fonctionnalité importante à mettre en œuvre dans une implémentation de client mail. Pour ce faire il faudra spécifier dans les headers l'utilisateur ciblé par tel cipher et signature. Ainsi lors de la réception le client prendra les options X-ID-CIPHER-B64 p.ex. Ou alors trouver un moyen d'envoyer un mail différent à chaque utilisateur, sans perdre la possibilité qu'un destinataire puisses choisir de répondre à tous.
 \paragraph*{Possibilité d'ajouter des pièces jointes.}
-Pour le moment la possibilité d'ajout de pièces jointes n'a pas été pris en considération. Cependant une des librairies choisies pour la récéption des emails pourrait composer des messages contenant des pièces jointes. Il faudrait ainsi les chiffrer avec la clé symétrique avant de l'ajouter dans le mail.
+Pour le moment la possibilité d'ajout de pièces jointes n'a pas été pris en considération. Cependant une des librairies choisies pour la réception des emails pourrait composer des messages contenant des pièces jointes. Il faudrait ainsi les chiffrer avec la clé symétrique avant de l'ajouter dans le mail.
 \paragraph*{GUI.}
 Mettre ne place une interface utilisateur pour le client mail, cela aiderait à rendre le chiffrement plus transparent et plus simple pour l'utilisateur. En effet demander à l'utilisateur d'écrire son mail au terminal n'est pas spécialement agréable.
 \section{Comparaisons avec état de l'art}

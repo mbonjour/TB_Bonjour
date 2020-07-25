@@ -3,18 +3,16 @@
 
 \section*{Résumé du problème}
 Les outils de chiffrement et de signature d'email actuels se résument principalement à S/MIME et à PGP. \\
-Ces deux solutions sont anciennes, souffrent assez régulièrement de nouvelles vulnérabilités et ne proposent pas certaines propriétés cryptographiques qui pourraient être utiles (par exemple, la "forward secrecy". Le but de ce travail de bachelor est d'étudier quelles propriétés seraient utiles pour la sécurisation des emails, de proposer un nouveau protocole les implémentant et de développer un proof of concept. 
+Ces deux solutions sont anciennes, souffrent assez régulièrement de nouvelles vulnérabilités et ne proposent pas certaines propriétés cryptographiques qui pourraient être utiles (par exemple, la "forward secrecy". Le but de ce travail de bachelor est d'étudier quelles propriétés seraient utiles pour la sécurité des emails, de proposer un nouveau protocole les implémentant et de développer un proof of concept. 
 \subsection*{Problématique}
-La problématique principale est résumée ci-dessus mais le principal problème c'est surtout que les technologies utilisées sont vieilles et elles souffrent de vulnérabilités par conception qui ont été mitigées en enlevant des options à l'utilisateur.
+Les systèmes de mails sécurisés souffrent de manque de praticité quant à leur implémentations, de plus elles ont été prouvées vulnérables à plusieurs reprises.
 \subsection*{Solutions existantes}
-%TODO: Compléter/Spécifier !
-PGP, S/MIME, PEP, messagerie instantanée (Signal)...
+Les solutions existantes sont représentées majoritairement par S/MIME et PGP. Cependant des nouveaux protocoles émergent tel que PEP et des fournisseurs proposent des implémentations transparentes de PGP p. ex. comme le fait Protonmail. Ainsi la messagerie instantanée aussi bénéficie de protocoles sécurisés comme Signal.
 \subsection*{Solutions possibles}
-Une solution possible est d'utiliser le système mis en place dans ce travail, cependant il faudrait une relecture et des analyses plus approfondies pour s'en assurer.
-Un des points possibles c'est de passer plus à de la messagerie instantanée dans la mesure du possible.
-Ou encore de s'orienter sur des nouvelles technologies comme PEP ou PGP mais en appliquant strictement les \textit{Best Practices} et en se formant un peu sur leur utilisation qui n'est pas donnée à tout le monde.
+Un début de solution est proposée dans ce papier à l'aide d'un nouveau système qui pourrait être mis facilement en place et qui bénéficierait de meilleures propriétés que les protocoles actuellement utilisés. Sinon il faudrait utiliser ces protocoles convenablement mais il n'est pas aisé de le faire.
+%TODO remplir le cahier des charges - mettre plus de travail dans l'analyse afin de lister correctement les point demandés dans le cahier des charges
 \section*{Cahier des charges}
-Voici un résumé du cahier des charges sous formes d'objectifs à atteindre :
+Voici un résumé du cahier des charges sous formes d'une liste d'objectifs à atteindre :
 \begin{itemize}
 	\item Analyser les besoins d’un système d’E-mails actuel.
 	\item Analyser et étudier les solutions de sécurité existantes.
