@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.3.5)  27 JUL 2020 00:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.3.5)  27 JUL 2020 01:08
 entering extended mode
 **./tb_report_bonjour.tex
 (tb_report_bonjour.tex
@@ -1344,59 +1344,60 @@ File: images/PGP_101.png Graphic file (type png)
 Package pdftex.def Info: images/PGP_101.png  used on input line 23.
 (pdftex.def)             Requested size: 284.52756pt x 296.4908pt.
  [5 <./images/PGP_101.png>] [6]
-<images/conceptualpEp.png, id=337, 541.0614pt x 412.4208pt>
+[7]
+<images/conceptualpEp.png, id=347, 541.0614pt x 412.4208pt>
 File: images/conceptualpEp.png Graphic file (type png)
 <use images/conceptualpEp.png>
-Package pdftex.def Info: images/conceptualpEp.png  used on input line 52.
+Package pdftex.def Info: images/conceptualpEp.png  used on input line 55.
 (pdftex.def)             Requested size: 426.79134pt x 325.33058pt.
+ [8 <./images/conceptualpEp.png>] [9]
+<images/signalFonctionnement.png, id=371, 632.3625pt x 623.32875pt>
+File: images/signalFonctionnement.png Graphic file (type png)
+<use images/signalFonctionnement.png>
+Package pdftex.def Info: images/signalFonctionnement.png  used on input line 96
+.
+(pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[7] [8 <./images/conceptualpEp.png>] [9]
-<images/signalFonctionnement.png, id=373, 632.3625pt x 623.32875pt>
-File: images/signalFonctionnement.png Graphic file (type png)
-<use images/signalFonctionnement.png>
-Package pdftex.def Info: images/signalFonctionnement.png  used on input line 93
-.
-(pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
- [10 <./images/signalFonctionnement.png>] [11] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 134--135
+[10] [11 <./images/signalFonctionnement.png>] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
 
  []
 
 
-Underfull \hbox (badness 5064) in paragraph at lines 137--142
+Underfull \hbox (badness 5064) in paragraph at lines 140--145
  []\T1/cmr/bx/n/10.95 Modèle d'ad-ver-saires. \T1/cmr/m/n/10.95 Pour éva-luer l
 es sché-mas de cer-ti-fi-ca-te-less pu-blic key
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--142
+Underfull \hbox (badness 10000) in paragraph at lines 140--145
 
  []
 
 [13] [14] [15] [16]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-95.
+97.
  (C:\Users\micbo\Documents\Latex\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-[17] [18]) (chapters/architecture.tex [19] [20
-
-]
+[17] [18] [19]) (chapters/architecture.tex [20]
 Chapitre 3.
 <images/SchemaGlobal.png, id=506, 721.94719pt x 319.94531pt>
 File: images/SchemaGlobal.png Graphic file (type png)
 <use images/SchemaGlobal.png>
 Package pdftex.def Info: images/SchemaGlobal.png  used on input line 10.
 (pdftex.def)             Requested size: 398.33858pt x 176.53188pt.
-[21 <./images/SchemaGlobal.png>] [22]
+[21
+
+ <./images/SchemaGlobal.png>] [22]
 \pgf@layerbox@umlsd@background=\box140
 \pgf@layerboxsaved@umlsd@background=\box141
 \pgf@layerbox@umlsd@threadlayer=\box142
@@ -1505,7 +1506,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 138.
 Here is how much of TeX's memory you used:
  33828 strings out of 481311
  672472 string characters out of 2916524
- 1156300 words of memory out of 3000000
+ 1156301 words of memory out of 3000000
  48331 multiletter control sequences out of 15000+200000
  553832 words of font info for 78 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1578,7 +1579,7 @@ s/cm/cmr8.pfb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfonts/cm/cm
 sy10.pfb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfonts/cm/cmsy8.p
 fb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfonts/symbols/msbm10.p
 fb>
-Output written on tb_report_bonjour.pdf (59 pages, 1057404 bytes).
+Output written on tb_report_bonjour.pdf (59 pages, 1058448 bytes).
 PDF statistics:
  1450 PDF objects out of 1728 (max. 8388607)
  239 named destinations out of 1000 (max. 500000)
