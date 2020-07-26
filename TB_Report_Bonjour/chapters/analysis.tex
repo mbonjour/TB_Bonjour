@@ -1,15 +1,23 @@
 \chapter{Analyse - État de l'art}
 \label{ch:analysis}
-%todo utilisation emails globales
 Dans ce chapitre je vais m'intéresser aux différentes propositions d'implémentations de système de messagerie sécurisée afin de voir où en est l'état de l'art. Pour cela j'ai recherché les systèmes les plus connus tel que PGP et S/MIME mais aussi les implémentations de ces protocoles dans des clients mails tel que Protonmail ou Tutanota. J'élargis l'analyse à des protocoles plus orientés vers la messagerie instantanée comme Signal.
 \section{Besoins d'un système de messagerie}
-%TODO analyse de fonctions d'un système simple de messagerie et de son fonctionnement
+Cette section permettra de lister les besoins principaux d'un système de messagerie et l'utilisation qui en est faite habituellement.
+\subsection{Besoins principaux}
+Dans un système de mail les besoins principaux sont surtout de pouvoir consulter sa boite mail à tout moment avec les anciens et nouveaux mails reçus. De plus il est préférable de pouvoir envoyer des mails aussi. Ces envois peuvent avoir plusieurs propriétés et fonctionnalités. L'on pourrait envoyer un mail à de multiples destinataires et même sans que les uns et les autres sachent exactement à qui est envoyé le mail exactement (Copie cachées). Un client mail permet aussi d'envoyer des pièces jointes, celles-ci seront encodées au sein du message et envoyée avec. Un mail a aussi un état pour savoir s'il a déjà été lu ou non. Parmi l'utilisation simple d'un système de messagerie il y aussi le fait que l'on veut pouvoir voir ses mails de n'importe quel appareil à n'importe quel moment. 
+\subsection{Détails techniques}
+Afin d'établir le futurs notations utilisées ci-après et montrer le fonctionnement global d'un système de messagerie électronique je vais utiliser la figure \ref{fig:mailGlobal}. Dans cette figure l'on peut voir que 3 protocoles différents sont utilisés pour la gestion des emails ; SMTP, IMAP et POP3. Ces 3 protocoles sont utilisés par différents acteurs, le MUA (Mail User Agent), le MTA (Mail Transfer Agent) et le MDA (Mail Delivery Agent). Le MUA est en fait un client mail qui va s'occuper d'envoyer des mails ou de les recevoir (rechercher sur le MDA). Les MTAs sont les serveurs mails responsables du bon acheminement des mails. Ainsi les 3 protocoles énoncés plus hauts sont soit pour l'envoi et la transmission (SMTP) soit pour la récupération des messages (IMAP et POP3). Lors de l'envoi un MUA va simplement renseigner les destinataires du message ainsi que sa source, son sujet et son message puis le serveur va transmettre ces informations au MTA du domaine de destination qui s'occupera de le transmettre au MDA (souvent les 2 à la fois), celui-ci stocke les mails en attendant qu'un MUA fasses une demande via POP3 ou IMAP. IMAP est souvent préféré car les mails restent ainsi sur le serveur mail et est donc consultable depuis un autre appareil utilisant aussi IMAP. POP3 va plutôt télécharger les mails et les enlever du serveur et ils ne seront donc plus disponibles par le biais d'un autre appareil. Les MTAs sont des serveurs de transmission de données, transmises en clair jusqu'à l'introduction d'ESMTP et de la directive STARTTLS qui permet un niveau basique de sécurité entre 2 MTAS pour le transfert de mails. Cependant, si un MTAs est mal configuré et ne permet pas cette directive le mail transitera en clair. C'est dans ce contexte là et celui du stockage des mails en clair par le MDA que des solutions de chiffrement de mail en E2E (End to End - Chiffrement de bout-en-bout) ont vu le jour.
+\begin{figure}[h!]
+	\includegraphics[width=14cm]{images/Etapes_envoi_email.png}
+	\centering
+	\caption{Le fonctionnement d'un système de mail~\cite{wiki:mailGlobal}}
+	\label{fig:mailGlobal}
+\end{figure}
 \section{Protocoles existants}
-Ici je vais regarder les protocole existants dans ce domaine.
-%todo ajouter fonctions techniques - choix des users des suites crypto
+Dans cette section je vais analyser les différents protocoles existants afin de sécuriser la messagerie électronique, ainsi que leur implémentation au sein de certains clients mails. De plus je m'intéresserait à la messagerie instantanée afin de voir s'il est possible d'implémenter cela dans un système de mails.
 \subsection{PGP}
 \paragraph*{Fonctionnement.}
-PGP (Pretty Good Privacy ou Assez bonne confidentialité) est un moyen de chiffrer des données (mails, fichiers, …) qui est beaucoup représenté lorsque l’on parle de sécurité email car c’est le plus utilisé avec S/MIME (c.f. \ref{protocols:SMIME}). C’est une méthode de chiffrement hybride (utilise le chiffrement symétrique et asymétrique) qui fonctionne comme montré sur la Figure \ref{fig:PGP_101}.
+PGP (Pretty Good Privacy ou Assez bon niveau de confidentialité) est un moyen de chiffrer des données (mails, fichiers, …). C’est une méthode de chiffrement hybride (utilise le chiffrement symétrique et asymétrique) qui fonctionne comme montré sur la Figure \ref{fig:PGP_101}. Comme on peut le voir, on tire une clé symétrique aléatoirement qui permettra de chiffrer notre mail avec un chiffrement symétrique comme AES. Ensuite, l'on va chiffrer cette clé symétrique à l'aide d'un chiffrement asymétrique, en utilisant la clé publique du destinataire.
 
 \begin{figure}[h!]
 \includegraphics[width=10cm]{images/PGP_101.png}
@@ -18,22 +26,26 @@ PGP (Pretty Good Privacy ou Assez bonne confidentialité) est un moyen de chiffr
 \label{fig:PGP_101}
 \end{figure}
 
-\noindent Ce fonctionnement hybride est défendu à cause de la lenteur et la non-praticité d’un chiffrement asymétrique sur un certain nombre de données. Ainsi en chiffrant uniquement la clé symétrique qui a servi à chiffrer le tout l’on peut déchiffrer bien plus rapidement et simplement le message (typiquement avec un chiffrement symétrique tel qu’AES qui a le droit à des instructions dédiées dans certains processeurs). Contrairement à des chiffrements asymétriques qui sont plus contraignants. Et l'on n'utilise pas directement le chiffrement symétrique car il a besoin d'un secret partagé dès le début de la communication.
-PGP utilise un système de clés… PGP est aussi critiqué pour son manque de "Forward Secrecy"...
+Ce fonctionnement hybride est défendu à cause de la lenteur et la non-praticité d’un chiffrement asymétrique sur un certain nombre de données. Ainsi en chiffrant uniquement la clé symétrique qui a servi à chiffrer le tout l’on peut déchiffrer bien plus rapidement et simplement le message (typiquement avec un chiffrement symétrique tel qu’AES qui a le droit à des instructions dédiées dans certains processeurs). Contrairement à des chiffrements asymétriques qui sont plus contraignants. Et l'on n'utilise pas directement le chiffrement symétrique car il a besoin d'un secret partagé dès le début de la communication.\\
+Pour ce qui est des primitives proposées par PGP pour le chiffrement je les listent ici par rapport à la RFC4880~\cite{RFC4880}. Pour le chiffrement symétrique les primitives suivantes peuvent être utilisées : IDEA, TripleDES, CAST5, Blowfish, AES-128,AES-192, AES-256, Twofish-256. Pour les primitives asymétrique : RSA, ElGamal, DSA, ECDSA, Diffie-Hellman. La RFC spécifie aussi les formats de compression : ZIP, ZLIB, BZip2. Puis enfin, les algorithmes de hachage : MD5, SHA-1, RIPE-MD160, SHA256, SHA384, SHA512, SHA224. Puis il faut savoir que pour chacune de ces catégories il y a 10 éléments réservés pour des primitives privées/expérimentales.Lorsqu'un mail est chiffré et signé avec PGP, il est d'abord hasher puis ce hash est signé avec la clé privée de l'utilisateur afin de faire une signature digitale qui sera chiffrée à l'aide la clé symétrique avec le message.\\
+PGP utilise donc un système de clés publiques afin d'envoyer des clés symétriques. Comment obtient-on une clé publique pour envoyer notre message ?\\
+Selon certaines utilisations les clés peuvent être obtenues via un serveur de clés, mais cela implique un tierce parti auquel il faut faire confiance, ainsi ce qui peut être fait c'est aussi d'avoir son propre serveur de clés. Mais pour être sûr que tel clé appartienne bien à tel utilisateur PGP a introduit dès ces débuts un système décentralisé de confiance appelé le "Web of Trust". Ainsi, un utilisateur pourra faire confiance à certaine clés d'autres utilisateurs puis chacun des utilisateurs aura des clés de confiance et ainsi de suite. Cela permet d'avoir une toile de confiance indirecte. Cependant, ce système est difficile à utiliser, il faut faire attention au confiance accordée ou non et à la gestion des certificats d'identités. Surtout pour les nouveaux utilisateurs qui ne peuvent faire vérifier leurs clés publiques facilement et ne seront donc pas vérifier toute suite, c'est pour cela que des fêtes de signature de clés sont organisées afin de se rencontrer personnellement et vérifier que tel utilisateur est bien telle personne. Cela est "facilité" via les Fingerprint des clés publiques qui sont des chaines hexadécimales de 20 bytes permettant d'identifier une clé publique plus facilement.\\
+Dans la dernière spécification de PGP des moyens de créer des certificate authorities ont été ajouté afin d'avoir un système décentralisé de \textit{trust signatures} à différents niveaus et ainsi pouvoir se baser sur un système PKI-Like mais avec une flexibilité sur les CAs auxquels on fait confiance ou non.
 \paragraph*{Propriétés cryptographiques.}
-Le problème qui est souvent reproché à PGP c'est qu'il n'implémentes pas de \textit{Forward Secrecy}. La \textit{Forward Secrecy} permet d'affirmer que si l'on a une brèche à un instant \textit{T}, et qu'un attaquant récupère cette clé, il ne pourra pas déchiffrer les anciens messages.
-De plus, la gestion des clés PGP est très problématique, en effet lors de mes tests il était difficile de connecter un serveur de clés p. ex. Ou de recevoir une clé d'un correspondant pour la sauvegarder. Et même en la recevant, comment savoir si cette clé n'a pas été modifiée via un \textit{MITM} p.ex. ? -> utiliser un autre canal pour vérifier l'empreinte.
-\paragraph*{Web of Trust.}
-Comment faire confiance a une clé -> surtout pour email -> Comment initialiser une confiance ?
-\paragraph*{Autocrypt.}
-Autocrypt est une manière d'échanger des clés entres emails, ces échanges ne sont pas considérés sécurisé par la communauté (Wikipedia -> à creuser). C'est une façon de s'échanger des clés de manière automatisée mais pas forcément sécurisée (utilise les mails).
+PGP a surtout été crée pour fournir du chiffrement de bout-en-bout afin de résoudre les problèmes de transmissions en clairs entre les MTAs et le stockage des mails en clair dans les MDAs. Ainsi même lors d'une récupération de mails sur un serveur les mails seraient chiffrés. Ensuite PGP propose de signer ou non ses mails ce qui amène donc de la répudiation (si non-signé, le mail ne pourra pas être utilisé pour prouver qu'il a été envoyé par telle personne) et non-répudiation (mail signé et ainsi l'on peut prouvé que l'envoyeur a bien envoyé le mail).\\ 
+Le problème qui est souvent reproché à PGP c'est qu'il n'implémentes pas de \textit{Forward Secrecy}. La \textit{Forward Secrecy} permet d'affirmer que si l'on a une brèche à un instant $t$, et qu'un attaquant récupère cette clé, il ne pourra pas déchiffrer les anciens messages chiffrées en $t-1$.
 \paragraph*{Utilisation.}
-Pour mes tests j’ai fait en sorte de trouver l’utilisation la plus simple possible pour voir si un utilisateur lambda pouvait arriver à mettre en place ce genre de sécurité. Il s’est avéré que cela était assez simple au départ, mais dès lors que l'on veut envoyer un mail chiffré à un correspondant cela se complique un peu. J’ai juste eu à installer un Add-On sur mon logiciel de messagerie (Thunderbird dans mon cas) qui s’appelle Enigmail. Ensuite Enigmail a générer mes clés PGP (de manière totallement opaque -> à creuser). Puis j’ai écrit un mail, en appuyant sur un petit cadenas mon mail partait chiffré et signé (uniquement si on a la clé du correspondant). Bien, cependant c’est très opaque et on ne sait pas ce qu'Enigmail et Autocrypt font réellement derrière les décors. L’utilisateur doit encore choisir s’il veut chiffrer ses mails ou non par contre il faut que le destinataire utilise PGP et que l’on ait sa clé publique. 
-J’ai donc expérimenté à plus bas niveau ce qu’il se passait.
+Pour mes tests j’ai fait en sorte de trouver l’utilisation la plus simple possible pour voir si un utilisateur lambda pouvait arriver à mettre en place ce genre de sécurité. Il s’est avéré que cela était assez simple au départ, mais dès lors que l'on veut envoyer un mail chiffré à un correspondant cela se complique un peu. J’ai juste eu à installer un Add-On sur mon logiciel de messagerie (Thunderbird dans mon cas) qui s’appelle Enigmail. Ensuite Enigmail a générer mes clés PGP (de manière totalement automatisée). Puis j’ai écrit un mail, en appuyant sur un petit cadenas mon mail partait chiffré et signé (uniquement si on a la clé du correspondant). Bien, cependant c’est très opaque et on ne sait pas ce qu'Enigmail fait réellement derrière les décors. L’utilisateur doit encore choisir s’il veut chiffrer ses mails ou non par contre il faut que le destinataire utilise PGP et que l’on ait sa clé publique. De plus, Enigmail utilise Autocrypt qui envoie notre clé publique directement dans le mail, ce qui n'est pas forcément pris en compte pour tout les destinataires et pourrait sujet à des modifications. Pour les clés Enigmail les envoie sur des serveurs de clés par défaut et va d'ailleurs regarder ces serveurs si la clé publique d'un destinataire n'est pas stockée en premier lieu. Ces serveurs sont les suivants : keys.opengpg.org (vks), hkps.pool.sks-keyservers.net (hkps), pgp.mit.edu (hkps). vks (Verifying Keyservers) et hkps (HTTP keyserver protocol over TLS) sont des interfaces avec des serveurs de clés afin d'enregistrer des nouvelles clés ou trouver une clé sur le serveur par différents moyens (email, key-id, fingerprint).
+\subsection{S/MIME}
+\label{protocols:SMIME}
+\paragraph*{Fonctionnement.}
+Basé sur le même principe que PGP principalement, mais avec des certificats pour prouver la légitimité des clés publiques. Pour l'utilisation il faut se créer un certificat, plusieurs classes de confiance existe. 
+\paragraph*{Propriétés cryptographiques.}
+\paragraph*{Utilisation.}
 %TODO Aller dans les détails
 \subsection{PEP}
 \paragraph*{Citation.}
-\textit{By default, communications between pep peers always work end-to-end encrypted – no eavesdrop-ping in between shall be possible by design.}
+\textit{By default, communications between pep peers always work end-to-end encrypted – no eavesdropping in between shall be possible by design.}
 \paragraph*{Utilisation.}
 pep assure un chiffrement de bout-en-bout par design, ils n'ont en effet pas de serveurs en soit et chiffre à l'aide d'un \textit{handshake} fait entres les deux personnes via des \textit{trustwords}. Ce sont des mots qu'il faut vérifier entres les deux partis afin d'être sûr que la connexion est bien authentifiée.
 \begin{figure}[h!]
@@ -43,13 +55,9 @@ pep assure un chiffrement de bout-en-bout par design, ils n'ont en effet pas de 
     \label{fig:PEP_global}
 \end{figure}
 -> à creuser mais à priori PEP utilise PGP pour le chiffrement des messages.
-\subsection{S/MIME}
-\label{protocols:SMIME}
-\paragraph*{Fonctionnement.}
-Basé sur le même principe que PGP principalement, mais avec des certificats pour prouver la légitimité des clés publiques. Pour l'utilisation il faut se créer un certificat, plusieurs classes de confiance existe. 
-\paragraph*{Propriétés cryptographiques.}
-\paragraph*{Utilisation.}
+
 \section{Implémentations existantes}
+Dans cette section je présentes certaines implémentations des protocoles discutés dans la section précédente, particulièrement PGP.
 \subsection{Protonmail}
 \paragraph*{Revendications.}
 Protonmail revendique beaucoup de propriétés cryptographiques, tel que le zero-access encryption. Et l’end-to-end chiffrement + zero-knowledge pour les messages sécurisés, même avec leur fonctionnalité de (Chiffrement vers l'extérieur) utilisant AES256-GCM. 
@@ -64,7 +72,8 @@ Tout leur code est open-source afin d'avoir une validation externe, de plus ils 
 Tout ce que j'ai vu pour le moment c'est que Tutanota utilise AES128-CBC ? Mais dans PGP ou ailleurs ?
 %\subsection{Bitmessage}
 \section{Attaque existantes}
-\subsection{Défauts webmail}
+Présentation des attaques faites sur les différents systèmes présentés jusqu'ici ainsi que leur fonctionnement global.
+\subsection{Défauts webmails}
 Selon un chercheur~\cite{DBLP:journals/iacr/Kobeissi18a} l'infrastructure de Protonmail aurait des failles via son webmail. Mais son papier est en fait plus général et parle des webmails en règle général.
 Il part du principe que les serveurs de Protonmail ne sont pas des serveurs à faire confiance, pour ainsi prouver le zero-knowledge de Protonmail. Par contre, le fait qu'il ne peuvent pas être mis en confiance est un problème selon lui, car c'est ces serveurs qui vont délivrer le code d'OpenPGP afin de faire le chiffrement. 
 Cela indique que si Protonmail était corrompu le fait d'avoir le code délivré par Protonmail pourrait avoir des effets néfastes. Comme p.ex l'extraction de la clé privée PGP. La conclusion est que dès le moment où vous avez utilisé une fois le webmail de protonmail la clé PGP est corrompue.
@@ -97,7 +106,7 @@ Comme mentionné avant les recherches ont beaucoup été orientées sur le proto
 S/MIME est la solution prédominante pour s'envoyer des mails chiffrés cependant il est compliqué de l'utiliser. Il et en effet difficile d'obtenir un certificat pour envoyer des mails et d'échanger avec une autre personne ayant S/MIME. De plus la complexité d'un systéme de PKI et l'overhead induit est assez conséquent.\\
 En faisant quelques essais PGP de mon côté je me suis heurté à beaucoup de difficultés et de problèmes avec les clés PGP, notamment pour se les échanger mais pour envoyer ensuite ce n'est pas si complexe, le problème étant de bien voir les primitives utilisées pour chiffrer/signer notre email, en effet les solutions \textit{plug-and-play like} ne permettent pas une gestion précise des primitives cryptographiques utilisées, ce qui pourrait induire à des primitives par défaut non sécurisées, comme l'a démontré EFAIL(c.f. \ref{attacks:EFAIL}).
 \section{Primitives}
-Présentation des primitives considérées pour implémenter un système de messagerie sécurisée.
+Présentation des primitives considérées pour implémenter un système de messagerie sécurisée. Cette section présente un aperçu des primitives analysées, pourquoi je l'ai ou non retenue et leur fonctionnement en quelques mots.
 \subsection{Primitives analysées}
 Les primitives que j'ai analysé le plus sont présentées si après. Elles ont en commun de s'appuyer sur un principe basé sur l'identité. C'est très pratique dans un système de mail car une identité peut-être très vite définie par le biais d'une adresse email. Voici donc les technologies auxquelles je me suis intéressée et que je décris brièvement :
 %TODO : Expliquer les différentes primitives
@@ -149,11 +158,11 @@ Et le $msk$ (master seret key) est $msk \leftarrow g_2*\gamma$.\\
 \textbf{SetPriv($x_{ID}, d_{ID}, mpk$) :} On choisit $r' \leftarrow \mathbb{Z}_p^*$ puis on reprends $(d_1, d_2) \leftarrow d_{ID}$ et l'on va prendre en secret key : 
 %TODO : Revoir si assez complet :
 \[sk_{ID} \leftarrow (s_1, s_2) = (d_1*x_{ID} + F_u(ID)*r', d_2*x_{ID} + g*r')\]
-Avec $sk_{ID}$ étant la clé secréte de l'utilisateur, donnée par l'Extract (notre Partial Private Key) et la valeur secrète de SetSec.\\
+Avec $sk_{ID}$ étant la clé secrète de l'utilisateur, donnée par l'Extract (notre Partial Private Key) et la valeur secrète de SetSec.\\
 \textbf{Encrypt($m, pk_{ID}, ID, mpk$) :} Pour chiffrer $m \in \mathbb{G}_T$, l'on va reprendre $(X,Y) \leftarrow pk_{ID}$. Pour chiffrer ce message on va tiré aléatoirement $s \leftarrow \mathbb{Z}_p^*$ pui calculer : 
 \[C = (C_0, C_1, C_2, C_3) \leftarrow (m + e(Y, g_2)*s, g*s,F_u(ID)*s, F_v(w)*s )\]
 Où $w \leftarrow H(C_0,C_1, C_2, ID, pk_{ID})$.\\
-\textbf{Decrypt($C, sk_{ID}, mpk$) :} L'on peut reprendre $(C_0,C_1,C_2,C_3) \leftarrow C$ et la clé privée $(s_1, s_2) \leftarrow sk_{ID}$. Afin d'accélerer le déchiffrement le calcul suivant peut être fait en tirant une valeur aléatoire $\alpha \leftarrow \mathbb{Z}_p^*$ :
+\textbf{Decrypt($C, sk_{ID}, mpk$) :} L'on peut reprendre $(C_0,C_1,C_2,C_3) \leftarrow C$ et la clé privée $(s_1, s_2) \leftarrow sk_{ID}$. Afin d'accélérer le déchiffrement le calcul suivant peut être fait en tirant une valeur aléatoire $\alpha \leftarrow \mathbb{Z}_p^*$ :
 \[m = C_0 + \frac{e(s_2 + \alpha*g, C_2 )*e(\alpha*g, C_3)}{e(C_1, s_1 + F_u(ID)*\alpha + F_v(w)*\alpha)}\]
 Qui donnera $m$ le texte en clair si le chiffré était bien formaté ou un élément aléatoire dans $G_T$.
 \subsection{Schémas Certificateless de Signature}
@@ -192,7 +201,7 @@ Pour établir une clé de chiffrement symétrique afin de chiffrer le mail l'n v
 \subsection{Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}
 Analyse de l'article~\cite{DBLP:journals/ijnsec/BalakrishnanR16}.
 \paragraph*{Description.} Ce papier traite le problème de la même façon que le précédent mais essaies d'aller plus loin dans les détails d'un implémentation à plus grande échelle (utilisation DNS). Il reprend le même schéma et les mêmes principes pour la création de la clé symétrique de chiffrement. Le même schéma de signature est présent aussi, qui est cassé rappelons-le. Le but serait d'avoir une entrée DNS similaire au DKIM déjà utilisé pour les emails afin d'informer les utilisateurs quelle adresse donne es clés publiques du domaine en question.
-\paragraph*{Détails techniques.} Beaucoup de détails concernant les domain policies qui pourraient être appliqués aux domaines pour la distribution des clés publiques. Proposition d'utiliser les headers d'emails pour transmettre la signature de l'email et informer le destinataire si l'email est chiffré ou non et de transmettre les IDS utilisés et le TImestamp utilisé. En effet, l'introduction d'un timestamp est proposé ici pour avoir un temps d'expiration au mail. Les DOmain Policies sont là pour informer les utilisateurs si les emails de ce domaines doivent être signés/chiffrés ou non.
+\paragraph*{Détails techniques.} Beaucoup de détails concernant les domain policies qui pourraient être appliqués aux domaines pour la distribution des clés publiques. Proposition d'utiliser les headers d'emails pour transmettre la signature de l'email et informer le destinataire si l'email est chiffré ou non et de transmettre les IDS utilisés et le TImestamp utilisé. En effet, l'introduction d'un timestamp est proposé ici pour avoir un temps d'expiration au mail. Les Domain Policies sont là pour informer les utilisateurs si les emails de ce domaines doivent être signés/chiffrés ou non.
 \paragraph*{Conclusion.} Une implémentation est citée utilisant la librairie MIRACL et en utilisant le C++ comme langage de programmation. L'implémentation est citée comme extension \textit{Thunderbird} en C++ / Javascript. Mais il n'y a pas de réel guide pour implémenter cela au monde réel avec des exemples de configuration DNS et autres. Pas vraiment d'explications sur l'utilisation d'une multitude de KGC ou un seul central, comment les synchroniser et autres... Par contre beaucoup d'explications sur comment pourrait fonctionner une entrée DNS afin d'informer aux utilisateurs où aller pour récupérer les clés publiques des utilisateurs du domaine en question et des policies qui pourraient s'appliquer à ce domaine.
 \subsection{PriviPK : Certificate-less and secure email communication}
 Analyse de l'article~\cite{DBLP:journals/compsec/AlSabahTLSD17}.

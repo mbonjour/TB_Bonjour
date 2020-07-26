@@ -26,7 +26,7 @@ Je me suis donc orienté sur le C pour avoir de meilleures performances et pouvo
 \end{table}
 
 \subsection{Librairie cryptographique}
-%TODO + d'explications sur les librairies et les choix faits (retrouver l'endoit où l'on dit que RELIC est plus efficient et est plus fait pour les POCs etc)
+%TODO + d'explications sur les librairies et les choix faits (retrouver l'endoit où l'on dit que RELIC est plus efficient et est plus fait pour les POCs etc) + ref livre Alex
 La librairie utilisée est RELIC Toolkit~\cite{relic-toolkit}, c'est une librairie en cours de développement qui se veut efficiente. Sa concurrence avec MIRACL m'a fait hésiter dans mon choix, mais MIRACL est plus codée en~ C++ avec des équivalences en C j'ai donc choisi RELIC. De plus j'ai trouvé par exemple que RELIC était généralement plus adapté dans le domaine universitaire pour des POC puis il est plus efficient que d'autres librairies~\cite{performanceRELIC}.
 \subsection{Courbe utilisée}
 La courbe utilisée pour le POC est la BLS12-P381, en effet cette courbe est assez efficiente et compatible avec les pairings. De plus RELIC l'a dans ses options et fonctionne bien, elle a un niveau de sécurité de 128bits. Je voulais prendre une courbe avec une plus grande sécurité cependant RELIC ne l'a pas encore totalement implémenté (certains tests concernant $\mathbb{G}_2$ ne passes pas), mais la librairie étant toujours en cours de développement il faudrait suivre ça de près, le code ne changerait en effet pas.
@@ -41,6 +41,8 @@ Pour H1, la première fonction de hachage j'ai simplement utilisé cette fonctio
 Pour la sérialisation des données, typiquement les clés publiques et les clés privées partielles envoyées en réseau ou les clés publiques enregistrées dans les fichiers par exemple, j'ai utilisé la librairie binn\footnote{\url{https://github.com/liteserver/binn}}. Cela permet de packer facilement des données binaires, pour cela RELIC met à disposition des méthodes g1\_write\_bin g1\_read\_bin qui a permis de faire ces enregistrements binaires. Ainsi les transferts de données sont simplifiés. Cependant il faut faire attention à certaines choses, on ne peut lire et écrire simultanément à l'aide de binn, si l'on crée un objet via un buffer on ne pourra modifier cet objet. Cela m'a posé des problèmes pour l'enregistrement des données secrètes, j'ai donc du copier l'objet lu pour pouvoir le modifier et sauver les nouveau paramètres.
 \subsection{Enregistrement des clés publiques (serveur)}
 Pour l'enregistrement j'ai utilisé une petite base de données NoSQL stockant les clés publiques des utilisateurs sur le KGC. Cela permet de facilement récupérer une clé publique pour un utilisateur si besoin. Pour implémenter cela j'ai utilisé la librairie UnQlite\footnote{\url{https://unqlite.org/}}. J'ai stocké les clés publiques pour le schéma de signature et de chiffrement séparément, en effet, l'entrée pour la signature porte le nom "signature/ID" et le chiffrement "encryption/ID".
+%TODO
+\subsection{Récupération via IMAP}
 \section{Implémentation clés  de chiffrement}
 Pour pouvoir implémenter ce schéma de chiffrement et signature certificateless dans un système hybride il a fallu penser à une manière d'encapsuler la clé et les données. Pour cela j'ai essayé de faire un système comparable à la figure \ref{fig:encapsulate}. 
 \begin{figure}[h!]

@@ -120,11 +120,14 @@
       Enseignant responsable : & Date et lieu : & Signature :  \\[0.3cm]
   
       {\TBsupervisor} & .......................................... &  .......................................... \\[0.8cm]
-      Nom de l'entreprise/institution : & Date et lieu : & Signature :  \\[0.3cm]
+     
       \ifthenelse{\equal{\TBindustryName}{}}%
     		{}%empty
-        {{\TBindustryContact} & .......................................... &  .......................................... \\
-        {\TBindustryName}}
+        {
+          Nom de l'entreprise/institution : & Date et lieu : & Signature :  \\[0.3cm]
+          {\TBindustryContact} & .......................................... &  .......................................... \\
+          {\TBindustryName}
+        }
   \end{tabular}
   
   \cleardoublepage

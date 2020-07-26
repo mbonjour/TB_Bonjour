@@ -1,4 +1,5 @@
 \chapter{Architecture / Design du protocole}
+% TODO : s'inspirer de PRIVIpk ET EXPLIQUER LES BESOINS EN MATIèRE DE SéCURITé
 % TODO Spécifications en texte via chapitre ou autre plus précise et ajouter un chapitre sur les notations
 \label{ch:arch}
 Dans ce chapitre, je vais m'intéresser à expliquer le fonctionnement de la \textit{certificateless cryptography} et démontrer comment je l'ai utilisée afin de l'intégrer à un protocole de chiffrement de mail.
@@ -63,7 +64,7 @@ Dans la littérature certificateless les schémas de signatures sont beaucoup pl
 \end{figure}
 
 Dans la Figure \ref{fig:firstConn} l'on voit la première connexion d'un utilisateur.
-Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoi les paramètres publiques (mpkS et mpkE) si aucun utilisateur n'a déjà cet email.
+Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoi les paramètres publiques (mpkS et mpkE) si aucun utilisateur n'a déjà cet email. Ces paramètres publiques sont assez lourd, en effet, ils font environ 52 kB au total, c'est donc un gros paquet qui est envoyé là. Dans mes expérimentations je n'ai jamais eu de problèmes, mais il est préférable de le mentionner tout de même.
 L'utilisateur va alors crée sa valeur secrète tirée aléatoire modulo p puis générer sa clé publique.
 Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et puisses le donner aux personnes qui veulent envoyer un mail à Alice.\\
 

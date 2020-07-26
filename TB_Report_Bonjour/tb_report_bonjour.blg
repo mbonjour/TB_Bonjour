@@ -1,6 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
-Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
-The top-level auxiliary file: tb_report_bonjour.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: tb_report_bonjour.aux
 The style file: plain.bst
 Database file #1: chapters/biblio.bib
 Repeated entry---line 203 of file chapters/biblio.bib
@@ -16,45 +14,4 @@ Repeated entry---line 240 of file chapters/biblio.bib
  :                                       ,
 I'm skipping whatever remains of this entry
 Warning--empty institution in doubleratchet
-You've used 18 entries,
-            2118 wiz_defined-function locations,
-            638 strings with 9461 characters,
-and the built_in function-call counts, 8036 in all, are:
-= -- 785
-> -- 429
-< -- 18
-+ -- 163
-- -- 142
-* -- 588
-:= -- 1276
-add.period$ -- 65
-call.type$ -- 18
-change.case$ -- 116
-chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 316
-empty$ -- 592
-format.name$ -- 142
-if$ -- 1737
-int.to.chr$ -- 0
-int.to.str$ -- 18
-missing$ -- 16
-newline$ -- 94
-num.names$ -- 52
-pop$ -- 130
-preamble$ -- 1
-purify$ -- 98
-quote$ -- 0
-skip$ -- 242
-stack$ -- 0
-substring$ -- 447
-swap$ -- 127
-text.length$ -- 18
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 70
-warning$ -- 1
-while$ -- 79
-width$ -- 20
-write$ -- 217
 (There were 3 error messages)

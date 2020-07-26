@@ -26,6 +26,18 @@ Suresh~Kumar Balakrishnan and V.~P.~Jagathy Raj.
   certificateless cryptography and domain name system.
 \newblock {\em I. J. Network Security}, 18(1):99--107, 2016.
 
+\bibitem{RFC4880}
+J.~Callas, L.~Donnerhacke, H.~Finney, D.~Shaw, and R.~Thayer.
+\newblock Openpgp message format.
+\newblock RFC 4880, RFC Editor, November 2007.
+\newblock \url{http://www.rfc-editor.org/rfc/rfc4880.txt}.
+
+\bibitem{wiki:mailGlobal}
+Wikimedia Commons.
+\newblock File:e-mail.svg --- wikimedia commons{,} the free media repository,
+  2014.
+\newblock [Online; accessed 26-July-2020].
+
 \bibitem{DBLP:conf/pkc/DentLP08}
 Alexander~W. Dent, Beno{\^{\i}}t Libert, and Kenneth~G. Paterson.
 \newblock Certificateless encryption schemes strongly secure in the standard
