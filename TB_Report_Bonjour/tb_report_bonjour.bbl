@@ -89,6 +89,12 @@ Nadim Kobeissi.
 \newblock An analysis of the protonmail cryptographic architecture.
 \newblock {\em {IACR} Cryptol. ePrint Arch.}, 2018:1121, 2018.
 
+\bibitem{DBLP:journals/iacr/LeurentP20}
+Ga{\"{e}}tan Leurent and Thomas Peyrin.
+\newblock {SHA-1} is a shambles - first chosen-prefix collision on {SHA-1} and
+  application to the {PGP} web of trust.
+\newblock {\em {IACR} Cryptol. ePrint Arch.}, 2020:14, 2020.
+
 \bibitem{doubleratchet}
 Trevor Perrin and Moxie Marlinspike.
 \newblock {The Double Ratchet Algorithm}.
