@@ -7,18 +7,18 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Le fonctionnement d'un système de mail~\cite {wiki:mailGlobal}}}{4}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Le fonctionnement global de PGP}}{5}{figure.2.2}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Exemple décodage d'un message PGP}}{7}{figure.2.3}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Erreur de vérification pour Fossa}}{9}{figure.2.4}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Erreur de vérification pour MeSince}}{10}{figure.2.5}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Le fonctionnement global de pEp}}{11}{figure.2.6}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Schéma fonctionnement de Signal\cite {doubleratchet}}}{13}{figure.2.7}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Erreur de vérification pour Fossa}}{10}{figure.2.4}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Erreur de vérification pour MeSince}}{11}{figure.2.5}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Le fonctionnement global de pEp}}{12}{figure.2.6}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Schéma fonctionnement de Signal\cite {doubleratchet}}}{15}{figure.2.7}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{23}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{25}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoi un message à Bob}}{26}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{27}{figure.3.4}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{25}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{27}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoi un message à Bob}}{28}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{29}{figure.3.4}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{32}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Connexion SSL/TLS avec le serveur email}}{34}{figure.4.2}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{34}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Connexion SSL/TLS avec le serveur email}}{36}{figure.4.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
