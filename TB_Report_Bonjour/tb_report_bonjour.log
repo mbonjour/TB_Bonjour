@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  27 JUL 2020 11:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  27 JUL 2020 14:56
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1341,79 +1341,81 @@ File: images/PGP_101.png Graphic file (type png)
 <use images/PGP_101.png>
 Package pdftex.def Info: images/PGP_101.png  used on input line 23.
 (pdftex.def)             Requested size: 284.52756pt x 296.4908pt.
- [5 <./images/PGP_101.png>] [6]
-<images/SMIME_FossaProblem.jpg, id=341, 592.2125pt x 1284.8pt>
-File: images/SMIME_FossaProblem.jpg Graphic file (type jpg)
-<use images/SMIME_FossaProblem.jpg>
-Package pdftex.def Info: images/SMIME_FossaProblem.jpg  used on input line 50.
-(pdftex.def)             Requested size: 284.52756pt x 617.28514pt.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
+1.
 
-
-LaTeX Warning: Float too large for page by 73.95866pt on input line 54.
-
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-5.
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-<images/meSince_problem.png, id=344, 1927.2pt x 1084.05pt>
-File: images/meSince_problem.png Graphic file (type png)
-<use images/meSince_problem.png>
-Package pdftex.def Info: images/meSince_problem.png  used on input line 58.
-(pdftex.def)             Requested size: 284.52756pt x 160.03659pt.
+<images/examplePGPDecode.png, id=326, 1834.855pt x 706.64pt>
+File: images/examplePGPDecode.png Graphic file (type png)
+<use images/examplePGPDecode.png>
+Package pdftex.def Info: images/examplePGPDecode.png  used on input line 33.
+(pdftex.def)             Requested size: 398.33858pt x 153.40182pt.
+ [5 <./images/PGP_101.png>] [6 <./images/examplePGPDecode.png>] [7]
+<images/SMIME_FossaProblem.jpg, id=355, 591.20876pt x 594.22pt>
+File: images/SMIME_FossaProblem.jpg Graphic file (type jpg)
+<use images/SMIME_FossaProblem.jpg>
+Package pdftex.def Info: images/SMIME_FossaProblem.jpg  used on input line 57.
+(pdftex.def)             Requested size: 284.52756pt x 285.984pt.
+<images/mesince_problem.png, id=358, 695.59875pt x 372.39125pt>
+File: images/mesince_problem.png Graphic file (type png)
+<use images/mesince_problem.png>
+Package pdftex.def Info: images/mesince_problem.png  used on input line 65.
+(pdftex.def)             Requested size: 426.79134pt x 228.48228pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[7]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/conceptualpEp.png, id=357, 541.0614pt x 412.4208pt>
+[8]
+<images/conceptualpEp.png, id=368, 541.0614pt x 412.4208pt>
 File: images/conceptualpEp.png Graphic file (type png)
 <use images/conceptualpEp.png>
-Package pdftex.def Info: images/conceptualpEp.png  used on input line 73.
+Package pdftex.def Info: images/conceptualpEp.png  used on input line 80.
 (pdftex.def)             Requested size: 426.79134pt x 325.33058pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8] [9]
-<images/signalFonctionnement.png, id=383, 632.3625pt x 623.32875pt>
+[9 <./images/SMIME_FossaProblem.jpg>] [10 <./images/mesince_problem.png>]
+[11 <./images/conceptualpEp.png>]
+<images/signalFonctionnement.png, id=396, 632.3625pt x 623.32875pt>
 File: images/signalFonctionnement.png Graphic file (type png)
 <use images/signalFonctionnement.png>
-Package pdftex.def Info: images/signalFonctionnement.png  used on input line 11
-4.
+Package pdftex.def Info: images/signalFonctionnement.png  used on input line 12
+0.
 (pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 155--156
+[12] [13 <./images/signalFonctionnement.png>] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 161--162
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
 
-[12]
-Underfull \hbox (badness 5064) in paragraph at lines 158--163
+
+Underfull \hbox (badness 5064) in paragraph at lines 164--169
  []\T1/cmr/bx/n/10.95 Modèle d'ad-ver-saires. \T1/cmr/m/n/10.95 Pour éva-luer l
 es sché-mas de cer-ti-fi-ca-te-less pu-blic key
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 158--163
+Underfull \hbox (badness 10000) in paragraph at lines 164--169
 
  []
 
-[13] [14] [15] [16] [17] [18]) (./chapters/architecture.tex [19] [20 <./images/
-SMIME_FossaProblem.jpg>] [21 <./images/meSince_problem.png> <./images/conceptua
-lpEp.png>] [22 <./images/signalFonctionnement.png>]
+[15] [16] [17] [18] [19] [20] [21]) (./chapters/architecture.tex [22]
 Chapitre 3.
-<images/SchemaGlobal.png, id=529, 721.94719pt x 319.94531pt>
+<images/SchemaGlobal.png, id=534, 721.94719pt x 319.94531pt>
 File: images/SchemaGlobal.png Graphic file (type png)
 <use images/SchemaGlobal.png>
 Package pdftex.def Info: images/SchemaGlobal.png  used on input line 10.
@@ -1438,7 +1440,7 @@ Chapitre 4.
 [29
 
 ] [30]
-<images/schemaEncapsulation.png, id=596, 607.51968pt x 353.82187pt>
+<images/schemaEncapsulation.png, id=601, 607.51968pt x 353.82187pt>
 File: images/schemaEncapsulation.png Graphic file (type png)
 <use images/schemaEncapsulation.png>
 Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 50.
@@ -1454,7 +1456,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 58--60
  []
 
 [31] [32 <./images/schemaEncapsulation.PNG>] [33]
-<images/packetProofEncrypted.png, id=625, 1036.87375pt x 701.62125pt>
+<images/packetProofEncrypted.png, id=630, 1036.87375pt x 701.62125pt>
 File: images/packetProofEncrypted.png Graphic file (type png)
 <use images/packetProofEncrypted.png>
 Package pdftex.def Info: images/packetProofEncrypted.png  used on input line 90
@@ -1527,10 +1529,10 @@ Package rerunfilecheck Info: File `tb_report_bonjour.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 138.
  ) 
 Here is how much of TeX's memory you used:
- 33831 strings out of 481239
- 671104 string characters out of 5920377
- 1154894 words of memory out of 5000000
- 48102 multiletter control sequences out of 15000+600000
+ 33839 strings out of 481239
+ 671304 string characters out of 5920377
+ 1155013 words of memory out of 5000000
+ 48108 multiletter control sequences out of 15000+600000
  553832 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  70i,11n,115p,2017b,949s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1600,10 +1602,10 @@ blic/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm12
 00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/t
 exmf/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf/fonts/type1/pub
 lic/cm-super/sftt1095.pfb>
-Output written on tb_report_bonjour.pdf (61 pages, 1326285 bytes).
+Output written on tb_report_bonjour.pdf (61 pages, 1347035 bytes).
 PDF statistics:
- 899 PDF objects out of 1000 (max. 8388607)
- 756 compressed objects within 8 object streams
- 245 named destinations out of 1000 (max. 500000)
- 471 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 905 PDF objects out of 1000 (max. 8388607)
+ 760 compressed objects within 8 object streams
+ 246 named destinations out of 1000 (max. 500000)
+ 476 words of extra memory for PDF output out of 10000 (max. 10000000)
 
