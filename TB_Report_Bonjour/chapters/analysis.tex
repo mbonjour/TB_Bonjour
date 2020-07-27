@@ -50,13 +50,13 @@ Lors des tests l’utilisation la plus simple possible a été utilisée pour vo
 \subsection{S/MIME}
 \label{protocols:SMIME}
 \paragraph*{Fonctionnement.}
-S/MIME se base sur un système de PKI (Public Key Infrastructure) pour chiffrer et signer des mails. 
+S/MIME (Secure/Multipurpose Internet Mail Extensions) se base sur un système de PKI (Public Key Infrastructure) pour chiffrer et signer les mails. MIME est un standard qui étend le format de mail standard afin de pouvoir transmettre des données plus complexes que le format ASCII. En effet, cela permet de transmettre d'autres sets de caractères et la possibilité de transmettre des fichiers joints audio, vidéo, images, programmes aux emails.
 \paragraph*{Propriétés cryptographiques.}
 S/MIME est aussi crée pour établir un \textbf{chiffrement bout-en-bout} et ainsi éviter de révéler trop d'informations lors d'une brèche tel que dans un MDA. 
 \textbf{Authentification} et \textbf{intégrité} du message en utilisant la signature digitale, en plus de \textbf{non-répudiation} grâce à celle-ci. Le fait d'avoir le message chiffré de bout en bout permet un certain respect de la vie privée, on ne peut voir les données envoyées.
 \paragraph*{Utilisation.}
 Pour utiliser S/MIME et avoir des exemples et références de certificats j'ai essayé 2 fournisseurs \textbf{gratuits} pour les certificats S/MIME.
-J'ai testé  un plugin firefox qui permet d'avoir des certificats pour GMail et envoyer des mails signés et chiffrés à l'aide de S/MIME. La clé privée est générée par l'extension localement et n'est pas sauvegardée dans un cloud, il est possible de la sécurisé à l'aide dune passphrase. Cependant les certificats ne sont pas vérifier correctement comme on peut le voir à la réception dans MeSince (le prochain programme essayé) à la figure \ref{fig:SMIME_MeSinceProblem}. Le certificat utilise RSA avec SHA256 pour la signature des messages.
+J'ai testé  un plugin firefox qui permet d'avoir des certificats pour GMail et envoyer des mails signés et chiffrés à l'aide de S/MIME. La clé privée est générée par l'extension localement et n'est pas sauvegardée dans un cloud, il est possible de la sécurisé à l'aide dune passphrase. Cependant les certificats ne sont pas vérifier correctement comme on peut le voir à la réception dans MeSince (le prochain programme testé) à la figure \ref{fig:SMIME_MeSinceProblem}. Le certificat utilise RSA avec SHA256 pour la signature des messages.
 \begin{figure}[h!]
 	\includegraphics[width=10cm]{images/SMIME_FossaProblem.jpg}
 	\centering
