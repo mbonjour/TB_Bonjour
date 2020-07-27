@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  27 JUL 2020 16:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  27 JUL 2020 17:39
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1341,31 +1341,37 @@ File: images/PGP_101.png Graphic file (type png)
 <use images/PGP_101.png>
 Package pdftex.def Info: images/PGP_101.png  used on input line 23.
 (pdftex.def)             Requested size: 284.52756pt x 296.4908pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--32
+
+ []
+
+[5 <./images/PGP_101.png>]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
-1.
+3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-<images/examplePGPDecode.png, id=328, 1834.855pt x 706.64pt>
+<images/examplePGPDecode.png, id=335, 1834.855pt x 706.64pt>
 File: images/examplePGPDecode.png Graphic file (type png)
 <use images/examplePGPDecode.png>
-Package pdftex.def Info: images/examplePGPDecode.png  used on input line 34.
+Package pdftex.def Info: images/examplePGPDecode.png  used on input line 36.
 (pdftex.def)             Requested size: 398.33858pt x 153.40182pt.
- [5 <./images/PGP_101.png>]
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6] [7 <./images/examplePGPDecode.png>]
-<images/SMIME_FossaProblem.jpg, id=360, 591.20876pt x 594.22pt>
+<images/SMIME_FossaProblem.jpg, id=359, 591.20876pt x 594.22pt>
 File: images/SMIME_FossaProblem.jpg Graphic file (type jpg)
 <use images/SMIME_FossaProblem.jpg>
-Package pdftex.def Info: images/SMIME_FossaProblem.jpg  used on input line 58.
+Package pdftex.def Info: images/SMIME_FossaProblem.jpg  used on input line 61.
 (pdftex.def)             Requested size: 284.52756pt x 285.984pt.
-<images/mesince_problem.png, id=363, 695.59875pt x 372.39125pt>
+<images/mesince_problem.png, id=362, 695.59875pt x 372.39125pt>
 File: images/mesince_problem.png Graphic file (type png)
 <use images/mesince_problem.png>
-Package pdftex.def Info: images/mesince_problem.png  used on input line 66.
+Package pdftex.def Info: images/mesince_problem.png  used on input line 69.
 (pdftex.def)             Requested size: 426.79134pt x 228.48228pt.
 
 
@@ -1375,49 +1381,48 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [8]
-<images/conceptualpEp.png, id=373, 541.0614pt x 412.4208pt>
+<images/conceptualpEp.png, id=372, 541.0614pt x 412.4208pt>
 File: images/conceptualpEp.png Graphic file (type png)
 <use images/conceptualpEp.png>
-Package pdftex.def Info: images/conceptualpEp.png  used on input line 80.
+Package pdftex.def Info: images/conceptualpEp.png  used on input line 83.
 (pdftex.def)             Requested size: 426.79134pt x 325.33058pt.
-
+ [9 <./images/SMIME_FossaProblem.jpg>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9 <./images/SMIME_FossaProblem.jpg>] [10 <./images/mesince_problem.png>]
-[11 <./images/conceptualpEp.png>]
-<images/signalFonctionnement.png, id=401, 632.3625pt x 623.32875pt>
+[10 <./images/mesince_problem.png>] [11 <./images/conceptualpEp.png>]
+<images/signalFonctionnement.png, id=400, 632.3625pt x 623.32875pt>
 File: images/signalFonctionnement.png Graphic file (type png)
 <use images/signalFonctionnement.png>
 Package pdftex.def Info: images/signalFonctionnement.png  used on input line 12
-0.
+3.
 (pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [12] [13 <./images/signalFonctionnement.png>] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
+Underfull \hbox (badness 10000) in paragraph at lines 164--165
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 162--163
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
 
-
-Underfull \hbox (badness 5064) in paragraph at lines 164--169
+[15]
+Underfull \hbox (badness 5064) in paragraph at lines 167--172
  []\T1/cmr/bx/n/10.95 Modèle d'ad-ver-saires. \T1/cmr/m/n/10.95 Pour éva-luer l
 es sché-mas de cer-ti-fi-ca-te-less pu-blic key
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 164--169
+Underfull \hbox (badness 10000) in paragraph at lines 167--172
 
  []
 
-[15] [16] [17] [18] [19] [20] [21]) (./chapters/architecture.tex [22]
+[16] [17] [18] [19] [20] [21]) (./chapters/architecture.tex [22]
 Chapitre 3.
 <images/SchemaGlobal.png, id=537, 721.94719pt x 319.94531pt>
 File: images/SchemaGlobal.png Graphic file (type png)
@@ -1606,7 +1611,7 @@ blic/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm12
 00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/t
 exmf/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf/fonts/type1/pub
 lic/cm-super/sftt1095.pfb>
-Output written on tb_report_bonjour.pdf (61 pages, 1347869 bytes).
+Output written on tb_report_bonjour.pdf (61 pages, 1348247 bytes).
 PDF statistics:
  909 PDF objects out of 1000 (max. 8388607)
  764 compressed objects within 8 object streams
