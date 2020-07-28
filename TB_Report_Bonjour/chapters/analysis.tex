@@ -231,7 +231,7 @@ Plusieurs types de Pairings existent :\\
 	\item \textbf{Type 3} : Lorsque $\mathbb{G}_1 \ne \mathbb{G}_2$ et qu'aucun isomorphise est connu entre $\mathbb{G}_1$ et $\mathbb{G}_2$, dans n'importe quelle direction.
 \end{itemize}
 Les différents schémas analysés utilisent souvent les pairings de Type 1, cependant la courbe utilisée, et RELIC me permet de faire des Type 3. Une conversion est faite dans les schémas choisis comme vu ci-après. En effet, les type 3 sont des pairings plus efficients avec des courbes plus petites tandis que les type 1 étaient plus utilisé dans les débuts de la \textit{Pairing Based Cryptography}.
-\subsection{À savoir}
+\subsection{Notations}
 \label{subsec:asavoir}
 Avant d'analyser les différents schémas, il faut connaître certaines notions présentes dans les tableaux comparatifs afin de mieux les comprendre. Liste non exhaustive de ces notions et de leurs significations et faites ici.
 \paragraph*{Types.}Les types présentés peuvent être soit \textbf{concret} soit \textbf{générique}. Les types concrets sont des schémas qui présentent leurs algorithmes en utilisant des calculs bien établis et présentent l'entierté du fonctionnement de leur schéma, tandis que les schémas présenté génériques peuvent s'appuyer sur d'autres problèmes et se baser sur des algorithmes déjà existants.\\
@@ -249,7 +249,7 @@ Pour chacun des types d'adversaires il existe différents niveaux de sécurité 
 Pour choisir parmi les nombreux schémas existants en certificateless pour le chiffrement j'ai établi un tableau comparatif des différentes manières de faire, inspiré de~\cite{bookIntroCertificateless}. En suivant ce tableau je me suis rendu compte que la construction de Dent-Libert-Paterson~\cite{DBLP:conf/pkc/DentLP08} était probablement la plus adaptée en vue des propriétés qu'elle présentait. Le tableau se trouve en annexe \ref{ch:fichiers}.
 
 \subsection{Détails techniques}
-Les détails techniques sur le chiffrement avec la \textit{Certificateless Cryptography}.
+Les détails techniques sur le chiffrement avec la \textit{Certificateless Cryptography}. Afin de faire la liaison avec l'implémentation, le code C montrant l'implémentation de chaque algorithme est listé. Ce code est simplifié pour ne pas inclure la création des différents éléments, il est là uniquement pour montrer comment les calculs ont été effectués et non comment la mémoire a été allouée.
 Le chiffrement se base sur le problème difficile \textit{The Decision 3-Party Diffie-Hellman Problem} (3-DDH). \\C'est de décider si $T =g^{abc} ayant (g^a, g^b, g^c, T) \in \mathbb{G}_4$.\\
 Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/pkc/DentLP08} et les expliquer, cependant dans le schéma il est noté les calculs avec $\mathbb{G} \times \mathbb{G} \rightarrow \mathbb{G}_T$ mais il est mentionné que c'est facilement adaptable pour $\mathbb{G}_1 \times \mathbb{G}_2 \rightarrow \mathbb{G}_T$ ce que j'ai fait. De plus, la conversion vers un groupe additif (travaillant sur les courbes elliptiques) est faite afin que les calculs ici puissent être lus avec mon implémentation :\\
 \textbf{Setup($1^k, n$) :} Avec $\mathbb{G}_1, \mathbb{G}_2, \mathbb{G}_T$ avec un ordre $p > 2^k$. $g$ est un générateur de $\mathbb{G}_1$. Ensuite  $g_1 = g * \gamma$ pour un $\gamma \leftarrow  \mathbb{Z}_p^*$ aléatoire. Puis $g_2 \leftarrow \mathbb{G}_2$. Deux vecteurs (U,V) seront tirés aléatoirement dans $\mathbb{G}_2^{n+1}$ en tant que fonctions de hash notés :
@@ -257,113 +257,285 @@ Pour expliquer les détails techniques je vais ici montrer les calculs faits dan
 L'on va aussi prendre une fonction de hash résistante aux collisions : $H : \{0,1\}^* \rightarrow \{0,1\}^n$. Au final notre $mpk$ (master public key) est :
 \[mpk \leftarrow (g, g_1, g_2, U, V)\]
 Et le $msk$ (master seret key) est $msk \leftarrow g_2*\gamma$.\\
-\begin{sourcebox}{c}{Fonction de setup}
-	// g = generator of G1
-	g1_get_gen(mpkSetup->g);
-	g1_get_ord(p);
-	
-	// gamma = random from Zp
-	bn_rand_mod(gamma, p);
-	// g1 = gamma*g
-	g1_mul(mpkSetup->g1, mpkSetup->g, gamma);
-	// g2 = generator of G2
-	g2_get_gen(mpkSetup->g2);
-	
-	g2_get_ord(p);
-	// Generate 2 arrays with G2 elements for the U and  vectors
-	for(int i =0; i < MESSAGE_SPACE; ++i){
-		g2_null(mpkSetup->u[i])
-		g2_null(mpkSetup->v[i])
-		g2_new(mpkSetup->u[i])
-		g2_new(mpkSetup->v[i])
+\begin{sourcebox}{C}{Fonction de setup}
+	void setup(int k, encryption_mpk* mpkSetup, g2_t* msk){
+		// g = generator of G1
+		g1_get_gen(mpkSetup->g);
+		g1_get_ord(p);
 		
-		bn_rand_mod(uvGen,p);
-		g2_mul(mpkSetup->u[i], mpkSetup->g2, uvGen);
-		bn_rand_mod(uvGen,p);
-		g2_mul(mpkSetup->v[i], mpkSetup->g2, uvGen);
+		// gamma = random from Zp
+		bn_rand_mod(gamma, p);
+		// g1 = gamma*g
+		g1_mul(mpkSetup->g1, mpkSetup->g, gamma);
+		// g2 = generator of G2
+		g2_get_gen(mpkSetup->g2);
+		
+		g2_get_ord(p);
+		// Generate 2 arrays with G2 elements for the U and  vectors
+		for(int i =0; i < MESSAGE_SPACE; ++i){
+			bn_rand_mod(uvGen,p);
+			g2_mul(mpkSetup->u[i], mpkSetup->g2, uvGen);
+			bn_rand_mod(uvGen,p);
+			g2_mul(mpkSetup->v[i], mpkSetup->g2, uvGen);
+		}
+		
+		// The master secret key is msk = gamma*g2
+		g2_mul(*msk, mpkSetup->g2, gamma);
 	}
-	
-	// The master secret key is msk = gamma*g2
-	g2_mul(*msk, mpkSetup->g2, gamma);
 \end{sourcebox}
 \textbf{Extract($mpk, \gamma, ID$) :} On prend $r \leftarrow \mathbb{Z}_p^*$ puis on retourne $d_{ID} \leftarrow (d_1, d_2) = (g_2*\gamma + F_u(ID)*r, g*r)$\\
-\begin{sourcebox}{c}{Code pour l'extraction}
-	// r random from Zp
-	bn_rand_mod(r,p);
-	
-	// Computes d1 = msk + r*Fu(ID)
-	g2_t temp;
-	g2_null(temp)
-	g2_new(temp)
-	
-	F(ID, mpk.u, &temp, strlen(ID));
-	g2_mul(temp, temp, r);
-	g2_add(partialKeys->d1, msk, temp);
-	
-	// Computes d2 = r*g
-	g1_mul(partialKeys->d2, mpk.g, r);
+\begin{sourcebox}{C}{Code pour l'extraction}
+	void extract(encryption_mpk mpk, g2_t msk, char* ID, encryption_ppk* partialKeys){
+		// r random from Zp
+		bn_rand_mod(r,p);
+		
+		// Computes d1 = msk + r*Fu(ID)
+		g2_t temp;
+		g2_null(temp)
+		g2_new(temp)
+		
+		F(ID, mpk.u, &temp, strlen(ID));
+		g2_mul(temp, temp, r);
+		g2_add(partialKeys->d1, msk, temp);
+		
+		// Computes d2 = r*g
+		g1_mul(partialKeys->d2, mpk.g, r);
+	}
 \end{sourcebox}
 \textbf{SetSec($mpk$) :} Retourne un secret aléatoirement choisi $x_{ID} \leftarrow \mathbb{Z}_p^*$.\\
 \begin{sourcebox}{c}{Construction de la valeur secrète}
-	g1_get_ord(p);
-	bn_rand_mod(*x, p);
+	void setSec(bn_t* x){
+		g1_get_ord(p);
+		bn_rand_mod(*x, p);
+	}
 \end{sourcebox}
 \textbf{SetPub($x_{ID}, mpk$) :} Retourne $pk_{ID} \leftarrow (X,Y) = (g*x_{ID}, g_1*x_{ID})$.\\
 \begin{sourcebox}{c}{Fonction de construction pour la clé publique}
-	g2_mul(PKtoGen->X, mpkSession.g2, x);
-	g1_mul(PKtoGen->Y, mpkSession.g1, x);
+	void setPub(bn_t x, encryption_mpk mpkSession, encryption_pk* PKtoGen){
+		g2_mul(PKtoGen->X, mpkSession.g2, x);
+		g1_mul(PKtoGen->Y, mpkSession.g1, x);
+	}
 \end{sourcebox}
 \textbf{SetPriv($x_{ID}, d_{ID}, mpk$) :} On choisit $r' \leftarrow \mathbb{Z}_p^*$ puis on reprends $(d_1, d_2) \leftarrow d_{ID}$ et l'on va prendre en secret key : 
 %TODO : Revoir si assez complet :
 \[sk_{ID} \leftarrow (s_1, s_2) = (d_1*x_{ID} + F_u(ID)*r', d_2*x_{ID} + g*r')\]
 Avec $sk_{ID}$ étant la clé secrète de l'utilisateur, donnée par l'Extract (notre Partial Private Key) et la valeur secrète de SetSec.\\
 \begin{sourcebox}{c}{Création de la clé privée}
-	bn_rand_mod(r, p);
-	
-	// Computes s1 = x*d1 + r*Fu(ID)
-	g2_t pointTemp;
-	g2_null(pointTemp)
-	g2_new(pointTemp)
-	
-	g2_mul(secretKeys->s1,d.d1, x);
-	F(ID, mpk.u, &pointTemp, strlen(ID));
-	g2_mul(pointTemp, pointTemp, r);
-	g2_add(secretKeys->s1, secretKeys->s1, pointTemp);
-	
-	// Computes s2 = x*d2 + r*g
-	g1_t temp;
-	g1_null(temp)
-	g1_new(temp)
-	
-	g1_mul(secretKeys->s2, d.d2, x);
-	g1_mul(temp, mpk.g, r);
-	g1_add(secretKeys->s2, secretKeys->s2, temp);
+	void setPriv(bn_t x, encryption_ppk d, encryption_mpk mpk, char* ID, encryption_sk* secretKeys){
+		bn_rand_mod(r, p);
+		
+		// Computes s1 = x*d1 + r*Fu(ID)
+		g2_t pointTemp;
+		g2_null(pointTemp)
+		g2_new(pointTemp)
+		
+		g2_mul(secretKeys->s1,d.d1, x);
+		F(ID, mpk.u, &pointTemp, strlen(ID));
+		g2_mul(pointTemp, pointTemp, r);
+		g2_add(secretKeys->s1, secretKeys->s1, pointTemp);
+		
+		// Computes s2 = x*d2 + r*g
+		g1_t temp;
+		g1_null(temp)
+		g1_new(temp)
+		
+		g1_mul(secretKeys->s2, d.d2, x);
+		g1_mul(temp, mpk.g, r);
+		g1_add(secretKeys->s2, secretKeys->s2, temp);
+	}
 \end{sourcebox}
 \textbf{Encrypt($m, pk_{ID}, ID, mpk$) :} Pour chiffrer $m \in \mathbb{G}_T$, l'on va reprendre $(X,Y) \leftarrow pk_{ID}$. Pour chiffrer ce message on va tiré aléatoirement $s \leftarrow \mathbb{Z}_p^*$ pui calculer : 
 \[C = (C_0, C_1, C_2, C_3) \leftarrow (m + e(Y, g_2)*s, g*s,F_u(ID)*s, F_v(w)*s )\]
 Où $w \leftarrow H(C_0,C_1, C_2, ID, pk_{ID})$.\\
+\begin{sourcebox}{C}{Code pour le chiffrement}
+	void encrypt(gt_t m, encryption_pk pk, unsigned char* ID, encryption_mpk mpk, cipher* c){
+		bn_rand_mod(s, p);
+		// Computes C0 = e(Y,g2)^s*m
+		gt_t temp;
+		gt_null(temp)
+		gt_new(temp)
+		pc_map(temp, pk.Y, mpk.g2);
+		gt_exp(temp, temp, s);
+		gt_mul(c->c0, m, temp)
+		gt_free(temp)
+		
+		// Computes C1 = s*g
+		g1_mul(c->c1, mpk.g, s);
+		
+		// Computes C2 = s*Fu(ID)
+		g2_t pointTemp;
+		g2_null(pointTemp)
+		g2_new(pointTemp)
+		F(ID, mpk.u, &pointTemp, strlen(ID));
+		g2_mul(c->c2, pointTemp, s);
+		g2_free(pointTemp)
+		
+		// Computes C3 = s*Fv(w) où w = C0, C1, C2, ID, PK.x, PK.y
+		g2_t pointTemp2;
+		g2_null(pointTemp2)
+		g2_new(pointTemp2)
+		
+		// Construction of the w bytes object to hash
+		// ...
+		
+		F(w, mpk.v, &pointTemp2, c0size + c1Size + c2Size + strlen(ID) + pkXSize + pkYSize);
+		g2_mul(c->c3, pointTemp2, s);
+	}
+\end{sourcebox}
 \textbf{Decrypt($C, sk_{ID}, mpk$) :} L'on peut reprendre $(C_0,C_1,C_2,C_3) \leftarrow C$ et la clé privée $(s_1, s_2) \leftarrow sk_{ID}$. Afin d'accélérer le déchiffrement le calcul suivant peut être fait en tirant une valeur aléatoire $\alpha \leftarrow \mathbb{Z}_p^*$ :
 \[m = C_0 + \frac{e(s_2 + \alpha*g, C_2 )*e(\alpha*g, C_3)}{e(C_1, s_1 + F_u(ID)*\alpha + F_v(w)*\alpha)}\]
 Qui donnera $m$ le texte en clair si le chiffré était bien formaté ou un élément aléatoire dans $G_T$.
+\begin{sourcebox}{C}{Code pour le déchiffrement}
+	void decrypt(cipher c, encryption_sk sk, encryption_pk pk, encryption_mpk  mpk, char* ID, gt_t* m){
+		bn_rand_mod(alpha, p);
+		// Construction of the w bytes object to hash (e(Ppub, Qa)*e(U, H2(m,ID,PK,U))*e(Ppub, H3(m,ID,PK)))
+		// ...
+		// Constructs our point
+		F(w, mpk.v, &pointFv, c0size + c1Size + c2Size + strlen(ID) + pkXSize + pkYSize);
+		F(ID, mpk.u, &pointFu, strlen(ID));
+		
+		// m = numerateur * numerateur2 / denominateur
+		// alphaG = alpha * g
+		g1_mul(alphaG, mpk.g, alpha);
+		g1_add(tempNumerateur, sk.s2, alphaG);
+		// numerateur = e(s2 + alphaG, C2)
+		pc_map(numerateur, tempNumerateur, c.c2);
+		// numerateur2 = e(alphaG, C3)
+		pc_map(numerateur2, alphaG, c.c3);
+		gt_mul(numerateur, numerateur, numerateur2);
+		
+		g2_mul(pointFu, pointFu, alpha);
+		g2_mul(pointFv, pointFv, alpha);
+		
+		g2_add(Fpoints, sk.s1, pointFu)
+		g2_add(Fpoints,Fpoints, pointFv)
+		pc_map(denominateur, c.c1, Fpoints);
+		
+		gt_inv(denominateur, denominateur);
+		gt_mul(*m, numerateur, denominateur);
+		gt_mul(*m, c.c0, *m);
+	}
+\end{sourcebox}
 \subsection{Schémas Certificateless de Signature}
 %TODO : Expliquer Malicious KGC (Type II -> à renseigner (voir dans le livre)) et mettre tableaux
 Pour choisir parmi les nombreux schémas certificateless pour la signature j'ai établi un tableau comparatif des différentes manières de faire inspiré de~\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau il y a peu de solutions se dégage, en effet l'on peut voir que beaucoup de schémas de signature sont cassés, mon choix s'est porté au final sur la construction de Zhang et Zhang~\cite{DBLP:conf/acns/ZhangWXF06} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) datant de 2006 et n'a pas été cassée depuis. Le tableau se trouve en annexe \ref{ch:fichiers}.
 \subsection{Détails techniques}
-Les détails techniques sur la signature avec la \textit{Certificateless Cryptography}.
+Les détails techniques sur la signature avec la \textit{Certificateless Cryptography}. Là encore, le code C montrant l'implémentation de chaque algorithme est listé. Ce code est simplifié pour ne pas inclure la création des différents éléments, il est là uniquement pour montrer comment les calculs ont été effectués et non comment la mémoire a été allouée.
 La signature se base sur le problème difficile \textit{The Computational Diffie-Hellman Problem} (CDH). \\Ayant $P, aP, bP$ où $a,b$ aléatoires $\in \mathbb{Z}_q^*$ il n'est pas possible de trouver $abP$.\\
 Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/acns/ZhangWXF06} et les expliquer. Cependant dans le papier original le groupe bilinéaire de couplage choisi est de forme $\mathbb{G}_1 \times \mathbb{G}_2 \rightarrow \mathbb{G}_T$ avec un \textit{pairing} $e(g,h)$ avec $g \in \mathbb{G}_1, h \in \mathbb{G}_2$ alors que le papier annonce une construction tel que $\mathbb{G} \times \mathbb{G} \rightarrow \mathbb{G}_T$.\\
 \textbf{Setup($1^k $) :} Tout d'abord l'on va prendre les groupes d'ordre $q$ énoncés auparavant. Puis on choisit un générateur $P \in \mathbb{G}_1$. La \textit{master secret key} va être choisie aléatoirement $s \in \mathbb{Z}_q^*$. Puis la clé publique calculée : $P_{pub} = sP$. Finalement, trois fonctions de hash distinctes $H_1, H_2, H_3$ vont être choisies, chacune d'elle \textit{mappant} de $\{0,1\}^*$ à $\mathbb{G}_2$. Pour cela j'ai choisi de faire du \textit{Hash Domain Separation} comme expliqué dans le Chapitre \ref{ch:impl}. L'on définit les $\mathbf{params} = (\mathbb{G}_1,\mathbb{G}_2,\mathbb{G}_T,e,q,P,P_{pub},H_1,H_2,H_3)$\\
+\begin{sourcebox}{C}{Code C pour le Setup}
+	void setupSig(int i, signature_mpk *mpk, bn_t *s){
+		// q = Order of G1
+		g1_get_ord(q);
+		
+		// s = random Zq
+		bn_rand_mod(*s, q);
+		
+		// Choose a generator P
+		g1_get_gen(mpk->P);
+		// Setup Ppub = s*P
+		g1_mul(mpk->Ppub, mpk->P, *s);
+	}
+\end{sourcebox}
 \textbf{Partial-Private-Key-Extract($params, s, ID_A$) :} Pour avoir la \textit{Partial Private Key} ($D_A$) de l'user $A$ avec l'identité $ID_A$. Calculer $Q_A = H_1(ID_A)$. Alors $D_A = sQ_A$.\\
+\begin{sourcebox}{C}{Code C pour l'extraction de la clé partielle privée}
+	void extractSig(signature_mpk mpk, bn_t msk, char* ID, signature_ppk * partialKeys) {
+		// Qa = H1(ID)
+		g2_map(qa, ID, strlen(ID));
+		// D = msk*Qa
+		g2_mul(partialKeys->D, qa, msk);
+		pc_map(test1, mpk.P, partialKeys->D);
+		pc_map(test2, mpk.Ppub, qa);
+		
+		if (gt_cmp(test2, test1) == RLC_EQ) {
+			printf("The partial private key extraction is correct !\n");
+		}
+	}
+\end{sourcebox}
 %TODO : Compléter
 \textbf{Set-Secret-Value :} La valeur secrète $x \in \mathbb{Z}_q^*$ est tirée aléatoirement.\\
+\begin{sourcebox}{C}{Code C pour créer la valeur secréte}
+	void setSecSig(bn_t* x){
+		// q = Zq
+		g1_get_ord(q);
+		// x = random from Zq
+		bn_rand_mod(*x, q);
+	}
+\end{sourcebox}
 \textbf{Set-Public-Key($params, x$) :}  La clé publique $PK_A$ de l'utilisateur $A$ est $PK_A = xP$.\\
+\begin{sourcebox}{C}{Code C pour créer la clé publique}
+	void setPubSig(bn_t x, signature_mpk mpkSession, signature_pk* PKtoGen){
+		// Public key : Ppub = x*P
+		g1_mul(PKtoGen->Ppub, mpkSession.P, x);
+	}
+\end{sourcebox}
 \textbf{Set-Private-Key($params, D_A, x$) :} La clé privé $SK_A$ de l'utilisateur $A$ est calculée comme ceci $SK_A = (D_A, x)$.\\
+\begin{sourcebox}{C}{Code C pour la création de la clé privée}
+	void setPrivSig(bn_t x, signature_ppk d, signature_mpk mpk, char* ID, signature_sk * secretKeys){
+		// The private key is composed with D, the partial private key
+		g2_copy(secretKeys->D, d.D);
+		// And x the secret value
+		bn_copy(secretKeys->x, x);
+	}
+\end{sourcebox}
 \textbf{CL-Sign($params, m, ID_A, SK_A$) :} Tout d'abord $r \in \mathbb{Z}_q^*$ est tiré aléatoirement puis on calcules les 2 composantes de la signature :
 \[ U = rP\]
 \[V = D_A + rH_2(m, ID_A, PK_A,U) + xH_3(m, ID_A, PK_A)\]
 Ainsi ces composantes forment la signature $\sigma = (U,V )$.\\
+\begin{sourcebox}{C}{Code C pour la signature}
+	void sign(unsigned char* m, signature_sk sk, signature_pk pk, unsigned char* ID, signature_mpk mpk, signature* s){
+		// r = random from Zq
+		bn_rand_mod(r, q);
+		
+		//Computes U = r*P
+		g1_mul(s->U, mpk.P, r);
+		// Computes V = D + r*H2(m,ID,PK,U) + x*H3(m,ID,PK)
+		g2_copy(s->V, sk.D);
+		// Construct H2(m,ID,PK,U) and H3(m,ID,PK)
+		// ...
+		functionH2(&h2, concat1, lenConcat1);
+		functionH3(&h3, concat2, lenConcat2);
+		
+		g2_mul(h2, h2, r);
+		g2_mul(h3, h3, sk.x);
+		
+		g2_add(s->V, s->V, h2);
+		g2_add(s->V, s->V, h3);
+	}
+\end{sourcebox}
 \textbf{CL-Verify($params, PK_A,  m, ID_A, \sigma$) :} Tout d'abord l'on va calculer $Q_A = H_1(ID_A)$ puis effectuer ce calcul afin de vérifier la signature :
 \[e(V,P) == e(P_{pub}, Q_A)*e(U, H_2(m, ID_A, PK_A,U))*e(PK_A, H_3(m, ID_A, PK_A)) \]
+\begin{sourcebox}{C}{Code C pour la vérification}
+	int verify(signature s, signature_pk pk, signature_mpk mpk, char* ID, unsigned char* m){
+		// Qa = H1(ID)
+		g2_map(qa, ID, strlen(ID));
+		// leftOPerand = e(P,V)
+		pc_map(leftOperand, mpk.P, s.V);
+		// rightOperand = e(Ppub, Qa)
+		pc_map(rightOperand, mpk.Ppub, qa);
+		// Construct H2(m,ID,PK,U) and H3(m,ID,PK)
+		// ...
+		functionH2(&h2, concat1, lenConcat1);
+		functionH3(&h3, concat2, lenConcat2);
+		
+		// temp = e(U, H2(m,ID,PK,U))
+		pc_map(temp, s.U, h2);
+		// rightOPerand = e(Ppub, Qa)*e(U, H2(m,ID,PK,U))
+		gt_mul(rightOperand, rightOperand, temp);
+		gt_null(temp)
+		gt_new(temp)
+		// temp = e(Ppub, H3(m,ID,PK))
+		pc_map(temp, pk.Ppub, h3);
+		// rightOperand = e(Ppub, Qa)*e(U, H2(m,ID,PK,U))*e(Ppub, H3(m,ID,PK))
+		gt_mul(rightOperand, rightOperand, temp);
+		
+		// The signature is correct if e(P,V) = e(Ppub, Qa)*e(U, H2(m,ID,PK,U))*e(Ppub, H3(m,ID,PK))
+		if (gt_cmp(leftOperand, rightOperand) == RLC_EQ) {
+			result = 0;
+		}
+	}
+\end{sourcebox}
 \section{État de l'art}
 Dans cette section une analyse et une comparaison entres les différentes solutions trouvées utilisant la \textit{Certificateless Cryptography} pour une implémentation dans des systèmes de mails. Les articles sont présentés par date de publication. 
 \subsection{Email Encryption System Using Certificateless Public Key Encryption Scheme}

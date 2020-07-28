@@ -14,13 +14,13 @@
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Schéma fonctionnement du DH Ratchet\cite {doubleratchet}}}{16}{figure.2.8}%
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Schéma fonctionnement du deuxième Ratchet\cite {doubleratchet}}}{17}{figure.2.9}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{29}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{31}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoi un message à Bob}}{32}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{33}{figure.3.4}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{35}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{37}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoi un message à Bob}}{38}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{39}{figure.3.4}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{38}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Connexion SSL/TLS avec le serveur email}}{41}{figure.4.2}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{44}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Connexion SSL/TLS avec le serveur email}}{47}{figure.4.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

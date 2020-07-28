@@ -39,7 +39,6 @@
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -195,7 +194,7 @@
       <workItem from="1595445502708" duration="6678000" />
       <workItem from="1595489587698" duration="5183000" />
       <workItem from="1595579693327" duration="2349000" />
-      <workItem from="1595929935923" duration="1155000" />
+      <workItem from="1595929935923" duration="4578000" />
     </task>
     <servers />
   </component>
