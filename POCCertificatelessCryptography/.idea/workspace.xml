@@ -20,9 +20,9 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="POCCertificatelessCryptography" targetName="mainServer" />
-      <config projectName="POCCertificatelessCryptography" targetName="mainClient" />
       <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
+      <config projectName="POCCertificatelessCryptography" targetName="mainClient" />
+      <config projectName="POCCertificatelessCryptography" targetName="mainServer" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -32,9 +32,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/analysis.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/analysis.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.lof" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.lof" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,6 +195,7 @@
       <workItem from="1595445502708" duration="6678000" />
       <workItem from="1595489587698" duration="5183000" />
       <workItem from="1595579693327" duration="2349000" />
+      <workItem from="1595929935923" duration="1155000" />
     </task>
     <servers />
   </component>

@@ -30,20 +30,38 @@ Je me suis donc orienté sur le C pour avoir de meilleures performances et pouvo
 En lisant le livre \textit{Guide to Paring-Based Cryptography}~\cite{bookPairing}, les librairies et implémentations en Sage qui sont conseillées ainsi que des exemples de code. 
 La librairie utilisée est RELIC Toolkit~\cite{relic-toolkit}, c'est une librairie en cours de développement qui se veut efficiente. Sa concurrence avec MIRACL m'a fait hésiter dans mon choix, mais MIRACL est plus codée en~ C++ avec des équivalences en C j'ai donc choisi RELIC. De plus j'ai trouvé par exemple que RELIC était généralement plus adapté dans le domaine universitaire pour des POC puis il est plus efficient que d'autres librairies~\cite{performanceRELIC}.
 \subsection{Courbe utilisée}
-La courbe utilisée pour le POC est la BLS12-P381, en effet cette courbe est assez efficiente et compatible avec les pairings. De plus RELIC l'a dans ses options et fonctionne bien, elle a un niveau de sécurité de 128bits. Je voulais prendre une courbe avec une plus grande sécurité cependant RELIC ne l'a pas encore totalement implémenté (certains tests concernant $\mathbb{G}_2$ ne passes pas), mais la librairie étant toujours en cours de développement il faudrait suivre ça de près, le code ne changerait en effet pas.
+La courbe utilisée pour le POC est la BLS12-P381, en effet cette courbe est assez efficiente et compatible avec les pairings. De plus RELIC l'a dans ses options et fonctionne bien, elle a un niveau de sécurité de 128bits. Je voulais prendre une courbe avec une plus grande sécurité cependant RELIC ne l'a pas encore totalement implémenté (certains tests concernant $\mathbb{G}_2$ ne passes pas), mais la librairie étant toujours en cours de développement il faudrait suivre ça de près, le code ne changerait en effet pas. Pour que RELIC utilise cete courbe il faut le mentionner à la compilation, heureusement RELIC établi des \textit{presets} pour la compilation de la librairie, la version GMP a été utilisée pour ce POC.
 % TODO voir si KDF n'st pas mieux ? ou même générique de libsodium
 \subsection{Dérivation de la clé AES}
 Le but de mon schéma certificateless est de chiffrer puis signer une clé AES qui permettra à mon message d'avoir un chiffrement authentifié. Pour cela il me faut dériver un élément de $\mathbb{G}_t$ en clé AES, en effet le chiffrement dans le schéma certificateless se fait sur un élément de $\mathbb{G}_t$.\\
 Pour cela j'ai utilisé une fonction permettant d'écrire sous forme compressée cet élément en bytes (fourni par la librairie RELIC utilisé et la fonction gt\_write\_bin()). Puis j'ai effectué un hachage avec SHA256 dessus, ainsi le résultat du hachage est une clé de 256 bits utilisable par AES-256-GCM. La fonction de hachage doit être par conséquent cryptographiquement sûre.
+\begin{sourcebox}{c}{Création de la clé AES depuis un élément $\mathbb{G}_T$}
+	// Get the binary data of the Gt element
+	int sizeAESK = gt_size_bin(originalM,1);
+	char aeskBin [sizeAESK];
+	gt_write_bin(aeskBin, sizeAESK, originalM, 1);
+	// Hash with SHA-256 to have an AES256 key from the Gt binary data
+	md_map_sh256(aesk, aeskBin, sizeAESK);
+\end{sourcebox}
 \subsection{Fonctions de hachage - signature}
 Pour le schéma de signature il nous faut plusieurs fonctions de hachage différentes, en effet ce schéma est basé sur le \textit{Random Oracle Model} comme définit dans le chapitre \ref{ch:analysis}. Pour appliquer cela j'ai utilisé la même méthode de mapping disponible ans RELIC pour mapper une char array (tableau de byte) à un point sur G2 à savoir g2\_map.
 Pour H1, la première fonction de hachage j'ai simplement utilisé cette fonction directement, mais pour H2 et H3 j'ai ajouté un byte devant les données à mapper respectivement les bytes '01' et '02'. Ceci afin de séparer les domaines des résultats des hashs, cela s'appelle du \textit{Hash Domain Separation}. En effet l'on peut voir dans ce draft~\cite{irtf-cfrg-hash-to-curve} définit comme une simulation pour prendre en compte plusieurs \textit{Random Oracle}.
+\begin{sourcebox}{c}{Fonction H2 pour le hachage vers un point de la courbe $\mathbb{G}_2$}
+	void functionH2(g2_t* to_point, char* bytes_from, int len_bytes){
+		uint8_t to_hash[len_bytes + 1];
+		// Hash domain separation adding 1 byte \x01 before the actual data to hash
+		to_hash[0] = '\x01';
+		memcpy(to_hash + 1, bytes_from, len_bytes);
+		g2_map(*to_point, to_hash, len_bytes + 1);
+	}
+\end{sourcebox}
 \subsection{Sérialisation des données}
 Pour la sérialisation des données, typiquement les clés publiques et les clés privées partielles envoyées en réseau ou les clés publiques enregistrées dans les fichiers par exemple, j'ai utilisé la librairie binn\footnote{\url{https://github.com/liteserver/binn}}. Cela permet de packer facilement des données binaires, pour cela RELIC met à disposition des méthodes g1\_write\_bin g1\_read\_bin qui a permis de faire ces enregistrements binaires. Ainsi les transferts de données sont simplifiés. Cependant il faut faire attention à certaines choses, on ne peut lire et écrire simultanément à l'aide de binn, si l'on crée un objet via un buffer on ne pourra modifier cet objet. Cela m'a posé des problèmes pour l'enregistrement des données secrètes, j'ai donc du copier l'objet lu pour pouvoir le modifier et sauver les nouveau paramètres.
 \subsection{Enregistrement des clés publiques (serveur)}
 Pour l'enregistrement j'ai utilisé une petite base de données NoSQL stockant les clés publiques des utilisateurs sur le KGC. Cela permet de facilement récupérer une clé publique pour un utilisateur si besoin. Pour implémenter cela j'ai utilisé la librairie UnQlite\footnote{\url{https://unqlite.org/}}. J'ai stocké les clés publiques pour le schéma de signature et de chiffrement séparément, en effet, l'entrée pour la signature porte le nom "signature/ID" et le chiffrement "encryption/ID".
 %TODO
 \subsection{Récupération via IMAP}
+Utilisation de la librairie libetPan\footnote{\url{https://github.com/dinhvh/libetpan}} et de l'exemple imap-sample.c pour la récupération email par IMAP. IMAP a été choisi plutôt que POP3 afin de laisser les mesages sur le serveur et ainsi avoir plusieurs appareils pouvant y accéder. Pour parser les emails cette librairie est aussi choisie ainsi que son exemple mime-parse.c.
 \section{Implémentation clés  de chiffrement}
 Pour pouvoir implémenter ce schéma de chiffrement et signature certificateless dans un système hybride il a fallu penser à une manière d'encapsuler la clé et les données. Pour cela j'ai essayé de faire un système comparable à la figure \ref{fig:encapsulate}. 
 \begin{figure}[h!]
@@ -54,7 +72,7 @@ Pour pouvoir implémenter ce schéma de chiffrement et signature certificateless
 \end{figure}
 
 \section{Fonctionnement global POC (KGC)}
-Ici je présente le fonctionnement global de mon implémentation du KGC pour mon POC. De plus je présente les problèmes connus et des propositions d'améliorations.
+Présentation du fonctionnement global de l'implémentation du KGC pour le POC. De plus les problèmes connus et des propositions d'améliorations sont présentés.
 \subsection{Fonctionnement}
 Le KGC est un élément important du protocole, en effet c'est lui qui va fournir une partie de la clé privée de l'utilisateur. De plus dans mon cas il permet de distribuer les clés publiques de ses utilisateurs, mais habituellement on fera plutôt appel à un serveur dédié pour la gestion des clés.\\
 Par mesure de généricité j'ai établi des codes d'opérations (arbitraires) afin de définir les opérations demandées au serveur par le client. Cela à l'aide de la librairie binn et les constructions d'objets proposés.\\
@@ -81,9 +99,9 @@ Implémentation d'une vérification par email afin d'être sûr que l'adresse em
 \paragraph*{Zero-Knowledge proof pour PPK.}
 On a vu dans les modèles d'adversaires définit par Al-Riyami et Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03} qu'un adversaire pourrait obtenir les PPK des utilisateurs et ne pas réussir à déchiffrer des messages. Mais avec du Zero Knowledge l'on pourrait ajouter une sécurité supplémentaire pour ne pas délivrer à n'importe qui des PPK.
 \section{Fonctionnement global POC (Client)}
-Ici je présente le fonctionnement global de l'implémentation du client mail sécurisé pour mon POC, des améliorations possibles et des problèmes connus.
+Présentation du fonctionnement global de l'implémentation du client mail sécurisé pour le POC, des améliorations possibles et des problèmes connus.
 \subsection{Fonctionnement}
-Je vais dépeindre le fonctionnement de mon POC ici et les différentes fonctionnalités que j'ai implémentée au client de mon POC.
+Fonctionnement du POC ici et les différentes fonctionnalités implémentées dans le client du POC.
 \paragraph*{Sécurité connexion mail.}
 Pour la connexion au serveur SMTP / IMAP j'ai fait attention à la connexion sécurisée pour éviter de \textit{leak} des mots de passe des utilisateurs du POC. En effet, cela permet de chiffrer les communications avec les serveurs de Gmail.
 \begin{figure}[h!]

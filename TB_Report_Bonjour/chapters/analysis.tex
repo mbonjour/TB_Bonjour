@@ -98,12 +98,18 @@ Cependant ces 2 tests effectués ne représentent pas vraiment une utilisation r
 Dans cette section je présentes certaines implémentations des protocoles discutés dans la section précédente, plus particulièrement PGP.
 \subsection{Protonmail}
 \paragraph*{Revendications.}
-Protonmail revendique beaucoup de propriétés cryptographiques, tel que le zero-access encryption (lors de la réception d'un message externe chiffré ou non Protonmail le chiffrera avec la clé publique de l'utilisateur pour ne plus y avoir accès dans le futur). Et l’end-to-end chiffrement + zero-knowledge pour les messages sécurisés, même avec leur fonctionnalité de chiffrement vers l'extérieur utilisant AES256-GCM. 
+Protonmail revendique beaucoup de propriétés cryptographiques, tel que le zero-access encryption (lors de la réception d'un message externe chiffré ou non Protonmail le chiffrera avec la clé publique de l'utilisateur pour ne plus y avoir accès dans le futur). Et l’end-to-end chiffrement + zero-knowledge pour les messages sécurisés, même avec leur fonctionnalité de chiffrement vers l'extérieur utilisant AES256-GCM. Possibilité de mettre une date d'expiration sur un mail afin que le destinataire ne puisses le lire que dans un temps imparti.
 Pour l'authentification Protonmail utilise une manière fortement sécurisée (SRP) pour ne pas avoir d'informations direct sur le mot de passe de l'utilisateur.
-%TODO : vérifier utilisation PGP proton à proton
+Protonmail chiffre automatiquement les mails d'un utilisateur Protonmail à un autre via PGP.
 \paragraph*{Fonctionnement.}
 Protonmail a plusieurs modes de fonctionnement dépendant du destinataire final. En effet de Protonmail à Protonmail les mails sont chiffrés à l'aide de PGP automatiquement. L'on peut utiliser Protonmail pour utiliser PGP si l'on a la clé de notre destinataire par exemple. Et l'on peut écrire un mail chiffré à quelqu'un qui n'utilise pas PGP grâce à une fonctionnalité de chiffrement vers l'extérieur.
-Cette fonctionnalité enverra une URL au destinataire qui, en la consultant, pourra déchiffrer le mail en utilisant un mot de passe communiqué auparavant de manière sécurisées entres les deux partis.
+Cette fonctionnalité enverra une URL au destinataire qui, en la consultant, pourra déchiffrer le mail en utilisant un mot de passe communiqué auparavant de manière sécurisées entres les deux partis. Un exemple de mail utilisant cette fonctionnalité est présenté dans la figure \ref{fig:ProtonmailPres}.
+\begin{figure}[h!]
+	\includegraphics[width=10cm]{images/protonmailPresentation.png}
+	\centering
+	\caption{Présentation d'un email chiffré Protonmail}
+	\label{fig:ProtonmailPres}
+\end{figure}
 \paragraph*{Open Source.}
 Leur code est open-source afin d'avoir une validation externe, de plus ils ont un programme de Bug Bounty pour les chercheurs. Ils ont largement contribué au projet d'intégration openpgp en javascript et en Go.
 
@@ -111,7 +117,7 @@ Leur code est open-source afin d'avoir une validation externe, de plus ils ont u
 Lors de l'utilisation de protonmail, l'analyse des clés PGP générées à montrer qu'elles utilisent RSA. Pour envoyer ou recevoir des messages via PGP, Protonmail le fait de manière très transparente. Apparemment utilisant les mêmes serveurs de clés cités plus haut pour Enigmail, en effet, les 2 emails de tests ont pu s'envoyer des messages sans s'envoyer les clés au préalable.\\
 Sensation de sécurité en utilisant Protonmail, en effet un mot de passe est utilisé pour chiffrer notre boite mail, pratique si une brèche survenait au niveau du stockage protonmail. De plus, la technologie utilisée pour l'authentification et les mots de passe et SRP. Permettant de ne pas avoir de hashs de mots de passe stockés chez Protonmail.\\
 Par contre la génération de la clé privée à la création du compte est assez obscure mais de l'information est disponible sur le site de protonmail\footnote{\url{https://protonmail.com/support/knowledge-base/how-is-the-private-key-stored/}}.\\
-\paragraph{Critiques.}
+\paragraph*{Critiques.}
 Protonmail est très critiqué de manière générale sur les réseaux sociaux. De plus une réponse au chercheur Nadim Kobeissi~\cite{DBLP:journals/iacr/Kobeissi18a} avait été formulée par Protonmail suite à son papier sur l'insécurité le leur webmail. Cependant, ils sont surtout critiqué sur les réseaux sociaux par des chercheurs en sécurité\footnote{\url{https://twitter.com/FiloSottile/status/1277068367728435202}} pour leur publicité mensongère, en effet, leur page d'accueil indiquait une sécurité pour \textbf{tous} les email sortants. Ce qui n'est pas le cas, uniquement les mails intentionnellement chiffré à l'aide de PGP ou chiffré vers l'extérieur sont chiffré. L'annonce ne représentait donc pas la réalité, ce qui peut être mal interprété par les utilisateurs. Après vérification la page d'accueil a bien été modifiée pour ne plus inclure la mention de chiffrement automatique pour tout les emails. Le commentaire fait référence aussi à d'autres points :
 \begin{itemize}
 	\item Ingère les emails en plaintext - par rapport à leu politique de zero-access, ils ont au moins une fois accès au plaintext d'un email non chiffré.
@@ -121,7 +127,16 @@ Protonmail est très critiqué de manière générale sur les réseaux sociaux. 
 \end{itemize}
 \subsection{Tutanota}
 \paragraph*{Fonctionnement.}
-Tutanota est un client mail sécurisé, il permet de chiffrer les mails vers l'extérieur. 
+Tutanota est un client mail sécurisé, il permet de chiffrer les mails vers l'extérieur. Cela en utilisant AES128-CBC selon ce que le code github analysé.
+\paragraph*{Utilisation.}
+L'utilisation de Tutanota est facile, en effet Tutanota utilise le même principe que Protonmail pour le chiffrement vers l'extérieur. En chiffrant le mail et en le gardant sur ses serveurs puis en envoyant un mail au destinataire comme celui présenté dans la figure \ref{fig:TutanotaPres}.
+\begin{figure}[h!]
+	\includegraphics[width=14cm]{images/tutanotaPresentation.png}
+	\centering
+	\caption{Présentation d'un email chiffré Tutanota}
+	\label{fig:TutanotaPres}
+\end{figure}
+% TODO : Revoir
 %\subsection{Bitmessage}
 \section{Attaques existantes}
 Présentation des attaques faites sur les différents systèmes présentés jusqu'ici ainsi que leur fonctionnement global.
@@ -133,6 +148,8 @@ Cela indique que si Protonmail était corrompu le fait d'avoir le code délivré
 \label{attacks:EFAIL}
 Malgré ces sécurités qui pourraient être mises en place à l’heure actuelle, une attaque nommée EFAIL~\cite{DBLP:conf/uss/PoddebniakD0ISF18} a été faite en 2018. En effet cette attaque a seulement été mitigée en évitant d’afficher les contenus HTML et les images dans les boites mails de base. Car le problème vient de là principalement, des problèmes sont liés aussi aux modes de chiffrement utilisé (typiquement CBC et CFB pour S/MIME et PGP respectivement) grâce à des "gadgets".
 Cette attaque permet en fait d'injecter une image dans l'HTML du message, puis faire en sorte de récupérer le contenu du message déchiffrer dans l'URL. Ceci est possible grâce au multi parties de MIME et en les abusant afin d'entourer le message chiffré d'une balise \textit{img} et de mettre en source le message qui sera déchiffré selon les règles de MIME. Ainsi l'attaquant aura le message déchiffré dans l'url qu'il peut contrôler. Cette attaque exploite en fait une erreur par rapport à la gestion des messages utilisants HTML et multipart/mixed, il faudrait en effet vérifier dans ces cas que le document HTML est un document entier. Ainsi que de ne pas traiter le contenu chiffré de la même origine que du contenu non protégé. La spécification~\cite{RFC8551} S/MIME a aussi mise à jour pour implémenter des chiffrements authentifiés et remplacer CBC qui permettait des attaques par gadgets.
+\subsection{SHA-1 Shambles}
+Récemment~\cite{DBLP:journals/iacr/LeurentP20} une attaque sur SHA-1 avec un préfixe choisi. Cette attaque permet de se faire passer pour quelqu'un d'autre grâce à une attaque par préfixe choisi sur SHA-1. SHA-1 était en effet l'algorithme de hachage par défaut pour signer les clés d'autres utilisateurs dans le \textit{Web Of Trust}.
 \section{Signal}
 L'analyse s'est faite aussi pour la messagerie instantanée à cause de sa ressemblance avec la messagerie électronique. 
 \subsection{Fonctionnement}
@@ -154,7 +171,7 @@ Le deuxième ratchet va générer une clé pour chaque message/batch de messages
 \subsection{Propriétés cryptographiques}
 Signal a de nombreux avantages concernant les propriétés cryptographiques qu'il promet. En effet le \textit{Double Ratchet} permet de la \textbf{Break-in recovery}, a une \textbf{Perfect Forward Secrecy}, \textbf{End-to-End encryption}, \textbf{Non-Répudiation}.
 \subsection{Problèmes d'intégrations}
-Le problème avec le protocole Signal quant à mes besoins niveaux mails est la \textit{perfect forward secrecy} qui est très forte. En effet comme vu dans le chapitre précédent il utilise une clé par message grâce au \textit{Double Ratchet}. Cependant ce fonctionnement comporte un gros problème en rapport aux mails, en effet si l'on veut pouvoir récupérer les anciens mails reçus/envoyés cela devient vraiment compliqué. En effet, la \textit{forward secrecy} est une propriété utile dans un système de mail, mais il faut pouvoir aussi récupérer les messages facilement si l'on connait la clé privée. Alors qu'avec ce système de Double Ratchet il nous faudrait enregistrer chaque Diffie-Hellman ratchet pour reconstruire toute les clés utilisée.
+Le problème avec le protocole Signal quant à mes besoins niveaux mails est la \textit{perfect forward secrecy} qui est très forte. En effet comme vu dans le chapitre précédent il utilise une clé par message grâce au \textit{Double Ratchet}. Cependant ce fonctionnement comporte un gros problème en rapport aux mails, en effet si l'on veut pouvoir récupérer les anciens mails reçus/envoyés cela devient vraiment compliqué. La \textit{forward secrecy} est une propriété utile dans un système de mail, mais il faut pouvoir aussi récupérer les messages facilement si l'on connait la clé privée. Alors qu'avec ce système de Double Ratchet il nous faudrait enregistrer chaque Diffie-Hellman ratchet pour reconstruire toute les clés utilisée.
 \section{Compromis}
 Pour passer à l'implémentation concrète d'un nouveau protocole il faut faire des compromis et aller chercher dans des primitives moins connues.\\
 Je suis tout de même rester sur un système de clés publiques comme PGP le fait. Cependant cette primitive a une identité propre à chaque clé publique ce qui évite un systéme de certificat trop complexe comme S/MIME.\\
@@ -180,7 +197,6 @@ Les primitives analysées sont présentées si après. Elles ont en commun de s'
 \section{Recherches sur la primitive}
 \label{sec:primitiveSearch}
 Dans cette section je vais introduire les détails techniques et les principes mathématiques utilisés. De plus, le choix de schéma parmi tous ceux analysés est détaillé ici. Ainsi que des précisions sur certains principes introduit par ce schéma.
-% TODO : Présenter les différents types de pairings
 \subsection{Principes mathématiques}
 Les variantes de \textit{Certificateless Cryptography} choisies utilisent un concept appelé les \textit{pairings} ou \textit{bilinear map groups}. Les informations suivantes ainsi que le choix de la librairie découle surtout du livre \textit{Guide to Pairing-Based Cryptography}~\cite{bookPairing}.
 Des groupes tels que $\mathbb{G}_1, \mathbb{G}_2, \mathbb{G}_T$ d'un ordre premier \textit{p} pour lesquels il existe un mapping $e : \mathbb{G}_1 \times \mathbb{G}_2 \rightarrow \mathbb{G}_T$ avec les propriétés suivantes :\\
@@ -200,9 +216,10 @@ Avant d'analyser les différents schémas, il faut connaître certaines notions 
 \paragraph*{Modèle de sécurité.} Ces modèles définissent sur quoi le schéma va se reposer pour établir sa sécurité et comment il va l'évaluer face à un adversaire. À nouveau il existe deux modèles présents dans les schémas analysés, le \textit{Random Oracle Model} et le \textit{Standard Model}. Le \textit{Random Oracle Model} se base sur des oracles aléatoires mais est un peu controversé, en effet l'aléatoire cryptographiquement sûr est difficile à atteindre, ainsi habituellement le \textit{Random Oracle Model} implémente ces oracles via des fonctions de hachage. Le modèle standard se base lui sur des problèmes mathématiquement difficiles tel que DDH (Decisional Diffie Hellman). \\
 \paragraph*{Modèle d'adversaires.}
 Pour évaluer les schémas de certificateless public key cryptography il y a différents niveaux de sécurité établis pour 2 types d'adversaires différents. Ces adversaires ont été décrits dans le papier d'Al-Riyami-Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03} pour la première fois afin de prouver que leur schéma était IND-CCA sûr dans le modèle Standard. Ces deux adversaires ont été définit comme suit :\\
-- Type I (\textit{outsider adversaries}) est appelé \textit{outsiders} et est permis de remplacer des clés publiques, obtenir des clés partiels privées, et des clés privées puis faire des requêtes de déchiffrements.\\
+- Type I (\textit{outsider adversaries}) est permis de remplacer des clés publiques, obtenir des clés partiels privées, et des clés privées puis faire des requêtes de déchiffrements.\\
 - Type II (\textit{honest but curious KGC}). L'adversaire de Type II est en fait un KGC connaissant la Master Secret Key et qui peut donc générer des PPK, obtenir des clés privées et faire des requêtes de déchiffrement tout en faisant confiance à ce KGC pour pas qu'il ne remplace de clés publiques.\\
-% Pour chacun des types d'adversaires il existe différents niveaux de sécurité :\\
+Pour chacun des types d'adversaires il existe différents niveaux de sécurité comme définit dans le livre \textit{Introduction to Ceritifcateless Cryptography}~\cite{bookIntroCertificateless}. Ces différents niveaux sont modélisés comme suit : \\
+
 %TODO : Remplir avec infos du livre sur les différents niveaux
 \subsection{Schémas Certificateless de Chiffrement}
 Pour choisir parmi les nombreux schémas existants en certificateless pour le chiffrement j'ai établi un tableau comparatif des différentes manières de faire, inspiré de~\cite{bookIntroCertificateless}. En suivant ce tableau je me suis rendu compte que la construction de Dent-Libert-Paterson~\cite{DBLP:conf/pkc/DentLP08} était probablement la plus adaptée en vue des propriétés qu'elle présentait. Le tableau se trouve en annexe \ref{ch:fichiers}.
@@ -216,13 +233,88 @@ Pour expliquer les détails techniques je vais ici montrer les calculs faits dan
 L'on va aussi prendre une fonction de hash résistante aux collisions : $H : \{0,1\}^* \rightarrow \{0,1\}^n$. Au final notre $mpk$ (master public key) est :
 \[mpk \leftarrow (g, g_1, g_2, U, V)\]
 Et le $msk$ (master seret key) est $msk \leftarrow g_2*\gamma$.\\
+\begin{sourcebox}{c}{Fonction de setup}
+	// g = generator of G1
+	g1_get_gen(mpkSetup->g);
+	g1_get_ord(p);
+	
+	// gamma = random from Zp
+	bn_rand_mod(gamma, p);
+	// g1 = gamma*g
+	g1_mul(mpkSetup->g1, mpkSetup->g, gamma);
+	// g2 = generator of G2
+	g2_get_gen(mpkSetup->g2);
+	
+	g2_get_ord(p);
+	// Generate 2 arrays with G2 elements for the U and  vectors
+	for(int i =0; i < MESSAGE_SPACE; ++i){
+		g2_null(mpkSetup->u[i])
+		g2_null(mpkSetup->v[i])
+		g2_new(mpkSetup->u[i])
+		g2_new(mpkSetup->v[i])
+		
+		bn_rand_mod(uvGen,p);
+		g2_mul(mpkSetup->u[i], mpkSetup->g2, uvGen);
+		bn_rand_mod(uvGen,p);
+		g2_mul(mpkSetup->v[i], mpkSetup->g2, uvGen);
+	}
+	
+	// The master secret key is msk = gamma*g2
+	g2_mul(*msk, mpkSetup->g2, gamma);
+\end{sourcebox}
 \textbf{Extract($mpk, \gamma, ID$) :} On prend $r \leftarrow \mathbb{Z}_p^*$ puis on retourne $d_{ID} \leftarrow (d_1, d_2) = (g_2*\gamma + F_u(ID)*r, g*r)$\\
+\begin{sourcebox}{c}{Code pour l'extraction}
+	// r random from Zp
+	bn_rand_mod(r,p);
+	
+	// Computes d1 = msk + r*Fu(ID)
+	g2_t temp;
+	g2_null(temp)
+	g2_new(temp)
+	
+	F(ID, mpk.u, &temp, strlen(ID));
+	g2_mul(temp, temp, r);
+	g2_add(partialKeys->d1, msk, temp);
+	
+	// Computes d2 = r*g
+	g1_mul(partialKeys->d2, mpk.g, r);
+\end{sourcebox}
 \textbf{SetSec($mpk$) :} Retourne un secret aléatoirement choisi $x_{ID} \leftarrow \mathbb{Z}_p^*$.\\
+\begin{sourcebox}{c}{Construction de la valeur secrète}
+	g1_get_ord(p);
+	bn_rand_mod(*x, p);
+\end{sourcebox}
 \textbf{SetPub($x_{ID}, mpk$) :} Retourne $pk_{ID} \leftarrow (X,Y) = (g*x_{ID}, g_1*x_{ID})$.\\
+\begin{sourcebox}{c}{Fonction de construction pour la clé publique}
+	g2_mul(PKtoGen->X, mpkSession.g2, x);
+	g1_mul(PKtoGen->Y, mpkSession.g1, x);
+\end{sourcebox}
 \textbf{SetPriv($x_{ID}, d_{ID}, mpk$) :} On choisit $r' \leftarrow \mathbb{Z}_p^*$ puis on reprends $(d_1, d_2) \leftarrow d_{ID}$ et l'on va prendre en secret key : 
 %TODO : Revoir si assez complet :
 \[sk_{ID} \leftarrow (s_1, s_2) = (d_1*x_{ID} + F_u(ID)*r', d_2*x_{ID} + g*r')\]
 Avec $sk_{ID}$ étant la clé secrète de l'utilisateur, donnée par l'Extract (notre Partial Private Key) et la valeur secrète de SetSec.\\
+\begin{sourcebox}{c}{Création de la clé privée}
+	bn_rand_mod(r, p);
+	
+	// Computes s1 = x*d1 + r*Fu(ID)
+	g2_t pointTemp;
+	g2_null(pointTemp)
+	g2_new(pointTemp)
+	
+	g2_mul(secretKeys->s1,d.d1, x);
+	F(ID, mpk.u, &pointTemp, strlen(ID));
+	g2_mul(pointTemp, pointTemp, r);
+	g2_add(secretKeys->s1, secretKeys->s1, pointTemp);
+	
+	// Computes s2 = x*d2 + r*g
+	g1_t temp;
+	g1_null(temp)
+	g1_new(temp)
+	
+	g1_mul(secretKeys->s2, d.d2, x);
+	g1_mul(temp, mpk.g, r);
+	g1_add(secretKeys->s2, secretKeys->s2, temp);
+\end{sourcebox}
 \textbf{Encrypt($m, pk_{ID}, ID, mpk$) :} Pour chiffrer $m \in \mathbb{G}_T$, l'on va reprendre $(X,Y) \leftarrow pk_{ID}$. Pour chiffrer ce message on va tiré aléatoirement $s \leftarrow \mathbb{Z}_p^*$ pui calculer : 
 \[C = (C_0, C_1, C_2, C_3) \leftarrow (m + e(Y, g_2)*s, g*s,F_u(ID)*s, F_v(w)*s )\]
 Où $w \leftarrow H(C_0,C_1, C_2, ID, pk_{ID})$.\\
@@ -249,7 +341,7 @@ Ainsi ces composantes forment la signature $\sigma = (U,V )$.\\
 \textbf{CL-Verify($params, PK_A,  m, ID_A, \sigma$) :} Tout d'abord l'on va calculer $Q_A = H_1(ID_A)$ puis effectuer ce calcul afin de vérifier la signature :
 \[e(V,P) == e(P_{pub}, Q_A)*e(U, H_2(m, ID_A, PK_A,U))*e(PK_A, H_3(m, ID_A, PK_A)) \]
 \section{État de l'art}
-Dans cette section je vais analyser et comparer les différentes solutions trouvées utilisant la \textit{Certificateless Cryptography} dans une implémentation concrète pour sécuriser des envois d'emails. J'ai trié les articles suivants par date de publication afin de voir comment les suivants ont repris les technologies etc.
+Dans cette section une analyse et une comparaison entres les différentes solutions trouvées utilisant la \textit{Certificateless Cryptography} pour une implémentation dans des systèmes de mails. Les articles sont présentés par date de publication. 
 \subsection{Email Encryption System Using Certificateless Public Key Encryption Scheme}
 Analyse de l'article~\cite{DBLP:conf/itcs2/ErYTG12}.
 \paragraph*{Description.} Cet article présente une façon de faire pour chiffrer les mails à l'aide de \textit{Certificateless Cryptography}. Il va d'abord comparer 6 schémas pour choisir celui à utiliser par rapport à ses propriétés. Ensuite il va comparer les différents algorithmes au niveau du temps avec une implémentation simple en J2SE. 
@@ -267,12 +359,12 @@ Analyse de l'article~\cite{DBLP:journals/ijnsec/BalakrishnanR16}.
 \paragraph*{Description.} Ce papier traite le problème de la même façon que le précédent mais essaies d'aller plus loin dans les détails d'un implémentation à plus grande échelle (utilisation DNS). Il reprend le même schéma et les mêmes principes pour la création de la clé symétrique de chiffrement. Le même schéma de signature est présent aussi, qui est cassé rappelons-le. Le but serait d'avoir une entrée DNS similaire au DKIM déjà utilisé pour les emails afin d'informer les utilisateurs quelle adresse donne es clés publiques du domaine en question.
 \paragraph*{Détails techniques.} Beaucoup de détails concernant les domain policies qui pourraient être appliqués aux domaines pour la distribution des clés publiques. Proposition d'utiliser les headers d'emails pour transmettre la signature de l'email et informer le destinataire si l'email est chiffré ou non et de transmettre les IDS utilisés et le TImestamp utilisé. En effet, l'introduction d'un timestamp est proposé ici pour avoir un temps d'expiration au mail. Les Domain Policies sont là pour informer les utilisateurs si les emails de ce domaines doivent être signés/chiffrés ou non.
 \paragraph*{Conclusion.} Une implémentation est citée utilisant la librairie MIRACL et en utilisant le C++ comme langage de programmation. L'implémentation est citée comme extension \textit{Thunderbird} en C++ / Javascript. Mais il n'y a pas de réel guide pour implémenter cela au monde réel avec des exemples de configuration DNS et autres. Pas vraiment d'explications sur l'utilisation d'une multitude de KGC ou un seul central, comment les synchroniser et autres... Par contre beaucoup d'explications sur comment pourrait fonctionner une entrée DNS afin d'informer aux utilisateurs où aller pour récupérer les clés publiques des utilisateurs du domaine en question et des policies qui pourraient s'appliquer à ce domaine.
-%TODO à compléter, signifier intéressant
 \subsection{PriviPK : Certificate-less and secure email communication}
 Analyse de l'article~\cite{DBLP:journals/compsec/AlSabahTLSD17}.
-\paragraph*{Description.} Cet article propose une implémentation très concrète utilisant CL-PKC pour communiquer de manière sécurisée dans la messagerie électronique. Il attaque beaucoup d'aspects que les autres papiers n'ont pas mentionnés comme la \textit{key transparency}. Le papier insiste sur la transparence du protocole pour l'utilisateur afin qu'il n'ait pas d'opérations fastidieuses à faire (comme c'est le cas dans PGP et S/MIME par exemple). Ce papier s'appuie sur un système de \textit{key agreement} proposé dans la littérature de la cryptographie basée sur l'identité.
-\paragraph*{Détails techniques.} CONIKS serveur, authentification via les clients mails déjà existants (gmail et yahoo), mise en place d'un système de key agreement id-based repensée pour le certificateless.
-\paragraph*{Conclusion.} Ce papier est assez intéressant et c'est la seule véritable implémentation que j'ai trouvée, il y a un repo sur github. Cependant il s'appuie sur du \textit{key agreement}. Comme le prochain système d'ailleurs. Par ailleurs, il insiste sur la transparence et sur l'utilisation des authentifications déjà présentes sur les clients emails.
+\paragraph*{Description.} Cet article propose une implémentation très concrète utilisant CL-PKC pour communiquer de manière sécurisée dans la messagerie électronique. Il décrit beaucoup d'aspects que les autres papiers n'ont pas mentionnés comme la \textit{key transparency}. Le papier insiste sur la transparence du protocole pour l'utilisateur afin qu'il n'ait pas d'opérations fastidieuses à faire (comme c'est le cas dans PGP et S/MIME par exemple). Ce papier s'appuie sur un système de \textit{key agreement} proposé dans la littérature de la cryptographie basée sur l'identité.
+\paragraph*{Détails techniques.} CONIKS serveur, authentification via les clients mails déjà existants (gmail et yahoo), mise en place d'un système de key agreement id-based repensée pour le certificateless. Analysant le code github on peut remarquer que l'implémentation faite est en fait une modification du Nylas Mail Engine. Cet Engine a été modifié quelque peu afin d'intégrer du chiffrement lors de l'envoi (sauf si la clé publique du destinataire n'est pas trouvée, auquel cas une erreur intervient). Dnas le code l'on voit beaucoup de TODO laissés aux endroits ajoutés pour le chiffrement de PriviPK. 
+\paragraph*{Conclusion.} Ce papier est assez intéressant et c'est la seule véritable implémentation trouvée, il y a un repository sur github\footnote{\url{https://github.com/PriviPK}}. Cependant il s'appuie sur du \textit{key agreement}, la création de la clé symétrique est effectuée via les informations de la clés publiques du destinataire ainsi que de la clé privée de la source.\\
+Par ailleurs, il insiste sur la transparence et sur l'utilisation des authentifications déjà présentes sur les clients emails comme Gmail et Yahoo.
 \subsection{A certificateless one-way group key agreement protocol for end-to-end email encryption}
 Analyse de l'article~\cite{DBLP:conf/prdc/YehSDSSW18}.
 \paragraph*{Description.} Dans cet article les auteurs présentent un moyen d'avoir une clé partagée entre n-partis et avec un seul message, ce qui permet dans un système de mail d'avoir qu'à envoyer un mail avec les informations nécessaires pour recomposer la clé partagée. Cette clé partagée est utilisée afin de chiffrer le mail et de l'envoyer ensuite avec les informations nécessaires à la création de la clé partagée. De plus, le système est n-parti, cela veut dire que l'on peut envoyer le mail à n personnes et le chiffrer avec la même clé. On enverra juste pas les mêmes informations de créations de la clé partagée à tous.
