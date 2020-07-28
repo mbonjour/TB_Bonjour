@@ -154,13 +154,20 @@ Les primitives que j'ai analysé le plus sont présentées si après. Elles ont 
 Dans cette section je vais introduire les détails techniques et les principes mathématiques utilisés. De plus, le choix de schéma parmi tous ceux analysés est détaillé ici. Ainsi que des précisions sur certains principes introduit par ce schéma.
 % TODO : Présenter les différents types de pairings
 \subsection{Principes mathématiques}
-Les variantes de \textit{Certificateless Cryptography} choisies utilisent un concept appelé les \textit{pairings} ou \textit{bilinear map groups}.
+Les variantes de \textit{Certificateless Cryptography} choisies utilisent un concept appelé les \textit{pairings} ou \textit{bilinear map groups}. Les informations suivantes ainsi que le choix de la librairie découle surtout du livre \textit{Guide to Pairing-Based Cryptography}~\cite{bookPairing}.
 Des groupes tels que $\mathbb{G}_1, \mathbb{G}_2, \mathbb{G}_T$ d'un ordre premier \textit{p} pour lesquels il existe un mapping $e : \mathbb{G}_1 \times \mathbb{G}_2 \rightarrow \mathbb{G}_T$ avec les propriétés suivantes :\\
 1. Bilinéarité : $e(g^a, h^b) = e(g, h)^{ab}$ pour tout $(g,h) \in \mathbb{G}_1 \times \mathbb{G}_2$ et $a,b \in \mathbb{Z}$;\\
-2. Pas de dégénérescence : $e(g,h) \neq 1_{\mathbb{G}_T} $ tant que $g,h \neq 1_{\mathbb{G}_{1,2}}$;
+2. Non-dégénérescence : $e(g,h) \neq 1_{\mathbb{G}_T} $ tant que $g,h \neq 1_{\mathbb{G}_{1,2}}$;\\
+Plusieurs types de Pairings existent :\\
+\begin{itemize}
+	\item \textbf{Type 1} : Lorsque $\mathbb{G}_1 = \mathbb{G}_2$;
+	\item \textbf{Type 2} : Lorsque $\mathbb{G}_1 \ne \mathbb{G}_2$ mais qu'un isomorphisme $\phi : \mathbb{G}_1 \rightarrow \mathbb{G}_2$ est connu, mais pas dans l'autre direction.
+	\item \textbf{Type 3} : Lorsque $\mathbb{G}_1 \ne \mathbb{G}_2$ et qu'aucun isomorphise est connu entre $\mathbb{G}_1$ et $\mathbb{G}_2$, dans n'importe quelle direction.
+\end{itemize}
+Les différents schémas analysés utilisent souvent les pairings de Type 1, cependant la courbe utilisée, et RELIC me permet de faire des Type 3. Une conversion est faite dans les schémas choisis comme vu ci-après. En effet, les type 3 sont des pairings plus efficients avec des courbes plus petites tandis que les type 1 étaient plus utilisé dans les débuts de la \textit{Pairing Based Cryptography}.
 \subsection{À savoir}
 \label{subsec:asavoir}
-Avant d'analyser les différents schémas je vais présenter les différentes facteurs présentés dans les tableaux et ainsi établir une légende de ceux-ci expliquée.
+Avant d'analyser les différents schémas, il faut connaître certaines notions présentes dans les tableaux comparatifs afin de mieux les comprendre. Liste non exhaustive de ces notions et de leurs significations et faites ici.
 \paragraph*{Types.}Les types présentés peuvent être soit \textbf{concret} soit \textbf{générique}. Les types concrets sont des schémas qui présentent leurs algorithmes en utilisant des calculs bien établis et présentent l'entierté du fonctionnement de leur schéma, tandis que les schémas présenté génériques peuvent s'appuyer sur d'autres problèmes et se baser sur des algorithmes déjà existants.\\
 \paragraph*{Modèle de sécurité.} Ces modèles définissent sur quoi le schéma va se reposer pour établir sa sécurité et comment il va l'évaluer face à un adversaire. À nouveau il existe deux modèles présents dans les schémas analysés, le \textit{Random Oracle Model} et le \textit{Standard Model}. Le \textit{Random Oracle Model} se base sur des oracles aléatoires mais est un peu controversé, en effet l'aléatoire cryptographiquement sûr est difficile à atteindre, ainsi habituellement le \textit{Random Oracle Model} implémente ces oracles via des fonctions de hachage. Le modèle standard se base lui sur des problèmes mathématiquement difficiles tel que DDH (Decisional Diffie Hellman). \\
 \paragraph*{Modèle d'adversaires.}

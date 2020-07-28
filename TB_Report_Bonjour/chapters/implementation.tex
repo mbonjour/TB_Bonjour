@@ -27,6 +27,7 @@ Je me suis donc orienté sur le C pour avoir de meilleures performances et pouvo
 
 \subsection{Librairie cryptographique}
 %TODO + d'explications sur les librairies et les choix faits (retrouver l'endoit où l'on dit que RELIC est plus efficient et est plus fait pour les POCs etc) + ref livre Alex
+En lisant le livre \textit{Guide to Paring-Based Cryptography}~\cite{bookPairing}, les librairies et implémentations en Sage qui sont conseillées ainsi que des exemples de code. 
 La librairie utilisée est RELIC Toolkit~\cite{relic-toolkit}, c'est une librairie en cours de développement qui se veut efficiente. Sa concurrence avec MIRACL m'a fait hésiter dans mon choix, mais MIRACL est plus codée en~ C++ avec des équivalences en C j'ai donc choisi RELIC. De plus j'ai trouvé par exemple que RELIC était généralement plus adapté dans le domaine universitaire pour des POC puis il est plus efficient que d'autres librairies~\cite{performanceRELIC}.
 \subsection{Courbe utilisée}
 La courbe utilisée pour le POC est la BLS12-P381, en effet cette courbe est assez efficiente et compatible avec les pairings. De plus RELIC l'a dans ses options et fonctionne bien, elle a un niveau de sécurité de 128bits. Je voulais prendre une courbe avec une plus grande sécurité cependant RELIC ne l'a pas encore totalement implémenté (certains tests concernant $\mathbb{G}_2$ ne passes pas), mais la librairie étant toujours en cours de développement il faudrait suivre ça de près, le code ne changerait en effet pas.

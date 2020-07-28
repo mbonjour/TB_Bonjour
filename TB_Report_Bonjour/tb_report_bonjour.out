@@ -28,6 +28,9 @@
 \BOOKMARK [0][-]{appendix.A}{Outils utilis\351s pour la compilation}{}% 28
 \BOOKMARK [1][-]{section.A.1}{RELIC Toolkit}{appendix.A}% 29
 \BOOKMARK [1][-]{section.A.2}{Libsodium}{appendix.A}% 30
-\BOOKMARK [0][-]{appendix.B}{Fichiers}{}% 31
-\BOOKMARK [1][-]{section.B.1}{Code du POC}{appendix.B}% 32
-\BOOKMARK [1][-]{section.B.2}{Tableaux comparatifs}{appendix.B}% 33
+\BOOKMARK [1][-]{section.A.3}{binn}{appendix.A}% 31
+\BOOKMARK [1][-]{section.A.4}{libetpan}{appendix.A}% 32
+\BOOKMARK [1][-]{section.A.5}{libcurl}{appendix.A}% 33
+\BOOKMARK [0][-]{appendix.B}{Fichiers}{}% 34
+\BOOKMARK [1][-]{section.B.1}{Code du POC}{appendix.B}% 35
+\BOOKMARK [1][-]{section.B.2}{Tableaux comparatifs}{appendix.B}% 36

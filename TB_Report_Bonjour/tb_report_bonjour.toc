@@ -13,31 +13,31 @@
 \contentsline {subsection}{\numberline {2.2.3}PEP}{9}{subsection.2.2.3}%
 \contentsline {section}{\numberline {2.3}Implémentations existantes}{10}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Protonmail}{10}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Tutanota}{11}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.2}Tutanota}{12}{subsection.2.3.2}%
 \contentsline {section}{\numberline {2.4}Attaque existantes}{12}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Défauts webmails}{12}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}EFAIL}{12}{subsection.2.4.2}%
 \contentsline {section}{\numberline {2.5}Signal}{12}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Fonctionnement}{12}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Problèmes d'intégrations}{12}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.1}Fonctionnement}{13}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Problèmes d'intégrations}{13}{subsection.2.5.2}%
 \contentsline {section}{\numberline {2.6}Compromis}{13}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Résultats des recherches}{13}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.1}Résultats des recherches}{14}{subsection.2.6.1}%
 \contentsline {section}{\numberline {2.7}Primitives}{14}{section.2.7}%
 \contentsline {subsection}{\numberline {2.7.1}Primitives analysées}{14}{subsection.2.7.1}%
-\contentsline {subsection}{\numberline {2.7.2}Primitive choisie}{14}{subsection.2.7.2}%
+\contentsline {subsection}{\numberline {2.7.2}Primitive choisie}{15}{subsection.2.7.2}%
 \contentsline {section}{\numberline {2.8}Recherches sur la primitive}{15}{section.2.8}%
 \contentsline {subsection}{\numberline {2.8.1}Principes mathématiques}{15}{subsection.2.8.1}%
-\contentsline {subsection}{\numberline {2.8.2}À savoir}{15}{subsection.2.8.2}%
-\contentsline {subsection}{\numberline {2.8.3}Schémas Certificateless de Chiffrement}{16}{subsection.2.8.3}%
-\contentsline {subsection}{\numberline {2.8.4}Détails techniques}{16}{subsection.2.8.4}%
-\contentsline {subsection}{\numberline {2.8.5}Schémas Certificateless de Signature}{17}{subsection.2.8.5}%
+\contentsline {subsection}{\numberline {2.8.2}À savoir}{16}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.3}Schémas Certificateless de Chiffrement}{17}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.4}Détails techniques}{17}{subsection.2.8.4}%
+\contentsline {subsection}{\numberline {2.8.5}Schémas Certificateless de Signature}{18}{subsection.2.8.5}%
 \contentsline {subsection}{\numberline {2.8.6}Détails techniques}{18}{subsection.2.8.6}%
 \contentsline {section}{\numberline {2.9}État de l'art}{19}{section.2.9}%
 \contentsline {subsection}{\numberline {2.9.1}Email Encryption System Using Certificateless Public Key Encryption Scheme}{19}{subsection.2.9.1}%
-\contentsline {subsection}{\numberline {2.9.2}An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{19}{subsection.2.9.2}%
-\contentsline {subsection}{\numberline {2.9.3}Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}{20}{subsection.2.9.3}%
+\contentsline {subsection}{\numberline {2.9.2}An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{20}{subsection.2.9.2}%
+\contentsline {subsection}{\numberline {2.9.3}Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}{21}{subsection.2.9.3}%
 \contentsline {subsection}{\numberline {2.9.4}PriviPK : Certificate-less and secure email communication}{21}{subsection.2.9.4}%
-\contentsline {subsection}{\numberline {2.9.5}A certificateless one-way group key agreement protocol for end-to-end email encryption}{21}{subsection.2.9.5}%
+\contentsline {subsection}{\numberline {2.9.5}A certificateless one-way group key agreement protocol for end-to-end email encryption}{22}{subsection.2.9.5}%
 \contentsline {chapter}{\numberline {3}Architecture / Design du protocole}{23}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Architecture globale}{23}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Acteurs}{24}{section.3.2}%
@@ -73,6 +73,9 @@
 \contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{47}{appendix.A}%
 \contentsline {section}{\numberline {A.1}RELIC Toolkit}{47}{section.A.1}%
 \contentsline {section}{\numberline {A.2}Libsodium}{47}{section.A.2}%
+\contentsline {section}{\numberline {A.3}binn}{48}{section.A.3}%
+\contentsline {section}{\numberline {A.4}libetpan}{48}{section.A.4}%
+\contentsline {section}{\numberline {A.5}libcurl}{48}{section.A.5}%
 \contentsline {chapter}{\numberline {B}Fichiers}{49}{appendix.B}%
 \contentsline {section}{\numberline {B.1}Code du POC}{49}{section.B.1}%
 \contentsline {section}{\numberline {B.2}Tableaux comparatifs}{49}{section.B.2}%

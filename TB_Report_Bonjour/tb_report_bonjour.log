@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  27 JUL 2020 18:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  28 JUL 2020 10:26
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1266,7 +1266,7 @@ LaTeX Font Info:    Trying to load font information for U+wasy on input line 74
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
-<template/logo_heig-vd.pdf, id=174, 236.885pt x 71.26625pt>
+<template/logo_heig-vd.pdf, id=186, 236.885pt x 71.26625pt>
 File: template/logo_heig-vd.pdf Graphic file (type pdf)
 <use template/logo_heig-vd.pdf>
 Package pdftex.def Info: template/logo_heig-vd.pdf  used on input line 74.
@@ -1330,13 +1330,13 @@ Chapitre 1.
 
 ]
 Chapitre 2.
-<images/Etapes_envoi_email.png, id=303, 1927.2pt x 208.78pt>
+<images/Etapes_envoi_email.png, id=318, 1927.2pt x 208.78pt>
 File: images/Etapes_envoi_email.png Graphic file (type png)
 <use images/Etapes_envoi_email.png>
 Package pdftex.def Info: images/Etapes_envoi_email.png  used on input line 11.
 (pdftex.def)             Requested size: 398.33858pt x 43.15059pt.
 [3] [4 <./images/Etapes_envoi_email.png>]
-<images/PGP_101.png, id=321, 501.875pt x 522.95375pt>
+<images/PGP_101.png, id=337, 501.875pt x 522.95375pt>
 File: images/PGP_101.png Graphic file (type png)
 <use images/PGP_101.png>
 Package pdftex.def Info: images/PGP_101.png  used on input line 23.
@@ -1353,7 +1353,7 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-<images/examplePGPDecode.png, id=335, 1834.855pt x 706.64pt>
+<images/examplePGPDecode.png, id=351, 1834.855pt x 706.64pt>
 File: images/examplePGPDecode.png Graphic file (type png)
 <use images/examplePGPDecode.png>
 Package pdftex.def Info: images/examplePGPDecode.png  used on input line 36.
@@ -1363,12 +1363,12 @@ Package pdftex.def Info: images/examplePGPDecode.png  used on input line 36.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6] [7 <./images/examplePGPDecode.png>]
-<images/SMIME_FossaProblem.jpg, id=359, 591.20876pt x 594.22pt>
+<images/SMIME_FossaProblem.jpg, id=374, 591.20876pt x 594.22pt>
 File: images/SMIME_FossaProblem.jpg Graphic file (type jpg)
 <use images/SMIME_FossaProblem.jpg>
 Package pdftex.def Info: images/SMIME_FossaProblem.jpg  used on input line 61.
 (pdftex.def)             Requested size: 284.52756pt x 285.984pt.
-<images/mesince_problem.png, id=362, 695.59875pt x 372.39125pt>
+<images/mesince_problem.png, id=377, 695.59875pt x 372.39125pt>
 File: images/mesince_problem.png Graphic file (type png)
 <use images/mesince_problem.png>
 Package pdftex.def Info: images/mesince_problem.png  used on input line 69.
@@ -1377,54 +1377,56 @@ Package pdftex.def Info: images/mesince_problem.png  used on input line 69.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[8]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8]
-<images/conceptualpEp.png, id=372, 541.0614pt x 412.4208pt>
+<images/conceptualpEp.png, id=387, 541.0614pt x 412.4208pt>
 File: images/conceptualpEp.png Graphic file (type png)
 <use images/conceptualpEp.png>
 Package pdftex.def Info: images/conceptualpEp.png  used on input line 83.
 (pdftex.def)             Requested size: 426.79134pt x 325.33058pt.
- [9 <./images/SMIME_FossaProblem.jpg>]
+[9 <./images/SMIME_FossaProblem.jpg>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [10 <./images/mesince_problem.png>] [11 <./images/conceptualpEp.png>]
-<images/signalFonctionnement.png, id=400, 632.3625pt x 623.32875pt>
+<images/signalFonctionnement.png, id=413, 632.3625pt x 623.32875pt>
 File: images/signalFonctionnement.png Graphic file (type png)
 <use images/signalFonctionnement.png>
 Package pdftex.def Info: images/signalFonctionnement.png  used on input line 12
 3.
 (pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[12] [13 <./images/signalFonctionnement.png>] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 164--165
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
+ [12]
+[13 <./images/signalFonctionnement.png>] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 157--163
 
  []
 
 [15]
-Underfull \hbox (badness 5064) in paragraph at lines 167--172
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--173
+
+ []
+
+
+Underfull \hbox (badness 5064) in paragraph at lines 174--179
  []\T1/cmr/bx/n/10.95 Modèle d'ad-ver-saires. \T1/cmr/m/n/10.95 Pour éva-luer l
 es sché-mas de cer-ti-fi-ca-te-less pu-blic key
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--172
+Underfull \hbox (badness 10000) in paragraph at lines 174--179
 
  []
 
 [16] [17] [18] [19] [20] [21]) (./chapters/architecture.tex [22]
 Chapitre 3.
-<images/SchemaGlobal.png, id=537, 721.94719pt x 319.94531pt>
+<images/SchemaGlobal.png, id=554, 721.94719pt x 319.94531pt>
 File: images/SchemaGlobal.png Graphic file (type png)
 <use images/SchemaGlobal.png>
 Package pdftex.def Info: images/SchemaGlobal.png  used on input line 10.
@@ -1449,10 +1451,10 @@ Chapitre 4.
 [29
 
 ] [30]
-<images/schemaEncapsulation.png, id=604, 607.51968pt x 353.82187pt>
+<images/schemaEncapsulation.png, id=621, 607.51968pt x 353.82187pt>
 File: images/schemaEncapsulation.png Graphic file (type png)
 <use images/schemaEncapsulation.png>
-Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 50.
+Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 51.
 
 (pdftex.def)             Requested size: 341.43306pt x 198.85693pt.
 
@@ -1460,15 +1462,15 @@ Package pdftex.def Info: images/schemaEncapsulation.png  used on input line 50.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--60
+Underfull \hbox (badness 10000) in paragraph at lines 59--61
 
  []
 
 [31] [32 <./images/schemaEncapsulation.PNG>] [33]
-<images/packetProofEncrypted.png, id=633, 1036.87375pt x 701.62125pt>
+<images/packetProofEncrypted.png, id=651, 1036.87375pt x 701.62125pt>
 File: images/packetProofEncrypted.png Graphic file (type png)
 <use images/packetProofEncrypted.png>
-Package pdftex.def Info: images/packetProofEncrypted.png  used on input line 90
+Package pdftex.def Info: images/packetProofEncrypted.png  used on input line 91
 .
 (pdftex.def)             Requested size: 398.33858pt x 269.54153pt.
  [34 <./images/packetProofEncrypted.png>]
@@ -1495,7 +1497,18 @@ aft-irtf-cfrg-hash-to-
 
 [39
 
-] [40]) [41] [42
+]
+! Misplaced alignment tab character &.
+l.101 \newblock Chapman &
+                          Hall/CRC, 2016.
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+[40]) [41] [42
 
 ] (./tb_report_bonjour.lof)
 \tf@lof=\write11
@@ -1505,24 +1518,24 @@ aft-irtf-cfrg-hash-to-
 
 ] [44
 
-]
-(./tb_report_bonjour.lot)
+] (./tb_report_bonjour.lot)
 \tf@lot=\write12
 \openout12 = `tb_report_bonjour.lot'.
 
- (./chapters/outils.tex [45
+
+(./chapters/outils.tex [45
 
 ] [46
 
 ]
 Annexe A.
-) (./chapters/fichiers.tex [47] [48
-
-]
+) (./chapters/fichiers.tex [47] [48]
 Annexe B.
 ) 
 AED: lastpage setting LastPage
-[49]
+[49
+
+]
 
 Package catoptions Warning: Undeclared options found in \XExecuteOptions
 (catoptions)                (family,option,value): 
@@ -1534,14 +1547,14 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 138.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 138.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 138.
 Package rerunfilecheck Info: File `tb_report_bonjour.out' has not changed.
-(rerunfilecheck)             Checksum: 8BAC39D6F9C256D2C27B2215137DBD2B;2108.
+(rerunfilecheck)             Checksum: 8E03417E564BD5910A11FAFFD564E72E;2271.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 138.
  ) 
 Here is how much of TeX's memory you used:
- 33840 strings out of 481239
- 671315 string characters out of 5920377
- 1155013 words of memory out of 5000000
- 48108 multiletter control sequences out of 15000+600000
+ 33848 strings out of 481239
+ 671416 string characters out of 5920377
+ 1155047 words of memory out of 5000000
+ 48112 multiletter control sequences out of 15000+600000
  553832 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  70i,11n,115p,2017b,949s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1611,10 +1624,10 @@ blic/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm12
 00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/t
 exmf/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf/fonts/type1/pub
 lic/cm-super/sftt1095.pfb>
-Output written on tb_report_bonjour.pdf (61 pages, 1348315 bytes).
+Output written on tb_report_bonjour.pdf (61 pages, 1350664 bytes).
 PDF statistics:
- 909 PDF objects out of 1000 (max. 8388607)
- 764 compressed objects within 8 object streams
- 247 named destinations out of 1000 (max. 500000)
- 476 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 927 PDF objects out of 1000 (max. 8388607)
+ 782 compressed objects within 8 object streams
+ 251 named destinations out of 1000 (max. 500000)
+ 500 words of extra memory for PDF output out of 10000 (max. 10000000)
 
