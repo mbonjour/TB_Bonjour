@@ -98,7 +98,7 @@ Ga{\"{e}}tan Leurent and Thomas Peyrin.
 \bibitem{bookPairing}
 Nadia~El Mrabet and Marc Joye.
 \newblock {\em Guide to Pairing-Based Cryptography}.
-\newblock Chapman & Hall/CRC, 2016.
+\newblock Chapman \& Hall/CRC, 2016.
 
 \bibitem{doubleratchet}
 Trevor Perrin and Moxie Marlinspike.
@@ -121,6 +121,12 @@ Lucian Popa, Bogdan Groza, and Pal-Stefan Murvay.
 \newblock In {\em Proceedings of the 14th International Conference on
   Availability, Reliability and Security}, ARES ’19, New York, NY, USA, 2019.
   Association for Computing Machinery.
+
+\bibitem{RFC8551}
+J.~Schaad, B.~Ramsdell, and S.~Turner.
+\newblock Secure/multipurpose internet mail extensions (s/mime) version 4.0
+  message specification.
+\newblock RFC 8551, RFC Editor, April 2019.
 
 \bibitem{DBLP:conf/crypto/Shamir84}
 Adi Shamir.
