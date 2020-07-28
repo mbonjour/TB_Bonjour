@@ -107,6 +107,13 @@ Ga{\"{e}}tan Leurent and Thomas Peyrin.
   application to the {PGP} web of trust.
 \newblock {\em {IACR} Cryptol. ePrint Arch.}, 2020:14, 2020.
 
+\bibitem{endToEndSecureEmailArticle}
+Bazara~Barry Mohammed~Hassouna, Nashwa~Mohamed and Eihab Bashier.
+\newblock An end-to-end secure mail system based on certificateless
+  cryptography in the standard security model.
+\newblock {\em IJCSI International Journal of Computer Science Issues, Vol. 10,
+  Issue 2, No 3, March 2013}, 2013:8, 2013.
+
 \bibitem{bookPairing}
 Nadia~El Mrabet and Marc Joye.
 \newblock {\em Guide to Pairing-Based Cryptography}.

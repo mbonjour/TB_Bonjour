@@ -138,7 +138,7 @@ Tout d'abord, un plugin firefox qui permet d'avoir des certificats pour GMail et
 	\label{fig:SMIME_FossaProblem}
 \end{figure}
 
-Pour tester S/MIME, un compte \url{https://www.mesince.com} a été utilisé. En effet, ce service permet d'utiliser S/MIME afin de chiffrer et signer ses mails, et ils fournissent les certificats, seulement il ne fonctionnait pas avec Gmail. De plus le service fourni n'a pas fonctionné pour se loguer et récupérer son certificat, ainsi le certificat a été généré et peut être utilisé par leur application mobile pour envoyer des mails signés et chiffrés mais je ne peux pas le voir. Sur l'application mobile, il n'y a pas moyen de vérifier la clé générée.
+Pour tester S/MIME, un compte MeSince\footnote{\url{https://www.mesince.com}} a été utilisé. En effet, ce service permet d'utiliser S/MIME afin de chiffrer et signer ses mails, et ils fournissent les certificats, seulement il ne fonctionnait pas avec Gmail. De plus le service fourni n'a pas fonctionné pour se loguer et récupérer son certificat, ainsi le certificat a été généré et peut être utilisé par leur application mobile pour envoyer des mails signés et chiffrés mais je ne peux pas le voir. Sur l'application mobile, il n'y a pas moyen de vérifier la clé générée.
 
 Attention cependant le même problème avec Fossa arrive comme le montre la Figure \ref{fig:SMIME_MeSinceProblem}, par contre l'avertissement n'est pas très voyant au sein de Gmail (qui intègre pourtant le support S/MIME dans G Suite). Les certificats utilisent RSA avec SHA256 pour la signature des messages.
 %TODO voir quel RSA utilisé
@@ -235,7 +235,7 @@ Le fonctionnement de Signal est complexe à expliquer, ainsi la Figure \ref{fig:
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=8cm]{images/signalFonctionnement.png}
-	\caption{Schéma fonctionnement du DH Ratchet\cite{doubleratchet}}
+	\caption{Schéma fonctionnement du DH Ratchet~\cite{doubleratchet}}
 	\label{fig:signal}
 \end{figure}
 
@@ -246,7 +246,7 @@ Le deuxième ratchet va générer une clé pour chaque message/batch de messages
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=10cm]{images/secondRatchet.png}
-	\caption{Schéma fonctionnement du deuxième Ratchet\cite{doubleratchet}}
+	\caption{Schéma fonctionnement du deuxième Ratchet~\cite{doubleratchet}}
 	\label{fig:signalSecond}
 \end{figure}
 
@@ -328,7 +328,7 @@ Les détails techniques sur le chiffrement avec la \textit{Certificateless Crypt
 
 Le chiffrement se base sur le problème difficile \textit{The Decision 3-Party Diffie-Hellman Problem} (3-DDH), décider si $T =g^{abc}$ ayant $(g^a, g^b, g^c, T) \in \mathbb{G}_4$.
 
-Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/pkc/DentLP08} et les expliquer. Cependant, dans \cite{DBLP:conf/pkc/DentLP08} les pairings symétriques sont utilisés (c.f. Section \ref{subsec:mathPairings}) mais il est mentionné que l'adaptation à des pairings asymétrique est triviale, c'est donc les pairings asymétriques qui seront utilisés. De plus, \cite{DBLP:conf/pkc/DentLP08} utilise un groupe multiplicatif ainsi la conversion vers un groupe additif (afin d'utiliser des courbes elliptiques) est faite ainsi les calculs peuvent être lus plus facilement avec l'implémentation faite :
+Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/pkc/DentLP08} et les expliquer. Cependant, dans~\cite{DBLP:conf/pkc/DentLP08} les pairings symétriques sont utilisés (c.f. Section \ref{subsec:mathPairings}) mais il est mentionné que l'adaptation à des pairings asymétrique est triviale, c'est donc les pairings asymétriques qui seront utilisés. De plus,~\cite{DBLP:conf/pkc/DentLP08} utilise un groupe multiplicatif ainsi la conversion vers un groupe additif (afin d'utiliser des courbes elliptiques) est faite ainsi les calculs peuvent être lus plus facilement avec l'implémentation faite :
 
 \textbf{Setup($1^k, n$) :} Avec $\mathbb{G}_1, \mathbb{G}_2, \mathbb{G}_T$ avec un ordre $p > 2^k$. $g$ est un générateur de $\mathbb{G}_1$. Ensuite  $g_1 = g \cdot \gamma$ pour un $\gamma \leftarrow  \mathbb{Z}_p^*$ aléatoire. Puis $g_2 \leftarrow \mathbb{G}_2$. Deux vecteurs (U,V) seront tirés aléatoirement dans $\mathbb{G}_2^{n+1}$ en tant que fonctions de hash notés :
 \[F_u(ID) = u' \sum_{i=1}^{n} u_j^{i_j}\quad\mathrm{and}\quad F_v(w) = v' \sum_{i=1}^{n} v_j^{w_j}\]
@@ -518,7 +518,7 @@ La signature se base sur le problème difficile \textit{The Computational Diffie
 
 Ayant $P, aP, bP$ où $a,b$ aléatoires $\in \mathbb{Z}_q^*$ il n'est pas possible de trouver $abP$.
 
-Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/acns/ZhangWXF06} et les expliquer. Cependant dans \cite{DBLP:conf/acns/ZhangWXF06} les pairings sont de type symétriques (c.f. Section \ref{subsec:mathPairings}), les pairings utilisés dans l'implémentation sont de type asymétrique.
+Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/acns/ZhangWXF06} et les expliquer. Cependant dans~\cite{DBLP:conf/acns/ZhangWXF06} les pairings sont de type symétriques (c.f. Section \ref{subsec:mathPairings}), les pairings utilisés dans l'implémentation sont de type asymétrique.
 
 \textbf{Setup($1^k $) :} Tout d'abord l'on va prendre les groupes d'ordre $q$ énoncés auparavant. Puis on choisit un générateur $P \in \mathbb{G}_1$. La \textit{master secret key} va être choisie aléatoirement $s \in \mathbb{Z}_q^*$. Puis la clé publique calculée : $P_{pub} = sP$. Finalement, trois fonctions de hash distinctes $H_1, H_2, H_3$ vont être choisies, chacune d'elle \textit{mappant} de $\{0,1\}^*$ à $\mathbb{G}_2$. Pour cela j'ai choisi de faire du \textit{Hash Domain Separation} comme expliqué dans le Chapitre \ref{ch:impl}. L'on définit les $\mathbf{params} = (\mathbb{G}_1,\mathbb{G}_2,\mathbb{G}_T,e,q,P,P_{pub},H_1,H_2,H_3)$
 
@@ -656,7 +656,7 @@ L'article~\cite{DBLP:conf/itcs2/ErYTG12} présente une façon de faire pour chif
 \paragraph*{Conclusion.} Ce papier nous conforte dans l'idée de l'utilisation d'AES pour la rapidité du chiffrement qui va avec cette primitive. Cependant, ils n'expliquent pas comment la clé AES est prise et chiffrée réellement. Une implémentation existe en J2SE mais je ne l'ai pas trouvée. Le schéma choisi l'a été pour son avantage de ne pas utiliser les \textit{pairings} et est donc plus rapide. Puis parmi les autres schémas qui n'utilisent pas les \textit{pairings} à ce moment là, un est de type générique (c.f. sous-section \ref{subsec:asavoir}) et l'autre est vulnérable aux \textit{outsider attacks} (c.f. sous-section \ref{subsec:asavoir}).
 
 \subsection{An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}
-L'article\footnote{\url{https://www.ijcsi.org/papers/IJCSI-10-2-3-264-271.pdf}} présente une façon de chiffrer et signer dans un système de mail avec le schéma original de \textit{Certificateless Cryptography} à savoir le schéma d'Al-Riyami et Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}. Un article complet définissant bien le contexte de mails et formalisant pour la première fois un moyen de chiffrer et signer des mails avec de la \textit{Certificateless Cryptography}. Cela en expliquant dans les détails comment ils feraient, sans implémentations citées de ce schéma.
+L'article~\cite{endToEndSecureEmailArticle} présente une façon de chiffrer et signer dans un système de mail avec le schéma original de \textit{Certificateless Cryptography} à savoir le schéma d'Al-Riyami et Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}. Un article complet définissant bien le contexte de mails et formalisant pour la première fois un moyen de chiffrer et signer des mails avec de la \textit{Certificateless Cryptography}. Cela en expliquant dans les détails comment ils feraient, sans implémentations citées de ce schéma.
 %TODO A voir, j'ai l'impression qu'il y a une erreur dans le papier pour le déchiffrement de t*
 \paragraph*{Détails techniques.} Les détails techniques intéressant dans ce papier est la manière d'encapsuler la clé de chiffrement du message. Sinon le reste s'appuie sur le schéma d'Al-Riyami et Paterson.
 
