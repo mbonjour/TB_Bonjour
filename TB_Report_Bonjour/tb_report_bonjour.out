@@ -3,7 +3,7 @@
 \BOOKMARK [0][-]{chapter*.3}{Cahier des charges}{}% 3
 \BOOKMARK [0][-]{chapter.1}{Introduction}{}% 4
 \BOOKMARK [0][-]{chapter.2}{Analyse - \311tat de l'art}{}% 5
-\BOOKMARK [1][-]{section.2.1}{Besoins d'un syst\350me de messagerie}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.1}{Syst\350me de messagerie}{chapter.2}% 6
 \BOOKMARK [1][-]{section.2.2}{Protocoles existants}{chapter.2}% 7
 \BOOKMARK [1][-]{section.2.3}{Impl\351mentations existantes}{chapter.2}% 8
 \BOOKMARK [1][-]{section.2.4}{Attaques existantes}{chapter.2}% 9
@@ -22,7 +22,7 @@
 \BOOKMARK [1][-]{section.4.2}{Impl\351mentation cl\351s de chiffrement}{chapter.4}% 22
 \BOOKMARK [1][-]{section.4.3}{Fonctionnement global POC \(KGC\)}{chapter.4}% 23
 \BOOKMARK [1][-]{section.4.4}{Fonctionnement global POC \(Client\)}{chapter.4}% 24
-\BOOKMARK [1][-]{section.4.5}{Comparaisons avec \351tat de l'art}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.5}{Comparaisons avec l'\351tat de l'art}{chapter.4}% 25
 \BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 26
 \BOOKMARK [1][-]{section.5.1}{Conclusions sur l'analyse}{chapter.5}% 27
 \BOOKMARK [1][-]{section.5.2}{Conclusions sur l'impl\351mentation}{chapter.5}% 28

@@ -4,16 +4,18 @@
 \label{ch:arch}
 Dans ce chapitre, je vais m'intéresser à expliquer le fonctionnement de la \textit{certificateless cryptography} et démontrer comment je l'ai utilisée afin de l'intégrer à un protocole de chiffrement de mail.
 \section{Architecture globale}
-Dans cette Figure \ref{fig:globalProtocol}, je présente uniquement l'architecture globale pour bien représenter les différents acteurs présents dans le protocole et ainsi avoir une vue d'ensemble pour faciliter la compréhension.
+Dans la Figure \ref{fig:globalProtocol}, je présente uniquement l'architecture globale pour bien représenter les différents acteurs présents dans le protocole et ainsi avoir une vue d'ensemble pour faciliter la compréhension.
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=14cm]{images/SchemaGlobal.png}
 	\caption{Schéma global du protocole}
 	\label{fig:globalProtocol}
 \end{figure}
+
 %TODO compléter ce chapitre et préciser les actions des acteurs plus en détails
 \section{Acteurs}
-Les parties impliquées sont les suivantes comme vu à la figure \ref{fig:globalProtocol}.
+Les parties impliquées sont les suivantes comme vu à la Figure \ref{fig:globalProtocol}.
 \begin{itemize}
 	\item Alice : L'envoyeur du mail en direction de Bob. Alice doit discuter avec le KGC pour construire sa clé privée (afin de signer) et récupérer la clé publique de Bob.
 	\item Bob : Le destinataire du message, communique uniquement avec le KGC en ayant reçu le message d'Alice afin de récupérer sa clé publique pour vérifier la signature et de construire sa clé privé pour déchiffrer le message.
@@ -24,7 +26,7 @@ Ces partis sont les principaux présents dans un exemple de \textit{Certificatel
 Je vais ici découper les différents algorithmes présent dans le certificateless public key cryptography. En passant par le chiffrement et la signature.
 Ces algorithmes seront accompagnés d'explications sur leur utilité. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. L'on peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{DBLP:conf/pkc/DentLP08}.
 \subsection{Chiffrement}
-Liste des différents algorithmes de \textit{Certificateless Cryptography} et leur description, les détails techniques de leurs implémentations sont disponibles à la Section \ref{sec:primitiveSearch}.
+La liste des différents algorithmes de \textit{Certificateless Cryptography} et leur description, les détails techniques de leurs implémentations sont disponibles à la Section \ref{sec:primitiveSearch}.
 \begin{itemize}
 	\item \textit{Setup.} (seulement une fois par le KGC).
 	\item \textit{Partial-Private-Key-Extract.} Calcul d'une clé privée partielles lorsque qu'un client le demande pour identité donnée.
@@ -64,17 +66,12 @@ Dans la littérature certificateless les schémas de signatures sont beaucoup pl
 \end{figure}
 
 Dans la Figure \ref{fig:firstConn} l'on voit la première connexion d'un utilisateur.
-Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoi les paramètres publiques (mpkS et mpkE) si aucun utilisateur n'a déjà cet email. Ces paramètres publiques sont assez lourd, en effet, ils font environ 52 kB au total, c'est donc un gros paquet qui est envoyé là. Dans mes expérimentations je n'ai jamais eu de problèmes, mais il est préférable de le mentionner tout de même.
+Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoi les paramètres publiques (mpkS et mpkE) si aucun utilisateur n'a déjà cet email. Ces paramètres publiques sont assez lourd, en effet, ils font environ 52 kB au total.
+
 L'utilisateur va alors crée sa valeur secrète tirée aléatoire modulo p puis générer sa clé publique.
-Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et puisses le donner aux personnes qui veulent envoyer un mail à Alice.\\
+Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et puisses le donner aux personnes qui veulent envoyer un mail à Alice.
 
-%\begin{figure}[h!]
-	%\centering
-	%\includegraphics[width=14cm]{images/aliceSendsToBob.png}
-	%\caption{Alice envoi un message à Bob}
-	%\label{fig:aliceSends}
-%\end{figure}
-
+%TODO modifier schéma pour contact KGC au début ou récupération en local
 \begin{figure}[h!]
 	\centering
 	\begin{sequencediagram}
@@ -110,9 +107,9 @@ Dans la Figure \ref{fig:aliceSends} l'on voit comment se déroulerait l'envoi d'
 \begin{itemize}
 	\item Tout d'abord, Alice va récupérer le clé publique de Bob via son ID (aka email).
 	\item Elle devra aussi récupérer sa clé privée partielle de signature pour créer ses clés privées afin de signer le message. Elle va le faire à l'aide de son ID et du même timestamp qu'utilisé pour la suite.
-	\item Elle va ensuite tirer une valeur aléatoire dans Gt qui représentera sa clé AES pour la suite, elle va chiffrer cet élément à l'aide de la clé publique de Bob et de son ID complété par un timestamp. Ce timestamp sert à garder une certaine Forward Secrecy. Le cipher sera c'.
-	\item Elle va calculer la signature du cipher donné (s' sur la figure)
-	\item Alice utilisera un chiffrement authentifié comme AES\_GCM pour chiffrer et authentifié son mail à Bob, t pour le tag et c pour le cipher.
+	\item Elle va ensuite tirer une valeur aléatoire dans Gt qui représentera sa clé AES pour la suite, elle va chiffrer cet élément à l'aide de la clé publique de Bob et de son ID complété par un timestamp. Ce timestamp sert à garder une certaine Forward Secrecy. Le texte chiffré sera c'.
+	\item Elle va calculer la signature du texte chiffré donné (s' sur la figure)
+	\item Alice utilisera un chiffrement authentifié comme AES\_GCM pour chiffrer et authentifié son mail à Bob, t pour le tag et c pour le texte chiffré.
 	\item Finalement elle va envoyer tout ces éléments à bob (à savoir, l'ID utilisé, c, c', t, s' et l'IV utilisé pour AES\_GCM).
 \end{itemize}
 
@@ -150,7 +147,7 @@ Dans la Figure \ref{fig:aliceSends} l'on voit comment se déroulerait l'envoi d'
 
 Mais dans la Figure \ref{fig:bobReceives} l'on voit comment la réception du côté de Bob se déroulerait :
 \begin{itemize}
-	\item A la réception la première chose à faire et de vérifier le cipher de la clé AES. Pour cela l'on va demander la clé publique d'Alice au KGC. Puis on va vérifier ce cipher c' à l'aide de sa signature s'.
+	\item A la réception la première chose à faire et de vérifier le texte chiffré de la clé AES. Pour cela l'on va demander la clé publique d'Alice au KGC. Puis on va vérifier ce texte chiffré c' à l'aide de sa signature s'.
 	\item Ensuite Bob va récupérer sa clé privée partielle via le KGC en fournissant son ID avec le timestamp envoyé par Alice. Il va ainsi pouvoir former sa clé privée.
 	\item Avec s clé privée il va pouvoir déchiffrer c' et obtenir la clé AES pour la suite.
 	\item Une fois que l'on a la clé AES l'on peut simplement déchiffrer à l'aide d'AES\_GCM c pour obtenir le message initial.
