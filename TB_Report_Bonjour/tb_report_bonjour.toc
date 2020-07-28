@@ -10,12 +10,12 @@
 \contentsline {section}{\numberline {2.2}Protocoles existants}{4}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}PGP}{5}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}S/MIME}{8}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Implémentations existantes}{10}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Implémentations existantes}{11}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Protonmail}{11}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Tutanota}{13}{subsection.2.3.2}%
 \contentsline {section}{\numberline {2.4}Attaques existantes}{14}{section.2.4}%
 \contentsline {subsection}{\numberline {2.4.1}Défauts webmails}{14}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}EFAIL}{14}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.2}EFAIL}{15}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3}SHA-1 Shambles}{15}{subsection.2.4.3}%
 \contentsline {section}{\numberline {2.5}Signal}{15}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Fonctionnement}{15}{subsection.2.5.1}%
@@ -35,7 +35,7 @@
 \contentsline {subsection}{\numberline {2.8.6}Détails techniques}{24}{subsection.2.8.6}%
 \contentsline {section}{\numberline {2.9}État de l'art}{25}{section.2.9}%
 \contentsline {subsection}{\numberline {2.9.1}Email Encryption System Using Certificateless Public Key Encryption Scheme}{25}{subsection.2.9.1}%
-\contentsline {subsection}{\numberline {2.9.2}An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{25}{subsection.2.9.2}%
+\contentsline {subsection}{\numberline {2.9.2}An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{26}{subsection.2.9.2}%
 \contentsline {subsection}{\numberline {2.9.3}Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}{26}{subsection.2.9.3}%
 \contentsline {subsection}{\numberline {2.9.4}PriviPK : Certificate-less and secure email communication}{27}{subsection.2.9.4}%
 \contentsline {subsection}{\numberline {2.9.5}A certificateless one-way group key agreement protocol for end-to-end email encryption}{28}{subsection.2.9.5}%
@@ -70,7 +70,9 @@
 \contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{43}{subsection.4.5.2}%
 \contentsline {subsection}{\numberline {4.5.3}Overhead induit}{43}{subsection.4.5.3}%
 \contentsline {chapter}{\numberline {5}Conclusion}{45}{chapter.5}%
-\contentsline {chapter}{Bibliographie}{47}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Conclusions sur l'analyse}{45}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Conclusions sur l'implémentation}{45}{section.5.2}%
+\contentsline {chapter}{Bibliographie}{47}{section.5.2}%
 \contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{55}{appendix.A}%
 \contentsline {section}{\numberline {A.1}RELIC Toolkit}{55}{section.A.1}%
 \contentsline {section}{\numberline {A.2}Libsodium}{55}{section.A.2}%

@@ -35,14 +35,22 @@ Pour ce qui est des primitives cryptographiques proposées dans la RFC4880~\cite
 		Symetric & Asymetric & Hash & Compression \\ [0.5ex]
 		\hline\hline
 		IDEA & RSA & MD5 & ZIP \\
+		TripleDES & ElGamal & SHA-1 & ZLIB \\
+		CAST5 & DSA & RIPE-MD160 & BZip2 \\
+		Blowfish & ECDSA & SHA256 & \\
+		AES-128 & Diffie-Hellman & SHA384 & \\
+		AES-192 & & SHA512 & \\
+		AES-256 & & SHA224 & \\
+		Twofish-256 & & & \\
+		IDEA & & & \\
+		\hline
 	\end{tabular}
 \caption{Table des algorithmes utilisés par PGP}
 \label{table:refPGPAlgos}
 \end{table}
- IDEA, TripleDES, CAST5, Blowfish, AES-128,AES-192, AES-256, Twofish-256. Pour les primitives asymétrique : RSA, ElGamal, DSA, ECDSA, Diffie-Hellman. La RFC spécifie aussi les formats de compression : ZIP, ZLIB, BZip2. Puis enfin, les algorithmes de hachage : MD5, SHA-1, RIPE-MD160, SHA256, SHA384, SHA512, SHA224 mais MD5 a été anoncé déprecié. Puis il faut savoir que pour chacune de ces catégories il y a 10 éléments réservés pour des primitives privées/expérimentales.\\
+Attention MD5 a été anoncé déprecié. Il faut savoir que pour chacune de ces catégories il y a 10 éléments réservés pour des primitives privées/expérimentales.\\
 Lorsqu'un mail est chiffré et signé avec PGP, il est d'abord hasher puis ce hash est signé avec la clé privée de l'utilisateur afin de faire une signature digitale. Le message et la signature sera alors chiffrée à l'aide la clé symétrique.\\
-L'organisation d'un message PGP se fait via des "paquets" d'informations encodés en base64. La RFC définit bien ces types de paquets, leur fonctionnement et les différents codes associés. Sur le site \url{https://cirw.in/gpg-decoder/} l'on peut entrer un message et ainsi voir l'organisation d'un message, de clés publiques et de clés privées. Ainsi, je montre un exemple de mail envoyé à plusieurs destinataires dans la figure \ref{fig:PGP_DECODE}. Cela démontre comment fonctionnes PGP, en effet le message étant chiffré avec une clé symétrique, le chiffré sera le même pour tout le monde. Mais afin que tout les destinataires puisses avoir la clé symétrique, la clé est chiffrée à l'aide des clés publiques des différents destinataires (et de la source, pour pouvoir la déchiffrer à l'avenir et ne pas conserver le mail en clair dans la boite d'envoi). À noter qu'avec l'option de \textit{blind copy} (option permettant d'envoyer à un utilisateur un mail sans qu'il sache qu'il a aussi été envoyé é un autre utilisateur), PGP \textit{leak} les receveurs des mails avec leur KeyID qui sera présent dans le message PGP\footnote{\url{https://crypto.stanford.edu/portia/papers/bb-bcc.pdf}}.\\
-% TODO citer le papier ci-dessus au lieu du lien
+L'organisation d'un message PGP se fait via des "paquets" d'informations encodés en base64. La RFC définit bien ces types de paquets, leur fonctionnement et les différents codes associés. Sur le blog de Conrad Irwin\footnote{\url{https://cirw.in/gpg-decoder/}} l'on peut entrer un message et ainsi voir l'organisation d'un message, de clés publiques et de clés privées. Ainsi, je montre un exemple de mail envoyé à plusieurs destinataires dans la figure \ref{fig:PGP_DECODE}. Cela démontre comment fonctionnes PGP, en effet le message étant chiffré avec une clé symétrique, le chiffré sera le même pour tout le monde. Mais afin que tout les destinataires puisses avoir la clé symétrique, la clé est chiffrée à l'aide des clés publiques des différents destinataires (et de la source, pour pouvoir la déchiffrer à l'avenir et ne pas conserver le mail en clair dans la boite d'envoi). À noter qu'avec l'option de \textit{blind copy} (option permettant d'envoyer à un utilisateur un mail sans qu'il sache qu'il a aussi été envoyé é un autre utilisateur), PGP \textit{leak} les receveurs des mails avec leur KeyID qui sera présent dans le message PGP~\cite{BccPrivacy}.\\
 \begin{figure}[h!]
 	\includegraphics[width=14cm]{images/examplePGPDecode.png}
 	\centering
@@ -66,11 +74,25 @@ MIME est un standard qui étend le format de mail standard afin de pouvoir trans
 Dans ce contexte S/MIME vient ajouter un type MIME \textit{application/pkcs7-mime}, un format de donnée qui enveloppe une entité MIME afin de la chiffrer, puis cette enveloppe chiffrée est ensuite le contenu de ce nouveau type. Cette enveloppe  Pour les signatures S/MIME utilisera plus le signatures détachées et le type \textit{multipart/signed} pour cela ou encore \textit{application/x-pkcs7-signature}. Anciennement c'était effectivement le format de message PKCS\#7 utilisé pour le format des messages chiffrés. Cependant, à l'heure actuelle c'est la spécification de CMS (Cryptographic Message Syntax) qui est utilisé dans ces types MIME.\\
 Afin de commencer à signer des messages avec S/MIME et pouvoir recevoir des messages chiffrés il faut un certificat. Ce certificat peut être obtenu soit par une autorité de certification interne ou une autorité externe. Ces certificats peuvent être de classe 1 (vérification que le propriétaire du certificat peut recevoir des messages envoyés au "From:" de ses messages) ou de classe 2 avec plus de précisions sur le propriétaire du certificat.\\
 Pour signer un message, S/MIME va utiliser la clé privée lié au certificat de la source, ainsi le message va être signé avec la primitive adéquate par rapport aux informations du certificat. Puis la signature sera envoyée avec le certificat, afin que le destinataire puisses vérifier la signature à l'aide du certificat. Et vérifier le certificat avec un CA.\\
-Comme le présente la RFC8551~\cite{RFC8551}, le chiffrement effectué par S/MIME s'approche de celui fait par PGP, en effet S/MIME va chiffrer la clé de chiffrement symétrique (Content Encryption Key dans CMS) une fois par destinataire en utilisant la clé publique authentifiée par leur certificat respectif et aussi une fois pour la source du message (afin de pouvoir relire le message envoyé à l'avenir). Les algorithmes qui doivent être pris en charge dans CMS sont les suivants selon la RFC8551 :\\
-Hash : SHA-256, SHA-512\\
-Signature : ECDSA (courbe P-256 et SHA-256), EdDSA (courbe 25519 avec PureEdDSA mode), RSA PKCS \#1 v1.5 avec SHA-256, RSASSA-PSS avec SHA-256\\
-Asymétrique : ECDH sur P-256, ECDH avec HKDF-256, RSA, RSAES-OAEP\\
-Symétrique : AES-128 CBC pour le non-authentifié, ChaCha20-Poly1305, AES128-GCM, AES256-GCM pour l'authentifié\\
+Comme le présente la RFC8551~\cite{RFC8551}, le chiffrement effectué par S/MIME s'approche de celui fait par PGP, en effet S/MIME va chiffrer la clé de chiffrement symétrique (Content Encryption Key dans CMS) une fois par destinataire en utilisant la clé publique authentifiée par leur certificat respectif et aussi une fois pour la source du message (afin de pouvoir relire le message envoyé à l'avenir). Les algorithmes qui doivent être pris en charge dans CMS sont les suivants selon la RFC8551 dans la table \ref{table:refSMIMEAlgos}.\\
+\begin{table}[h!]
+	\centering
+	\caption{Table des algorithmes utilisés par S/MIME}
+	\label{table:refSMIMEAlgos}
+	\begin{adjustbox}{width=\textwidth}
+		\begin{tabular}{||c c c c||}
+			\hline
+			Symetric & Asymetric & Hash & Signature \\ [0.5ex]
+			\hline\hline
+			AES-128 CBC & ECDH sur P-256 & SHA-256 & ECDSA (courbe P-256 et SHA-256) \\
+			ChaCha20-Poly1305 & ECDH  avec HKDF-256 & SHA-512 & EdDSA (courbe 25519 avec PureEdDSA mode) \\
+			AES128-GCM & RSA & & RSA PKCS \#1 v1.5 avec SHA-256 \\
+			AES256-GCM & RSAES-OAEP & & RSASSA-PSS avec SHA-256\\
+			\hline
+		\end{tabular}
+	\end{adjustbox}
+	
+\end{table}
 \paragraph*{Propriétés cryptographiques.}
 S/MIME est aussi crée pour établir un \textbf{chiffrement bout-en-bout} et ainsi éviter de révéler trop d'informations lors d'une brèche tel que dans un MDA. 
 \textbf{Authentification} et \textbf{intégrité} du message en utilisant la signature digitale, en plus de \textbf{non-répudiation} grâce à celle-ci. Le fait d'avoir le message chiffré de bout en bout permet un certain respect de la vie privée, on ne peut voir les données envoyées.
@@ -215,9 +237,11 @@ Avant d'analyser les différents schémas, il faut connaître certaines notions 
 \paragraph*{Types.}Les types présentés peuvent être soit \textbf{concret} soit \textbf{générique}. Les types concrets sont des schémas qui présentent leurs algorithmes en utilisant des calculs bien établis et présentent l'entierté du fonctionnement de leur schéma, tandis que les schémas présenté génériques peuvent s'appuyer sur d'autres problèmes et se baser sur des algorithmes déjà existants.\\
 \paragraph*{Modèle de sécurité.} Ces modèles définissent sur quoi le schéma va se reposer pour établir sa sécurité et comment il va l'évaluer face à un adversaire. À nouveau il existe deux modèles présents dans les schémas analysés, le \textit{Random Oracle Model} et le \textit{Standard Model}. Le \textit{Random Oracle Model} se base sur des oracles aléatoires mais est un peu controversé, en effet l'aléatoire cryptographiquement sûr est difficile à atteindre, ainsi habituellement le \textit{Random Oracle Model} implémente ces oracles via des fonctions de hachage. Le modèle standard se base lui sur des problèmes mathématiquement difficiles tel que DDH (Decisional Diffie Hellman). \\
 \paragraph*{Modèle d'adversaires.}
-Pour évaluer les schémas de certificateless public key cryptography il y a différents niveaux de sécurité établis pour 2 types d'adversaires différents. Ces adversaires ont été décrits dans le papier d'Al-Riyami-Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03} pour la première fois afin de prouver que leur schéma était IND-CCA sûr dans le modèle Standard. Ces deux adversaires ont été définit comme suit :\\
-- Type I (\textit{outsider adversaries}) est permis de remplacer des clés publiques, obtenir des clés partiels privées, et des clés privées puis faire des requêtes de déchiffrements.\\
-- Type II (\textit{honest but curious KGC}). L'adversaire de Type II est en fait un KGC connaissant la Master Secret Key et qui peut donc générer des PPK, obtenir des clés privées et faire des requêtes de déchiffrement tout en faisant confiance à ce KGC pour pas qu'il ne remplace de clés publiques.\\
+Pour évaluer les schémas de certificateless public key cryptography il y a différents niveaux de sécurité établis pour 2 types d'adversaires différents. Ces adversaires ont été décrits dans le papier d'Al-Riyami-Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03} pour la première fois afin de prouver que leur schéma était IND-CCA sûr dans le modèle Standard. Ces deux adversaires ont été définit comme suit :
+\begin{itemize}
+	\item Type I (\textit{outsider adversaries}) est permis de remplacer des clés publiques, obtenir des clés partiels privées, et des clés privées puis faire des requêtes de déchiffrements.
+	\item Type II (\textit{honest but curious KGC}). L'adversaire de Type II est en fait un KGC connaissant la Master Secret Key et qui peut donc générer des PPK, obtenir des clés privées et faire des requêtes de déchiffrement tout en faisant confiance à ce KGC pour pas qu'il ne remplace de clés publiques.
+\end{itemize}
 Pour chacun des types d'adversaires il existe différents niveaux de sécurité comme définit dans le livre \textit{Introduction to Ceritifcateless Cryptography}~\cite{bookIntroCertificateless}. Ces différents niveaux sont modélisés comme suit : \\
 
 %TODO : Remplir avec infos du livre sur les différents niveaux

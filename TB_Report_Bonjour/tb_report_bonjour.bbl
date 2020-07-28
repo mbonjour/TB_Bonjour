@@ -26,6 +26,12 @@ Suresh~Kumar Balakrishnan and V.~P.~Jagathy Raj.
   certificateless cryptography and domain name system.
 \newblock {\em I. J. Network Security}, 18(1):99--107, 2016.
 
+\bibitem{BccPrivacy}
+Adman Barth and Dan Boneh.
+\newblock Correcting privacy violations in blind-carbon-copy (bcc) encrypted
+  email.
+\newblock {\em Stanford Papers}, 2005:17, 2005.
+
 \bibitem{RFC4880}
 J.~Callas, L.~Donnerhacke, H.~Finney, D.~Shaw, and R.~Thayer.
 \newblock Openpgp message format.

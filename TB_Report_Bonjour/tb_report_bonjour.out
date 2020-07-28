@@ -24,14 +24,16 @@
 \BOOKMARK [1][-]{section.4.4}{Fonctionnement global POC \(Client\)}{chapter.4}% 24
 \BOOKMARK [1][-]{section.4.5}{Comparaisons avec \351tat de l'art}{chapter.4}% 25
 \BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 26
-\BOOKMARK [0][-]{chapter.5}{Bibliographie}{}% 27
-\BOOKMARK [0][-]{appendix.A}{Outils utilis\351s pour la compilation}{}% 28
-\BOOKMARK [1][-]{section.A.1}{RELIC Toolkit}{appendix.A}% 29
-\BOOKMARK [1][-]{section.A.2}{Libsodium}{appendix.A}% 30
-\BOOKMARK [1][-]{section.A.3}{binn}{appendix.A}% 31
-\BOOKMARK [1][-]{section.A.4}{libetpan}{appendix.A}% 32
-\BOOKMARK [1][-]{section.A.5}{libcurl}{appendix.A}% 33
-\BOOKMARK [1][-]{section.A.6}{UnQlite}{appendix.A}% 34
-\BOOKMARK [0][-]{appendix.B}{Fichiers}{}% 35
-\BOOKMARK [1][-]{section.B.1}{Code du POC}{appendix.B}% 36
-\BOOKMARK [1][-]{section.B.2}{Tableaux comparatifs}{appendix.B}% 37
+\BOOKMARK [1][-]{section.5.1}{Conclusions sur l'analyse}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.2}{Conclusions sur l'impl\351mentation}{chapter.5}% 28
+\BOOKMARK [0][-]{section.5.2}{Bibliographie}{}% 29
+\BOOKMARK [0][-]{appendix.A}{Outils utilis\351s pour la compilation}{}% 30
+\BOOKMARK [1][-]{section.A.1}{RELIC Toolkit}{appendix.A}% 31
+\BOOKMARK [1][-]{section.A.2}{Libsodium}{appendix.A}% 32
+\BOOKMARK [1][-]{section.A.3}{binn}{appendix.A}% 33
+\BOOKMARK [1][-]{section.A.4}{libetpan}{appendix.A}% 34
+\BOOKMARK [1][-]{section.A.5}{libcurl}{appendix.A}% 35
+\BOOKMARK [1][-]{section.A.6}{UnQlite}{appendix.A}% 36
+\BOOKMARK [0][-]{appendix.B}{Fichiers}{}% 37
+\BOOKMARK [1][-]{section.B.1}{Code du POC}{appendix.B}% 38
+\BOOKMARK [1][-]{section.B.2}{Tableaux comparatifs}{appendix.B}% 39
