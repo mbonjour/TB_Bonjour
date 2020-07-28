@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.3.5)  28 JUL 2020 01:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7300 64-bit) (preloaded format=pdflatex 2020.3.5)  28 JUL 2020 02:07
 entering extended mode
 **./tb_report_bonjour.tex
 (tb_report_bonjour.tex
@@ -1382,45 +1382,46 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/conceptualpEp.png, id=394, 541.0614pt x 412.4208pt>
-File: images/conceptualpEp.png Graphic file (type png)
-<use images/conceptualpEp.png>
-Package pdftex.def Info: images/conceptualpEp.png  used on input line 102.
-(pdftex.def)             Requested size: 426.79134pt x 325.33058pt.
-[10 <./images/SMIME_FossaProblem.jpg>]
+[10 <./images/SMIME_FossaProblem.jpg>] [11 <./images/mesince_problem.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 111--114
+
+ []
+
+[12]
+<images/signalFonctionnement.png, id=429, 632.3625pt x 623.32875pt>
+File: images/signalFonctionnement.png Graphic file (type png)
+<use images/signalFonctionnement.png>
+Package pdftex.def Info: images/signalFonctionnement.png  used on input line 14
+3.
+(pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
+<images/secondRatchet.png, id=431, 598.48593pt x 416.68172pt>
+File: images/secondRatchet.png Graphic file (type png)
+<use images/secondRatchet.png>
+Package pdftex.def Info: images/secondRatchet.png  used on input line 151.
+(pdftex.def)             Requested size: 284.52756pt x 198.09752pt.
+ [13]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[11 <./images/mesince_problem.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 121--124
-
- []
-
-[12 <./images/conceptualpEp.png>] [13]
-<images/signalFonctionnement.png, id=439, 632.3625pt x 623.32875pt>
-File: images/signalFonctionnement.png Graphic file (type png)
-<use images/signalFonctionnement.png>
-Package pdftex.def Info: images/signalFonctionnement.png  used on input line 15
-5.
-(pdftex.def)             Requested size: 227.62204pt x 224.36964pt.
- [14] [15 <./images/signalFonctionnement.png>] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 196--197
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 197--198
+[14 <./images/signalFonctionnement.png>] [15 <./images/secondRatchet.png>]
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 194--195
 
  []
 
 [17]
-Underfull \hbox (badness 5064) in paragraph at lines 199--204
+Underfull \hbox (badness 10000) in paragraph at lines 195--196
+
+ []
+
+
+Underfull \hbox (badness 5064) in paragraph at lines 197--202
  []\T1/cmr/bx/n/10.95 Modèle d'ad-ver-saires. \T1/cmr/m/n/10.95 Pour éva-luer l
 es sché-mas de cer-ti-fi-ca-te-less pu-blic key
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--204
+Underfull \hbox (badness 10000) in paragraph at lines 197--202
 
  []
 
@@ -1540,9 +1541,9 @@ Package rerunfilecheck Info: File `tb_report_bonjour.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 138.
  ) 
 Here is how much of TeX's memory you used:
- 33881 strings out of 481311
- 673581 string characters out of 2916524
- 1156992 words of memory out of 3000000
+ 33879 strings out of 481311
+ 673561 string characters out of 2916524
+ 1157026 words of memory out of 3000000
  48363 multiletter control sequences out of 15000+200000
  553832 words of font info for 78 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1618,9 +1619,9 @@ s/cm/cmr8.pfb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfonts/cm/cm
 sy10.pfb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfonts/cm/cmsy8.p
 fb><C:/Users/micbo/Documents/Latex/fonts/type1/public/amsfonts/symbols/msbm10.p
 fb>
-Output written on tb_report_bonjour.pdf (63 pages, 1359449 bytes).
+Output written on tb_report_bonjour.pdf (63 pages, 1210868 bytes).
 PDF statistics:
  1539 PDF objects out of 1728 (max. 8388607)
- 256 named destinations out of 1000 (max. 500000)
+ 254 named destinations out of 1000 (max. 500000)
  500 words of extra memory for PDF output out of 10000 (max. 10000000)
 
