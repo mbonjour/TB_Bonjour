@@ -6,20 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c
-cipherPOC.h
-/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.h
-
-/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.h
-stdio.h
--
-relic.h
--
-string.h
--
-binn.h
--
-
 /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.c
 sys/stat.h
 -
@@ -57,16 +43,6 @@ signaturePOC.h
 /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/signaturePOC.h
 utils/aesUtils.h
 /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/utils/aesUtils.h
-
-/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/aesUtils.c
-aesUtils.h
-/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/aesUtils.h
-
-/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/aesUtils.h
-sodium.h
-/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/sodium.h
-relic.h
-/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/relic.h
 
 cipherPOC.h
 stdio.h

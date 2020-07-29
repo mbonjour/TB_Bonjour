@@ -1302,7 +1302,8 @@ int main() {
             strcat(authenticatedData, destinationID);
             strcat(authenticatedData, subject);
             encrypt_message(message, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len, authenticatedData, authenticatedDataSize);
-            unsigned char *ciphertextB64 = base64_encode(ciphertextAES, cipher_len, NULL);
+            size_t ciphertextLen;
+            unsigned char *ciphertextB64 = base64_encode(ciphertextAES, cipher_len, &ciphertextLen);
             printf("Encrypted message : %s\n", ciphertextB64);
 
             unsigned char *nonceAesB64 = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, NULL);
@@ -1343,11 +1344,12 @@ int main() {
             int c1Size = g1_size_bin(c.c1, 1);
             int c2Size = g2_size_bin(c.c2, 1);
             int c3Size = g2_size_bin(c.c3, 1);
-            uint8_t mSig[c0size + c1Size + c2Size + c3Size];
+            uint8_t mSig[c0size + c1Size + c2Size + c3Size + ciphertextLen];
             gt_write_bin(mSig, c0size, c.c0, 1);
             g1_write_bin(&mSig[c0size], c1Size, c.c1, 1);
             g2_write_bin(&mSig[c0size + c1Size], c2Size, c.c2, 1);
             g2_write_bin(&mSig[c0size + c1Size + c2Size], c3Size, c.c3, 1);
+            memcpy(&mSig[c0size + c1Size + c2Size + c3Size], ciphertextB64, ciphertextLen);
 
             // Structure of an signature
             signature s;
@@ -1440,11 +1442,12 @@ int main() {
             int c1Size = g1_size_bin(c.c1, 1);
             int c2Size = g2_size_bin(c.c2, 1);
             int c3Size = g2_size_bin(c.c3, 1);
-            uint8_t mSig[c0size + c1Size + c2Size + c3Size];
+            uint8_t mSig[c0size + c1Size + c2Size + c3Size + strlen(b64Encrypted)];
             gt_write_bin(mSig, c0size, c.c0, 1);
             g1_write_bin(&mSig[c0size], c1Size, c.c1, 1);
             g2_write_bin(&mSig[c0size + c1Size], c2Size, c.c2, 1);
             g2_write_bin(&mSig[c0size + c1Size + c2Size], c3Size, c.c3, 1);
+            memcpy(&mSig[c0size + c1Size + c2Size + c3Size], b64Encrypted, strlen(b64Encrypted));
 
 
             encryption_pk encryption_sourcePK;
