@@ -34,9 +34,10 @@ void get_key(char *aesk, gt_t originalM) {
     // KDF the "master key" to have a usable key to encrypt the data
     crypto_kdf_derive_from_key(aesk, 32, 1, "AES-KEY", master_key);
 
+    /*
     printf("AES Key : ");
     for(int i=0;i < 32;i++)
         printf("%02X",(unsigned char)aesk[i]);
     printf("\n");
-
+    */
 }

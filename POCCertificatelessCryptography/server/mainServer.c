@@ -282,7 +282,6 @@ int main() {
             //so the main thread can entertain next request
             if( pthread_create(&tid[i++], NULL, socketThread, &newSocket) != 0 )
             printf("Failed to create thread\n");
-            // TODO: create a pool of threads who can receive requests
             if( i >= 50){
                 i = 0;
                 while(i < 50){

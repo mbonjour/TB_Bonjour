@@ -61,11 +61,10 @@ void setup(int k, encryption_mpk* mpkSetup, g2_t* msk){
     bn_free(uvGen)
 }
 
-// TODO: pass length of var
 void F(const char *var, g2_t* suite, g2_t *result, int size) {
     uint8_t h[RLC_MD_LEN];
     // Strlen ok car effectué sur des IDs donc vrais chaines de chars
-    md_map(h, (uint8_t*) var, strlen(var));
+    md_map(h, (uint8_t*) var, size);
 
     // Premier à ajouter
     g2_copy(*result, suite[0]);
@@ -430,7 +429,6 @@ void deserialize_MPKE(binn* obj, encryption_mpk* newMpk){
     for(int i = 1; i <= countU; ++i){
         currentBin = binn_list_blob(listU, i, &currentSize);
         g2_read_bin(newMpk->u[i-1], currentBin, currentSize);
-        // TODO : Check why at j = 0x48 it crashes sometimes (because currentBin = NULL)
         binn_list_get_blob(listV, i,&currentBin, &currentSize);
         g2_read_bin(newMpk->v[i-1], currentBin, currentSize);
     }

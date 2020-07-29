@@ -275,7 +275,6 @@ static size_t payload_source(void *ptr, size_t size, size_t nmemb, void *userp)
     return 0;
 }
 
-// TODO: add the date header and maybe a name before each header
 int sendmail(char* destination, char* source, char* subject, char* nonceAES, char* IDused, char* content, char* signature, char* cipher, char *email, char *password){
 
     char * to_text = malloc(100); // 52Kb for the moment
@@ -722,7 +721,6 @@ void getGlobalParams(encryption_mpk *mpkSession, signature_mpk *mpkSignature){
     binn_free(list);
 }
 
-// TODO : just get or create secrets values
 binn* getSecretsValue(char *userID, char *userPassword, unsigned char **salt, unsigned char **nonce) {
     FILE *file;
     char *secretFile = malloc(330);
@@ -815,7 +813,6 @@ binn* getSecretsValue(char *userID, char *userPassword, unsigned char **salt, un
         return savedSecCopy;
     }
 
-    //TODO : generate secret values and encrypts it and public keys ans send the lasts
     printf("Generating and saving secret values and public keys\n");
     // Now we can go for user's private keys (encrypting and signing)
     bn_t encryption_secret;
@@ -887,7 +884,6 @@ binn* getSecretsValue(char *userID, char *userPassword, unsigned char **salt, un
 
     printf("PK obj : %s\n", b64Payload);
     binn_object_set_str(packetSendingPK, "PK", b64Payload);
-    // TODO : Vérifier si ok
     free(b64Payload);
 
     int sizeSent = send(sock, binn_ptr(packetSendingPK), binn_size(packetSendingPK), 0);
@@ -903,7 +899,6 @@ binn* getSecretsValue(char *userID, char *userPassword, unsigned char **salt, un
     return obj;
 }
 
-// TODO at the end of a transaction save the state of the params (maybe a timestamp was added
 void saveSecretsValue(binn *secrets, char *userID, char *userPassword, unsigned char **salt, unsigned char **nonce) {
     FILE *savingParams;
     char *secretFile = malloc(330);
@@ -912,7 +907,6 @@ void saveSecretsValue(binn *secrets, char *userID, char *userPassword, unsigned 
     strcat(secretFile, "_SK");
     savingParams = fopen(secretFile, "wb");
     if (*salt == NULL || *nonce == NULL){
-        // TODO :
         *salt = malloc(crypto_pwhash_SALTBYTES);
         printf("We give the salt and need to store it for future use :\n");
         randombytes_buf(*salt, crypto_pwhash_SALTBYTES);
@@ -970,7 +964,6 @@ void saveSecretsValue(binn *secrets, char *userID, char *userPassword, unsigned 
     free(secretFile);
 }
 
-// TODO : get a public key of a particular user locally if we sent to it recently or get them via KGC and saves them for further use
 void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID){
     FILE *file;
     char *pkFile = malloc(330);
@@ -979,7 +972,6 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
     strcat(pkFile, "_PK");
     file = fopen(pkFile, "rb");
     if (file){
-        // TODO : retrieve Public keys of an user which we already sent to
         int r;
         struct stat stat_info;
         r = stat(pkFile, &stat_info);
@@ -1034,7 +1026,6 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
 
     deserialize_PKE(decodedTest, encryptionPk);
     free(decodedTest);
-    // TODO : Get public keys of userID and save them to a file userID_PK
 
     sock = connectToKGC();
     binn *getPKSBinnObj;
@@ -1077,7 +1068,6 @@ void getPk(encryption_pk *encryptionPk, signature_pk *signaturePk, char *userID)
     free(pkFile);
 }
 
-
 int connectToKGC(){
     int sock = 0;
     struct sockaddr_in serv_addr;
@@ -1106,7 +1096,6 @@ void getSecretKey(binn *secrets, char *timestamp, encryption_mpk mpkSession, sig
     memset(fullID, 0, 330);
     strcpy(fullID, userID);
     if(strcmp(timestamp, "default") != 0) {
-        // TODO : concatenate timestamp
         strcat(fullID, "+");
         strcat(fullID, timestamp);
     }
@@ -1147,7 +1136,6 @@ void getSecretKey(binn *secrets, char *timestamp, encryption_mpk mpkSession, sig
 
         sock = connectToKGC();
 
-        // TODO add timestamp to extraction
         char bufferPPKE[1024] = {0};
         binn* bobPpk;
         bobPpk = binn_object();
@@ -1167,7 +1155,6 @@ void getSecretKey(binn *secrets, char *timestamp, encryption_mpk mpkSession, sig
         g1_new(encryptionSk->s2)
         setPriv(encryption_secret, PartialKeysBob, mpkSession, fullID, encryptionSk);
 
-        //TODO : serialize sk and put them on secrets
         binn *addSK;
         addSK = binn_object();
         binn *addSKE;
@@ -1234,7 +1221,6 @@ int main() {
         fgets(password, 320, stdin);
         password[strlen(password)-1] = '\x00';
 
-        // TODO : Generate our public keys in getSecrets if not present
         char *userPassword = malloc(320);
         unsigned char *salt = NULL;
         unsigned char *nonce = NULL;
@@ -1322,10 +1308,8 @@ int main() {
             unsigned char *nonceAesB64 = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, NULL);
             printf("Nonce message : %s\n", nonceAesB64);
 
-
             // Encryption of the AES Key with the Public key of the destination
             cipher c;
-            //TODO : add timestamp
             char *destinationTimestamp = malloc(330);
             memset(destinationTimestamp, 0, 330);
             strcpy(destinationTimestamp, destinationID);
@@ -1339,7 +1323,6 @@ int main() {
             strcat(destinationTimestamp, timestampStr);
 
             encrypt(AESK, destPKE, destinationTimestamp, mpkSession, &c);
-            // TODO print base64 of cipher for decrypt
             binn *cipherBinnObect;
             cipherBinnObect = binn_object();
             serialize_Cipher(cipherBinnObect, c);
@@ -1370,7 +1353,6 @@ int main() {
             signature s;
             // We can sign using our private keys and public ones
             sign(mSig, signature_senderSk, signaturePk, userID, mpkSignature, &s);
-            // TODO print base64 of signature for decrypt
             binn *signatureObjBinn;
             signatureObjBinn = binn_object();
             serialize_Signature(signatureObjBinn, s);
@@ -1495,7 +1477,6 @@ int main() {
                 unsigned char decrypted[size_cipher];
                 memset(decrypted, 0, size_cipher);
 
-                // TODO récupérer d'ailleurs
                 size_t nonceSize;
                 unsigned char* nonceAES = base64_decode(b64Nonce, strlen(b64Nonce), &nonceSize);
 
