@@ -33,9 +33,18 @@
   <component name="ChangeListManager">
     <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/mainClient.dir/C.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/mainClient.c" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/globalMPK" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/analysis.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/analysis.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/implementation.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/chapters/implementation.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fdb_latexmk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fls" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.fls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.lof" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.lof" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/tb_report_bonjour.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TB_Report_Bonjour/template/TB-template.sty" beforeDir="false" afterPath="$PROJECT_DIR$/../TB_Report_Bonjour/template/TB-template.sty" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,29 +257,29 @@
     <state x="404" y="197" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1170@0.0.1920.1050" timestamp="1592821540496" />
     <state x="734" y="77" width="426" height="477" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1593506842056" />
     <state x="778" y="102" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1595251853229" />
-    <state width="1820" height="230" key="GridCell.Tab.0.bottom" timestamp="1596017861998">
+    <state width="1820" height="230" key="GridCell.Tab.0.bottom" timestamp="1596018165134">
       <screen x="54" y="27" width="1866" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224173" />
-    <state width="1820" height="230" key="GridCell.Tab.0.bottom/54.27.1866.1053@54.27.1866.1053" timestamp="1596017861998" />
+    <state width="1820" height="230" key="GridCell.Tab.0.bottom/54.27.1866.1053@54.27.1866.1053" timestamp="1596018165134" />
     <state width="1802" height="277" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1595516268893" />
-    <state width="1820" height="230" key="GridCell.Tab.0.center" timestamp="1596017861997">
+    <state width="1820" height="230" key="GridCell.Tab.0.center" timestamp="1596018165134">
       <screen x="54" y="27" width="1866" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224172" />
-    <state width="1820" height="230" key="GridCell.Tab.0.center/54.27.1866.1053@54.27.1866.1053" timestamp="1596017861997" />
+    <state width="1820" height="230" key="GridCell.Tab.0.center/54.27.1866.1053@54.27.1866.1053" timestamp="1596018165134" />
     <state width="1802" height="277" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1595516268892" />
-    <state width="1820" height="230" key="GridCell.Tab.0.left" timestamp="1596017861997">
+    <state width="1820" height="230" key="GridCell.Tab.0.left" timestamp="1596018165134">
       <screen x="54" y="27" width="1866" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224171" />
-    <state width="1820" height="230" key="GridCell.Tab.0.left/54.27.1866.1053@54.27.1866.1053" timestamp="1596017861997" />
+    <state width="1820" height="230" key="GridCell.Tab.0.left/54.27.1866.1053@54.27.1866.1053" timestamp="1596018165134" />
     <state width="1802" height="277" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1595516268892" />
-    <state width="1820" height="230" key="GridCell.Tab.0.right" timestamp="1596017861997">
+    <state width="1820" height="230" key="GridCell.Tab.0.right" timestamp="1596018165134">
       <screen x="54" y="27" width="1866" height="1053" />
     </state>
     <state width="1874" height="442" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1594912224172" />
-    <state width="1820" height="230" key="GridCell.Tab.0.right/54.27.1866.1053@54.27.1866.1053" timestamp="1596017861997" />
+    <state width="1820" height="230" key="GridCell.Tab.0.right/54.27.1866.1053@54.27.1866.1053" timestamp="1596018165134" />
     <state width="1802" height="277" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1595516268893" />
     <state width="1802" height="327" key="GridCell.Tab.1.bottom" timestamp="1595452182780">
       <screen x="72" y="27" width="1848" height="1053" />
@@ -376,12 +385,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1500</line>
+          <line>1498</line>
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1466</line>
+          <line>1464</line>
           <option name="timeStamp" value="121" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -416,7 +425,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1475</line>
+          <line>1473</line>
           <option name="timeStamp" value="141" />
         </line-breakpoint>
       </breakpoints>

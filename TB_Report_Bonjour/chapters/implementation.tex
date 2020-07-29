@@ -32,7 +32,7 @@ En lisant le livre \textit{Guide to Paring-Based Cryptography}~\cite{bookPairing
 La librairie finalement utilisée est RELIC Toolkit~\cite{relic-toolkit}, c'est une librairie en cours de développement qui se veut efficiente. Sa concurrence avec MIRACL m'a fait hésiter dans mon choix, mais MIRACL est plus codée en~ C++ avec des équivalences en C j'ai donc choisi RELIC. De plus j'ai trouvé que RELIC était généralement plus adapté dans le domaine universitaire pour des POC puis il est plus efficient que d'autres librairies~\cite{performanceRELIC}.
 \subsection{Courbe utilisée}
 La courbe utilisée pour le POC est la BLS12-P381, en effet cette courbe est assez efficiente et compatible avec les pairings. De plus RELIC l'a dans ses options et fonctionne bien, elle a un niveau de sécurité de 128bits. Je voulais prendre une courbe avec une plus grande sécurité cependant RELIC ne l'a pas encore totalement implémenté (certains tests concernant $\mathbb{G}_2$ ne passes pas), mais la librairie étant toujours en cours de développement il faudrait suivre ça de près, le code ne changerait en effet pas. Pour que RELIC utilise cete courbe il faut le mentionner à la compilation, heureusement RELIC établi des \textit{presets} pour la compilation de la librairie, la version GMP a été utilisée pour ce POC.
-% TODO voir si KDF n'st pas mieux ? ou même générique de libsodium
+
 \subsection{Dérivation de la clé AES}
 Le but de mon schéma certificateless est de chiffrer puis signer une clé AES qui permettra à mon message d'avoir un chiffrement authentifié. Pour cela il me faut dériver un élément de $\mathbb{G}_t$ en clé AES, en effet le chiffrement dans le schéma certificateless se fait sur un élément de $\mathbb{G}_t$.\\
 Pour cela j'ai utilisé une fonction permettant d'écrire sous forme compressée cet élément en bytes (fourni par la librairie RELIC utilisé et la fonction gt\_write\_bin()). Puis j'ai effectué un hachage avec SHA256 dessus, ainsi le résultat du hachage est une clé de 256 bits utilisable par AES-256-GCM. La fonction de hachage doit être par conséquent cryptographiquement sûre.
@@ -51,6 +51,17 @@ Pour cela j'ai utilisé une fonction permettant d'écrire sous forme compressée
 	}
 \end{sourcebox}
 
+\subsection{Pseudo Forward Secrecy- Timestamp}
+Afin d'obtenir une \textit{Pseudo Forward Secrecy} l'utilisation d'un timestamp dans l'ID est utilisée comme démontré dans la Section \ref{subsec:pseudoSecrecy}.
+
+L'implémentation prend un timestamp par semaine, ainsi si une clé privé fuite, on ne pourra déchiffrer que les messages de cette semaine. Pour le lier à l'ID un "+" a été ajouté entre l'ID et le timestamp.
+\begin{sourcebox}{C}{Gestion du timestamp}
+	strcat(destinationTimestamp, "+");
+	time_t timestampNow = time(NULL);
+	timestampNow -= timestampNow % 604800;
+	sprintf(timestampStr, "%d", timestampNow);
+\end{sourcebox}
+
 \subsection{Fonctions de hachage - signature}
 Pour le schéma de signature, il nous faut plusieurs fonctions de hachage différentes, en effet ce schéma est basé sur le \textit{Random Oracle Model} comme définit dans le Chapitre \ref{ch:analysis}. Pour appliquer cela j'ai utilisé la même méthode de mapping disponible ans RELIC pour mapper une char array (tableau de byte) à un point sur G2 à savoir g2\_map.
 Pour H1, la première fonction de hachage, j'ai simplement utilisé cette fonction directement, mais pour H2 et H3 j'ai ajouté un byte devant les données à mapper respectivement les bytes '01' et '02'. Ceci afin de séparer les domaines des résultats des hashs, cela s'appelle du \textit{Hash Domain Separation}. En effet l'on peut voir dans ce draft~\cite{irtf-cfrg-hash-to-curve} définit comme une simulation pour prendre en compte plusieurs \textit{Random Oracle}.
@@ -66,10 +77,11 @@ Pour H1, la première fonction de hachage, j'ai simplement utilisé cette foncti
 \end{sourcebox}
 
 \subsection{Sérialisation des données}
-Pour la sérialisation des données, typiquement les clés publiques et les clés privées partielles envoyées en réseau ou les clés publiques enregistrées dans les fichiers par exemple, j'ai utilisé la librairie binn\footnote{\url{https://github.com/liteserver/binn}}. Cela permet de packer facilement des données binaires, pour cela RELIC met à disposition des méthodes g1\_write\_bin g1\_read\_bin qui a permis de faire ces enregistrements binaires. Ainsi les transferts de données sont simplifiés. Cependant il faut faire attention à certaines choses, on ne peut lire et écrire simultanément à l'aide de binn, si l'on crée un objet via un buffer on ne pourra modifier cet objet. Cela m'a posé des problèmes pour l'enregistrement des données secrètes, j'ai donc dû copier l'objet lu pour pouvoir le modifier et sauver les nouveau paramètres.
+Pour la sérialisation des données, typiquement les clés publiques et les clés privées partielles envoyées en réseau ou les clés publiques enregistrées dans les fichiers par exemple, j'ai utilisé la librairie binn\footnote{\url{https://github.com/liteserver/binn}}. Cela permet de packer facilement des données binaires, pour cela RELIC met à disposition des méthodes g1\_write\_bin g1\_read\_bin qui a permis de faire ces enregistrements binaires. Ainsi les transferts de données sont simplifiés.
+
+Cependant il faut faire attention à certaines choses, on ne peut lire et écrire simultanément à l'aide de binn, si l'on crée un objet via un buffer on ne pourra modifier cet objet. Cela m'a posé des problèmes pour l'enregistrement des données secrètes, j'ai donc dû copier l'objet lu pour pouvoir le modifier et sauver les nouveau paramètres.
 \subsection{Enregistrement des clés publiques (serveur)}
 Pour l'enregistrement j'ai utilisé une petite base de données NoSQL stockant les clés publiques des utilisateurs sur le KGC. Cela permet de facilement récupérer une clé publique pour un utilisateur si besoin. Pour implémenter cela j'ai utilisé la librairie UnQlite\footnote{\url{https://unqlite.org/}}. J'ai stocké les clés publiques pour le schéma de signature et de chiffrement séparément, en effet, l'entrée pour la signature porte le nom "signature/ID" et le chiffrement "encryption/ID".
-%TODO
 \subsection{Récupération via IMAP}
 Utilisation de la librairie libetPan\footnote{\url{https://github.com/dinhvh/libetpan}} et de l'exemple imap-sample.c pour la récupération email par IMAP. IMAP a été choisi plutôt que POP3 afin de laisser les mesages sur le serveur et ainsi avoir plusieurs appareils pouvant y accéder. Pour parser les emails cette librairie est aussi choisie ainsi que son exemple mime-parse.c.
 \section{Implémentation clés  de chiffrement}
@@ -102,13 +114,16 @@ Les différents codes d'opérations sont :
 	\item EE : Permet de faire la "Encryption Extraction" et donc de demander la Partial Private Key pour l'utilisateur ID. Utilisé lors du déchiffrement d'un message pour reconstruire sa clé privée.
 \end{itemize}
 \subsection{Problèmes connus}
+\paragraph*{TODO}
+
 \subsection{Améliorations}
 Quelques améliorations qui seraient possibles mais dont j'ai pas eu le temps de m'occuper :
 \paragraph*{Vérification email.}
 Implémentation d'une vérification par email afin d'être sûr que l'adresse email annoncée appartient bien à l'utilisateur qui s'authentifies pour la première fois. Typiquement lors du "HELO", l'on pourrait envoyer un mail de vérification avec un code sur l'email annoncé (s'il n'est pas dans la base de données) et demander le code envoyé avant de pouvoir uploader sa clé publique. Ainsi le client devrait pouvoir implémenter cette fonctionnalité aussi. Cela permettrait d'être sûr que tel utilisateur a effectivement tel email.
-% TODO : voir avec Alex si garder ou non
-\paragraph*{Zero-Knowledge proof pour PPK.}
-On a vu dans les modèles d'adversaires définit par Al-Riyami et Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03} qu'un adversaire pourrait obtenir les PPK des utilisateurs et ne pas réussir à déchiffrer des messages. Mais avec du Zero Knowledge l'on pourrait ajouter une sécurité supplémentaire pour ne pas délivrer à n'importe qui des PPK.
+\paragraph*{Mise en place à large échelle}
+Si l'on veut pouvoir mettre en place ce genr de système à une large échelle, il faut prévoir une manière d'avoir plusieurs KGC qui communiquent entres eux dans un système global de réplication par exemple. Ceci afin de pouvoir les mêmes paramètres sur l'ensemble des KGC et que le système global fonctionne.
+
+Une autre solution serait par exemple d'ajouter un "tag" d'appartenance à un ID et celui-ci sera donc lié à un certain KGC. Ceci afin de partager la charge qui serait normalement sur un seul KGC. Ce genre de solutions pourrait permettre d'avoir par exemple un KGC par domaine ou alors de les partager via les TLDs. De plus, les KGC pourraient avoir des paramètres générés différemment enres eux, ce qui ne seraient pas le cas dans un système de réplication. Cette solution ajoute cependant de la complexité au système, et l'envoi de paquets plus volumineux sur le réseau pour les paramètres globaux d'un KGC qui sont de 52kB.
 \section{Fonctionnement global POC (Client)}
 Présentation du fonctionnement global de l'implémentation du client mail sécurisé pour le POC, des améliorations possibles et des problèmes connus.
 \subsection{Fonctionnement}
@@ -121,11 +136,12 @@ Pour la connexion au serveur SMTP / IMAP j'ai fait attention à la connexion sé
 	\caption{Connexion SSL/TLS avec le serveur email}
 	\label{fig:securityProofEmail}
 \end{figure}
-%TODO : présenter des captures de paquets chiffrées de connexion IMAP et SMTP
 \subsection{Problèmes connus}
 Les problèmes qu'il reste à résoudre à ce jour :
 \paragraph*{Développement sécurisé.}
-ors du développement j'ai fait attention au maximum d'avoir le moins possible de fuite mémoires à l'aide de sanitizers et de valgrind. Cependant cela ne suffirait pas pour une application correctement sécurisée, il faudrait mettre à 0 les structures utilisées et qui stockent des informations confidentielles.
+Lors du développement j'ai fait attention au maximum d'avoir le moins possible de fuite mémoires à l'aide de sanitizers et de valgrind. Cependant cela ne suffirait pas pour une application correctement sécurisée, il faudrait mettre à 0 les structures utilisées et qui stockent des informations confidentielles.
+\paragraph*{Enregistrement lors d'un crash}
+Lors d'un crash du client en plein millieu du programme ou de l'écriture/chiffrement du fichier des secrets il se peut que celui-ci deviennent corrompu. Il faudrait éviter de le corrompre car la seule manière d'y remédier serait de le supprimer et ainsi de recréer ses valeurs secrètes.
 \subsection{Améliorations}
 Les améliorations à amener dans le client :
 \paragraph*{Multiples destinataires.}
@@ -133,9 +149,9 @@ Pour le moment l'implémentation ne prends pas en compte une situation où un ma
 \paragraph*{Possibilité d'ajouter des pièces jointes.}
 Pour le moment la possibilité d'ajout de pièces jointes n'a pas été pris en considération. Cependant une des librairies choisies pour la réception des emails pourrait composer des messages contenant des pièces jointes. Il faudrait ainsi les chiffrer avec la clé symétrique avant de l'ajouter dans le mail.
 \paragraph*{GUI.}
-Mettre ne place une interface utilisateur pour le client mail, cela aiderait à rendre le chiffrement plus transparent et plus simple pour l'utilisateur. En effet demander à l'utilisateur d'écrire son mail au terminal n'est pas spécialement agréable.
+Mettre en place une interface utilisateur pour le client mail, cela aiderait à rendre le chiffrement plus transparent et plus simple pour l'utilisateur. En effet demander à l'utilisateur d'écrire son mail au terminal n'est pas spécialement agréable.
 \section{Comparaisons avec l'état de l'art}
-Dans cette section je vais présenter les différents protocoles et implémentations existantes présentées au chapitre \ref{ch:analysis} et les comparer à mon implémentation. Tout d'abord en présentant les différentes propriétés cryptographiques puis les temps d'exécution.
+Dans cette section je vais présenter les différents protocoles et implémentations existantes présentées au Chapitre \ref{ch:analysis} et les comparer à mon implémentation. Tout d'abord en présentant les différentes propriétés cryptographiques puis les temps d'exécution.
 
 % TODO à analyser et remplir correctement
 \subsection{Propriétés cryptographiques}
@@ -176,7 +192,7 @@ Comparasion du temps mis pour chiffrer et signer / déchiffrer et vérifier un m
 	\label{table:comparisonTime}
 \end{table}
 \subsection{Overhead induit}
-Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systèmes de mails sécurisés analysés au chapitre \ref{ch:analysis}. Dans le tableau \ref{table:comparisonOverhead} on voit la taille d'overhead induit par les différents systèmes testés.
+Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systèmes de mails sécurisés analysés au Chapitre \ref{ch:analysis}. Dans le tableau \ref{table:comparisonOverhead} on voit la taille d'overhead induit par les différents systèmes testés.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{ |p{3cm}||p{5cm}|p{6cm}| }

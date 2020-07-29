@@ -1449,11 +1449,9 @@ int main() {
             g2_write_bin(&mSig[c0size + c1Size + c2Size], c3Size, c.c3, 1);
             memcpy(&mSig[c0size + c1Size + c2Size + c3Size], b64Encrypted, strlen(b64Encrypted));
 
-
             encryption_pk encryption_sourcePK;
             signature_pk signature_sourcePK;
             getPk(&encryption_sourcePK, &signature_sourcePK, sourceAddress);
-
 
             // We can go for decrypting and verification
             // We can verify directly with the public keys of the sender

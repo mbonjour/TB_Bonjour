@@ -41,7 +41,10 @@ Pour la signature les algorithmes sont les mêmes avec une différence dans leur
 %TODO compléter voir tableau
 Dans la littérature certificateless les schémas de signatures sont beaucoup plus cassés que ceux de chiffrement apparemment (voir tableau ). Il faut donc faire attention à suivre les schémas afin de vérifier que le schéma choisi ne soit pas mis à mal.
 \section{Design du protocole}
+Dans cette section le fonctionnement du protocole est décrit à l'aide de diagramme de séquences. Des notations sont utilisées afin de séparer correctement les paramètres utiles au chiffrement sont dénotés d'un E alors que les paramètres pour la signature sont dénotés d'un S.
 %TODO : ajouter setup
+\subsection{Premier contact}
+Description du premier contact effectué avec le KGC. Le KGC nécessites d'être initialisé avant ce premier contact. 
 \begin{figure}
 [h!]
 	\centering
@@ -65,12 +68,13 @@ Dans la littérature certificateless les schémas de signatures sont beaucoup pl
 	\label{fig:firstConn}
 \end{figure}
 
-Dans la Figure \ref{fig:firstConn} l'on voit la première connexion d'un utilisateur.
-Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoi les paramètres publiques (mpkS et mpkE) si aucun utilisateur n'a déjà cet email. Ces paramètres publiques sont assez lourd, en effet, ils font environ 52 kB au total.
+La Figure \ref{fig:firstConn} permet de schématiser la première connexion d'un utilisateur.
+Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoi les paramètres publiques ($mpk_S$ et $mpk_E$) si aucun utilisateur n'a déjà cet email. Ces paramètres publiques sont assez lourd, en effet, ils font environ 52 kB au total.
 
-L'utilisateur va alors crée sa valeur secrète tirée aléatoire modulo p puis générer sa clé publique.
+L'utilisateur va alors crée sa valeur secrète puis générer sa clé publique.
 Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et puisses le donner aux personnes qui veulent envoyer un mail à Alice.
-
+\subsection{Envoi d'un message}
+Présentation des différentes actions faites lors de l'envoi d'un message d'Alice à Bob. La Figure \ref{fig:aliceSends} permet d'avoir un aperçu du fonctionnement du protocole.
 %TODO modifier schéma pour contact KGC au début ou récupération en local
 \begin{figure}[h!]
 	\centering
@@ -103,16 +107,18 @@ Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et
 	\label{fig:aliceSends}
 \end{figure}
 
-Dans la Figure \ref{fig:aliceSends} l'on voit comment se déroulerait l'envoi d'un message à Bob : 
+Ainsi, l'envoi d'un message se déroule comme suit :
 \begin{itemize}
 	\item Tout d'abord, Alice va récupérer le clé publique de Bob via son ID (aka email).
 	\item Elle devra aussi récupérer sa clé privée partielle de signature pour créer ses clés privées afin de signer le message. Elle va le faire à l'aide de son ID et du même timestamp qu'utilisé pour la suite.
-	\item Elle va ensuite tirer une valeur aléatoire dans Gt qui représentera sa clé AES pour la suite, elle va chiffrer cet élément à l'aide de la clé publique de Bob et de son ID complété par un timestamp. Ce timestamp sert à garder une certaine Forward Secrecy. Le texte chiffré sera c'.
-	\item Elle va calculer la signature du texte chiffré donné (s' sur la figure)
+	\item Elle va ensuite tirer une valeur aléatoire dans Gt qui représentera sa clé AES pour la suite, elle va chiffrer cet élément à l'aide de la clé publique de Bob et de son ID complété par un timestamp. Ce timestamp sert à garder une certaine Forward Secrecy comme expliqué dans la Section \ref{subsec:pseudoSecrecy}. Le texte chiffré sera c'.
+	\item Elle va calculer la signature du texte chiffré donné (s' sur la Figure \ref{fig:aliceSends})
 	\item Alice utilisera un chiffrement authentifié comme AES\_GCM pour chiffrer et authentifié son mail à Bob, t pour le tag et c pour le texte chiffré.
 	\item Finalement elle va envoyer tout ces éléments à bob (à savoir, l'ID utilisé, c, c', t, s' et l'IV utilisé pour AES\_GCM).
 \end{itemize}
 
+\subsection{Réception d'un message}
+Présentation des différentes actions faites lors de la réception d'un message pour Bob. La Figure \ref{fig:bobReceives} permet d'avoir un aperçu du fonctionnement de la réception.
 \begin{figure}
 [h!]
 	\centering
@@ -145,7 +151,7 @@ Dans la Figure \ref{fig:aliceSends} l'on voit comment se déroulerait l'envoi d'
 	\label{fig:bobReceives}
 \end{figure}
 
-Mais dans la Figure \ref{fig:bobReceives} l'on voit comment la réception du côté de Bob se déroulerait :
+Ainsi la réception déclence les étapes suivantes :
 \begin{itemize}
 	\item A la réception la première chose à faire et de vérifier le texte chiffré de la clé AES. Pour cela l'on va demander la clé publique d'Alice au KGC. Puis on va vérifier ce texte chiffré c' à l'aide de sa signature s'.
 	\item Ensuite Bob va récupérer sa clé privée partielle via le KGC en fournissant son ID avec le timestamp envoyé par Alice. Il va ainsi pouvoir former sa clé privée.

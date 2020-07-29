@@ -4,7 +4,7 @@ Dans ce chapitre je vais m'intéresser aux différentes propositions d'implémen
 \section{Système de messagerie}
 Dans un système de mail les besoins principaux sont surtout de pouvoir consulter sa boite mail à tout moment avec les anciens et nouveaux mails reçus. De plus il est préférable de pouvoir envoyer des mails aussi. Ces envois peuvent avoir plusieurs propriétés et fonctionnalités. L'on pourrait envoyer un mail à de multiples destinataires et même sans que les uns et les autres sachent exactement à qui est envoyé le mail exactement (Copie cachées). Un client mail permet aussi d'envoyer des pièces jointes, celles-ci seront encodées au sein du message et envoyée avec. Un mail a aussi un état pour savoir s'il a déjà été lu ou non. Parmi l'utilisation simple d'un système de messagerie il y aussi le fait que l'on veut pouvoir voir ses mails de n'importe quel appareil à n'importe quel moment. 
 \subsection{Détails techniques}
-Afin d'établir le futurs notations utilisées ci-après et montrer le fonctionnement global d'un système de messagerie électronique la figure \ref{fig:mailGlobal} sera la base de l'explication. Dans cette figure l'on peut voir que 3 protocoles différents sont utilisés pour la gestion des emails ; SMTP, IMAP et POP3. Ces 3 protocoles sont utilisés par différents acteurs, le MUA (Mail User Agent), le MTA (Mail Transfer Agent) et le MDA (Mail Delivery Agent).
+Afin d'établir le futurs notations utilisées ci-après et montrer le fonctionnement global d'un système de messagerie électronique la Figure \ref{fig:mailGlobal} sera la base de l'explication. Dans cette Figure l'on peut voir que 3 protocoles différents sont utilisés pour la gestion des emails ; SMTP, IMAP et POP3. Ces 3 protocoles sont utilisés par différents acteurs, le MUA (Mail User Agent), le MTA (Mail Transfer Agent) et le MDA (Mail Delivery Agent).
 
 Le MUA est en fait un client mail qui va s'occuper d'envoyer des mails ou de les recevoir (rechercher sur le MDA). 
  
@@ -61,7 +61,7 @@ Attention MD5 a été annoncé déprécié. Il faut savoir que pour chacune de c
 
 Lorsqu'un mail est chiffré et signé avec PGP, il est d'abord hasher puis ce hash est signé avec la clé privée de l'utilisateur afin de faire une signature digitale. Le message et la signature sera alors chiffrée à l'aide la clé symétrique.
 
-L'organisation d'un message PGP se fait via des "paquets" d'informations encodés en base64. La RFC définit bien ces types de paquets, leur fonctionnement et les différents codes associés. Sur le blog de Conrad Irwin\footnote{\url{https://cirw.in/gpg-decoder/}} l'on peut entrer un message PGP et ainsi voir l'organisation d'un message, ou entrer des clés publiques ou une clé privée (déconseillé tout de même). Ainsi, un exemple de mail envoyé à plusieurs destinataires est représenté dans la figure \ref{fig:PGP_DECODE}. Cela démontre comment fonctionnes PGP, en effet le message étant chiffré avec une clé symétrique, le chiffré sera le même pour tout le monde. Mais afin que tous les destinataires puisses avoir la clé symétrique, elle est chiffrée à l'aide des clés publiques des différents destinataires (et de la source, pour pouvoir la déchiffrer à l'avenir et ne pas conserver le mail en clair dans la boite d'envoi). À noter qu'avec l'option de \textit{blind copy} (option permettant d'envoyer à un utilisateur un mail sans qu'il sache qu'il a aussi été envoyé à un autre utilisateur), PGP \textit{leak} les receveurs des mails avec leur KeyID qui sera présent dans le message PGP~\cite{BccPrivacy}.
+L'organisation d'un message PGP se fait via des "paquets" d'informations encodés en base64. La RFC définit bien ces types de paquets, leur fonctionnement et les différents codes associés. Sur le blog de Conrad Irwin\footnote{\url{https://cirw.in/gpg-decoder/}} l'on peut entrer un message PGP et ainsi voir l'organisation d'un message, ou entrer des clés publiques ou une clé privée (déconseillé tout de même). Ainsi, un exemple de mail envoyé à plusieurs destinataires est représenté dans la Figure \ref{fig:PGP_DECODE}. Cela démontre comment fonctionnes PGP, en effet le message étant chiffré avec une clé symétrique, le chiffré sera le même pour tout le monde. Mais afin que tous les destinataires puisses avoir la clé symétrique, elle est chiffrée à l'aide des clés publiques des différents destinataires (et de la source, pour pouvoir la déchiffrer à l'avenir et ne pas conserver le mail en clair dans la boite d'envoi). À noter qu'avec l'option de \textit{blind copy} (option permettant d'envoyer à un utilisateur un mail sans qu'il sache qu'il a aussi été envoyé à un autre utilisateur), PGP \textit{leak} les receveurs des mails avec leur KeyID qui sera présent dans le message PGP~\cite{BccPrivacy}.
 
 \begin{figure}[h!]
 	\includegraphics[width=14cm]{images/examplePGPDecode.png}
@@ -72,13 +72,16 @@ L'organisation d'un message PGP se fait via des "paquets" d'informations encodé
 
 PGP utilise donc un système de clés publiques afin d'envoyer des clés symétriques. Comment obtient-on une clé publique pour envoyer notre message ?
 
-Selon certaines utilisations les clés peuvent être obtenues via un serveur de clés, mais cela implique un parti tier auquel il faut faire confiance, ainsi ce qui peut être fait c'est aussi d'avoir son propre serveur de clés. Mais pour être sûr que tel clé appartienne bien à tel utilisateur, PGP a introduit dès ces débuts un système décentralisé de confiance appelé le "Web of Trust". Ainsi, un utilisateur pourra faire confiance à certaine clés d'autres utilisateurs et les signer, puis chacun des utilisateurs aura des clés de confiance et ainsi de suite. Cela permet d'avoir une toile de confiance entres les utilisateurs.
+Selon certaines utilisations les clés peuvent être obtenues via un serveur de clés, mais cela implique un parti tier auquel il faut faire confiance, ainsi ce qui peut être fait c'est aussi d'avoir son propre serveur de clés. Mais pour être sûr que tel clé appartienne bien à tel utilisateur, PGP a introduit dès ses débuts un système décentralisé de confiance appelé le "Web of Trust". Ainsi, les utilisateurs signent entre eux leurs certificats d'identité, chacun des utilisateurs aura des clés de confiance et ainsi de suite. Cela permet d'avoir une toile de confiance entres les utilisateurs.
 
-Cependant, ce système est difficile à utiliser, il est nécessaire de faire attention à quelles clés les utilisateurs signent et approuvent. Surtout pour les nouveaux utilisateurs qui ne peuvent faire vérifier leurs clés publiques facilement et ne seront donc pas vérifier, c'est pour cela que des "fêtes" de signature de clés sont organisées afin de se rencontrer personnellement et vérifier que tel utilisateur est bien telle personne. Ces évènements sont d'ailleurs possible grâce aux Fingerprint des clés publiques. Ce sont des chaines hexadécimales de 20 bytes permettant d'identifier une clé publique plus facilement.
+Cependant, ce système est difficile à utiliser, il est nécessaire de faire attention à quelles clés les utilisateurs signent et approuvent. Surtout pour les nouveaux utilisateurs qui ne peuvent faire vérifier leurs clés publiques facilement et ne seront donc pas vérifié, c'est pour cela que des "fêtes" de signature de clés sont organisées afin de se rencontrer personnellement et vérifier que tel utilisateur est bien telle personne. Ces évènements sont d'ailleurs possible grâce aux Fingerprint des clés publiques. Ce sont des chaines hexadécimales de 20 bytes permettant d'identifier une clé publique plus facilement.
+
+%TODO schéma ?
+Pour expliquer plus précisémment le \textit{Web Of Trust} prenant un exemple : Alice a un clé publique 0xAAAAAAAAAAAA et elle signe la clé de Bob 0xBBBBBBBBBBB car elle le connaît. De la même manière Bob signe la clé publique de Carol 0xCCCCCCCCCCCC. Grâce à cela Alice peut être sûr que cette clé appartient bien à Carol car il y a un chemin de signature vailde entre sa clé publique et celle de Carol.
 
 Ces certificats d'identité sont signés à l'aide de SHA-1, cependant il a été prouvé que des attaques sur cet algorithme au niveau des collisions peuvent être faites~\cite{DBLP:journals/iacr/LeurentP20}. Heureusement le standard a été modifié dans les nouvelles version de GnuPG pour signer les identités des utilisateurs.
 
-Dans la dernière spécification de PGP des moyens de créer des certificate authorities ont été ajouté afin d'avoir un système décentralisé de \textit{trust signatures} à différents niveaux et ainsi pouvoir se baser sur un système qui ressemble à un PKI mais avec une flexibilité sur les CAs (utilisateurs) auxquels on fait confiance ou non.
+Dans la dernière spécification de PGP des moyens de créer des certificate authorities ont été ajouté afin d'avoir un système décentralisé de \textit{trust signatures}. Ceux-ci ont plusieurs niveaux de confiance pouvont ou non délivrer des signatures. Ceci permet de se baser sur un système qui ressemble à un PKI mais avec une flexibilité sur les CAs (utilisateurs) auxquels on fait confiance ou non.
 \paragraph*{Propriétés cryptographiques.}
 PGP a surtout été crée pour fournir du \textbf{chiffrement de bout-en-bout} afin de résoudre les problèmes de transmissions en clairs entre les MTAs et le stockage des mails en clair dans les MDAs. Ceci même lors d'une récupération de mails sur un serveur les mails seraient chiffrés. Ensuite, PGP propose de signer ou non ses mails ce qui amène donc de la \textbf{répudiation} (si non-signé, le mail ne pourra pas être utilisé pour prouver qu'il a été envoyé par telle personne) et \textbf{non-répudiation} (mail signé, ainsi l'on peut prouvé que l'envoyeur a bien envoyé le mail).
 
@@ -86,10 +89,9 @@ Le problème qui est souvent reproché à PGP c'est qu'il n'implémentes pas de 
 \paragraph*{Utilisation.}
 Lors des tests, l’utilisation la plus simple possible a été utilisée pour voir si un utilisateur lambda pouvait arriver à mettre en place ce genre de sécurité. Il s’est avéré que cela était assez simple au départ, mais dès lors que l'on veut envoyer un mail chiffré à un correspondant cela se complique.
 
- L'installation d'un Add-On sur le logiciel de messagerie (Thunderbird dans ce cas) s’appelant Enigmail a été nécessaire pour évaluer les cas d'utilisation. Ensuite, Enigmail a généré les clés PGP (de manière totalement automatisée à l'aide GnuPG). Puis l'envoi d'un mail se fait simplement via des icônes et des options dans le client mail. Cependant, le fonctionnement est très opaque et on ne sait pas ce qu'Enigmail fait réellement derrière les décors. L’utilisateur doit encore choisir s’il veut chiffrer ses mails ou non. De plus, Enigmail utilise Autocrypt, un système permettant d'envoyer la clé publique directement dans le mail. Cette technologie ne fait pas encore l'unanimité et est donc à utiliser avec précaution.
+L'installation d'un Add-On sur le logiciel de messagerie (Thunderbird dans ce cas) s’appelant Enigmail a été nécessaire pour évaluer les cas d'utilisation. Ensuite, Enigmail a généré les clés PGP (de manière totalement automatisée à l'aide GnuPG). Puis l'envoi d'un mail se fait simplement via des icônes et des options dans le client mail. Cependant, le fonctionnement est très opaque et on ne sait pas ce qu'Enigmail fait réellement derrière les décors. L’utilisateur doit encore choisir s’il veut chiffrer ses mails ou non. De plus, Enigmail utilise Autocrypt, un système permettant d'envoyer la clé publique directement dans le mail. Cette technologie ne fait pas encore l'unanimité et est donc à utiliser avec précaution.
  
- Pour les clés, Enigmail les envoie sur des serveurs de clés par défaut. Il va aussi interroger ces serveurs si une clé publique pour un destinataire est disponible dessus lors du chiffrement d'un message. Ces serveurs sont les suivants : keys.opengpg.org (vks), hkps.pool.sks-keyservers.net (hkps), pgp.mit.edu (hkps). vks (Verifying Keyservers) et hkps (HTTP keyserver protocol over TLS) sont des interfaces avec des serveurs de clés afin d'enregistrer des nouvelles clés ou trouver une clé sur le serveur par différents moyens (email, key-id, fingerprint). Les clés générées ont été générées avec les algorithmes de courbe elliptique EdDSA 4096bits par défaut, et dans les paramètres avancés il est possible de choisir entre cet algorithme et RSA.
- %TODO vérifier quel version RSA Enigmail utilise
+Pour les clés, Enigmail les envoie sur des serveurs de clés par défaut. Il va aussi interroger ces serveurs si une clé publique pour un destinataire est disponible dessus lors du chiffrement d'un message. Ces serveurs sont les suivants : keys.opengpg.org (vks), hkps.pool.sks-keyservers.net (hkps), pgp.mit.edu (hkps). vks (Verifying Keyservers) et hkps (HTTP keyserver protocol over TLS) sont des interfaces avec des serveurs de clés afin d'enregistrer des nouvelles clés ou trouver une clé sur le serveur par différents moyens (email, key-id, fingerprint). Les clés générées ont été générées avec les algorithmes de courbe elliptique EdDSA 4096bits par défaut, et dans les paramètres avancés il est possible de choisir entre cet algorithme et RSA (algorithme non spécifié).
 \subsection{S/MIME}
 \label{protocols:SMIME}
 \paragraph*{Fonctionnement.}
@@ -129,8 +131,7 @@ S/MIME est aussi créé pour établir un \textbf{chiffrement bout-en-bout} et ai
 \paragraph*{Utilisation.}
 Pour utiliser S/MIME et avoir des exemples et références de certificats 2 fournisseurs \textbf{gratuits} ont été utilisés pour évaluer les certificats S/MIME.
 
-Tout d'abord, un plugin firefox qui permet d'avoir des certificats pour GMail et envoyer des mails signés et chiffrés à l'aide de S/MIME a été testé. La clé privée est générée par l'extension localement et n'est pas sauvegardée dans un cloud, il est possible de la sécurisé à l'aide d'une \textit{passphrase}. Cependant, les certificats ne sont pas vérifier correctement comme on peut le voir à la réception dans MeSince (le prochain programme testé) à la Figure \ref{fig:SMIME_MeSinceProblem}. Le certificat utilise RSA avec SHA256 pour la signature des messages.
-%TODO voir quel RSA utilisé
+Tout d'abord, un plugin firefox qui permet d'avoir des certificats pour GMail et envoyer des mails signés et chiffrés à l'aide de S/MIME a été testé. La clé privée est générée par l'extension localement et n'est pas sauvegardée dans un cloud, il est possible de la sécurisé à l'aide d'une \textit{passphrase}. Cependant, les certificats ne sont pas vérifier correctement comme on peut le voir à la réception dans MeSince (le prochain programme testé) à la Figure \ref{fig:SMIME_MeSinceProblem}. Le certificat utilise RSA (algorithme exact non spécifié) avec SHA256 pour la signature des messages.
 \begin{figure}[h!]
 	\includegraphics[width=10cm]{images/SMIME_FossaProblem.jpg}
 	\centering
@@ -140,8 +141,7 @@ Tout d'abord, un plugin firefox qui permet d'avoir des certificats pour GMail et
 
 Pour tester S/MIME, un compte MeSince\footnote{\url{https://www.mesince.com}} a été utilisé. En effet, ce service permet d'utiliser S/MIME afin de chiffrer et signer ses mails, et ils fournissent les certificats, seulement il ne fonctionnait pas avec Gmail. De plus le service fourni n'a pas fonctionné pour se loguer et récupérer son certificat, ainsi le certificat a été généré et peut être utilisé par leur application mobile pour envoyer des mails signés et chiffrés mais je ne peux pas le voir. Sur l'application mobile, il n'y a pas moyen de vérifier la clé générée.
 
-Attention cependant le même problème avec Fossa arrive comme le montre la Figure \ref{fig:SMIME_MeSinceProblem}, par contre l'avertissement n'est pas très voyant au sein de Gmail (qui intègre pourtant le support S/MIME dans G Suite). Les certificats utilisent RSA avec SHA256 pour la signature des messages.
-%TODO voir quel RSA utilisé
+Attention cependant le même problème avec Fossa arrive comme le montre la Figure \ref{fig:SMIME_MeSinceProblem}, par contre l'avertissement n'est pas très voyant au sein de Gmail (qui intègre pourtant le support S/MIME dans G Suite). Les certificats utilisent RSA (algorithme exact non spécifié) avec SHA256 pour la signature des messages.
 
 \begin{figure}[h!]
 	\includegraphics[width=15cm]{images/mesince_problem.png}
@@ -153,13 +153,11 @@ Attention cependant le même problème avec Fossa arrive comme le montre la Figu
 MeSince informe que la clé privée est automatiquement sauvegardée dans leur cloud sécurisé, ce qui n'est pas forcément une bonne nouvelle, de plus la clé est générée automatiquement donc aucune vérification de la part de l'utilisateur.
 
 Cependant ces deux tests effectués ne représentent pas vraiment une utilisation réelle de S/MIME, en effet, le meilleur moyen de tester S/MIME aurait été d'avoir un nom de domaine à soi et de générer des certificats S/MIME pour une adresse privée. Ensuite, il faudra importer manuellement ses certificats et ses clés dans le client mail utilisés.
-% TODO revoir PEP ?
 \section{Implémentations existantes}
 Dans cette section certaines implémentations des protocoles discutés dans la section précédente sont analysés, particulièrement ceux implémentant PGP.
 \subsection{Protonmail}
 \paragraph*{Revendications.}
-Protonmail revendique beaucoup de propriétés cryptographiques, tel que le zero-access encryption (lors de la réception d'un message externe chiffré ou non Protonmail le chiffrera avec la clé publique de l'utilisateur pour ne plus y avoir accès dans le futur). Et l’end-to-end chiffrement + zero-knowledge pour les messages sécurisés, même avec leur fonctionnalité de chiffrement vers l'extérieur utilisant AES256-GCM. Mettre une date d'expiration sur un mail est aussi possible, afin que le destinataire ne puisses le lire que dans un temps imparti.
-%TODO voir en quoi consiste le zero-knowledge dans ce cas
+Protonmail revendique beaucoup de propriétés cryptographiques, tel que le zero-access encryption (lors de la réception d'un message externe chiffré ou non Protonmail le chiffrera avec la clé publique de l'utilisateur pour ne plus y avoir accès dans le futur). Et l’end-to-end chiffrement pour les messages sécurisés, même avec leur fonctionnalité de chiffrement vers l'extérieur utilisant AES256-GCM. Mettre une date d'expiration sur un mail est aussi possible, afin que le destinataire ne puisses le lire que dans un temps imparti.
 
 Pour l'authentification Protonmail utilise une manière fortement sécurisée (SRP) pour ne pas avoir d'informations direct sur le mot de passe de l'utilisateur.
 
@@ -187,16 +185,16 @@ Sensation de sécurité en utilisant Protonmail, en effet un mot de passe est ut
 Par contre la génération de la clé privée à la création du compte est assez obscure mais de l'information est disponible sur le site de protonmail\footnote{\url{https://protonmail.com/support/knowledge-base/how-is-the-private-key-stored/}}.
 
 \paragraph*{Critiques.}
-Protonmail est très critiqué de manière générale sur les réseaux sociaux. De plus une réponse au chercheur Nadim Kobeissi~\cite{DBLP:journals/iacr/Kobeissi18a} avait été formulée par Protonmail suite à son papier sur l'insécurité le leur webmail. Cependant, ils sont surtout critiqué sur les réseaux sociaux par des chercheurs en sécurité\footnote{\url{https://twitter.com/FiloSottile/status/1277068367728435202}} pour leur publicité mensongère, en effet, leur page d'accueil indiquait une sécurité pour \textbf{tous} les email sortants. Ce qui n'est pas le cas, uniquement les mails intentionnellement chiffré à l'aide de PGP ou chiffré vers l'extérieur sont chiffré. L'annonce ne représentait donc pas la réalité, ce qui peut être mal interprété par les utilisateurs. Après vérification la page d'accueil a bien été modifiée pour ne plus inclure la mention de chiffrement automatique pour tout les emails. Le commentaire fait référence aussi à d'autres points :
+Protonmail est très critiqué de manière générale sur les réseaux sociaux. De plus une réponse\footnote{\url{https://protonmail.com/blog/cryptographic-architecture-response/}} au chercheur Nadim Kobeissi~\cite{DBLP:journals/iacr/Kobeissi18a} avait été formulée par Protonmail suite à son papier sur l'insécurité le leur webmail. Cependant, ils sont surtout critiqué sur les réseaux sociaux par des chercheurs en sécurité\footnote{\url{https://twitter.com/FiloSottile/status/1277068367728435202}} pour leur publicité mensongère, en effet, leur page d'accueil indiquait une sécurité pour \textbf{tous} les email sortants. Ce qui n'est pas le cas, uniquement les mails intentionnellement chiffré à l'aide de PGP ou chiffré vers l'extérieur sont chiffré. L'annonce ne représentait donc pas la réalité, ce qui peut être mal interprété par les utilisateurs. Après vérification la page d'accueil a bien été modifiée pour ne plus inclure la mention de chiffrement automatique pour tout les emails. Le commentaire fait référence aussi à d'autres points :
 \begin{itemize}
 	\item Ingère les emails en plaintext - par rapport à leu politique de zero-access, ils ont au moins une fois accès au plaintext d'un email non chiffré.
 	\item Pas de réels solutions pour du chiffrement vers l'extérieur - La solution amenant l'utilisateur distant à se connecter à leur service pour déchiffrer un message n'est pas une solution viable.
-	\item Utilise de la cryptographie dans le navigateur non validée - Modules cryptographiques servis par les serveurs de Protonmail, on revient ici aux revendications de ce papier~\cite{DBLP:journals/iacr/Kobeissi18a}. Malgré cela une solution existe désormais, utiliser un bridge disponible à \url{https://github.com/ProtonMail/proton-bridge}.
+	\item Utilise de la cryptographie dans le navigateur non validée - Modules cryptographiques servis par les serveurs de Protonmail, on revient ici aux revendications de ce papier~\cite{DBLP:journals/iacr/Kobeissi18a}. Malgré cela une solution existe désormais, utiliser un bridge disponible à \footnote{\url{https://github.com/ProtonMail/proton-bridge}}.
 	\item Agit comme un serveur de clés, sans transparence de clés - Suite à la mise en place d'un serveur de clés pour chercher les clés PGP d'utilisateur Protonmail pas de transparence sur ce serveur n'a été communiqué.
 \end{itemize}
 \subsection{Tutanota}
 \paragraph*{Fonctionnement.}
-Tutanota est un client mail sécurisé, il permet de chiffrer les mails vers l'extérieur. Cela en utilisant AES128-CBC selon ce que le code github analysé.
+Tutanota est un client mail sécurisé, il permet de chiffrer les mails vers l'extérieur. Cela en utilisant AES256-CBC (selon analyse du code source\footnote{\url{https://github.com/tutao/tutanota/blob/master/src/api/worker/crypto/Aes.js}}) mais aussi RSA apparemment, sans savoir le contexte exact, peut-être pour vérifier le client desktop.
 \paragraph*{Utilisation.}
 L'utilisation de Tutanota est facile, en effet Tutanota utilise le même principe que Protonmail pour le chiffrement vers l'extérieur. En chiffrant le mail et en le gardant sur ses serveurs puis en envoyant un mail au destinataire comme celui présenté dans la Figure \ref{fig:TutanotaPres}.
 
@@ -207,7 +205,6 @@ L'utilisation de Tutanota est facile, en effet Tutanota utilise le même princip
 	\label{fig:TutanotaPres}
 \end{figure}
 
-% TODO : Revoir
 %\subsection{Bitmessage}
 \section{Attaques existantes}
 Présentation des attaques faites sur les différents systèmes présentés jusqu'ici ainsi que leur fonctionnement global.
@@ -224,13 +221,19 @@ Malgré ces sécurités qui pourraient être mises en place à l’heure actuell
 Cette attaque permet en fait d'injecter une image dans l'HTML du message, puis faire en sorte de récupérer le contenu du message déchiffrer dans l'URL. Ceci est possible grâce au multi parties de MIME et en les abusant afin d'entourer le message chiffré d'une balise \textit{img} et de mettre en source le message qui sera déchiffré selon les règles de MIME. Ainsi l'attaquant aura le message déchiffré dans l'url qu'il peut contrôler. 
 
 Cette attaque exploite en fait une erreur par rapport à la gestion des messages utilisants HTML et multipart/mixed, il faudrait en effet vérifier dans ces cas que le document HTML est un document entier. Ainsi que de ne pas traiter le contenu chiffré de la même origine que du contenu non protégé. La spécification~\cite{RFC8551} S/MIME a aussi mise à jour pour implémenter des chiffrements authentifiés et remplacer CBC qui permettait des attaques par gadgets.
-% TODO plus de détails sur Shambles
 \subsection{SHA-1 Shambles}
-Récemment~\cite{DBLP:journals/iacr/LeurentP20} une attaque sur SHA-1 avec un préfixe choisi. Cette attaque permet de se faire passer pour quelqu'un d'autre grâce à une attaque par préfixe choisi sur SHA-1. SHA-1 était en effet l'algorithme de hachage par défaut pour signer les clés d'autres utilisateurs dans le \textit{Web Of Trust}.
+Récemment~\cite{DBLP:journals/iacr/LeurentP20} une attaque sur SHA-1 avec un préfixe choisi a été démontrée en pratique\footnote{\url{https://sha-mbles.github.io/}}. Cette attaque permet de se faire passer pour un autre utilisateur grâce à une attaque par préfixe choisi sur SHA-1. SHA-1 était en effet l'algorithme de hachage par défaut pour signer les clés d'autres utilisateurs dans le \textit{Web Of Trust}.
+
+L'attaque fonctionne ainsi : 
+\begin{itemize}
+	\item Utilisant leur attaque de préfixe choisi sur SHA-1 ils générent deux clés PGP avec différents UserIDs. Grâce à cela les certificats d'identité des deux clés se collisionnent.
+	\item Une clé B spécialement formatée pour l'attaque est signée par le \textit{Web Of Trust}.
+	\item Cette signature peut être portée à la clé forgée A et ainsi l'utilisateur B peut signer des document à la place de l'utilisateur A.
+\end{itemize}
 \section{Signal}
 L'analyse s'est faite aussi pour la messagerie instantanée à cause de sa ressemblance avec la messagerie électronique. 
 \subsection{Fonctionnement}
-Le fonctionnement de Signal est complexe à expliquer, ainsi la Figure \ref{fig:signal} sera plus parlante pour expliquer le Diffie-Hellman Ratchet. Ce premier Ratchet permet d'utiliser Diffie-Hellman afin d'avoir une première sortie synchronisée entre l'envoi et la réception d'un utilisateur. Au début de la discussion Bob va envoyer sa clé publique et Alice va pouvoir commencer son premier Ratchet en générant elle aussi une paire de clés Diffie-Hellman. On verra dans la figure suivante ce qu'il se passe ensuite pour le chiffrement des messages mais une fois cett opération finie, Alice envoi sa clé publique précédemment générée à Bob pour qu'il puisses générer la même clé partagée à l'aide de Diffie-Hellman et ainsi déchiffrer le contenu en s'aidant du Deuxième Ratchet.
+Le fonctionnement de Signal est complexe à expliquer, ainsi la Figure \ref{fig:signal} sera plus parlante pour expliquer le Diffie-Hellman Ratchet. Ce premier Ratchet permet d'utiliser Diffie-Hellman afin d'avoir une première sortie synchronisée entre l'envoi et la réception d'un utilisateur. Au début de la discussion Bob va envoyer sa clé publique et Alice va pouvoir commencer son premier Ratchet en générant elle aussi une paire de clés Diffie-Hellman. On verra dans la Figure \ref{fig:signalSecond} ce qu'il se passe ensuite pour le chiffrement des messages mais une fois cette opération finie, Alice envoi sa clé publique précédemment générée à Bob pour qu'il puisses générer la même clé partagée à l'aide de Diffie-Hellman et ainsi déchiffrer le contenu en s'aidant du Deuxième Ratchet.
 
 \begin{figure}[h!]
 	\centering
@@ -253,7 +256,7 @@ Le deuxième ratchet va générer une clé pour chaque message/batch de messages
 \subsection{Propriétés cryptographiques}
 Signal a de nombreux avantages concernant les propriétés cryptographiques qu'il promet. En effet le \textit{Double Ratchet} permet de la \textbf{Break-in recovery}, a une \textbf{Perfect Forward Secrecy}, \textbf{End-to-End encryption}, \textbf{Non-Répudiation}.
 \subsection{Problèmes d'intégrations}
-Le problème avec le protocole Signal quant à mes besoins niveaux mails est la \textit{perfect forward secrecy} qui est très forte. En effet comme vu dans le chapitre précédent il utilise une clé par message grâce au \textit{Double Ratchet}. Cependant ce fonctionnement comporte un gros problème en rapport aux mails, en effet si l'on veut pouvoir récupérer les anciens mails reçus/envoyés cela devient vraiment compliqué. La \textit{forward secrecy} est une propriété utile dans un système de mail, mais il faut pouvoir aussi récupérer les messages facilement si l'on connait la clé privée. Alors qu'avec ce système de Double Ratchet il nous faudrait enregistrer chaque Diffie-Hellman ratchet pour reconstruire toute les clés utilisée.
+Le problème avec le protocole Signal quant à mes besoins niveaux mails est la \textit{perfect forward secrecy} qui est très forte. En effet comme vu dans la Section précédente il utilise une clé par message grâce au \textit{Double Ratchet}. Cependant ce fonctionnement comporte un gros problème en rapport aux mails, en effet si l'on veut pouvoir récupérer les anciens mails reçus/envoyés cela devient vraiment compliqué. La \textit{forward secrecy} est une propriété utile dans un système de mail, mais il faut pouvoir aussi récupérer les messages facilement si l'on connait la clé privée. Alors qu'avec ce système de Double Ratchet il nous faudrait enregistrer chaque Diffie-Hellman ratchet pour reconstruire toute les clés utilisée.
 \section{Compromis}
 Pour passer à l'implémentation concrète d'un nouveau protocole il faut faire des compromis et aller chercher dans des primitives moins connues.
 
@@ -266,6 +269,9 @@ Comme mentionné avant, les recherches ont beaucoup été orientées sur le prot
 S/MIME est la solution prédominante pour s'envoyer des mails chiffrés cependant il est compliqué de l'utiliser. Il et en effet difficile d'obtenir un certificat pour envoyer des mails et échanger avec une autre personne ayant S/MIME. De plus la complexité d'un système de PKI et l'overhead induit est assez conséquent.
 
 En faisant quelques essais PGP de mon côté je me suis heurté à beaucoup de difficultés et de problèmes avec les clés PGP, notamment pour se les échanger mais pour envoyer ensuite ce n'est pas si complexe, le problème étant de bien voir les primitives utilisées pour chiffrer/signer notre email, en effet les solutions \textit{plug-and-play like} ne permettent pas une gestion précise des primitives cryptographiques utilisées, ce qui pourrait induire à des primitives par défaut non sécurisées, comme l'a démontré EFAIL(c.f. \ref{attacks:EFAIL}).
+
+
+
 % TODO récapitulatif des implémentations présentées, propriétés, etc
 \section{Primitives}
 Cette Section présente les primitives considérées pour implémenter un système de messagerie sécurisée. Elle contient un aperçu des primitives analysées, pourquoi elle a été ou non retenue et leur fonctionnement en quelques mots.
@@ -317,9 +323,8 @@ Pour évaluer les schémas de certificateless public key cryptography il y a dif
 	\item Type II (\textit{honest but curious KGC}). L'adversaire de Type II est en fait un KGC connaissant la Master Secret Key et qui peut donc générer des PPK, obtenir des clés privées et faire des requêtes de déchiffrement tout en faisant confiance à ce KGC pour pas qu'il ne remplace de clés publiques.
 \end{itemize}
 
-Pour chacun des types d'adversaires il existe différents niveaux de sécurité comme définit dans le livre \textit{Introduction to Ceritifcateless Cryptography}~\cite{bookIntroCertificateless}. Ces différents niveaux sont modélisés comme suit :
-
-%TODO : Remplir avec infos du livre sur les différents niveaux
+%TODO ajouter des spécifications de la présentation
+Pour chacun des types d'adversaires il existe différents niveaux de sécurité comme définit dans le livre \textit{Introduction to Ceritifcateless Cryptography}~\cite{bookIntroCertificateless}.
 \subsection{Schémas Certificateless de Chiffrement}
 Pour choisir parmi les nombreux schémas existants en certificateless pour le chiffrement j'ai établi un tableau comparatif des différentes manières de faire, inspiré de~\cite{bookIntroCertificateless}. En suivant ce tableau je me suis rendu compte que la construction de Dent-Libert-Paterson~\cite{DBLP:conf/pkc/DentLP08} était probablement la plus adaptée en vue des propriétés qu'elle présentait. Le tableau se trouve en annexe \ref{ch:fichiers}.
 
@@ -509,10 +514,10 @@ Qui donnera $m$ le texte en clair si le chiffré était bien formaté ou un él�
 \end{sourcebox}
 
 \subsection{Schémas Certificateless de Signature}
-%TODO : Expliquer Malicious KGC (Type II -> à renseigner (voir dans le livre)) et mettre tableaux
+%TODO : Expliquer Malicious KGC (Type II -> à renseigner (voir dans le livre)) et mettre tableaux^
 Pour choisir parmi les nombreux schémas certificateless pour la signature j'ai établi un tableau comparatif des différentes manières de faire inspiré de~\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau il y a peu de solutions qui se dégage, en effet l'on peut voir que beaucoup de schémas de signature sont cassés, mon choix s'est porté au final sur la construction de Zhang et Zhang~\cite{DBLP:conf/acns/ZhangWXF06} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) datant de 2006 et n'a pas été cassée depuis. Le tableau se trouve en Annexe \ref{ch:fichiers}.
 \subsection{Détails techniques}
- Là encore, le code C montrant l'implémentation de chaque algorithme est listé. Ce code est simplifié pour ne pas inclure la création des différents éléments, il est là uniquement pour montrer comment les calculs ont été effectués et non comment la mémoire a été allouée.
+Là encore, le code C montrant l'implémentation de chaque algorithme est listé. Ce code est simplifié pour ne pas inclure la création des différents éléments, il est là uniquement pour montrer comment les calculs ont été effectués et non comment la mémoire a été allouée.
  
 La signature se base sur le problème difficile \textit{The Computational Diffie-Hellman Problem} (CDH). 
 
@@ -646,6 +651,15 @@ Ainsi ces composantes forment la signature $\sigma = (U,V)$.
 		}
 	}
 \end{sourcebox}
+
+\subsection{Ajout d'une pseudo Forward Secrecy}
+\label{subsec:pseudoSecrecy}
+La primitive n'offre pas de forward secrecy par défaut, cependant il existe un moyen d'avoir une \textit{pseudo forward secrecy}, en effet si l'on ajoute un élément à l'ID en fonction des chiffrements on peut établir un simili de cette propriété.
+
+Cela s'explique dans la façon de fonctionner de \textit{Certificateless}, lors du chiffrement l'o peut utiliser la clé publique de l'utilisateur ID et chiffrer à l'aide de ID+timestamp et ainsi avoir un chiffrement pour un destinataire ayant la valeur secrète correspondante et pouvant extraire une clé partielle pour ID+timestamp. Les chiffrements effectués avec un ID+timestamp ont besoin d'une clé privée construite pour ID+timestamp.
+
+Cela permet donc d'avoir une Forward Secrecy par rapport à la clé privée, en effet pour chaque timestamp une clé privée différente est nécessaire. Cependant la valeur secrète utilisée pour cette clé privée sera toujours utilisée. Cette solution permet de limiter les dégats si une clé privée fuit mais pas si une valeur secrète est découverte.
+% TODO : Schéma
 
 \section{État de l'art}
 Dans cette section une analyse et une comparaison entres les différentes solutions trouvées utilisant la \textit{Certificateless Cryptography} pour une implémentation dans des systèmes de mails. Les articles sont présentés par date de publication. 
