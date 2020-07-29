@@ -2,7 +2,7 @@
 #include "mainClient.h"
 
 #define PORT 10002
-char *payload_text[10];
+char *payload_text[12];
 struct upload_status {
     int lines_read;
 };
@@ -327,19 +327,30 @@ int sendmail(char* destination, char* source, char* subject, char* nonceAES, cha
     strcat(cipher_text, "\r\n");
     payload_text[6] = cipher_text;
 
+    char * date_text = malloc(100);
+    memset(date_text, 0, 100);
+    strcat(date_text, "Date : ");
+    char dateFormat[50] = {0};
+    time_t t = time(NULL);
+    struct tm *temp = localtime(&t);
+    strftime(dateFormat, 50, "%02i/%02i/%i %02i:%02i:%02i %+04i", temp);
+    strcat(date_text, dateFormat);
+    strcat(date_text, "\r\n");
+    payload_text[7] = date_text;
+
     char * before_body = malloc(50); // 52Kb for the moment
     memset(before_body, 0, 50);
     strcat(before_body, "\r\n");
-    payload_text[7] = before_body;
+    payload_text[8] = before_body;
 
     char * bodyEnd = malloc(10000); // 52Kb for the moment
     memset(bodyEnd, 0, 10000);
     strcat(bodyEnd, content);
-    payload_text[8] = bodyEnd;
+    payload_text[9] = bodyEnd;
 
     char * nullTerminated = malloc(1); // 52Kb for the moment
     memset(nullTerminated, 0, 1);
-    payload_text[9] = nullTerminated;
+    payload_text[10] = nullTerminated;
 
     CURL *curl;
     CURLcode res = CURLE_OK;

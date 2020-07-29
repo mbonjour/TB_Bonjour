@@ -23,18 +23,20 @@ void decrypt_message(unsigned char* decrypted, unsigned char* cipher, unsigned c
     }
 }
 
-// TODO : Change to libsodium hash/KDF
 void get_key(char *aesk, gt_t originalM) {
     // Get the binary data of the Gt element
     int sizeAESK = gt_size_bin(originalM,1);
-    char aeskBin [sizeAESK];
+    uint8_t aeskBin[sizeAESK];
     gt_write_bin(aeskBin, sizeAESK, originalM, 1);
-    // Hash with SHA-256 to have an AES256 key from the Gt binary data
-    md_map_sh256(aesk, aeskBin, sizeAESK);
-    // TODO ifdef DEBUG ?
+    uint8_t master_key[32];
+    // Hash with SHA-256 to have an master key for KDF from the Gt binary data
+    md_map_sh256(master_key, aeskBin, sizeAESK);
+    // KDF the "master key" to have a usable key to encrypt the data
+    crypto_kdf_derive_from_key(aesk, 32, 1, "AES-KEY", master_key);
 
     printf("AES Key : ");
     for(int i=0;i < 32;i++)
         printf("%02X",(unsigned char)aesk[i]);
     printf("\n");
+
 }
