@@ -89,7 +89,7 @@ Pour pouvoir implémenter ce schéma de chiffrement et signature certificateless
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=12cm]{images/schemaEncapsulation.png}
+	\includegraphics[width=\textwidth]{images/schemCles.png}
 	\caption{Schéma encapsulation des données}
 	\label{fig:encapsulate}
 \end{figure}
@@ -126,8 +126,9 @@ Si l'on veut pouvoir mettre en place ce genr de système à une large échelle, 
 Une autre solution serait par exemple d'ajouter un "tag" d'appartenance à un ID et celui-ci sera donc lié à un certain KGC. Ceci afin de partager la charge qui serait normalement sur un seul KGC. Ce genre de solutions pourrait permettre d'avoir par exemple un KGC par domaine ou alors de les partager via les TLDs. De plus, les KGC pourraient avoir des paramètres générés différemment enres eux, ce qui ne seraient pas le cas dans un système de réplication. Cette solution ajoute cependant de la complexité au système, et l'envoi de paquets plus volumineux sur le réseau pour les paramètres globaux d'un KGC qui sont de 52kB.
 \section{Fonctionnement global POC (Client)}
 Présentation du fonctionnement global de l'implémentation du client mail sécurisé pour le POC, des améliorations possibles et des problèmes connus.
+%TODO
 \subsection{Fonctionnement}
-Fonctionnement du POC ici et les différentes fonctionnalités implémentées dans le client du POC.
+Présentation du fonctionnement du POC et les différentes fonctionnalités implémentées dans le client.
 \paragraph*{Sécurité connexion mail.}
 Pour la connexion au serveur SMTP / IMAP j'ai fait attention à la connexion sécurisée pour éviter de \textit{leak} des mots de passe des utilisateurs du POC. En effet, cela permet de chiffrer les communications avec les serveurs de Gmail.
 \begin{figure}[h!]
@@ -174,7 +175,7 @@ Ici je fais un comparatif sur les différentes propriétés cryptographiques que
 \end{table}
 % TODO si le temps le permet faire des calculs sur les temps de chiffrement / déchiffrement
 \subsection{Temps des différentes implémentations}
-Comparasion du temps mis pour chiffrer et signer / déchiffrer et vérifier un mail entres les différentes implémentations existantes. Dans la table \ref{table:comparisonTime} l'on voit les calculs faits.
+Comparaison du temps mis pour signer / chiffrer et déchiffrer / vérifier un mail entres les différentes implémentations existantes. Dans la table \ref{table:comparisonTime} l'on voit les calculs faits.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}| }

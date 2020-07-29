@@ -189,7 +189,7 @@ Protonmail est très critiqué de manière générale sur les réseaux sociaux. 
 \begin{itemize}
 	\item Ingère les emails en plaintext - par rapport à leu politique de zero-access, ils ont au moins une fois accès au plaintext d'un email non chiffré.
 	\item Pas de réels solutions pour du chiffrement vers l'extérieur - La solution amenant l'utilisateur distant à se connecter à leur service pour déchiffrer un message n'est pas une solution viable.
-	\item Utilise de la cryptographie dans le navigateur non validée - Modules cryptographiques servis par les serveurs de Protonmail, on revient ici aux revendications de ce papier~\cite{DBLP:journals/iacr/Kobeissi18a}. Malgré cela une solution existe désormais, utiliser un bridge disponible à \footnote{\url{https://github.com/ProtonMail/proton-bridge}}.
+	\item Utilise de la cryptographie dans le navigateur non validée - Modules cryptographiques servis par les serveurs de Protonmail, on revient ici aux revendications de ce papier~\cite{DBLP:journals/iacr/Kobeissi18a}. Malgré cela une solution existe désormais, utiliser un bridge disponible sur github\footnote{\url{https://github.com/ProtonMail/proton-bridge}}.
 	\item Agit comme un serveur de clés, sans transparence de clés - Suite à la mise en place d'un serveur de clés pour chercher les clés PGP d'utilisateur Protonmail pas de transparence sur ce serveur n'a été communiqué.
 \end{itemize}
 \subsection{Tutanota}
@@ -226,7 +226,7 @@ Récemment~\cite{DBLP:journals/iacr/LeurentP20} une attaque sur SHA-1 avec un pr
 
 L'attaque fonctionne ainsi : 
 \begin{itemize}
-	\item Utilisant leur attaque de préfixe choisi sur SHA-1 ils générent deux clés PGP avec différents UserIDs. Grâce à cela les certificats d'identité des deux clés se collisionnent.
+	\item Utilisant leur attaque de préfixe choisi sur SHA-1 ils génèrent deux clés PGP avec différents UserIDs. Grâce à cela les certificats d'identité des deux clés se collisionnent.
 	\item Une clé B spécialement formatée pour l'attaque est signée par le \textit{Web Of Trust}.
 	\item Cette signature peut être portée à la clé forgée A et ainsi l'utilisateur B peut signer des document à la place de l'utilisateur A.
 \end{itemize}
@@ -237,8 +237,8 @@ Le fonctionnement de Signal est complexe à expliquer, ainsi la Figure \ref{fig:
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=8cm]{images/signalFonctionnement.png}
-	\caption{Schéma fonctionnement du DH Ratchet~\cite{doubleratchet}}
+	\includegraphics[width=10cm]{images/signalFonctionnement.png}
+	\caption{Fonctionnement du DH Ratchet~\cite{doubleratchet}}
 	\label{fig:signal}
 \end{figure}
 
@@ -248,15 +248,15 @@ Le deuxième ratchet va générer une clé pour chaque message/batch de messages
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=10cm]{images/secondRatchet.png}
-	\caption{Schéma fonctionnement du deuxième Ratchet~\cite{doubleratchet}}
+	\includegraphics[width=12cm]{images/secondRatchet.png}
+	\caption{Fonctionnement du deuxième Ratchet~\cite{doubleratchet}}
 	\label{fig:signalSecond}
 \end{figure}
 
 \subsection{Propriétés cryptographiques}
 Signal a de nombreux avantages concernant les propriétés cryptographiques qu'il promet. En effet le \textit{Double Ratchet} permet de la \textbf{Break-in recovery}, a une \textbf{Perfect Forward Secrecy}, \textbf{End-to-End encryption}, \textbf{Non-Répudiation}.
 \subsection{Problèmes d'intégrations}
-Le problème avec le protocole Signal quant à mes besoins niveaux mails est la \textit{perfect forward secrecy} qui est très forte. En effet comme vu dans la Section précédente il utilise une clé par message grâce au \textit{Double Ratchet}. Cependant ce fonctionnement comporte un gros problème en rapport aux mails, en effet si l'on veut pouvoir récupérer les anciens mails reçus/envoyés cela devient vraiment compliqué. La \textit{forward secrecy} est une propriété utile dans un système de mail, mais il faut pouvoir aussi récupérer les messages facilement si l'on connait la clé privée. Alors qu'avec ce système de Double Ratchet il nous faudrait enregistrer chaque Diffie-Hellman ratchet pour reconstruire toute les clés utilisée.
+Le problème avec le protocole Signal quant aux besoins niveaux mails est la \textit{perfect forward secrecy} qui est très forte. En effet comme vu dans la Section précédente il utilise une clé par message grâce au \textit{Double Ratchet}. Cependant ce fonctionnement comporte un gros problème en rapport aux mails, en effet si l'on veut pouvoir récupérer les anciens mails reçus/envoyés cela devient vraiment compliqué. La \textit{forward secrecy} est une propriété utile dans un système de mail, mais il faut pouvoir aussi récupérer les messages facilement si l'on connait la clé privée. Alors qu'avec ce système de Double Ratchet il nous faudrait enregistrer chaque Diffie-Hellman ratchet pour reconstruire toute les clés utilisée.
 \section{Compromis}
 Pour passer à l'implémentation concrète d'un nouveau protocole il faut faire des compromis et aller chercher dans des primitives moins connues.
 
