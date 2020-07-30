@@ -6,6 +6,7 @@ Dans ce chapitre, je vais m'intéresser à expliquer le fonctionnement de la \te
 \section{Architecture globale}
 Dans la Figure \ref{fig:globalProtocol}, je présente uniquement l'architecture globale pour bien représenter les différents acteurs présents dans le protocole et ainsi avoir une vue d'ensemble pour faciliter la compréhension.
 
+% TODO modifier schéma avec corrections
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=14cm]{images/SchemaGlobal.png}
@@ -18,33 +19,35 @@ Dans la Figure \ref{fig:globalProtocol}, je présente uniquement l'architecture 
 Les parties impliquées sont les suivantes comme vu à la Figure \ref{fig:globalProtocol}.
 \begin{itemize}
 	\item Alice : L'envoyeur du mail en direction de Bob. Alice doit discuter avec le KGC pour construire sa clé privée (afin de signer) et récupérer la clé publique de Bob.
-	\item Bob : Le destinataire du message, communique uniquement avec le KGC en ayant reçu le message d'Alice afin de récupérer sa clé publique pour vérifier la signature et de construire sa clé privé pour déchiffrer le message.
+	\item Bob : Le destinataire du message, communique uniquement avec le KGC en ayant reçu le message d'Alice afin de récupérer sa clé publique pour vérifier la signature et construire sa clé privée pour déchiffrer le message.
 	\item KGC : Permet aux différents acteurs de pouvoir récupérer les clés publiques des clients, mais aussi de  recevoir les \textit{Partial Private Keys} qui permettent aux acteurs de construire leur clé privée. 
 \end{itemize}
-Ces partis sont les principaux présents dans un exemple de \textit{Certificateless Cryptography} dans mon système de mail.
+Ces différents acteurs sont les principaux présents dans un exemple de \textit{Certificateless Cryptography} dans le système de messagerie implémenté par la suite, mais on pourrait imaginer un serveur gérant uniquement les clés publiques.
 \section{Fonctionnement Certificateless PKC}
-Je vais ici découper les différents algorithmes présent dans le certificateless public key cryptography. En passant par le chiffrement et la signature.
-Ces algorithmes seront accompagnés d'explications sur leur utilité. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. L'on peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{DBLP:conf/pkc/DentLP08}.
+Je vais ici découper les différents algorithmes présents dans le certificateless public key cryptography. En passant par le chiffrement et la signature.
+
+Ces algorithmes seront accompagnés d'explications sur leur utilité. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. On peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{DBLP:conf/pkc/DentLP08}.
 \subsection{Chiffrement}
 La liste des différents algorithmes de \textit{Certificateless Cryptography} et leur description, les détails techniques de leurs implémentations sont disponibles à la Section \ref{sec:primitiveSearch}.
 \begin{itemize}
 	\item \textit{Setup.} (seulement une fois par le KGC).
-	\item \textit{Partial-Private-Key-Extract.} Calcul d'une clé privée partielles lorsque qu'un client le demande pour identité donnée.
+	\item \textit{Partial-Private-Key-Extract.} Calcul d'une clé privée partielle lorsqu'un client le demande pour identité donnée.
 	\item \textit{Set-Secret-Value.} Le client ne le fait qu'une fois pour tirer sa valeur secrète.
-	\item \textit{Set-Private-Key.} Le client combine ses clés partielles et sa clé secrète pour obtenir une clé privée afin de déchiffrer les message reçus, chiffrés avec une certaine identité.
+	\item \textit{Set-Private-Key.} Le client combine ses clés partielles et sa clé secrète pour obtenir une clé privée afin de déchiffrer les messages reçus, chiffrés avec une certaine identité.
 	\item \textit{Set-Public-Key.} Le client ne le fait qu'une fois, il calcule sa clé publique en fonction de sa valeur secrète.
 	\item \textit{Encrypt.} Chiffre un message avec la clé publique du destinataire et son identité.
 	\item \textit{Decrypt.} Déchiffre un message utilisant sa clé privée et l'identité utilisée pendant le chiffrement.
 \end{itemize}
 \subsection{Signature}
-Pour la signature les algorithmes sont les mêmes avec une différence dans leur conception et évidemment le \textit{Encrypt} et \textit{Decrypt} sont remplacé par \textit{Sign} et \textit{Verify}.
+Pour la signature, les algorithmes sont les mêmes avec une différence dans leur conception et évidemment le \textit{Encrypt} et \textit{Decrypt} sont remplacé par \textit{Sign} et \textit{Verify}.
 %TODO compléter voir tableau
-Dans la littérature certificateless les schémas de signatures sont beaucoup plus cassés que ceux de chiffrement apparemment (voir tableau ). Il faut donc faire attention à suivre les schémas afin de vérifier que le schéma choisi ne soit pas mis à mal.
+
+Dans la littérature certificateless, les schémas de signatures sont apparemment beaucoup plus cassés que ceux de chiffrement (voir tableau en Annexe \ref{ch:fichiers}). Il faut donc faire attention à vérifier régulièrement les différents schémas afin de vérifier que le schéma choisi ne soit pas mis à mal.
 \section{Design du protocole}
 Dans cette section le fonctionnement du protocole est décrit à l'aide de diagramme de séquences. Des notations sont utilisées afin de séparer correctement les paramètres utiles au chiffrement sont dénotés d'un E alors que les paramètres pour la signature sont dénotés d'un S.
 %TODO : ajouter setup
 \subsection{Premier contact}
-Description du premier contact effectué avec le KGC. Le KGC nécessites d'être initialisé avant ce premier contact. 
+Description du premier contact effectué avec le KGC. Le KGC nécessite d'être initialisé avant ce premier contact. 
 \begin{figure}
 [h!]
 	\centering
@@ -68,11 +71,11 @@ Description du premier contact effectué avec le KGC. Le KGC nécessites d'être
 	\label{fig:firstConn}
 \end{figure}
 
-La Figure \ref{fig:firstConn} permet de schématiser la première connexion d'un utilisateur.
-Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoi les paramètres publiques ($mpk_S$ et $mpk_E$) si aucun utilisateur n'a déjà cet email. Ces paramètres publiques sont assez lourd, en effet, ils font environ 52 kB au total.
+La Figure \ref{fig:firstConn} permet d'expliquer la première connexion d'un utilisateur.
+Alice veut s'enregistrer auprès du KGC, ainsi le KGC lui renvoie les paramètres publiques ($mpk_S$ et $mpk_E$) si aucun utilisateur n'a déjà cette adresse email (ID). Ces paramètres publiques sont assez lourds, en effet, ils font environ 52 kB au total.
 
-L'utilisateur va alors crée sa valeur secrète puis générer sa clé publique.
-Pour finir Alice envoi sa clé publique au KGC afin qu'il l'associe à son ID et puisses le donner aux personnes qui veulent envoyer un mail à Alice.
+L'utilisateur va alors créer sa valeur secrète puis générer sa clé publique.
+Pour finir, Alice envoie sa clé publique au KGC afin qu'il l'associe à son ID et puisse le donner aux personnes qui veulent envoyer un mail à Alice.
 \subsection{Envoi d'un message}
 Présentation des différentes actions faites lors de l'envoi d'un message d'Alice à Bob. La Figure \ref{fig:aliceSends} permet d'avoir un aperçu du fonctionnement du protocole.
 %TODO modifier schéma pour contact KGC au début ou récupération en local
@@ -97,13 +100,13 @@ Présentation des différentes actions faites lors de l'envoi d'un message d'Ali
 		\begin{callself}{A}{$s' = Sign(c', SKS_{Alice})$}{}
 		\end{callself}
 		\postlevel
-		\begin{callself}{A}{$c, t = AESGCM_{AESK}(mesage)$}{}
+		\begin{callself}{A}{$c, t = AESGCM_{AESK}(message)$}{}
 		\end{callself}
 		\postlevel
 		\begin{call}{A}{time, c', c, t, s', IV}{C}{}
 		\end{call}
 	\end{sequencediagram}
-	\caption{Alice envoi un message à Bob}
+	\caption{Alice envoie un message à Bob}
 	\label{fig:aliceSends}
 \end{figure}
 
@@ -111,10 +114,10 @@ Ainsi, l'envoi d'un message se déroule comme suit :
 \begin{itemize}
 	\item Tout d'abord, Alice va récupérer le clé publique de Bob via son ID (aka email).
 	\item Elle devra aussi récupérer sa clé privée partielle de signature pour créer ses clés privées afin de signer le message. Elle va le faire à l'aide de son ID et du même timestamp qu'utilisé pour la suite.
-	\item Elle va ensuite tirer une valeur aléatoire dans Gt qui représentera sa clé AES pour la suite, elle va chiffrer cet élément à l'aide de la clé publique de Bob et de son ID complété par un timestamp. Ce timestamp sert à garder une certaine Forward Secrecy comme expliqué dans la Section \ref{subsec:pseudoSecrecy}. Le texte chiffré sera c'.
+	\item Elle va ensuite tirer une valeur aléatoire dans Gt qui représentera sa clé AES pour la suite. Elle va chiffrer cet élément à l'aide de la clé publique de Bob et de son ID complété par un timestamp. Ce timestamp sert à garder une certaine Forward Secrecy comme expliqué dans la Section \ref{subsec:pseudoSecrecy}. Le texte chiffré sera c'.
 	\item Elle va calculer la signature du texte chiffré donné (s' sur la Figure \ref{fig:aliceSends})
-	\item Alice utilisera un chiffrement authentifié comme AES\_GCM pour chiffrer et authentifié son mail à Bob, t pour le tag et c pour le texte chiffré.
-	\item Finalement elle va envoyer tout ces éléments à bob (à savoir, l'ID utilisé, c, c', t, s' et l'IV utilisé pour AES\_GCM).
+	\item Alice utilisera un chiffrement authentifié comme AES\_GCM pour chiffrer et authentifier son mail à Bob, t pour le tag et c pour le texte chiffré.
+	\item Finalement elle va envoyer tous ces éléments à Bob (à savoir, l'ID utilisé, c, c', t, s' et l'IV utilisé pour AES\_GCM).
 \end{itemize}
 
 \subsection{Réception d'un message}
@@ -151,10 +154,10 @@ Présentation des différentes actions faites lors de la réception d'un message
 	\label{fig:bobReceives}
 \end{figure}
 
-Ainsi la réception déclence les étapes suivantes :
+Ainsi la réception déclenche les étapes suivantes :
 \begin{itemize}
-	\item A la réception la première chose à faire et de vérifier le texte chiffré de la clé AES. Pour cela l'on va demander la clé publique d'Alice au KGC. Puis on va vérifier ce texte chiffré c' à l'aide de sa signature s'.
+	\item A la réception, la première chose à faire est de vérifier le texte chiffré de la clé AES. Pour cela, on va demander la clé publique d'Alice au KGC. Puis on va vérifier ce texte chiffré c' à l'aide de sa signature s'.
 	\item Ensuite Bob va récupérer sa clé privée partielle via le KGC en fournissant son ID avec le timestamp envoyé par Alice. Il va ainsi pouvoir former sa clé privée.
 	\item Avec s clé privée il va pouvoir déchiffrer c' et obtenir la clé AES pour la suite.
-	\item Une fois que l'on a la clé AES l'on peut simplement déchiffrer à l'aide d'AES\_GCM c pour obtenir le message initial.
+	\item Une fois que l'on a la clé AES on peut simplement déchiffrer à l'aide d'AES\_GCM le chiffré c pour obtenir le message initial.
 \end{itemize}

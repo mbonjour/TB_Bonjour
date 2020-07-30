@@ -275,37 +275,28 @@ De plus, pour avoir une \textit{forward secrecy}, on peut ajouter une notion de 
 \subsection{Résultats des recherches}
 Comme mentionné avant, les recherches ont beaucoup été orientées sur le protocole Signal qui a une très bonne forward secrecy, résilience et break-in recovery. Cependant, le problème avec l'utilisation des mails, c'est d'avoir envie de consulter tous ses mails depuis n'importe quel appareil. Ce n'est malheureusement pas le cas avec Signal à moins de conserver une \textit{root key} quelque part qui ferait s'effondrer les caractéristiques principales du protocole.
 
-%TODO
-%TODO
-%TODO\\
-%TODO\\depuis ici LA RELECTURE DES CORRECTIONS
-%TODO\\
-%TODO\\
-%TODO
-S/MIME est la solution prédominante pour s'envoyer des mails chiffrés cependant il est compliqué de l'utiliser. Il et en effet difficile d'obtenir un certificat pour envoyer des mails et échanger avec une autre personne ayant S/MIME. De plus la complexité d'un système de PKI et l'overhead induit est assez conséquent.
+S/MIME est la solution prédominante pour s'envoyer des mails chiffrés, cependant il est compliqué de l'utiliser. Il est en effet difficile d'obtenir un certificat pour envoyer des mails et échanger avec une autre personne ayant S/MIME. De plus, la complexité d'un système de PKI et l'overhead induit est assez conséquent.
 
-En faisant quelques essais PGP de mon côté je me suis heurté à beaucoup de difficultés et de problèmes avec les clés PGP, notamment pour se les échanger mais pour envoyer ensuite ce n'est pas si complexe, le problème étant de bien voir les primitives utilisées pour chiffrer/signer notre email, en effet les solutions \textit{plug-and-play like} ne permettent pas une gestion précise des primitives cryptographiques utilisées, ce qui pourrait induire à des primitives par défaut non sécurisées, comme l'a démontré EFAIL(c.f. \ref{attacks:EFAIL}).
-
-
+En faisant quelques essais PGP de mon côté, je me suis heurté à beaucoup de difficultés et de problèmes avec les clés PGP. Notamment pour se les échanger, mais pour envoyer un mail ensuite ce n'est pas si complexe. Le problème étant de bien voir les primitives utilisées pour chiffrer/signer notre email, en effet, les solutions \textit{plug-and-play like} ne permettent pas une gestion précise des primitives cryptographiques utilisées. Cela pourrait induire à des primitives par défaut non sécurisées, comme l'a démontré EFAIL(c.f. \ref{attacks:EFAIL}).
 
 % TODO récapitulatif des implémentations présentées, propriétés, etc
 \section{Primitives}
-Cette Section présente les primitives considérées pour implémenter un système de messagerie sécurisée. Elle contient un aperçu des primitives analysées, pourquoi elle a été ou non retenue et leur fonctionnement en quelques mots.
+Cette section présente les primitives considérées pour implémenter un système de messagerie sécurisée. Elle contient un aperçu des primitives analysées, pourquoi elle a été ou non retenue et leur fonctionnement en quelques mots.
 \subsection{Primitives analysées}
-Les primitives analysées sont présentées si après. Elles ont en commun de s'appuyer sur un principe basé sur l'identité. C'est très pratique dans un système de mail car une identité peut-être très vite définie par le biais d'une adresse email. Voici donc les technologies auxquelles les recherches se sont portées :
+Les primitives analysées sont présentées ci-après. Elles ont en commun de s'appuyer sur un principe basé sur l'identité. C'est très pratique dans un système de mail car une identité peut-être très vite définie par le biais d'une adresse email. Voici donc les technologies auxquelles les recherches se sont portées :
 %TODO : Expliquer les différentes primitives
 \begin{itemize}
-	\item Identity based encryption~\cite{DBLP:conf/crypto/Shamir84}, primitive instaurant en premier le binding entre un ID et le chiffrement, ceci afin d'éviter les infrastructures complexes de PKI. Cependant, cette primitive introduit le \textit{key escrow problem}, un problème inhérent de la construction qui nécessite un KGC générant les clés privées pour les utilisateurs et qui en apar la conséquente connaissance.
+	\item Identity based encryption~\cite{DBLP:conf/crypto/Shamir84}, primitive instaurant en premier le binding entre un ID et le chiffrement, ceci afin d'éviter les infrastructures complexes de PKI. Cependant, cette primitive introduit le \textit{key escrow problem}, un problème inhérent de la construction qui nécessite un KGC générant les clés privées pour les utilisateurs et qui en a par la conséquente connaissance.
 	% TODO remettre ce qu'Alex avait envoyé A Forward-Secure Public-Key Encryption Scheme∗
 	\item HIBE - Hierarchical Identity Based encryption~\cite{DBLP:conf/eurocrypt/HorwitzL02}
 	\item Certificateless PKC~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03} (Voir ci-après)
 \end{itemize}
 \subsection{Primitive choisie}
 - Certificateless PKC~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}\\
- Cette primitive a été choisie car elle est similaire à de l'identity based encryption avec un ID pour désigner une clé publique. Le problème avec l'identity based encryption c'est le fait que le serveur central génère la clé publique et la clé secrète de l'utilisateur, cela amène ce qu'on appelle le \textit{key escrow} problème. C'est le fait qu'une entité connaisse à elle seule toutes les clés de tout les utilisateurs. Ce problème est résolu dans le certificateless en introduisant des \textit{Partial Private Keys} permettant d'avoir une clé secrète partiellement générée par le serveur (KGC - Key Generation Center) et par l'utilisateur puis assemblée pour former la clé privée seulement connue de l'utilisateur. De plus, cette primitive a l'avantage de ne pas introduire de certificats et ainsi évites la complexité d'une infrastructure de PKI (Public Key Infrastructure).
+ Cette primitive a été choisie car elle est similaire à de l'identity based encryption avec un ID pour désigner une clé publique. Le problème avec l'identity based encryption c'est le fait que le serveur central génère la clé publique et la clé secrète de l'utilisateur, cela amène ce qu'on appelle le \textit{key escrow} problème. C'est le fait qu'une entité connaisse à elle seule toutes les clés de tous les utilisateurs. Ce problème est résolu dans le certificateless en introduisant des \textit{Partial Private Keys} permettant d'avoir une clé secrète partiellement générée par le serveur (KGC - Key Generation Center) et par l'utilisateur puis assemblée pour former la clé privée seulement connue de l'utilisateur. De plus, cette primitive a l'avantage de ne pas introduire de certificats et ainsi évite la complexité d'une infrastructure de PKI (Public Key Infrastructure).
 \section{Recherches sur la primitive}
 \label{sec:primitiveSearch}
-Dans cette section je vais introduire les détails techniques et les principes mathématiques utilisés. De plus, le choix de schéma parmi tous ceux analysés est détaillé ici. Ainsi que des précisions sur certains principes introduit par ce schéma.
+Dans cette section je vais introduire les détails techniques et les principes mathématiques utilisés. De plus, le choix du schéma parmi tous ceux analysés est détaillé ici. Ainsi que des précisions sur certains principes introduits par ce schéma.
 \subsection{Principes mathématiques}
 \label{subsec:mathPairings}
 Les variantes de \textit{Certificateless Cryptography} choisies utilisent un concept appelé les \textit{pairings} ou \textit{bilinear map groups} ou \textit{couplages}. Les informations suivantes ainsi que le choix de la librairie découle du livre \textit{Guide to Pairing-Based Cryptography}~\cite{bookPairing}.
@@ -322,38 +313,38 @@ Plusieurs types de Pairings existent :
 	\item \textbf{Type 2} : Lorsque $\mathbb{G}_1 \ne \mathbb{G}_2$ mais qu'un isomorphisme $\phi : \mathbb{G}_1 \rightarrow \mathbb{G}_2$ est connu, mais pas dans l'autre direction.
 	\item \textbf{Type 3} : Lorsque $\mathbb{G}_1 \ne \mathbb{G}_2$ et qu'aucun isomorphise est connu entre $\mathbb{G}_1$ et $\mathbb{G}_2$, dans n'importe quelle direction.
 \end{itemize}
-Les différents schémas analysés utilisent souvent les pairings de Type 1, cependant la courbe utilisée, et RELIC me permet de faire des Type 3. Une conversion est faite dans les schémas choisis comme vu ci-après. En effet, les type 3 sont des pairings plus efficients avec des courbes plus petites tandis que les type 1 étaient plus utilisé dans les débuts de la \textit{Pairing Based Cryptography}.
+Les différents schémas analysés utilisent souvent les pairings de Type 1, cependant la courbe utilisée et RELIC me permet de faire des pairings de Type 3. Une conversion est faite dans les schémas choisis comme vu ci-après. En effet, les pairings de Type 3 sont des pairings plus efficients avec des courbes plus petites tandis que les pairings de type 1 étaient plus utilisés dans les débuts de la \textit{Pairing Based Cryptography}.
 \subsection{Notations}
 \label{subsec:asavoir}
-Avant d'analyser les différents schémas, il faut connaître certaines notions présentes dans les tableaux comparatifs afin de mieux les comprendre. Liste non exhaustive de ces notions et de leurs significations et faites ici.
+Avant d'analyser les différents schémas, il faut connaître certaines notions présentes dans les tableaux comparatifs afin de mieux les comprendre. Liste non exhaustive de ces notions et de leurs significations est faite ici.
 
-\paragraph*{Types.}Les types présentés peuvent être soit \textbf{concret} soit \textbf{générique}. Les types concrets sont des schémas qui présentent leurs algorithmes en utilisant des calculs bien établis et présentent l'entierté du fonctionnement de leur schéma, tandis que les schémas présenté génériques peuvent s'appuyer sur d'autres problèmes et se baser sur des algorithmes déjà existants.
+\paragraph*{Types.}Les types présentés peuvent être soit \textbf{concret} soit \textbf{générique}. Les types concrets sont des schémas qui présentent leurs algorithmes en utilisant des calculs bien établis et présentent l'entierté du fonctionnement de leurs schémas, tandis que les schémas présentés génériques peuvent s'appuyer sur d'autres problèmes et se baser sur des algorithmes déjà existants.
 
-\paragraph*{Modèle de sécurité.} Ces modèles définissent sur quoi le schéma va se reposer pour établir sa sécurité et comment il va l'évaluer face à un adversaire. À nouveau il existe deux modèles présents dans les schémas analysés, le \textit{Random Oracle Model} et le \textit{Standard Model}. Le \textit{Random Oracle Model} se base sur des oracles aléatoires mais est un peu controversé, en effet l'aléatoire cryptographiquement sûr est difficile à atteindre, ainsi habituellement le \textit{Random Oracle Model} implémente ces oracles via des fonctions de hachage. Le modèle standard se base lui sur des problèmes mathématiquement difficiles tel que DDH (Decisional Diffie Hellman).
+\paragraph*{Modèle de sécurité.} Ces modèles définissent sur quoi le schéma va se reposer pour établir sa sécurité et comment il va l'évaluer face à un adversaire. À nouveau, il existe deux modèles présents dans les schémas analysés, le \textit{Random Oracle Model} et le \textit{Standard Model}. Le \textit{Random Oracle Model} se base sur des oracles aléatoires mais est un peu controversé. En effet, l'aléatoire cryptographiquement sûr est difficile à atteindre, ainsi habituellement le \textit{Random Oracle Model} implémente ces oracles via des fonctions de hachage. Le modèle standard se base lui sur des problèmes mathématiquement difficiles tel que DDH (Decisional Diffie Hellman).
 
 \paragraph*{Modèle d'adversaires.}
-Pour évaluer les schémas de certificateless public key cryptography il y a différents niveaux de sécurité établis pour 2 types d'adversaires différents. Ces adversaires ont été décrits dans le papier d'Al-Riyami-Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03} pour la première fois afin de prouver que leur schéma était IND-CCA sûr dans le modèle Standard. Ces deux adversaires ont été définit comme suit :
+Pour évaluer les schémas de certificateless public key cryptography il y a différents niveaux de sécurité établis pour deux types d'adversaires différents. Ces adversaires ont été décrits dans le papier d'Al-Riyami-Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03} pour la première fois afin de prouver que leurs schémas était IND-CCA sûr dans le modèle Standard. Ces deux adversaires ont été défini comme suit :
 
 \begin{itemize}
-	\item Type I (\textit{outsider adversaries}) est permis de remplacer des clés publiques, obtenir des clés partiels privées, et des clés privées puis faire des requêtes de déchiffrements.
-	\item Type II (\textit{honest but curious KGC}). L'adversaire de Type II est en fait un KGC connaissant la Master Secret Key et qui peut donc générer des PPK, obtenir des clés privées et faire des requêtes de déchiffrement tout en faisant confiance à ce KGC pour pas qu'il ne remplace de clés publiques.
+	\item Type I (\textit{outsider adversaries}) est permis de remplacer des clés publiques, obtenir des clés partielles privées, et des clés privées puis faire des requêtes de déchiffrements.
+	\item Type II (\textit{honest but curious KGC}). L'adversaire de Type II est en fait un KGC connaissant la Master Secret Key et qui peut donc générer des PPK, obtenir des clés privées et faire des requêtes de déchiffrement tout en faisant confiance à ce KGC pour ne pas qu'il remplace des clés publiques.
 \end{itemize}
 
 %TODO ajouter des spécifications de la présentation
-Pour chacun des types d'adversaires il existe différents niveaux de sécurité comme définit dans le livre \textit{Introduction to Ceritifcateless Cryptography}~\cite{bookIntroCertificateless}.
+Pour chacun des types d'adversaires, il existe différents niveaux de sécurité comme défini dans le livre \textit{Introduction to Ceritifcateless Cryptography}~\cite{bookIntroCertificateless}.
 \subsection{Schémas Certificateless de Chiffrement}
-Pour choisir parmi les nombreux schémas existants en certificateless pour le chiffrement j'ai établi un tableau comparatif des différentes manières de faire, inspiré de~\cite{bookIntroCertificateless}. En suivant ce tableau je me suis rendu compte que la construction de Dent-Libert-Paterson~\cite{DBLP:conf/pkc/DentLP08} était probablement la plus adaptée en vue des propriétés qu'elle présentait. Le tableau se trouve en annexe \ref{ch:fichiers}.
+Pour choisir parmi les nombreux schémas existants en certificateless pour le chiffrement j'ai établi un tableau comparatif des différentes manières de faire, inspiré de~\cite{bookIntroCertificateless}. En suivant ce tableau, je me suis rendu compte que la construction de Dent-Libert-Paterson~\cite{DBLP:conf/pkc/DentLP08} était probablement la plus adaptée en vue des propriétés qu'elle présentait. Le tableau se trouve en annexe \ref{ch:fichiers}.
 
 \subsection{Détails techniques}
-Les détails techniques sur le chiffrement avec la \textit{Certificateless Cryptography}. Afin de faire la liaison avec l'implémentation, le code C montrant l'implémentation de chaque algorithme est listé. Ce code est simplifié pour ne pas inclure la création des différents éléments, il est là uniquement pour montrer comment les calculs ont été effectués et non comment la mémoire a été allouée.
+Les détails techniques sur le chiffrement avec la \textit{Certificateless Cryptography} sont présentés ci-après. Afin de faire la liaison avec l'implémentation, le code C montrant l'implémentation de chaque algorithme est listé. Ce code est simplifié pour ne pas inclure la création des différents éléments, il est là uniquement pour montrer comment les calculs ont été effectués et non comment la mémoire a été allouée.
 
 Le chiffrement se base sur le problème difficile \textit{The Decision 3-Party Diffie-Hellman Problem} (3-DDH), décider si $T =g^{abc}$ ayant $(g^a, g^b, g^c, T) \in \mathbb{G}_4$.
 
-Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/pkc/DentLP08} et les expliquer. Cependant, dans~\cite{DBLP:conf/pkc/DentLP08} les pairings symétriques sont utilisés (c.f. Section \ref{subsec:mathPairings}) mais il est mentionné que l'adaptation à des pairings asymétrique est triviale, c'est donc les pairings asymétriques qui seront utilisés. De plus,~\cite{DBLP:conf/pkc/DentLP08} utilise un groupe multiplicatif ainsi la conversion vers un groupe additif (afin d'utiliser des courbes elliptiques) est faite ainsi les calculs peuvent être lus plus facilement avec l'implémentation faite :
+Pour expliquer les détails techniques, je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/pkc/DentLP08} et les expliquer. Cependant, dans~\cite{DBLP:conf/pkc/DentLP08} les pairings symétriques sont utilisés (c.f. Section \ref{subsec:mathPairings}) mais il est mentionné que l'adaptation à des pairings asymétriques est triviale, c'est donc les pairings asymétriques qui seront utilisés. De plus,~\cite{DBLP:conf/pkc/DentLP08} utilise un groupe multiplicatif, ainsi la conversion vers un groupe additif (car l'implémentation utilise des courbes elliptiques) est faite. Cela facilite la lecture avec l'implémentation faite :
 
 \textbf{Setup($1^k, n$) :} Avec $\mathbb{G}_1, \mathbb{G}_2, \mathbb{G}_T$ avec un ordre $p > 2^k$. $g$ est un générateur de $\mathbb{G}_1$. Ensuite  $g_1 = g \cdot \gamma$ pour un $\gamma \leftarrow  \mathbb{Z}_p^*$ aléatoire. Puis $g_2 \leftarrow \mathbb{G}_2$. Deux vecteurs (U,V) seront tirés aléatoirement dans $\mathbb{G}_2^{n+1}$ en tant que fonctions de hash notés :
 \[F_u(ID) = u' \sum_{i=1}^{n} u_j^{i_j}\quad\mathrm{and}\quad F_v(w) = v' \sum_{i=1}^{n} v_j^{w_j}\]
-L'on va aussi prendre une fonction de hash résistante aux collisions : $H : \{0,1\}^* \rightarrow \{0,1\}^n$. Au final notre $mpk$ (master public key) est :
+On va aussi prendre une fonction de hash résistante aux collisions : $H : \{0,1\}^* \rightarrow \{0,1\}^n$. Au final notre $mpk$ (master public key) est :
 \[mpk \leftarrow (g, g_1, g_2, U, V)\]
 Et le $msk$ (master seret key) est $msk \leftarrow g_2 \cdot \gamma$.
 
@@ -423,10 +414,10 @@ Et le $msk$ (master seret key) est $msk \leftarrow g_2 \cdot \gamma$.
 	}
 \end{sourcebox}
 
-\textbf{SetPriv($x_{ID}, d_{ID}, mpk$) :} On choisit $r' \leftarrow \mathbb{Z}_p^*$ puis on reprends $(d_1, d_2) \leftarrow d_{ID}$ et l'on va prendre en secret key : 
+\textbf{SetPriv($x_{ID}, d_{ID}, mpk$) :} On choisit $r' \leftarrow \mathbb{Z}_p^*$ puis on reprends $(d_1, d_2) \leftarrow d_{ID}$ et on va prendre en secret key : 
 %TODO : Revoir si assez complet :
 \[sk_{ID} \leftarrow (s_1, s_2) = (d_1 \cdot x_{ID} + F_u(ID) \cdot r', d_2 \cdot x_{ID} + g \cdot r')\]
-Avec $sk_{ID}$ étant la clé secrète de l'utilisateur, donnée par l'Extract (notre Partial Private Key) et la valeur secrète de SetSec.
+Avec $sk_{ID}$ étant la clé secrète de l'utilisateur, donnée par l'Extract (notre Partial Private Key) est la valeur secrète de SetSec.
 
 \begin{sourcebox}{c}{Création de la clé privée}
 	void setPriv(bn_t x, encryption_ppk d, encryption_mpk mpk, char* ID, encryption_sk* secretKeys){
@@ -453,7 +444,7 @@ Avec $sk_{ID}$ étant la clé secrète de l'utilisateur, donnée par l'Extract (
 	}
 \end{sourcebox}
 
-\textbf{Encrypt($m, pk_{ID}, ID, mpk$) :} Pour chiffrer $m \in \mathbb{G}_T$, l'on va reprendre $(X,Y) \leftarrow pk_{ID}$. Pour chiffrer ce message on va tiré aléatoirement $s \leftarrow \mathbb{Z}_p^*$ puis calculer : 
+\textbf{Encrypt($m, pk_{ID}, ID, mpk$) :} Pour chiffrer $m \in \mathbb{G}_T$, on va reprendre $(X,Y) \leftarrow pk_{ID}$. Pour chiffrer ce message on va tirer aléatoirement $s \leftarrow \mathbb{Z}_p^*$ puis calculer : 
 \[C = (C_0, C_1, C_2, C_3) \leftarrow (m + e(Y, g_2) \cdot s, g \cdot s,F_u(ID) \cdot s, F_v(w) \cdot s )\]
 Où $w \leftarrow H(C_0,C_1, C_2, ID, pk_{ID})$.
 
@@ -493,7 +484,7 @@ Où $w \leftarrow H(C_0,C_1, C_2, ID, pk_{ID})$.
 	}
 \end{sourcebox}
 
-\textbf{Decrypt($C, sk_{ID}, mpk$) :} L'on peut reprendre $(C_0,C_1,C_2,C_3) \leftarrow C$ et la clé privée $(s_1, s_2) \leftarrow sk_{ID}$. Afin d'accélérer le déchiffrement le calcul suivant peut être fait en tirant une valeur aléatoire $\alpha \leftarrow \mathbb{Z}_p^*$ :
+\textbf{Decrypt($C, sk_{ID}, mpk$) :} On peut reprendre $(C_0,C_1,C_2,C_3) \leftarrow C$ est la clé privée $(s_1, s_2) \leftarrow sk_{ID}$. Afin d'accélérer le déchiffrement le calcul suivant peut être fait en tirant une valeur aléatoire $\alpha \leftarrow \mathbb{Z}_p^*$ :
 \[m = C_0 + \frac{e(s_2 + \alpha \cdot g, C_2 ) \cdot e(\alpha \cdot g, C_3)}{e(C_1, s_1 + F_u(ID) \cdot \alpha + F_v(w) \cdot \alpha)}\]
 Qui donnera $m$ le texte en clair si le chiffré était bien formaté ou un élément aléatoire dans $G_T$.
 
@@ -531,7 +522,7 @@ Qui donnera $m$ le texte en clair si le chiffré était bien formaté ou un él�
 
 \subsection{Schémas Certificateless de Signature}
 %TODO : Expliquer Malicious KGC (Type II -> à renseigner (voir dans le livre)) et mettre tableaux^
-Pour choisir parmi les nombreux schémas certificateless pour la signature j'ai établi un tableau comparatif des différentes manières de faire inspiré de~\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau il y a peu de solutions qui se dégage, en effet l'on peut voir que beaucoup de schémas de signature sont cassés, mon choix s'est porté au final sur la construction de Zhang et Zhang~\cite{DBLP:conf/acns/ZhangWXF06} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) datant de 2006 et n'a pas été cassée depuis. Le tableau se trouve en Annexe \ref{ch:fichiers}.
+Pour choisir parmi les nombreux schémas certificateless pour la signature, j'ai établi un tableau comparatif des différentes manières,de faire, inspiré de~\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau, il y a peu de solutions qui se dégagent, en effet, on peut voir que beaucoup de schémas de signature sont cassés. Mon choix s'est porté au final sur la construction de Zhang et Zhang~\cite{DBLP:conf/acns/ZhangWXF06} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) datant de 2006 et n'a pas été cassée depuis. Le tableau se trouve en Annexe \ref{ch:fichiers}.
 \subsection{Détails techniques}
 Là encore, le code C montrant l'implémentation de chaque algorithme est listé. Ce code est simplifié pour ne pas inclure la création des différents éléments, il est là uniquement pour montrer comment les calculs ont été effectués et non comment la mémoire a été allouée.
  
@@ -539,9 +530,9 @@ La signature se base sur le problème difficile \textit{The Computational Diffie
 
 Ayant $P, aP, bP$ où $a,b$ aléatoires $\in \mathbb{Z}_q^*$ il n'est pas possible de trouver $abP$.
 
-Pour expliquer les détails techniques je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/acns/ZhangWXF06} et les expliquer. Cependant dans~\cite{DBLP:conf/acns/ZhangWXF06} les pairings sont de type symétriques (c.f. Section \ref{subsec:mathPairings}), les pairings utilisés dans l'implémentation sont de type asymétrique.
+Pour expliquer les détails techniques, je vais ici montrer les calculs faits dans le schéma choisi~\cite{DBLP:conf/acns/ZhangWXF06} et les expliquer. Cependant dans~\cite{DBLP:conf/acns/ZhangWXF06} les pairings sont de type symétriques (c.f. Section \ref{subsec:mathPairings}), les pairings utilisés dans l'implémentation sont de type asymétriques.
 
-\textbf{Setup($1^k $) :} Tout d'abord l'on va prendre les groupes d'ordre $q$ énoncés auparavant. Puis on choisit un générateur $P \in \mathbb{G}_1$. La \textit{master secret key} va être choisie aléatoirement $s \in \mathbb{Z}_q^*$. Puis la clé publique calculée : $P_{pub} = sP$. Finalement, trois fonctions de hash distinctes $H_1, H_2, H_3$ vont être choisies, chacune d'elle \textit{mappant} de $\{0,1\}^*$ à $\mathbb{G}_2$. Pour cela j'ai choisi de faire du \textit{Hash Domain Separation} comme expliqué dans le Chapitre \ref{ch:impl}. L'on définit les $\mathbf{params} = (\mathbb{G}_1,\mathbb{G}_2,\mathbb{G}_T,e,q,P,P_{pub},H_1,H_2,H_3)$
+\textbf{Setup($1^k $) :} Tout d'abord on va prendre les groupes d'ordre $q$ énoncés auparavant. Puis on choisit un générateur $P \in \mathbb{G}_1$. La \textit{master secret key} va être choisie aléatoirement $s \in \mathbb{Z}_q^*$. Puis la clé publique calculée : $P_{pub} = sP$. Finalement, trois fonctions de hash distinctes $H_1, H_2, H_3$ vont être choisies, chacune d'elle \textit{mappant} de $\{0,1\}^*$ à $\mathbb{G}_2$. Pour cela j'ai choisi de faire du \textit{Hash Domain Separation} comme expliqué dans le Chapitre \ref{ch:impl}. On défini les $\mathbf{params} = (\mathbb{G}_1,\mathbb{G}_2,\mathbb{G}_T,e,q,P,P_{pub},H_1,H_2,H_3)$
 
 \begin{sourcebox}{C}{Code C pour le Setup}
 	void setupSig(int i, signature_mpk *mpk, bn_t *s){
@@ -578,7 +569,7 @@ Pour expliquer les détails techniques je vais ici montrer les calculs faits dan
 %TODO : Compléter
 \textbf{Set-Secret-Value :} La valeur secrète $x \in \mathbb{Z}_q^*$ est tirée aléatoirement.
 
-\begin{sourcebox}{C}{Code C pour créer la valeur secréte}
+\begin{sourcebox}{C}{Code C pour créer la valeur secrète}
 	void setSecSig(bn_t* x){
 		// q = Zq
 		g1_get_ord(q);
@@ -596,7 +587,7 @@ Pour expliquer les détails techniques je vais ici montrer les calculs faits dan
 	}
 \end{sourcebox}
 
-\textbf{Set-Private-Key($params, D_A, x$) :} La clé privé $SK_A$ de l'utilisateur $A$ est calculée comme ceci $SK_A = (D_A, x)$.
+\textbf{Set-Private-Key($params, D_A, x$) :} La clé privée $SK_A$ de l'utilisateur $A$ est calculée comme ceci $SK_A = (D_A, x)$.
 
 \begin{sourcebox}{C}{Code C pour la création de la clé privée}
 	void setPrivSig(bn_t x, signature_ppk d, signature_mpk mpk, char* ID, signature_sk * secretKeys){
@@ -607,7 +598,7 @@ Pour expliquer les détails techniques je vais ici montrer les calculs faits dan
 	}
 \end{sourcebox}
 
-\textbf{CL-Sign($params, m, ID_A, SK_A$) :} Tout d'abord $r \in \mathbb{Z}_q^*$ est tiré aléatoirement puis on calcules les 2 composantes de la signature :
+\textbf{CL-Sign($params, m, ID_A, SK_A$) :} Tout d'abord $r \in \mathbb{Z}_q^*$ est tiré aléatoirement puis on calcule les 2 composantes de la signature :
 \[ U = rP\]
 \[V = D_A + rH_2(m, ID_A, PK_A,U) + xH_3(m, ID_A, PK_A)\]
 Ainsi ces composantes forment la signature $\sigma = (U,V)$.
@@ -634,7 +625,7 @@ Ainsi ces composantes forment la signature $\sigma = (U,V)$.
 	}
 \end{sourcebox}
 
-\textbf{CL-Verify($params, PK_A,  m, ID_A, \sigma$) :} Tout d'abord l'on va calculer $Q_A = H_1(ID_A)$ puis vérifier cette équation afin de prouver que la signature est correcte :
+\textbf{CL-Verify($params, PK_A,  m, ID_A, \sigma$) :} Tout d'abord on va calculer $Q_A = H_1(ID_A)$ puis vérifier cette équation afin de prouver que la signature est correcte :
 \[e(V,P) = e(P_{pub}, Q_A) \cdot e(U, H_2(m, ID_A, PK_A,U)) \cdot e(PK_A, H_3(m, ID_A, PK_A)) \]
 
 \begin{sourcebox}{C}{Code C pour la vérification}
@@ -678,43 +669,44 @@ Cela permet donc d'avoir une Forward Secrecy par rapport à la clé privée, en 
 % TODO : Schéma
 
 \section{État de l'art}
-Dans cette section une analyse et une comparaison entres les différentes solutions trouvées utilisant la \textit{Certificateless Cryptography} pour une implémentation dans des systèmes de mails. Les articles sont présentés par date de publication. 
+Dans cette section, une analyse et une comparaison entre les différentes solutions trouvées utilisant la \textit{Certificateless Cryptography} pour une implémentation dans des systèmes de mails. Les articles sont présentés par date de publication. 
 
 \subsection{Email Encryption System Using Certificateless Public Key Encryption Scheme}
 L'article~\cite{DBLP:conf/itcs2/ErYTG12} présente une façon de faire pour chiffrer les mails à l'aide de \textit{Certificateless Cryptography}. Il va d'abord comparer 6 schémas pour choisir celui à utiliser par rapport à ses propriétés. Ensuite il va comparer les différents algorithmes au niveau du temps avec une implémentation simple en J2SE. 
-\paragraph*{Détails techniques.} Les détails techniques ne sont pas très fourni dans cet article, en effet, il est mentionné uniquement le choix du schéma (Whang-Huang-Yang). Puis une comparaison des temps entre les différent algorithmes de la primitive. Finalement ils présentent la différence de temps entre le chiffrement du message via le certificateless et via une clé AES qui est chiffrée avec le certificateless.
+\paragraph*{Détails techniques.} Les détails techniques ne sont pas très fourni dans cet article, en effet, il est mentionné uniquement le choix du schéma (Whang-Huang-Yang). Puis une comparaison des temps entre les différents algorithmes de la primitive. Finalement ils présentent la différence de temps entre le chiffrement du message via le certificateless et via une clé AES qui est chiffrée avec le certificateless.
 \paragraph*{Conclusion.} Ce papier nous conforte dans l'idée de l'utilisation d'AES pour la rapidité du chiffrement qui va avec cette primitive. Cependant, ils n'expliquent pas comment la clé AES est prise et chiffrée réellement. Une implémentation existe en J2SE mais je ne l'ai pas trouvée. Le schéma choisi l'a été pour son avantage de ne pas utiliser les \textit{pairings} et est donc plus rapide. Puis parmi les autres schémas qui n'utilisent pas les \textit{pairings} à ce moment là, un est de type générique (c.f. sous-section \ref{subsec:asavoir}) et l'autre est vulnérable aux \textit{outsider attacks} (c.f. sous-section \ref{subsec:asavoir}).
 
 \subsection{An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}
-L'article~\cite{endToEndSecureEmailArticle} présente une façon de chiffrer et signer dans un système de mail avec le schéma original de \textit{Certificateless Cryptography} à savoir le schéma d'Al-Riyami et Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}. Un article complet définissant bien le contexte de mails et formalisant pour la première fois un moyen de chiffrer et signer des mails avec de la \textit{Certificateless Cryptography}. Cela en expliquant dans les détails comment ils feraient, sans implémentations citées de ce schéma.
+L'article~\cite{endToEndSecureEmailArticle} présente une façon de chiffrer et signer dans un système de mails avec le schéma original de \textit{Certificateless Cryptography} à savoir le schéma d'Al-Riyami et Paterson~\cite{DBLP:conf/asiacrypt/Al-RiyamiP03}. Un article complet définissant bien le contexte de mails et formalisant pour la première fois un moyen de chiffrer et signer des mails avec de la \textit{Certificateless Cryptography}. Cela en expliquant dans les détails comment ils feraient, sans implémentations citées de ce schéma.
 %TODO A voir, j'ai l'impression qu'il y a une erreur dans le papier pour le déchiffrement de t*
-\paragraph*{Détails techniques.} Les détails techniques intéressant dans ce papier est la manière d'encapsuler la clé de chiffrement du message. Sinon le reste s'appuie sur le schéma d'Al-Riyami et Paterson.
+\paragraph*{Détails techniques.} Les détails techniques intéressants dans ce papier sont la manière d'encapsuler la clé de chiffrement du message. Sinon le reste s'appuie sur le schéma d'Al-Riyami et Paterson.
 
-Pour établir une clé de chiffrement symétrique afin de chiffrer le mail l'n va tout d'abord tirer une valeur aléatoire $t \in \mathbb{Z}_p$ puis la chiffrer avec CL-PKC en utilisant la clé publique du destinataire $t* = Enc_{P_B}$. Ce $t^*$ sera envoyé avec l' email. Pour en tirer une clé symétrique on va établir : $K_{AB} = tx_AP_B$ à l'aide de la clé privée de la source et la clé publique du destinataire et enfin la valeur aléatoire tirée auparavant. Puis l'on va calculer la clé symétrique $K = H_2(Q_A||Q_B||K_{AB})$.
-
-\paragraph*{Conclusion.} Ce papier est assez complet concernant la partie fonctionnement des mails en globalité et offres une bonne idée pour la construction d'une clé symétrique par mail envoyé. Cependant la mise en place de la clé symétrique et la preuve de son fonctionnement n'est pas très explicitée. D'ailleurs il y a selon moi une erreur dans le papier original pour la logique de déchiffrement de $t^*$ et de la récupération de la clé symétrique. De plus, le système de signature d'Al-Riyami et Paterson a été cassé par~\cite{DBLP:conf/cans/HuangSMZ05}.
+Pour établir une clé de chiffrement symétrique afin de chiffrer le mail on va tout d'abord tirer une valeur aléatoire $t \in \mathbb{Z}_p$ puis la chiffrer avec CL-PKC en utilisant la clé publique du destinataire $t* = Enc_{P_B}$. Ce $t^*$ sera envoyé avec l' email. Pour en tirer une clé symétrique on va établir : $K_{AB} = tx_AP_B$ à l'aide de la clé privée de la source et la clé publique du destinataire et enfin la valeur aléatoire tirée auparavant. Puis on va calculer la clé symétrique $K = H_2(Q_A||Q_B||K_{AB})$.
+% TODO vérifier erreur
+\paragraph*{Conclusion.} Ce papier est assez complet concernant la partie fonctionnement des mails en globalité et offre une bonne idée pour la construction d'une clé symétrique par mail envoyé. Cependant la mise en place de la clé symétrique et la preuve de son fonctionnement n'est pas très explicitée. D'ailleurs il y a selon moi une erreur dans le papier original pour la logique de déchiffrement de $t^*$ et de la récupération de la clé symétrique. De plus, le système de signature d'Al-Riyami et Paterson a été cassé par~\cite{DBLP:conf/cans/HuangSMZ05}.
 
 \subsection{Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}
-L'article~\cite{DBLP:journals/ijnsec/BalakrishnanR16} traite le problème de la même façon que le précédent mais essaies d'aller plus loin dans les détails d'un implémentation à plus grande échelle (utilisation DNS). Il reprend le même schéma et les mêmes principes pour la création de la clé symétrique de chiffrement. Le même schéma de signature est présent aussi, qui est cassé rappelons-le. Le but serait d'avoir une entrée DNS similaire au DKIM déjà utilisé pour les emails afin d'informer les utilisateurs quelle adresse donne es clés publiques du domaine en question.
+L'article~\cite{DBLP:journals/ijnsec/BalakrishnanR16} traite le problème de la même façon que le précédent mais essaie d'aller plus loin dans les détails d'une implémentation à plus grande échelle (utilisation DNS). Il reprend le même schéma et les mêmes principes pour la création de la clé symétrique de chiffrement. Le même schéma de signature est présent aussi, qui est cassé rappelons-le. Le but serait d'avoir une entrée DNS similaire au DKIM déjà utilisé pour les mails afin d'informer les utilisateurs quelle adresse distribue les clés publiques du domaine en question.
 
-\paragraph*{Détails techniques.} Beaucoup de détails concernant les domain policies qui pourraient être appliqués aux domaines pour la distribution des clés publiques. Proposition d'utiliser les headers d'emails pour transmettre la signature de l'email et informer le destinataire si l'email est chiffré ou non et de transmettre les IDS utilisés et le Timestamp utilisé. En effet, l'introduction d'un timestamp est proposé ici pour avoir un temps d'expiration au mail. Les Domain Policies sont là pour informer les utilisateurs si les emails de ce domaines doivent être signés/chiffrés ou non.
+\paragraph*{Détails techniques.} Beaucoup de détails concernant les Domain Policies qui pourraient être appliqués aux domaines pour la distribution des clés publiques. Proposition d'utiliser les headers des mails pour transmettre la signature du message et informer le destinataire si le mail est chiffré ou non et de transmettre les IDS utilisés et le Timestamp utilisé. En effet, l'introduction d'un timestamp est proposé ici pour avoir un temps d'expiration au mail. Les Domain Policies sont là pour informer les utilisateurs si les mails de ce domaine doivent être signés/chiffrés ou non.
 
-\paragraph*{Conclusion.} Une implémentation est citée utilisant la librairie MIRACL et en utilisant le C++ comme langage de programmation. L'implémentation est citée comme extension \textit{Thunderbird} en C++ / Javascript. Mais il n'y a pas de réel guide pour implémenter cela au monde réel avec des exemples de configuration DNS et autres. Pas vraiment d'explications sur l'utilisation d'une multitude de KGC ou un seul central, comment les synchroniser et autres... Par contre beaucoup d'explications sur comment pourrait fonctionner une entrée DNS afin d'informer aux utilisateurs où aller pour récupérer les clés publiques des utilisateurs du domaine en question et des policies qui pourraient s'appliquer à ce domaine.
+\paragraph*{Conclusion.} Une implémentation est citée utilisant la librairie MIRACL et en utilisant le C++ comme langage de programmation. L'implémentation est citée comme extension \textit{Thunderbird} en C++ / Javascript. Mais il n'y a pas de réel guide pour implémenter cela au monde réel avec des exemples de configuration DNS et autres. Pas vraiment d'explications sur l'utilisation d'une multitude de KGC ou un seul central, comment les synchroniser et autre... Par contre, beaucoup d'explications sur comment pourrait fonctionner une entrée DNS afin d'informer aux utilisateurs où aller pour récupérer les clés publiques des utilisateurs du domaine en question et des \textit{policies} qui pourraient s'appliquer à ce domaine.
 
 \subsection{PriviPK : Certificate-less and secure email communication}
-L'article~\cite{DBLP:journals/compsec/AlSabahTLSD17} propose une implémentation très concrète utilisant CL-PKC pour communiquer de manière sécurisée dans la messagerie électronique. Il décrit beaucoup d'aspects que les autres papiers n'ont pas mentionnés comme la \textit{key transparency}. Le papier insiste sur la transparence du protocole pour l'utilisateur afin qu'il n'ait pas d'opérations fastidieuses à faire (comme c'est le cas dans PGP et S/MIME par exemple). Ce papier s'appuie sur un système de \textit{key agreement} proposé dans la littérature de la cryptographie basée sur l'identité.
+L'article~\cite{DBLP:journals/compsec/AlSabahTLSD17} propose une implémentation très concrète utilisant CL-PKC pour communiquer de manière sécurisée dans la messagerie électronique. Il décrit beaucoup d'aspects que~\cite{DBLP:conf/itcs2/ErYTG12}~\cite{endToEndSecureEmailArticle}~\cite{DBLP:journals/ijnsec/BalakrishnanR16} n'ont pas mentionnés comme la \textit{key transparency}. L'article insiste sur la transparence du protocole pour l'utilisateur afin qu'il n'ait pas d'opérations fastidieuses à faire (comme c'est le cas dans PGP et S/MIME par exemple). Cet article s'appuie sur un système de \textit{key agreement} proposé dans la littérature de la cryptographie basée sur l'identité.
 
-\paragraph*{Détails techniques.} CONIKS serveur, authentification via les clients mails déjà existants (gmail et yahoo), mise en place d'un système de key agreement id-based repensée pour le certificateless. Analysant le code github on peut remarquer que l'implémentation faite est en fait une modification du Nylas Mail Engine. Cet Engine a été modifié quelque peu afin d'intégrer du chiffrement lors de l'envoi (sauf si la clé publique du destinataire n'est pas trouvée, auquel cas une erreur intervient). Dans le code l'on voit beaucoup de TODO laissés aux endroits ajoutés pour le chiffrement de PriviPK. 
+\paragraph*{Détails techniques.} CONIKS serveur, authentification via les clients mails déjà existants (gmail et yahoo), mise en place d'un système de key agreement id-based repensée pour le certificateless. Analysant le code github on peut remarquer que l'implémentation faite est en fait une modification du Nylas Mail Engine. Cet \textit{engine} a été modifié quelque peu afin d'intégrer du chiffrement lors de l'envoi (sauf si la clé publique du destinataire n'est pas trouvée, auquel cas une erreur intervient). Dans le code on voit beaucoup de TODO laissés aux endroits ajoutés pour le chiffrement de PriviPK. 
 
-\paragraph*{Conclusion.} Ce papier est assez intéressant et c'est la seule véritable implémentation trouvée, il y a un repository sur github\footnote{\url{https://github.com/PriviPK}}. Cependant il s'appuie sur du \textit{key agreement}, la création de la clé symétrique est effectuée via les informations de la clés publiques du destinataire ainsi que de la clé privée de la source.\\
-Par ailleurs, il insiste sur la transparence et sur l'utilisation des authentifications déjà présentes sur les clients emails comme Gmail et Yahoo.
+\paragraph*{Conclusion.} Cet article est assez intéressant et c'est la seule véritable implémentation trouvée, il y a un repository sur github\footnote{\url{https://github.com/PriviPK}}. Cependant il s'appuie sur du \textit{key agreement}, la création de la clé symétrique est effectuée via les informations de la clé publique du destinataire ainsi que de la clé privée de la source.
+
+Par ailleurs, il insiste sur la transparence et sur l'utilisation des authentifications déjà présentes sur les clients mails comme Gmail et Yahoo. Ceci afin de vérifier que l'utilisateur peut effectivement se connecter à ce compte et obtenir les mails envoyés.
 
 \subsection{A certificateless one-way group key agreement protocol for end-to-end email encryption}
-L'article~\cite{DBLP:conf/prdc/YehSDSSW18} les auteurs présentent un moyen d'avoir une clé partagée entre n-partis et avec un seul message, ce qui permet dans un système de mail d'avoir qu'à envoyer un mail avec les informations nécessaires pour recomposer la clé partagée. Cette clé partagée est utilisée afin de chiffrer le mail et de l'envoyer ensuite avec les informations nécessaires à la création de la clé partagée. De plus, le système est n-parti, cela veut dire que l'on peut envoyer le mail à n personnes et le chiffrer avec la même clé. On enverra juste pas les mêmes informations de créations de la clé partagée à tous.
+L'article~\cite{DBLP:conf/prdc/YehSDSSW18} les auteurs présentent un moyen d'avoir une clé partagée entre n-parties et avec un seul message, ce qui permet dans un système de messagerie de n'avoir qu'à envoyer un mail avec les informations nécessaires pour recomposer la clé partagée. Cette clé partagée est utilisée afin de chiffrer le mail et de l'envoyer ensuite avec les informations nécessaires à la création de la clé partagée. De plus, le système est $n$-parties, cela veut dire que l'on peut envoyer le mail à $n$ personnes et le chiffrer avec la même clé comme le fait PGP.
 
-\paragraph*{Détails techniques.} Pour ce qui est des détails techniques on peut voir que le principe est de créer une clé partagée à l'aide des différents ID et clés publiques des destinataires. On aura une sous-clé $x_i$ pour chaque utilisateur $i$. L'on va construire un $y_i = x_0 \dots x_{i-1} + x_{i+1} \dots x_n$ pour un utilisateur où l'on additionnera tout les $x$ des utilisateurs sauf de l'utilisateur $i$. Ainsi à la réception du message l'utilisateur pourra recréer la clé partagée en faisant $y_i + x_i = x_0 + \dots + x_n = K$. Ce $K$ sera ensuite utilisé pour chiffrer le mail.
+\paragraph*{Détails techniques.} Pour ce qui est des détails techniques on peut voir que le principe est de créer une clé partagée à l'aide des différents ID et clés publiques des destinataires. On aura une sous-clé $x_i$ pour chaque utilisateur $i$. On va construire un $y_i = x_0 \dots x_{i-1} + x_{i+1} \dots x_n$ pour un utilisateur où l'on additionnera tous les $x$ des utilisateurs sauf de l'utilisateur $i$. Ainsi à la réception du message, l'utilisateur pourra recréer la clé partagée en faisant $y_i + x_i = x_0 + \dots + x_n = K$. Ce $K$ sera ensuite utilisé pour chiffrer le mail.
 
-\paragraph*{Conclusion.} Ce système est simple et efficace mais ne permets pas la signature des éléments nécessaires à la création de la clé partagée, l'on peut donc envisager des DOS afin qu'un utilisateur ne puisses plus lire ces messages. Cependant c'est une construction intéressante se basant sur un \textit{key-agreement} via le \textit{Certificateless Cryptography} et non pas sur ses possibilités de chiffrement/signature.
+\paragraph*{Conclusion.} Ce système est simple et efficace mais ne permets pas la signature des éléments nécessaires à la création de la clé partagée, on peut donc envisager des DOS afin qu'un utilisateur ne puisses plus lire ces messages. Cependant, c'est une construction intéressante se basant sur un \textit{key-agreement} via le \textit{Certificateless Cryptography} et non pas sur ses possibilités de chiffrement/signature.
 
 
 

@@ -11,8 +11,8 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Erreur de vérification pour MeSince}}{11}{figure.2.5}%
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Présentation d'un email chiffré Protonmail}}{13}{figure.2.6}%
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Présentation d'un email chiffré Tutanota}}{15}{figure.2.7}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Schéma fonctionnement du DH Ratchet~\cite {doubleratchet}}}{17}{figure.2.8}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Schéma fonctionnement du deuxième Ratchet~\cite {doubleratchet}}}{18}{figure.2.9}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Fonctionnement du DH Ratchet~\cite {doubleratchet}}}{17}{figure.2.8}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Fonctionnement du deuxième Ratchet~\cite {doubleratchet}}}{18}{figure.2.9}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{35}{figure.3.1}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{37}{figure.3.2}%
