@@ -37,8 +37,6 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
-% For setting PDF
-\usepackage{hyperref}
 
 % Layout
 \usepackage{fullpage}
@@ -138,6 +136,25 @@
 \usepackage{layout}
 
 
+% For setting PDF
+\usepackage{hyperref}
+\hypersetup
+{
+%pagebackref=true,
+bookmarksopen=true,
+pdftitle="Chiffrement / signature d'emails", 
+pdfauthor="Mickael BONJOUR", 
+%pdftoolbar=false, % toolbar hidden
+pdfmenubar=true, %menubar shown
+pdfhighlight=/O, %effect of clicking on a link
+colorlinks=true, %couleurs sur les liens hypertextes
+pdfpagemode=UseNone, %aucun mode de page
+pdfpagelayout=SinglePage, %ouverture en simple page
+pdffitwindow=true, %pages ouvertes entierement dans toute la fenetre
+%linkcolor=linkcol, %couleur des liens hypertextes internes
+%citecolor=citecol, %couleur des liens pour les citations
+%urlcolor=linkcol %couleur des liens pour les url
+}
 
 % +---------------------------------------------------------------+
 % | Headers/footers

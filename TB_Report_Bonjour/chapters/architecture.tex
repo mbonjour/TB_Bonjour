@@ -1,12 +1,11 @@
 \chapter{Architecture / Design du protocole}
 % TODO : s'inspirer de PRIVIpk ET EXPLIQUER LES BESOINS EN MATIèRE DE SéCURITé
-% TODO Spécifications en texte via chapitre ou autre plus précise et ajouter un chapitre sur les notations
+% TODO Spécifications du protocole en texte via chapitre ou autre plus précise
 \label{ch:arch}
 Dans ce chapitre, je vais m'intéresser à expliquer le fonctionnement de la \textit{certificateless cryptography} et démontrer comment je l'ai utilisée afin de l'intégrer à un protocole de chiffrement de mail.
 \section{Architecture globale}
 Dans la Figure \ref{fig:globalProtocol}, je présente uniquement l'architecture globale pour bien représenter les différents acteurs présents dans le protocole et ainsi avoir une vue d'ensemble pour faciliter la compréhension.
 
-% TODO modifier schéma avec corrections
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=14cm]{images/SchemaGlobal.png}
@@ -44,10 +43,10 @@ Pour la signature, les algorithmes sont les mêmes avec une différence dans leu
 
 Dans la littérature certificateless, les schémas de signatures sont apparemment beaucoup plus cassés que ceux de chiffrement (voir tableau en Annexe \ref{ch:fichiers}). Il faut donc faire attention à vérifier régulièrement les différents schémas afin de vérifier que le schéma choisi ne soit pas mis à mal.
 \section{Design du protocole}
-Dans cette section le fonctionnement du protocole est décrit à l'aide de diagramme de séquences. Des notations sont utilisées afin de séparer correctement les paramètres utiles au chiffrement sont dénotés d'un E alors que les paramètres pour la signature sont dénotés d'un S.
-%TODO : ajouter setup
+Dans cette section le fonctionnement du protocole est décrit à l'aide de diagramme de séquences. Des notations sont utilisées afin de séparer correctement les paramètres utiles au chiffrement sont dénotés d'un E alors que les paramètres pour la signature sont dénotés d'un S. Pour les prochaines figures présentées on peut supposer que le KGC a été initialisé auparavant.
+
 \subsection{Premier contact}
-Description du premier contact effectué avec le KGC. Le KGC nécessite d'être initialisé avant ce premier contact. 
+Description du premier contact effectué avec le KGC. 
 \begin{figure}
 [h!]
 	\centering

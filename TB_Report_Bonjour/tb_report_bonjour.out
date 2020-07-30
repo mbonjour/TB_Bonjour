@@ -1,90 +1,91 @@
-\BOOKMARK [0][-]{chapter*.1}{Pr\351ambule}{}% 1
-\BOOKMARK [0][-]{chapter*.2}{Authentification}{}% 2
-\BOOKMARK [0][-]{chapter*.3}{Cahier des charges}{}% 3
-\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 4
-\BOOKMARK [0][-]{chapter.2}{Analyse - \311tat de l'art}{}% 5
-\BOOKMARK [1][-]{section.2.1}{Syst\350me de messagerie}{chapter.2}% 6
-\BOOKMARK [2][-]{subsection.2.1.1}{D\351tails techniques}{section.2.1}% 7
-\BOOKMARK [1][-]{section.2.2}{Protocoles existants}{chapter.2}% 8
-\BOOKMARK [2][-]{subsection.2.2.1}{PGP}{section.2.2}% 9
-\BOOKMARK [2][-]{subsection.2.2.2}{S/MIME}{section.2.2}% 10
-\BOOKMARK [1][-]{section.2.3}{Impl\351mentations existantes}{chapter.2}% 11
-\BOOKMARK [2][-]{subsection.2.3.1}{Protonmail}{section.2.3}% 12
-\BOOKMARK [2][-]{subsection.2.3.2}{Tutanota}{section.2.3}% 13
-\BOOKMARK [1][-]{section.2.4}{Attaques existantes}{chapter.2}% 14
-\BOOKMARK [2][-]{subsection.2.4.1}{D\351fauts webmails}{section.2.4}% 15
-\BOOKMARK [2][-]{subsection.2.4.2}{EFAIL}{section.2.4}% 16
-\BOOKMARK [2][-]{subsection.2.4.3}{SHA-1 Shambles}{section.2.4}% 17
-\BOOKMARK [1][-]{section.2.5}{Signal}{chapter.2}% 18
-\BOOKMARK [2][-]{subsection.2.5.1}{Fonctionnement}{section.2.5}% 19
-\BOOKMARK [2][-]{subsection.2.5.2}{Propri\351t\351s cryptographiques}{section.2.5}% 20
-\BOOKMARK [2][-]{subsection.2.5.3}{Probl\350mes d'int\351grations}{section.2.5}% 21
-\BOOKMARK [1][-]{section.2.6}{Compromis}{chapter.2}% 22
-\BOOKMARK [2][-]{subsection.2.6.1}{R\351sultats des recherches}{section.2.6}% 23
-\BOOKMARK [1][-]{section.2.7}{Primitives}{chapter.2}% 24
-\BOOKMARK [2][-]{subsection.2.7.1}{Primitives analys\351es}{section.2.7}% 25
-\BOOKMARK [2][-]{subsection.2.7.2}{Primitive choisie}{section.2.7}% 26
-\BOOKMARK [1][-]{section.2.8}{Recherches sur la primitive}{chapter.2}% 27
-\BOOKMARK [2][-]{subsection.2.8.1}{Principes math\351matiques}{section.2.8}% 28
-\BOOKMARK [2][-]{subsection.2.8.2}{Notations}{section.2.8}% 29
-\BOOKMARK [2][-]{subsection.2.8.3}{Sch\351mas Certificateless de Chiffrement}{section.2.8}% 30
-\BOOKMARK [2][-]{subsection.2.8.4}{D\351tails techniques}{section.2.8}% 31
-\BOOKMARK [2][-]{subsection.2.8.5}{Sch\351mas Certificateless de Signature}{section.2.8}% 32
-\BOOKMARK [2][-]{subsection.2.8.6}{D\351tails techniques}{section.2.8}% 33
-\BOOKMARK [2][-]{subsection.2.8.7}{Ajout d'une pseudo Forward Secrecy}{section.2.8}% 34
-\BOOKMARK [1][-]{section.2.9}{\311tat de l'art}{chapter.2}% 35
-\BOOKMARK [2][-]{subsection.2.9.1}{Email Encryption System Using Certificateless Public Key Encryption Scheme}{section.2.9}% 36
-\BOOKMARK [2][-]{subsection.2.9.2}{An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{section.2.9}% 37
-\BOOKMARK [2][-]{subsection.2.9.3}{Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}{section.2.9}% 38
-\BOOKMARK [2][-]{subsection.2.9.4}{PriviPK : Certificate-less and secure email communication}{section.2.9}% 39
-\BOOKMARK [2][-]{subsection.2.9.5}{A certificateless one-way group key agreement protocol for end-to-end email encryption}{section.2.9}% 40
-\BOOKMARK [0][-]{chapter.3}{Architecture / Design du protocole}{}% 41
-\BOOKMARK [1][-]{section.3.1}{Architecture globale}{chapter.3}% 42
-\BOOKMARK [1][-]{section.3.2}{Acteurs}{chapter.3}% 43
-\BOOKMARK [1][-]{section.3.3}{Fonctionnement Certificateless PKC}{chapter.3}% 44
-\BOOKMARK [2][-]{subsection.3.3.1}{Chiffrement}{section.3.3}% 45
-\BOOKMARK [2][-]{subsection.3.3.2}{Signature}{section.3.3}% 46
-\BOOKMARK [1][-]{section.3.4}{Design du protocole}{chapter.3}% 47
-\BOOKMARK [2][-]{subsection.3.4.1}{Premier contact}{section.3.4}% 48
-\BOOKMARK [2][-]{subsection.3.4.2}{Envoi d'un message}{section.3.4}% 49
-\BOOKMARK [2][-]{subsection.3.4.3}{R\351ception d'un message}{section.3.4}% 50
-\BOOKMARK [0][-]{chapter.4}{Impl\351mentation}{}% 51
-\BOOKMARK [1][-]{section.4.1}{Choix d'impl\351mentations}{chapter.4}% 52
-\BOOKMARK [2][-]{subsection.4.1.1}{Langage}{section.4.1}% 53
-\BOOKMARK [2][-]{subsection.4.1.2}{Librairie cryptographique}{section.4.1}% 54
-\BOOKMARK [2][-]{subsection.4.1.3}{Courbe utilis\351e}{section.4.1}% 55
-\BOOKMARK [2][-]{subsection.4.1.4}{D\351rivation de la cl\351 AES}{section.4.1}% 56
-\BOOKMARK [2][-]{subsection.4.1.5}{Pseudo Forward Secrecy- Timestamp}{section.4.1}% 57
-\BOOKMARK [2][-]{subsection.4.1.6}{Fonctions de hachage - signature}{section.4.1}% 58
-\BOOKMARK [2][-]{subsection.4.1.7}{S\351rialisation des donn\351es}{section.4.1}% 59
-\BOOKMARK [2][-]{subsection.4.1.8}{Enregistrement des cl\351s publiques \(serveur\)}{section.4.1}% 60
-\BOOKMARK [2][-]{subsection.4.1.9}{R\351cup\351ration via IMAP}{section.4.1}% 61
-\BOOKMARK [1][-]{section.4.2}{Impl\351mentation cl\351s de chiffrement}{chapter.4}% 62
-\BOOKMARK [1][-]{section.4.3}{Fonctionnement global POC \(KGC\)}{chapter.4}% 63
-\BOOKMARK [2][-]{subsection.4.3.1}{Fonctionnement}{section.4.3}% 64
-\BOOKMARK [2][-]{subsection.4.3.2}{Probl\350mes connus}{section.4.3}% 65
-\BOOKMARK [2][-]{subsection.4.3.3}{Am\351liorations}{section.4.3}% 66
-\BOOKMARK [1][-]{section.4.4}{Fonctionnement global POC \(Client\)}{chapter.4}% 67
-\BOOKMARK [2][-]{subsection.4.4.1}{Fonctionnement}{section.4.4}% 68
-\BOOKMARK [2][-]{subsection.4.4.2}{Probl\350mes connus}{section.4.4}% 69
-\BOOKMARK [2][-]{subsection.4.4.3}{Am\351liorations}{section.4.4}% 70
-\BOOKMARK [1][-]{section.4.5}{Comparaisons avec l'\351tat de l'art}{chapter.4}% 71
-\BOOKMARK [2][-]{subsection.4.5.1}{Propri\351t\351s cryptographiques}{section.4.5}% 72
-\BOOKMARK [2][-]{subsection.4.5.2}{Temps des diff\351rentes impl\351mentations}{section.4.5}% 73
-\BOOKMARK [2][-]{subsection.4.5.3}{Overhead induit}{section.4.5}% 74
-\BOOKMARK [2][-]{subsection.4.5.4}{Diff\351rences d'utilisabilit\351}{section.4.5}% 75
-\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 76
-\BOOKMARK [1][-]{section.5.1}{Conclusions sur l'analyse}{chapter.5}% 77
-\BOOKMARK [1][-]{section.5.2}{Conclusions sur l'impl\351mentation}{chapter.5}% 78
-\BOOKMARK [1][-]{section.5.3}{Futures directions}{chapter.5}% 79
-\BOOKMARK [0][-]{section.5.3}{Bibliographie}{}% 80
-\BOOKMARK [0][-]{appendix.A}{Outils utilis\351s pour la compilation}{}% 81
-\BOOKMARK [1][-]{section.A.1}{RELIC Toolkit}{appendix.A}% 82
-\BOOKMARK [1][-]{section.A.2}{Libsodium}{appendix.A}% 83
-\BOOKMARK [1][-]{section.A.3}{Libbinn}{appendix.A}% 84
-\BOOKMARK [1][-]{section.A.4}{Libetpan}{appendix.A}% 85
-\BOOKMARK [1][-]{section.A.5}{Libcurl}{appendix.A}% 86
-\BOOKMARK [1][-]{section.A.6}{UnQlite}{appendix.A}% 87
-\BOOKMARK [0][-]{appendix.B}{Fichiers}{}% 88
-\BOOKMARK [1][-]{section.B.1}{Code du POC}{appendix.B}% 89
-\BOOKMARK [1][-]{section.B.2}{Tableaux comparatifs}{appendix.B}% 90
+\BOOKMARK [0][]{chapter*.1}{Pr\351ambule}{}% 1
+\BOOKMARK [0][]{chapter*.2}{Authentification}{}% 2
+\BOOKMARK [0][]{chapter*.3}{Cahier des charges}{}% 3
+\BOOKMARK [0][]{chapter.1}{Introduction}{}% 4
+\BOOKMARK [0][]{chapter.2}{Analyse - \311tat de l'art}{}% 5
+\BOOKMARK [1][]{section.2.1}{Syst\350me de messagerie}{chapter.2}% 6
+\BOOKMARK [2][]{subsection.2.1.1}{D\351tails techniques}{section.2.1}% 7
+\BOOKMARK [1][]{section.2.2}{Protocoles existants}{chapter.2}% 8
+\BOOKMARK [2][]{subsection.2.2.1}{PGP}{section.2.2}% 9
+\BOOKMARK [2][]{subsection.2.2.2}{S/MIME}{section.2.2}% 10
+\BOOKMARK [1][]{section.2.3}{Impl\351mentations existantes}{chapter.2}% 11
+\BOOKMARK [2][]{subsection.2.3.1}{Protonmail}{section.2.3}% 12
+\BOOKMARK [2][]{subsection.2.3.2}{Tutanota}{section.2.3}% 13
+\BOOKMARK [1][]{section.2.4}{Attaques existantes}{chapter.2}% 14
+\BOOKMARK [2][]{subsection.2.4.1}{D\351fauts webmails}{section.2.4}% 15
+\BOOKMARK [2][]{subsection.2.4.2}{EFAIL}{section.2.4}% 16
+\BOOKMARK [2][]{subsection.2.4.3}{SHA-1 Shambles}{section.2.4}% 17
+\BOOKMARK [1][]{section.2.5}{Signal}{chapter.2}% 18
+\BOOKMARK [2][]{subsection.2.5.1}{Fonctionnement}{section.2.5}% 19
+\BOOKMARK [2][]{subsection.2.5.2}{Propri\351t\351s cryptographiques}{section.2.5}% 20
+\BOOKMARK [2][]{subsection.2.5.3}{Probl\350mes d'int\351grations}{section.2.5}% 21
+\BOOKMARK [1][]{section.2.6}{Compromis}{chapter.2}% 22
+\BOOKMARK [2][]{subsection.2.6.1}{R\351sultats des recherches}{section.2.6}% 23
+\BOOKMARK [1][]{section.2.7}{Primitives}{chapter.2}% 24
+\BOOKMARK [2][]{subsection.2.7.1}{Primitives analys\351es}{section.2.7}% 25
+\BOOKMARK [2][]{subsection.2.7.2}{Primitive choisie}{section.2.7}% 26
+\BOOKMARK [1][]{section.2.8}{Recherches sur la primitive}{chapter.2}% 27
+\BOOKMARK [2][]{subsection.2.8.1}{Principes math\351matiques}{section.2.8}% 28
+\BOOKMARK [2][]{subsection.2.8.2}{Notations}{section.2.8}% 29
+\BOOKMARK [2][]{subsection.2.8.3}{Sch\351mas Certificateless de Chiffrement}{section.2.8}% 30
+\BOOKMARK [2][]{subsection.2.8.4}{D\351tails techniques}{section.2.8}% 31
+\BOOKMARK [2][]{subsection.2.8.5}{Sch\351mas Certificateless de Signature}{section.2.8}% 32
+\BOOKMARK [2][]{subsection.2.8.6}{D\351tails techniques}{section.2.8}% 33
+\BOOKMARK [2][]{subsection.2.8.7}{Ajout d'une pseudo Forward Secrecy}{section.2.8}% 34
+\BOOKMARK [1][]{section.2.9}{\311tat de l'art}{chapter.2}% 35
+\BOOKMARK [2][]{subsection.2.9.1}{Email Encryption System Using Certificateless Public Key Encryption Scheme}{section.2.9}% 36
+\BOOKMARK [2][]{subsection.2.9.2}{An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{section.2.9}% 37
+\BOOKMARK [2][]{subsection.2.9.3}{Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}{section.2.9}% 38
+\BOOKMARK [2][]{subsection.2.9.4}{PriviPK : Certificate-less and secure email communication}{section.2.9}% 39
+\BOOKMARK [2][]{subsection.2.9.5}{A certificateless one-way group key agreement protocol for end-to-end email encryption}{section.2.9}% 40
+\BOOKMARK [0][]{chapter.3}{Architecture / Design du protocole}{}% 41
+\BOOKMARK [1][]{section.3.1}{Architecture globale}{chapter.3}% 42
+\BOOKMARK [1][]{section.3.2}{Acteurs}{chapter.3}% 43
+\BOOKMARK [1][]{section.3.3}{Fonctionnement Certificateless PKC}{chapter.3}% 44
+\BOOKMARK [2][]{subsection.3.3.1}{Chiffrement}{section.3.3}% 45
+\BOOKMARK [2][]{subsection.3.3.2}{Signature}{section.3.3}% 46
+\BOOKMARK [1][]{section.3.4}{Design du protocole}{chapter.3}% 47
+\BOOKMARK [2][]{subsection.3.4.1}{Premier contact}{section.3.4}% 48
+\BOOKMARK [2][]{subsection.3.4.2}{Envoi d'un message}{section.3.4}% 49
+\BOOKMARK [2][]{subsection.3.4.3}{R\351ception d'un message}{section.3.4}% 50
+\BOOKMARK [0][]{chapter.4}{Impl\351mentation}{}% 51
+\BOOKMARK [1][]{section.4.1}{Choix d'impl\351mentations}{chapter.4}% 52
+\BOOKMARK [2][]{subsection.4.1.1}{Langage}{section.4.1}% 53
+\BOOKMARK [2][]{subsection.4.1.2}{Librairie cryptographique}{section.4.1}% 54
+\BOOKMARK [2][]{subsection.4.1.3}{Courbe utilis\351e}{section.4.1}% 55
+\BOOKMARK [2][]{subsection.4.1.4}{D\351rivation de la cl\351 AES}{section.4.1}% 56
+\BOOKMARK [2][]{subsection.4.1.5}{Pseudo Forward Secrecy- Timestamp}{section.4.1}% 57
+\BOOKMARK [2][]{subsection.4.1.6}{Fonctions de hachage - signature}{section.4.1}% 58
+\BOOKMARK [2][]{subsection.4.1.7}{S\351rialisation des donn\351es}{section.4.1}% 59
+\BOOKMARK [2][]{subsection.4.1.8}{Enregistrement des cl\351s publiques \(serveur\)}{section.4.1}% 60
+\BOOKMARK [2][]{subsection.4.1.9}{R\351cup\351ration via IMAP}{section.4.1}% 61
+\BOOKMARK [1][]{section.4.2}{Impl\351mentation cl\351s de chiffrement}{chapter.4}% 62
+\BOOKMARK [1][]{section.4.3}{Fonctionnement global POC \(KGC\)}{chapter.4}% 63
+\BOOKMARK [2][]{subsection.4.3.1}{Fonctionnement}{section.4.3}% 64
+\BOOKMARK [2][]{subsection.4.3.2}{Probl\350mes connus}{section.4.3}% 65
+\BOOKMARK [2][]{subsection.4.3.3}{Am\351liorations}{section.4.3}% 66
+\BOOKMARK [1][]{section.4.4}{Fonctionnement global POC \(Client\)}{chapter.4}% 67
+\BOOKMARK [2][]{subsection.4.4.1}{Fonctionnement}{section.4.4}% 68
+\BOOKMARK [2][]{subsection.4.4.2}{Probl\350mes connus}{section.4.4}% 69
+\BOOKMARK [2][]{subsection.4.4.3}{Am\351liorations}{section.4.4}% 70
+\BOOKMARK [1][]{section.4.5}{Comparaisons avec l'\351tat de l'art}{chapter.4}% 71
+\BOOKMARK [2][]{subsection.4.5.1}{Propri\351t\351s cryptographiques}{section.4.5}% 72
+\BOOKMARK [2][]{subsection.4.5.2}{Temps des diff\351rentes impl\351mentations}{section.4.5}% 73
+\BOOKMARK [2][]{subsection.4.5.3}{Overhead induit}{section.4.5}% 74
+\BOOKMARK [2][]{subsection.4.5.4}{Diff\351rences d'utilisabilit\351}{section.4.5}% 75
+\BOOKMARK [0][]{chapter.5}{Conclusion}{}% 76
+\BOOKMARK [1][]{section.5.1}{Conclusions sur l'analyse}{chapter.5}% 77
+\BOOKMARK [1][]{section.5.2}{Conclusions sur l'impl\351mentation}{chapter.5}% 78
+\BOOKMARK [1][]{section.5.3}{Futures directions}{chapter.5}% 79
+\BOOKMARK [0][]{section.5.3}{Bibliographie}{}% 80
+\BOOKMARK [0][]{appendix.A}{Outils utilis\351s pour la compilation}{}% 81
+\BOOKMARK [1][]{section.A.1}{Sagemath}{appendix.A}% 82
+\BOOKMARK [1][]{section.A.2}{RELIC Toolkit}{appendix.A}% 83
+\BOOKMARK [1][]{section.A.3}{Libsodium}{appendix.A}% 84
+\BOOKMARK [1][]{section.A.4}{Libbinn}{appendix.A}% 85
+\BOOKMARK [1][]{section.A.5}{Libetpan}{appendix.A}% 86
+\BOOKMARK [1][]{section.A.6}{Libcurl}{appendix.A}% 87
+\BOOKMARK [1][]{section.A.7}{UnQlite}{appendix.A}% 88
+\BOOKMARK [0][]{appendix.B}{Fichiers}{}% 89
+\BOOKMARK [1][]{section.B.1}{Code du POC}{appendix.B}% 90
+\BOOKMARK [1][]{section.B.2}{Tableaux comparatifs}{appendix.B}% 91

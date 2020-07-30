@@ -60,32 +60,33 @@
 \contentsline {subsection}{\numberline {4.1.7}Sérialisation des données}{44}{subsection.4.1.7}%
 \contentsline {subsection}{\numberline {4.1.8}Enregistrement des clés publiques (serveur)}{44}{subsection.4.1.8}%
 \contentsline {subsection}{\numberline {4.1.9}Récupération via IMAP}{44}{subsection.4.1.9}%
-\contentsline {section}{\numberline {4.2}Implémentation clés de chiffrement}{44}{section.4.2}%
+\contentsline {section}{\numberline {4.2}Implémentation clés de chiffrement}{45}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Fonctionnement global POC (KGC)}{45}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Fonctionnement}{45}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Problèmes connus}{46}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}Problèmes connus}{47}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Améliorations}{47}{subsection.4.3.3}%
 \contentsline {section}{\numberline {4.4}Fonctionnement global POC (Client)}{47}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Fonctionnement}{47}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.1}Fonctionnement}{48}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Problèmes connus}{48}{subsection.4.4.2}%
 \contentsline {subsection}{\numberline {4.4.3}Améliorations}{49}{subsection.4.4.3}%
 \contentsline {section}{\numberline {4.5}Comparaisons avec l'état de l'art}{49}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{49}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{50}{subsection.4.5.1}%
 \contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{50}{subsection.4.5.2}%
 \contentsline {subsection}{\numberline {4.5.3}Overhead induit}{50}{subsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.5.4}Différences d'utilisabilité}{51}{subsection.4.5.4}%
+\contentsline {subsection}{\numberline {4.5.4}Différences d'utilisabilité}{50}{subsection.4.5.4}%
 \contentsline {chapter}{\numberline {5}Conclusion}{53}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Conclusions sur l'analyse}{53}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Conclusions sur l'implémentation}{53}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Futures directions}{54}{section.5.3}%
 \contentsline {chapter}{Bibliographie}{55}{section.5.3}%
 \contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{63}{appendix.A}%
-\contentsline {section}{\numberline {A.1}RELIC Toolkit}{63}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Libsodium}{63}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Libbinn}{64}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Libetpan}{64}{section.A.4}%
-\contentsline {section}{\numberline {A.5}Libcurl}{64}{section.A.5}%
-\contentsline {section}{\numberline {A.6}UnQlite}{64}{section.A.6}%
-\contentsline {chapter}{\numberline {B}Fichiers}{65}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Code du POC}{65}{section.B.1}%
-\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{65}{section.B.2}%
+\contentsline {section}{\numberline {A.1}Sagemath}{63}{section.A.1}%
+\contentsline {section}{\numberline {A.2}RELIC Toolkit}{63}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Libsodium}{64}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Libbinn}{64}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Libetpan}{64}{section.A.5}%
+\contentsline {section}{\numberline {A.6}Libcurl}{64}{section.A.6}%
+\contentsline {section}{\numberline {A.7}UnQlite}{65}{section.A.7}%
+\contentsline {chapter}{\numberline {B}Fichiers}{67}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Code du POC}{67}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{67}{section.B.2}%

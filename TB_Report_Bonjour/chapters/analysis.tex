@@ -666,11 +666,11 @@ La primitive n'offre pas de forward secrecy par défaut, cependant il existe un 
 
 Cela s'explique dans la façon de fonctionner de \textit{Certificateless}, lors du chiffrement l'o peut utiliser la clé publique de l'utilisateur ID et chiffrer à l'aide de ID+timestamp et ainsi avoir un chiffrement pour un destinataire ayant la valeur secrète correspondante et pouvant extraire une clé partielle pour ID+timestamp. Les chiffrements effectués avec un ID+timestamp ont besoin d'une clé privée construite pour ID+timestamp.
 
-Cela permet donc d'avoir une Forward Secrecy par rapport à la clé privée, en effet pour chaque timestamp une clé privée différente est nécessaire. Cependant la valeur secrète utilisée pour cette clé privée sera toujours utilisée. Cette solution permet de limiter les dégats si une clé privée fuit mais pas si une valeur secrète est découverte.
+Cela permet donc d'avoir une \textit{Forward Secrecy} par rapport à la clé privée, en effet pour chaque timestamp une clé privée différente est nécessaire. Cependant la valeur secrète utilisée pour cette clé privée sera toujours utilisée. Cette solution permet de limiter les dégats si une clé privée fuit mais pas si une valeur secrète est découverte.
 % TODO : Schéma
 
 \section{État de l'art}
-Dans cette section, une analyse et une comparaison entre les différentes solutions trouvées utilisant la \textit{Certificateless Cryptography} pour une implémentation dans des systèmes de mails. Les articles sont présentés par date de publication. 
+Dans cette section, une analyse entre les différentes solutions trouvées utilisant la \textit{Certificateless Cryptography} pour une implémentation dans des systèmes de mails. Les articles sont présentés par date de publication. 
 
 \subsection{Email Encryption System Using Certificateless Public Key Encryption Scheme}
 L'article~\cite{conf/itcs2/ErYTG12} présente une façon de faire pour chiffrer les mails à l'aide de \textit{Certificateless Cryptography}. Il va d'abord comparer 6 schémas pour choisir celui à utiliser par rapport à ses propriétés. Ensuite il va comparer les différents algorithmes au niveau du temps avec une implémentation simple en J2SE. 

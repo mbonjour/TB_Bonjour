@@ -1,12 +1,15 @@
 \chapter{Implémentation}
 \label{ch:impl}
-
+Ce chapitre présente le \textit{Proof Of COncept} mis en place pour prouver le bon fonctionnement du protocole proposé ainsi que d'évaluer son efficacité et sa simplicité d'utilisation. Les outils utilisé dans ce but sont présentés plus en détails en Annexe \ref{ch:outils}.
 %TODO ajouter problèmes rencontrés ou intégrer ailleurs et parler de la sérialisation et du problème de connexion socket que j'ai eu, voir si autres problèmes
 \section{Choix d'implémentations}
+Cette section présente les différents choix d'implémentation faits au long du projet, afin d'avoir une idée globale du fonctionnement interne du POC.
 \subsection{Langage}
-Au départ le choix du langage s'est porté sur sagemath (framework python) afin de mieux comprendre les différents calculs et faire un premier POC du chiffrement/déchiffrement.
+Au départ le choix du langage s'est porté sur \textit{sagemath} (voir Annexe \ref{ch:outils}) afin de mieux comprendre les différents calculs et faire un premier POC du chiffrement/déchiffrement.
 Cependant, l'implémentation du POC était lente et le changement d'algorithme pour les pairings était difficile.
-Je me suis donc orienté sur le C pour avoir de meilleures performances et pouvoir mieux gérer la mémoire de mon implémentation. Pour pouvoir faire facilement des calculs sur les courbes elliptiques et les pairings en C il me fallait une librairie, ce que je décris dans la section suivante. Comme on peut le voir sur la table \ref{table:comparisonTimeAlgo}, une différence des temps d'exécution entre les deux langages. Il faut cependant mettre en lumière que les temps sont calculés avec des courbes différentes et des couplages différents (Sage avec des Weil pairings, C avec ate pairings).
+Je me suis donc orienté sur le C pour avoir de meilleures performances et pouvoir mieux gérer la mémoire de mon implémentation. Pour pouvoir faire facilement des calculs sur les courbes elliptiques et les pairings en C il me fallait une librairie, ce que je décris dans la section suivante.
+
+Comme on peut le voir sur la table \ref{table:comparisonTimeAlgo}, une différence des temps d'exécution entre les deux langages est bien réelle. Il faut cependant mettre en lumière que les temps sont calculés avec des courbes différentes et des couplages différents (Sage avec des Weil pairings, C avec des optimal ate pairings). Les résultats sont des moyennes faites sur 15 essais. Ils ont été effectué avec un processeur \textit{Intel(R) Core(TM) i7-7600U CPU @ 2.80GHz} et 16GB de RAM.
 
 \begin{table}[h!]
 	\centering
@@ -26,16 +29,17 @@ Je me suis donc orienté sur le C pour avoir de meilleures performances et pouvo
 \end{table}
 
 \subsection{Librairie cryptographique}
-%TODO + d'explications sur les librairies et les choix faits (retrouver l'endoit où l'on dit que RELIC est plus efficient et est plus fait pour les POCs etc) + ref livre Alex
 En lisant le livre \textit{Guide to Paring-Based Cryptography}~\cite{bookPairing}, des librairies et implémentations en Sage sont conseillées et des exemples de codes sont montrés. C'est de ce livre que les recherches pour les différentes librairie ont commencées.
 
-La librairie finalement utilisée est RELIC Toolkit~\cite{relic-toolkit}, c'est une librairie en cours de développement qui se veut efficiente. Sa concurrence avec MIRACL m'a fait hésiter dans mon choix, mais MIRACL est plus codée en~ C++ avec des équivalences en C j'ai donc choisi RELIC. De plus j'ai trouvé que RELIC était généralement plus adapté dans le domaine universitaire pour des POC, puis il est plus efficient que d'autres librairies~\cite{performanceRELIC}.
+La librairie finalement utilisée est RELIC Toolkit~\cite{relic-toolkit} et en Annexe \ref{ch:outils}, c'est une librairie en cours de développement qui se veut efficiente. Sa concurrence avec MIRACL m'a fait hésiter dans mon choix, mais MIRACL est plus codée en C++ avec des équivalences en C, j'ai donc choisi RELIC. De plus j'ai trouvé que RELIC était généralement plus adapté dans le domaine universitaire pour des POC, puis il est plus efficient que d'autres librairies~\cite{performanceRELIC}.
+
 \subsection{Courbe utilisée}
-La courbe utilisée pour le POC est la BLS12-P381, en effet cette courbe est assez efficiente et compatible avec les pairings. De plus, RELIC l'a dans ses options et fonctionne bien, elle a un niveau de sécurité de 128bits. Je voulais prendre une courbe avec une plus grande sécurité, cependant RELIC ne l'a pas encore totalement implémentée (certains tests concernant $\mathbb{G}_2$ ne passes pas), mais la librairie étant toujours en cours de développement, il faudrait suivre ça de près, le code ne changerait en effet pas. Pour que RELIC utilise cette courbe il faut le mentionner à la compilation. Heureusement RELIC établi des \textit{presets} pour la compilation de la librairie, la version GMP a été utilisée pour ce POC.
+La courbe utilisée pour le POC est la BLS12-P381, en effet cette courbe est assez efficiente et compatible avec les pairings. De plus, RELIC l'a dans ses options et fonctionne bien, elle a un niveau de sécurité de 128bits. Je voulais prendre une courbe avec une plus grande sécurité, cependant RELIC ne l'a pas encore totalement implémentée (certains tests concernant $\mathbb{G}_2$ ne passes pas), mais la librairie étant toujours en cours de développement, il faudrait vérifier régulièrement pour pouvoir mettre la courbe à jour. Pour que RELIC utilise cette courbe il faut le mentionner à la compilation. Heureusement, la librairie établi des \textit{presets} pour la compilation de la librairie, la version GMP a été utilisée pour ce POC.
 
 \subsection{Dérivation de la clé AES}
-Le but de mon schéma certificateless est de chiffrer puis signer une clé AES qui permettra à mon message d'avoir un chiffrement authentifié. Pour cela il me faut dériver un élément de $\mathbb{G}_t$ en clé AES. En effet, le chiffrement dans le schéma certificateless se fait sur un élément de $\mathbb{G}_t$.\\
-Pour cela j'ai utilisé une fonction permettant d'écrire sous forme compressée cet élément en bytes (fourni par la librairie RELIC utilisée et la fonction gt\_write\_bin()). Puis j'ai effectué un hachage avec SHA256 dessus, ainsi le résultat du hachage est une clé de 256 bits utilisable par AES-256-GCM. La fonction de hachage doit être par conséquent cryptographiquement sûre.
+Le but du schéma certificateless est de chiffrer puis signer une clé AES qui permettra à mon message d'avoir un chiffrement authentifié. Pour cela il me faut dériver un élément de $\mathbb{G}_t$ en clé AES. En effet, le chiffrement dans le schéma certificateless se fait sur un élément de $\mathbb{G}_t$ et c'est donc plus simple de garder cet élément intact.
+
+Pour cela j'ai utilisé une fonction permettant d'écrire sous forme compressée cet élément en bytes (fourni par la librairie RELIC utilisée et la fonction gt\_write\_bin()). Puis j'ai effectué un hachage avec SHA256 dessus, ainsi le résultat du hachage est une clé de 256 bits utilisable comme une \textit{master-key} pour une KDF. L'utilisation d'une KDF est toujours plus propre afin de créer au final une clé AES-256-GCM sûre. Pour la KDF la librairie libsodium (voir Annexe \ref{ch:outils}) a été utilisée.
 
 \begin{sourcebox}{c}{Création de la clé AES depuis un élément $\mathbb{G}_T$}
 	void get_key(char *aesk, gt_t originalM) {
@@ -58,7 +62,8 @@ L'implémentation prend un timestamp par semaine, ainsi si une clé privé fuite
 \begin{sourcebox}{C}{Gestion du timestamp}
 	strcat(destinationTimestamp, "+");
 	time_t timestampNow = time(NULL);
-	timestampNow -= timestampNow % 604800;
+	// Calcul afin d'avoir un timestamp par semaine
+	timestampNow -= timestampNow % SECONDS_IN_WEEK;
 	sprintf(timestampStr, "%d", timestampNow);
 \end{sourcebox}
 
@@ -77,15 +82,15 @@ Pour H1, la première fonction de hachage, j'ai simplement utilisé cette foncti
 \end{sourcebox}
 
 \subsection{Sérialisation des données}
-Pour la sérialisation des données, typiquement les clés publiques et les clés privées partielles envoyées en réseau ou les clés publiques enregistrées dans les fichiers par exemple, j'ai utilisé la librairie binn\footnote{\url{https://github.com/liteserver/binn}}. Cela permet de packer facilement des données binaires, pour cela RELIC met à disposition des méthodes g1\_write\_bin g1\_read\_bin qui a permis de faire ces enregistrements binaires. Ainsi les transferts de données sont simplifiés.
+Pour la sérialisation des données, typiquement les clés publiques et les clés privées partielles envoyées en réseau ou les clés publiques enregistrées dans les fichiers par exemple, j'ai utilisé la librairie binn (voir Annexe~\ref{ch:outils}). Cela permet de "packer" facilement des données binaires, pour cela RELIC met à disposition des méthodes g1\_write\_bin g1\_read\_bin qui a permis de faire ces enregistrements binaires. Ainsi les transferts de données sont simplifiés.
 
-Cependant, il faut faire attention à certaines choses, on ne peut lire et écrire simultanément à l'aide de binn, si l'on crée un objet via un buffer on ne pourra pas modifier cet objet. Cela m'a posé des problèmes pour l'enregistrement des données secrètes, j'ai donc dû copier l'objet lu pour pouvoir le modifier et sauver les nouveaus paramètres.
+Cependant, il faut faire attention à certaines choses, on ne peut lire et écrire simultanément à l'aide de binn, si l'on crée un objet via un buffer on ne pourra pas modifier cet objet. Cela m'a posé des problèmes pour l'enregistrement des données secrètes, j'ai donc dû copier l'objet lu pour pouvoir le modifier et sauver les nouveaux paramètres.
 
 \subsection{Enregistrement des clés publiques (serveur)}
-Pour l'enregistrement j'ai utilisé une petite base de données NoSQL stockant les clés publiques des utilisateurs sur le KGC. Cela permet de facilement récupérer une clé publique pour un utilisateur si besoin. Pour implémenter cela j'ai utilisé la librairie UnQlite\footnote{\url{https://unqlite.org/}}. J'ai stocké les clés publiques pour le schéma de signature et de chiffrement séparément, en effet, l'entrée pour la signature porte le nom "signature/ID" et le chiffrement "encryption/ID".
+Pour l'enregistrement j'ai utilisé une petite base de données NoSQL stockant les clés publiques des utilisateurs sur le KGC. Cela permet de facilement récupérer une clé publique pour un utilisateur si besoin. Pour implémenter cela j'ai utilisé la librairie UnQlite (voir Annexe~\ref{ch:outils}). J'ai stocké les clés publiques pour le schéma de signature et de chiffrement séparément, en effet, l'entrée pour la signature porte le nom "signature/ID" et le chiffrement "encryption/ID".
 
 \subsection{Récupération via IMAP}
-Utilisation de la librairie libetPan\footnote{\url{https://github.com/dinhvh/libetpan}} et de l'exemple imap-sample.c pour la récupération email par IMAP. IMAP a été choisi plutôt que POP3 afin de laisser les mesages sur le serveur et ainsi avoir plusieurs appareils pouvant y accéder. Pour parser les emails cette librairie est aussi choisie ainsi que son exemple mime-parse.c.
+Utilisation de la librairie libetPan (voir Annexe~\ref{ch:outils}) et de l'exemple \textit{imap-sample.c} pour la récupération email par IMAP. IMAP a été choisi plutôt que POP3 afin de laisser les messages sur le serveur et ainsi avoir plusieurs appareils pouvant y accéder. Pour parser les emails cette librairie est aussi choisie ainsi que son exemple \textit{mime-parse.c}.
 
 \section{Implémentation clés  de chiffrement}
 Pour pouvoir implémenter ce schéma de chiffrement et signature certificateless dans un système hybride il a fallu penser à une manière d'encapsuler la clé et les données. Pour cela j'ai essayé de faire un système comparable à la Figure \ref{fig:encapsulate}.
@@ -151,15 +156,16 @@ Les problèmes qu'il reste à résoudre à ce jour :
 \paragraph*{Développement sécurisé.}
 Lors du développement j'ai fait attention au maximum d'avoir le moins possible de fuites mémoires à l'aide de sanitizers et de valgrind. Cependant cela ne suffirait pas pour une application correctement sécurisée, il faudra mettre à 0 les structures utilisées et qui stockent des informations confidentielles.
 \paragraph*{Enregistrement lors d'un crash}
-Lors d'un crash du client en plein millieu du programme ou de l'écriture/chiffrement du fichier des secrets il se peut que celui-ci deviennent corrompu. Il faudrait éviter de le corrompre car la seule manière d'y remédier serait de le supprimer et ainsi de recréer ses valeurs secrètes.
+Lors d'un crash du client en plein milieu du programme ou de l'écriture/chiffrement du fichier des secrets il se peut que celui-ci deviennent corrompu. Il faudrait éviter de le corrompre car la seule manière d'y remédier serait de le supprimer et ainsi de recréer ses valeurs secrètes.
 \subsection{Améliorations}
 Les améliorations à amener dans le client :
 \paragraph*{Multiples destinataires.}
 Pour le moment l'implémentation ne prends pas en compte une situation où un mail doit être envoyé à des destinataires multiples, c'est une fonctionnalité importante à mettre en œuvre dans une implémentation de client mail. Pour ce faire, il faudra spécifier dans les headers l'utilisateur ciblé par tel cipher et signature. Ainsi, lors de la réception, le client prendra les options X-ID-CIPHER-B64 p.ex. Ou alors trouver un moyen d'envoyer un mail différent à chaque utilisateur, sans perdre la possibilité qu'un destinataire puisse choisir de répondre à tous.
 \paragraph*{Possibilité d'ajouter des pièces jointes.}
-Pour le moment la possibilité d'ajout de pièces jointes n'a pas été pris en considération. Cependant, une des librairies choisies pour la réception des emails pourrait composer des messages contenant des pièces jointes. Il faudrait ainsi les chiffrer avec la clé symétrique avant de l'ajouter dans le mail.
+Pour le moment la possibilité d'ajout de pièces jointes n'a pas été pris en considération. Cependant, une des librairies choisies pour la réception des mails pourrait composer des messages contenant des pièces jointes. Il faudrait ainsi les chiffrer avec la clé symétrique avant de l'ajouter dans le mail.
 \paragraph*{GUI.}
 Mettre en place une interface utilisateur pour le client mail, cela aiderait à rendre le chiffrement plus transparent et plus simple pour l'utilisateur. En effet, demander à l'utilisateur d'écrire son mail au terminal n'est pas spécialement agréable.
+
 \section{Comparaisons avec l'état de l'art}
 Dans cette section je vais présenter les différents protocoles et implémentations existantes présentées au Chapitre \ref{ch:analysis} et les comparer à l'implémentation faite dans ce travail (ci-après CLPKC-POC). Tout d'abord en présentant les différentes propriétés cryptographiques, les tailles d'overhead et l'utilisabilité.
 
@@ -221,7 +227,7 @@ Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisa
 \end{table}
 
 \subsection{Différences d'utilisabilité}
-Comparaison de la facilité d'utilisation entre PGP, S/MIME et CLPKC-POC. Cela permet de comparer les différents cas d'utilisation et de voir la souplesse des solutions.
+Comparaison de la facilité d'utilisation entre PGP, S/MIME et CLPKC-POC. Cela permet de comparer les différents cas d'utilisation et de voir la souplesse des différentes solutions.
 
 \paragraph*{Global}
 Globalement l'utilisation de CLPKC-POC est souvent plus simple que l'utilisation de PGP. 
