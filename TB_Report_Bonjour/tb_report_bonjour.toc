@@ -47,7 +47,7 @@
 \contentsline {subsection}{\numberline {3.3.2}Signature}{37}{subsection.3.3.2}%
 \contentsline {section}{\numberline {3.4}Design du protocole}{37}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Premier contact}{37}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Envoi d'un message}{38}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.2}Envoi d'un message}{37}{subsection.3.4.2}%
 \contentsline {subsection}{\numberline {3.4.3}Réception d'un message}{38}{subsection.3.4.3}%
 \contentsline {chapter}{\numberline {4}Implémentation}{41}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Choix d'implémentations}{41}{section.4.1}%
@@ -68,10 +68,10 @@
 \contentsline {section}{\numberline {4.4}Fonctionnement global POC (Client)}{47}{section.4.4}%
 \contentsline {subsection}{\numberline {4.4.1}Fonctionnement}{47}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Problèmes connus}{48}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Améliorations}{48}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.3}Améliorations}{49}{subsection.4.4.3}%
 \contentsline {section}{\numberline {4.5}Comparaisons avec l'état de l'art}{49}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{49}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{50}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{49}{subsection.4.5.2}%
 \contentsline {subsection}{\numberline {4.5.3}Overhead induit}{50}{subsection.4.5.3}%
 \contentsline {chapter}{\numberline {5}Conclusion}{51}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Conclusions sur l'analyse}{51}{section.5.1}%
@@ -80,9 +80,9 @@
 \contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{61}{appendix.A}%
 \contentsline {section}{\numberline {A.1}RELIC Toolkit}{61}{section.A.1}%
 \contentsline {section}{\numberline {A.2}Libsodium}{61}{section.A.2}%
-\contentsline {section}{\numberline {A.3}binn}{62}{section.A.3}%
-\contentsline {section}{\numberline {A.4}libetpan}{62}{section.A.4}%
-\contentsline {section}{\numberline {A.5}libcurl}{62}{section.A.5}%
+\contentsline {section}{\numberline {A.3}Libbinn}{62}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Libetpan}{62}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Libcurl}{62}{section.A.5}%
 \contentsline {section}{\numberline {A.6}UnQlite}{62}{section.A.6}%
 \contentsline {chapter}{\numberline {B}Fichiers}{63}{appendix.B}%
 \contentsline {section}{\numberline {B.1}Code du POC}{63}{section.B.1}%

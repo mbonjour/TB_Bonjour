@@ -79,9 +79,9 @@
 \BOOKMARK [0][-]{appendix.A}{Outils utilis\351s pour la compilation}{}% 79
 \BOOKMARK [1][-]{section.A.1}{RELIC Toolkit}{appendix.A}% 80
 \BOOKMARK [1][-]{section.A.2}{Libsodium}{appendix.A}% 81
-\BOOKMARK [1][-]{section.A.3}{binn}{appendix.A}% 82
-\BOOKMARK [1][-]{section.A.4}{libetpan}{appendix.A}% 83
-\BOOKMARK [1][-]{section.A.5}{libcurl}{appendix.A}% 84
+\BOOKMARK [1][-]{section.A.3}{Libbinn}{appendix.A}% 82
+\BOOKMARK [1][-]{section.A.4}{Libetpan}{appendix.A}% 83
+\BOOKMARK [1][-]{section.A.5}{Libcurl}{appendix.A}% 84
 \BOOKMARK [1][-]{section.A.6}{UnQlite}{appendix.A}% 85
 \BOOKMARK [0][-]{appendix.B}{Fichiers}{}% 86
 \BOOKMARK [1][-]{section.B.1}{Code du POC}{appendix.B}% 87

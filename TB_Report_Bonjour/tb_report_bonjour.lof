@@ -15,8 +15,8 @@
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Fonctionnement du deuxième Ratchet~\cite {doubleratchet}}}{18}{figure.2.9}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{35}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{37}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoi un message à Bob}}{39}{figure.3.3}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{38}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoie un message à Bob}}{39}{figure.3.3}%
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{40}{figure.3.4}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{45}{figure.4.1}%
