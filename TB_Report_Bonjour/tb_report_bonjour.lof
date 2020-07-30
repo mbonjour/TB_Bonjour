@@ -4,7 +4,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Le fonctionnement d'un système de mail~\cite {mailGlobal}}}{4}{figure.2.1}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Le fonctionnement d'un système de messagerie~\cite {mailGlobal}}}{4}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Le fonctionnement global de PGP~\cite {pgpGlobal}}}{5}{figure.2.2}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Exemple décodage d'un message PGP}}{7}{figure.2.3}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Erreur de vérification pour Fossa}}{10}{figure.2.4}%
@@ -14,13 +14,13 @@
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Fonctionnement du DH Ratchet~\cite {doubleratchet}}}{17}{figure.2.8}%
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Fonctionnement du deuxième Ratchet~\cite {doubleratchet}}}{18}{figure.2.9}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{35}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{38}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoie un message à Bob}}{39}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{40}{figure.3.4}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{37}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{40}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoie un message à Bob}}{41}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{42}{figure.3.4}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{45}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Connexion SSL/TLS avec le serveur email}}{48}{figure.4.2}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{47}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Connexion SSL/TLS avec le serveur email}}{50}{figure.4.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -38,6 +38,14 @@ J.~Callas, L.~Donnerhacke, H.~Finney, D.~Shaw, and R.~Thayer.
 \newblock RFC 4880, RFC Editor, November 2007.
 \newblock \url{http://www.rfc-editor.org/rfc/rfc4880.txt}.
 
+\bibitem{conf/eurocrypt/CanettiHK03}
+Ran Canetti, Shai Halevi, and Jonathan Katz.
+\newblock A forward-secure public-key encryption scheme.
+\newblock In Eli Biham, editor, {\em Advances in Cryptology - {EUROCRYPT} 2003,
+  International Conference on the Theory and Applications of Cryptographic
+  Techniques, Warsaw, Poland, May 4-8, 2003, Proceedings}, volume 2656 of {\em
+  Lecture Notes in Computer Science}, pages 255--271. Springer, 2003.
+
 \bibitem{mailGlobal}
 Wikimedia Commons.
 \newblock File:e-mail.svg --- wikimedia commons{,} the free media repository,
@@ -77,15 +85,6 @@ Armando Faz-Hernandez, Sam Scott, Nick Sullivan, Riad Wahby, and Christopher
   June 2020.
 \newblock
   \url{http://www.ietf.org/internet-drafts/draft-irtf-cfrg-hash-to-curve-09.txt}.
-
-\bibitem{conf/eurocrypt/HorwitzL02}
-Jeremy Horwitz and Ben Lynn.
-\newblock Toward hierarchical identity-based encryption.
-\newblock In Lars~R. Knudsen, editor, {\em Advances in Cryptology - {EUROCRYPT}
-  2002, International Conference on the Theory and Applications of
-  Cryptographic Techniques, Amsterdam, The Netherlands, April 28 - May 2, 2002,
-  Proceedings}, volume 2332 of {\em Lecture Notes in Computer Science}, pages
-  466--481. Springer, 2002.
 
 \bibitem{conf/cans/HuangSMZ05}
 Xinyi Huang, Willy Susilo, Yi~Mu, and Futai Zhang.

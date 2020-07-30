@@ -55,7 +55,7 @@ Pour cela j'ai utilisé une fonction permettant d'écrire sous forme compressée
 	}
 \end{sourcebox}
 
-\subsection{Pseudo Forward Secrecy- Timestamp}
+\subsection{Pseudo Forward Secrecy - Timestamp}
 Afin d'obtenir une \textit{Pseudo Forward Secrecy} l'utilisation d'un timestamp dans l'ID est utilisée comme démontré dans la Section \ref{subsec:pseudoSecrecy}.
 
 L'implémentation prend un timestamp par semaine, ainsi si une clé privé fuite, on ne pourra déchiffrer que les messages de cette semaine. Pour le lier à l'ID un "+" a été ajouté entre l'ID et le timestamp.
@@ -69,7 +69,7 @@ L'implémentation prend un timestamp par semaine, ainsi si une clé privé fuite
 
 \subsection{Fonctions de hachage - signature}
 Pour le schéma de signature, il nous faut plusieurs fonctions de hachage différentes. En effet, ce schéma est basé sur le \textit{Random Oracle Model} comme défini dans le Chapitre \ref{ch:analysis}. Pour appliquer cela, j'ai utilisé la même méthode de mapping disponible dans RELIC pour mapper une char array (tableau de byte) à un point sur G2 à savoir g2\_map.
-Pour H1, la première fonction de hachage, j'ai simplement utilisé cette fonction directement, mais pour H2 et H3 j'ai ajouté un byte devant les données à mapper, respectivement les bytes '01' et '02'. Ceci afin de séparer les domaines des résultats des hashs, cela s'appelle du \textit{Hash Domain Separation}. En effet, on peut voir dans ce draft~\cite{irtf-cfrg-hash-to-curve} qui défini comme une simulation pour prendre en compte plusieurs \textit{Random Oracle}.
+Pour H1, la première fonction de hachage, j'ai simplement utilisé cette fonction directement, mais pour H2 et H3 j'ai ajouté un byte devant les données à mapper, respectivement les bytes '01' et '02'. Ceci afin de séparer les domaines des résultats des hashs, cela s'appelle du \textit{Hash Domain Separation}. En effet, on peut voir que ce draft~\cite{irtf-cfrg-hash-to-curve} défini cela comme une simulation pour prendre en compte plusieurs \textit{Random Oracle}.
 
 \begin{sourcebox}{c}{Fonction H2 pour le hachage vers un point de la courbe $\mathbb{G}_2$}
 	void functionH2(g2_t* to_point, char* bytes_from, int len_bytes){
@@ -124,9 +124,12 @@ Les différents codes d'opérations sont :
 	\item SE : Permet de faire la "Signature Extraction" et donc de demander la Partial Private Key pour l'utilisateur ID. Utilisé lors de la signature d'un message afin de construire sa clé privée et de signer le message avec. 
 	\item EE : Permet de faire la "Encryption Extraction" et donc de demander la Partial Private Key pour l'utilisateur ID. Utilisé lors du déchiffrement d'un message pour reconstruire sa clé privée.
 \end{itemize}
-% TODO
 \subsection{Problèmes connus}
-\paragraph*{TODO}
+Liste des problèmes connus concernant l'implémentation du côté serveur.
+\paragraph*{Implémentations TLS}
+Pour avoir une sécurité supplémentaire et garantir l'authenticité des paramètres envoyés par le KGC il serait préférable d'implémenter les serveur en TLS. Ceci n'a pas été fait dans l'état actuel du projet.
+\paragraph*{Sauvegarde des paramètres}
+La sauvegarde des paramètres privés du serveur n'est pas implémentée dans le KGC actuellement ce qui amènerait des problèmes lors d'un crash ou un arrêt du serveur. Ceci doit être résolu dans une implémentation effective.
 
 \subsection{Améliorations}
 Quelques améliorations seraient possibles mais restent à mettre en place, cela permet de donner quelques pistes pour la continuation du travail :
@@ -139,8 +142,7 @@ Une autre solution serait par exemple d'ajouter un "tag" d'appartenance à un ID
 
 Pour le système de clés on pourrait reprendre l'idée de~\cite{journals/ijnsec/BalakrishnanR16} afin d'aller chercher le serveur de clés pour tel domaine.
 \section{Fonctionnement global POC (Client)}
-Présentation du fonctionnement global de l'implémentation du client mail sécurisé pour le POC, des améliorations possibles et des problèmes connus.
-%TODO
+Présentation du fonctionnement global de l'implémentation du client mail implémentant la CLPKC pour le POC, des améliorations possibles et des problèmes connus.
 \subsection{Fonctionnement}
 Présentation du fonctionnement du POC et les différentes fonctionnalités implémentées dans le client.
 \paragraph*{Sécurité connexion mail.}

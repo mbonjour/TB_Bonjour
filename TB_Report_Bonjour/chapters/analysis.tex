@@ -203,7 +203,7 @@ Protonmail est très critiqué de manière générale sur les réseaux sociaux. 
 \end{itemize}
 \subsection{Tutanota}
 \paragraph*{Fonctionnement.}
-Tutanota est un client mail sécurisé, il permet de chiffrer les emails vers l'extérieur. Cela en utilisant AES256-CBC (selon analyse du code source\footnote{\url{https://github.com/tutao/tutanota/blob/master/src/api/worker/crypto/Aes.js}}) mais aussi RSA apparemment, sans savoir le contexte exact, peut-être pour vérifier le client desktop.
+Tutanota est un client mail sécurisé, il permet de chiffrer les emails vers l'extérieur. Cela en utilisant AES128-CBC (selon analyse du code source\footnote{\url{https://github.com/tutao/tutanota/blob/master/src/api/worker/crypto/Aes.js}}). Mais aussi RSA-OAEP pour chiffrer les communications entre deux utilisateurs Tutanota\footnote{\url{https://tutanota.com/fr/security/}}.
 \paragraph*{Utilisation.}
 L'utilisation de Tutanota est facile, en effet Tutanota utilise le même principe que Protonmail pour le chiffrement vers l'extérieur. En chiffrant l'email et en le gardant sur ses serveurs puis en envoyant un email au destinataire comme celui présenté dans la Figure \ref{fig:TutanotaPres}.
 
@@ -280,34 +280,31 @@ S/MIME est la solution prédominante pour s'envoyer des emails chiffrés, cepend
 
 En faisant quelques essais PGP de mon côté, je me suis heurté à beaucoup de difficultés et de problèmes avec les clés PGP. Notamment pour se les échanger, mais pour envoyer un email ensuite ce n'est pas si complexe. Le problème étant de bien voir les primitives utilisées pour chiffrer/signer notre email, en effet, les solutions \textit{plug-and-play like} ne permettent pas une gestion précise des primitives cryptographiques utilisées. Cela pourrait induire à des primitives par défaut non sécurisées, comme l'a démontré EFAIL(c.f. \ref{attacks:EFAIL}).
 
-Dans la Table \ref{tab:recapProps}, on peut voir les différentes implémentations ainsi que les propriétés cryptographiques qu'elles atteignent.
+Dans la Table \ref{tab:recapProps}, on peut voir les différentes implémentations ainsi que les propriétés cryptographiques qu'elles atteignent. On voit surtout que Signal implémente plus d'options que les autres systèmes.
 \begin{table}[]
 	\centering
 	\begin{tabular}{|lccc|}
 		\hline
 		Property          & Signal & Protonmail & Tutanota \\ \hline
 		Forward Secrecy   & Oui    &            &          \\
-		Répudiation       & Oui    & Oui        &          \\
+		Répudiation       & Oui    &            &          \\
 		Non répudiation   &        & Oui        & Oui      \\
 		Break-in recovery & Oui    &            &          \\ \hline
 	\end{tabular}
 	\caption{Récapitulatif des propriétés cryptographiques de différentes implémentations}
 	\label{tab:recapProps}
 \end{table}
-% TODO récapitulatif des implémentations présentées, propriétés, etc
 \section{Primitives}
 Cette section présente les primitives considérées pour implémenter un système de messagerie sécurisée. Elle contient un aperçu des primitives analysées, pourquoi elle a été ou non retenue et leur fonctionnement en quelques mots.
 \subsection{Primitives analysées}
 Les primitives analysées sont présentées ci-après. Elles ont en commun de s'appuyer sur un principe basé sur l'identité. C'est très pratique dans un système de email car une identité peut-être très vite définie par le biais d'une adresse email. Voici donc les technologies auxquelles les recherches se sont portées :
-%TODO : Expliquer les différentes primitives
 \begin{itemize}
 	\item Identity based encryption~\cite{conf/crypto/Shamir84}, primitive instaurant en premier le binding entre un ID et le chiffrement, ceci afin d'éviter les infrastructures complexes de PKI. Cependant, cette primitive introduit le \textit{key escrow problem}, un problème inhérent de la construction qui nécessite un KGC générant les clés privées pour les utilisateurs et qui en a par la conséquente connaissance.
-	% TODO remettre ce qu'Alex avait envoyé A Forward-Secure Public-Key Encryption Scheme∗
-	\item HIBE - Hierarchical Identity Based encryption~\cite{conf/eurocrypt/HorwitzL02}
-	\item Certificateless PKC~\cite{conf/asiacrypt/Al-RiyamiP03} (Voir ci-après)
+	\item A Forward-Secure Public-Key Encryption Scheme~\cite{conf/eurocrypt/CanettiHK03}, cette primitive présente un schéma de \textit{hierarchical identity based encryption} qui permet de restreindre le problème de \textit{key escrow} partiellement. Et la sécurité atteinte est CPA sûre et d'ailleurs moins sécurisée que certains schémas dans le \textit{Random Oracle Model} (expliqué ci-après dans la Sous-Section \ref{subsec:asavoir}). Ils introduisent aussi un concept de Binary Tree Encryption.
+	\item Certificateless PKC~\cite{conf/asiacrypt/Al-RiyamiP03}, primitive permettant d'utiliser un système basé sur l'identité. Cependant, elle permet d'éviter le \textit{key escrow problem} de la cryptographie basée sur l'identité.
 \end{itemize}
 \subsection{Primitive choisie}
-- Certificateless PKC~\cite{conf/asiacrypt/Al-RiyamiP03}\\
+- Certificateless PKC~\cite{conf/asiacrypt/Al-RiyamiP03} (souvent nommé CLPKC dans la suite du cdocument).\\
  Cette primitive a été choisie car elle est similaire à de l'identity based encryption avec un ID pour désigner une clé publique. Le problème avec l'identity based encryption c'est le fait que le serveur central génère la clé publique et la clé secrète de l'utilisateur, cela amène ce qu'on appelle le \textit{key escrow} problème. C'est le fait qu'une entité connaisse à elle seule toutes les clés de tous les utilisateurs. Ce problème est résolu dans le certificateless en introduisant des \textit{Partial Private Keys} permettant d'avoir une clé secrète partiellement générée par le serveur (KGC - Key Generation Center) et par l'utilisateur puis assemblée pour former la clé privée seulement connue de l'utilisateur. De plus, cette primitive a l'avantage de ne pas introduire de certificats et ainsi évite la complexité d'une infrastructure de PKI (Public Key Infrastructure).
 \section{Recherches sur la primitive}
 \label{sec:primitiveSearch}
@@ -326,7 +323,7 @@ Plusieurs types de Pairings existent :
 \begin{itemize}
 	\item \textbf{Type 1} : Lorsque $\mathbb{G}_1 = \mathbb{G}_2$;
 	\item \textbf{Type 2} : Lorsque $\mathbb{G}_1 \ne \mathbb{G}_2$ mais qu'un isomorphisme $\phi : \mathbb{G}_1 \rightarrow \mathbb{G}_2$ est connu, mais pas dans l'autre direction.
-	\item \textbf{Type 3} : Lorsque $\mathbb{G}_1 \ne \mathbb{G}_2$ et qu'aucun isomorphise est connu entre $\mathbb{G}_1$ et $\mathbb{G}_2$, dans n'importe quelle direction.
+	\item \textbf{Type 3} : Lorsque $\mathbb{G}_1 \ne \mathbb{G}_2$ et qu'aucun isomorphisme est connu entre $\mathbb{G}_1$ et $\mathbb{G}_2$, dans n'importe quelle direction.
 \end{itemize}
 Les différents schémas analysés utilisent souvent les pairings de Type 1, cependant la courbe utilisée et RELIC me permet de faire des pairings de Type 3. Une conversion est faite dans les schémas choisis comme vu ci-après. En effet, les pairings de Type 3 sont des pairings plus efficients avec des courbes plus petites tandis que les pairings de type 1 étaient plus utilisés dans les débuts de la \textit{Pairing Based Cryptography}.
 \subsection{Notations}

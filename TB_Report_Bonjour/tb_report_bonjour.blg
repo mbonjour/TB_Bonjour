@@ -6,36 +6,36 @@ Database file #1: chapters/biblio.bib
 Warning--empty institution in doubleratchet
 You've used 26 entries,
             2118 wiz_defined-function locations,
-            686 strings with 10683 characters,
-and the built_in function-call counts, 10115 in all, are:
-= -- 980
-> -- 541
+            685 strings with 10672 characters,
+and the built_in function-call counts, 10148 in all, are:
+= -- 982
+> -- 546
 < -- 20
-+ -- 208
-- -- 178
-* -- 710
-:= -- 1652
++ -- 211
+- -- 180
+* -- 715
+:= -- 1658
 add.period$ -- 90
 call.type$ -- 26
-change.case$ -- 157
+change.case$ -- 158
 chr.to.int$ -- 0
 cite$ -- 27
 duplicate$ -- 393
 empty$ -- 750
-format.name$ -- 178
-if$ -- 2159
+format.name$ -- 180
+if$ -- 2164
 int.to.chr$ -- 0
 int.to.str$ -- 26
 missing$ -- 21
 newline$ -- 135
 num.names$ -- 68
-pop$ -- 177
+pop$ -- 178
 preamble$ -- 1
-purify$ -- 132
+purify$ -- 133
 quote$ -- 0
-skip$ -- 297
+skip$ -- 296
 stack$ -- 0
-substring$ -- 503
+substring$ -- 504
 swap$ -- 135
 text.length$ -- 20
 text.prefix$ -- 0
