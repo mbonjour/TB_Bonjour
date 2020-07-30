@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  30 JUL 2020 15:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  30 JUL 2020 15:38
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1660,89 +1660,42 @@ runsystem(rm tb_report_bonjour.out.pyg)...executed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 137.
  ) 
 Here is how much of TeX's memory you used:
- 34417 strings out of 481239
- 681679 string characters out of 5920377
- 1186272 words of memory out of 5000000
+ 34402 strings out of 481239
+ 680672 string characters out of 5920377
+ 1186177 words of memory out of 5000000
  48560 multiletter control sequences out of 15000+600000
  555523 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  76i,11n,115p,1419b,1035s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/prdc/YehS
-DSSW18} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:journals/compsec
-/AlSabahTLSD17} has been referenced but does not exist, replaced by a fixed one
-
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:journals/ijnsec/
-BalakrishnanR16} has been referenced but does not exist, replaced by a fixed on
-e
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/cans/HuangS
-MZ05} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/itcs2/ErYTG
-12} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/acns/ZhangW
-XF06} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/pkc/DentLP0
-8} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/asiacrypt/A
-l-RiyamiP03} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/eurocrypt/H
-orwitzL02} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/crypto/Sham
-ir84} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:conf/uss/Poddebn
-iakD0ISF18} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:journals/iacr/Ko
-beissi18a} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.DBLP\\penalty\040\\@M\040\040:journals/iacr/Le
-urentP20} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.wiki\\penalty\040\\@M\040\040:pgpGlobal} has b
-een referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.wiki\\penalty\040\\@M\040\040:mailGlobal} has 
-been referenced but does not exist, replaced by a fixed one
-
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fo
-nts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public
-/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.p
-fb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf
-/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/
-cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1095.pf
-b></usr/share/texmf/fonts/type1/public/cm-super/sfit0900.pfb></usr/share/texmf/
-fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/c
-m-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb
-></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/f
-onts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm
--super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb>
-</usr/share/texmf/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf/fo
-nts/type1/public/cm-super/sftt1095.pfb>
-Output written on tb_report_bonjour.pdf (79 pages, 1438203 bytes).
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/
+fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/publ
+ic/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200
+.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/tex
+mf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/publi
+c/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1095.
+pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit0900.pfb></usr/share/texm
+f/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public
+/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf
+/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/
+cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pf
+b></usr/share/texmf/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf/
+fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on tb_report_bonjour.pdf (79 pages, 1437611 bytes).
 PDF statistics:
- 1372 PDF objects out of 1440 (max. 8388607)
- 1198 compressed objects within 12 object streams
- 318 named destinations out of 1000 (max. 500000)
+ 1355 PDF objects out of 1440 (max. 8388607)
+ 1181 compressed objects within 12 object streams
+ 303 named destinations out of 1000 (max. 500000)
  942 words of extra memory for PDF output out of 10000 (max. 10000000)
 

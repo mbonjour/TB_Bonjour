@@ -1,6 +1,6 @@
 \begin{thebibliography}{10}
 
-\bibitem{DBLP:conf/asiacrypt/Al-RiyamiP03}
+\bibitem{conf/asiacrypt/Al-RiyamiP03}
 Sattam~S. Al{-}Riyami and Kenneth~G. Paterson.
 \newblock Certificateless public key cryptography.
 \newblock In Chi{-}Sung Laih, editor, {\em Advances in Cryptology - {ASIACRYPT}
@@ -9,7 +9,7 @@ Sattam~S. Al{-}Riyami and Kenneth~G. Paterson.
   4, 2003, Proceedings}, volume 2894 of {\em Lecture Notes in Computer
   Science}, pages 452--473. Springer, 2003.
 
-\bibitem{DBLP:journals/compsec/AlSabahTLSD17}
+\bibitem{journals/compsec/AlSabahTLSD17}
 Mashael AlSabah, Alin Tomescu, Ilia~A. Lebedev, Dimitrios~N. Serpanos, and
   Srinivas Devadas.
 \newblock Privipk: Certificate-less and secure email communication.
@@ -20,7 +20,7 @@ D.~F. Aranha, C.~P.~L. Gouvêa, T.~Markmann, R.~S. Wahby, and K.~Liao.
 \newblock {RELIC is an Efficient LIbrary for Cryptography}.
 \newblock \url{https://github.com/relic-toolkit/relic}.
 
-\bibitem{DBLP:journals/ijnsec/BalakrishnanR16}
+\bibitem{journals/ijnsec/BalakrishnanR16}
 Suresh~Kumar Balakrishnan and V.~P.~Jagathy Raj.
 \newblock Practical implementation of a secure email system using
   certificateless cryptography and domain name system.
@@ -38,19 +38,19 @@ J.~Callas, L.~Donnerhacke, H.~Finney, D.~Shaw, and R.~Thayer.
 \newblock RFC 4880, RFC Editor, November 2007.
 \newblock \url{http://www.rfc-editor.org/rfc/rfc4880.txt}.
 
-\bibitem{wiki:mailGlobal}
+\bibitem{mailGlobal}
 Wikimedia Commons.
 \newblock File:e-mail.svg --- wikimedia commons{,} the free media repository,
   2014.
 \newblock [Online; accessed 26-July-2020].
 
-\bibitem{wiki:pgpGlobal}
+\bibitem{pgpGlobal}
 Wikimedia Commons.
 \newblock File:pgp diagram.svg --- wikimedia commons{,} the free media
   repository, 2020.
 \newblock [Online; accessed 28-July-2020].
 
-\bibitem{DBLP:conf/pkc/DentLP08}
+\bibitem{conf/pkc/DentLP08}
 Alexander~W. Dent, Beno{\^{\i}}t Libert, and Kenneth~G. Paterson.
 \newblock Certificateless encryption schemes strongly secure in the standard
   model.
@@ -59,7 +59,7 @@ Alexander~W. Dent, Beno{\^{\i}}t Libert, and Kenneth~G. Paterson.
   Cryptography, Barcelona, Spain, March 9-12, 2008. Proceedings}, volume 4939
   of {\em Lecture Notes in Computer Science}, pages 344--359. Springer, 2008.
 
-\bibitem{DBLP:conf/itcs2/ErYTG12}
+\bibitem{conf/itcs2/ErYTG12}
 Yee{-}Lee Er, Wei{-}Chuen Yau, Syh{-}Yuan Tan, and Bok{-}Min Goi.
 \newblock Email encryption system using certificateless public key encryption
   scheme.
@@ -78,7 +78,7 @@ Armando Faz-Hernandez, Sam Scott, Nick Sullivan, Riad Wahby, and Christopher
 \newblock
   \url{http://www.ietf.org/internet-drafts/draft-irtf-cfrg-hash-to-curve-09.txt}.
 
-\bibitem{DBLP:conf/eurocrypt/HorwitzL02}
+\bibitem{conf/eurocrypt/HorwitzL02}
 Jeremy Horwitz and Ben Lynn.
 \newblock Toward hierarchical identity-based encryption.
 \newblock In Lars~R. Knudsen, editor, {\em Advances in Cryptology - {EUROCRYPT}
@@ -87,7 +87,7 @@ Jeremy Horwitz and Ben Lynn.
   Proceedings}, volume 2332 of {\em Lecture Notes in Computer Science}, pages
   466--481. Springer, 2002.
 
-\bibitem{DBLP:conf/cans/HuangSMZ05}
+\bibitem{conf/cans/HuangSMZ05}
 Xinyi Huang, Willy Susilo, Yi~Mu, and Futai Zhang.
 \newblock On the security of certificateless signature schemes from asiacrypt
   2003.
@@ -96,12 +96,12 @@ Xinyi Huang, Willy Susilo, Yi~Mu, and Futai Zhang.
   Xiamen, China, December 14-16, 2005, Proceedings}, volume 3810 of {\em
   Lecture Notes in Computer Science}, pages 13--25. Springer, 2005.
 
-\bibitem{DBLP:journals/iacr/Kobeissi18a}
+\bibitem{journals/iacr/Kobeissi18a}
 Nadim Kobeissi.
 \newblock An analysis of the protonmail cryptographic architecture.
 \newblock {\em {IACR} Cryptol. ePrint Arch.}, 2018:1121, 2018.
 
-\bibitem{DBLP:journals/iacr/LeurentP20}
+\bibitem{journals/iacr/LeurentP20}
 Ga{\"{e}}tan Leurent and Thomas Peyrin.
 \newblock {SHA-1} is a shambles - first chosen-prefix collision on {SHA-1} and
   application to the {PGP} web of trust.
@@ -124,7 +124,7 @@ Trevor Perrin and Moxie Marlinspike.
 \newblock {The Double Ratchet Algorithm}.
 \newblock Technical report, 2016.
 
-\bibitem{DBLP:conf/uss/PoddebniakD0ISF18}
+\bibitem{conf/uss/PoddebniakD0ISF18}
 Damian Poddebniak, Christian Dresen, Jens M{\"{u}}ller, Fabian Ising, Sebastian
   Schinzel, Simon Friedberger, Juraj Somorovsky, and J{\"{o}}rg Schwenk.
 \newblock Efail: Breaking {S/MIME} and openpgp email encryption using
@@ -147,7 +147,7 @@ J.~Schaad, B.~Ramsdell, and S.~Turner.
   message specification.
 \newblock RFC 8551, RFC Editor, April 2019.
 
-\bibitem{DBLP:conf/crypto/Shamir84}
+\bibitem{conf/crypto/Shamir84}
 Adi Shamir.
 \newblock Identity-based cryptosystems and signature schemes.
 \newblock In G.~R. Blakley and David Chaum, editors, {\em Advances in
@@ -160,7 +160,7 @@ Hu~Xiong, Zhen Qin, and Athanasios~V. Vasilakos.
 \newblock {\em Introduction to Certificateless Cryptography}.
 \newblock CRC Press, Inc., USA, 2016.
 
-\bibitem{DBLP:conf/prdc/YehSDSSW18}
+\bibitem{conf/prdc/YehSDSSW18}
 Jyh{-}haw Yeh, Srisarguru Sridhar, Gaby~G. Dagher, Hung{-}Min Sun, Ning Shen,
   and Kathleen~Dakota White.
 \newblock A certificateless one-way group key agreement protocol for end-to-end
@@ -169,14 +169,14 @@ Jyh{-}haw Yeh, Srisarguru Sridhar, Gaby~G. Dagher, Hung{-}Min Sun, Ning Shen,
   Computing, {PRDC} 2018, Taipei, Taiwan, December 4-7, 2018}, pages 34--43.
   {IEEE}, 2018.
 
-\bibitem{DBLP:conf/icc/ZhangZ08a}
+\bibitem{conf/icc/ZhangZ08a}
 Lei Zhang and Futai Zhang.
 \newblock A new provably secure certificateless signature scheme.
 \newblock In {\em Proceedings of {IEEE} International Conference on
   Communications, {ICC} 2008, Beijing, China, 19-23 May 2008}, pages
   1685--1689. {IEEE}, 2008.
 
-\bibitem{DBLP:conf/acns/ZhangWXF06}
+\bibitem{conf/acns/ZhangWXF06}
 Zhenfeng Zhang, Duncan~S. Wong, Jing Xu, and Dengguo Feng.
 \newblock Certificateless public-key signature: Security model and efficient
   construction.

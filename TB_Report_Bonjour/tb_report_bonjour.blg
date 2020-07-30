@@ -6,7 +6,7 @@ Database file #1: chapters/biblio.bib
 Warning--empty institution in doubleratchet
 You've used 26 entries,
             2118 wiz_defined-function locations,
-            686 strings with 10843 characters,
+            686 strings with 10683 characters,
 and the built_in function-call counts, 10115 in all, are:
 = -- 980
 > -- 541

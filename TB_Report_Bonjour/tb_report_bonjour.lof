@@ -4,8 +4,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Le fonctionnement d'un système de mail~\cite {wiki:mailGlobal}}}{4}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Le fonctionnement global de PGP~\cite {wiki:pgpGlobal}}}{5}{figure.2.2}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Le fonctionnement d'un système de mail~\cite {mailGlobal}}}{4}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Le fonctionnement global de PGP~\cite {pgpGlobal}}}{5}{figure.2.2}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Exemple décodage d'un message PGP}}{7}{figure.2.3}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Erreur de vérification pour Fossa}}{10}{figure.2.4}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Erreur de vérification pour MeSince}}{11}{figure.2.5}%
