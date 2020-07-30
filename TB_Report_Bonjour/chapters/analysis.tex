@@ -231,13 +231,14 @@ Cette attaque permet en fait d'injecter une image dans l'HTML du message, puis f
 
 Cette attaque exploite en fait une erreur par rapport à la gestion des messages utilisants HTML et multipart/mixed. Il faudrait en effet vérifier dans ces cas que le document HTML est un document entier. Ainsi que de ne pas traiter le contenu chiffré de la même origine que du contenu non protégé. La spécification~\cite{RFC8551} S/MIME a aussi mise à jour pour implémenter des chiffrements authentifiés et remplacer CBC qui permettait des attaques par gadgets.
 \subsection{SHA-1 Shambles}
-Récemment~\cite{DBLP:journals/iacr/LeurentP20} une attaque sur SHA-1 avec un préfixe choisi a été démontrée en pratique\footnote{\url{https://sha-mbles.github.io/}}. Cette attaque permet de se faire passer pour un autre utilisateur grâce à une attaque par préfixe choisi sur SHA-1. SHA-1 était en effet l'algorithme de hachage par défaut pour signer les clés d'autres utilisateurs dans le \textit{Web Of Trust}.
+Récemment~\cite{DBLP:journals/iacr/LeurentP20} une attaque sur SHA-1 avec un préfixe choisi a été démontrée en pratique\footnote{\url{https://sha-mbles.github.io/}}. Cette attaque permet de se faire passer pour un autre utilisateur grâce à une attaque par préfixe choisi sur SHA-1. SHA-1 était en effet l'algorithme de hachage par défaut pour signer les clés d'autres utilisateurs dans le \textit{Web Of Trust} de PGP.
 
-L'attaque fonctionne ainsi : 
+L'attaque fonctionne ainsi pour un l'attaquant, Bob, voulant se faire passer pour Alice: 
 \begin{itemize}
-	\item Utilisant leur attaque de préfixe choisi sur SHA-1, ils génèrent deux clés PGP avec différents UserIDs. Grâce à cela les certificats d'identité des deux clés se collisionnent.
-	\item Une clé B spécialement formatée pour l'attaque est signée par le \textit{Web Of Trust}.
-	\item Cette signature peut être portée à la clé forgée A et ainsi l'utilisateur B peut signer des documents à la place de l'utilisateur A.
+	\item Il va générer deux clés PGP à l'aide de l'attaque par préfixe choisi, une clé A contenant une grande clé publique mais qui sera facilement factorisable avec l'identité d'Alice puis une clé B contenant une petite clé publique ainsi que l'identité de Bob au sein d'un objet JPEG, et après la fin de ce format l'identité d'Alice "cachée". Le fait de générer ces deux clés avec l'attaque permet d'avoir un hash commun pour les deux clés publiques $H(A) = H(B)$.
+	\item Bob va donner sa clé publique à d'autre utilisateurs et demander de la signer (clé tout à fait correcte à première vue).
+	\item Il va pouvoir utiliser les signatures effectuées sur sa clé sur la clé A générée auparavant.
+	\item Cela a pour effet d'avoir une clé publique contenant l'identité d'Alice qui est signée pas des utilisateurs du \textit{Web Of Trust}. Les autres utilisateurs faisant confiance à ces utilisateurs feront donc confiance à la clé d'Alice alors que c'est une clé forgée.
 \end{itemize}
 \section{Signal}
 L'analyse s'est faite aussi pour la messagerie instantanée à cause de sa ressemblance avec la messagerie électronique. 

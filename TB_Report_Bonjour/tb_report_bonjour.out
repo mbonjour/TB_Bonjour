@@ -72,17 +72,19 @@
 \BOOKMARK [2][-]{subsection.4.5.1}{Propri\351t\351s cryptographiques}{section.4.5}% 72
 \BOOKMARK [2][-]{subsection.4.5.2}{Temps des diff\351rentes impl\351mentations}{section.4.5}% 73
 \BOOKMARK [2][-]{subsection.4.5.3}{Overhead induit}{section.4.5}% 74
-\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 75
-\BOOKMARK [1][-]{section.5.1}{Conclusions sur l'analyse}{chapter.5}% 76
-\BOOKMARK [1][-]{section.5.2}{Conclusions sur l'impl\351mentation}{chapter.5}% 77
-\BOOKMARK [0][-]{section.5.2}{Bibliographie}{}% 78
-\BOOKMARK [0][-]{appendix.A}{Outils utilis\351s pour la compilation}{}% 79
-\BOOKMARK [1][-]{section.A.1}{RELIC Toolkit}{appendix.A}% 80
-\BOOKMARK [1][-]{section.A.2}{Libsodium}{appendix.A}% 81
-\BOOKMARK [1][-]{section.A.3}{Libbinn}{appendix.A}% 82
-\BOOKMARK [1][-]{section.A.4}{Libetpan}{appendix.A}% 83
-\BOOKMARK [1][-]{section.A.5}{Libcurl}{appendix.A}% 84
-\BOOKMARK [1][-]{section.A.6}{UnQlite}{appendix.A}% 85
-\BOOKMARK [0][-]{appendix.B}{Fichiers}{}% 86
-\BOOKMARK [1][-]{section.B.1}{Code du POC}{appendix.B}% 87
-\BOOKMARK [1][-]{section.B.2}{Tableaux comparatifs}{appendix.B}% 88
+\BOOKMARK [2][-]{subsection.4.5.4}{Diff\351rences d'utilisabilit\351}{section.4.5}% 75
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 76
+\BOOKMARK [1][-]{section.5.1}{Conclusions sur l'analyse}{chapter.5}% 77
+\BOOKMARK [1][-]{section.5.2}{Conclusions sur l'impl\351mentation}{chapter.5}% 78
+\BOOKMARK [1][-]{section.5.3}{Futures directions}{chapter.5}% 79
+\BOOKMARK [0][-]{section.5.3}{Bibliographie}{}% 80
+\BOOKMARK [0][-]{appendix.A}{Outils utilis\351s pour la compilation}{}% 81
+\BOOKMARK [1][-]{section.A.1}{RELIC Toolkit}{appendix.A}% 82
+\BOOKMARK [1][-]{section.A.2}{Libsodium}{appendix.A}% 83
+\BOOKMARK [1][-]{section.A.3}{Libbinn}{appendix.A}% 84
+\BOOKMARK [1][-]{section.A.4}{Libetpan}{appendix.A}% 85
+\BOOKMARK [1][-]{section.A.5}{Libcurl}{appendix.A}% 86
+\BOOKMARK [1][-]{section.A.6}{UnQlite}{appendix.A}% 87
+\BOOKMARK [0][-]{appendix.B}{Fichiers}{}% 88
+\BOOKMARK [1][-]{section.B.1}{Code du POC}{appendix.B}% 89
+\BOOKMARK [1][-]{section.B.2}{Tableaux comparatifs}{appendix.B}% 90

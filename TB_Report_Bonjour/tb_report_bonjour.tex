@@ -43,7 +43,11 @@
 % \isconfidentialtrue
 
 \newcommand{\TBresumePubliable}{
-Dans ce travail de bachelor, je vais analyser les besoins classiques d'un système de messagerie éléctronique. De plus, une analyse des solutions actuelles de messagerie sécurisée est faite afin d'identifier les propriétés cryptographiques mises en avant dans de tels systèmes. De ces propriétés, je détermine une primitive cryptographique adéquate au problème et qui permettrait d'avoir les propriétés cryptographiques nécessaires. Ensuite, j'établirai un \textit{Proof Of Concept} amenant la technologie choisie dans un cadre de messagerie électronique sécurisée. Ce Proof of Concept se base sur la Certificateless Public Key Cryptography qui a été la primitive choisie grâce à ses propriétés intéressantes dans un contexte de mails sécurisés. J'évalue ma solution par rapport à d'autres solutions présentes sur le marché au niveau du temps de chiffrement/déchiffrement, de l'overhead introduit et des propriétés cryptographiques des différents systèmes. 
+Encore aujourd'hui, les systèmes de messagerie électronique sont largement utilisés pour s'échanger des messages ou des fichiers, parfois même confidentiels. Cependant, ces données ne sont pas toujours sécurisées correctement. Les systèmes en vigueur pour sécuriser les e-mails ont souvent subit des failles critiques permettant de récupérer les données en clair, et leur complexité d'utilisation ne fait pas l'unanimité parmi les utilisateurs. 
+	
+Ce projet propose une analyse des différents systèmes de messagerie sécurisés en vigueur ainsi que des propriétés cryptographiques atteintes par ces différents protocoles. De là, une primitive cryptographique sera choisie afin d'atteindre des meilleures propriétés et une simplicité d'utilisation plus accessibles aux utilisateurs. Un \textit{Proof Of Concept} sera fait pour évaluer si la primitive pourrait être utilisée en production. Ensuite, une comparaison sera faite pour mettre en relation les systèmes analysés et l'état de l'art déjà présent dans cette primitive.
+
+Le \textit{Proof Of Concept} a permis de démontrer la facilité d'utilisation induite par un tel système. En effet, cette primitive permet de lier une adresse mail à une certaine clé publique sans passer par des certificats et son infrastructure complexe qui en découle. Ceci est très avantageux et plus simple d'utilisation. 
 }
 
 % +---------------------------------------------------------------+
@@ -113,7 +117,7 @@ Dans ce travail de bachelor, je vais analyser les besoins classiques d'un systè
 \chaptermark{Bibliographie}
 \bibliographystyle{plain}
 \bibliography{chapters/biblio}
-\nocite{*} %ajoute tout ce qu'il y a dans le bibtex
+\nocite{*} % ajoute tout ce qu'il y a dans le bibtex
 \cleardoublepage
 \chaptermark{Liste des Figures}
 \listoffigures

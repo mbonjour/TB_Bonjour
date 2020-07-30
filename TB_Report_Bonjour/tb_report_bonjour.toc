@@ -17,7 +17,7 @@
 \contentsline {subsection}{\numberline {2.4.2}EFAIL}{15}{subsection.2.4.2}%
 \contentsline {subsection}{\numberline {2.4.3}SHA-1 Shambles}{16}{subsection.2.4.3}%
 \contentsline {section}{\numberline {2.5}Signal}{16}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Fonctionnement}{16}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.1}Fonctionnement}{17}{subsection.2.5.1}%
 \contentsline {subsection}{\numberline {2.5.2}Propriétés cryptographiques}{18}{subsection.2.5.2}%
 \contentsline {subsection}{\numberline {2.5.3}Problèmes d'intégrations}{18}{subsection.2.5.3}%
 \contentsline {section}{\numberline {2.6}Compromis}{19}{section.2.6}%
@@ -71,19 +71,21 @@
 \contentsline {subsection}{\numberline {4.4.3}Améliorations}{49}{subsection.4.4.3}%
 \contentsline {section}{\numberline {4.5}Comparaisons avec l'état de l'art}{49}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{49}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{49}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.2}Temps des différentes implémentations}{50}{subsection.4.5.2}%
 \contentsline {subsection}{\numberline {4.5.3}Overhead induit}{50}{subsection.4.5.3}%
-\contentsline {chapter}{\numberline {5}Conclusion}{51}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Conclusions sur l'analyse}{51}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Conclusions sur l'implémentation}{51}{section.5.2}%
-\contentsline {chapter}{Bibliographie}{53}{section.5.2}%
-\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{61}{appendix.A}%
-\contentsline {section}{\numberline {A.1}RELIC Toolkit}{61}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Libsodium}{61}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Libbinn}{62}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Libetpan}{62}{section.A.4}%
-\contentsline {section}{\numberline {A.5}Libcurl}{62}{section.A.5}%
-\contentsline {section}{\numberline {A.6}UnQlite}{62}{section.A.6}%
-\contentsline {chapter}{\numberline {B}Fichiers}{63}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Code du POC}{63}{section.B.1}%
-\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{63}{section.B.2}%
+\contentsline {subsection}{\numberline {4.5.4}Différences d'utilisabilité}{51}{subsection.4.5.4}%
+\contentsline {chapter}{\numberline {5}Conclusion}{53}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Conclusions sur l'analyse}{53}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Conclusions sur l'implémentation}{53}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Futures directions}{54}{section.5.3}%
+\contentsline {chapter}{Bibliographie}{55}{section.5.3}%
+\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{63}{appendix.A}%
+\contentsline {section}{\numberline {A.1}RELIC Toolkit}{63}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Libsodium}{63}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Libbinn}{64}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Libetpan}{64}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Libcurl}{64}{section.A.5}%
+\contentsline {section}{\numberline {A.6}UnQlite}{64}{section.A.6}%
+\contentsline {chapter}{\numberline {B}Fichiers}{65}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Code du POC}{65}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{65}{section.B.2}%

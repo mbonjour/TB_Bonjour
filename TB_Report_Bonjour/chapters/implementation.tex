@@ -128,9 +128,11 @@ Quelques améliorations seraient possibles mais restent à mettre en place, cela
 \paragraph*{Vérification email.}
 Implémentation d'une vérification par email afin d'être sûr que l'adresse email annoncée appartient bien à l'utilisateur qui s'authentifie pour la première fois. Typiquement lors du "HELO", on pourrait envoyer un mail de vérification avec un code sur l'email annoncé (s'il n'est pas dans la base de données) et demander le code envoyé avant de pouvoir uploader sa clé publique. Ainsi le client devrait pouvoir implémenter cette fonctionnalité aussi. Cela permettrait d'être sûr que tel utilisateur a effectivement tel email.
 \paragraph*{Mise en place à large échelle}
-Si l'on veut pouvoir mettre en place ce genr de système à une large échelle, il faut prévoir une manière d'avoir plusieurs KGC qui communiquent entres eux dans un système global de réplication par exemple. Ceci afin de pouvoir les mêmes paramètres sur l'ensemble des KGC et que le système global fonctionne.
+Si l'on veut pouvoir mettre en place ce genr de système à une large échelle, il faut prévoir une manière d'avoir plusieurs KGC qui communiquent entres eux dans un système global de réplication par exemple. Ceci afin de pouvoir avoir les mêmes paramètres sur l'ensemble des KGC et que le système fonctionne.
 
-Une autre solution serait par exemple d'ajouter un "tag" d'appartenance à un ID et celui-ci sera donc lié à un certain KGC. Ceci afin de partager la charge qui serait normalement sur un seul KGC. Ce genre de solutions pourrait permettre d'avoir par exemple un KGC par domaine ou alors de les partager via les TLDs. De plus, les KGC pourraient avoir des paramètres générés différemment enres eux, ce qui ne seraient pas le cas dans un système de réplication. Cette solution ajoute cependant de la complexité au système, et l'envoi de paquets plus volumineux sur le réseau pour les paramètres globaux d'un KGC qui sont de 52kB.
+Une autre solution serait par exemple d'ajouter un "tag" d'appartenance à un ID et celui-ci sera donc lié à un certain KGC. Ceci afin de partager la charge qui serait normalement sur un seul KGC. Ce genre de solutions pourrait permettre d'avoir par exemple un KGC par domaine ou alors de les partager via les TLDs. De plus, les KGC pourraient avoir des paramètres générés différemment enrtes eux, ce qui ne seraient pas le cas dans un système de réplication. Cette solution ajoute cependant de la complexité au système, et l'envoi de paquets plus volumineux sur le réseau pour les paramètres globaux d'un KGC qui sont de 52kB, nécessaire dans le cas du chiffrement ou de la vérification de la signature.
+
+Pour le système de clés on pourrait reprendre l'idée de~\cite{DBLP:journals/ijnsec/BalakrishnanR16} afin d'aller chercher le serveur de clés pour tel domaine.
 \section{Fonctionnement global POC (Client)}
 Présentation du fonctionnement global de l'implémentation du client mail sécurisé pour le POC, des améliorations possibles et des problèmes connus.
 %TODO
@@ -159,7 +161,7 @@ Pour le moment la possibilité d'ajout de pièces jointes n'a pas été pris en 
 \paragraph*{GUI.}
 Mettre en place une interface utilisateur pour le client mail, cela aiderait à rendre le chiffrement plus transparent et plus simple pour l'utilisateur. En effet, demander à l'utilisateur d'écrire son mail au terminal n'est pas spécialement agréable.
 \section{Comparaisons avec l'état de l'art}
-Dans cette section je vais présenter les différents protocoles et implémentations existantes présentées au Chapitre \ref{ch:analysis} et les comparer à mon implémentation. Tout d'abord en présentant les différentes propriétés cryptographiques puis les temps d'exécution.
+Dans cette section je vais présenter les différents protocoles et implémentations existantes présentées au Chapitre \ref{ch:analysis} et les comparer à l'implémentation faite dans ce travail (ci-après CLPKC-POC). Tout d'abord en présentant les différentes propriétés cryptographiques, les tailles d'overhead et l'utilisabilité.
 
 % TODO à analyser et remplir correctement
 \subsection{Propriétés cryptographiques}
@@ -217,3 +219,10 @@ Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisa
 	\caption{Table de comparaison des différents overhead en rapport avec les solutions existantes }
 	\label{table:comparisonOverhead}
 \end{table}
+
+\subsection{Différences d'utilisabilité}
+Comparaison de la facilité d'utilisation entre PGP, S/MIME et CLPKC-POC. Cela permet de comparer les différents cas d'utilisation et de voir la souplesse des solutions.
+
+\paragraph*{Global}
+Globalement l'utilisation de CLPKC-POC est souvent plus simple que l'utilisation de PGP. 
+\paragraph*{KGC non accessibles}
