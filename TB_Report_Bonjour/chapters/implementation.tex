@@ -1,6 +1,6 @@
 \chapter{Implémentation}
 \label{ch:impl}
-Ce chapitre présente le \textit{Proof Of COncept} mis en place pour prouver le bon fonctionnement du protocole proposé ainsi que d'évaluer son efficacité et sa simplicité d'utilisation. Les outils utilisé dans ce but sont présentés plus en détails en Annexe \ref{ch:outils}.
+Ce chapitre présente le \textit{Proof Of Concept} mis en place pour prouver le bon fonctionnement du protocole proposé ainsi que d'évaluer son efficacité et sa simplicité d'utilisation. Les outils utilisé dans ce but sont présentés plus en détails en Annexe \ref{ch:outils}.
 %TODO ajouter problèmes rencontrés ou intégrer ailleurs et parler de la sérialisation et du problème de connexion socket que j'ai eu, voir si autres problèmes
 \section{Choix d'implémentations}
 Cette section présente les différents choix d'implémentation faits au long du projet, afin d'avoir une idée globale du fonctionnement interne du POC.
@@ -165,6 +165,8 @@ Pour le moment l'implémentation ne prends pas en compte une situation où un ma
 Pour le moment la possibilité d'ajout de pièces jointes n'a pas été pris en considération. Cependant, une des librairies choisies pour la réception des mails pourrait composer des messages contenant des pièces jointes. Il faudrait ainsi les chiffrer avec la clé symétrique avant de l'ajouter dans le mail.
 \paragraph*{GUI.}
 Mettre en place une interface utilisateur pour le client mail, cela aiderait à rendre le chiffrement plus transparent et plus simple pour l'utilisateur. En effet, demander à l'utilisateur d'écrire son mail au terminal n'est pas spécialement agréable.
+\paragraph*{Ajout clé publique}
+Dans l'envoi du mail il faudrait ajouter la clé publique de la source dans le message, ainsi la vérification de la signature
 
 \section{Comparaisons avec l'état de l'art}
 Dans cette section je vais présenter les différents protocoles et implémentations existantes présentées au Chapitre \ref{ch:analysis} et les comparer à l'implémentation faite dans ce travail (ci-après CLPKC-POC). Tout d'abord en présentant les différentes propriétés cryptographiques, les tailles d'overhead et l'utilisabilité.
@@ -229,9 +231,19 @@ Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisa
 \subsection{Différences d'utilisabilité}
 Comparaison de la facilité d'utilisation entre PGP, S/MIME et CLPKC-POC. Cela permet de comparer les différents cas d'utilisation et de voir la souplesse des différentes solutions.
 
-\paragraph*{Global}
-Globalement l'utilisation de CLPKC-POC est souvent plus simple que l'utilisation de PGP. 
+\paragraph*{Usage global}
+Globalement l'utilisation de CLPKC-POC est souvent plus simple que l'utilisation de PGP ou S/MIME. En fait, l'utilisation sera plus simple car le système de cryptographie \textit{Certificateless} a certaines propriétés qui le rend plus accessible. 
+
+Dans S/MIME le contrôle des certificats et l'import de différents certificats est complexe et peut entrainer des erreurs. Dans PGP les clés ne sont pas si faciles à obtenir et les clés nécessitent aussi d'avoir une certaine confiance (signés par d'autres utilisateurs) de PGP.
 \paragraph*{KGC / serveurs de clés non accessibles}
 Que se passe-t-il si un serveur de clés ou le KGC n'est plus accessible pour une quelconque raison ?
+
+Dans le cas de PGP, le déchiffrement pourra être effectué car la clé privée ne change pas d'un moment à l'autre, de plus lors d'un chiffrement PGP la signature digital est effectuée sur le texte clair puis est chiffré avec. Ainsi la clé publique de la source doit être récupérée, cela posera un problème si la clé n'est pas déjà stockée en local. Dans certains cas la clé publique peut être intégrée à l'envoi dans l'email mais n'est pas authentifiée.
+
+Dans le cas de CLPKC-POC, le déchiffrement sera potentiellement compromis, cela dépendra si l'utilisateur aura créer la clé pour la semaine courante ou non. Si c'est le cas le chiffrement pourra être fait. La vérification de la signature pourra être faite aussi si la clé publique de la source est stockée en local (si l'utilisateur nous a envoyés un mail auparavant). Il serait possible d'envoyer la clé publique de la source pour faciliter la vérification mais ce n'est pas fait dans l'état actuel.
+
+Dans S/MIME, le déchiffrement pourra être effectué car la clé privée ne changera pas non plus. Et la vérification pourra être faite en local avec les CAs intègres dans le système pour le certificat envoyé avec le mail.
 \paragraph*{Erreur utilisateur}
-Les erreurs que les utilisateurs peuvent faire sur certains éléments peuvent être critiques dans certains cas.
+Les erreurs que les utilisateurs peuvent faire sur certains éléments peuvent être problématique dans certains cas pour PGP et S/MIME. En effet, si un utilisateur signe une clé publique d'un utilisateur sans vérifier réellement l'identité cela pourrait authentifier une clé publique compromise et déstabiliserait le \textit{Web Of Trust}.
+
+ Pareil pour S/MIME où l'import d'un certificat malicieux pourrait avoir un impact sur la sécurité des données. Cependant, dans CLPKC-POC peu d'erreurs peuvent être faite car la plupart des paramètres et clés sont générés automatiquement.
