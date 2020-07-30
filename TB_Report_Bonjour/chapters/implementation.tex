@@ -211,7 +211,7 @@ Comparaison du temps mis pour signer / chiffrer et déchiffrer / vérifier un ma
 Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systèmes de mails sécurisés analysés au Chapitre \ref{ch:analysis}. Dans le tableau \ref{table:comparisonOverhead} on voit la taille d'overhead induit par les différents systèmes testés.
 \begin{table}[h!]
 	\centering
-	\begin{tabular}{ |p{3cm}||p{5cm}|p{6cm}| }
+	\begin{tabular}{ |p{3cm}||p{4cm}|p{6cm}| }
 		\hline
 		\multicolumn{3}{|c|}{Comparaisons de l'overhead induit dans un mail} \\
 		\hline
@@ -231,4 +231,7 @@ Comparaison de la facilité d'utilisation entre PGP, S/MIME et CLPKC-POC. Cela p
 
 \paragraph*{Global}
 Globalement l'utilisation de CLPKC-POC est souvent plus simple que l'utilisation de PGP. 
-\paragraph*{KGC non accessibles}
+\paragraph*{KGC / serveurs de clés non accessibles}
+Que se passe-t-il si un serveur de clés ou le KGC n'est plus accessible pour une quelconque raison ?
+\paragraph*{Erreur utilisateur}
+Les erreurs que les utilisateurs peuvent faire sur certains éléments peuvent être critiques dans certains cas.

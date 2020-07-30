@@ -88,5 +88,5 @@
 \contentsline {section}{\numberline {A.6}Libcurl}{64}{section.A.6}%
 \contentsline {section}{\numberline {A.7}UnQlite}{65}{section.A.7}%
 \contentsline {chapter}{\numberline {B}Fichiers}{67}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Code du POC}{67}{section.B.1}%
+\contentsline {section}{\numberline {B.1}Code du \textit {Proof Of Concept}}{67}{section.B.1}%
 \contentsline {section}{\numberline {B.2}Tableaux comparatifs}{67}{section.B.2}%
