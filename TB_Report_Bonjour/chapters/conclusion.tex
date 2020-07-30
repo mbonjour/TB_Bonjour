@@ -7,13 +7,12 @@ Lors de ce travail, la recherche a permis de relever les problèmes inhérents a
 La partie d'analyse faite dans ce travail permet également de voir comment d'autres personnes ont implémentées ce genre de primitive dans un système de messagerie et ainsi les comparer à la solution imaginée dans ce travail. Un travail de comparaison a été effectué afin d'évaluer les performances, la taille des données induites dans le mail et les propriétés cryptographiques assurées.
 
 \section{Conclusions sur l'implémentation}
-L'implémentation faite dans ce travail est un POC qui a pour but de prouver la faisabilité de l'incorporation d'un tel chiffrement dans un système de messagerie. Dans ce cadre, le POC n'est pas aboutit avec toutes les options possibles pour un client mail, mais permet tout de même de s'échanger des emails chiffrés entres deux personnes qui seraient inclues dans le système.
+L'implémentation faite dans ce travail est un POC qui a pour but de prouver la faisabilité du déploiement d'un tel chiffrement dans un système de messagerie. Dans ce cadre, le POC n'est pas aboutit avec toutes les options possibles pour un client mail, mais permet tout de même de s'échanger des emails chiffrés entres deux personnes qui seraient inclues dans le système.
 
-En conclusion, ce travail présente avant tout une façon de chiffrer des mails à l'aide d'une primitive peu répandue mais efficace. Cette implémentation pourrait être améliorée afin d'avoir un vrai programme de client mail et ainsi l'intégrer en production. Il faudra répondre à des questions concernant l'intégration du KGC dans le monde réel (que faire pour avoir plusieurs KGC, comment gérer l'accès restreint à un KGC, ...), ceci afin d'avoir un système plus complet et utilisable dans le monde réel.
+En conclusion, ce travail présente avant tout une façon de chiffrer des mails à l'aide d'une primitive peu répandue mais offrant des propriétés intéressantes. Cette implémentation pourrait être améliorée afin d'avoir un vrai programme de client mail et ainsi l'intégrer en production. Il faudra répondre à des questions concernant l'intégration du KGC dans le monde réel (que faire pour avoir plusieurs KGC, comment gérer l'accès restreint à un KGC, ...), ceci afin d'avoir un système plus complet et utilisable dans le monde réel.
 
-De plus, l'intégration d'une \textit{Forward Secrecy} plus propre devra être pensée. En effet, si la valeur secrète d'un client fuit, les messages pourront être déchiffrés.
-%TODO
+De plus, l'intégration d'une \textit{Forward Secrecy} plus sûre devra être pensée. En effet, si la valeur secrète d'un client fuit, les messages pourront être déchiffrés comme expliqué en Section \ref{subsec:pseudoSecrecy}.
+
 \section{Futures directions}
-Pour améliorer ce système de chiffrement et signature il va falloir penser à plusieurs questions qui se posent dans le cadre d'une intégration plus globale. Des pistes sont données dans le Chapitre \ref{ch:impl} mais aucuns tests n'a été effectué concernant l'implémentation de ces idées.
-
+Pour améliorer ce système de chiffrement et signature il va falloir penser à plusieurs questions qui se posent dans le cadre d'une intégration plus globale. Des pistes sont données dans le Chapitre \ref{ch:impl} mais aucuns tests n'a été effectué concernant l'implémentation de ces idées. Cependant, il est possible de déployer ce genre des olutions dans un contexte actuel, en effet la simplicité d'utilisation serait bien plus attractive que celle offerte par PGP ou S/MIME et pourrait attirer plus d'utilisateurs / email provider afin d'intégrer cette technologie dans leur quotidien, ceci uniquement après des tests plus approfondis et des relectures.
  

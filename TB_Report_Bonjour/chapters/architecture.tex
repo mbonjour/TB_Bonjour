@@ -1,8 +1,6 @@
 \chapter{Architecture / Design du protocole}
-% TODO : s'inspirer de PRIVIpk ET EXPLIQUER LES BESOINS EN MATIèRE DE SéCURITé
-% TODO Spécifications du protocole en texte via chapitre ou autre plus précise
 \label{ch:arch}
-Dans ce chapitre, je vais m'intéresser à expliquer le fonctionnement de la \textit{certificateless cryptography} et démontrer comment je l'ai utilisée afin de l'intégrer à un protocole de chiffrement de mail.
+Dans ce chapitre, je vais m'intéresser à expliquer le fonctionnement de la \textit{certificateless cryptography} et démontrer comment je l'ai utilisée afin de l'intégrer à un protocole de chiffrement de mail. Les besoins en sécurité de ce système s'inscrive dans un système de messagerie électronique nécessitant de l'intégrité, authentification, confidentialité et une possibilité de répudiation et non-répudiation.
 \section{Architecture globale}
 Dans la Figure \ref{fig:globalProtocol}, je présente uniquement l'architecture globale pour bien représenter les différents acteurs présents dans le protocole et ainsi avoir une vue d'ensemble pour faciliter la compréhension.
 
@@ -13,11 +11,10 @@ Dans la Figure \ref{fig:globalProtocol}, je présente uniquement l'architecture 
 	\label{fig:globalProtocol}
 \end{figure}
 
-%TODO compléter ce chapitre et préciser les actions des acteurs plus en détails
 \section{Acteurs}
-Les parties impliquées sont les suivantes comme vu à la Figure \ref{fig:globalProtocol}.
+Les parties impliquées sont les présentées à la Figure \ref{fig:globalProtocol}.
 \begin{itemize}
-	\item Alice : L'envoyeur du mail en direction de Bob. Alice doit discuter avec le KGC pour construire sa clé privée (afin de signer) et récupérer la clé publique de Bob.
+	\item Alice : La source du mail en direction de Bob. Alice doit discuter avec le KGC pour construire sa clé privée (afin de signer) et récupérer la clé publique de Bob.
 	\item Bob : Le destinataire du message, communique uniquement avec le KGC en ayant reçu le message d'Alice afin de récupérer sa clé publique pour vérifier la signature et construire sa clé privée pour déchiffrer le message.
 	\item KGC : Permet aux différents acteurs de pouvoir récupérer les clés publiques des clients, mais aussi de  recevoir les \textit{Partial Private Keys} qui permettent aux acteurs de construire leur clé privée. 
 \end{itemize}
@@ -25,7 +22,7 @@ Ces différents acteurs sont les principaux présents dans un exemple de \textit
 \section{Fonctionnement Certificateless PKC}
 Je vais ici découper les différents algorithmes présents dans le certificateless public key cryptography. En passant par le chiffrement et la signature.
 
-Ces algorithmes seront accompagnés d'explications sur leur utilité. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. On peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{conf/pkc/DentLP08}.
+Ces algorithmes seront accompagnés d'explications sur leur utilité alors que la Section \ref{subsec:mathPairings} présente les différents calculs et implémentations effectué. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. On peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{conf/pkc/DentLP08}.
 \subsection{Chiffrement}
 La liste des différents algorithmes de \textit{Certificateless Cryptography} et leur description, les détails techniques de leurs implémentations sont disponibles à la Section \ref{sec:primitiveSearch}.
 \begin{itemize}
@@ -39,7 +36,6 @@ La liste des différents algorithmes de \textit{Certificateless Cryptography} et
 \end{itemize}
 \subsection{Signature}
 Pour la signature, les algorithmes sont les mêmes avec une différence dans leur conception et évidemment le \textit{Encrypt} et \textit{Decrypt} sont remplacé par \textit{Sign} et \textit{Verify}.
-%TODO compléter voir tableau
 
 Dans la littérature certificateless, les schémas de signatures sont apparemment beaucoup plus cassés que ceux de chiffrement (voir tableau en Annexe \ref{ch:fichiers}). Il faut donc faire attention à vérifier régulièrement les différents schémas afin de vérifier que le schéma choisi ne soit pas mis à mal.
 \section{Design du protocole}

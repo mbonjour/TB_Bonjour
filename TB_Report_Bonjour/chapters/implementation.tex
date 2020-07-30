@@ -1,7 +1,6 @@
 \chapter{Implémentation}
 \label{ch:impl}
 Ce chapitre présente le \textit{Proof Of Concept} mis en place pour prouver le bon fonctionnement du protocole proposé ainsi que d'évaluer son efficacité et sa simplicité d'utilisation. Les outils utilisé dans ce but sont présentés plus en détails en Annexe \ref{ch:outils}.
-%TODO ajouter problèmes rencontrés ou intégrer ailleurs et parler de la sérialisation et du problème de connexion socket que j'ai eu, voir si autres problèmes
 \section{Choix d'implémentations}
 Cette section présente les différents choix d'implémentation faits au long du projet, afin d'avoir une idée globale du fonctionnement interne du POC.
 \subsection{Langage}
@@ -124,13 +123,18 @@ Les différents codes d'opérations sont :
 	\item SE : Permet de faire la "Signature Extraction" et donc de demander la Partial Private Key pour l'utilisateur ID. Utilisé lors de la signature d'un message afin de construire sa clé privée et de signer le message avec. 
 	\item EE : Permet de faire la "Encryption Extraction" et donc de demander la Partial Private Key pour l'utilisateur ID. Utilisé lors du déchiffrement d'un message pour reconstruire sa clé privée.
 \end{itemize}
+\subsection{Problème rencontré}
+Un problème ayant bien ralenti le développement est une erreur dans l'implémentation des socket en C, en effet, au départ le serveur ne recevait pas toutes les données du client et inversement d'ailleurs.
+
+La solution a été de recevoir les données par petits chunks et de les regrouper petit à petit. Beaucoup de tests et de recherches ont été faites pour ce problème pourtant anodin sur les socket en C.
 \subsection{Problèmes connus}
 Liste des problèmes connus concernant l'implémentation du côté serveur.
 \paragraph*{Implémentations TLS}
 Pour avoir une sécurité supplémentaire et garantir l'authenticité des paramètres envoyés par le KGC il serait préférable d'implémenter les serveur en TLS. Ceci n'a pas été fait dans l'état actuel du projet.
 \paragraph*{Sauvegarde des paramètres}
 La sauvegarde des paramètres privés du serveur n'est pas implémentée dans le KGC actuellement ce qui amènerait des problèmes lors d'un crash ou un arrêt du serveur. Ceci doit être résolu dans une implémentation effective.
-
+\paragraph*{Révocation des clés}
+La révocation des clés n'est pas réellement implémentée, dans l'état actuel le serveur va reprendre une nouvelle clé publique envoyée d'Alice car aucune vérification n'est faite, ceci permet de révoquer une clé en l'écrasant. Cependant ce n'est pas une vrai révocation de clés.
 \subsection{Améliorations}
 Quelques améliorations seraient possibles mais restent à mettre en place, cela permet de donner quelques pistes pour la continuation du travail :
 \paragraph*{Vérification email.}
@@ -144,7 +148,20 @@ Pour le système de clés on pourrait reprendre l'idée de~\cite{journals/ijnsec
 \section{Fonctionnement global POC (Client)}
 Présentation du fonctionnement global de l'implémentation du client mail implémentant la CLPKC pour le POC, des améliorations possibles et des problèmes connus.
 \subsection{Fonctionnement}
-Présentation du fonctionnement du POC et les différentes fonctionnalités implémentées dans le client.
+Le déroulement pour envoyer un message se passe comme suit :
+\begin{itemize}
+	\item Informations de connexions à GMail demandées
+	\item Si le fichier (\textit{globalMPK}) de paramètres globaux n'est pas présent en local l'application communiquera avec le KGC afin de récupérer ces paramètres publiques tels que $mpk_E$ et $mpk_S$ et les stockera donc.
+	\item Si le fichier (\textit{ID\_SK}) n'est pas trouvé les valeurs secrètes vont être tirées pour l'utilisateur et la construction des clés publiques et leur envoi au serveur va être effectué. Si le fichier est trouvé il va être déchiffrer en utilisant AES\_GCM en prenant la clé donnée par l'application de l'algorithme Argon2id sur un mot de passe donné par l'utilisateur.
+	\item L'application va demander si l'utilisateur veut envoyer ou recevoir des emails.
+	\item Dans le cadre d'un envoi, les informations nécessaires à l'envoi d'un mail seront demandées telles que le destinataire, le sujet et le message.
+	\item L'application va regarder si le fichier \textit{ID\_PK} est disponible en local et si ce n'est pas le cas il va demander au KGC la clé publique du destinataire. Si le KGC n'arrives pas à la trouver une erreur sera annoncée à l'utilisateur et l'envoi ne sera pas effectué.
+	\item Si tout est bon l'application va effectuer l'encapsulation des données montrées dans la Figure \ref{fig:encapsulate}.
+	\item L'envoi est effectué via SMTP en incluant dans les headers le base64 des informations nécessaires à la réception.
+	\item Les informations confidentielles sont sauvegardées en les chiffrant à l'aide AES\_GCM et Argon2id afin de dériver le mot de passe de l'utilisateur.
+\end{itemize}
+La réception se passe de la même manière globalement, le changement principal et le téléchargement des emails des dernières 24h grâce à IMAP, à moins qu'ils soient déjà téléchargés auparavant. Le déchiffrement va se passer comme décrit dans le Chapitre \ref{ch:arch}. 
+\subsection{Fonctionnalités}
 \paragraph*{Sécurité connexion mail.}
 Pour la connexion au serveur SMTP / IMAP j'ai fait attention à la connexion sécurisée pour éviter de \textit{leak} des mots de passe des utilisateurs du POC. En effet, cela permet de chiffrer les communications avec les serveurs de Gmail comme démontré dans la Figure \ref{fig:securityProofEmail}.
 \begin{figure}[h!]
@@ -162,57 +179,41 @@ Lors d'un crash du client en plein milieu du programme ou de l'écriture/chiffre
 \subsection{Améliorations}
 Les améliorations à amener dans le client :
 \paragraph*{Multiples destinataires.}
-Pour le moment l'implémentation ne prends pas en compte une situation où un mail doit être envoyé à des destinataires multiples, c'est une fonctionnalité importante à mettre en œuvre dans une implémentation de client mail. Pour ce faire, il faudra spécifier dans les headers l'utilisateur ciblé par tel cipher et signature. Ainsi, lors de la réception, le client prendra les options X-ID-CIPHER-B64 p.ex. Ou alors trouver un moyen d'envoyer un mail différent à chaque utilisateur, sans perdre la possibilité qu'un destinataire puisse choisir de répondre à tous.
+Pour le moment l'implémentation ne prends pas en compte une situation où un mail doit être envoyé à des destinataires multiples, c'est une fonctionnalité importante à mettre en œuvre dans une implémentation de client mail. Pour ce faire, il faudra spécifier dans les headers l'utilisateur ciblé par tel cipher et signature. Ainsi, lors de la réception, le client prendra les options X-ID-CIPHER-B64 p.ex. Ou alors trouver un moyen d'envoyer un mail différent à chaque utilisateur, sans perdre la possibilité qu'un destinataire puisse choisir de répondre à tous les autres destinataires.
 \paragraph*{Possibilité d'ajouter des pièces jointes.}
 Pour le moment la possibilité d'ajout de pièces jointes n'a pas été pris en considération. Cependant, une des librairies choisies pour la réception des mails pourrait composer des messages contenant des pièces jointes. Il faudrait ainsi les chiffrer avec la clé symétrique avant de l'ajouter dans le mail.
 \paragraph*{GUI.}
 Mettre en place une interface utilisateur pour le client mail, cela aiderait à rendre le chiffrement plus transparent et plus simple pour l'utilisateur. En effet, demander à l'utilisateur d'écrire son mail au terminal n'est pas spécialement agréable.
 \paragraph*{Ajout clé publique}
-Dans l'envoi du mail il faudrait ajouter la clé publique de la source dans le message, ainsi la vérification de la signature
+Dans l'envoi du mail il faudrait ajouter la clé publique de la source dans le message, ainsi la vérification de la signature.
+
+\paragraph*{Répudiation et non répudiation}
+Ajouter la possibilité de signer ou non l'email afin de pouvoir obtenir ou non de la répudiation. Pour le moment l'implémentation signe le message et la clé symétrique chiffrée, ainsi la non-répudiation est accomplie. Afin d'avoir de la non répudiation il faudrait ne plus avoir cette signature, cela permettrait d'avoir la répudiation et d'avoir tout de même un système sécurisé.
 
 \section{Comparaisons avec l'état de l'art}
 Dans cette section je vais présenter les différents protocoles et implémentations existantes présentées au Chapitre \ref{ch:analysis} et les comparer à l'implémentation faite dans ce travail (ci-après CLPKC-POC). Tout d'abord en présentant les différentes propriétés cryptographiques, les tailles d'overhead et l'utilisabilité.
 
-% TODO à analyser et remplir correctement
 \subsection{Propriétés cryptographiques}
-Ici je fais un comparatif sur les différentes propriétés cryptographiques que les systèmes de mails sécurisés proposent avec mon implémentation Certificateless. On peut le voir dans la table \ref{table:comparisonProperties}.
+Ici je fais un comparatif sur les différentes propriétés cryptographiques que les systèmes de mails sécurisés proposent avec mon implémentation Certificateless. On peut le voir dans la table \ref{table:comparisonProperties}. La pseudo forward secrecy est intéressante mais expliquée dans la Section \ref{subsec:pseudoSecrecy}. La répudiation est une propriété possible dans CLPKC en évitant de signer la clé symétrique chiffrée. La non répudiation est établie via les signatures digitales des différents algorithmes, dans CLPKC POC la signature se fait sur le message chiffré et la clé chiffrée ainsi la source ne pourra répudier le fait d'avoir signer ces données. 
 \begin{table}[h!]
 	\centering
-	\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}| }
+	\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}|p{3cm}| }
 		\hline
-		\multicolumn{3}{|c|}{Comparaisons des propriétés cryptographiques proposées} \\
+		\multicolumn{4}{|c|}{Comparaisons des propriétés cryptographiques proposées} \\
 		\hline
-		Implémentations & E2EE & Forward Secrecy\\
+		Propriétés & CL-PKC POC & PGP & S/MIME \\
 		\hline
-		CLPKC-POC   & Oui & Oui\\
-		PGP & Oui & Non\\
-		S/MIME & Oui & Non\\
+		E2EE   & Oui & Oui & Oui\\
+		Forward Secrecy & Oui (Pseudo) & Non & Non\\
+		Repudiation & Possible & Non & Non\\
+		Non repudiation & Oui & Oui & Oui\\
 		\hline
 	\end{tabular}
 	\caption{Table de comparaison des différentes propriétés cryptographiques }
 	\label{table:comparisonProperties}
 \end{table}
-% TODO si le temps le permet faire des calculs sur les temps de chiffrement / déchiffrement
-\subsection{Temps des différentes implémentations}
-Comparaison du temps mis pour signer / chiffrer et déchiffrer / vérifier un mail entre les différentes implémentations existantes. Dans la table \ref{table:comparisonTime} on voit les calculs faits.
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{ |p{3cm}||p{3cm}|p{3cm}| }
-		\hline
-		\multicolumn{3}{|c|}{Comparaisons des temps d'exécution entre différentes implémentations proposées} \\
-		\hline
-		Implémentations & Chiffrement & Déchiffrement\\
-		\hline
-		CLPKC-POC   & 0.0061584s & 0.00951s\\
-		PGP & 0 & 0\\
-		S/MIME & 0 & 0\\
-		\hline
-	\end{tabular}
-	\caption{Table de comparaison des temps d'exécution entre les implémentations de mails chiffrés}
-	\label{table:comparisonTime}
-\end{table}
 \subsection{Overhead induit}
-Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systèmes de mails sécurisés analysés au Chapitre \ref{ch:analysis}. Dans le tableau \ref{table:comparisonOverhead} on voit la taille d'overhead induit par les différents systèmes testés.
+Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systèmes de mails sécurisés analysés au Chapitre \ref{ch:analysis}. Dans le tableau \ref{table:comparisonOverhead} on voit la taille d'overhead induit par les différents systèmes testés. Ces tailles ont été déterminées de manière empirique pars des tests effectués au long de ce projet.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{ |p{3cm}||p{4cm}|p{6cm}| }
@@ -221,9 +222,9 @@ Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisa
 		\hline
 		Implémentations & Taille overhead & Contenu\\
 		\hline
-		CLPKC-POC   & Environ 1200 bytes & Signature, timestamp, nonce, Encrypted Session Key\\
-		PGP & Environ 300 bytes & Encrypted Session key\\
-		S/MIME & 0 & TODO\\
+		CLPKC-POC   & Environ 1000 bytes / destinataire & Signature, timestamp, nonce, Encrypted Session Key\\
+		PGP & Environ 300 bytes / destinataire & Encrypted Session key\\
+		S/MIME & Environ 7300 bytes (Signature) & CMS EnvelopedData et Certificat\\
 		\hline
 	\end{tabular}
 	\caption{Table de comparaison des différents overhead en rapport avec les solutions existantes }

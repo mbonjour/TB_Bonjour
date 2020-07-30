@@ -62,30 +62,31 @@
 \BOOKMARK [1][]{section.4.2}{Impl\351mentation cl\351s de chiffrement}{chapter.4}% 62
 \BOOKMARK [1][]{section.4.3}{Fonctionnement global POC \(KGC\)}{chapter.4}% 63
 \BOOKMARK [2][]{subsection.4.3.1}{Fonctionnement}{section.4.3}% 64
-\BOOKMARK [2][]{subsection.4.3.2}{Probl\350mes connus}{section.4.3}% 65
-\BOOKMARK [2][]{subsection.4.3.3}{Am\351liorations}{section.4.3}% 66
-\BOOKMARK [1][]{section.4.4}{Fonctionnement global POC \(Client\)}{chapter.4}% 67
-\BOOKMARK [2][]{subsection.4.4.1}{Fonctionnement}{section.4.4}% 68
-\BOOKMARK [2][]{subsection.4.4.2}{Probl\350mes connus}{section.4.4}% 69
-\BOOKMARK [2][]{subsection.4.4.3}{Am\351liorations}{section.4.4}% 70
-\BOOKMARK [1][]{section.4.5}{Comparaisons avec l'\351tat de l'art}{chapter.4}% 71
-\BOOKMARK [2][]{subsection.4.5.1}{Propri\351t\351s cryptographiques}{section.4.5}% 72
-\BOOKMARK [2][]{subsection.4.5.2}{Temps des diff\351rentes impl\351mentations}{section.4.5}% 73
-\BOOKMARK [2][]{subsection.4.5.3}{Overhead induit}{section.4.5}% 74
-\BOOKMARK [2][]{subsection.4.5.4}{Diff\351rences d'utilisabilit\351}{section.4.5}% 75
-\BOOKMARK [0][]{chapter.5}{Conclusion}{}% 76
-\BOOKMARK [1][]{section.5.1}{Conclusions sur l'analyse}{chapter.5}% 77
-\BOOKMARK [1][]{section.5.2}{Conclusions sur l'impl\351mentation}{chapter.5}% 78
-\BOOKMARK [1][]{section.5.3}{Futures directions}{chapter.5}% 79
-\BOOKMARK [0][]{section.5.3}{Bibliographie}{}% 80
-\BOOKMARK [0][]{appendix.A}{Outils utilis\351s pour la compilation}{}% 81
-\BOOKMARK [1][]{section.A.1}{Sagemath}{appendix.A}% 82
-\BOOKMARK [1][]{section.A.2}{RELIC Toolkit}{appendix.A}% 83
-\BOOKMARK [1][]{section.A.3}{Libsodium}{appendix.A}% 84
-\BOOKMARK [1][]{section.A.4}{Libbinn}{appendix.A}% 85
-\BOOKMARK [1][]{section.A.5}{Libetpan}{appendix.A}% 86
-\BOOKMARK [1][]{section.A.6}{Libcurl}{appendix.A}% 87
-\BOOKMARK [1][]{section.A.7}{UnQlite}{appendix.A}% 88
-\BOOKMARK [0][]{appendix.B}{Fichiers}{}% 89
-\BOOKMARK [1][]{section.B.1}{Code du Proof Of Concept}{appendix.B}% 90
-\BOOKMARK [1][]{section.B.2}{Tableaux comparatifs}{appendix.B}% 91
+\BOOKMARK [2][]{subsection.4.3.2}{Probl\350me rencontr\351}{section.4.3}% 65
+\BOOKMARK [2][]{subsection.4.3.3}{Probl\350mes connus}{section.4.3}% 66
+\BOOKMARK [2][]{subsection.4.3.4}{Am\351liorations}{section.4.3}% 67
+\BOOKMARK [1][]{section.4.4}{Fonctionnement global POC \(Client\)}{chapter.4}% 68
+\BOOKMARK [2][]{subsection.4.4.1}{Fonctionnement}{section.4.4}% 69
+\BOOKMARK [2][]{subsection.4.4.2}{Fonctionnalit\351s}{section.4.4}% 70
+\BOOKMARK [2][]{subsection.4.4.3}{Probl\350mes connus}{section.4.4}% 71
+\BOOKMARK [2][]{subsection.4.4.4}{Am\351liorations}{section.4.4}% 72
+\BOOKMARK [1][]{section.4.5}{Comparaisons avec l'\351tat de l'art}{chapter.4}% 73
+\BOOKMARK [2][]{subsection.4.5.1}{Propri\351t\351s cryptographiques}{section.4.5}% 74
+\BOOKMARK [2][]{subsection.4.5.2}{Overhead induit}{section.4.5}% 75
+\BOOKMARK [2][]{subsection.4.5.3}{Diff\351rences d'utilisabilit\351}{section.4.5}% 76
+\BOOKMARK [0][]{chapter.5}{Conclusion}{}% 77
+\BOOKMARK [1][]{section.5.1}{Conclusions sur l'analyse}{chapter.5}% 78
+\BOOKMARK [1][]{section.5.2}{Conclusions sur l'impl\351mentation}{chapter.5}% 79
+\BOOKMARK [1][]{section.5.3}{Futures directions}{chapter.5}% 80
+\BOOKMARK [0][]{section.5.3}{Bibliographie}{}% 81
+\BOOKMARK [0][]{appendix.A}{Outils utilis\351s pour la compilation}{}% 82
+\BOOKMARK [1][]{section.A.1}{Sagemath}{appendix.A}% 83
+\BOOKMARK [1][]{section.A.2}{RELIC Toolkit}{appendix.A}% 84
+\BOOKMARK [1][]{section.A.3}{Libsodium}{appendix.A}% 85
+\BOOKMARK [1][]{section.A.4}{Libbinn}{appendix.A}% 86
+\BOOKMARK [1][]{section.A.5}{Libetpan}{appendix.A}% 87
+\BOOKMARK [1][]{section.A.6}{Libcurl}{appendix.A}% 88
+\BOOKMARK [1][]{section.A.7}{UnQlite}{appendix.A}% 89
+\BOOKMARK [0][]{appendix.B}{Fichiers}{}% 90
+\BOOKMARK [1][]{section.B.1}{Code du Proof Of Concept}{appendix.B}% 91
+\BOOKMARK [1][]{section.B.2}{Tableaux comparatifs}{appendix.B}% 92

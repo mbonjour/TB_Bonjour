@@ -274,13 +274,14 @@ Je suis tout de même resté sur un système de clés publiques comme PGP le fai
 
 De plus, pour avoir une \textit{forward secrecy}, on peut ajouter une notion de temps ou de token à l'ID pour chaque batch de messages comme expliqué plus précisément dans la Section \ref{subsec:pseudoSecrecy}.
 \subsection{Résultats des recherches}
-Comme mentionné avant, les recherches ont beaucoup été orientées sur le protocole Signal qui a une très bonne forward secrecy, résilience et break-in recovery. Cependant, le problème avec l'utilisation des emails, c'est d'avoir envie de consulter tous ses emails depuis n'importe quel appareil. Ce n'est malheureusement pas le cas avec Signal à moins de conserver une \textit{root key} quelque part qui ferait s'effondrer les caractéristiques principales du protocole.
+Comme mentionné avant, les recherches ont beaucoup été orientées sur le protocole Signal qui a une très bonne forward secrecy et résilience. Cependant, le problème avec l'utilisation des emails, c'est d'avoir envie de consulter tous ses emails depuis n'importe quel appareil. Ce n'est malheureusement pas le cas avec Signal à moins de conserver une \textit{root key} ainsi que tous les diffie-hellman ratchet quelque part qui ferait s'effondrer les caractéristiques principales du protocole.
 
 S/MIME est la solution prédominante pour s'envoyer des emails chiffrés, cependant il est compliqué de l'utiliser. Il est en effet difficile d'obtenir un certificat pour envoyer des emails et échanger avec une autre personne ayant S/MIME. De plus, la complexité d'un système de PKI et l'overhead induit est assez conséquent.
 
 En faisant quelques essais PGP de mon côté, je me suis heurté à beaucoup de difficultés et de problèmes avec les clés PGP. Notamment pour se les échanger, mais pour envoyer un email ensuite ce n'est pas si complexe. Le problème étant de bien voir les primitives utilisées pour chiffrer/signer notre email, en effet, les solutions \textit{plug-and-play like} ne permettent pas une gestion précise des primitives cryptographiques utilisées. Cela pourrait induire à des primitives par défaut non sécurisées, comme l'a démontré EFAIL(c.f. \ref{attacks:EFAIL}).
 
-Dans la Table \ref{tab:recapProps}, on peut voir les différentes implémentations ainsi que les propriétés cryptographiques qu'elles atteignent. On voit surtout que Signal implémente plus d'options que les autres systèmes.
+Dans la Table \ref{tab:recapProps}, on peut voir les différentes implémentations ainsi que les propriétés cryptographiques qu'elles atteignent. On voit surtout que Signal offre plus de possibilités que d'autres systèmes. Tutanota n'offre pas de Forward Secrecy car les mails sont chiffrés à l'aide de RSA-OAEP entres les utilisateurs, les mails vers l'externe chiffré sont sûrement chiffré avec des clés différentes et on peu donc parler de Forward Secrecy. Protonmail utilise PGP entresses utilisateurs et le chiffrement vers l'extérieur est sûrement aussi pseudo forward secure. Tutanota et Protonmail n'offre pas de répudiation à cause de PGP.
+% TODO expliquer à la présentation
 \begin{table}[]
 	\centering
 	\begin{tabular}{|lccc|}
@@ -304,8 +305,9 @@ Les primitives analysées sont présentées ci-après. Elles ont en commun de s'
 	\item Certificateless PKC~\cite{conf/asiacrypt/Al-RiyamiP03}, primitive permettant d'utiliser un système basé sur l'identité. Cependant, elle permet d'éviter le \textit{key escrow problem} de la cryptographie basée sur l'identité.
 \end{itemize}
 \subsection{Primitive choisie}
-- Certificateless PKC~\cite{conf/asiacrypt/Al-RiyamiP03} (souvent nommé CLPKC dans la suite du cdocument).\\
- Cette primitive a été choisie car elle est similaire à de l'identity based encryption avec un ID pour désigner une clé publique. Le problème avec l'identity based encryption c'est le fait que le serveur central génère la clé publique et la clé secrète de l'utilisateur, cela amène ce qu'on appelle le \textit{key escrow} problème. C'est le fait qu'une entité connaisse à elle seule toutes les clés de tous les utilisateurs. Ce problème est résolu dans le certificateless en introduisant des \textit{Partial Private Keys} permettant d'avoir une clé secrète partiellement générée par le serveur (KGC - Key Generation Center) et par l'utilisateur puis assemblée pour former la clé privée seulement connue de l'utilisateur. De plus, cette primitive a l'avantage de ne pas introduire de certificats et ainsi évite la complexité d'une infrastructure de PKI (Public Key Infrastructure).
+- Certificateless PKC~\cite{conf/asiacrypt/Al-RiyamiP03} (souvent nommé CL-PKC dans la suite du document).
+
+ Cette primitive a été choisie car elle est similaire à de l'identity based encryption avec un ID pour désigner une clé publique. Le problème avec l'identity based encryption c'est le fait que le serveur central génère la clé publique et la clé secrète de l'utilisateur, cela amène ce qu'on appelle le \textit{key escrow} problème. C'est le fait qu'une entité connaisse à elle seule toutes les clés de tous les utilisateurs. Ce problème est résolu dans le certificateless en introduisant des \textit{Partial Private Keys} permettant d'avoir une clé secrète partiellement générée par le serveur (KGC - Key Generation Center) et par l'utilisateur puis assemblée pour former la clé privée seulement connue de l'utilisateur. De plus, cette primitive a l'avantage de ne pas introduire de certificats et ainsi évite la complexité d'une infrastructure de PKI (Public Key Infrastructure) tout en \textit{bindant} les clés publiques à un certain ID. Et cela en ayant un niveau de sécurité équivalent à celui accordé à un CA dans une PKI.
 \section{Recherches sur la primitive}
 \label{sec:primitiveSearch}
 Dans cette section je vais introduire les détails techniques et les principes mathématiques utilisés. De plus, le choix du schéma parmi tous ceux analysés est détaillé ici. Ainsi que des précisions sur certains principes introduits par ce schéma.
@@ -330,9 +332,11 @@ Les différents schémas analysés utilisent souvent les pairings de Type 1, cep
 \label{subsec:asavoir}
 Avant d'analyser les différents schémas, il faut connaître certaines notions présentes dans les tableaux comparatifs afin de mieux les comprendre. Liste non exhaustive de ces notions et de leurs significations est faite ici.
 
-\paragraph*{Types.}Les types présentés peuvent être soit \textbf{concret} soit \textbf{générique}. Les types concrets sont des schémas qui présentent leurs algorithmes en utilisant des calculs bien établis et présentent l'entierté du fonctionnement de leurs schémas, tandis que les schémas présentés génériques peuvent s'appuyer sur d'autres problèmes et se baser sur des algorithmes déjà existants.
+\paragraph*{Types.} 
+Les types présentés peuvent être soit \textbf{concret} soit \textbf{générique}. Les types concrets sont des schémas qui présentent leurs algorithmes en utilisant des calculs bien établis et présentent l'entierté du fonctionnement de leurs schémas, tandis que les schémas présentés génériques peuvent s'appuyer sur d'autres problèmes et se baser sur des algorithmes déjà existants.
 
-\paragraph*{Modèle de sécurité.} Ces modèles définissent sur quoi le schéma va se reposer pour établir sa sécurité et comment il va l'évaluer face à un adversaire. À nouveau, il existe deux modèles présents dans les schémas analysés, le \textit{Random Oracle Model} et le \textit{Standard Model}. Le \textit{Random Oracle Model} se base sur des oracles aléatoires mais est un peu controversé. En effet, l'aléatoire cryptographiquement sûr est difficile à atteindre, ainsi habituellement le \textit{Random Oracle Model} implémente ces oracles via des fonctions de hachage. Le modèle standard se base lui sur des problèmes mathématiquement difficiles tel que DDH (Decisional Diffie Hellman).
+\paragraph*{Modèle de sécurité.} 
+Ces modèles définissent sur quoi le schéma va se reposer pour établir sa sécurité et comment il va l'évaluer face à un adversaire. À nouveau, il existe deux modèles présents dans les schémas analysés, le \textit{Random Oracle Model} et le \textit{Standard Model}. Le \textit{Random Oracle Model} se base sur des oracles aléatoires mais est un peu controversé. En effet, l'aléatoire cryptographiquement sûr est difficile à atteindre, ainsi habituellement le \textit{Random Oracle Model} implémente ces oracles via des fonctions de hachage. Le modèle standard se base lui sur des problèmes mathématiquement difficiles tel que DDH (Decisional Diffie Hellman).
 
 \paragraph*{Modèle d'adversaires.}
 Pour évaluer les schémas de certificateless public key cryptography il y a différents niveaux de sécurité établis pour deux types d'adversaires différents. Ces adversaires ont été décrits dans le papier d'Al-Riyami-Paterson~\cite{conf/asiacrypt/Al-RiyamiP03} pour la première fois afin de prouver que leurs schémas était IND-CCA sûr dans le modèle Standard. Ces deux adversaires ont été défini comme suit :
@@ -340,9 +344,9 @@ Pour évaluer les schémas de certificateless public key cryptography il y a dif
 \begin{itemize}
 	\item Type I (\textit{outsider adversaries}) est permis de remplacer des clés publiques, obtenir des clés partielles privées, et des clés privées puis faire des requêtes de déchiffrements.
 	\item Type II (\textit{honest but curious KGC}). L'adversaire de Type II est en fait un KGC connaissant la Master Secret Key et qui peut donc générer des PPK, obtenir des clés privées et faire des requêtes de déchiffrement tout en faisant confiance à ce KGC pour ne pas qu'il remplace des clés publiques.
+	\item Malicious but passive KGC - KGC ayant la possibilité d'extraire les clés partielles et regarder les textes chiffrés et essayer de les déchiffrer, sans pouvoir extraire la valeur secrète de l'utilisateur ou remplacer sa clé publique. Cependant ce KGC fera le \textit{Setup} de manière honnête.
 \end{itemize}
 
-%TODO ajouter des spécifications de la présentation
 Pour chacun des types d'adversaires, il existe différents niveaux de sécurité comme défini dans le livre \textit{Introduction to Ceritifcateless Cryptography}~\cite{bookIntroCertificateless}.
 \subsection{Schémas Certificateless de Chiffrement}
 Pour choisir parmi les nombreux schémas existants en certificateless pour le chiffrement j'ai établi un tableau comparatif des différentes manières de faire, inspiré de~\cite{bookIntroCertificateless}. En suivant ce tableau, je me suis rendu compte que la construction de Dent-Libert-Paterson~\cite{conf/pkc/DentLP08} était probablement la plus adaptée en vue des propriétés qu'elle présentait. Le tableau se trouve en annexe \ref{ch:fichiers}.
@@ -427,7 +431,7 @@ Et le $msk$ (master seret key) est $msk \leftarrow g_2 \cdot \gamma$.
 \end{sourcebox}
 
 \textbf{SetPriv($x_{ID}, d_{ID}, mpk$) :} On choisit $r' \leftarrow \mathbb{Z}_p^*$ puis on reprends $(d_1, d_2) \leftarrow d_{ID}$ et on va prendre en secret key : 
-%TODO : Revoir si assez complet :
+
 \[sk_{ID} \leftarrow (s_1, s_2) = (d_1 \cdot x_{ID} + F_u(ID) \cdot r', d_2 \cdot x_{ID} + g \cdot r')\]
 Avec $sk_{ID}$ étant la clé secrète de l'utilisateur, donnée par l'Extract (notre Partial Private Key) est la valeur secrète de SetSec.
 
@@ -533,7 +537,6 @@ Qui donnera $m$ le texte en clair si le chiffré était bien formaté ou un él�
 \end{sourcebox}
 
 \subsection{Schémas Certificateless de Signature}
-%TODO : Expliquer Malicious KGC (Type II -> à renseigner (voir dans le livre)) et mettre tableaux^
 Pour choisir parmi les nombreux schémas certificateless pour la signature, j'ai établi un tableau comparatif des différentes manières,de faire, inspiré de~\cite{bookIntroCertificateless}. En analysant les différentes possibilités dans ce tableau, il y a peu de solutions qui se dégagent, en effet, on peut voir que beaucoup de schémas de signature sont cassés. Mon choix s'est porté au final sur la construction de Zhang et Zhang~\cite{conf/acns/ZhangWXF06} pour des signatures robustes en Certificateless. J'ai pris cette construction car elle est résistante au Malicious KGC (si le KGC a été setup avec des paramètres vulnérables) datant de 2006 et n'a pas été cassée depuis. Le tableau se trouve en Annexe \ref{ch:fichiers}.
 \subsection{Détails techniques}
 Là encore, le code C montrant l'implémentation de chaque algorithme est listé. Ce code est simplifié pour ne pas inclure la création des différents éléments, il est là uniquement pour montrer comment les calculs ont été effectués et non comment la mémoire a été allouée.
@@ -563,12 +566,16 @@ Pour expliquer les détails techniques, je vais ici montrer les calculs faits da
 
 \textbf{Partial-Private-Key-Extract($params, s, ID_A$) :} Pour avoir la \textit{Partial Private Key} ($D_A$) de l'user $A$ avec l'identité $ID_A$. Calculer $Q_A = H_1(ID_A)$. Alors $D_A = sQ_A$.
 
+L'utilisateur peut vérifier sa clé partielle à la réception en vérifiant cette équation : $e(P, D_A) = e(Ppub, Q_a)$.
+
 \begin{sourcebox}{C}{Code C pour l'extraction de la clé partielle privée}
 	void extractSig(signature_mpk mpk, bn_t msk, char* ID, signature_ppk * partialKeys) {
 		// Qa = H1(ID)
 		g2_map(qa, ID, strlen(ID));
 		// D = msk*Qa
 		g2_mul(partialKeys->D, qa, msk);
+		
+		// Vérification de la clé privée partielle
 		pc_map(test1, mpk.P, partialKeys->D);
 		pc_map(test2, mpk.Ppub, qa);
 		
@@ -578,7 +585,6 @@ Pour expliquer les détails techniques, je vais ici montrer les calculs faits da
 	}
 \end{sourcebox}
 
-%TODO : Compléter
 \textbf{Set-Secret-Value :} La valeur secrète $x \in \mathbb{Z}_q^*$ est tirée aléatoirement.
 
 \begin{sourcebox}{C}{Code C pour créer la valeur secrète}
@@ -677,7 +683,7 @@ La primitive n'offre pas de forward secrecy par défaut, cependant il existe un 
 
 Cela s'explique dans la façon de fonctionner de \textit{Certificateless}, lors du chiffrement l'o peut utiliser la clé publique de l'utilisateur ID et chiffrer à l'aide de ID+timestamp et ainsi avoir un chiffrement pour un destinataire ayant la valeur secrète correspondante et pouvant extraire une clé partielle pour ID+timestamp. Les chiffrements effectués avec un ID+timestamp ont besoin d'une clé privée construite pour ID+timestamp.
 
-Cela permet donc d'avoir une \textit{Forward Secrecy} par rapport à la clé privée, en effet pour chaque timestamp une clé privée différente est nécessaire. Cependant la valeur secrète utilisée pour cette clé privée sera toujours utilisée. Cette solution permet de limiter les dégats si une clé privée fuit mais pas si une valeur secrète est découverte.
+Cela permet donc d'avoir une \textit{Forward Secrecy} par rapport à la clé privée, en effet pour chaque timestamp une clé privée différente est nécessaire. Cependant la valeur secrète utilisée pour cette clé privée sera toujours utilisée. Cette solution permet de limiter les dégâts si une clé privée fuit mais pas si une valeur secrète est découverte.
 % TODO : Schéma
 
 \section{État de l'art}
