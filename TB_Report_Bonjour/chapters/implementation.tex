@@ -57,7 +57,7 @@ Pour cela j'ai utilisé une fonction permettant d'écrire sous forme compressée
 \subsection{Pseudo Forward Secrecy - Timestamp}
 Afin d'obtenir une \textit{Pseudo Forward Secrecy} l'utilisation d'un timestamp dans l'ID est utilisée comme démontré dans la Section \ref{subsec:pseudoSecrecy}.
 
-L'implémentation prend un timestamp par semaine, ainsi si une clé privé fuite, on ne pourra déchiffrer que les messages de cette semaine. Pour le lier à l'ID un "+" a été ajouté entre l'ID et le timestamp.
+L'implémentation prend un timestamp par semaine, ainsi si une clé privée fuite, on ne pourra déchiffrer que les messages de cette semaine. Pour le lier à l'ID un "+" a été ajouté entre l'ID et le timestamp.
 \begin{sourcebox}{C}{Gestion du timestamp}
 	strcat(destinationTimestamp, "+");
 	time_t timestampNow = time(NULL);
