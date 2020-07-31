@@ -1,6 +1,6 @@
 \chapter{Implémentation}
 \label{ch:impl}
-Ce chapitre présente le \textit{Proof Of Concept} mis en place pour prouver le bon fonctionnement du protocole proposé ainsi que d'évaluer son efficacité et sa simplicité d'utilisation. Les outils utilisé dans ce but sont présentés plus en détails en Annexe \ref{ch:outils}.
+Ce chapitre présente le \textit{Proof Of Concept} mis en place pour prouver le bon fonctionnement du protocole proposé ainsi que d'évaluer son efficacité et sa simplicité d'utilisation. Les outils utilisés dans ce but sont présentés plus en détails en Annexe \ref{ch:outils}.
 \section{Choix d'implémentations}
 Cette section présente les différents choix d'implémentation faits au long du projet, afin d'avoir une idée globale du fonctionnement interne du POC.
 \subsection{Langage}
@@ -8,7 +8,7 @@ Au départ le choix du langage s'est porté sur \textit{sagemath} (voir Annexe \
 Cependant, l'implémentation du POC était lente et le changement d'algorithme pour les pairings était difficile.
 Je me suis donc orienté sur le C pour avoir de meilleures performances et pouvoir mieux gérer la mémoire de mon implémentation. Pour pouvoir faire facilement des calculs sur les courbes elliptiques et les pairings en C il me fallait une librairie, ce que je décris dans la section suivante.
 
-Comme on peut le voir sur la table \ref{table:comparisonTimeAlgo}, une différence des temps d'exécution entre les deux langages est bien réelle. Il faut cependant mettre en lumière que les temps sont calculés avec des courbes différentes et des couplages différents (Sage avec des Weil pairings, C avec des optimal ate pairings). Les résultats sont des moyennes faites sur 15 essais. Ils ont été effectué avec un processeur \textit{Intel(R) Core(TM) i7-7600U CPU @ 2.80GHz} et 16GB de RAM.
+Comme on peut le voir sur la table \ref{table:comparisonTimeAlgo}, une différence des temps d'exécution entre les deux langages est bien réelle. Il faut cependant mettre en lumière que les temps sont calculés avec des courbes différentes et des couplages différents (Sage avec des Weil pairings, C avec des optimal ate pairings). Les résultats sont des moyennes faites sur 15 essais. Ils ont été effectués avec un processeur \textit{Intel(R) Core(TM) i7-7600U CPU @ 2.80GHz} et 16GB de RAM.
 
 \begin{table}[h!]
 	\centering
@@ -28,12 +28,12 @@ Comme on peut le voir sur la table \ref{table:comparisonTimeAlgo}, une différen
 \end{table}
 
 \subsection{Librairie cryptographique}
-En lisant le livre \textit{Guide to Paring-Based Cryptography}~\cite{bookPairing}, des librairies et implémentations en Sage sont conseillées et des exemples de codes sont montrés. C'est de ce livre que les recherches pour les différentes librairie ont commencées.
+En lisant le livre \textit{Guide to Paring-Based Cryptography}~\cite{bookPairing}, des librairies et implémentations en Sage sont conseillées et des exemples de codes sont montrés. C'est de ce livre que les recherches pour les différentes librairies ont commencées.
 
 La librairie finalement utilisée est RELIC Toolkit~\cite{relic-toolkit} et en Annexe \ref{ch:outils}, c'est une librairie en cours de développement qui se veut efficiente. Sa concurrence avec MIRACL m'a fait hésiter dans mon choix, mais MIRACL est plus codée en C++ avec des équivalences en C, j'ai donc choisi RELIC. De plus j'ai trouvé que RELIC était généralement plus adapté dans le domaine universitaire pour des POC, puis il est plus efficient que d'autres librairies~\cite{performanceRELIC}.
 
 \subsection{Courbe utilisée}
-La courbe utilisée pour le POC est la BLS12-P381, en effet cette courbe est assez efficiente et compatible avec les pairings. De plus, RELIC l'a dans ses options et fonctionne bien, elle a un niveau de sécurité de 128bits. Je voulais prendre une courbe avec une plus grande sécurité, cependant RELIC ne l'a pas encore totalement implémentée (certains tests concernant $\mathbb{G}_2$ ne passes pas), mais la librairie étant toujours en cours de développement, il faudrait vérifier régulièrement pour pouvoir mettre la courbe à jour. Pour que RELIC utilise cette courbe il faut le mentionner à la compilation. Heureusement, la librairie établi des \textit{presets} pour la compilation de la librairie, la version GMP a été utilisée pour ce POC.
+La courbe utilisée pour le POC est la BLS12-P381. Cette courbe est assez efficiente et compatible avec les pairings. De plus, RELIC l'a dans ses options et fonctionne bien, elle a un niveau de sécurité de 128bits. Je voulais prendre une courbe avec une plus grande sécurité, cependant RELIC ne l'a pas encore totalement implémentée (certains tests concernant $\mathbb{G}_2$ ne passent pas), mais la librairie étant toujours en cours de développement, il faudrait vérifier régulièrement pour pouvoir mettre la courbe à jour. Pour que RELIC utilise cette courbe il faut le mentionner à la compilation. Heureusement, la librairie établi des \textit{presets} pour la compilation de la librairie, la version GMP a été utilisée pour ce POC.
 
 \subsection{Dérivation de la clé AES}
 Le but du schéma certificateless est de chiffrer puis signer une clé AES qui permettra à mon message d'avoir un chiffrement authentifié. Pour cela il me faut dériver un élément de $\mathbb{G}_t$ en clé AES. En effet, le chiffrement dans le schéma certificateless se fait sur un élément de $\mathbb{G}_t$ et c'est donc plus simple de garder cet élément intact.
@@ -86,13 +86,13 @@ Pour la sérialisation des données, typiquement les clés publiques et les clé
 Cependant, il faut faire attention à certaines choses, on ne peut lire et écrire simultanément à l'aide de binn, si l'on crée un objet via un buffer on ne pourra pas modifier cet objet. Cela m'a posé des problèmes pour l'enregistrement des données secrètes, j'ai donc dû copier l'objet lu pour pouvoir le modifier et sauver les nouveaux paramètres.
 
 \subsection{Enregistrement des clés publiques (serveur)}
-Pour l'enregistrement j'ai utilisé une petite base de données NoSQL stockant les clés publiques des utilisateurs sur le KGC. Cela permet de facilement récupérer une clé publique pour un utilisateur si besoin. Pour implémenter cela j'ai utilisé la librairie UnQlite (voir Annexe~\ref{ch:outils}). J'ai stocké les clés publiques pour le schéma de signature et de chiffrement séparément, en effet, l'entrée pour la signature porte le nom "signature/ID" et le chiffrement "encryption/ID".
+Pour l'enregistrement j'ai utilisé une petite base de données NoSQL stockant les clés publiques des utilisateurs sur le KGC. Cela permet de facilement récupérer une clé publique pour un utilisateur si besoin. Pour implémenter cela j'ai utilisé la librairie UnQlite (voir Annexe~\ref{ch:outils}). J'ai stocké les clés publiques pour le schéma de signature et de chiffrement séparément. En effet, l'entrée pour la signature porte le nom "signature/ID" et le chiffrement "encryption/ID".
 
 \subsection{Récupération via IMAP}
 Utilisation de la librairie libetPan (voir Annexe~\ref{ch:outils}) et de l'exemple \textit{imap-sample.c} pour la récupération email par IMAP. IMAP a été choisi plutôt que POP3 afin de laisser les messages sur le serveur et ainsi avoir plusieurs appareils pouvant y accéder. Pour parser les emails cette librairie est aussi choisie ainsi que son exemple \textit{mime-parse.c}.
 
 \section{Implémentation clés  de chiffrement}
-Pour pouvoir implémenter ce schéma de chiffrement et signature certificateless dans un système hybride il a fallu penser à une manière d'encapsuler la clé et les données. Pour cela j'ai essayé de faire un système comparable à la Figure \ref{fig:encapsulate}.
+Pour pouvoir implémenter ce schéma de chiffrement et signature certificateless dans un système hybride, il a fallu penser à une manière d'encapsuler la clé et les données. Pour cela j'ai essayé de faire un système comparable à la Figure \ref{fig:encapsulate}.
 
 \begin{figure}[h!]
 	\centering
@@ -104,7 +104,7 @@ Pour pouvoir implémenter ce schéma de chiffrement et signature certificateless
 \section{Fonctionnement global POC (KGC)}
 Présentation du fonctionnement global de l'implémentation du KGC pour le POC. De plus, les problèmes connus et des propositions d'améliorations sont présentés.
 \subsection{Fonctionnement}
-Le KGC est un élément important du protocole, en effet c'est lui qui va fournir une partie de la clé privée de l'utilisateur. Dans mon cas il permet de distribuer les clés publiques de ses utilisateurs, mais habituellement on fera plutôt appel à un serveur dédié pour la gestion des clés.
+Le KGC est un élément important du protocole, en effet c'est lui qui va fournir une partie de la clé privée de l'utilisateur. Dans ce cas, il permet de distribuer les clés publiques de ses utilisateurs, mais habituellement on fera plutôt appel à un serveur dédié pour la gestion des clés.
 
 Par mesure de généricité j'ai établi des codes d'opérations (arbitraires) afin de définir les opérations demandées au serveur par le client. Cela à l'aide de la librairie binn et les constructions d'objets proposés.
 
@@ -117,14 +117,14 @@ Ainsi un paquet typique sera :\\
 Les différents codes d'opérations sont :
 \begin{itemize}
 	\item HELO : Permet de s'annoncer au KGC pour la première fois, le KGC répondra systématiquement avec les paramètres globaux du système. Cela implique la Master Public Key de chiffrement du KGC ainsi que celle du schéma de signature. 
-	\item PK : Permet d'annoncer les clés publiques de l'utilisateur avec un certain ID. Le paquet est composé de \{ID : alice@wonderland.com, opCode : PK, PKE : base64 de la PKE, PKS : base64 de la PKS\}. La PKE est encodée en base64 par le client est envoyée au serveur. Elle est aussi représentée à l'aide d'un objet binn mais le serveur n'a pas besoin d'en prendre connaissance, il stocke donc cette donnée telle quelle dans la base de donnée NoSQL. La même chose est faite pour la PKS, la clé publique pour la signature.
+	\item PK : Permet d'annoncer les clés publiques de l'utilisateur avec un certain ID. Le paquet est composé de \{ID : alice@wonderland.com, opCode : PK, PKE : base64 de la PKE, PKS : base64 de la PKS\}. La PKE est encodée en base64 par le client puis est envoyée au serveur. Elle est aussi représentée à l'aide d'un objet binn mais le serveur n'a pas besoin d'en prendre connaissance, il stocke donc cette donnée telle quelle dans la base de donnée NoSQL. La même chose est faite pour la PKS, la clé publique pour la signature.
 	\item GPE : Permet de récupérer la clé publique de chiffrement (utile pour chiffrer un message) d'un utilisateur ayant l'ID mentionné. Ainsi le serveur va simplement regarder dans la base de donnée pour "encryption/ID" et récupérer la clé encodée en base64 et la renvoyer à l'utilisateur. Si le serveur ne trouve pas cette clé, il va renvoyer une erreur dans l'objet et ainsi à la réception on va d'abord regarder cette erreur.
 	\item GPS : Fonctionne de la même manière que "GPE" mais pour les clés publiques de Signature (utile pour vérifier une signature).
 	\item SE : Permet de faire la "Signature Extraction" et donc de demander la Partial Private Key pour l'utilisateur ID. Utilisé lors de la signature d'un message afin de construire sa clé privée et de signer le message avec. 
 	\item EE : Permet de faire la "Encryption Extraction" et donc de demander la Partial Private Key pour l'utilisateur ID. Utilisé lors du déchiffrement d'un message pour reconstruire sa clé privée.
 \end{itemize}
 \subsection{Problème rencontré}
-Un problème ayant bien ralenti le développement est une erreur dans l'implémentation des socket en C, en effet, au départ le serveur ne recevait pas toutes les données du client et inversement d'ailleurs.
+Un problème ayant bien ralenti le développement est une erreur dans l'implémentation des socket en C. En effet, au départ le serveur ne recevait pas toutes les données du client et inversement d'ailleurs.
 
 La solution a été de recevoir les données par petits chunks et de les regrouper petit à petit. Beaucoup de tests et de recherches ont été faites pour ce problème pourtant anodin sur les socket en C.
 \subsection{Problèmes connus}
@@ -140,9 +140,9 @@ Quelques améliorations seraient possibles mais restent à mettre en place, cela
 \paragraph*{Vérification email.}
 Implémentation d'une vérification par email afin d'être sûr que l'adresse email annoncée appartient bien à l'utilisateur qui s'authentifie pour la première fois. Typiquement lors du "HELO", on pourrait envoyer un mail de vérification avec un code sur l'email annoncé (s'il n'est pas dans la base de données) et demander le code envoyé avant de pouvoir uploader sa clé publique. Ainsi le client devrait pouvoir implémenter cette fonctionnalité aussi. Cela permettrait d'être sûr que tel utilisateur a effectivement tel email.
 \paragraph*{Mise en place à large échelle}
-Si l'on veut pouvoir mettre en place ce genr de système à une large échelle, il faut prévoir une manière d'avoir plusieurs KGC qui communiquent entres eux dans un système global de réplication par exemple. Ceci afin de pouvoir avoir les mêmes paramètres sur l'ensemble des KGC et que le système fonctionne.
+Si l'on veut pouvoir mettre en place ce genre de système à une large échelle, il faut prévoir une manière d'avoir plusieurs KGC qui communiquent, par exemple, entres eux dans un système global de réplication. Ceci afin de pouvoir avoir les mêmes paramètres sur l'ensemble des KGC et que le système fonctionne.
 
-Une autre solution serait par exemple d'ajouter un "tag" d'appartenance à un ID et celui-ci sera donc lié à un certain KGC. Ceci afin de partager la charge qui serait normalement sur un seul KGC. Ce genre de solutions pourrait permettre d'avoir par exemple un KGC par domaine ou alors de les partager via les TLDs. De plus, les KGC pourraient avoir des paramètres générés différemment enrtes eux, ce qui ne seraient pas le cas dans un système de réplication. Cette solution ajoute cependant de la complexité au système, et l'envoi de paquets plus volumineux sur le réseau pour les paramètres globaux d'un KGC qui sont de 52kB, nécessaire dans le cas du chiffrement ou de la vérification de la signature.
+Une autre solution serait par exemple d'ajouter un "tag" d'appartenance à un ID et celui-ci sera donc lié à un certain KGC. Ceci afin de partager la charge qui serait normalement sur un seul KGC. Ce genre de solutions pourrait permettre d'avoir par exemple un KGC par domaine ou alors de les partager via les TLDs. De plus, les KGC pourraient avoir des paramètres générés différemment entre eux, ce qui ne serait pas le cas dans un système de réplication. Cette solution ajoute cependant de la complexité au système. Et des envoi de paquets plus volumineux sur le réseau pour les paramètres globaux d'un KGC qui sont de 52kB, pour chaque KGC.
 
 Pour le système de clés on pourrait reprendre l'idée de~\cite{journals/ijnsec/BalakrishnanR16} afin d'aller chercher le serveur de clés pour tel domaine.
 \section{Fonctionnement global POC (Client)}
@@ -173,7 +173,7 @@ Pour la connexion au serveur SMTP / IMAP j'ai fait attention à la connexion sé
 \subsection{Problèmes connus}
 Les problèmes qu'il reste à résoudre à ce jour :
 \paragraph*{Développement sécurisé.}
-Lors du développement j'ai fait attention au maximum d'avoir le moins possible de fuites mémoires à l'aide de sanitizers et de valgrind. Cependant cela ne suffirait pas pour une application correctement sécurisée, il faudra mettre à 0 les structures utilisées et qui stockent des informations confidentielles.
+Lors du développement j'ai fait attention au maximum d'avoir le moins possible de fuites mémoires à l'aide de sanitizers et de valgrind. Cependant cela ne suffirait pas pour une application correctement sécurisée, il faudrait mettre à 0 les structures utilisées et qui stockent des informations confidentielles.
 \paragraph*{Enregistrement lors d'un crash}
 Lors d'un crash du client en plein milieu du programme ou de l'écriture/chiffrement du fichier des secrets il se peut que celui-ci deviennent corrompu. Il faudrait éviter de le corrompre car la seule manière d'y remédier serait de le supprimer et ainsi de recréer ses valeurs secrètes.
 \subsection{Améliorations}
@@ -185,7 +185,7 @@ Pour le moment la possibilité d'ajout de pièces jointes n'a pas été pris en 
 \paragraph*{GUI.}
 Mettre en place une interface utilisateur pour le client mail, cela aiderait à rendre le chiffrement plus transparent et plus simple pour l'utilisateur. En effet, demander à l'utilisateur d'écrire son mail au terminal n'est pas spécialement agréable.
 \paragraph*{Ajout clé publique}
-Dans l'envoi du mail il faudrait ajouter la clé publique de la source dans le message, ainsi la vérification de la signature.
+Dans l'envoi du mail il faudrait ajouter la clé publique de la source dans le message, ainsi que la vérification de la signature.
 
 \paragraph*{Répudiation et non répudiation}
 Ajouter la possibilité de signer ou non l'email afin de pouvoir obtenir ou non de la répudiation. Pour le moment l'implémentation signe le message et la clé symétrique chiffrée, ainsi la non-répudiation est accomplie. Afin d'avoir de la non répudiation il faudrait ne plus avoir cette signature, cela permettrait d'avoir la répudiation et d'avoir tout de même un système sécurisé.
@@ -213,7 +213,7 @@ Ici je fais un comparatif sur les différentes propriétés cryptographiques que
 	\label{table:comparisonProperties}
 \end{table}
 \subsection{Overhead induit}
-Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systèmes de mails sécurisés analysés au Chapitre \ref{ch:analysis}. Dans le tableau \ref{table:comparisonOverhead} on voit la taille d'overhead induit par les différents systèmes testés. Ces tailles ont été déterminées de manière empirique pars des tests effectués au long de ce projet.
+Ici je présente les différents \textit{overhead} que j'ai remarqué en utilisant les différents systèmes de mails sécurisés analysés au Chapitre \ref{ch:analysis}. Dans le tableau \ref{table:comparisonOverhead} on voit la taille d'overhead induit par les différents systèmes testés. Ces tailles ont été déterminées de manière empirique par des tests effectués tout au long de ce projet.
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{ |p{3cm}||p{4cm}|p{6cm}| }
@@ -241,12 +241,12 @@ Dans S/MIME le contrôle des certificats et l'import de différents certificats 
 \paragraph*{KGC / serveurs de clés non accessibles}
 Que se passe-t-il si un serveur de clés ou le KGC n'est plus accessible pour une quelconque raison ?
 
-Dans le cas de PGP, le déchiffrement pourra être effectué car la clé privée ne change pas d'un moment à l'autre, de plus lors d'un chiffrement PGP la signature digital est effectuée sur le texte clair puis est chiffré avec. Ainsi la clé publique de la source doit être récupérée, cela posera un problème si la clé n'est pas déjà stockée en local. Dans certains cas la clé publique peut être intégrée à l'envoi dans l'email mais n'est pas authentifiée.
+Dans le cas de PGP, le déchiffrement pourra être effectué car la clé privée ne change pas d'un moment à l'autre. De plus, lors d'un chiffrement PGP la signature digitale est effectuée sur le texte clair puis est chiffrée avec. Ainsi la clé publique de la source doit être récupérée, cela posera un problème si la clé n'est pas déjà stockée en local. Dans certains cas la clé publique peut être intégrée à l'envoi dans l'email mais n'est pas authentifiée.
 
-Dans le cas de CLPKC-POC, le déchiffrement sera potentiellement compromis, cela dépendra si l'utilisateur aura créer la clé pour la semaine courante ou non. Si c'est le cas le chiffrement pourra être fait. La vérification de la signature pourra être faite aussi si la clé publique de la source est stockée en local (si l'utilisateur nous a envoyés un mail auparavant). Il serait possible d'envoyer la clé publique de la source pour faciliter la vérification mais ce n'est pas fait dans l'état actuel.
+Dans le cas de CLPKC-POC, le déchiffrement sera potentiellement compromis, cela dépendra si l'utilisateur aura créé la clé pour la semaine courante ou non. Si c'est le cas, le chiffrement pourra être fait. La vérification de la signature pourra être faite aussi si la clé publique de la source est stockée en local (si l'utilisateur nous a envoyé un mail auparavant). Il serait possible d'envoyer la clé publique de la source pour faciliter la vérification mais ce n'est pas fait dans l'état actuel.
 
-Dans S/MIME, le déchiffrement pourra être effectué car la clé privée ne changera pas non plus. Et la vérification pourra être faite en local avec les CAs intègres dans le système pour le certificat envoyé avec le mail.
+Dans S/MIME, le déchiffrement pourra être effectué car la clé privée ne changera pas non plus. La vérification pourra être faite en local avec les CAs intégrés dans le système pour le certificat envoyé avec le mail.
 \paragraph*{Erreur utilisateur}
-Les erreurs que les utilisateurs peuvent faire sur certains éléments peuvent être problématique dans certains cas pour PGP et S/MIME. En effet, si un utilisateur signe une clé publique d'un utilisateur sans vérifier réellement l'identité cela pourrait authentifier une clé publique compromise et déstabiliserait le \textit{Web Of Trust}.
+Les erreurs que les utilisateurs peuvent faire sur certains éléments peuvent être problématiques dans certains cas pour PGP et S/MIME. En effet, si un utilisateur signe une clé publique d'un utilisateur sans vérifier réellement l'identité cela pourrait authentifier une clé publique compromise et déstabiliserait le \textit{Web Of Trust}.
 
- Pareil pour S/MIME où l'import d'un certificat malicieux pourrait avoir un impact sur la sécurité des données. Cependant, dans CLPKC-POC peu d'erreurs peuvent être faite car la plupart des paramètres et clés sont générés automatiquement.
+ Pareil pour S/MIME où l'import d'un certificat malicieux pourrait avoir un impact sur la sécurité des données. Cependant, dans CLPKC-POC peu d'erreurs peuvent être faites car la plupart des paramètres et clés sont générés automatiquement.

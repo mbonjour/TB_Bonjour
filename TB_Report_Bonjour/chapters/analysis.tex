@@ -67,7 +67,7 @@ Attention MD5 a été annoncé déprécié. Il faut savoir que pour chacune de c
 
 Lorsqu'un email est chiffré et signé avec PGP, il est d'abord hasher puis ce hash est signé avec la clé privée de l'utilisateur afin de faire une signature digitale. Le message et la signature sera alors chiffrée à l'aide la clé symétrique.
 
-L'organisation d'un message PGP se fait via des "paquets" d'informations encodés en base64. La RFC définit bien ces types de paquets, leur fonctionnement et les différents codes associés. Sur le blog de Conrad Irwin\footnote{\url{https://cirw.in/gpg-decoder/}} l'on peut entrer un message PGP et ainsi voir l'organisation d'un message, ou entrer des clés publiques ou une clé privée (déconseillé tout de même). Ainsi, un exemple d'email envoyé à plusieurs destinataires est représenté dans la Figure \ref{fig:PGP_DECODE}. Cela démontre comment fonctionnes PGP, en effet le message étant chiffré avec une clé symétrique, le chiffré sera le même pour tout le monde. Mais afin que tous les destinataires puisses avoir la clé symétrique, elle est chiffrée à l'aide des clés publiques des différents destinataires (et de la source, pour pouvoir la déchiffrer à l'avenir et ne pas conserver l'email en clair dans la boite d'envoi). À noter qu'avec l'option de \textit{blind copy} (option permettant d'envoyer à un utilisateur un email sans qu'il sache qu'il a aussi été envoyé à un autre utilisateur), PGP \textit{leak} les receveurs des emails avec leur KeyID qui sera présent dans le message PGP~\cite{BccPrivacy}.
+L'organisation d'un message PGP se fait via des "paquets" d'informations encodés en base64. La RFC4880~\cite{RFC4880} définit bien ces types de paquets, leur fonctionnement et les différents codes associés. Sur le blog de Conrad Irwin\footnote{\url{https://cirw.in/gpg-decoder/}} l'on peut entrer un message PGP et ainsi voir l'organisation d'un message, ou entrer des clés publiques ou une clé privée (déconseillé tout de même). Ainsi, un exemple d'email envoyé à plusieurs destinataires est représenté dans la Figure \ref{fig:PGP_DECODE}. 
 
 \begin{figure}[h!]
 	\includegraphics[width=\textwidth]{images/examplePGPDecode.png}
@@ -76,14 +76,22 @@ L'organisation d'un message PGP se fait via des "paquets" d'informations encodé
 	\label{fig:PGP_DECODE}
 \end{figure}
 
+Cela démontre comment fonctionnes PGP, en effet le message étant chiffré avec une clé symétrique, le chiffré sera le même pour tout le monde. Mais afin que tous les destinataires puisses avoir la clé symétrique, elle est chiffrée à l'aide des clés publiques des différents destinataires (et de la source, pour pouvoir la déchiffrer à l'avenir et ne pas conserver l'email en clair dans la boite d'envoi). À noter qu'avec l'option de \textit{blind copy} (option permettant d'envoyer à un utilisateur un email sans qu'il sache qu'il a aussi été envoyé à un autre utilisateur), PGP \textit{leak} les receveurs des emails avec leur KeyID qui sera présent dans le message PGP~\cite{BccPrivacy}.
+
 PGP utilise donc un système de clés publiques afin d'envoyer des clés symétriques. Comment obtient-on une clé publique pour envoyer notre message ?
 
 Selon certaines utilisations les clés peuvent être obtenues via un serveur de clés, mais cela implique un parti tier auquel il faut faire confiance, ainsi ce qui peut être fait c'est aussi d'avoir son propre serveur de clés. Mais pour être sûr que tel clé appartienne bien à tel utilisateur, PGP a introduit dès ses débuts un système décentralisé de confiance appelé le "Web of Trust". Ainsi, les utilisateurs signent entre eux leurs certificats d'identité, chacun des utilisateurs aura des clés de confiance et ainsi de suite. Cela permet d'avoir une toile de confiance entres les utilisateurs.
 
 Cependant, ce système est difficile à utiliser, il est nécessaire de faire attention à quelles clés les utilisateurs signent et approuvent. Surtout pour les nouveaux utilisateurs qui ne peuvent faire vérifier leurs clés publiques facilement et ne seront donc pas vérifié, c'est pour cela que des "fêtes" de signature de clés sont organisées afin de se rencontrer personnellement et vérifier que tel utilisateur est bien telle personne. Ces évènements sont d'ailleurs possible grâce aux Fingerprint des clés publiques. Ce sont des chaînes hexadécimales de 20 bytes permettant d'identifier une clé publique plus facilement.
 
-%TODO schéma ?
-Pour expliquer plus précisément le \textit{Web Of Trust} prenant un exemple : Alice a une clé publique 0xAAAAAAAAAAAA et elle signe la clé de Bob 0xBBBBBBBBBBB car elle le connaît. De la même manière Bob signe la clé publique de Carol 0xCCCCCCCCCCCC. Grâce à cela, Alice peut être sûre que cette clé appartient bien à Carol car il y a un chemin de signature valide entre sa clé publique et celle de Carol.
+Pour expliquer plus précisément le \textit{Web Of Trust} prenant un exemple : Alice a une clé publique 0xAAAAAAAAAAAA et elle signe la clé de Bob 0xBBBBBBBBBBB car elle le connaît. De la même manière Bob signe la clé publique de Carol 0xCCCCCCCCCCCC. Grâce à cela, Alice peut être sûre que cette clé appartient bien à Carol car il y a un chemin de signature valide entre sa clé publique et celle de Carol. Comme affiché dans la Figure \ref{fig:WOTExample}.
+
+\begin{figure}[h!]
+	\includegraphics[width=\textwidth]{images/WOTExample.pdf}
+	\centering
+	\caption{Exemple de la confiance dans le Web Of Trust}
+	\label{fig:WOTExample}
+\end{figure}
 
 Ces certificats d'identité sont signés à l'aide de SHA-1, cependant il a été prouvé que des attaques sur cet algorithme au niveau des collisions peuvent être faites~\cite{journals/iacr/LeurentP20}. Heureusement, le standard a été modifié dans les nouvelles version de GnuPG pour signer les identités des utilisateurs.
 
@@ -103,9 +111,23 @@ Pour les clés, Enigmail les envoie sur des serveurs de clés par défaut. Il va
 \paragraph*{Fonctionnement.}
 S/MIME (Secure/Multipurpose Internet Mail Extensions) se base sur un système de PKI (Public Key Infrastructure) pour chiffrer et signer les emails. Dans une telle infrastructure les CAs (Certificate Authorities) garantissent que les certificats décrivent bien l'entité.
 
-MIME est un standard qui étend le format d'email standard afin de pouvoir transmettre des données plus complexes que le format ASCII. En effet, cela permet de transmettre d'autres sets de caractères et la possibilité de transmettre des fichiers joints audio, vidéo, images, programmes aux emails. MIME permet de séparer le message en partie, c'est d'ailleurs là dessus que l'attaque EFAIL (c.f. Section \ref{attacks:EFAIL}) s'appuie. Ces parties ont différent format de données et le message MIME est défini selon un type parmi : mixed, digest, alternative, related, report, signed, encrypted, form-data, mixed-replace, byteranges. Ces types de contenu sont là pour définir de quoi est composé le message et comment le décoder, fonctionnant via une notion de frontières entres les différentes parties.
+MIME est un standard qui étend le format d'email standard afin de pouvoir transmettre des données plus complexes que le format ASCII. En effet, cela permet de transmettre d'autres sets de caractères et la possibilité de transmettre des fichiers joints audio, vidéo, images, programmes aux emails. MIME permet de séparer le message en partie, c'est d'ailleurs là dessus que l'attaque EFAIL (c.f. Section \ref{attacks:EFAIL}) s'appuie. Ces parties ont différent format de données et le message MIME est défini selon un type parmi : mixed, digest, alternative, related, report, signed, encrypted, form-data, mixed-replace, byteranges. Ces types de contenu sont là pour définir de quoi est composé le message et comment le décoder, fonctionnant via une notion de frontières entres les différentes parties. La Figure \ref{fig:MIMEExemple} permet de montrer un message MIME utilisé dans le cadre de S/MIME mais il illustre le fonctionnement de MIME.
 
-Dans ce contexte S/MIME vient ajouter un type MIME \textit{application/pkcs7-mime}, un format de données, qui fabrique une enveloppe chiffrée d'une entité MIME. Pour les signatures S/MIME utilisera plus les signatures détachées et le type \textit{multipart/signed} pour cela ou encore \textit{application/x-pkcs7-signature}. Anciennement, c'était effectivement le format de message PKCS\#7 utilisé pour le format des messages chiffrés. Cependant, à l'heure actuelle c'est la spécification de CMS (Cryptographic Message Syntax) qui est utilisé dans ces types S/MIME.
+\begin{figure}[h!]
+	\includegraphics[width=8cm]{images/MIMESignExample.png}
+	\centering
+	\caption{Exemple du format MIME}
+	\label{fig:MIMEExemple}
+\end{figure}
+
+Dans ce contexte S/MIME vient ajouter un type MIME \textit{application/pkcs7-mime}, un format de données, qui fabrique une enveloppe chiffrée d'une entité MIME. Pour les signatures S/MIME utilisera plus les signatures détachées et le type \textit{multipart/signed} pour cela ou encore \textit{application/x-pkcs7-signature}. Anciennement, c'était effectivement le format de message PKCS\#7 utilisé pour le format des messages chiffrés. Cependant, à l'heure actuelle c'est la spécification de CMS (Cryptographic Message Syntax) qui est utilisé dans ces types S/MIME. La Figure \ref{fig:SMIME_Encapsulation} permet de mieux se représenter cette encapsulation avec l'objet CMS \textit{SignedData}, inspiré d'un cours de la Haute École de Rapperswill\footnote{\url{http://security.hsr.ch/lectures/Internet_Security_1/07-SecureEmail.pdf}}
+
+\begin{figure}[h!]
+	\includegraphics[width=8cm]{images/MIMESignerDataExample.png}
+	\centering
+	\caption{Encapsulation des données avec S/MIME}
+	\label{fig:SMIME_Encapsulation}
+\end{figure}
 
 Afin de commencer à signer des messages avec S/MIME et pouvoir recevoir des messages chiffrés il faut un certificat. Ce certificat peut être obtenu soit par une autorité de certification interne ou une autorité externe. Ces certificats peuvent être de classe 1 (vérification que le propriétaire du certificat peut recevoir des messages envoyés au "From:" de ses messages) ou de classe 2 avec plus de précisions sur le propriétaire du certificat.
 
@@ -214,7 +236,6 @@ L'utilisation de Tutanota est facile, en effet Tutanota utilise le même princip
 	\label{fig:TutanotaPres}
 \end{figure}
 
-%\subsection{Bitmessage}
 \section{Attaques existantes}
 Présentation des attaques faites sur les différents systèmes présentés jusqu'ici ainsi que leur fonctionnement global.
 \subsection{Défauts webmails}
@@ -225,7 +246,14 @@ Il part du principe que les serveurs de Protonmail ne sont pas des serveurs à f
 Cela indique que si Protonmail était corrompu le fait d'avoir le code délivré par Protonmail pourrait avoir des effets néfastes. Comme p.ex l'extraction de la clé privée PGP. La conclusion est que dès le moment où vous avez utilisé une fois le webmail de Protonmail la clé PGP pourrait être corrompue ou connue de Protonmail.
 \subsection{EFAIL}
 \label{attacks:EFAIL}
-Malgré ces sécurités qui pourraient être mises en place à l’heure actuelle, une attaque nommée EFAIL~\cite{conf/uss/PoddebniakD0ISF18} a été faite en 2018. En effet, cette attaque a seulement été mitigée en évitant d’afficher les contenus HTML et les images dans les boîtes mails de base. Car le problème vient principalement de là, des problèmes sont liés aussi aux modes de chiffrement utilisé (typiquement CBC et CFB pour S/MIME et PGP respectivement) grâce à des "gadgets".
+Malgré ces sécurités qui pourraient être mises en place à l’heure actuelle, une attaque nommée EFAIL~\cite{conf/uss/PoddebniakD0ISF18} a été faite en 2018. En effet, cette attaque a seulement été mitigée en évitant d’afficher les contenus HTML et les images dans les boîtes mails de base. Car le problème vient principalement de là, des problèmes sont liés aussi aux modes de chiffrement utilisé (typiquement CBC et CFB pour S/MIME et PGP respectivement) grâce à des "gadgets". Cette attaque par gadget est démontrée sur le site officiel d'EFAIL\footnote{\url{https://efail.de/}} à l'aide de la Figure \ref{fig:efailAttack}. Ces gadgets sont possible car une partie du texte clair est connue (a), l'attaquant peut ainsi construir un bloc de 0 lorsque déchiffré en manipulant l'IV. La paire $X$ et $C_0$ est appelée un CBC gadget. Ce gadget pourra être utilisé pour pour ajouter du contenu permettant à l'exfiltration du texte clair (c).
+
+\begin{figure}[h!]
+	\includegraphics[width=\textwidth]{images/efail-attack.png}
+	\centering
+	\caption{Attaque par gadgets pour les modes d'opération CFB et CBC}
+	\label{fig:efailAttack}
+\end{figure}
 
 Cette attaque permet en fait d'injecter une image dans l'HTML du message, puis faire en sorte de récupérer le contenu du message déchiffré dans l'URL. Ceci est possible grâce au multi parties de MIME et en les abusant afin d'entourer le message chiffré d'une balise \textit{img} et de mettre en source le message qui sera déchiffré selon les règles de MIME. Ainsi l'attaquant aura le message déchiffré dans l'URL qu'il peut contrôler. 
 

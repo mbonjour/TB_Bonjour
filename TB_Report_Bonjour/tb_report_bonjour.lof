@@ -7,20 +7,24 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Le fonctionnement d'un système de messagerie~\cite {mailGlobal}}}{4}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Le fonctionnement global de PGP~\cite {pgpGlobal}}}{5}{figure.2.2}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Exemple décodage d'un message PGP}}{7}{figure.2.3}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Erreur de vérification pour Fossa}}{10}{figure.2.4}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Erreur de vérification pour MeSince}}{11}{figure.2.5}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Présentation d'un email chiffré Protonmail}}{13}{figure.2.6}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Présentation d'un email chiffré Tutanota}}{15}{figure.2.7}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Fonctionnement du DH Ratchet~\cite {doubleratchet}}}{17}{figure.2.8}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Fonctionnement du deuxième Ratchet~\cite {doubleratchet}}}{18}{figure.2.9}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Exemple de la confiance dans le Web Of Trust}}{8}{figure.2.4}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Exemple du format MIME}}{9}{figure.2.5}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Encapsulation des données avec S/MIME}}{10}{figure.2.6}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Erreur de vérification pour Fossa}}{12}{figure.2.7}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Erreur de vérification pour MeSince}}{12}{figure.2.8}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Présentation d'un email chiffré Protonmail}}{14}{figure.2.9}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Présentation d'un email chiffré Tutanota}}{16}{figure.2.10}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Attaque par gadgets pour les modes d'opération CFB et CBC}}{17}{figure.2.11}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Fonctionnement du DH Ratchet~\cite {doubleratchet}}}{19}{figure.2.12}%
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Fonctionnement du deuxième Ratchet~\cite {doubleratchet}}}{20}{figure.2.13}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{38}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{40}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoie un message à Bob}}{41}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{42}{figure.3.4}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Schéma global du protocole}}{40}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schéma de la première connexion}}{42}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Alice envoie un message à Bob}}{43}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Bob reçoit le message}}{44}{figure.3.4}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{47}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Connexion SSL/TLS avec le serveur email}}{51}{figure.4.2}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Schéma encapsulation des données}}{49}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Connexion SSL/TLS avec le serveur email}}{53}{figure.4.2}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -5,13 +5,13 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {2.1}{\ignorespaces Table des algorithmes utilisés par PGP}}{6}{table.2.1}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Table des algorithmes utilisés par S/MIME}}{9}{table.2.2}%
-\contentsline {table}{\numberline {2.3}{\ignorespaces Récapitulatif des propriétés cryptographiques de différentes implémentations}}{20}{table.2.3}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Table des algorithmes utilisés par S/MIME}}{11}{table.2.2}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Récapitulatif des propriétés cryptographiques de différentes implémentations}}{21}{table.2.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Table de comparaison des temps d'exécution pour les différents algorithmes de Certificateless Cryptography }}{44}{table.4.1}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Table de comparaison des différentes propriétés cryptographiques }}{53}{table.4.2}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Table de comparaison des différents overhead en rapport avec les solutions existantes }}{54}{table.4.3}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Table de comparaison des temps d'exécution pour les différents algorithmes de Certificateless Cryptography }}{46}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Table de comparaison des différentes propriétés cryptographiques }}{55}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Table de comparaison des différents overhead en rapport avec les solutions existantes }}{56}{table.4.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
