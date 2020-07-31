@@ -20,9 +20,9 @@
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
-      <config projectName="POCCertificatelessCryptography" targetName="mainClient" />
       <config projectName="POCCertificatelessCryptography" targetName="mainServer" />
+      <config projectName="POCCertificatelessCryptography" targetName="mainClient" />
+      <config projectName="POCCertificatelessCryptography" targetName="testAlgo" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -31,7 +31,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="" />
+    <list default="true" id="9cda98c4-2006-4b24-a1c4-ee94a99413cc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/mainClient.c" beforeDir="false" afterPath="$PROJECT_DIR$/client/mainClient.c" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -186,6 +190,7 @@
       <workItem from="1595489587698" duration="5183000" />
       <workItem from="1595579693327" duration="2349000" />
       <workItem from="1595929935923" duration="9536000" />
+      <workItem from="1596155609772" duration="2752000" />
     </task>
     <servers />
   </component>
@@ -350,7 +355,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1429</line>
+          <line>1430</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -375,12 +380,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1498</line>
+          <line>1502</line>
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1464</line>
+          <line>1465</line>
           <option name="timeStamp" value="121" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -415,7 +420,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/client/mainClient.c</url>
-          <line>1473</line>
+          <line>1474</line>
           <option name="timeStamp" value="141" />
         </line-breakpoint>
       </breakpoints>
