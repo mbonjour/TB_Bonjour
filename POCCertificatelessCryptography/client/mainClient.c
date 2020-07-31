@@ -882,12 +882,12 @@ binn* getSecretsValue(char *userID, char *userPassword, unsigned char **salt, un
     fclose(pkFile);
     free(pkFilename);
 
-    printf("PK obj : %s\n", b64Payload);
+    //printf("PK obj : %s\n", b64Payload);
     binn_object_set_str(packetSendingPK, "PK", b64Payload);
     free(b64Payload);
 
     int sizeSent = send(sock, binn_ptr(packetSendingPK), binn_size(packetSendingPK), 0);
-    printf("Size of PK : %d\n", sizeSent);
+    //printf("Size of PK : %d\n", sizeSent);
     binn_free(pkBinnObj);
     binn_free(packetSendingPK);
     printf("In order to securely save your personal parameters we need you to provide a (strong) password for encrypting your personal data : \n");
@@ -908,7 +908,7 @@ void saveSecretsValue(binn *secrets, char *userID, char *userPassword, unsigned 
     savingParams = fopen(secretFile, "wb");
     if (*salt == NULL || *nonce == NULL){
         *salt = malloc(crypto_pwhash_SALTBYTES);
-        printf("We give the salt and need to store it for future use :\n");
+        //printf("We give the salt and need to store it for future use :\n");
         randombytes_buf(*salt, crypto_pwhash_SALTBYTES);
         *nonce = malloc(crypto_aead_aes256gcm_NPUBBYTES);
         randombytes_buf(*nonce, crypto_aead_aes256gcm_NPUBBYTES);
@@ -921,7 +921,7 @@ void saveSecretsValue(binn *secrets, char *userID, char *userPassword, unsigned 
 
         size_t sizeB64Salt;
         unsigned char *b64Salt = base64_encode(*salt, crypto_pwhash_SALTBYTES, &sizeB64Salt);
-        printf("%s\n", b64Salt);
+        //printf("%s\n", b64Salt);
 
         if (crypto_pwhash
                     (aesk, sizeof aesk, userPassword, strlen(userPassword), *salt,
@@ -934,10 +934,10 @@ void saveSecretsValue(binn *secrets, char *userID, char *userPassword, unsigned 
         unsigned long long cipher_len;
         unsigned char ciphertextAES[m_len + crypto_aead_aes256gcm_ABYTES];
         encrypt_message(m, aesk, *nonce, ciphertextAES, &cipher_len, &m_len, NULL, 0);
-        printf("We give the nonce and need to store it for future use :\n");
+        //printf("We give the nonce and need to store it for future use :\n");
         size_t outLenB64Nonce;
         unsigned char *b64nonce = base64_encode(*nonce, crypto_aead_aes256gcm_NPUBBYTES, &outLenB64Nonce);
-        printf("%s\n", b64nonce);
+        //printf("%s\n", b64nonce);
 
         size_t b64EncryptedLen;
         unsigned char *encryptedContent = base64_encode(ciphertextAES, cipher_len, &b64EncryptedLen);
@@ -1191,7 +1191,7 @@ int main() {
     }
     if(pc_param_set_any() == RLC_OK){
         pc_param_print();
-        printf("Security : %d\n", pc_param_level());
+        //printf("Security : %d\n", pc_param_level());
 
         // MPK struct, Master Public Key structure to store
         encryption_mpk mpkSession;
@@ -1245,7 +1245,7 @@ int main() {
         if(sendOrDecryptUser == 0) {
             // At this point we're sure that params are full, by generating them or retrieving from the user disk
             // So now we can ask the user about the email he want to send
-            printf("Now params are loaded, please enter the destination address of the email :\n");
+            printf("Please enter the destination address of the email :\n");
             char *destinationID = malloc(320);
             fgets(destinationID, 320, stdin);
             destinationID[strlen(destinationID)-1] = '\x00';
@@ -1304,10 +1304,10 @@ int main() {
             encrypt_message(message, aesk, nonceAES, ciphertextAES, &cipher_len, &m_len, authenticatedData, authenticatedDataSize);
             size_t ciphertextLen;
             unsigned char *ciphertextB64 = base64_encode(ciphertextAES, cipher_len, &ciphertextLen);
-            printf("Encrypted message : %s\n", ciphertextB64);
+            //printf("Encrypted message : %s\n", ciphertextB64);
 
             unsigned char *nonceAesB64 = base64_encode(nonceAES, crypto_aead_aes256gcm_NPUBBYTES, NULL);
-            printf("Nonce message : %s\n", nonceAesB64);
+            //printf("Nonce message : %s\n", nonceAesB64);
 
             // Encryption of the AES Key with the Public key of the destination
             cipher c;
@@ -1328,7 +1328,7 @@ int main() {
             cipherBinnObect = binn_object();
             serialize_Cipher(cipherBinnObect, c);
             unsigned char *cipherB64 = base64_encode(binn_ptr(cipherBinnObect), binn_size(cipherBinnObect), NULL);
-            printf("Cipher base64 : %s\n", cipherB64);
+            //printf("Cipher base64 : %s\n", cipherB64);
 
             binn_free(cipherBinnObect);
 
@@ -1359,7 +1359,7 @@ int main() {
             signatureObjBinn = binn_object();
             serialize_Signature(signatureObjBinn, s);
             unsigned char *b64signatureObjBinn = base64_encode(binn_ptr(signatureObjBinn), binn_size(signatureObjBinn), NULL);
-            printf("Signature (base64) : %s\n", b64signatureObjBinn);
+            //printf("Signature (base64) : %s\n", b64signatureObjBinn);
 
             sendmail(destinationID, userID, subject, nonceAesB64, timestampStr, ciphertextB64, b64signatureObjBinn, cipherB64, userID, password);
             free(nonceAesB64);
@@ -1419,6 +1419,7 @@ int main() {
             char *timestamp = binn_object_str(emailObj, "X-TIMESTAMP-USED");
             if(b64Signature == NULL || b64Cipher == NULL || b64Encrypted == NULL || b64Nonce == NULL){
                 printf("I cannot parse the email, it's not an email written by my POC\n");
+                saveSecretsValue(secrets, userID, userPassword, &salt, &nonce);
                 exit(EXIT_FAILURE);
             }
             char *IDUsed = malloc(330);
@@ -1488,7 +1489,10 @@ int main() {
                 strcat(authenticatedData, userID);
                 strcat(authenticatedData, subject);
                 decrypt_message(decrypted, ciphertext, nonceAES, aeskDecrypted, size_cipher, authenticatedData, authenticatedDataSize);
-                printf("Decrypted message : %s\n", decrypted);
+                printf("From : %s\n", sourceAddress);
+                printf("To : %s\n", userID);
+                printf("Subject : %s\n", subject);
+                printf("Decrypted content : %s\n", decrypted);
                 free(ciphertext);
                 free(authenticatedData);
                 free(nonceAES);

@@ -1,10 +1,47 @@
-# README for POC of certificateless encryption and signing
+# README for POC of certificateless encryption and signing of emails
 ### Author : Mickael Bonjour
 
-## Purpose of this
-This readme is here to help building the POC from sources and explain a bit what it's doing.
+## Purpose of this README
+This readme is here to help building this POC from sources and explain a bit what it's going on.
 ## Dependencies
-Libsodium need to be installed prior to the build of the project.
+Some libraries need to be installed before building the sources.
+
+- Libcurl
+- Libetpan
+- Libsodium
+- libgmp
+
+Steps to install on an Ubuntu-like system :
+
+Libsodium :
+```bash
+git clone https://github.com/jedisct1/libsodium --branch stable
+cd libsodium
+./configure
+make && make check
+sudo make install
+```
+Libcurl :
+```bash
+sudo apt-get install libcurl4-gnutls-dev
+```
+Libetpan:
+```bash
+git clone https://github.com/dinhvh/libetpan.git
+cd libetpan
+./autogen.sh
+make
+```
+Libgmp :
+```bash
+sudo apt-get install libgmp-dev
+```
+
+One more step, we need to download the RELIC library source and copy it to the lib folder :
+```bash
+git clone https://github.com/relic-toolkit/relic.git
+cp -r relic libs/
+```
 ## Build and launch
 To simply build from the sources you can try this command :
 ```bash

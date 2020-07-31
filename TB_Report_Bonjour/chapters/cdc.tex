@@ -1,15 +1,14 @@
 \chapter{Cahier des charges}
 \label{ch:cdc}
 \section*{Résumé du problème}
-Les outils de chiffrement et de signature de mails actuels se résument principalement à S/MIME et à PGP. \\
+Les outils de chiffrement et de signature de mails actuels se résument principalement à S/MIME et à PGP.\\
 Ces deux solutions sont anciennes, souffrent assez régulièrement de nouvelles vulnérabilités et ne proposent pas certaines propriétés cryptographiques qui pourraient être utiles (par exemple, la "forward secrecy"). Le but de ce travail de bachelor est d'étudier quelles propriétés seraient utiles pour la sécurité des emails, de proposer un nouveau protocole les implémentant et de développer un proof of concept. 
 \subsection*{Problématique}
-Les systèmes de mails sécurisés souffrent de manque de praticité quant à leur implémentations, de plus elles ont été prouvées vulnérables à plusieurs reprises.
+Les systèmes de mails sécurisés souffrent d'un cruel manque de praticité quant à leur implémentations, de plus elles ont été prouvées vulnérables à plusieurs reprises.
 \subsection*{Solutions existantes}
-Les solutions existantes sont représentées majoritairement par S/MIME et PGP. Cependant, des nouveaux protocoles émergent tel que PEP et des fournisseurs proposent des implémentations transparentes de PGP, p. ex. comme le fait Protonmail. De plus, l'on pourrait s'orienter aussi sur la messagerie instantanée qui bénéficie de protocoles sécurisés comme Signal.
+Les solutions existantes sont représentées majoritairement par S/MIME et PGP. Cependant, des nouveaux protocoles émergent tel que PEP et des fournisseurs proposent des implémentations transparentes de PGP, par exemple comme le fait Protonmail. De plus, on pourrait s'orienter aussi sur la messagerie instantanée qui bénéficie de protocoles sécurisés comme Signal.
 \subsection*{Solutions possibles}
-Un début de solution est proposé dans ce papier à l'aide d'un nouveau système qui pourrait être mis facilement en place et qui bénéficierait de meilleures propriétés que les protocoles actuellement utilisés. L'autre solution serait de rester avec PGP et S/MIME malgré le manque d'intégration dont ils font preuves.
-%TODO remplir le cahier des charges - mettre plus de travail dans l'analyse afin de lister correctement les point demandés dans le cahier des charges
+Un début de solution est proposé dans ce travail à l'aide d'un nouveau système qui pourrait être mis facilement en place et qui bénéficierait de meilleures propriétés que les protocoles actuellement utilisés. Ainsi qu'une praticité accrue. L'autre solution serait de rester avec PGP et S/MIME malgré le manque d'intégration dont ils font preuves.
 \section*{Cahier des charges}
 Voici un résumé du cahier des charges sous forme d'une liste d'objectifs à atteindre :
 \begin{itemize}
@@ -27,10 +26,9 @@ Si le temps le permet:
 	\item Faire un prototype de client mail utilisant une architecture mise en place pour le POC.
 \end{itemize}
 
-%\subsection*{Objectifs}
 
 \subsection*{Déroulement}
-Tout d'abord je vais m'intéresser à faire une évaluation des concepts existants en messagerie sécurisée, tel que PGP et S/MIME pour les emails ou encore Signal pour la messagerie instantanée. Ayant vu ce qu'il se fait, j'essaie de trouver une solution alternative pour le chiffrement et la signature d'emails. De là, je vais conceptualiser un protocole et l'implémenter au sein d'un \textit{Proof Of Concept}.
+Tout d'abord, une évaluation des concepts existants en messagerie sécurisée sera faite, tel que PGP et S/MIME pour les emails ou encore Signal pour la messagerie instantanée. Vu ce qu'il se fait, une solution alternative pour le chiffrement et la signature d'emails sera proposée. De là, la conceptualisation d'un protocole sera proposée ainsi que son implémentation au sein d'un \textit{Proof Of Concept}.
 \subsection*{Livrables}
 Les délivrables seront les suivants :
 \begin{enumerate}

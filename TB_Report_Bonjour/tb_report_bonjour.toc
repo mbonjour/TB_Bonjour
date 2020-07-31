@@ -8,86 +8,86 @@
 \contentsline {subsection}{\numberline {2.1.1}Détails techniques}{3}{subsection.2.1.1}%
 \contentsline {section}{\numberline {2.2}Protocoles existants}{4}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}PGP}{5}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}S/MIME}{8}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Implémentations existantes}{12}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Protonmail}{12}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Tutanota}{14}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Attaques existantes}{14}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Défauts webmails}{15}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}EFAIL}{15}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}SHA-1 Shambles}{16}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}Signal}{16}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Fonctionnement}{17}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Propriétés cryptographiques}{18}{subsection.2.5.2}%
-\contentsline {subsection}{\numberline {2.5.3}Problèmes d'intégrations}{18}{subsection.2.5.3}%
-\contentsline {section}{\numberline {2.6}Compromis}{19}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Résultats des recherches}{19}{subsection.2.6.1}%
-\contentsline {section}{\numberline {2.7}Primitives}{20}{section.2.7}%
-\contentsline {subsection}{\numberline {2.7.1}Primitives analysées}{20}{subsection.2.7.1}%
-\contentsline {subsection}{\numberline {2.7.2}Primitive choisie}{20}{subsection.2.7.2}%
-\contentsline {section}{\numberline {2.8}Recherches sur la primitive}{21}{section.2.8}%
-\contentsline {subsection}{\numberline {2.8.1}Principes mathématiques}{21}{subsection.2.8.1}%
-\contentsline {subsection}{\numberline {2.8.2}Notations}{22}{subsection.2.8.2}%
-\contentsline {subsection}{\numberline {2.8.3}Schémas Certificateless de Chiffrement}{23}{subsection.2.8.3}%
-\contentsline {subsection}{\numberline {2.8.4}Détails techniques}{23}{subsection.2.8.4}%
-\contentsline {subsection}{\numberline {2.8.5}Schémas Certificateless de Signature}{27}{subsection.2.8.5}%
-\contentsline {subsection}{\numberline {2.8.6}Détails techniques}{28}{subsection.2.8.6}%
-\contentsline {subsection}{\numberline {2.8.7}Ajout d'une pseudo Forward Secrecy}{31}{subsection.2.8.7}%
-\contentsline {section}{\numberline {2.9}État de l'art}{32}{section.2.9}%
-\contentsline {subsection}{\numberline {2.9.1}Email Encryption System Using Certificateless Public Key Encryption Scheme}{32}{subsection.2.9.1}%
-\contentsline {subsection}{\numberline {2.9.2}An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{32}{subsection.2.9.2}%
-\contentsline {subsection}{\numberline {2.9.3}Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}{33}{subsection.2.9.3}%
-\contentsline {subsection}{\numberline {2.9.4}PriviPK : Certificate-less and secure email communication}{34}{subsection.2.9.4}%
-\contentsline {subsection}{\numberline {2.9.5}A certificateless one-way group key agreement protocol for end-to-end email encryption}{35}{subsection.2.9.5}%
-\contentsline {chapter}{\numberline {3}Architecture / Design du protocole}{37}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Architecture globale}{37}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Acteurs}{37}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Fonctionnement Certificateless PKC}{38}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Chiffrement}{38}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Signature}{39}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}Design du protocole}{39}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Premier contact}{39}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Envoi d'un message}{40}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Réception d'un message}{41}{subsection.3.4.3}%
-\contentsline {chapter}{\numberline {4}Implémentation}{43}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Choix d'implémentations}{43}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Langage}{43}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Librairie cryptographique}{44}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Courbe utilisée}{44}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.1.4}Dérivation de la clé AES}{44}{subsection.4.1.4}%
-\contentsline {subsection}{\numberline {4.1.5}Pseudo Forward Secrecy - Timestamp}{45}{subsection.4.1.5}%
-\contentsline {subsection}{\numberline {4.1.6}Fonctions de hachage - signature}{45}{subsection.4.1.6}%
-\contentsline {subsection}{\numberline {4.1.7}Sérialisation des données}{46}{subsection.4.1.7}%
-\contentsline {subsection}{\numberline {4.1.8}Enregistrement des clés publiques (serveur)}{46}{subsection.4.1.8}%
-\contentsline {subsection}{\numberline {4.1.9}Récupération via IMAP}{46}{subsection.4.1.9}%
-\contentsline {section}{\numberline {4.2}Implémentation clés de chiffrement}{47}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Fonctionnement global POC (KGC)}{47}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Fonctionnement}{47}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Problème rencontré}{49}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Problèmes connus}{49}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Améliorations}{49}{subsection.4.3.4}%
-\contentsline {section}{\numberline {4.4}Fonctionnement global POC (Client)}{50}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Fonctionnement}{50}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Fonctionnalités}{51}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Problèmes connus}{52}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Améliorations}{52}{subsection.4.4.4}%
-\contentsline {section}{\numberline {4.5}Comparaisons avec l'état de l'art}{53}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{53}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Overhead induit}{53}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Différences d'utilisabilité}{54}{subsection.4.5.3}%
-\contentsline {chapter}{\numberline {5}Conclusion}{57}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Conclusions sur l'analyse}{57}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Conclusions sur l'implémentation}{57}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Futures directions}{58}{section.5.3}%
-\contentsline {chapter}{Bibliographie}{59}{section.5.3}%
-\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{67}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Sagemath}{67}{section.A.1}%
-\contentsline {section}{\numberline {A.2}RELIC Toolkit}{67}{section.A.2}%
-\contentsline {section}{\numberline {A.3}Libsodium}{68}{section.A.3}%
-\contentsline {section}{\numberline {A.4}Libbinn}{68}{section.A.4}%
-\contentsline {section}{\numberline {A.5}Libetpan}{68}{section.A.5}%
-\contentsline {section}{\numberline {A.6}Libcurl}{68}{section.A.6}%
-\contentsline {section}{\numberline {A.7}UnQlite}{69}{section.A.7}%
-\contentsline {chapter}{\numberline {B}Fichiers}{71}{appendix.B}%
-\contentsline {section}{\numberline {B.1}Code du \textit {Proof Of Concept}}{71}{section.B.1}%
-\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{71}{section.B.2}%
+\contentsline {subsection}{\numberline {2.2.2}S/MIME}{9}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Implémentations existantes}{13}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Protonmail}{13}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Tutanota}{15}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Attaques existantes}{16}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Défauts webmails}{16}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}EFAIL}{17}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}SHA-1 Shambles}{18}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Signal}{18}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Fonctionnement}{18}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Propriétés cryptographiques}{19}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}Problèmes d'intégrations}{20}{subsection.2.5.3}%
+\contentsline {section}{\numberline {2.6}Compromis}{20}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Résultats des recherches}{21}{subsection.2.6.1}%
+\contentsline {section}{\numberline {2.7}Primitives}{22}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Primitives analysées}{22}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Primitive choisie}{22}{subsection.2.7.2}%
+\contentsline {section}{\numberline {2.8}Recherches sur la primitive}{23}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Principes mathématiques}{23}{subsection.2.8.1}%
+\contentsline {subsection}{\numberline {2.8.2}Notations}{23}{subsection.2.8.2}%
+\contentsline {subsection}{\numberline {2.8.3}Schémas Certificateless de Chiffrement}{24}{subsection.2.8.3}%
+\contentsline {subsection}{\numberline {2.8.4}Détails techniques}{25}{subsection.2.8.4}%
+\contentsline {subsection}{\numberline {2.8.5}Schémas Certificateless de Signature}{29}{subsection.2.8.5}%
+\contentsline {subsection}{\numberline {2.8.6}Détails techniques}{30}{subsection.2.8.6}%
+\contentsline {subsection}{\numberline {2.8.7}Ajout d'une pseudo Forward Secrecy}{33}{subsection.2.8.7}%
+\contentsline {section}{\numberline {2.9}État de l'art}{34}{section.2.9}%
+\contentsline {subsection}{\numberline {2.9.1}Email Encryption System Using Certificateless Public Key Encryption Scheme}{34}{subsection.2.9.1}%
+\contentsline {subsection}{\numberline {2.9.2}An End-To-End Secure Mail System Based on Certificateless Cryptography in the Standard Model}{34}{subsection.2.9.2}%
+\contentsline {subsection}{\numberline {2.9.3}Practical Implementation of a Secure Email System Using Certificateless Cryptography and Domain Name System}{35}{subsection.2.9.3}%
+\contentsline {subsection}{\numberline {2.9.4}PriviPK : Certificate-less and secure email communication}{36}{subsection.2.9.4}%
+\contentsline {subsection}{\numberline {2.9.5}A certificateless one-way group key agreement protocol for end-to-end email encryption}{36}{subsection.2.9.5}%
+\contentsline {chapter}{\numberline {3}Architecture / Design du protocole}{39}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Architecture globale}{39}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Acteurs}{39}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Fonctionnement Certificateless PKC}{40}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Chiffrement}{40}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Signature}{41}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Design du protocole}{41}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Premier contact}{41}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Envoi d'un message}{42}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Réception d'un message}{43}{subsection.3.4.3}%
+\contentsline {chapter}{\numberline {4}Implémentation}{45}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Choix d'implémentations}{45}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Langage}{45}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Librairie cryptographique}{46}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Courbe utilisée}{46}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Dérivation de la clé AES}{46}{subsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.1.5}Pseudo Forward Secrecy - Timestamp}{47}{subsection.4.1.5}%
+\contentsline {subsection}{\numberline {4.1.6}Fonctions de hachage - signature}{47}{subsection.4.1.6}%
+\contentsline {subsection}{\numberline {4.1.7}Sérialisation des données}{48}{subsection.4.1.7}%
+\contentsline {subsection}{\numberline {4.1.8}Enregistrement des clés publiques (serveur)}{48}{subsection.4.1.8}%
+\contentsline {subsection}{\numberline {4.1.9}Récupération via IMAP}{48}{subsection.4.1.9}%
+\contentsline {section}{\numberline {4.2}Implémentation clés de chiffrement}{49}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Fonctionnement global POC (KGC)}{49}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Fonctionnement}{49}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Problème rencontré}{51}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Problèmes connus}{51}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Améliorations}{51}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Fonctionnement global POC (Client)}{52}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Fonctionnement}{52}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Fonctionnalités}{53}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Problèmes connus}{54}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Améliorations}{54}{subsection.4.4.4}%
+\contentsline {section}{\numberline {4.5}Comparaisons avec l'état de l'art}{55}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{55}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Overhead induit}{55}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Différences d'utilisabilité}{56}{subsection.4.5.3}%
+\contentsline {chapter}{\numberline {5}Conclusion}{59}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Conclusions sur l'analyse}{59}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Conclusions sur l'implémentation}{59}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Futures directions}{60}{section.5.3}%
+\contentsline {chapter}{Bibliographie}{61}{section.5.3}%
+\contentsline {chapter}{\numberline {A}Outils utilisés pour la compilation}{69}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Sagemath}{69}{section.A.1}%
+\contentsline {section}{\numberline {A.2}RELIC Toolkit}{69}{section.A.2}%
+\contentsline {section}{\numberline {A.3}Libsodium}{70}{section.A.3}%
+\contentsline {section}{\numberline {A.4}Libbinn}{70}{section.A.4}%
+\contentsline {section}{\numberline {A.5}Libetpan}{70}{section.A.5}%
+\contentsline {section}{\numberline {A.6}Libcurl}{70}{section.A.6}%
+\contentsline {section}{\numberline {A.7}UnQlite}{71}{section.A.7}%
+\contentsline {chapter}{\numberline {B}Fichiers}{73}{appendix.B}%
+\contentsline {section}{\numberline {B.1}Code du \textit {Proof Of Concept}}{73}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Tableaux comparatifs}{73}{section.B.2}%
