@@ -1,6 +1,6 @@
 \chapter{Architecture / Design du protocole}
 \label{ch:arch}
-Dans ce chapitre, je vais m'intéresser à expliquer le fonctionnement de la \textit{certificateless cryptography} et démontrer comment je l'ai utilisée afin de l'intégrer à un protocole de chiffrement de mail. Les besoins en sécurité de ce système s'inscrive dans un système de messagerie électronique nécessitant de l'intégrité, authentification, confidentialité et une possibilité de répudiation et non-répudiation.
+Dans ce chapitre, je vais m'intéresser à expliquer le fonctionnement de la \textit{certificateless cryptography} et démontrer comment je l'ai utilisée afin de l'intégrer à un protocole de chiffrement de mail. Les besoins en sécurité de ce système s'inscrivent dans un système de messagerie électronique nécessitant de l'intégrité, authentification, confidentialité et une possibilité de répudiation et non-répudiation.
 \section{Architecture globale}
 Dans la Figure \ref{fig:globalProtocol}, je présente uniquement l'architecture globale pour bien représenter les différents acteurs présents dans le protocole et ainsi avoir une vue d'ensemble pour faciliter la compréhension.
 
@@ -22,7 +22,7 @@ Ces différents acteurs sont les principaux présents dans un exemple de \textit
 \section{Fonctionnement Certificateless PKC}
 Je vais ici découper les différents algorithmes présents dans le certificateless public key cryptography. En passant par le chiffrement et la signature.
 
-Ces algorithmes seront accompagnés d'explications sur leur utilité alors que la Section \ref{subsec:mathPairings} présente les différents calculs et implémentations effectué. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. On peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{conf/pkc/DentLP08}.
+Ces algorithmes seront accompagnés d'explications sur leur utilité alors que la Section \ref{subsec:mathPairings} présente les différents calculs et implémentations effectués. Les noms donnés aux algorithmes seront réutilisés ensuite pour les schémas afin de démontrer l'architecture du protocole mis en place. On peut voir des définitions spécifiques dans l'article sur lequel je me suis appuyé pour ce travail~\cite{conf/pkc/DentLP08}.
 \subsection{Chiffrement}
 La liste des différents algorithmes de \textit{Certificateless Cryptography} et leur description, les détails techniques de leurs implémentations sont disponibles à la Section \ref{sec:primitiveSearch}.
 \begin{itemize}
@@ -108,11 +108,11 @@ Présentation des différentes actions faites lors de l'envoi d'un message d'Ali
 Ainsi, l'envoi d'un message se déroule comme suit :
 \begin{itemize}
 	\item Tout d'abord, Alice va récupérer le clé publique de Bob via son ID (aka email).
-	\item Elle devra aussi récupérer sa clé privée partielle de signature pour créer ses clés privées afin de signer le message. Elle va le faire à l'aide de son ID et du même timestamp qu'utilisé pour la suite.
-	\item Elle va ensuite tirer une valeur aléatoire dans Gt qui représentera sa clé AES pour la suite. Elle va chiffrer cet élément à l'aide de la clé publique de Bob et de son ID complété par un timestamp. Ce timestamp sert à garder une certaine Forward Secrecy comme expliqué dans la Section \ref{subsec:pseudoSecrecy}. Le texte chiffré sera c'.
-	\item Elle va calculer la signature du texte chiffré donné (s' sur la Figure \ref{fig:aliceSends})
-	\item Alice utilisera un chiffrement authentifié comme AES\_GCM pour chiffrer et authentifier son mail à Bob, t pour le tag et c pour le texte chiffré.
-	\item Finalement elle va envoyer tous ces éléments à Bob (à savoir, l'ID utilisé, c, c', t, s' et l'IV utilisé pour AES\_GCM).
+	\item Elle devra aussi récupérer sa clé privée partielle de signature pour créer ses clés privées afin de signer le message. Elle va le faire à l'aide de son $ID$ et du même timestamp qu'utilisé pour la suite.
+	\item Elle va ensuite tirer une valeur aléatoire dans $G_T$ qui représentera sa clé AES pour la suite. Elle va chiffrer cet élément à l'aide de la clé publique de Bob et de son ID complété par un timestamp. Ce timestamp sert à garder une certaine Forward Secrecy comme expliqué dans la Section \ref{subsec:pseudoSecrecy}. Le texte chiffré sera $c'$.
+	\item Elle va calculer la signature du texte chiffré donné ($s'$ sur la Figure \ref{fig:aliceSends})
+	\item Alice utilisera un chiffrement authentifié comme AES\_GCM pour chiffrer et authentifier son mail à Bob, $t$ pour le tag et $c$ pour le texte chiffré.
+	\item Finalement elle va envoyer tous ces éléments à Bob (à savoir, l'$ID$ utilisé, $c, c', t, s'$ et l'$IV$ utilisé pour AES\_GCM).
 \end{itemize}
 
 \subsection{Réception d'un message}
@@ -151,8 +151,8 @@ Présentation des différentes actions faites lors de la réception d'un message
 
 Ainsi la réception déclenche les étapes suivantes :
 \begin{itemize}
-	\item A la réception, la première chose à faire est de vérifier le texte chiffré de la clé AES. Pour cela, on va demander la clé publique d'Alice au KGC. Puis on va vérifier ce texte chiffré c' à l'aide de sa signature s'.
-	\item Ensuite Bob va récupérer sa clé privée partielle via le KGC en fournissant son ID avec le timestamp envoyé par Alice. Il va ainsi pouvoir former sa clé privée.
-	\item Avec s clé privée il va pouvoir déchiffrer c' et obtenir la clé AES pour la suite.
-	\item Une fois que l'on a la clé AES on peut simplement déchiffrer à l'aide d'AES\_GCM le chiffré c pour obtenir le message initial.
+	\item À la réception, la première chose à faire est de vérifier le texte chiffré de la clé AES. Pour cela, on va demander la clé publique d'Alice au KGC. Puis on va vérifier ce texte chiffré c' à l'aide de sa signature s'.
+	\item Ensuite Bob va récupérer sa clé privée partielle via le KGC en fournissant son ID avec le timestamp utilisé par Alice. Il va ainsi pouvoir former sa clé privée.
+	\item Avec sa clé privée il va pouvoir déchiffrer $c'$ et obtenir la clé AES pour la suite.
+	\item Une fois que l'on a la clé AES on peut simplement déchiffrer à l'aide d'AES\_GCM le chiffré $c$ pour obtenir le message initial.
 \end{itemize}
