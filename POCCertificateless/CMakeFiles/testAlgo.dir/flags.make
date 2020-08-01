@@ -6,5 +6,5 @@ C_FLAGS = -g   -Wall -Wextra -Wpedantic  -std=gnu11
 
 C_DEFINES = 
 
-C_INCLUDES = -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/. -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/binn 
+C_INCLUDES = -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/. -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic/include -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/unqlite -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic-target/include -I/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/binn 
 

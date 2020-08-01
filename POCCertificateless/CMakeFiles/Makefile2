@@ -44,10 +44,10 @@ RM = /home/mbonjour/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.8743.17/b
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
+CMAKE_SOURCE_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
+CMAKE_BINARY_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -78,14 +78,14 @@ clean: CMakeFiles/mainServer.dir/clean
 CMakeFiles/mainClient.dir/all:
 	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/depend
 	$(MAKE) -f CMakeFiles/mainClient.dir/build.make CMakeFiles/mainClient.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target mainClient"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target mainClient"
 .PHONY : CMakeFiles/mainClient.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/mainClient.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/mainClient.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles 0
 .PHONY : CMakeFiles/mainClient.dir/rule
 
 # Convenience name for target.
@@ -105,14 +105,14 @@ CMakeFiles/mainClient.dir/clean:
 CMakeFiles/testAlgo.dir/all:
 	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/depend
 	$(MAKE) -f CMakeFiles/testAlgo.dir/build.make CMakeFiles/testAlgo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=14,15,16,17,18,19,20 "Built target testAlgo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=14,15,16,17,18,19,20 "Built target testAlgo"
 .PHONY : CMakeFiles/testAlgo.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/testAlgo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/testAlgo.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles 0
 .PHONY : CMakeFiles/testAlgo.dir/rule
 
 # Convenience name for target.
@@ -132,14 +132,14 @@ CMakeFiles/testAlgo.dir/clean:
 CMakeFiles/mainServer.dir/all:
 	$(MAKE) -f CMakeFiles/mainServer.dir/build.make CMakeFiles/mainServer.dir/depend
 	$(MAKE) -f CMakeFiles/mainServer.dir/build.make CMakeFiles/mainServer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=8,9,10,11,12,13 "Built target mainServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=8,9,10,11,12,13 "Built target mainServer"
 .PHONY : CMakeFiles/mainServer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/mainServer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/mainServer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles 0
 .PHONY : CMakeFiles/mainServer.dir/rule
 
 # Convenience name for target.

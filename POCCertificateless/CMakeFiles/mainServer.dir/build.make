@@ -43,10 +43,10 @@ RM = /home/mbonjour/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.8743.17/b
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
+CMAKE_SOURCE_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
+CMAKE_BINARY_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless
 
 # Include any dependencies generated for this target.
 include CMakeFiles/mainServer.dir/depend.make
@@ -59,68 +59,68 @@ include CMakeFiles/mainServer.dir/flags.make
 
 CMakeFiles/mainServer.dir/server/mainServer.c.o: CMakeFiles/mainServer.dir/flags.make
 CMakeFiles/mainServer.dir/server/mainServer.c.o: server/mainServer.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/mainServer.dir/server/mainServer.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/server/mainServer.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/server/mainServer.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/mainServer.dir/server/mainServer.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/server/mainServer.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/server/mainServer.c
 
 CMakeFiles/mainServer.dir/server/mainServer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mainServer.dir/server/mainServer.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/server/mainServer.c > CMakeFiles/mainServer.dir/server/mainServer.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/server/mainServer.c > CMakeFiles/mainServer.dir/server/mainServer.c.i
 
 CMakeFiles/mainServer.dir/server/mainServer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mainServer.dir/server/mainServer.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/server/mainServer.c -o CMakeFiles/mainServer.dir/server/mainServer.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/server/mainServer.c -o CMakeFiles/mainServer.dir/server/mainServer.c.s
 
 CMakeFiles/mainServer.dir/cipherPOC.c.o: CMakeFiles/mainServer.dir/flags.make
 CMakeFiles/mainServer.dir/cipherPOC.c.o: cipherPOC.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/mainServer.dir/cipherPOC.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/cipherPOC.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/mainServer.dir/cipherPOC.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/cipherPOC.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/cipherPOC.c
 
 CMakeFiles/mainServer.dir/cipherPOC.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mainServer.dir/cipherPOC.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c > CMakeFiles/mainServer.dir/cipherPOC.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/cipherPOC.c > CMakeFiles/mainServer.dir/cipherPOC.c.i
 
 CMakeFiles/mainServer.dir/cipherPOC.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mainServer.dir/cipherPOC.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c -o CMakeFiles/mainServer.dir/cipherPOC.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/cipherPOC.c -o CMakeFiles/mainServer.dir/cipherPOC.c.s
 
 CMakeFiles/mainServer.dir/signaturePOC.c.o: CMakeFiles/mainServer.dir/flags.make
 CMakeFiles/mainServer.dir/signaturePOC.c.o: signaturePOC.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/mainServer.dir/signaturePOC.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/signaturePOC.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/mainServer.dir/signaturePOC.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/signaturePOC.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/signaturePOC.c
 
 CMakeFiles/mainServer.dir/signaturePOC.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mainServer.dir/signaturePOC.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c > CMakeFiles/mainServer.dir/signaturePOC.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/signaturePOC.c > CMakeFiles/mainServer.dir/signaturePOC.c.i
 
 CMakeFiles/mainServer.dir/signaturePOC.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mainServer.dir/signaturePOC.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c -o CMakeFiles/mainServer.dir/signaturePOC.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/signaturePOC.c -o CMakeFiles/mainServer.dir/signaturePOC.c.s
 
 CMakeFiles/mainServer.dir/utils/base64.c.o: CMakeFiles/mainServer.dir/flags.make
 CMakeFiles/mainServer.dir/utils/base64.c.o: utils/base64.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/mainServer.dir/utils/base64.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/utils/base64.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/base64.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/mainServer.dir/utils/base64.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/utils/base64.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/base64.c
 
 CMakeFiles/mainServer.dir/utils/base64.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mainServer.dir/utils/base64.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/base64.c > CMakeFiles/mainServer.dir/utils/base64.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/base64.c > CMakeFiles/mainServer.dir/utils/base64.c.i
 
 CMakeFiles/mainServer.dir/utils/base64.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mainServer.dir/utils/base64.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/base64.c -o CMakeFiles/mainServer.dir/utils/base64.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/base64.c -o CMakeFiles/mainServer.dir/utils/base64.c.s
 
 CMakeFiles/mainServer.dir/utils/socketUtils.c.o: CMakeFiles/mainServer.dir/flags.make
 CMakeFiles/mainServer.dir/utils/socketUtils.c.o: utils/socketUtils.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/mainServer.dir/utils/socketUtils.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/utils/socketUtils.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/socketUtils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/mainServer.dir/utils/socketUtils.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mainServer.dir/utils/socketUtils.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/socketUtils.c
 
 CMakeFiles/mainServer.dir/utils/socketUtils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mainServer.dir/utils/socketUtils.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/socketUtils.c > CMakeFiles/mainServer.dir/utils/socketUtils.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/socketUtils.c > CMakeFiles/mainServer.dir/utils/socketUtils.c.i
 
 CMakeFiles/mainServer.dir/utils/socketUtils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mainServer.dir/utils/socketUtils.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/socketUtils.c -o CMakeFiles/mainServer.dir/utils/socketUtils.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/socketUtils.c -o CMakeFiles/mainServer.dir/utils/socketUtils.c.s
 
 # Object files for target mainServer
 mainServer_OBJECTS = \
@@ -143,7 +143,7 @@ mainServer: libs/relic-target/lib/librelic.so
 mainServer: libs/unqlite/libunqlite.a
 mainServer: libs/binn/libbinn.so.3.0
 mainServer: CMakeFiles/mainServer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable mainServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable mainServer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mainServer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -156,6 +156,6 @@ CMakeFiles/mainServer.dir/clean:
 .PHONY : CMakeFiles/mainServer.dir/clean
 
 CMakeFiles/mainServer.dir/depend:
-	cd /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles/mainServer.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles/mainServer.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/mainServer.dir/depend
 

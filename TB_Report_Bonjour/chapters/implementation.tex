@@ -162,8 +162,24 @@ Le déroulement pour envoyer un message se passe comme suit :
 \end{itemize}
 La réception se passe de la même manière globalement, le changement principal et le téléchargement des emails des dernières 24h grâce à IMAP, à moins qu'ils soient déjà téléchargés auparavant. Le déchiffrement va se passer comme décrit dans le Chapitre \ref{ch:arch}. 
 \subsection{Fonctionnalités}
+\paragraph*{Sécurise les informations confidentielles}
+Les clés privées générées et les valeurs secrètes sont chiffrées à l'aide d'un mot de passe dérivé à l'aide d'Argon2id. Ceci afin d'éviter les attaques par bruteforce sur les mots de passe. Ceci est possible à l'aide de la librairie libsodium (voir Annexe \ref{ch:outils}). La fonction est utilisée avec ses paramètres par défaut qui sont de très bons paramètres de base, à adapter en fonction de la mémoire que l'on peut allouer pour cela, le plus possible est le mieux.
+\begin{sourcebox}{c}{PBKDF pour le chiffrement des données confidentielles}
+	*salt = malloc(crypto_pwhash_SALTBYTES);
+	randombytes_buf(*salt, crypto_pwhash_SALTBYTES);
+	*nonce = malloc(crypto_aead_aes256gcm_NPUBBYTES);
+	randombytes_buf(*nonce, crypto_aead_aes256gcm_NPUBBYTES);
+	unsigned char aesk[crypto_secretbox_KEYBYTES];
+	if (crypto_pwhash
+	(aesk, sizeof aesk, userPassword, strlen(userPassword), *salt,
+	crypto_pwhash_OPSLIMIT_INTERACTIVE, crypto_pwhash_MEMLIMIT_INTERACTIVE,
+	crypto_pwhash_ALG_DEFAULT) != 0) {
+		printf("Not enough memory");
+		/* out of memory */
+	}
+\end{sourcebox}
 \paragraph*{Sécurité connexion mail.}
-Pour la connexion au serveur SMTP / IMAP j'ai fait attention à la connexion sécurisée pour éviter de \textit{leak} des mots de passe des utilisateurs du POC. En effet, cela permet de chiffrer les communications avec les serveurs de Gmail comme démontré dans la Figure \ref{fig:securityProofEmail}.
+Pour la connexion au serveur SMTP / IMAP j'ai fait attention à la connexion sécurisée pour éviter de \textit{leak} des mots de passe des utilisateurs du POC. En effet, cela permet de chiffrer les communications avec les serveurs de Gmail comme démontré dans la Figure \ref{fig:securityProofEmail}. C'est une sécurité de base mais elle nécessite tout de même d'être mentionnée car c'est important pour éviter des attaques MITM (Man In The Middle) grâce à TLS.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=14cm]{images/packetProofEncrypted.png}
@@ -175,7 +191,7 @@ Les problèmes qu'il reste à résoudre à ce jour :
 \paragraph*{Développement sécurisé.}
 Lors du développement j'ai fait attention au maximum d'avoir le moins possible de fuites mémoires à l'aide de sanitizers et de valgrind. Cependant cela ne suffirait pas pour une application correctement sécurisée, il faudrait mettre à 0 les structures utilisées et qui stockent des informations confidentielles.
 \paragraph*{Enregistrement lors d'un crash}
-Lors d'un crash du client en plein milieu du programme ou de l'écriture/chiffrement du fichier des secrets il se peut que celui-ci deviennent corrompu. Il faudrait éviter de le corrompre car la seule manière d'y remédier serait de le supprimer et ainsi de recréer ses valeurs secrètes.
+Lors d'un crash du client en plein milieu du programme ou de l'écriture/chiffrement du fichier des secrets il se peut que celui-ci deviennent corrompu. Il faudrait éviter de le corrompre car la seule manière d'y remédier serait de le supprimer et ainsi de recréer ses valeurs secrètes. Attention, lorsqu'une clé publique n'existes pas sur le serveur le client va s'arrêter sans enregistrer le fichier des données confidentielles. Lorsqu'une erreur arrive il faut \textit{clean} les paramètres secret est publique personnels afin que le client les régénère, mais vous ne pourrez plus déchiffrer les anciens mails reçus.
 \subsection{Améliorations}
 Les améliorations à amener dans le client :
 \paragraph*{Multiples destinataires.}

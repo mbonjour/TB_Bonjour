@@ -70,11 +70,11 @@
 \contentsline {subsection}{\numberline {4.4.1}Fonctionnement}{52}{subsection.4.4.1}%
 \contentsline {subsection}{\numberline {4.4.2}Fonctionnalités}{53}{subsection.4.4.2}%
 \contentsline {subsection}{\numberline {4.4.3}Problèmes connus}{54}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Améliorations}{54}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.4}Améliorations}{55}{subsection.4.4.4}%
 \contentsline {section}{\numberline {4.5}Comparaisons avec l'état de l'art}{55}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{55}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Overhead induit}{55}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Différences d'utilisabilité}{56}{subsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.5.1}Propriétés cryptographiques}{56}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Overhead induit}{56}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Différences d'utilisabilité}{57}{subsection.4.5.3}%
 \contentsline {chapter}{\numberline {5}Conclusion}{59}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Conclusions sur l'analyse}{59}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Conclusions sur l'implémentation}{59}{section.5.2}%

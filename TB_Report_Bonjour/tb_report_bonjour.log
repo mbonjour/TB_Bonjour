@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  31 JUL 2020 06:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.7.17)  31 JUL 2020 07:01
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1376,17 +1376,17 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6]
 
-pdfTeX warning: /usr/bin/pdflatex (file ./images/WOTExample.pdf): PDF inclusion
+pdfTeX warning: /usr/bin/pdflatex (file ./images/WOTExemple.pdf): PDF inclusion
 : found PDF version <1.7>, but at most version <1.5> allowed
-<images/WOTExample.pdf, id=659, 514.92375pt x 90.3375pt>
-File: images/WOTExample.pdf Graphic file (type pdf)
-<use images/WOTExample.pdf>
-Package pdftex.def Info: images/WOTExample.pdf  used on input line 90.
+<images/WOTExemple.pdf, id=659, 514.92375pt x 90.3375pt>
+File: images/WOTExemple.pdf Graphic file (type pdf)
+<use images/WOTExemple.pdf>
+Package pdftex.def Info: images/WOTExemple.pdf  used on input line 90.
 (pdftex.def)             Requested size: 435.89624pt x 76.47432pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[7 <./images/examplePGPDecode.png>] [8 <./images/WOTExample.pdf>]
+[7 <./images/examplePGPDecode.png>] [8 <./images/WOTExemple.pdf>]
 <images/MIMESignExample.png, id=686, 568.37344pt x 504.38437pt>
 File: images/MIMESignExample.png Graphic file (type png)
 <use images/MIMESignExample.png>
@@ -1639,21 +1639,28 @@ Package pdftex.def Info: images/schemCles.png  used on input line 99.
 (pdftex.def)             Requested size: 435.89624pt x 300.03609pt.
  [49 <./images/schemCles.png>] [50] [51]
 [52]
-<images/packetProofEncrypted.png, id=1110, 1036.87375pt x 701.62125pt>
+\openout7 = `tb_report_bonjour.pyg'.
+
+runsystem(pygmentize -l c -f latex -P commandprefix=PYG -F tokenmerge -o tb_rep
+ort_bonjour.out.pyg tb_report_bonjour.pyg)...executed.
+
+ (./tb_report_bonjour.out.pyg)
+<images/packetProofEncrypted.png, id=1111, 1036.87375pt x 701.62125pt>
 File: images/packetProofEncrypted.png Graphic file (type png)
 <use images/packetProofEncrypted.png>
-Package pdftex.def Info: images/packetProofEncrypted.png  used on input line 16
-9.
+Package pdftex.def Info: images/packetProofEncrypted.png  used on input line 18
+5.
 (pdftex.def)             Requested size: 398.33858pt x 269.54153pt.
- [53 <./images/packetProofEncrypted.png>] [54]
-Underfull \hbox (badness 1418) in paragraph at lines 225--225
-[]\T1/cmr/m/n/10.95 Environ 1000 bytes /
- []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[55] [56]) (./chapters/conclusion.tex [57] [58
+[53] [54 <./images/packetProofEncrypted.png>] [55]
+Underfull \hbox (badness 1418) in paragraph at lines 241--241
+[]\T1/cmr/m/n/10.95 Environ 1000 bytes /
+ []
+
+[56]) (./chapters/conclusion.tex [57] [58
 
 ]
 Chapitre 5.
@@ -1718,10 +1725,10 @@ runsystem(rm tb_report_bonjour.out.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 34471 strings out of 481239
- 682190 string characters out of 5920377
+ 34476 strings out of 481239
+ 682299 string characters out of 5920377
  1186547 words of memory out of 5000000
- 48604 multiletter control sequences out of 15000+600000
+ 48605 multiletter control sequences out of 15000+600000
  556522 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  76i,11n,115p,1178b,1036s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1751,10 +1758,10 @@ cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pf
 b></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf/
 fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf/fonts/type1/public/c
 m-super/sftt1095.pfb>
-Output written on tb_report_bonjour.pdf (87 pages, 1645467 bytes).
+Output written on tb_report_bonjour.pdf (87 pages, 1647367 bytes).
 PDF statistics:
- 1455 PDF objects out of 1728 (max. 8388607)
- 1263 compressed objects within 13 object streams
- 322 named destinations out of 1000 (max. 500000)
+ 1458 PDF objects out of 1728 (max. 8388607)
+ 1266 compressed objects within 13 object streams
+ 324 named destinations out of 1000 (max. 500000)
  978 words of extra memory for PDF output out of 10000 (max. 10000000)
 

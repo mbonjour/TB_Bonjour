@@ -8,241 +8,241 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography"/>
+				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="mainClient">
-				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/mainClient" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography"/>
+				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/mainClient" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/."/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/."/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/unqlite"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 mainClient"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 mainClient"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="mainClient/fast">
-				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/mainClient" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography"/>
+				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/mainClient" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/."/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/."/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/unqlite"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 mainClient/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 mainClient/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="testAlgo">
-				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/testAlgo" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography"/>
+				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/testAlgo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/."/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/."/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/unqlite"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 testAlgo"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 testAlgo"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="testAlgo/fast">
-				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/testAlgo" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography"/>
+				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/testAlgo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/."/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/."/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/unqlite"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 testAlgo/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 testAlgo/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography"/>
+				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="mainServer">
-				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/mainServer" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography"/>
+				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/mainServer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/."/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/."/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/unqlite"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 mainServer"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 mainServer"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="mainServer/fast">
-				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/mainServer" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography"/>
+				<Option output="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/mainServer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/."/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/unqlite"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/relic-target/include"/>
-					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/libs/binn"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/."/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/unqlite"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/relic-target/include"/>
+					<Add directory="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/libs/binn"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 mainServer/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 mainServer/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography"/>
+				<Option working_dir="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/cipherPOC.c">
 			<Option target="mainClient"/>
 			<Option target="testAlgo"/>
 			<Option target="mainServer"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.h">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/cipherPOC.h">
 			<Option target="mainClient"/>
 			<Option target="testAlgo"/>
 			<Option target="mainServer"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.c">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/client/mainClient.c">
 			<Option target="mainClient"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/client/mainClient.h">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/client/mainClient.h">
 			<Option target="mainClient"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/server/mainServer.c">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/server/mainServer.c">
 			<Option target="mainServer"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c">
-			<Option target="mainClient"/>
-			<Option target="testAlgo"/>
-			<Option target="mainServer"/>
-		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.h">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/signaturePOC.c">
 			<Option target="mainClient"/>
 			<Option target="testAlgo"/>
 			<Option target="mainServer"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/test/fullTest.c">
-			<Option target="testAlgo"/>
-		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/aesUtils.c">
-			<Option target="mainClient"/>
-			<Option target="testAlgo"/>
-		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/aesUtils.h">
-			<Option target="mainClient"/>
-			<Option target="testAlgo"/>
-		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/base64.c">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/signaturePOC.h">
 			<Option target="mainClient"/>
 			<Option target="testAlgo"/>
 			<Option target="mainServer"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/base64.h">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/test/fullTest.c">
+			<Option target="testAlgo"/>
+		</Unit>
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/aesUtils.c">
+			<Option target="mainClient"/>
+			<Option target="testAlgo"/>
+		</Unit>
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/aesUtils.h">
+			<Option target="mainClient"/>
+			<Option target="testAlgo"/>
+		</Unit>
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/base64.c">
 			<Option target="mainClient"/>
 			<Option target="testAlgo"/>
 			<Option target="mainServer"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/socketUtils.c">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/base64.h">
 			<Option target="mainClient"/>
 			<Option target="testAlgo"/>
 			<Option target="mainServer"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/socketUtils.h">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/socketUtils.c">
 			<Option target="mainClient"/>
 			<Option target="testAlgo"/>
 			<Option target="mainServer"/>
 		</Unit>
-		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeLists.txt">
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/socketUtils.h">
+			<Option target="mainClient"/>
+			<Option target="testAlgo"/>
+			<Option target="mainServer"/>
+		</Unit>
+		<Unit filename="/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

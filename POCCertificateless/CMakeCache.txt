@@ -130,7 +130,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=POCCertificateless
+CMAKE_PROJECT_NAME:STATIC=POCCertificatelessCryptography
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib

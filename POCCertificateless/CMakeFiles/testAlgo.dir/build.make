@@ -43,10 +43,10 @@ RM = /home/mbonjour/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.8743.17/b
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
+CMAKE_SOURCE_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
+CMAKE_BINARY_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless
 
 # Include any dependencies generated for this target.
 include CMakeFiles/testAlgo.dir/depend.make
@@ -59,81 +59,81 @@ include CMakeFiles/testAlgo.dir/flags.make
 
 CMakeFiles/testAlgo.dir/test/fullTest.c.o: CMakeFiles/testAlgo.dir/flags.make
 CMakeFiles/testAlgo.dir/test/fullTest.c.o: test/fullTest.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/testAlgo.dir/test/fullTest.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/test/fullTest.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/test/fullTest.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/testAlgo.dir/test/fullTest.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/test/fullTest.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/test/fullTest.c
 
 CMakeFiles/testAlgo.dir/test/fullTest.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/testAlgo.dir/test/fullTest.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/test/fullTest.c > CMakeFiles/testAlgo.dir/test/fullTest.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/test/fullTest.c > CMakeFiles/testAlgo.dir/test/fullTest.c.i
 
 CMakeFiles/testAlgo.dir/test/fullTest.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/testAlgo.dir/test/fullTest.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/test/fullTest.c -o CMakeFiles/testAlgo.dir/test/fullTest.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/test/fullTest.c -o CMakeFiles/testAlgo.dir/test/fullTest.c.s
 
 CMakeFiles/testAlgo.dir/utils/aesUtils.c.o: CMakeFiles/testAlgo.dir/flags.make
 CMakeFiles/testAlgo.dir/utils/aesUtils.c.o: utils/aesUtils.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/testAlgo.dir/utils/aesUtils.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/utils/aesUtils.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/aesUtils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/testAlgo.dir/utils/aesUtils.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/utils/aesUtils.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/aesUtils.c
 
 CMakeFiles/testAlgo.dir/utils/aesUtils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/testAlgo.dir/utils/aesUtils.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/aesUtils.c > CMakeFiles/testAlgo.dir/utils/aesUtils.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/aesUtils.c > CMakeFiles/testAlgo.dir/utils/aesUtils.c.i
 
 CMakeFiles/testAlgo.dir/utils/aesUtils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/testAlgo.dir/utils/aesUtils.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/aesUtils.c -o CMakeFiles/testAlgo.dir/utils/aesUtils.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/aesUtils.c -o CMakeFiles/testAlgo.dir/utils/aesUtils.c.s
 
 CMakeFiles/testAlgo.dir/cipherPOC.c.o: CMakeFiles/testAlgo.dir/flags.make
 CMakeFiles/testAlgo.dir/cipherPOC.c.o: cipherPOC.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/testAlgo.dir/cipherPOC.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/cipherPOC.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/testAlgo.dir/cipherPOC.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/cipherPOC.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/cipherPOC.c
 
 CMakeFiles/testAlgo.dir/cipherPOC.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/testAlgo.dir/cipherPOC.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c > CMakeFiles/testAlgo.dir/cipherPOC.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/cipherPOC.c > CMakeFiles/testAlgo.dir/cipherPOC.c.i
 
 CMakeFiles/testAlgo.dir/cipherPOC.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/testAlgo.dir/cipherPOC.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/cipherPOC.c -o CMakeFiles/testAlgo.dir/cipherPOC.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/cipherPOC.c -o CMakeFiles/testAlgo.dir/cipherPOC.c.s
 
 CMakeFiles/testAlgo.dir/signaturePOC.c.o: CMakeFiles/testAlgo.dir/flags.make
 CMakeFiles/testAlgo.dir/signaturePOC.c.o: signaturePOC.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/testAlgo.dir/signaturePOC.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/signaturePOC.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/testAlgo.dir/signaturePOC.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/signaturePOC.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/signaturePOC.c
 
 CMakeFiles/testAlgo.dir/signaturePOC.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/testAlgo.dir/signaturePOC.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c > CMakeFiles/testAlgo.dir/signaturePOC.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/signaturePOC.c > CMakeFiles/testAlgo.dir/signaturePOC.c.i
 
 CMakeFiles/testAlgo.dir/signaturePOC.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/testAlgo.dir/signaturePOC.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/signaturePOC.c -o CMakeFiles/testAlgo.dir/signaturePOC.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/signaturePOC.c -o CMakeFiles/testAlgo.dir/signaturePOC.c.s
 
 CMakeFiles/testAlgo.dir/utils/base64.c.o: CMakeFiles/testAlgo.dir/flags.make
 CMakeFiles/testAlgo.dir/utils/base64.c.o: utils/base64.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/testAlgo.dir/utils/base64.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/utils/base64.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/base64.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/testAlgo.dir/utils/base64.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/utils/base64.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/base64.c
 
 CMakeFiles/testAlgo.dir/utils/base64.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/testAlgo.dir/utils/base64.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/base64.c > CMakeFiles/testAlgo.dir/utils/base64.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/base64.c > CMakeFiles/testAlgo.dir/utils/base64.c.i
 
 CMakeFiles/testAlgo.dir/utils/base64.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/testAlgo.dir/utils/base64.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/base64.c -o CMakeFiles/testAlgo.dir/utils/base64.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/base64.c -o CMakeFiles/testAlgo.dir/utils/base64.c.s
 
 CMakeFiles/testAlgo.dir/utils/socketUtils.c.o: CMakeFiles/testAlgo.dir/flags.make
 CMakeFiles/testAlgo.dir/utils/socketUtils.c.o: utils/socketUtils.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/testAlgo.dir/utils/socketUtils.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/utils/socketUtils.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/socketUtils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/testAlgo.dir/utils/socketUtils.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/testAlgo.dir/utils/socketUtils.c.o   -c /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/socketUtils.c
 
 CMakeFiles/testAlgo.dir/utils/socketUtils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/testAlgo.dir/utils/socketUtils.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/socketUtils.c > CMakeFiles/testAlgo.dir/utils/socketUtils.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/socketUtils.c > CMakeFiles/testAlgo.dir/utils/socketUtils.c.i
 
 CMakeFiles/testAlgo.dir/utils/socketUtils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/testAlgo.dir/utils/socketUtils.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/utils/socketUtils.c -o CMakeFiles/testAlgo.dir/utils/socketUtils.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/utils/socketUtils.c -o CMakeFiles/testAlgo.dir/utils/socketUtils.c.s
 
 # Object files for target testAlgo
 testAlgo_OBJECTS = \
@@ -158,7 +158,7 @@ testAlgo: libs/relic-target/lib/librelic.so
 testAlgo: libs/unqlite/libunqlite.a
 testAlgo: libs/binn/libbinn.so.3.0
 testAlgo: CMakeFiles/testAlgo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable testAlgo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable testAlgo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/testAlgo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -171,6 +171,6 @@ CMakeFiles/testAlgo.dir/clean:
 .PHONY : CMakeFiles/testAlgo.dir/clean
 
 CMakeFiles/testAlgo.dir/depend:
-	cd /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles/testAlgo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles/testAlgo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/testAlgo.dir/depend
 

@@ -48,10 +48,10 @@ RM = /home/mbonjour/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/201.8743.17/b
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
+CMAKE_SOURCE_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography
+CMAKE_BINARY_DIR = /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificatelessCryptography/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/mbonjour/Desktop/TB_Bonjour/POCCertificateless/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
