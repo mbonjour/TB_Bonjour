@@ -86,16 +86,16 @@ Présentation des différentes actions faites lors de l'envoi d'un message d'Ali
 		\begin{call}{A}{Extract alice@mail.ch + time}{B}{$PPKS_{Alice}$}
 		\end{call}
 		\postlevel
-		\begin{callself}{A}{$c'  = ENC_{PKE_{Bob}}(AES_K, bob@mail.ch + time)$}{}
+		\begin{callself}{A}{$c' = ENC_{PKE_{Bob}}(AES_K, bob@mail.ch + time)$}{}
 		\end{callself}
 		\postlevel
 		\begin{callself}{A}{SetPrivSig $SKS_{Alice} = (PPKS_{Alice}, x)$}{}
 		\end{callself}
 		\postlevel
-		\begin{callself}{A}{$s' = Sign(c', SKS_{Alice})$}{}
+		\begin{callself}{A}{$c, t = AESGCM_{AESK}(message)$}{}
 		\end{callself}
 		\postlevel
-		\begin{callself}{A}{$c, t = AESGCM_{AESK}(message)$}{}
+		\begin{callself}{A}{$s' = Sign(c' + c + t, SKS_{Alice})$}{}
 		\end{callself}
 		\postlevel
 		\begin{call}{A}{time, c', c, t, s', IV}{C}{}
@@ -130,13 +130,13 @@ Présentation des différentes actions faites lors de la réception d'un message
 		\begin{call}{A}{PK of alice@mail.ch}{B}{$PK_{Alice}$}
 		\end{call}
 		\postlevel
-		\begin{callself}{A}{$s' == Verify(c', PK_{Alice})$}{}
+		\begin{callself}{A}{$s' == Verify(c' + c + t, PK_{Alice})$}{}
 		\end{callself}
 		\postlevel
 		\begin{call}{A}{Extract bob@mail.ch + time}{B}{$PPKE_{Bob}$}
 		\end{call}
 		\postlevel
-		\begin{callself}{A}{SetPriv $SKE_{Bob}' = $}{}
+		\begin{callself}{A}{SetPriv $SKE_{Bob} = (s_1, s_2)$}{}
 		\end{callself}
 		\postlevel
 		\begin{callself}{A}{$AES_K = DEC_{SKE_{Bob}}(c', ID=bob@mail.ch+time)$}{}
