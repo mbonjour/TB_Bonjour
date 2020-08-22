@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -40,33 +40,26 @@
 
 int cp_zss_gen(bn_t d, g1_t q, gt_t z) {
 	bn_t n;
-	g2_t g;
 	int result = RLC_OK;
 
 	bn_null(n);
-	g2_null(g);
 
-	TRY {
+	RLC_TRY {
 		bn_new(n);
-		g2_new(g);
-
-		g1_get_gen(q);
-		g2_get_gen(g);
 
 		/* z = e(g1, g2). */
-		pc_map(z, q, g);
+		gt_get_gen(z);
 
-		g2_get_ord(n);
+		pc_get_ord(n);
 
 		bn_rand_mod(d, n);
 		g1_mul_gen(q, d);
 	}
-	CATCH_ANY {
+	RLC_CATCH_ANY {
 		result = RLC_ERR;
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(n);
-		g2_free(g);
 	}
 	return result;
 }
@@ -81,13 +74,13 @@ int cp_zss_sig(g2_t s, uint8_t *msg, int len, int hash, bn_t d) {
 	bn_null(r);
 	bn_null(t);
 
-	TRY {
+	RLC_TRY {
 		bn_new(m);
 		bn_new(n);
 		bn_new(r);
 		bn_new(t);
 
-		g1_get_ord(n);
+		pc_get_ord(n);
 
 		/* m = H(msg). */
 		if (hash) {
@@ -101,18 +94,15 @@ int cp_zss_sig(g2_t s, uint8_t *msg, int len, int hash, bn_t d) {
         /* Compute (H(m) + d) and invert. */
         bn_add(t, m, d);
         bn_mod(t, t, n);
-        bn_gcd_ext(r, t, NULL, t, n);
-		if (bn_sign(t) == RLC_NEG) {
-			bn_add(t, t, n);
-		}
+		bn_mod_inv(t, t, n);
 
 		/* Compute the sinature. */
 		g2_mul_gen(s, t);
 	}
-	CATCH_ANY {
+	RLC_CATCH_ANY {
 		result = RLC_ERR;
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(m);
 		bn_free(n);
 		bn_free(r);
@@ -133,13 +123,13 @@ int cp_zss_ver(g2_t s, uint8_t *msg, int len, int hash, g1_t q, gt_t z) {
 	g1_null(g);
 	gt_null(e);
 
-	TRY {
+	RLC_TRY {
 		bn_new(m);
 		bn_new(n);
 		g1_new(g);
 		gt_new(e);
 
-		g1_get_ord(n);
+		pc_get_ord(n);
 
 		/* m = H(msg). */
 		if (hash) {
@@ -160,10 +150,10 @@ int cp_zss_ver(g2_t s, uint8_t *msg, int len, int hash, g1_t q, gt_t z) {
 			result = 1;
 		}
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(m);
 		bn_free(n);
 		g1_free(g);

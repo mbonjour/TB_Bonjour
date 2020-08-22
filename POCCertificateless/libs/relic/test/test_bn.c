@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -42,18 +42,18 @@ static int memory(void) {
 
 	bn_null(a);
 
-	TRY {
+	RLC_TRY {
 		TEST_BEGIN("memory can be allocated") {
 			bn_new(a);
 			bn_free(a);
 		}
 		TEST_END;
 	}
-	CATCH(e) {
+	RLC_CATCH(e) {
 		switch (e) {
 			case ERR_NO_MEMORY:
 				util_print("FATAL ERROR!\n");
-				ERROR(end);
+				RLC_ERROR(end);
 				break;
 		}
 	}
@@ -73,7 +73,7 @@ static int util(void) {
 	bn_null(b);
 	bn_null(c);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -185,9 +185,7 @@ static int util(void) {
 			TEST_ASSERT(bn_sign(a) == bn_sign(b), end);
 			TEST_ASSERT(bn_is_zero(a) == 0, end);
 			TEST_ASSERT(bn_cmp(a, b) == RLC_LT, end);
-			do {
-				bn_rand(b, RLC_NEG, RLC_BN_BITS);
-			} while (bn_is_zero(b));
+			bn_rand(b, RLC_NEG, RLC_DIG);
 			bn_rand_mod(a, b);
 			TEST_ASSERT(bn_sign(a) == bn_sign(b), end);
 			TEST_ASSERT(bn_is_zero(a) == 0, end);
@@ -289,8 +287,8 @@ static int util(void) {
 		}
 		TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -310,7 +308,7 @@ static int addition(void) {
 	bn_null(d);
 	bn_null(e);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -352,8 +350,8 @@ static int addition(void) {
 			TEST_ASSERT(bn_is_zero(e), end);
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -375,7 +373,7 @@ static int subtraction(void) {
 	bn_null(c);
 	bn_null(d);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -409,8 +407,8 @@ static int subtraction(void) {
 		}
 		TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -432,7 +430,7 @@ static int multiplication(void) {
 	bn_null(e);
 	bn_null(f);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -552,8 +550,8 @@ static int multiplication(void) {
 #endif
 
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -574,7 +572,7 @@ static int squaring(void) {
 	bn_null(b);
 	bn_null(c);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -614,8 +612,8 @@ static int squaring(void) {
 #endif
 
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -633,7 +631,7 @@ static int doubling_halving(void) {
 	bn_null(b);
 	bn_null(c);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -652,8 +650,8 @@ static int doubling_halving(void) {
 			TEST_ASSERT(bn_cmp(c, a) == RLC_EQ, end);
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -671,7 +669,7 @@ static int shifting(void) {
 	bn_null(b);
 	bn_null(c);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -732,8 +730,8 @@ static int shifting(void) {
 			TEST_ASSERT(bn_cmp(b, c) == RLC_EQ, end);
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -753,7 +751,7 @@ static int division(void) {
 	bn_null(d);
 	bn_null(e);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -864,8 +862,8 @@ static int division(void) {
 			TEST_ASSERT(bn_sign(d) == bn_sign(b), end);
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -887,7 +885,7 @@ static int reduction(void) {
 	bn_null(d);
 	bn_null(e);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -973,8 +971,8 @@ static int reduction(void) {
 #endif
 
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -995,7 +993,7 @@ static int exponentiation(void) {
 	bn_null(c);
 	bn_null(p);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -1072,8 +1070,8 @@ static int exponentiation(void) {
 		TEST_END;
 #endif
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -1092,7 +1090,7 @@ static int square_root(void) {
 	bn_null(b);
 	bn_null(c);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -1105,8 +1103,8 @@ static int square_root(void) {
 		}
 		TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -1127,7 +1125,7 @@ static int gcd(void) {
 	bn_null(e);
 	bn_null(f);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -1241,8 +1239,8 @@ static int gcd(void) {
 			TEST_ASSERT(bn_cmp(b, c) == RLC_EQ || bn_cmp(a, c) == RLC_EQ, end);
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -1263,7 +1261,7 @@ static int lcm(void) {
 	bn_null(b);
 	bn_null(c);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -1277,8 +1275,8 @@ static int lcm(void) {
 			TEST_ASSERT(bn_is_zero(a) && bn_is_zero(b), end);
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -1298,7 +1296,7 @@ static int symbol(void) {
 	bn_null(p);
 	bn_null(q);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -1455,8 +1453,8 @@ static int symbol(void) {
 			TEST_ASSERT(bn_cmp(a, b) == RLC_EQ, end);
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -1480,7 +1478,7 @@ static int digit(void) {
 	bn_null(e);
 	bn_null(f);
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -1585,8 +1583,8 @@ static int digit(void) {
 		}
 		TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -1605,7 +1603,7 @@ static int prime(void) {
 
 	bn_null(p);
 
-	TRY {
+	RLC_TRY {
 		bn_new(p);
 
 		TEST_ONCE("prime generation is consistent") {
@@ -1651,8 +1649,8 @@ static int prime(void) {
 			TEST_ASSERT(bn_is_prime_solov(p) == 1, end);
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -1680,7 +1678,7 @@ static int small_primes(void) {
 	bn_t p;
 	bn_null(p);
 
-	TRY {
+	RLC_TRY {
 		bn_new(p);
 
 		TEST_ONCE("prime testing of small primes is correct") {
@@ -1711,8 +1709,8 @@ static int small_primes(void) {
 			}
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -1720,6 +1718,40 @@ static int small_primes(void) {
 	return code;
 }
 
+static int inversion(void) {
+	int code = RLC_ERR;
+	bn_t a, b, c;
+
+	bn_null(a);
+	bn_null(b);
+	bn_null(c);
+
+	RLC_TRY {
+		bn_new(a);
+		bn_new(b);
+		bn_new(c);
+
+		bn_gen_prime(a, RLC_BN_BITS);
+
+		TEST_BEGIN("modular inversion is correct") {
+			bn_rand_mod(b, a);
+			bn_mod_inv(c, b, a);
+			TEST_ASSERT(bn_cmp_dig(c, 1) != RLC_EQ, end);
+			bn_mul(c, b, c);
+			bn_mod(c, c, a);
+			TEST_ASSERT(bn_cmp_dig(c, 1) == RLC_EQ, end);
+		} TEST_END;
+	}
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
+	}
+	code = RLC_OK;
+  end:
+	bn_free(a);
+	bn_free(b);
+	bn_free(c);
+	return code;
+}
 
 static int factor(void) {
 	int code = RLC_ERR;
@@ -1729,7 +1761,7 @@ static int factor(void) {
 	bn_null(q);
 	bn_null(n);
 
-	TRY {
+	RLC_TRY {
 		bn_new(p);
 		bn_new(q);
 		bn_new(n);
@@ -1745,8 +1777,8 @@ static int factor(void) {
 			}
 		} TEST_END;
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -1771,7 +1803,7 @@ static int recoding(void) {
 		bn_null(v2[k]);
 	}
 
-	TRY {
+	RLC_TRY {
 		bn_new(a);
 		bn_new(b);
 		bn_new(c);
@@ -2047,8 +2079,8 @@ static int recoding(void) {
 		} TEST_END;
 #endif /* WITH_EP && EP_KBLTZ */
 	}
-	CATCH_ANY {
-		ERROR(end);
+	RLC_CATCH_ANY {
+		RLC_ERROR(end);
 	}
 	code = RLC_OK;
   end:
@@ -2164,6 +2196,11 @@ int main(void) {
 	}
 
 	if (small_primes() != RLC_OK) {
+		core_clean();
+		return 1;
+	}
+
+	if (inversion() != RLC_OK) {
 		core_clean();
 		return 1;
 	}

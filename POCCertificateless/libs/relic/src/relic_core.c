@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -34,6 +34,7 @@
 #include <string.h>
 
 #include "relic_core.h"
+#include "relic_multi.h"
 #include "relic_rand.h"
 #include "relic_types.h"
 #include "relic_err.h"
@@ -73,26 +74,21 @@
 /*============================================================================*/
 
 /**
- * If multi-threading is enabled, assigns each thread a local copy of the data.
- */
-#if MULTI == PTHREAD
-#define thread 	__thread
-#else
-#define thread /* */
-#endif
-
-/**
  * Default library context.
  */
-thread ctx_t first_ctx;
+#if MULTI
+rlc_thread ctx_t first_ctx;
+#else
+static ctx_t first_ctx;
+#endif
 
 /**
  * Active library context.
  */
-thread ctx_t *core_ctx = NULL;
-
-#if MULTI == OPENMP
-#pragma omp threadprivate(first_ctx, core_ctx)
+#if MULTI
+rlc_thread ctx_t *core_ctx = NULL;
+#else
+static ctx_t *core_ctx = NULL;
 #endif
 
 int core_init(void) {
@@ -119,7 +115,7 @@ int core_init(void) {
 
 	core_ctx->code = RLC_OK;
 
-	TRY {
+	RLC_TRY {
 		arch_init();
 		rand_init();
 #ifdef WITH_FP
@@ -127,9 +123,6 @@ int core_init(void) {
 #endif
 #ifdef WITH_FB
 		fb_poly_init();
-#endif
-#ifdef WITH_FT
-		ft_poly_init();
 #endif
 #ifdef WITH_EP
 		ep_curve_init();
@@ -143,8 +136,10 @@ int core_init(void) {
 #ifdef WITH_PP
 		pp_map_init();
 #endif
-	}
-	CATCH_ANY {
+#ifdef WITH_PC
+		pc_core_init();
+#endif
+	} RLC_CATCH_ANY {
 		return RLC_ERR;
 	}
 
@@ -159,9 +154,6 @@ int core_clean(void) {
 #ifdef WITH_FB
 	fb_poly_clean();
 #endif
-#ifdef WITH_FT
-	ft_poly_clean();
-#endif
 #ifdef WITH_EP
 	ep_curve_clean();
 #endif
@@ -173,6 +165,9 @@ int core_clean(void) {
 #endif
 #ifdef WITH_PP
 	pp_map_clean();
+#endif
+#ifdef WITH_PC
+	pc_core_clean();
 #endif
 	arch_clean();
 	core_ctx = NULL;

@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -55,7 +55,7 @@ static void eb_add_basic_imp(eb_t r, const eb_t p, const eb_t q) {
 	fb_null(t1);
 	fb_null(t2);
 
-	TRY {
+	RLC_TRY {
 		fb_new(t0);
 		fb_new(t1);
 		fb_new(t2);
@@ -109,13 +109,13 @@ static void eb_add_basic_imp(eb_t r, const eb_t p, const eb_t q) {
 			fb_copy(r->x, t2);
 			fb_copy(r->z, p->z);
 
-			r->norm = 1;
+			r->coord = BASIC;
 		}
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		fb_free(t0);
 		fb_free(t1);
 		fb_free(t2);
@@ -146,7 +146,7 @@ static void eb_add_projc_mix(eb_t r, const eb_t p, const eb_t q) {
 	fb_null(t4);
 	fb_null(t5);
 
-	TRY {
+	RLC_TRY {
 		fb_new(t0);
 		fb_new(t1);
 		fb_new(t2);
@@ -157,7 +157,7 @@ static void eb_add_projc_mix(eb_t r, const eb_t p, const eb_t q) {
 		/* madd-2005-dl formulas: 7M + 4S + 9add + 1*4 + 3*2. */
 		/* http://www.hyperelliptic.org/EFD/g12o/auto-shortw-lopezdahab-1.html#addition-madd-2005-dl */
 
-		if (!p->norm) {
+		if (p->coord != BASIC) {
 			/* A = y1 + y2 * z1^2. */
 			fb_sqr(t0, p->z);
 			fb_mul(t0, t0, q->y);
@@ -181,7 +181,7 @@ static void eb_add_projc_mix(eb_t r, const eb_t p, const eb_t q) {
 				eb_set_infty(r);
 			}
 		} else {
-			if (!p->norm) {
+			if (p->coord != BASIC) {
 				/* t2 = C = B * z1. */
 				fb_mul(t2, p->z, t1);
 				/* z3 = C^2. */
@@ -247,12 +247,12 @@ static void eb_add_projc_mix(eb_t r, const eb_t p, const eb_t q) {
 			fb_add(r->y, r->y, t0);
 		}
 
-		r->norm = 0;
+		r->coord = PROJC;
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		fb_free(t0);
 		fb_free(t1);
 		fb_free(t2);
@@ -280,7 +280,7 @@ static void eb_add_projc_imp(eb_t r, const eb_t p, const eb_t q) {
 
 #if defined(EB_MIXED) || !defined(STRIP)
 	/* Test if z2 = 1 only if mixed coordinates are turned on. */
-	if (q->norm) {
+	if (q->coord == BASIC) {
 		eb_add_projc_mix(r, p, q);
 		return;
 	}
@@ -296,7 +296,7 @@ static void eb_add_projc_imp(eb_t r, const eb_t p, const eb_t q) {
 	fb_null(t6);
 	fb_null(t7);
 
-	TRY {
+	RLC_TRY {
 		fb_new(t0);
 		fb_new(t1);
 		fb_new(t2);
@@ -373,12 +373,12 @@ static void eb_add_projc_imp(eb_t r, const eb_t p, const eb_t q) {
 			fb_add(r->y, r->y, t7);
 		}
 
-		r->norm = 0;
+		r->coord = PROJC;
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		fb_free(t0);
 		fb_free(t1);
 		fb_free(t2);
@@ -423,18 +423,18 @@ void eb_sub_basic(eb_t r, const eb_t p, const eb_t q) {
 		return;
 	}
 
-	TRY {
+	RLC_TRY {
 		eb_new(t);
 
 		eb_neg_basic(t, q);
 		eb_add_basic(r, p, t);
 
-		r->norm = 1;
+		r->coord = BASIC;
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		eb_free(t);
 	}
 }
@@ -467,16 +467,16 @@ void eb_sub_projc(eb_t r, const eb_t p, const eb_t q) {
 		return;
 	}
 
-	TRY {
+	RLC_TRY {
 		eb_new(t);
 
 		eb_neg_projc(t, q);
 		eb_add_projc(r, p, t);
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		eb_free(t);
 	}
 }

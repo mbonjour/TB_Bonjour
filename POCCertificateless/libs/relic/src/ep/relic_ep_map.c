@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -53,7 +53,7 @@ TMPL_MAP_HORNER(fp, fp_st)
 /**
  * Generic isogeny map evaluation for use with SSWU map.
  */
-TMPL_MAP_ISOGENY_MAP()
+TMPL_MAP_ISOGENY_MAP(ep, fp, iso)
 #endif /* EP_CTMAP */
 
 /**
@@ -61,13 +61,13 @@ TMPL_MAP_ISOGENY_MAP()
  * "Fast and simple constant-time hashing to the BLS12-381 Elliptic Curve"
  */
 #define EP_MAP_COPY_COND(O, I, C) dv_copy_cond(O, I, RLC_FP_DIGS, C)
-TMPL_MAP_SSWU(,dig_t,EP_MAP_COPY_COND)
+TMPL_MAP_SSWU(ep, fp, dig_t, EP_MAP_COPY_COND)
 
 /**
  * Shallue--van de Woestijne map, based on the definition from
  * draft-irtf-cfrg-hash-to-curve-06, Section 6.6.1
  */
-TMPL_MAP_SVDW(,dig_t,EP_MAP_COPY_COND)
+TMPL_MAP_SVDW(ep, fp, dig_t, EP_MAP_COPY_COND)
 #undef EP_MAP_COPY_COND
 
 /* caution: this function overwrites k, which it uses as an auxiliary variable */
@@ -76,20 +76,24 @@ static inline int fp_sgn0(const fp_t t, bn_t k) {
 	return bn_get_bit(k, 0);
 }
 
-void ep_map_impl(ep_t p, const uint8_t *msg, int len, const uint8_t *dst, int dst_len) {
+/*============================================================================*/
+/* Public definitions                                                         */
+/*============================================================================*/
+
+void ep_map_dst(ep_t p, const uint8_t *msg, int len, const uint8_t *dst, int dst_len) {
 	bn_t k;
 	fp_t t;
 	ep_t q;
 	int neg;
 	/* enough space for two field elements plus extra bytes for uniformity */
 	const int len_per_elm = (FP_PRIME + ep_param_level() + 7) / 8;
-	uint8_t *pseudo_random_bytes = RLC_ALLOCA(uint8_t, 4 * len_per_elm);
+	uint8_t *pseudo_random_bytes = RLC_ALLOCA(uint8_t, 2 * len_per_elm);
 
 	bn_null(k);
 	fp_null(t);
 	ep_null(q);
 
-	TRY {
+	RLC_TRY {
 		bn_new(k);
 		fp_new(t);
 		ep_new(q);
@@ -125,12 +129,12 @@ void ep_map_impl(ep_t p, const uint8_t *msg, int len, const uint8_t *dst, int ds
 		/* first map invocation */
 		EP_MAP_CONVERT_BYTES(0);
 		EP_MAP_APPLY_MAP(p);
-		TMPL_MAP_CALL_ISOMAP(,p);
+		TMPL_MAP_CALL_ISOMAP(ep, p);
 
 		/* second map invocation */
 		EP_MAP_CONVERT_BYTES(1);
 		EP_MAP_APPLY_MAP(q);
-		TMPL_MAP_CALL_ISOMAP(,q);
+		TMPL_MAP_CALL_ISOMAP(ep, q);
 
 		/* XXX(rsw) could add p and q and then apply isomap,
 		 * but need ep_add to support addition on isogeny curves */
@@ -172,10 +176,10 @@ void ep_map_impl(ep_t p, const uint8_t *msg, int len, const uint8_t *dst, int ds
 				}
 		}
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(k);
 		fp_free(t);
 		ep_free(q);
@@ -183,10 +187,6 @@ void ep_map_impl(ep_t p, const uint8_t *msg, int len, const uint8_t *dst, int ds
 	}
 }
 
-/*============================================================================*/
-/* Public definitions                                                         */
-/*============================================================================*/
-
 void ep_map(ep_t p, const uint8_t *msg, int len) {
-	ep_map_impl(p, msg, len, (const uint8_t *)"RELIC", 5);
+	ep_map_dst(p, msg, len, (const uint8_t *)"RELIC", 5);
 }

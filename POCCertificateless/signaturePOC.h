@@ -125,24 +125,26 @@ void setPrivSig(bn_t x, signature_ppk d, signature_mpk mpk, char* ID, signature_
 /**
  * @brief The sign operation of a message
  * @param m The message to sign
+ * @param mLen message length
  * @param sk Secret Key of the signer
  * @param pk The Public Key of the signer
  * @param ID The ID of the user
  * @param mpk Master Publi Keys of the KGC
  * @param s Th resulting signature
  */
-void sign(unsigned char* m, signature_sk sk, signature_pk pk, unsigned char* ID, signature_mpk mpk, signature* s);
+void sign(unsigned char* m, int mLen, signature_sk sk, signature_pk pk, unsigned char* ID, signature_mpk mpk, signature* s);
 
 /**
  * @brief The verification of a given message.
  * @param s Signature of the message
+ * @param mLen message length
  * @param pk Public Key of the Signer
  * @param mpk Master Public Key of the KGC
  * @param ID The ID the signer used to sign
  * @param m The message signed to verify
  * @return 0 if OK 1 if not
  */
-int verify(signature s, signature_pk pk, signature_mpk mpk, char* ID, unsigned char* m);
+int verify(signature s, signature_pk pk, signature_mpk mpk, char* ID, unsigned char* m, int mLen);
 
 /**
  * @brief Serialization of the mpkStructSig with the binn library

@@ -121,7 +121,7 @@ void setPrivSig(bn_t x, signature_ppk d, signature_mpk mpk, char* ID, signature_
     bn_copy(secretKeys->x, x);
 }
 
-void sign(unsigned char* m, signature_sk sk, signature_pk pk, unsigned char* ID, signature_mpk mpk, signature* s){
+void sign(unsigned char* m, int mLen, signature_sk sk, signature_pk pk, unsigned char* ID, signature_mpk mpk, signature* s){
     bn_t r, q;
     bn_null(r)
     bn_new(r)
@@ -149,20 +149,19 @@ void sign(unsigned char* m, signature_sk sk, signature_pk pk, unsigned char* ID,
 
     int PKsize = g1_size_bin(pk.Ppub, 1);
     int USize = g1_size_bin(s->U, 1);
-    int lenConcat1 = strlen(ID) + strlen(m) + PKsize + USize;
-    int lenConcat2 = strlen(ID) + strlen(m) + PKsize;
+    int lenConcat1 = strlen(ID) + mLen + PKsize + USize;
+    int lenConcat2 = strlen(ID) + mLen + PKsize;
 
     // Construct H2(m,ID,PK,U) and H3(m,ID,PK)
     uint8_t concat1[lenConcat1], concat2[lenConcat2];
-    strcpy(concat1, m);
-    strcpy(concat2, m);
-    strcpy(&concat1[strlen(m)], ID);
-    strcpy(&concat2[strlen(m)], ID);
+    memcpy(concat1, m, mLen);
+    memcpy(concat2, m, mLen);
+    strcpy(&concat1[mLen], ID);
+    strcpy(&concat2[mLen], ID);
 
-    g1_write_bin(&concat1[strlen(ID) + strlen(m)], PKsize, pk.Ppub, 1);
-    g1_write_bin(&concat2[strlen(ID) + strlen(m)], PKsize, pk.Ppub, 1);
-
-    g1_write_bin(&concat1[strlen(ID) + strlen(m) + PKsize], USize, s->U, 1);
+    g1_write_bin(&concat1[strlen(ID) + mLen], PKsize, pk.Ppub, 1);
+    g1_write_bin(&concat2[strlen(ID) + mLen], PKsize, pk.Ppub, 1);
+    g1_write_bin(&concat1[strlen(ID) + mLen + PKsize], USize, s->U, 1);
 
     functionH2(&h2, concat1, lenConcat1);
     functionH3(&h3, concat2, lenConcat2);
@@ -183,7 +182,7 @@ void sign(unsigned char* m, signature_sk sk, signature_pk pk, unsigned char* ID,
     g2_free(h3)
 }
 
-int verify(signature s, signature_pk pk, signature_mpk mpk, char* ID, unsigned char* m){
+int verify(signature s, signature_pk pk, signature_mpk mpk, char* ID, unsigned char* m, int mLen){
     // By default the signature is not verified
     int result = 1;
 
@@ -215,18 +214,18 @@ int verify(signature s, signature_pk pk, signature_mpk mpk, char* ID, unsigned c
 
     int PKsize = g1_size_bin(pk.Ppub, 1);
     int USize = g1_size_bin(s.U, 1);
-    int lenConcat1 = strlen(ID) + strlen(m) + PKsize + USize;
-    int lenConcat2 = strlen(ID) + strlen(m) + PKsize;
+    int lenConcat1 = strlen(ID) + mLen + PKsize + USize;
+    int lenConcat2 = strlen(ID) + mLen + PKsize;
 
     uint8_t concat1[lenConcat1], concat2[lenConcat2];
-    strcpy(concat1, m);
-    strcpy(concat2, m);
-    strcpy(&concat1[strlen(m)], ID);
-    strcpy(&concat2[strlen(m)], ID);
+    memcpy(concat1, m, mLen);
+    memcpy(concat2, m, mLen);
+    strcpy(&concat1[mLen], ID);
+    strcpy(&concat2[mLen], ID);
 
-    g1_write_bin(&concat1[strlen(ID) + strlen(m)], PKsize, pk.Ppub, 1);
-    g1_write_bin(&concat2[strlen(ID) + strlen(m)], PKsize, pk.Ppub, 1);
-    g1_write_bin(&concat1[strlen(ID) + strlen(m) + PKsize], USize, s.U, 1);
+    g1_write_bin(&concat1[strlen(ID) + mLen], PKsize, pk.Ppub, 1);
+    g1_write_bin(&concat2[strlen(ID) + mLen], PKsize, pk.Ppub, 1);
+    g1_write_bin(&concat1[strlen(ID) + mLen + PKsize], USize, s.U, 1);
 
     functionH2(&h2, concat1, lenConcat1);
     functionH3(&h3, concat2, lenConcat2);

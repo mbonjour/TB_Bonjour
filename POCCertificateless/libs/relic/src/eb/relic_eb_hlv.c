@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -44,7 +44,7 @@ void eb_hlv(eb_t r, const eb_t p) {
 	fb_null(l);
 	fb_null(t);
 
-	TRY {
+	RLC_TRY {
 		fb_new(l);
 		fb_new(t);
 
@@ -66,7 +66,7 @@ void eb_hlv(eb_t r, const eb_t p) {
 
 		fb_slv(l, t);
 
-		if (p->norm == 1) {
+		if (p->coord == BASIC) {
 			/* Compute t = v + u * lambda. */
 			fb_mul(t, l, p->x);
 			fb_add(t, t, p->y);
@@ -88,12 +88,12 @@ void eb_hlv(eb_t r, const eb_t p) {
 			fb_srt(r->x, t);
 		}
 		fb_set_dig(r->z, 1);
-		r->norm = 2;
+		r->coord = HALVE;
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		fb_free(l);
 		fb_free(t);
 	}

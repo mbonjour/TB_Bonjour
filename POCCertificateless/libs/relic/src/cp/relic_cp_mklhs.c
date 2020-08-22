@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -41,24 +41,23 @@ int cp_mklhs_gen(bn_t sk, g2_t pk) {
 
 	bn_null(n);
 
-	TRY {
+	RLC_TRY {
 		bn_new(n);
 
-		g2_get_ord(n);
+		pc_get_ord(n);
 		bn_rand_mod(sk, n);
 		g2_mul_gen(pk, sk);
 	}
-	CATCH_ANY {
+	RLC_CATCH_ANY {
 		result = RLC_ERR;
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(n);
 	}
 	return result;
 }
 
-int cp_mklhs_sig(g1_t s, bn_t m, char *data, int dlen, char *label, int llen,
-		bn_t sk) {
+int cp_mklhs_sig(g1_t s, bn_t m, char *data, char *label, bn_t sk) {
 	bn_t n;
 	g1_t a;
 	int result = RLC_OK;
@@ -66,24 +65,24 @@ int cp_mklhs_sig(g1_t s, bn_t m, char *data, int dlen, char *label, int llen,
 	bn_null(n);
 	g1_new(a);
 
-	TRY {
+	RLC_TRY {
 		bn_new(n);
 		g1_new(a);
 
-		g1_get_ord(n);
+		pc_get_ord(n);
 		g1_mul_gen(a, m);
 
-		g1_map(s, (uint8_t *)data, dlen);
+		g1_map(s, (uint8_t *)data, strlen(data));
 		g1_add(s, s, a);
-		g1_map(a, (uint8_t *)label, llen);
+		g1_map(a, (uint8_t *)label, strlen(label));
 		g1_add(s, s, a);
 		g1_norm(s, s);
 		g1_mul_key(s, s, sk);
 	}
-	CATCH_ANY {
+	RLC_CATCH_ANY {
 		result = RLC_ERR;
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(n);
 		g1_free(a);
 	}
@@ -97,11 +96,11 @@ int cp_mklhs_fun(bn_t mu, bn_t m[], dig_t f[], int len) {
 	bn_null(n);
 	bn_null(t);
 
-	TRY {
+	RLC_TRY {
 		bn_new(n);
 		bn_new(t);
 
-		g1_get_ord(n);
+		pc_get_ord(n);
 		bn_zero(mu);
 		for (int i = 0; i < len; i++) {
 			bn_mul_dig(t, m[i], f[i]);
@@ -109,10 +108,10 @@ int cp_mklhs_fun(bn_t mu, bn_t m[], dig_t f[], int len) {
 			bn_mod(mu, mu, n);
 		}
 	}
-	CATCH_ANY {
+	RLC_CATCH_ANY {
 		result = RLC_ERR;
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(n);
 		bn_free(t);
 	}
@@ -127,9 +126,8 @@ int cp_mklhs_evl(g1_t sig, g1_t s[], dig_t f[], int len) {
 	return result;
 }
 
-int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
-		char *label[], int llen[], dig_t f[][RLC_TERMS], int flen[], g2_t pk[],
-		int slen) {
+int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, char *label[],
+		dig_t *f[], int flen[], g2_t pk[], int slen) {
 	bn_t t, n;
 	g1_t d, *g = RLC_ALLOCA(g1_t, slen);
 	g2_t g2;
@@ -147,7 +145,7 @@ int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
 	gt_null(c);
 	gt_null(e);
 
-	TRY {
+	RLC_TRY {
 		bn_new(t);
 		bn_new(n);
 		g1_new(d);
@@ -157,11 +155,11 @@ int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
 		if (g == NULL || h == NULL) {
 			RLC_FREE(g);
 			RLC_FREE(h);
-			THROW(ERR_NO_MEMORY);
+			RLC_THROW(ERR_NO_MEMORY);
 		}
 
 		bn_zero(t);
-		g1_get_ord(n);
+		pc_get_ord(n);
 		for (int j = 0; j < slen; j++) {
 			g1_null(g[j]);
 			g1_new(g[j]);
@@ -177,10 +175,10 @@ int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
 			ver1 = 1;
 		}
 
-		g1_map(d, (uint8_t *)data, dlen);
+		g1_map(d, (uint8_t *)data, strlen(data));
 		for (int i = 0; i < slen; i++) {
 			for (int j = 0; j < flen[i]; j++) {
-				g1_map(h[j], (uint8_t *)label[j], llen[j]);
+				g1_map(h[j], (uint8_t *)label[j], strlen(label[j]));
 				g1_add(h[j], h[j], d);
 			}
 			g1_norm_sim(h, h, slen);
@@ -197,10 +195,10 @@ int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
 			ver2 = 1;
 		}
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_new(t);
 		bn_new(n);
 		g1_free(d);
@@ -219,18 +217,18 @@ int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
 	return (ver1 && ver2);
 }
 
-int cp_mklhs_off(g1_t h[], dig_t ft[], char *label[], int llen[], dig_t f[][RLC_TERMS],
-		int flen[], int slen) {
+int cp_mklhs_off(g1_t h[], dig_t ft[], char *label[], dig_t *f[], int flen[],
+		int slen) {
 	int fmax = 0, result = RLC_OK;;
 	for (int i = 0; i < slen; i++) {
 		fmax = RLC_MAX(fmax, flen[i]);
 	}
 	g1_t *_h = RLC_ALLOCA(g1_t, fmax);
 
-	TRY {
+	RLC_TRY {
 		if (_h == NULL) {
 			RLC_FREE(_h);
-			THROW(ERR_NO_MEMORY);
+			RLC_THROW(ERR_NO_MEMORY);
 		}
 
 		for (int j = 0; j < fmax; j++) {
@@ -241,16 +239,16 @@ int cp_mklhs_off(g1_t h[], dig_t ft[], char *label[], int llen[], dig_t f[][RLC_
 		for (int i = 0; i < slen; i++) {
 			ft[i] = 0;
 			for (int j = 0; j < flen[i]; j++) {
-				g1_map(_h[j], (uint8_t *)label[j], llen[j]);
+				g1_map(_h[j], (uint8_t *)label[j], strlen(label[j]));
 				ft[i] += f[i][j];
 			}
 			g1_mul_sim_dig(h[i], _h, f[i], flen[i]);
 		}
 	}
-	CATCH_ANY {
+	RLC_CATCH_ANY {
 		result = RLC_ERR;
 	}
-	FINALLY {
+	RLC_FINALLY {
 		for (int j = 0; j < fmax; j++) {
 			g1_free(_h[j]);
 		}
@@ -259,8 +257,8 @@ int cp_mklhs_off(g1_t h[], dig_t ft[], char *label[], int llen[], dig_t f[][RLC_
 	return result;
 }
 
-int cp_mklhs_onv(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
-		g1_t h[], dig_t ft[], g2_t pk[], int slen) {
+int cp_mklhs_onv(g1_t sig, bn_t m, bn_t mu[], char *data,  g1_t h[], dig_t ft[],
+		g2_t pk[], int slen) {
 	bn_t t, n;
 	g1_t d, g1, *g = RLC_ALLOCA(g1_t, slen);
 	g2_t g2;
@@ -275,7 +273,7 @@ int cp_mklhs_onv(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
 	gt_null(c);
 	gt_null(e);
 
-	TRY {
+	RLC_TRY {
 		bn_new(t);
 		bn_new(n);
 		g1_new(d);
@@ -285,11 +283,11 @@ int cp_mklhs_onv(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
 		gt_new(e);
 		if (g == NULL) {
 			RLC_FREE(g);
-			THROW(ERR_NO_MEMORY);
+			RLC_THROW(ERR_NO_MEMORY);
 		}
 
 		bn_zero(t);
-		g1_get_ord(n);
+		pc_get_ord(n);
 		for (int j = 0; j < slen; j++) {
 			g1_null(g[j]);
 			g1_new(g[j]);
@@ -301,7 +299,7 @@ int cp_mklhs_onv(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
 			ver1 = 1;
 		}
 
-		g1_map(d, (uint8_t *)data, dlen);
+		g1_map(d, (uint8_t *)data, strlen(data));
 		for (int i = 0; i < slen; i++) {
 			g1_mul_dig(g[i], d, ft[i]);
 			g1_add(g[i], g[i], h[i]);
@@ -317,10 +315,10 @@ int cp_mklhs_onv(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
 			ver2 = 1;
 		}
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_new(t);
 		bn_new(n);
 		g1_free(d);

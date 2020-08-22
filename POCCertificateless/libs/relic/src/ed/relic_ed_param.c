@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -80,12 +80,12 @@ void ed_param_set(int param) {
 	bn_null(r);
 	bn_null(h);
 
-	TRY {
+	RLC_TRY {
 		ed_new(g);
 		bn_new(r);
 		bn_new(h);
 
-		core_get()->ed_id = 0;
+		ctx->ed_id = 0;
 
 		switch (param) {
 #if FP_PRIME == 255
@@ -95,7 +95,7 @@ void ed_param_set(int param) {
 #endif
 			default:
 				(void)str;
-				THROW(ERR_NO_VALID);
+				RLC_THROW(ERR_NO_VALID);
 				break;
 		}
 		fp_set_dig(g->z, 1);
@@ -104,7 +104,7 @@ void ed_param_set(int param) {
 #if ED_ADD == EXTND
 		fp_mul(g->t, g->x, g->y);
 #endif
-		g->norm = 1;
+		g->coord = BASIC;
 
 		bn_copy(&ctx->ed_h, h);
 		bn_copy(&ctx->ed_r, r);
@@ -114,17 +114,55 @@ void ed_param_set(int param) {
 		for (int i = 0; i < RLC_ED_TABLE; i++) {
 			ctx->ed_ptr[i] = &(ctx->ed_pre[i]);
 		}
-#endif
-
-#if defined(ED_PRECO)
 		ed_mul_pre((ed_t *)ed_curve_get_tab(), &ctx->ed_g);
 #endif
 		ctx->ed_id = param;
+
+		/* compute constants for p == 5 mod 8 */
+		if (fp_prime_get_2ad() == 2) {
+			h->used = RLC_FP_DIGS;
+			h->sign = RLC_POS;
+			dv_copy(h->dp, fp_prime_get(), RLC_FP_DIGS); /* p */
+			bn_add_dig(h, h, 3);                         /* p + 3 */
+			bn_rsh(h, h, 3);                             /* (p + 3) / 8 */
+			/* compute 2^((p+3)/8) */
+			fp_set_dig(ctx->ed_map_c[0], 2);
+			fp_exp(ctx->ed_map_c[0], ctx->ed_map_c[0], h);
+
+			/* compute sqrt(-1) */
+			fp_set_dig(ctx->ed_map_c[1], 1);
+			fp_neg(ctx->ed_map_c[1], ctx->ed_map_c[1]);
+			if (!fp_srt(ctx->ed_map_c[1], ctx->ed_map_c[1])) {
+				/* should never happen because 2adicity > 1 */
+				RLC_THROW(ERR_NO_VALID);
+			}
+
+			if (param == CURVE_ED25519) {
+				/* compute sqrt(-486664) for mapping curve25519 -> edwards25519 */
+				fp_read_str(ctx->ed_map_c[3], "486662", 6, 10);
+				fp_add_dig(ctx->ed_map_c[2], ctx->ed_map_c[3], 2);
+				fp_neg(ctx->ed_map_c[2], ctx->ed_map_c[2]);
+				if (!fp_srt(ctx->ed_map_c[2], ctx->ed_map_c[2])) {
+					RLC_THROW(ERR_NO_VALID);
+				}
+				fp_prime_back(h, ctx->ed_map_c[2]);
+				/* make sure sgn0(ctx->ed_map_c[2]) == 0 */
+				if (bn_get_bit(h, 0) != 0) {
+					fp_neg(ctx->ed_map_c[2], ctx->ed_map_c[2]);
+				}
+			} else {
+				/* don't know how to compute remaining constants for other curves */
+				RLC_THROW(ERR_NO_VALID);
+			}
+		} else {
+			/* map impl only supports p = 5 mod 8! */
+			RLC_THROW(ERR_NO_VALID);
+		}
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(r);
 		bn_free(h);
 		ed_free(g);

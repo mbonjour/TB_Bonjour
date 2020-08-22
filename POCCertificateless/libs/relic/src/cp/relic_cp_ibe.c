@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -43,32 +43,32 @@ int cp_ibe_gen(bn_t master, g1_t pub) {
 
 	bn_null(n);
 
-	TRY {
+	RLC_TRY {
 		bn_new(n);
 
-		g1_get_ord(n);
+		pc_get_ord(n);
 		bn_rand_mod(master, n);
 
 		/* K_pub = sG. */
 		g1_mul_gen(pub, master);
 	}
-	CATCH_ANY {
+	RLC_CATCH_ANY {
 		result = RLC_ERR;
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(n);
 	}
 	return result;
 }
 
-int cp_ibe_gen_prv(g2_t prv, char *id, int len, bn_t master) {
-	g2_map(prv, (uint8_t *)id, len);
+int cp_ibe_gen_prv(g2_t prv, char *id, bn_t master) {
+	g2_map(prv, (uint8_t *)id, strlen(id));
 	g2_mul(prv, prv, master);
 	return RLC_OK;
 }
 
-int cp_ibe_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len,
-		char *id, int len, g1_t pub) {
+int cp_ibe_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len, char *id,
+		g1_t pub) {
 	int l, result = RLC_OK;
 	uint8_t *buf = NULL, h[RLC_MD_LEN];
 	bn_t n;
@@ -92,7 +92,7 @@ int cp_ibe_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len,
 		return RLC_ERR;
 	}
 
-	TRY {
+	RLC_TRY {
 		bn_new(n);
 		bn_new(r);
 		g1_new(p);
@@ -103,13 +103,13 @@ int cp_ibe_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len,
 		l = gt_size_bin(e, 0);
 		buf = RLC_ALLOCA(uint8_t, l);
 		if (buf == NULL) {
-			THROW(ERR_NO_MEMORY);
+			RLC_THROW(ERR_NO_MEMORY);
 		}
 
-		g1_get_ord(n);
+		pc_get_ord(n);
 
 		/* q = H_1(ID). */
-		g2_map(q, (uint8_t *)id, len);
+		g2_map(q, (uint8_t *)id, strlen(id));
 
 		/* e = e(K_pub, q). */
 		pc_map(e, pub, q);
@@ -129,9 +129,9 @@ int cp_ibe_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len,
 		}
 
 		*out_len = in_len + (2 * RLC_FP_BYTES + 1);
-	} CATCH_ANY {
+	} RLC_CATCH_ANY {
 		result = RLC_ERR;
-	} FINALLY {
+	} RLC_FINALLY {
 		bn_free(n);
 		bn_free(r);
 		g1_free(p);
@@ -160,7 +160,7 @@ int cp_ibe_dec(uint8_t *out, int *out_len, uint8_t *in, int in_len, g2_t prv) {
 		return RLC_ERR;
 	}
 
-	TRY {
+	RLC_TRY {
 		g1_new(p);
 		gt_new(e);
 
@@ -172,7 +172,7 @@ int cp_ibe_dec(uint8_t *out, int *out_len, uint8_t *in, int in_len, g2_t prv) {
 		l = gt_size_bin(e, 0);
 		buf = RLC_ALLOCA(uint8_t, l);
 		if (buf == NULL) {
-			THROW(ERR_NO_MEMORY);
+			RLC_THROW(ERR_NO_MEMORY);
 		}
 		gt_write_bin(buf, l, e, 0);
 		md_map(h, buf, l);
@@ -183,9 +183,9 @@ int cp_ibe_dec(uint8_t *out, int *out_len, uint8_t *in, int in_len, g2_t prv) {
 		}
 
 		*out_len = in_len;
-	} CATCH_ANY {
+	} RLC_CATCH_ANY {
 		result = RLC_ERR;
-	} FINALLY {
+	} RLC_FINALLY {
 		g1_free(p);
 		gt_free(e);
 		RLC_FREE(buf);

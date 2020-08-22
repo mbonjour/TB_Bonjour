@@ -1344,7 +1344,9 @@ int main() {
             int c1Size = g1_size_bin(c.c1, 1);
             int c2Size = g2_size_bin(c.c2, 1);
             int c3Size = g2_size_bin(c.c3, 1);
-            uint8_t mSig[c0size + c1Size + c2Size + c3Size + ciphertextLen];
+            int b64LenTest = strlen(ciphertextB64);
+            int mSigLen = c0size + c1Size + c2Size + c3Size + ciphertextLen;
+            uint8_t mSig[mSigLen];
             gt_write_bin(mSig, c0size, c.c0, 1);
             g1_write_bin(&mSig[c0size], c1Size, c.c1, 1);
             g2_write_bin(&mSig[c0size + c1Size], c2Size, c.c2, 1);
@@ -1354,7 +1356,7 @@ int main() {
             // Structure of an signature
             signature s;
             // We can sign using our private keys and public ones
-            sign(mSig, signature_senderSk, signaturePk, userID, mpkSignature, &s);
+            sign(mSig,mSigLen, signature_senderSk, signaturePk, userID, mpkSignature, &s);
             binn *signatureObjBinn;
             signatureObjBinn = binn_object();
             serialize_Signature(signatureObjBinn, s);
@@ -1443,12 +1445,13 @@ int main() {
             int c1Size = g1_size_bin(c.c1, 1);
             int c2Size = g2_size_bin(c.c2, 1);
             int c3Size = g2_size_bin(c.c3, 1);
-            uint8_t mSig[c0size + c1Size + c2Size + c3Size + strlen(b64Encrypted)];
+            int mSigLen = c0size + c1Size + c2Size + c3Size + strlen(b64Encrypted) -2;
+            uint8_t mSig[mSigLen];
             gt_write_bin(mSig, c0size, c.c0, 1);
             g1_write_bin(&mSig[c0size], c1Size, c.c1, 1);
             g2_write_bin(&mSig[c0size + c1Size], c2Size, c.c2, 1);
             g2_write_bin(&mSig[c0size + c1Size + c2Size], c3Size, c.c3, 1);
-            memcpy(&mSig[c0size + c1Size + c2Size + c3Size], b64Encrypted, strlen(b64Encrypted));
+            memcpy(&mSig[c0size + c1Size + c2Size + c3Size], b64Encrypted, strlen(b64Encrypted) -2);
 
             encryption_pk encryption_sourcePK;
             signature_pk signature_sourcePK;
@@ -1456,7 +1459,8 @@ int main() {
 
             // We can go for decrypting and verification
             // We can verify directly with the public keys of the sender
-            int test = verify(s, signature_sourcePK, mpkSignature, sourceAddress, mSig);
+
+            int test = verify(s, signature_sourcePK, mpkSignature, sourceAddress, mSig, mSigLen);
             printf("\nVerification of the key (0 if correct 1 if not) : %d\n", test);
             // if the verif is ok we can continue, otherwise we can stop here
             if(test == 0) {

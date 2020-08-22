@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -46,20 +46,12 @@
 #include "relic_eb.h"
 #include "relic_epx.h"
 #include "relic_ed.h"
+#include "relic_pc.h"
 #include "relic_conf.h"
 #include "relic_bench.h"
 #include "relic_rand.h"
 #include "relic_label.h"
 #include "relic_alloc.h"
-
-#if defined(MULTI)
-#include <math.h>
-#if MULTI == OPENMP
-#include <omp.h>
-#elif MULTI == PTHREAD
-#include <pthread.h>
-#endif /* OPENMP */
-#endif /* MULTI */
 
 /*============================================================================*/
 /* Constant definitions                                                       */
@@ -197,13 +189,13 @@ typedef struct _ctx_t {
 #ifdef WITH_EB
 	/** Identifier of the currently configured binary elliptic curve. */
 	int eb_id;
-	/** The 'a' coefficient of the elliptic curve. */
+	/** The a-coefficient of the elliptic curve. */
 	fb_st eb_a;
-	/** The 'b' coefficient of the elliptic curve. */
+	/** The b-coefficient of the elliptic curve. */
 	fb_st eb_b;
-	/** Optimization identifier for the 'a' coefficient. */
+	/** Optimization identifier for the a-coefficient. */
 	int eb_opt_a;
-	/** Optimization identifier for the 'b' coefficient. */
+	/** Optimization identifier for the b-coefficient. */
 	int eb_opt_b;
 	/** The generator of the elliptic curve. */
 	eb_st eb_g;
@@ -259,10 +251,12 @@ typedef struct _ctx_t {
 #ifdef WITH_EP
 	/** Identifier of the currently configured prime elliptic curve. */
 	int ep_id;
-	/** The 'a' coefficient of the elliptic curve. */
+	/** The a-coefficient of the elliptic curve. */
 	fp_st ep_a;
-	/** The 'b' coefficient of the elliptic curve. */
+	/** The b-coefficient of the elliptic curve. */
 	fp_st ep_b;
+	/** The value 3b used in elliptic curve arithmetic. */
+	fp_st ep_b3;
 	/** The generator of the elliptic curve. */
 	ep_st ep_g;
 	/** The order of the group of points in the elliptic curve. */
@@ -286,6 +280,8 @@ typedef struct _ctx_t {
 	int ep_opt_a;
 	/** Optimization identifier for the b-coefficient. */
 	int ep_opt_b;
+	/** Optimization identifier for the b3 value. */
+	int ep_opt_b3;
 	/** Flag that stores if the prime curve has efficient endomorphisms. */
 	int ep_is_endom;
 	/** Flag that stores if the prime curve is supersingular. */
@@ -356,8 +352,8 @@ typedef struct _ctx_t {
 	fp_st ed_a;
 	/** The 'd' coefficient of the Edwards elliptic curve. */
 	fp_st ed_d;
-	/** The square root of -1 needed for hashing. */
-	fp_st srm1;
+	/** Precomputed constants for hashing. */
+	fp_st ed_map_c[4];
 	/** The generator of the Edwards elliptic curve. */
 	ed_st ed_g;
 	/** The order of the group of points in the Edwards elliptic curve. */
@@ -388,6 +384,10 @@ typedef struct _ctx_t {
 	/** @} */
 #endif /* WITH_PP */
 
+#if defined(WITH_PC)
+	gt_t gt_g;
+#endif
+
 #if BENCH > 0
 	/** Stores the time measured before the execution of the benchmark. */
 	bench_t before;
@@ -403,7 +403,7 @@ typedef struct _ctx_t {
 
 #if RAND != CALL
 	/** Internal state of the PRNG. */
-	uint8_t rand[RAND_SIZE];
+	uint8_t rand[RLC_RAND_SIZE];
 #else
 	void (*rand_call)(uint8_t *, int, void *);
 	void *rand_args;

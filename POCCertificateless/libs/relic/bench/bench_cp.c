@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -66,32 +66,6 @@ static void rsa(void) {
 		BENCH_ADD(cp_rsa_dec(new, &new_len, out, out_len, prv));
 	} BENCH_END;
 
-#if CP_RSA == BASIC || !defined(STRIP)
-	BENCH_ONCE("cp_rsa_gen_basic", cp_rsa_gen_basic(pub, prv, RLC_BN_BITS));
-
-	BENCH_BEGIN("cp_rsa_dec_basic") {
-		out_len = RLC_BN_BITS / 8 + 1;
-		new_len =out_len;
-		rand_bytes(in, sizeof(in));
-		cp_rsa_enc(out, &out_len, in, sizeof(in), pub);
-		BENCH_ADD(cp_rsa_dec_basic(new, &new_len, out, out_len, prv));
-	} BENCH_END;
-#endif
-
-#if CP_RSA == QUICK || !defined(STRIP)
-	BENCH_ONCE("cp_rsa_gen_quick", cp_rsa_gen_quick(pub, prv, RLC_BN_BITS));
-
-	BENCH_BEGIN("cp_rsa_dec_quick") {
-		out_len = RLC_BN_BITS / 8 + 1;
-		new_len =out_len;
-		rand_bytes(in, sizeof(in));
-		cp_rsa_enc(out, &out_len, in, sizeof(in), pub);
-		BENCH_ADD(cp_rsa_dec_quick(new, &new_len, out, out_len, prv));
-	} BENCH_END;
-#endif
-
-	BENCH_ONCE("cp_rsa_gen", cp_rsa_gen(pub, prv, RLC_BN_BITS));
-
 	BENCH_BEGIN("cp_rsa_sig (h = 0)") {
 		out_len = RLC_BN_BITS / 8 + 1;
 		new_len = out_len;
@@ -123,44 +97,6 @@ static void rsa(void) {
 		cp_rsa_sig(out, &out_len, h, RLC_MD_LEN, 1, prv);
 		BENCH_ADD(cp_rsa_ver(out, out_len, h, RLC_MD_LEN, 1, pub));
 	} BENCH_END;
-
-#if CP_RSA == BASIC || !defined(STRIP)
-	BENCH_ONCE("cp_rsa_gen_basic", cp_rsa_gen_basic(pub, prv, RLC_BN_BITS));
-
-	BENCH_BEGIN("cp_rsa_sig_basic (h = 0)") {
-		out_len = RLC_BN_BITS / 8 + 1;
-		new_len = out_len;
-		rand_bytes(in, sizeof(in));
-		BENCH_ADD(cp_rsa_sig_basic(out, &out_len, in, sizeof(in), 0, prv));
-	} BENCH_END;
-
-	BENCH_BEGIN("cp_rsa_sig_basic (h = 1)") {
-		out_len = RLC_BN_BITS / 8 + 1;
-		new_len = out_len;
-		rand_bytes(in, sizeof(in));
-		md_map(h, in, sizeof(in));
-		BENCH_ADD(cp_rsa_sig_basic(out, &out_len, h, RLC_MD_LEN, 1, prv));
-	} BENCH_END;
-#endif
-
-#if CP_RSA == QUICK || !defined(STRIP)
-	BENCH_ONCE("cp_rsa_gen_quick", cp_rsa_gen_quick(pub, prv, RLC_BN_BITS));
-
-	BENCH_BEGIN("cp_rsa_sig_quick (h = 0)") {
-		out_len = RLC_BN_BITS / 8 + 1;
-		new_len = out_len;
-		rand_bytes(in, sizeof(in));
-		BENCH_ADD(cp_rsa_sig_quick(out, &out_len, in, sizeof(in), 0, prv));
-	} BENCH_END;
-
-	BENCH_BEGIN("cp_rsa_sig_quick (h = 1)") {
-		out_len = RLC_BN_BITS / 8 + 1;
-		new_len = out_len;
-		rand_bytes(in, sizeof(in));
-		md_map(h, in, sizeof(in));
-		BENCH_ADD(cp_rsa_sig_quick(out, &out_len, in, sizeof(in), 1, prv));
-	} BENCH_END;
-#endif
 
 	rsa_free(pub);
 	rsa_free(prv);
@@ -235,38 +171,62 @@ static void benaloh(void) {
 }
 
 static void paillier(void) {
-	bn_t n, l;
-	uint8_t in[1000], new[1000], out[RLC_BN_BITS / 8 + 1];
-	int in_len, out_len;
+	bn_t c, m, pub;
+	phpe_t prv;
 
-	bn_null(n);
-	bn_null(l);
+	bn_null(c);
+	bn_null(m);
+	bn_null(pub);
+	phpe_null(prv);
 
-	bn_new(n);
-	bn_new(l);
+	bn_new(c);
+	bn_new(m);
+	bn_new(pub);
+	phpe_new(prv);
 
-	BENCH_ONCE("cp_phpe_gen", cp_phpe_gen(n, l, RLC_BN_BITS / 2));
+	BENCH_ONCE("cp_phpe_gen", cp_phpe_gen(pub, prv, RLC_BN_BITS / 2));
 
 	BENCH_BEGIN("cp_phpe_enc") {
-		in_len = bn_size_bin(n);
-		out_len = RLC_BN_BITS / 8 + 1;
-		memset(in, 0, sizeof(in));
-		rand_bytes(in + 1, in_len - 1);
-		BENCH_ADD(cp_phpe_enc(out, &out_len, in, in_len, n));
-		cp_phpe_dec(new, in_len, out, out_len, n, l);
+		bn_rand_mod(m, pub);
+		BENCH_ADD(cp_phpe_enc(c, m, pub));
 	} BENCH_END;
 
 	BENCH_BEGIN("cp_phpe_dec") {
-		in_len = bn_size_bin(n);
-		out_len = RLC_BN_BITS / 8 + 1;
-		memset(in, 0, sizeof(in));
-		rand_bytes(in + 1, in_len - 1);
-		cp_phpe_enc(out, &out_len, in, in_len, n);
-		BENCH_ADD(cp_phpe_dec(new, in_len, out, out_len, n, l));
+		bn_rand_mod(m, pub);
+		cp_phpe_enc(c, m, pub);
+		BENCH_ADD(cp_phpe_dec(m, c, prv));
 	} BENCH_END;
 
-	bn_free(n);
-	bn_free(l);
+	BENCH_ONCE("cp_ghpe_gen", cp_ghpe_gen(pub, prv->n, RLC_BN_BITS / 2));
+
+	BENCH_BEGIN("cp_ghpe_enc (1)") {
+		bn_rand_mod(m, pub);
+		BENCH_ADD(cp_ghpe_enc(c, m, pub, 1));
+	} BENCH_END;
+
+	BENCH_BEGIN("cp_ghpe_dec (1)") {
+		bn_rand_mod(m, pub);
+		cp_ghpe_enc(m, c, pub, 1);
+		BENCH_ADD(cp_ghpe_dec(c, m, pub, prv->n, 1));
+	} BENCH_END;
+
+	BENCH_ONCE("cp_ghpe_gen", cp_ghpe_gen(pub, prv->n, RLC_BN_BITS / 4));
+
+	BENCH_BEGIN("cp_ghpe_enc (2)") {
+		bn_rand(m, RLC_POS, 2 * bn_bits(pub) - 1);
+		BENCH_ADD(cp_ghpe_enc(m, c, pub, 2));
+	} BENCH_END;
+
+	BENCH_BEGIN("cp_ghpe_dec (2)") {
+		bn_rand(m, RLC_POS, 2 * bn_bits(pub) - 1);
+		cp_ghpe_enc(m, c, pub, 2);
+		BENCH_ADD(cp_ghpe_dec(c, m, pub, prv->n, 2));
+	} BENCH_END;
+
+	bn_free(c);
+	bn_free(m);
+	bn_free(pub);
+	phpe_free(prv);
 }
 
 #endif
@@ -529,8 +489,8 @@ static void sokaka(void) {
 	sokaka_t k;
 	bn_t s;
 	uint8_t key1[RLC_MD_LEN];
-	char id_a[5] = { 'A', 'l', 'i', 'c', 'e' };
-	char id_b[3] = { 'B', 'o', 'b' };
+	char *id_a = "Alice";
+	char *id_b = "Bob";
 
 	sokaka_null(k);
 
@@ -543,22 +503,20 @@ static void sokaka(void) {
 	BENCH_END;
 
 	BENCH_BEGIN("cp_sokaka_gen_prv") {
-		BENCH_ADD(cp_sokaka_gen_prv(k, id_b, sizeof(id_b), s));
+		BENCH_ADD(cp_sokaka_gen_prv(k, id_b, s));
 	}
 	BENCH_END;
 
 	BENCH_BEGIN("cp_sokaka_key (g1)") {
-		BENCH_ADD(cp_sokaka_key(key1, RLC_MD_LEN, id_b, sizeof(id_b), k, id_a,
-						sizeof(id_a)));
+		BENCH_ADD(cp_sokaka_key(key1, RLC_MD_LEN, id_b, k, id_a));
 	}
 	BENCH_END;
 
 	if (pc_map_is_type3()) {
-		cp_sokaka_gen_prv(k, id_a, sizeof(id_a), s);
+		cp_sokaka_gen_prv(k, id_a, s);
 
 		BENCH_BEGIN("cp_sokaka_key (g2)") {
-			BENCH_ADD(cp_sokaka_key(key1, RLC_MD_LEN, id_a, sizeof(id_a), k, id_b,
-							sizeof(id_b)));
+			BENCH_ADD(cp_sokaka_key(key1, RLC_MD_LEN, id_a, k, id_b));
 		}
 		BENCH_END;
 	}
@@ -572,7 +530,7 @@ static void ibe(void) {
 	g1_t pub;
 	g2_t prv;
 	uint8_t in[10], out[10 + 2 * RLC_FP_BYTES + 1];
-	char id[5] = { 'A', 'l', 'i', 'c', 'e' };
+	char *id = "Alice";
 	int in_len, out_len;
 
 	bn_null(s);
@@ -591,7 +549,7 @@ static void ibe(void) {
 	BENCH_END;
 
 	BENCH_BEGIN("cp_ibe_gen_prv") {
-		BENCH_ADD(cp_ibe_gen_prv(prv, id, sizeof(id), s));
+		BENCH_ADD(cp_ibe_gen_prv(prv, id, s));
 	}
 	BENCH_END;
 
@@ -599,7 +557,7 @@ static void ibe(void) {
 		in_len = sizeof(in);
 		out_len = in_len + 2 * RLC_FP_BYTES + 1;
 		rand_bytes(in, sizeof(in));
-		BENCH_ADD(cp_ibe_enc(out, &out_len, in, in_len, id, sizeof(id), pub));
+		BENCH_ADD(cp_ibe_enc(out, &out_len, in, in_len, id, pub));
 		cp_ibe_dec(out, &out_len, out, out_len, prv);
 	}
 	BENCH_END;
@@ -608,7 +566,7 @@ static void ibe(void) {
 		in_len = sizeof(in);
 		out_len = in_len + 2 * RLC_FP_BYTES + 1;
 		rand_bytes(in, sizeof(in));
-		cp_ibe_enc(out, &out_len, in, in_len, id, sizeof(id), pub);
+		cp_ibe_enc(out, &out_len, in, in_len, id, pub);
 		BENCH_ADD(cp_ibe_dec(out, &out_len, out, out_len, prv));
 	}
 	BENCH_END;
@@ -881,13 +839,11 @@ static int cls(void) {
 }
 
 static void pss(void) {
-	bn_t u, v, _v[5];
+	bn_t ms[10], n, u, v, _v[10];
 	g1_t a, b;
-	g2_t g, x, y, _y[5];
-	uint8_t m[5] = { 0, 1, 2, 3, 4 };
-	uint8_t *msgs[5] = {m, m, m, m, m};
-	int i, lens[5] = {sizeof(m), sizeof(m), sizeof(m), sizeof(m), sizeof(m)};
+	g2_t g, x, y, _y[10];
 
+	bn_null(n);
 	bn_null(u);
 	bn_null(v);
 	g1_null(a);
@@ -895,11 +851,7 @@ static void pss(void) {
 	g2_null(g);
 	g2_null(x);
 	g2_null(y);
-	for (i = 0; i < 5; i++) {
-		bn_null(_v[i]);
-		g2_null(_y[i]);
-	}
-
+	bn_new(n);
 	bn_new(u);
 	bn_new(v);
 	g1_new(a);
@@ -907,7 +859,14 @@ static void pss(void) {
 	g2_new(g);
 	g2_new(x);
 	g2_new(y);
-	for (i = 0; i < 5; i++) {
+
+	g1_get_ord(n);
+	for (int i = 0; i < 10; i++) {
+		bn_null(ms[i]);
+		bn_null(_v[i]);
+		g2_null(_y[i]);
+		bn_new(ms[i]);
+		bn_rand_mod(ms[i], n);
 		bn_new(_v[i]);
 		g2_new(_y[i]);
 	}
@@ -917,23 +876,23 @@ static void pss(void) {
 	} BENCH_END;
 
 	BENCH_BEGIN("cp_pss_sig") {
-		BENCH_ADD(cp_pss_sig(a, b, m, sizeof(m), u, v));
+		BENCH_ADD(cp_pss_sig(a, b, ms[0], u, v));
 	} BENCH_END;
 
 	BENCH_BEGIN("cp_pss_ver") {
-		BENCH_ADD(cp_pss_ver(a, b, m, sizeof(m), g, x, y));
+		BENCH_ADD(cp_pss_ver(a, b, ms[0], g, x, y));
 	} BENCH_END;
 
-	BENCH_BEGIN("cp_psb_gen (5)") {
-		BENCH_ADD(cp_psb_gen(u, _v, g, x, _y, 5));
+	BENCH_BEGIN("cp_psb_gen (10)") {
+		BENCH_ADD(cp_psb_gen(u, _v, g, x, _y, 10));
 	} BENCH_END;
 
-	BENCH_BEGIN("cp_psb_sig (5)") {
-		BENCH_ADD(cp_psb_sig(a, b, msgs, lens, u, _v, 5));
+	BENCH_BEGIN("cp_psb_sig (10)") {
+		BENCH_ADD(cp_psb_sig(a, b, ms, u, _v, 10));
 	} BENCH_END;
 
-	BENCH_BEGIN("cp_psb_ver (5)") {
-		BENCH_ADD(cp_psb_ver(a, b, msgs, lens, g, x, _y, 5));
+	BENCH_BEGIN("cp_psb_ver (10)") {
+		BENCH_ADD(cp_psb_ver(a, b, ms, g, x, _y, 10));
 	} BENCH_END;
 
 	bn_free(u);
@@ -943,9 +902,137 @@ static void pss(void) {
 	g2_free(g);
 	g2_free(x);
 	g2_free(y);
-	for (i = 0; i < 5; i++) {
+	for (int i = 0; i < 10; i++) {
+		bn_free(ms[i]);
 		bn_free(_v[i]);
 		g1_free(_y[i]);
+	}
+}
+
+static void mpss(void) {
+	bn_t m[2], n, u[2], v[2], ms[10][2], _v[10][2];
+	g1_t g, s[2];
+	g2_t h, x[2], y[2], _y[10][2];
+	gt_t r;
+	mt_t tri[3][2];
+	pt_t t[2];
+
+	bn_null(n);
+	g1_null(g);
+	g2_null(h);
+	gt_null(r);
+
+	bn_new(n);
+	g1_new(g);
+	g2_new(h);
+	gt_new(r);
+	for (int i = 0; i < 2; i++) {
+		bn_null(m[i]);
+		bn_null(u[i]);
+		bn_null(v[i]);
+		g1_null(s[i]);
+		g2_null(x[i]);
+		g2_null(y[i]);
+		mt_null(tri[0][i]);
+		mt_null(tri[1][i]);
+		mt_null(tri[2][i]);
+		pt_null(t[i]);
+		bn_new(m[i]);
+		bn_new(u[i]);
+		bn_new(v[i]);
+		g1_new(s[i]);
+		g2_new(x[i]);
+		g2_new(y[i]);
+		mt_new(tri[0][i]);
+		mt_new(tri[1][i]);
+		mt_new(tri[2][i]);
+		pt_new(t[i]);
+
+		g1_get_ord(n);
+		for (int j = 0; j < 10; j++) {
+			bn_null(ms[j][i]);
+			bn_null(_v[j][i]);
+			g2_null(_y[j][i]);
+			bn_new(ms[j][i]);
+			bn_rand_mod(ms[j][i], n);
+			bn_new(_v[j][i]);
+			g2_new(_y[j][i]);
+		}
+	}
+
+	pc_map_tri(t);
+	mt_gen(tri[0], n);
+	mt_gen(tri[1], n);
+	mt_gen(tri[2], n);
+
+	bn_rand_mod(m[0], n);
+	bn_rand_mod(m[1], n);
+	bn_sub(m[0], m[1], m[0]);
+	if (bn_sign(m[0]) == RLC_NEG) {
+		bn_add(m[0], m[0], n);
+	}
+
+	BENCH_BEGIN("cp_mpss_gen") {
+		BENCH_ADD(cp_mpss_gen(u, v, h, x, y));
+	} BENCH_END;
+
+	BENCH_BEGIN("cp_mpss_bct") {
+		BENCH_ADD(cp_mpss_bct(x, y));
+	} BENCH_END;
+
+	BENCH_BEGIN("cp_mpss_sig") {
+		BENCH_ADD(cp_mpss_sig(g, s, m, u, v, tri[0], tri[1]));
+	} BENCH_DIV(2);
+
+	BENCH_BEGIN("cp_mpss_ver") {
+		BENCH_ADD(cp_mpss_ver(r, g, s, m, h, x[0], y[0], tri[2], t));
+	} BENCH_DIV(2);
+
+	g1_get_ord(n);
+	pc_map_tri(t);
+	mt_gen(tri[0], n);
+	mt_gen(tri[1], n);
+	mt_gen(tri[2], n);
+
+	BENCH_BEGIN("cp_mpsb_gen (10)") {
+		BENCH_ADD(cp_mpsb_gen(u, _v, h, x, _y, 10));
+	} BENCH_END;
+
+	BENCH_BEGIN("cp_mpsb_bct (10)") {
+		BENCH_ADD(cp_mpsb_bct(x, _y, 10));
+	} BENCH_END;
+
+	BENCH_BEGIN("cp_mpsb_sig (10)") {
+		BENCH_ADD(cp_mpsb_sig(g, s, ms, u, _v, tri[0], tri[1], 10));
+	} BENCH_DIV(2);
+
+	BENCH_BEGIN("cp_mpsb_ver (10)") {
+		BENCH_ADD(cp_mpsb_ver(r, g, s, ms, h, x[0], _y, NULL, tri[2], t, 10));
+	} BENCH_DIV(2);
+
+	BENCH_BEGIN("cp_mpsb_ver (10,sk)") {
+		BENCH_ADD(cp_mpsb_ver(r, g, s, ms, h, x[0], _y, _v, tri[2], t, 10));
+	} BENCH_DIV(2);
+
+  	bn_free(n);
+	g1_free(g);
+	g2_free(h);
+	for (int i = 0; i < 2; i++) {
+		bn_free(m[i]);
+		bn_free(u[i]);
+		bn_free(v[i]);
+		g1_free(s[i]);
+		g2_free(x[i]);
+		g2_free(y[i]);
+		mt_free(tri[0][i]);
+		mt_free(tri[1][i]);
+		mt_free(tri[2][i]);
+		pt_free(t[i]);
+		for (int j = 0; j < 10; j++) {
+			bn_free(ms[j][i]);
+			bn_free(_v[j][i]);
+			g2_free(_y[j][i]);
+		}
 	}
 }
 
@@ -1002,7 +1089,7 @@ static void zss(void) {
 #define S	10			/* Number of signers. */
 #define L	16			/* Number of labels, must be <= RLC_TERMS. */
 #define K	RLC_MD_LEN	/* Size of PRF key. */
-//#define BENCH_LHS		/* Uncomment for fine-grained benchmarking. */
+#define BENCH_LHS		/* Uncomment for fine-grained benchmarking. */
 
 static void lhs(void) {
 	uint8_t k[S][K];
@@ -1010,9 +1097,11 @@ static void lhs(void) {
 	g1_t _r, h, as[S], cs[S], sig[S];
 	g1_t a[S][L], c[S][L], r[S][L];
 	g2_t _s, s[S][L], pk[S], y[S], z[S];
-	gt_t hs[S][RLC_TERMS];
+	gt_t *hs[S];
 	char *id = "id";
 	dig_t ft[S];
+	dig_t *f[S];
+	int flen[S];
 
 	bn_null(m);
 	bn_null(n);
@@ -1026,7 +1115,7 @@ static void lhs(void) {
 	g1_new(_r);
 	g2_new(_s);
 
-	g1_get_ord(n);
+	pc_get_ord(n);
 	for (int i = 0; i < L; i++) {
 		bn_null(msg[i]);
 		bn_new(msg[i]);
@@ -1069,9 +1158,9 @@ static void lhs(void) {
 	}
 
 	/* Define linear function. */
-	dig_t f[S][RLC_TERMS];
-	int flen[S];
 	for (int i = 0; i < S; i++) {
+		hs[i] = RLC_ALLOCA(gt_t, RLC_TERMS);
+		f[i] = RLC_ALLOCA(dig_t, RLC_TERMS);
 		for (int j = 0; j < RLC_TERMS; j++) {
 			uint32_t t;
 			rand_bytes((uint8_t *)&t, sizeof(uint32_t));
@@ -1097,8 +1186,8 @@ static void lhs(void) {
 			for (int l = 0; l < L; l++) {
 				label[l] = l;
 				bn_mod(msg[l], msg[l], n);
-				BENCH_ADD(cp_cmlhs_sig(sig[j], z[j], a[j][l], c[j][l], r[j][l], s[j][l], msg[l],
-					id, sizeof(id), label[l], x[j][l], h, k[j], K, d[j], sk[j]));
+				BENCH_ADD(cp_cmlhs_sig(sig[j], z[j], a[j][l], c[j][l], r[j][l],
+					s[j][l], msg[l], id, label[l], x[j][l], h, k[j], K, d[j], sk[j]));
 			}
 		}
 	} BENCH_DIV(S * L);
@@ -1132,16 +1221,16 @@ static void lhs(void) {
 	}
 
 	BENCH_BEGIN("cp_cmlhs_ver") {
-		BENCH_ADD(cp_cmlhs_ver(_r, _s, sig, z, as, cs, m, id, sizeof(id),
-			label, h, hs, f, flen, y, pk, S));
+		BENCH_ADD(cp_cmlhs_ver(_r, _s, sig, z, as, cs, m, id, label, h, hs,
+			f, flen, y, pk, S));
 	} BENCH_DIV(S);
 
 #ifdef BENCH_LHS
 	for (int t = 1; t <= S; t++) {
 		util_print("(%2d ids) ", t);
 		BENCH_BEGIN("cp_cmlhs_ver") {
-			BENCH_ADD(cp_cmlhs_ver(_r, _s, sig, z, as, cs, m, id, sizeof(id),
-				label, h, hs, f, flen, y, pk, t));
+			BENCH_ADD(cp_cmlhs_ver(_r, _s, sig, z, as, cs, m, id, label, h, hs,
+				f, flen, y, pk, t));
 		} BENCH_END;
 	}
 
@@ -1151,14 +1240,13 @@ static void lhs(void) {
 			flen[u] = t;
 		}
 		BENCH_BEGIN("cp_cmlhs_ver") {
-			BENCH_ADD(cp_cmlhs_ver(_r, _s, sig, z, as, cs, m, id, sizeof(id),
-				label, h, hs, f, flen, y, pk, S));
+			BENCH_ADD(cp_cmlhs_ver(_r, _s, sig, z, as, cs, m, id, label, h, hs,
+				f, flen, y, pk, S));
 		} BENCH_END;
 	}
 #endif  /* BENCH_LHS */
 
-	char *ls[L] = { "l" };
-	int lens[L] = { sizeof(ls[0]) };
+	char *ls[L];
 
 	BENCH_BEGIN("cp_mklhs_gen") {
 		for (int j = 0; j < S; j++) {
@@ -1169,9 +1257,9 @@ static void lhs(void) {
 	BENCH_BEGIN("cp_mklhs_sig") {
 		for (int j = 0; j < S; j++) {
 			for (int l = 0; l < L; l++) {
+				ls[l] = "l";
 				bn_mod(msg[l], msg[l], n);
-				BENCH_ADD(cp_mklhs_sig(a[j][l], msg[l], id, sizeof(id),
-					ls[l], lens[l], sk[j]));
+				BENCH_ADD(cp_mklhs_sig(a[j][l], msg[l], id, ls[l], sk[j]));
 			}
 		}
 	} BENCH_DIV(S * L);
@@ -1206,24 +1294,22 @@ static void lhs(void) {
 	}
 
 	BENCH_BEGIN("cp_mklhs_ver") {
-		BENCH_ADD(cp_mklhs_ver(_r, m, d, id, sizeof(id), ls, lens, f, flen,
-			pk, S));
+		BENCH_ADD(cp_mklhs_ver(_r, m, d, id, ls, f, flen, pk, S));
 	} BENCH_DIV(S);
 
 	BENCH_BEGIN("cp_mklhs_off") {
-		BENCH_ADD(cp_mklhs_off(cs, ft, ls, lens, f, flen, S));
+		BENCH_ADD(cp_mklhs_off(cs, ft, ls, f, flen, S));
 	} BENCH_DIV(S);
 
 	BENCH_BEGIN("cp_mklhs_onv") {
-		BENCH_ADD(cp_mklhs_onv(_r, m, d, id, sizeof(id), cs, ft, pk, S));
+		BENCH_ADD(cp_mklhs_onv(_r, m, d, id, cs, ft, pk, S));
 	} BENCH_DIV(S);
 
 #ifdef BENCH_LHS
 	for (int t = 1; t <= S; t++) {
 		util_print("(%2d ids) ", t);
 		BENCH_BEGIN("cp_mklhs_ver") {
-			BENCH_ADD(cp_mklhs_ver(_r, m, d, id, sizeof(id), ls, lens, f, flen,
-				pk, t));
+			BENCH_ADD(cp_mklhs_ver(_r, m, d, id, ls, f, flen, pk, t));
 		} BENCH_END;
 	}
 
@@ -1233,19 +1319,18 @@ static void lhs(void) {
 			flen[u] = t;
 		}
 		BENCH_BEGIN("cp_mklhs_ver") {
-			BENCH_ADD(cp_mklhs_ver(_r, m, d, id, sizeof(id), ls, lens, f, flen,
-				pk, S));
+			BENCH_ADD(cp_mklhs_ver(_r, m, d, id, ls, f, flen, pk, S));
 		} BENCH_END;
 	}
 
 	for (int t = 1; t <= S; t++) {
 		util_print("(%2d ids) ", t);
 		BENCH_BEGIN("cp_mklhs_off") {
-			BENCH_ADD(cp_mklhs_off(cs, ft, ls, lens, f, flen, t));
+			BENCH_ADD(cp_mklhs_off(cs, ft, ls, f, flen, t));
 		} BENCH_END;
 
 		BENCH_BEGIN("cp_mklhs_onv") {
-			BENCH_ADD(cp_mklhs_onv(_r, m, d, id, sizeof(id), cs, ft, pk, t));
+			BENCH_ADD(cp_mklhs_onv(_r, m, d, id, cs, ft, pk, t));
 		} BENCH_END;
 	}
 
@@ -1255,11 +1340,11 @@ static void lhs(void) {
 			flen[u] = t;
 		}
 		BENCH_BEGIN("cp_mklhs_off") {
-			BENCH_ADD(cp_mklhs_off(cs, ft, ls, lens, f, flen, S));
+			BENCH_ADD(cp_mklhs_off(cs, ft, ls, f, flen, S));
 		} BENCH_END;
 
 		BENCH_BEGIN("cp_mklhs_onv") {
-			BENCH_ADD(cp_mklhs_onv(_r, m, d, id, sizeof(id), cs, ft, pk, S));
+			BENCH_ADD(cp_mklhs_onv(_r, m, d, id, cs, ft, pk, S));
 		} BENCH_END;
 	}
 #endif /* BENCH_LHS */
@@ -1274,6 +1359,8 @@ static void lhs(void) {
 		bn_free(msg[i]);
 	}
 	for (int i = 0; i < S; i++) {
+		RLC_FREE(hs[i]);
+		RLC_FREE(f[i]);
 		for (int j = 0; j < RLC_TERMS; j++) {
 			gt_free(hs[i][j]);
 		}
@@ -1325,7 +1412,7 @@ int main(void) {
 		ecss();
 		vbnn();
 	} else {
-		THROW(ERR_NO_CURVE);
+		RLC_THROW(ERR_NO_CURVE);
 	}
 #endif
 
@@ -1339,10 +1426,13 @@ int main(void) {
 		bbs();
 		cls();
 		pss();
+#if defined(WITH_MPC)
+		mpss();
+#endif
 		zss();
 		lhs();
 	} else {
-		THROW(ERR_NO_CURVE);
+		RLC_THROW(ERR_NO_CURVE);
 	}
 #endif
 

@@ -1,1 +1,0 @@
-/usr/bin/cc -pipe -std=c99 -m64 -Wall   -O2 -funroll-loops -fomit-frame-pointer  -L/home/mbonjour/RELIC/relic/src/low/gmp/  -rdynamic CMakeFiles/bench_eb.dir/bench_eb.c.o  -o ../bin/bench_eb  ../lib/librelic_s.a -lgmp -lrt 

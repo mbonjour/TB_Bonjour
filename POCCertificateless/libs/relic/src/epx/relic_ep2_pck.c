@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -44,7 +44,7 @@ void ep2_pck(ep2_t r, ep2_t p) {
 	fp_zero(r->y[1]);
 	fp_set_dig(r->z[0], 1);
 	fp_zero(r->z[1]);
-	r->norm = 1;
+	r->coord = BASIC;
 }
 
 int ep2_upk(ep2_t r, ep2_t p) {
@@ -53,7 +53,7 @@ int ep2_upk(ep2_t r, ep2_t p) {
 
 	fp2_null(t);
 
-	TRY {
+	RLC_TRY {
 		fp2_new(t);
 
 		ep2_rhs(t, p);
@@ -71,13 +71,13 @@ int ep2_upk(ep2_t r, ep2_t p) {
 			fp2_copy(r->y, t);
 			fp_set_dig(r->z[0], 1);
 			fp_zero(r->z[1]);
-			r->norm = 1;
+			r->coord = BASIC;
 		}
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		fp2_free(t);
 	}
 	return result;

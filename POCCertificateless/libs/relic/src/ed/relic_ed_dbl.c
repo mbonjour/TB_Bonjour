@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -46,7 +46,7 @@ void ed_dbl_basic(ed_t r, const ed_t p) {
 	fp_null(t1);
 	fp_null(t2);
 
-	TRY {
+	RLC_TRY {
 		fp_new(t0);
 		fp_new(t1);
 		fp_new(t2);
@@ -76,19 +76,19 @@ void ed_dbl_basic(ed_t r, const ed_t p) {
 		fp_copy(r->x, t0);
 		fp_copy(r->z, p->z);
 
-		r->norm = 1;
+		r->coord = BASIC;
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		fp_free(t0);
 		fp_free(t1);
 		fp_free(t2);
 	}
 }
 
-#endif /* EP_ADD == BASIC */
+#endif /* ED_ADD == BASIC */
 
 #if ED_ADD == PROJC || !defined(STRIP)
 
@@ -103,7 +103,7 @@ void ed_dbl_projc(ed_t r, const ed_t p) {
 	fp_null(t5);
 	fp_null(t6);
 
-	TRY {
+	RLC_TRY {
 		fp_new(t0);
 		fp_new(t1);
 		fp_new(t2);
@@ -147,10 +147,10 @@ void ed_dbl_projc(ed_t r, const ed_t p) {
 		/* x3 = F * J */
 		fp_mul(r->z, t4, t6);
 
-		r->norm = 0;
-	} CATCH_ANY {
-		THROW(ERR_CAUGHT);
-	} FINALLY {
+		r->coord = PROJC;
+	} RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
+	} RLC_FINALLY {
 		fp_free(t0);
 		fp_free(t1);
 		fp_free(t2);
@@ -174,7 +174,7 @@ void ed_dbl_extnd(ed_t r, const ed_t p) {
 	fp_null(t3);
 	fp_null(t4);
 
-	TRY {
+	RLC_TRY {
 		fp_new(t0);
 		fp_new(t1);
 		fp_new(t2);
@@ -210,17 +210,17 @@ void ed_dbl_extnd(ed_t r, const ed_t p) {
 		fp_mul(r->x, t2, t3);
 		/* Y = G * H */
 		fp_mul(r->y, t4, r->z);
-		if (r->norm != 2) {
+		if (r->coord != EXTND) {
 			/* T = E * H */
 			fp_mul(r->t, t2, r->z);
 		}
 		/* Z = F * G */
 		fp_mul(r->z, t3, t4);
 
-		r->norm = 0;
-	} CATCH_ANY {
-		THROW(ERR_CAUGHT);
-	} FINALLY {
+		r->coord = PROJC;
+	} RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
+	} RLC_FINALLY {
 		fp_free(t0);
 		fp_free(t1);
 		fp_free(t2);
