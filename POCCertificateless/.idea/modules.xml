@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Test_RELIC.iml" filepath="$PROJECT_DIR$/.idea/Test_RELIC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/POCCertificateless.iml" filepath="$PROJECT_DIR$/.idea/POCCertificateless.iml" />
     </modules>
   </component>
 </project>

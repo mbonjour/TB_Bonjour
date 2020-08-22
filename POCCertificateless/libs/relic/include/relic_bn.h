@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -142,7 +142,7 @@ typedef bn_st *bn_t;
 #define bn_new(A)															\
 	A = (bn_t)calloc(1, sizeof(bn_st));										\
 	if ((A) == NULL) {														\
-		THROW(ERR_NO_MEMORY);												\
+		RLC_THROW(ERR_NO_MEMORY);												\
 	}																		\
 	bn_init(A, RLC_BN_SIZE);												\
 
@@ -171,7 +171,7 @@ typedef bn_st *bn_t;
 #define bn_new_size(A, D)													\
 	A = (bn_t)calloc(1, sizeof(bn_st));										\
 	if (A == NULL) {														\
-		THROW(ERR_NO_MEMORY);												\
+		RLC_THROW(ERR_NO_MEMORY);												\
 	}																		\
 	bn_init(A, D);															\
 
@@ -855,6 +855,17 @@ void bn_div_dig(bn_t c, const bn_t a, dig_t b);
  * @throw ERR_NO_VALID		- if the divisor is zero.
  */
 void bn_div_rem_dig(bn_t c, dig_t *d, const bn_t a, const dig_t b);
+
+/**
+ * Computes the modular inverse of a multiple precision integer. Computes c such
+ * that a*c mod b = 1.
+ *
+ * @param[out] c 			- the result.
+ * @param[in] a				- the element to invert.
+ * param[in] b				- the modulus.
+ *
+ */
+void bn_mod_inv(bn_t c, const bn_t a, const bn_t b);
 
 /**
  * Reduces a multiple precision integer modulo a power of 2. Computes

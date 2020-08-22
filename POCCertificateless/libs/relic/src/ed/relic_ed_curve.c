@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -46,8 +46,10 @@ void ed_curve_init(void) {
 
 void ed_curve_clean(void) {
 	ctx_t *ctx = core_get();
-	bn_clean(&ctx->ed_r);
-	bn_clean(&ctx->ed_h);
+	if (ctx != NULL) {
+		bn_clean(&ctx->ed_r);
+		bn_clean(&ctx->ed_h);		
+	}
 }
 
 void ed_curve_get_gen(ed_t g) {

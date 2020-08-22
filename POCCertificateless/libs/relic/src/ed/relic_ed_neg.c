@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -46,7 +46,7 @@ void ed_neg_basic(ed_t r, const ed_t p) {
 	fp_copy(r->y, p->y);
 	fp_neg(r->x, p->x);
 
-	r->norm = 1;
+	r->coord = BASIC;
 }
 
 #endif
@@ -66,7 +66,7 @@ void ed_neg_projc(ed_t r, const ed_t p) {
 	fp_neg(r->t, p->t);
 #endif
 
-	r->norm = p->norm;
+	r->coord = p->coord;
 }
 
 #endif

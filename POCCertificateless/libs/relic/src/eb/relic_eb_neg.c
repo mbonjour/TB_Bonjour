@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -53,7 +53,7 @@ void eb_neg_basic(eb_t r, const eb_t p) {
 
 	fb_add(r->y, p->x, p->y);
 
-	r->norm = 1;
+	r->coord = BASIC;
 }
 
 #endif
@@ -70,18 +70,18 @@ void eb_neg_projc(eb_t r, const eb_t p) {
 		return;
 	}
 
-	if (p->norm) {
+	if (p->coord == BASIC) {
 		if (r != p) {
 			fb_copy(r->x, p->x);
 			fb_copy(r->z, p->z);
 		}
 
 		fb_add(r->y, p->x, p->y);
-		r->norm = 1;
+		r->coord = BASIC;
 		return;
 	}
 
-	TRY {
+	RLC_TRY {
 		fb_new(t);
 
 		fb_mul(t, p->x, p->z);
@@ -91,12 +91,12 @@ void eb_neg_projc(eb_t r, const eb_t p) {
 			fb_copy(r->x, p->x);
 		}
 
-		r->norm = 0;
+		r->coord = PROJC;
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		fb_free(t);
 	}
 }

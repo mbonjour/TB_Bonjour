@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -52,7 +52,7 @@ TMPL_MAP_HORNER(fp2, fp2_t)
 /**
  * Generic isogeny map evaluation for use with SSWU map.
  */
-TMPL_MAP_ISOGENY_MAP(2)
+TMPL_MAP_ISOGENY_MAP(ep2, fp2, iso2)
 #endif /* EP_CTMAP */
 
 /**
@@ -63,12 +63,12 @@ TMPL_MAP_ISOGENY_MAP(2)
 		dv_copy_cond(O[0], I[0], RLC_FP_DIGS, C);                                        \
 		dv_copy_cond(O[1], I[1], RLC_FP_DIGS, C);                                        \
 	} while (0)
-TMPL_MAP_SSWU(2,fp_t,EP2_MAP_COPY_COND)
+TMPL_MAP_SSWU(ep2, fp2, fp_t, EP2_MAP_COPY_COND)
 
 /**
  * Shallue--van de Woestijne map.
  */
-TMPL_MAP_SVDW(2,fp_t,EP2_MAP_COPY_COND)
+TMPL_MAP_SVDW(ep2, fp2, fp_t, EP2_MAP_COPY_COND)
 #undef EP2_MAP_COPY_COND
 
 /**
@@ -86,7 +86,7 @@ static void ep2_mul_cof_bn(ep2_t r, ep2_t p) {
 	ep2_null(t2);
 	bn_null(x);
 
-	TRY {
+	RLC_TRY {
 		ep2_new(t0);
 		ep2_new(t1);
 		ep2_new(t2);
@@ -113,10 +113,10 @@ static void ep2_mul_cof_bn(ep2_t r, ep2_t p) {
 
 		ep2_norm(r, t2);
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		ep2_free(t0);
 		ep2_free(t1);
 		ep2_free(t2);
@@ -140,7 +140,7 @@ static void ep2_mul_cof_b12(ep2_t r, ep2_t p) {
 	ep2_null(t3);
 	bn_null(x);
 
-	TRY {
+	RLC_TRY {
 		ep2_new(t0);
 		ep2_new(t1);
 		ep2_new(t2);
@@ -167,10 +167,10 @@ static void ep2_mul_cof_b12(ep2_t r, ep2_t p) {
 		ep2_add(t2, t2, t3);
 		ep2_norm(r, t2);
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		ep2_free(t0);
 		ep2_free(t1);
 		ep2_free(t2);
@@ -193,7 +193,11 @@ static inline int fp2_sgn0(const fp2_t t, bn_t k) {
 	return t_0_neg | (t_0_zero & t_1_neg);
 }
 
-void ep2_map_impl(ep2_t p, const uint8_t *msg, int len, const uint8_t *dst, int dst_len) {
+/*============================================================================*/
+/* Public definitions                                                         */
+/*============================================================================*/
+
+void ep2_map_dst(ep2_t p, const uint8_t *msg, int len, const uint8_t *dst, int dst_len) {
 	bn_t k;
 	fp2_t t;
 	ep2_t q;
@@ -206,7 +210,7 @@ void ep2_map_impl(ep2_t p, const uint8_t *msg, int len, const uint8_t *dst, int 
 	fp2_null(t);
 	ep2_null(q);
 
-	TRY {
+	RLC_TRY {
 		bn_new(k);
 		fp2_new(t);
 		ep2_new(q);
@@ -243,12 +247,12 @@ void ep2_map_impl(ep2_t p, const uint8_t *msg, int len, const uint8_t *dst, int 
 		/* first map invocation */
 		EP2_MAP_CONVERT_BYTES(0);
 		EP2_MAP_APPLY_MAP(p);
-		TMPL_MAP_CALL_ISOMAP(2,p);
+		TMPL_MAP_CALL_ISOMAP(ep2, p);
 
 		/* second map invocation */
 		EP2_MAP_CONVERT_BYTES(1);
 		EP2_MAP_APPLY_MAP(q);
-		TMPL_MAP_CALL_ISOMAP(2,q);
+		TMPL_MAP_CALL_ISOMAP(ep2, q);
 
 		/* XXX(rsw) could add p and q and then apply isomap,
 		 * but need ep_add to support addition on isogeny curves */
@@ -279,10 +283,10 @@ void ep2_map_impl(ep2_t p, const uint8_t *msg, int len, const uint8_t *dst, int 
 				break;
 		}
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		bn_free(k);
 		fp2_free(t);
 		ep2_free(q);
@@ -290,10 +294,6 @@ void ep2_map_impl(ep2_t p, const uint8_t *msg, int len, const uint8_t *dst, int 
 	}
 }
 
-/*============================================================================*/
-/* Public definitions                                                         */
-/*============================================================================*/
-
 void ep2_map(ep2_t p, const uint8_t *msg, int len) {
-	ep2_map_impl(p, msg, len, (const uint8_t *)"RELIC", 5);
+	ep2_map_dst(p, msg, len, (const uint8_t *)"RELIC", 5);
 }

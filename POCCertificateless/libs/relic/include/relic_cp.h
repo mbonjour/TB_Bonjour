@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -41,71 +41,79 @@
 #include "relic_bn.h"
 #include "relic_ec.h"
 #include "relic_pc.h"
+#include "relic_mpc.h"
 
 /*============================================================================*/
 /* Type definitions.                                                          */
 /*============================================================================*/
 
 /**
- * Represents an RSA key pair.
+ * Represents a pair of moduli for using the Chinese Remainder Theorem (CRT).
  */
-typedef struct _rsa_t {
+typedef struct {
 	/** The modulus n = pq. */
 	bn_t n;
-	/** The public exponent. */
-	bn_t e;
-	/** The private exponent. */
-	bn_t d;
 	/** The first prime p. */
 	bn_t p;
 	/** The second prime q. */
 	bn_t q;
-	/** The inverse of e modulo (p-1). */
+	/** The precomputed costant for the first prime. */
 	bn_t dp;
-	/** The inverse of e modulo (q-1). */
+	/** The precomputed costant for the second prime. */
 	bn_t dq;
 	/** The inverse of q modulo p. */
 	bn_t qi;
-} relic_rsa_st;
+} crt_st;
+
+#if ALLOC == AUTO
+typedef crt_st crt_t[1];
+#else
+typedef crt_st *crt_t;
+#endif
+
+/**
+ * Represents an RSA key pair.
+ */
+typedef struct {
+	/** The private exponent. */
+	bn_t d;
+	/** The public exponent. */
+	bn_t e;
+	/** The pair of moduli. */
+	crt_t crt;
+} _rsa_st;
 
 /**
  * Pointer to an RSA key pair.
  */
 #if ALLOC == AUTO
-typedef relic_rsa_st rsa_t[1];
+typedef _rsa_st rsa_t[1];
 #else
-typedef relic_rsa_st *rsa_t;
+typedef _rsa_st *rsa_t;
 #endif
-
-/**
- * Represents a Rabin key pair.
- */
-typedef struct _rabin_t {
-	/** The modulus n = pq. */
-	bn_t n;
-	/** The first prime p. */
-	bn_t p;
-	/** The second prime q. */
-	bn_t q;
-	/** The cofactor of the first prime. */
-	bn_t dp;
-	/** The cofactor of the second prime. */
-	bn_t dq;
-} rabin_st;
 
 /**
  * Pointer to a Rabin key pair.
  */
 #if ALLOC == AUTO
-typedef rabin_st rabin_t[1];
+typedef crt_st rabin_t[1];
 #else
-typedef rabin_st *rabin_t;
+typedef crt_st *rabin_t;
+#endif
+
+/**
+ * Pointer to a Paillier's Homomorphic Probabilistic Encryption key pair.
+ */
+#if ALLOC == AUTO
+typedef crt_st phpe_t[1];
+#else
+typedef crt_st *phpe_t;
 #endif
 
 /**
  * Represents a Benaloh's Dense Probabilistic Encryption key pair.
  */
-typedef struct _bdpe_t {
+typedef struct {
 	/** The modulus n = pq. */
 	bn_t n;
 	/** The first prime p. */
@@ -149,7 +157,7 @@ typedef sokaka_st *sokaka_t;
 /**
  * Represents a Boneh-Goh-Nissim cryptosystem key pair.
  */
-typedef struct _bgn_t {
+typedef struct {
 	/** The first exponent. */
 	bn_t x;
 	/** The second exponent. */
@@ -184,6 +192,89 @@ typedef bgn_st *bgn_t;
 /*============================================================================*/
 
 /**
+ * Initializes a CRT moduli set with a null value.
+ *
+ * @param[out] A			- the moduli to initialize.
+ */
+#if ALLOC == AUTO
+#define crt_null(A)				/* empty */
+#else
+#define crt_null(A)			A = NULL;
+#endif
+
+/**
+ * Calls a function to allocate and initialize a Rabin key pair.
+ *
+ * @param[out] A			- the new key pair.
+ */
+#if ALLOC == DYNAMIC
+#define crt_new(A)															\
+	A = (crt_t)calloc(1, sizeof(crt_st));									\
+	if (A == NULL) {														\
+		RLC_THROW(ERR_NO_MEMORY);											\
+	}																		\
+	bn_new((A)->n);															\
+	bn_new((A)->dp);														\
+	bn_new((A)->dq);														\
+	bn_new((A)->p);															\
+	bn_new((A)->q);															\
+	bn_new((A)->qi);														\
+
+#elif ALLOC == AUTO
+#define crt_new(A)															\
+	bn_new((A)->n);															\
+	bn_new((A)->dp);														\
+	bn_new((A)->dq);														\
+	bn_new((A)->p);															\
+	bn_new((A)->q);															\
+	bn_new((A)->qi);														\
+
+#elif ALLOC == STACK
+#define crt_new(A)															\
+	A = (crt_t)alloca(sizeof(crt_st));										\
+	bn_new((A)->n);															\
+	bn_new((A)->dp);														\
+	bn_new((A)->dq);														\
+	bn_new((A)->p);															\
+	bn_new((A)->q);															\
+	bn_new((A)->qi);														\
+
+#endif
+
+/**
+ * Calls a function to clean and free a Rabin key pair.
+ *
+ * @param[out] A			- the key pair to clean and free.
+ */
+#if ALLOC == DYNAMIC
+#define crt_free(A)															\
+	if (A != NULL) {														\
+		bn_free((A)->n);													\
+		bn_free((A)->dp);													\
+		bn_free((A)->dq);													\
+		bn_free((A)->p);													\
+		bn_free((A)->q);													\
+		bn_free((A)->qi);													\
+		free(A);															\
+		A = NULL;															\
+	}
+
+#elif ALLOC == AUTO
+#define crt_free(A)			/* empty */
+
+#elif ALLOC == STACK
+#define crt_free(A)															\
+	bn_free((A)->n);														\
+	bn_free((A)->dp);														\
+	bn_free((A)->dq);														\
+	bn_free((A)->p);														\
+	bn_free((A)->q);														\
+	bn_free((A)->qi);														\
+	A = NULL;																\
+
+#endif
+
+/**
  * Initializes an RSA key pair with a null value.
  *
  * @param[out] A			- the key pair to initialize.
@@ -201,49 +292,28 @@ typedef bgn_st *bgn_t;
  */
 #if ALLOC == DYNAMIC
 #define rsa_new(A)															\
-	A = (rsa_t)calloc(1, sizeof(relic_rsa_st));									\
+	A = (rsa_t)calloc(1, sizeof(_rsa_st));									\
 	if (A == NULL) {														\
-		THROW(ERR_NO_MEMORY);												\
+		RLC_THROW(ERR_NO_MEMORY);											\
 	}																		\
-	bn_null((A)->e);														\
-	bn_null((A)->n);														\
 	bn_null((A)->d);														\
-	bn_null((A)->dp);														\
-	bn_null((A)->dq);														\
-	bn_null((A)->p);														\
-	bn_null((A)->q);														\
-	bn_null((A)->qi);														\
-	bn_new((A)->e);															\
-	bn_new((A)->n);															\
+	bn_null((A)->e);														\
 	bn_new((A)->d);															\
-	bn_new((A)->dp);														\
-	bn_new((A)->dq);														\
-	bn_new((A)->p);															\
-	bn_new((A)->q);															\
-	bn_new((A)->qi);														\
+	bn_new((A)->e);															\
+	crt_new((A)->crt);														\
 
 #elif ALLOC == AUTO
 #define rsa_new(A)															\
-	bn_new((A)->e);															\
-	bn_new((A)->n);															\
 	bn_new((A)->d);															\
-	bn_new((A)->dp);														\
-	bn_new((A)->dq);														\
-	bn_new((A)->p);															\
-	bn_new((A)->q);															\
-	bn_new((A)->qi);														\
+	bn_new((A)->e);															\
+	crt_new((A)->crt);														\
 
 #elif ALLOC == STACK
 #define rsa_new(A)															\
-	A = (rsa_t)alloca(sizeof(relic_rsa_st));										\
+	A = (rsa_t)alloca(sizeof(_rsa_st));										\
 	bn_new((A)->e);															\
-	bn_new((A)->n);															\
 	bn_new((A)->d);															\
-	bn_new((A)->dp);														\
-	bn_new((A)->dq);														\
-	bn_new((A)->p);															\
-	bn_new((A)->q);															\
-	bn_new((A)->qi);														\
+	crt_new((A)->crt);														\
 
 #endif
 
@@ -255,14 +325,9 @@ typedef bgn_st *bgn_t;
 #if ALLOC == DYNAMIC
 #define rsa_free(A)															\
 	if (A != NULL) {														\
-		bn_free((A)->e);													\
-		bn_free((A)->n);													\
 		bn_free((A)->d);													\
-		bn_free((A)->dp);													\
-		bn_free((A)->dq);													\
-		bn_free((A)->p);													\
-		bn_free((A)->q);													\
-		bn_free((A)->qi);													\
+		bn_free((A)->e);													\
+		crt_free((A)->crt);													\
 		free(A);															\
 		A = NULL;															\
 	}
@@ -272,14 +337,9 @@ typedef bgn_st *bgn_t;
 
 #elif ALLOC == STACK
 #define rsa_free(A)															\
-	bn_free((A)->e);														\
-	bn_free((A)->n);														\
 	bn_free((A)->d);														\
-	bn_free((A)->dp);														\
-	bn_free((A)->dq);														\
-	bn_free((A)->p);														\
-	bn_free((A)->q);														\
-	bn_free((A)->qi);														\
+	bn_free((A)->e);														\
+	crt_free((A)->crt);														\
 	A = NULL;																\
 
 #endif
@@ -290,7 +350,7 @@ typedef bgn_st *bgn_t;
  * @param[out] A			- the key pair to initialize.
  */
 #if ALLOC == AUTO
-#define rabin_null(A)			/* empty */
+#define rabin_null(A)		/* empty */
 #else
 #define rabin_null(A)		A = NULL;
 #endif
@@ -300,68 +360,39 @@ typedef bgn_st *bgn_t;
  *
  * @param[out] A			- the new key pair.
  */
-#if ALLOC == DYNAMIC
-#define rabin_new(A)														\
-	A = (rabin_t)calloc(1, sizeof(rabin_st));								\
-	if (A == NULL) {														\
-		THROW(ERR_NO_MEMORY);												\
-	}																		\
-	bn_new((A)->n);															\
-	bn_new((A)->dp);														\
-	bn_new((A)->dq);														\
-	bn_new((A)->p);															\
-	bn_new((A)->q);															\
-
-#elif ALLOC == AUTO
-#define rabin_new(A)														\
-	bn_new((A)->n);															\
-	bn_new((A)->dp);														\
-	bn_new((A)->dq);														\
-	bn_new((A)->p);															\
-	bn_new((A)->q);															\
-
-#elif ALLOC == STACK
-#define rabin_new(A)														\
-	A = (rabin_t)alloca(sizeof(rabin_st));									\
-	bn_new((A)->n);															\
-	bn_new((A)->dp);														\
-	bn_new((A)->dq);														\
-	bn_new((A)->p);															\
-	bn_new((A)->q);															\
-
-#endif
+#define rabin_new(A)		crt_new(A)
 
 /**
  * Calls a function to clean and free a Rabin key pair.
  *
  * @param[out] A			- the key pair to clean and free.
  */
-#if ALLOC == DYNAMIC
-#define rabin_free(A)														\
-	if (A != NULL) {														\
-		bn_free((A)->n);													\
-		bn_free((A)->dp);													\
-		bn_free((A)->dq);													\
-		bn_free((A)->p);													\
-		bn_free((A)->q);													\
-		free(A);															\
-		A = NULL;															\
-	}
+#define rabin_free(A)		crt_free(A)
 
-#elif ALLOC == AUTO
-#define rabin_free(A)			/* empty */
-
-#elif ALLOC == STACK
-#define rabin_free(A)														\
-	bn_free((A)->n);														\
-	bn_free((A)->dp);														\
-	bn_free((A)->dq);														\
-	bn_free((A)->p);														\
-	bn_free((A)->q);														\
-	A = NULL;																\
-
+/**
+ * Initializes a Paillier key pair with a null value.
+ *
+ * @param[out] A			- the key pair to initialize.
+ */
+#if ALLOC == AUTO
+#define phpe_null(A)		/* empty */
+#else
+#define phpe_null(A)		A = NULL;
 #endif
 
+/**
+ * Calls a function to allocate and initialize a Paillier key pair.
+ *
+ * @param[out] A			- the new key pair.
+ */
+#define phpe_new(A)			crt_new(A)
+
+/**
+ * Calls a function to clean and free a Paillier key pair.
+ *
+ * @param[out] A			- the key pair to clean and free.
+ */
+#define phpe_free(A)		crt_free(A)
 /**
  * Initializes a Benaloh's key pair with a null value.
  *
@@ -382,7 +413,7 @@ typedef bgn_st *bgn_t;
 #define bdpe_new(A)															\
 	A = (bdpe_t)calloc(1, sizeof(bdpe_st));									\
 	if (A == NULL) {														\
-		THROW(ERR_NO_MEMORY);												\
+		RLC_THROW(ERR_NO_MEMORY);											\
 	}																		\
 	bn_new((A)->n);															\
 	bn_new((A)->y);															\
@@ -459,7 +490,7 @@ typedef bgn_st *bgn_t;
 #define sokaka_new(A)														\
 	A = (sokaka_t)calloc(1, sizeof(sokaka_st));								\
 	if (A == NULL) {														\
-		THROW(ERR_NO_MEMORY);												\
+		RLC_THROW(ERR_NO_MEMORY);											\
 	}																		\
 	g1_new((A)->s1);														\
 	g2_new((A)->s2);														\
@@ -520,7 +551,7 @@ typedef bgn_st *bgn_t;
 #define bgn_new(A)															\
 	A = (bgn_t)calloc(1, sizeof(bgn_st));									\
 	if (A == NULL) {														\
-		THROW(ERR_NO_MEMORY);												\
+		RLC_THROW(ERR_NO_MEMORY);											\
 	}																		\
 	bn_new((A)->x);															\
 	bn_new((A)->y);															\
@@ -589,76 +620,20 @@ typedef bgn_st *bgn_t;
 
 #endif
 
-/**
- * Generates a new RSA key pair.
- *
- * @param[out] PB			- the public key.
- * @param[out] PV			- the private key.
- * @param[in] B				- the key length in bits.
- * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
- */
-#if CP_RSA == BASIC
-#define cp_rsa_gen(PB, PV, B)				cp_rsa_gen_basic(PB, PV, B)
-#elif CP_RSA == QUICK
-#define cp_rsa_gen(PB, PV, B)				cp_rsa_gen_quick(PB, PV, B)
-#endif
-
-/**
- * Decrypts using RSA.
- *
- * @param[out] O			- the output buffer.
- * @param[out] OL			- the number of bytes written in the output buffer.
- * @param[in] I				- the input buffer.
- * @param[in] IL			- the number of bytes to encrypt.
- * @param[in] K				- the private key.
- * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
- */
-#if CP_RSA == BASIC
-#define cp_rsa_dec(O, OL, I, IL, K)			cp_rsa_dec_basic(O, OL, I, IL, K)
-#elif CP_RSA == QUICK
-#define cp_rsa_dec(O, OL, I, IL, K)			cp_rsa_dec_quick(O, OL, I, IL, K)
-#endif
-
-/**
- * Signs a message using the RSA cryptosystem.
- *
- * @param[out] O			- the output buffer.
- * @param[out] OL			- the number of bytes written in the output buffer.
- * @param[in] I				- the input buffer.
- * @param[in] IL			- the number of bytes to sign.
- * @param[in] H				- the flag to indicate the message format.
- * @param[in] K				- the private key.
- * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
- */
-#if CP_RSA == BASIC
-#define cp_rsa_sig(O, OL, I, IL, H, K)	cp_rsa_sig_basic(O, OL, I, IL, H, K)
-#elif CP_RSA == QUICK
-#define cp_rsa_sig(O, OL, I, IL, H, K)	cp_rsa_sig_quick(O, OL, I, IL, H, K)
-#endif
-
 /*============================================================================*/
 /* Function prototypes                                                        */
 /*============================================================================*/
 
 /**
- * Generates a key pair for the basic RSA algorithm.
+ * Generates a key pair for the RSA cryptosystem. Generates additional values
+ * for the CRT optimization if CP_CRT is on.
  *
  * @param[out] pub			- the public key.
  * @param[out] prv			- the private key.
  * @param[in] bits			- the key length in bits.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_rsa_gen_basic(rsa_t pub, rsa_t prv, int bits);
-
-/**
- * Generates a key pair for fast RSA operations with the CRT optimization.
- *
- * @param[out] pub			- the public key.
- * @param[out] prv			- the private key.
- * @param[in] bits			- the key length in bits.
- * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
- */
-int cp_rsa_gen_quick(rsa_t pub, rsa_t prv, int bits);
+int cp_rsa_gen(rsa_t pub, rsa_t prv, int bits);
 
 /**
  * Encrypts using the RSA cryptosystem.
@@ -673,7 +648,8 @@ int cp_rsa_gen_quick(rsa_t pub, rsa_t prv, int bits);
 int cp_rsa_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len, rsa_t pub);
 
 /**
- * Decrypts using the basic RSA decryption method.
+ * Decrypts using the RSA cryptosystem. Uses the CRT optimization if
+ * CP_CRT is on.
  *
  * @param[out] out			- the output buffer.
  * @param[in, out] out_len	- the buffer capacity and number of bytes written.
@@ -682,25 +658,13 @@ int cp_rsa_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len, rsa_t pub);
  * @param[in] prv			- the private key.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_rsa_dec_basic(uint8_t *out, int *out_len, uint8_t *in, int in_len,
-		rsa_t prv);
-
-/**
- * Decrypts using the fast RSA decryption with CRT optimization.
- *
- * @param[out] out			- the output buffer.
- * @param[in, out] out_len	- the buffer capacity and number of bytes written.
- * @param[in] in			- the input buffer.
- * @param[in] in_len		- the number of bytes to decrypt.
- * @param[in] prv			- the private key.
- * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
- */
-int cp_rsa_dec_quick(uint8_t *out, int *out_len, uint8_t *in, int in_len,
-		rsa_t prv);
+int cp_rsa_dec(uint8_t *out, int *out_len, uint8_t *in, int in_len,
+	rsa_t prv);
 
 /**
  * Signs using the basic RSA signature algorithm. The flag must be non-zero if
- * the message being signed is already a hash value.
+ * the message being signed is already a hash value. Uses the CRT optimization
+ * if CP_CRT is on.
  *
  * @param[out] sig			- the signature
  * @param[out] sig_len		- the number of bytes written in the signature.
@@ -710,23 +674,8 @@ int cp_rsa_dec_quick(uint8_t *out, int *out_len, uint8_t *in, int in_len,
  * @param[in] prv			- the private key.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_rsa_sig_basic(uint8_t *sig, int *sig_len, uint8_t *msg, int msg_len,
-		int hash, rsa_t prv);
-
-/**
- * Signs using the fast RSA signature algorithm with CRT optimization. The flag
- * must be non-zero if the message being signed is already a hash value.
- *
- * @param[out] sig			- the signature
- * @param[out] sig_len		- the number of bytes written in the signature.
- * @param[in] msg			- the message to sign.
- * @param[in] msg_len		- the number of bytes to sign.
- * @param[in] hash			- the flag to indicate the message format.
- * @param[in] prv			- the private key.
- * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
- */
-int cp_rsa_sig_quick(uint8_t *sig, int *sig_len, uint8_t *msg, int msg_len,
-		int hash, rsa_t prv);
+int cp_rsa_sig(uint8_t *sig, int *sig_len, uint8_t *msg, int msg_len,
+	int hash, rsa_t prv);
 
 /**
  * Verifies an RSA signature. The flag must be non-zero if the message being
@@ -741,7 +690,7 @@ int cp_rsa_sig_quick(uint8_t *sig, int *sig_len, uint8_t *msg, int msg_len,
  * @return a boolean value indicating if the signature is valid.
  */
 int cp_rsa_ver(uint8_t *sig, int sig_len, uint8_t *msg, int msg_len, int hash,
-		rsa_t pub);
+	rsa_t pub);
 
 /**
  * Generates a key pair for the Rabin cryptosystem.
@@ -764,7 +713,7 @@ int cp_rabin_gen(rabin_t pub, rabin_t prv, int bits);
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
 int cp_rabin_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len,
-		rabin_t pub);
+	rabin_t pub);
 
 /**
  * Decrypts using the Rabin cryptosystem.
@@ -777,7 +726,7 @@ int cp_rabin_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len,
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
 int cp_rabin_dec(uint8_t *out, int *out_len, uint8_t *in, int in_len,
-		rabin_t prv);
+	rabin_t prv);
 
 /**
  * Generates a key pair for Benaloh's Dense Probabilistic Encryption.
@@ -815,39 +764,64 @@ int cp_bdpe_dec(dig_t *out, uint8_t *in, int in_len, bdpe_t prv);
 /**
  * Generates a key pair for Paillier's Homomorphic Probabilistic Encryption.
  *
- * @param[out] n			- the public key.
- * @param[out] l			- the private key.
+ * @param[out] pub			- the public key.
+ * @param[out] prv			- the private key.
  * @param[in] bits			- the key length in bits.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_phpe_gen(bn_t n, bn_t l, int bits);
+int cp_phpe_gen(bn_t pub, phpe_t prv, int bits);
 
 /**
  * Encrypts using the Paillier cryptosystem.
  *
- * @param[out] out			- the output buffer.
- * @param[in, out] out_len	- the buffer capacity and number of bytes written.
- * @param[in] in			- the input buffer.
- * @param[in] in_len		- the number of bytes to encrypt.
- * @param[in] n				- the public key.
+ * @param[out] c			- the ciphertex, represented as an integer.
+ * @param[in] m				- the plaintext as an integer.
+ * @param[in] pub			- the public key.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_phpe_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len, bn_t n);
+int cp_phpe_enc(bn_t c, bn_t m, bn_t pub);
 
 /**
- * Decrypts using the Paillier cryptosystem. Since this system is homomorphic,
- * no padding can be applied and the user is responsible for specifying the
- * resulting plaintext size.
+ * Decrypts using the Paillier cryptosystem.
  *
- * @param[out] out			- the output buffer.
- * @param[out] out_len		- the number of bytes to write in the output buffer.
- * @param[in] in_len		- the number of bytes to decrypt.
- * @param[in] n				- the public key.
- * @param[in] l				- the private key.
+ * @param[out] m			- the plaintext, represented as an integer.
+ * @param[in] c				- the ciphertex as an integer.
+ * @param[in] prv			- the private key.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_phpe_dec(uint8_t *out, int out_len, uint8_t *in, int in_len, bn_t n,
-		bn_t l);
+int cp_phpe_dec(bn_t m, bn_t c, phpe_t prv);
+
+/**
+ * Generates a key pair for Genealized Homomorphic Probabilistic Encryption.
+ *
+ * @param[out] pub			- the public key.
+ * @param[out] prv			- the private key.
+ * @param[in] bits			- the key length in bits.
+ * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
+ */
+int cp_ghpe_gen(bn_t pub, bn_t prv, int bits);
+
+/**
+ * Encrypts using the Generalized Paillier cryptosystem.
+ *
+ * @param[out] c			- the ciphertext.
+ * @param[in] m				- the plaintext.
+ * @param[in] pub			- the public key.
+ * @param[in] s 			- the block length parameter.
+ * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
+ */
+int cp_ghpe_enc(bn_t c, bn_t m, bn_t pub, int s);
+
+/**
+ * Decrypts using the Generalized Paillier cryptosystem.
+ *
+ * @param[out] m			- the plaintext.
+ * @param[in] c				- the ciphertext.
+ * @param[in] pub			- the public key.
+ * @param[in] s 			- the block length parameter.
+ * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
+ */
+int cp_ghpe_dec(bn_t m, bn_t c, bn_t pub, bn_t prv, int s);
 
 /**
  * Generates an ECDH key pair.
@@ -893,7 +867,7 @@ int cp_ecmqv_gen(bn_t d, ec_t q);
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
 int cp_ecmqv_key(uint8_t *key, int key_len, bn_t d1, bn_t d2, ec_t q2u,
-		ec_t q1v, ec_t q2v);
+	ec_t q1v, ec_t q2v);
 
 /**
  * Generates an ECIES key pair.
@@ -917,7 +891,7 @@ int cp_ecies_gen(bn_t d, ec_t q);
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
 int cp_ecies_enc(ec_t r, uint8_t *out, int *out_len, uint8_t *in, int in_len,
-		ec_t q);
+	ec_t q);
 
 /**
  * Decrypts using the ECIES cryptosystem.
@@ -931,7 +905,7 @@ int cp_ecies_enc(ec_t r, uint8_t *out, int *out_len, uint8_t *in, int in_len,
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
 int cp_ecies_dec(uint8_t *out, int *out_len, ec_t r, uint8_t *in, int in_len,
-		bn_t d);
+	bn_t d);
 
 /**
  * Generates an ECDSA key pair.
@@ -1016,11 +990,10 @@ int cp_sokaka_gen(bn_t master);
  *
  * @param[out] k			- the private key.
  * @param[in] id			- the identity.
- * @param[in] len			- the length of identity in bytes.
  * @param[in] master		- the master key.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_sokaka_gen_prv(sokaka_t k, char *id, int len, bn_t master);
+int cp_sokaka_gen_prv(sokaka_t k, char *id, bn_t master);
 
 /**
  * Computes a shared key between two entities.
@@ -1028,14 +1001,12 @@ int cp_sokaka_gen_prv(sokaka_t k, char *id, int len, bn_t master);
  * @param[out] key			- the shared key.
  * @param[int] key_len		- the intended shared key length in bytes.
  * @param[in] id1			- the first identity.
- * @param[in] len1			- the length of the first identity in bytes.
  * @param[in] k				- the private key of the first identity.
  * @param[in] id2			- the second identity.
- * @param[in] len2			- the length of the second identity in bytes.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_sokaka_key(uint8_t *key, unsigned int key_len, char *id1, int len1,
-		sokaka_t k, char *id2, int len2);
+int cp_sokaka_key(uint8_t *key, unsigned int key_len, char *id1,
+	sokaka_t k, char *id2);
 
 /**
  * Generates a key pair for the Boneh-Go-Nissim (BGN) cryptosystem.
@@ -1131,11 +1102,10 @@ int cp_ibe_gen(bn_t master, g1_t pub);
  *
  * @param[out] prv			- the private key.
  * @param[in] id			- the identity.
- * @param[in] len			- the length of identity in bytes.
  * @param[in] s				- the master key.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_ibe_gen_prv(g2_t prv, char *id, int len, bn_t master);
+int cp_ibe_gen_prv(g2_t prv, char *id, bn_t master);
 
 /**
  * Encrypts a message using the BF-IBE protocol.
@@ -1144,11 +1114,12 @@ int cp_ibe_gen_prv(g2_t prv, char *id, int len, bn_t master);
  * @param[in, out] out_len	- the buffer capacity and number of bytes written.
  * @param[in] in			- the input buffer.
  * @param[in] in_len		- the number of bytes to encrypt.
+ * @param[in] id			- the identity.
  * @param[in] pub			- the public key of the PKG.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_ibe_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len,
-		char *id, int len, g1_t pub);
+int cp_ibe_enc(uint8_t *out, int *out_len, uint8_t *in, int in_len, char *id,
+	g1_t pub);
 
 /**
  * Decrypts a message using the BF-IBE protocol.
@@ -1391,27 +1362,80 @@ int cp_pss_gen(bn_t u, bn_t v, g2_t g, g2_t x, g2_t y);
  *
  * @param[out] a			- the first part of the signature.
  * @param[out] b			- the second part of the signature.
- * @param[in] msg			- the message to sign.
- * @param[in] len			- the message length in bytes.
+ * @param[in] m			- the message to sign.
  * @param[in] u				- the first part of the private key.
  * @param[in] v				- the second part of the private key.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_pss_sig(g1_t a, g1_t b, uint8_t *msg, int len, bn_t u, bn_t v);
+int cp_pss_sig(g1_t a, g1_t b, bn_t m, bn_t u, bn_t v);
 
 /**
  ** Verifies a signature using the PSS protocol.
  *
  * @param[in] a				- the first part of the signature.
  * @param[in] b				- the second part of the signature.
- * @param[in] msg			- the message to sign.
- * @param[in] len			- the message length in bytes.
+ * @param[in] m				- the message to sign.
  * @param[in] g				- the first part of the public key.
  * @param[in] u				- the second part of the public key.
  * @param[in] v				- the third part of the public key.
  * @return a boolean value indicating the verification result.
  */
-int cp_pss_ver(g1_t a, g1_t b, uint8_t *msg, int len, g2_t g, g2_t x, g2_t y);
+int cp_pss_ver(g1_t a, g1_t b, bn_t m, g2_t g, g2_t x, g2_t y);
+
+/**
+ * Generates a key pair for the multi-part version of the Pointcheval-Sanders
+ * simple signature (MPSS) protocol.
+ *
+ * @param[out] r			- the first part of the private key.
+ * @param[out] s			- the second part of the private key.
+ * @param[out] g			- the first part of the public key.
+ * @param[out] x			- the second part of the public key.
+ * @param[out] y			- the third part of the public key.
+ * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
+ */
+int cp_mpss_gen(bn_t r[2], bn_t s[2], g2_t g, g2_t x[2], g2_t y[2]);
+
+/**
+ * Signs a message using the MPSS protocol operating over shares using triples.
+ *
+ * @param[out] a			- the first part of the signature.
+ * @param[out] b			- the second part of the signature.
+ * @param[in] m				- the message to sign.
+ * @param[in] r				- the first part of the private key.
+ * @param[in] s				- the second part of the private key.
+ * @param[in] mul_tri 		- the triple for the multiplication.
+ * @param[in] sm_tri 		- the triple for the scalar multiplication.
+ * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
+ */
+int cp_mpss_sig(g1_t a, g1_t b[2], bn_t m[2], bn_t r[2], bn_t s[2],
+		mt_t mul_tri[2], mt_t sm_tri[2]);
+
+/**
+ * Opens public values in the MPSS protocols, in this case public keys.
+ *
+ * @param[in,out] x			- the shares of the second part of the public key.
+ * @param[in,out] y			- the shares of the third part of the public key.
+ * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
+ */
+int cp_mpss_bct(g2_t x[2], g2_t y[2]);
+
+/**
+ * Verifies a signature using the MPSS protocol operating over shares using
+ * triples.
+ *
+ * @param[out] e			- the result of the verification.
+ * @param[in] a				- the first part of the signature.
+ * @param[in] b				- the second part of the signature.
+ * @param[in] m				- the message to sign.
+ * @param[in] g				- the first part of the public key.
+ * @param[in] x				- the second part of the public key.
+ * @param[in] y				- the third part of the public key.
+ * @param[in] sm_tri 		- the triple for the scalar multiplication.
+ * @param[in] pc_tri 		- the triple for the pairing computation.
+ * @return a boolean value indicating the verification result.
+ */
+int cp_mpss_ver(gt_t e, g1_t a, g1_t b[2], bn_t m[2], g2_t h, g2_t x, g2_t y,
+		mt_t sm_tri[2], pt_t pc_tri[2]);
 
 /**
  * Generates a key pair for the Pointcheval-Sanders block signature (PSB)
@@ -1431,31 +1455,87 @@ int cp_psb_gen(bn_t r, bn_t s[], g2_t g, g2_t x, g2_t y[], int l);
  *
  * @param[out] a			- the first component of the signature.
  * @param[out] b			- the second component of the signature.
- * @param[in] msgs			- the l messages to sign.
- * @param[in] lens			- the l message lengths in bytes.
+ * @param[in] ms			- the l messages to sign.
  * @param[in] r				- the first part of the private key.
  * @param[in] s				- the remaining l part of the private key.
  * @param[in] l 			- the number of messages to sign.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_psb_sig(g1_t a, g1_t b, uint8_t *msgs[], int lens[], bn_t r, bn_t s[],
-		int l);
+int cp_psb_sig(g1_t a, g1_t b, bn_t ms[], bn_t r, bn_t s[],	int l);
 
 /**
  * Verifies a block of messages signed using the PSB protocol.
  *
  * @param[out] a			- the first component of the signature.
  * @param[out] b			- the seconed component of the signature.
- * @param[in] msgs			- the l messages to sign.
- * @param[in] lens			- the l message lengths in bytes.
+ * @param[in] ms			- the l messages to sign.
  * @param[in] g				- the first part of the public key.
  * @param[in] x				- the second part of the public key.
  * @param[in] y				- the remaining l parts of the public key.
  * @param[in] l 			- the number of messages to sign.
  * @return a boolean value indicating the verification result.
  */
-int cp_psb_ver(g1_t a, g1_t b, uint8_t *msgs[], int lens[], g2_t g, g2_t x,
-		g2_t y[], int l);
+int cp_psb_ver(g1_t a, g1_t b, bn_t ms[], g2_t g, g2_t x, g2_t y[], int l);
+
+/**
+ * Generates a key pair for the multi-part version of the Pointcheval-Sanders
+ * simple signature (MPSS) protocol.
+ *
+ * @param[out] r			- the first part of the private key.
+ * @param[out] s			- the second part of the private key.
+ * @param[out] g			- the first part of the public key.
+ * @param[out] x			- the second part of the public key.
+ * @param[out] y			- the third part of the public key.
+ * @param[in] l 			- the number of messages to sign.
+ * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
+ */
+int cp_mpsb_gen(bn_t r[2], bn_t s[][2], g2_t h, g2_t x[2], g2_t y[][2], int l);
+
+/**
+ * Signs a message using the MPSS protocol operating over shares using triples.
+ *
+ * @param[out] a			- the first part of the signature.
+ * @param[out] b			- the second part of the signature.
+ * @param[in] m				- the messages to sign.
+ * @param[in] r				- the first part of the private key.
+ * @param[in] s				- the second parts of the private key.
+ * @param[in] mul_tri 		- the triple for the multiplication.
+ * @param[in] sm_tri 		- the triple for the scalar multiplication.
+ * @param[in] l 			- the number of messages to sign.
+ * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
+ */
+ int cp_mpsb_sig(g1_t a, g1_t b[2], bn_t m[][2], bn_t r[2], bn_t s[][2],
+ 		mt_t mul_tri[2], mt_t sm_tri[2], int l);
+
+/**
+ * Opens public values in the MPSS protocols, in this case public keys.
+ *
+ * @param[in,out] x			- the shares of the second part of the public key.
+ * @param[in,out] y			- the shares of the third part of the public key.
+ * @param[in] l 			- the number of messages to sign.
+ * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
+ */
+int cp_mpsb_bct(g2_t x[2], g2_t y[][2], int l);
+
+/**
+ * Verifies a signature using the MPSS protocol operating over shares using
+ * triples.
+ *
+ * @param[out] e			- the result of the verification.
+ * @param[in] a				- the first part of the signature.
+ * @param[in] b				- the second part of the signature.
+ * @param[in] m				- the messages to sign.
+ * @param[in] g				- the first part of the public key.
+ * @param[in] x				- the second part of the public key.
+ * @param[in] y				- the third parts of the public key.
+ * @param[in] sm_tri 		- the triple for the scalar multiplication.
+ * @param[in] pc_tri 		- the triple for the pairing computation.
+ * @param[in] v 			- the private keys, can be NULL.
+ * @param[in] l 			- the number of messages to sign.
+ * @return a boolean value indicating the verification result.
+ */
+int cp_mpsb_ver(gt_t e, g1_t a, g1_t b[2], bn_t m[][2], g2_t h, g2_t x,
+		g2_t y[][2], bn_t v[][2], mt_t sm_tri[2], pt_t pc_tri[2], int l);
 
 /**
  * Generates a Zhang-Safavi-Naini-Susilo (ZSS) key pair.
@@ -1581,7 +1661,6 @@ int cp_cmlhs_gen(bn_t x[], gt_t hs[], int len, uint8_t prf[], int plen,
  * @param[out] s 			- the fourth component of the signature.
  * @param[in] msg 			- the message vector to sign (one component).
  * @param[in] data 			- the dataset identifier.
- * @param[in] dlen 			- the length of the dataset identifier.
  * @param[in] label 		- the integer label.
  * @param[in] x 			- the exponent value for the label.
  * @param[in] h 			- the random value (message has one component).
@@ -1592,8 +1671,8 @@ int cp_cmlhs_gen(bn_t x[], gt_t hs[], int len, uint8_t prf[], int plen,
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
 int cp_cmlhs_sig(g1_t sig, g2_t z, g1_t a, g1_t c, g1_t r, g2_t s, bn_t msg,
-		char *data, int dlen, int label, bn_t x, g1_t h,
-		uint8_t prf[], int plen, bn_t sk, bn_t d);
+		char *data, int label, bn_t x, g1_t h, uint8_t prf[], int plen,
+		bn_t sk, bn_t d);
 
 /**
  * Applies a function over a set of CMLHS signatures from the same user.
@@ -1632,7 +1711,6 @@ int cp_cmlhs_evl(g1_t r, g2_t s, g1_t rs[], g2_t ss[], dig_t f[], int len);
  * @param[in] c				- the vector of second components of the signatures.
  * @param[in] msg 			- the combined message.
  * @param[in] data 			- the dataset identifier.
- * @param[in] dlen 			- the length of the dataset identifier.
  * @param[in] label 		- the integer labels.
  * @param[in] h				- the random element (message has one component).
  * @param[in] hs 			- the hash values, one per label.
@@ -1644,9 +1722,8 @@ int cp_cmlhs_evl(g1_t r, g2_t s, g1_t rs[], g2_t ss[], dig_t f[], int len);
  * @return a boolean value indicating the verification result.
  */
 int cp_cmlhs_ver(g1_t r, g2_t s, g1_t sig[], g2_t z[], g1_t a[], g1_t c[],
-		bn_t m, char *data, int dlen, int label[], g1_t h,
-		gt_t hs[][RLC_TERMS], dig_t f[][RLC_TERMS], int flen[], g2_t y[],
-		g2_t pk[], int slen);
+		bn_t m, char *data, int label[], g1_t h, gt_t *hs[],
+		dig_t *f[], int flen[], g2_t y[], g2_t pk[], int slen);
 
 /**
  * Generates a key pair for the Multi-Key Homomorphic Signature (MKLHS) scheme.
@@ -1663,14 +1740,11 @@ int cp_mklhs_gen(bn_t sk, g2_t pk);
  * @param[out] s 			- the resulting signature.
  * @param[in] m 			- the message to sign.
  * @param[in] data 			- the dataset identifier.
- * @param[in] dlen 			- the length of the dataset identifier.
  * @param[in] label 		- the label.
- * @param[in] llen 			- the length of the label.
  * @param[in] sk 			- the private key for the signature scheme.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_mklhs_sig(g1_t s, bn_t m, char *data, int dlen, char *label, int llen,
-		bn_t sk);
+int cp_mklhs_sig(g1_t s, bn_t m, char *data, char *label, bn_t sk);
 
 /**
  * Applies a function over a set of messages from the same user.
@@ -1686,7 +1760,7 @@ int cp_mklhs_fun(bn_t mu, bn_t m[], dig_t f[], int len);
 /**
  * Evaluates a function over a set of MKLHS signatures.
  *
- * @param[out] sig			- the resulting signature
+ * @param[out] sig			- the resulting signature.
  * @param[in] s				- the set of signatures.
  * @param[in] f 			- the linear coefficients in the function.
  * @param[in] len			- the number of coefficients.
@@ -1701,18 +1775,15 @@ int cp_mklhs_evl(g1_t sig, g1_t s[], dig_t f[], int len);
  * @param[in] m 			- the signed message.
  * @param[in] mu			- the vector of signed messages per user.
  * @param[in] data 			- the dataset identifier.
- * @param[in] dlen 			- the length of the dataset identifier.
  * @param[in] label 		- the vector of labels.
- * @param[in] llen 			- the vector of label lengths.
  * @param[in] f 			- the linear coefficients in the function.
  * @param[in] flen			- the number of coefficients.
  * @param[in] pk 			- the public keys of the users.
  * @param[in] slen 			- the number of signatures.
  * @return a boolean value indicating the verification result.
  */
-int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
-		char *label[], int llen[], dig_t f[][RLC_TERMS], int flen[], g2_t pk[],
-		int slen);
+int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, char *label[],
+	dig_t *f[], int flen[], g2_t pk[], int slen);
 
 /**
  * Computes the offline part of veryfying a MKLHS signature over a set of
@@ -1721,14 +1792,13 @@ int cp_mklhs_ver(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
  * @param[out] h 			- the hashes of labels
  * @param[out] ft 			- the precomputed linear coefficients.
  * @param[in] label 		- the vector of labels.
- * @param[in] llen 			- the vector of label lengths.
  * @param[in] f 			- the linear coefficients in the function.
  * @param[in] flen			- the number of coefficients.
  * @param[in] slen 			- the number of signatures.
  * @return RLC_OK if no errors occurred, RLC_ERR otherwise.
  */
-int cp_mklhs_off(g1_t h[], dig_t ft[], char *label[], int llen[],
-	dig_t f[][RLC_TERMS], int flen[], int slen);
+int cp_mklhs_off(g1_t h[], dig_t ft[], char *label[], dig_t *f[], int flen[],
+	int slen);
 
 /**
  * Computes the online part of veryfying a MKLHS signature over a set of
@@ -1738,14 +1808,13 @@ int cp_mklhs_off(g1_t h[], dig_t ft[], char *label[], int llen[],
  * @param[in] m 			- the signed message.
  * @param[in] mu			- the vector of signed messages per user.
  * @param[in] data 			- the dataset identifier.
- * @param[in] dlen 			- the length of the dataset identifier.
  * @param[in] d 			- the hashes of labels.
  * @param[in] ft 			- the precomputed linear coefficients.
  * @param[in] pk 			- the public keys of the users.
  * @param[in] slen 			- the number of signatures.
  * @return a boolean value indicating the verification result.
  */
-int cp_mklhs_onv(g1_t sig, bn_t m, bn_t mu[], char *data, int dlen,
-		g1_t h[], dig_t ft[], g2_t pk[], int slen);
+int cp_mklhs_onv(g1_t sig, bn_t m, bn_t mu[], char *data, g1_t h[], dig_t ft[],
+	g2_t pk[], int slen);
 
 #endif /* !RLC_CP_H */

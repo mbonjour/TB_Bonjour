@@ -114,7 +114,7 @@ int main() {
         // Structure of an signature
         signature s;
         // We can sign using our private keys and public ones
-        sign(mSig, mySecretKeysSig, myPKSig, ID, mpkSignature, &s);
+        sign(mSig, c0size+c1Size+c2Size+c3Size, mySecretKeysSig, myPKSig, ID, mpkSignature, &s);
         // ----------------------------------------------------------------------
         // Now the message is encrypted and authentified with an AES Key and the key is encrypted and signed using CLPKC
         // ----------------------------------------------------------------------
@@ -124,7 +124,7 @@ int main() {
         // For this we need our Partial Private Keys with the ID used to encrypt the message
 
         // We can verify directly with the public keys of the sender
-        int test = verify(s, myPKSig, mpkSignature, ID, mSig);
+        int test = verify(s, myPKSig, mpkSignature, ID, mSig, c0size+c1Size+c2Size+c3Size);
         printf("\nVerification of the key (0 if correct 1 if not) : %d\n", test);
         // if the verif is ok we can continue, otherwise we can stop here
         if(test == 0) {
@@ -165,7 +165,7 @@ int main() {
         printf("Message changed to simulate corruption\n");
 
         // We can verify now with the public keys of the sender
-        test = verify(s, myPKSig, mpkSignature, ID, mSigCorrupt);
+        test = verify(s, myPKSig, mpkSignature, ID, mSigCorrupt, strlen(mSigCorrupt));
         printf("Verification (0 if correct 1 if not) : %d\n", test);
     }
     core_clean();

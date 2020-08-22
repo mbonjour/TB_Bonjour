@@ -1,6 +1,6 @@
 /*
  * RELIC is an Efficient LIbrary for Cryptography
- * Copyright (C) 2007-2019 RELIC Authors
+ * Copyright (C) 2007-2020 RELIC Authors
  *
  * This file is part of RELIC. RELIC is legal property of its developers,
  * whose names are not listed here. Please refer to the COPYRIGHT file
@@ -54,7 +54,7 @@ static void eb_dbl_basic_imp(eb_t r, const eb_t p) {
 	fb_null(t1);
 	fb_null(t2);
 
-	TRY {
+	RLC_TRY {
 		fb_new(t0);
 		fb_new(t1);
 		fb_new(t2);
@@ -98,12 +98,12 @@ static void eb_dbl_basic_imp(eb_t r, const eb_t p) {
 
 		fb_copy(r->z, p->z);
 
-		r->norm = 1;
+		r->coord = BASIC;
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		fb_free(t0);
 		fb_free(t1);
 		fb_free(t2);
@@ -127,7 +127,7 @@ static void eb_dbl_projc_imp(eb_t r, const eb_t p) {
 	fb_null(t0);
 	fb_null(t1);
 
-	TRY {
+	RLC_TRY {
 		fb_new(t0);
 		fb_new(t1);
 
@@ -136,7 +136,7 @@ static void eb_dbl_projc_imp(eb_t r, const eb_t p) {
 		/* C = B + y1. */
 		fb_add(r->y, t0, p->y);
 
-		if (!p->norm) {
+		if (p->coord != BASIC) {
 			/* A = x1 * z1. */
 			fb_mul(t1, p->x, p->z);
 			/* z3 = A^2. */
@@ -182,12 +182,12 @@ static void eb_dbl_projc_imp(eb_t r, const eb_t p) {
 		fb_mul(r->y, t1, r->x);
 		fb_add(r->y, r->y, t0);
 
-		r->norm = 0;
+		r->coord = PROJC;
 	}
-	CATCH_ANY {
-		THROW(ERR_CAUGHT);
+	RLC_CATCH_ANY {
+		RLC_THROW(ERR_CAUGHT);
 	}
-	FINALLY {
+	RLC_FINALLY {
 		fb_free(t0);
 		fb_free(t1);
 	}

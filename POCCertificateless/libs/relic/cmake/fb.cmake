@@ -43,6 +43,7 @@ message("      FB_METHD=BINAR    Binary Inversion algorithm.")
 message("      FB_METHD=ALMOS    Inversion by the Amost inverse algorithm.")
 message("      FB_METHD=EXGCD    Inversion by the Extended Euclidean algorithm.")
 message("      FB_METHD=ITOHT    Inversion by Itoh-Tsuji.")
+message("      FB_METHD=CTAIA    Constant-time almost inversion algorithm.")
 message("      FB_METHD=BRUCH    Hardware-friendly inversion by Brunner et al.")
 message("      FB_METHD=LOWER    Pass inversion to the lower level.\n")
 
@@ -59,18 +60,18 @@ message("      FB_METHD=QUICK    Iterated squaring/square-root by table-based me
 if (NOT FB_POLYN)
 	set(FB_POLYN 283)
 endif(NOT FB_POLYN)
-set(FB_POLYN ${FB_POLYN} CACHE INTEGER "Irreducible polynomial size in bits.")
+set(FB_POLYN ${FB_POLYN} CACHE STRING "Irreducible polynomial size in bits.")
 
 # Fix the number of Karatsuba instances
 if (NOT FB_KARAT)
 	set(FB_KARAT 0)
 endif(NOT FB_KARAT)
-set(FB_KARAT ${FB_KARAT} CACHE INTEGER "Number of Karatsuba levels.")
+set(FB_KARAT ${FB_KARAT} CACHE STRING "Number of Karatsuba levels.")
 
 if (NOT FB_WIDTH)
 	set(FB_WIDTH 4)
 endif(NOT FB_WIDTH)
-set(FB_WIDTH ${FB_WIDTH} CACHE INTEGER "Width of window processing for exponentiation methods.")
+set(FB_WIDTH ${FB_WIDTH} CACHE STRING "Width of window processing for exponentiation methods.")
 
 option(FB_TRINO "Prefer trinomials." on)
 option(FB_SQRTF "Prefer square-root friendly polynomials." off)
