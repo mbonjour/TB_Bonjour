@@ -1,7 +1,7 @@
 #include <sys/stat.h>
 #include "mainClient.h"
 
-#define PORT 10002
+#define PORT 10000
 char *payload_text[12];
 struct upload_status {
     int lines_read;
@@ -321,7 +321,7 @@ int sendmail(char* destination, char* source, char* subject, char* nonceAES, cha
 
     char * cipher_text = malloc(1000); // 52Kb for the moment
     memset(cipher_text, 0, 1000);
-    strcat(cipher_text, "X-CIPHER-B64 : ");
+    strcat(cipher_text, "X-CIPHERTEXTKEY-B64 : ");
     strcat(cipher_text, cipher);
     strcat(cipher_text, "\r\n");
     payload_text[6] = cipher_text;
@@ -1414,7 +1414,7 @@ int main() {
 
             char *sourceAddress = binn_object_str(emailObj, "From");
             char *b64Signature = binn_object_str(emailObj, "X-SIGNATURE-B64");
-            char *b64Cipher = binn_object_str(emailObj, "X-CIPHER-B64");
+            char *b64Cipher = binn_object_str(emailObj, "X-CIPHERTEXTKEY-B64");
             char *b64Encrypted = binn_object_str(emailObj, "Body");
             char *b64Nonce = binn_object_str(emailObj, "X-AES-NONCE");
             char *subject = binn_object_str(emailObj, "Subject");
